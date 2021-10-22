@@ -1,0 +1,110 @@
+<#@ AutosarXml processor="ArDirectiveProcessor" requires="arPrefix='ar';arNamespace='http://autosar.org/4.0.3'" #>
+<#@ template inherits="AutosarDirectiveProcessor.ArGtcBase" debug="true" #>
+<#@ output extension="" #>
+<#@ include file="Helper.tt" #>
+<#@ include file="XcpEventTimeConv.tti" #>
+<# /*-------------------------------------------------------------------------------------------------------------*/ #>
+<#
+    ChangeContext( Xp.ModuleConfAtDefRefTo( "Xcp/XcpConfig" ) );
+#>
+<# /*-------------------------------------------------------------------------------------------------------------*/ #>
+<# !LOOP( Xp.ContainerAtDefRefTo( "XcpEventChannel" ) ) #>
+<# /*-------------------------------------------------------------------------------------------------------------*/ #>
+<#
+    string EventName = ValueOf( "ar:SHORT-NAME" );
+    string SwcName = "CDD_XcpIf" + EventName; 
+    double Period = 0.0;
+    
+    Period = XcpEventTimeConv( ValueOf( Xp.ValueAtDefRefTo( "XcpEventChannelTimeUnit" ) ), 
+                               ValueOf( Xp.ValueAtDefRefTo( "XcpEventChannelTimeCycle" ) ) );
+                               
+    SwcSrcGen(SwcName, Period);
+#>
+<# /*-------------------------------------------------------------------------------------------------------------*/ #>
+<# !ENDLOOP #>
+<# /*-------------------------------------------------------------------------------------------------------------*/ #>
+<#+
+/* The following function generates a source file for each of the SWC that were defined in the above ARXML. */
+public void SwcSrcGen(string SwcName, double Period)
+{
+    /* The output path is read from the batch file that called the ARTT exe. This will provide the proper output during 
+       execution in a component development and production enviroment. */
+    string OutputPath = System.Environment.GetEnvironmentVariable("GENDATA_FOLDER");
+    string FileName = SwcName + ".m";
+    string FilePath = System.IO.Path.Combine(OutputPath, FileName);
+    
+    using (System.IO.StreamWriter sw = System.IO.File.CreateText(FilePath))
+    {
+        /* The following source is contained in one long literal text string. Otherwise, each line could be 
+           broke down using sw.WriteLine */
+        sw.WriteLine( @"%%--------------------------------------------------------------------------------%
+%% EA4 Component Data Dictionary - Template Created on 04-Nov-2017 00:00:00       %
+%                                  Created with tool release: N/A                 %
+%                                  Synergy file: %version: 1 %                    %
+%                                  Derived by: %derived_by: cz7lt6 %              %
+%%--------------------------------------------------------------------------------%
+
+" + SwcName + @" = DataDict.FDD;
+" + SwcName + @".Version = '1.0.0';
+" + SwcName + @".LongName = 'XCP Interface Data Acquistion Configuration for " + SwcName + @"';
+" + SwcName + @".ShoName  = '" + SwcName + @"';
+" + SwcName + @".DesignASIL = '';
+" + SwcName + @".Description = ['This generated M-file contains the runnable definitions for the XCP DAQ events configured in the project.'];
+
+%%-------------------------------------------
+%% Runnable Definitions
+%%-------------------------------------------
+" + SwcName + @"Per1 = DataDict.Runnable;
+" + SwcName + @"Per1.Context = 'Rte';
+" + SwcName + @"Per1.Description = 'Runnable for the XCP event " + SwcName + @". This should be placed as the last task item in the lowest priority task for the definfed runnable rate.';
+" + SwcName + @"Per1.TimeStep = " + Period + @";
+
+%%-------------------------------------------
+%% Client Definitions
+%%-------------------------------------------
+
+%%-------------------------------------------
+%% Input Signal Definition
+%%-------------------------------------------
+
+%%-------------------------------------------
+%% Output Signal Definition
+%%-------------------------------------------
+
+%%-------------------------------------------
+%% Inter-Runnable Variable Definition
+%%-------------------------------------------
+
+%%-------------------------------------------
+%% Calibrations Definition
+%%-------------------------------------------
+
+%%-------------------------------------------
+%% Imported Calibrations Definition
+%%-------------------------------------------
+
+%%-------------------------------------------
+%% Non-Volatile Memory Definition
+%%-------------------------------------------
+
+%%-------------------------------------------
+%% Display Variable Definition
+%%-------------------------------------------
+
+%%-------------------------------------------
+%% Per-Instance Memory Definition
+%%-------------------------------------------
+
+%%-------------------------------------------
+%% Constant Definition
+%%-------------------------------------------
+
+%%-------------------------------------------
+%% NTC Definition
+%%-------------------------------------------
+");
+    }
+    
+    return;
+}
+#>

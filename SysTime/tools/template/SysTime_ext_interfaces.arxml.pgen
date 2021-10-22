@@ -1,0 +1,165 @@
+%{#
+into(module("SysTime"))
+with(container("SysTimeGeneral")):
+  SysTimeDetUsage = value(ref("SysTimeDevErrorDetect"))
+leave()
+}%\
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+*  \file
+*
+*  \brief       BMW SWC SysTime
+*
+*  This file is the external interfaces part of the software component description of the module SysTime
+*  for usage in the BMW AUTOSAR Core.
+*
+*  \project     BMW Platform Software
+*
+*  \copyright   BMW AG 2015 - 2017
+*
+*  \version     5.0.3
+*
+*/
+
+/*
+*
+*  THIS FILE WAS GENERATED. DO NOT MODIFY!
+*
+*  GENERATOR       : %{= generation_tool() }% %{= generation_version_info() }%
+*
+*  GENERATION TIME : %{= generation_timestamp() }%
+*
+*/
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-3-0_STRICT_COMPACT.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>BMW</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>Platform</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE>
+              <SHORT-NAME>SysTime</SHORT-NAME>
+              <AR-PACKAGES>
+
+                <!-- Dcm -->
+
+                <AR-PACKAGE>
+                  <SHORT-NAME>Dcm</SHORT-NAME>
+                  <AR-PACKAGES>
+                    <AR-PACKAGE>
+                      <SHORT-NAME>ImplementationDataTypes</SHORT-NAME>
+                      <ELEMENTS>
+                        <IMPLEMENTATION-DATA-TYPE>
+                          <SHORT-NAME>Array4</SHORT-NAME>
+                          <CATEGORY>ARRAY</CATEGORY>
+                          <SUB-ELEMENTS>
+                            <IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                              <SHORT-NAME>data</SHORT-NAME>
+                              <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                              <ARRAY-SIZE>4</ARRAY-SIZE>
+                              <ARRAY-SIZE-SEMANTICS>FIXED-SIZE</ARRAY-SIZE-SEMANTICS>
+                              <SW-DATA-DEF-PROPS>
+                                <SW-DATA-DEF-PROPS-VARIANTS>
+                                  <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                    <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                                  </SW-DATA-DEF-PROPS-CONDITIONAL>
+                                </SW-DATA-DEF-PROPS-VARIANTS>
+                              </SW-DATA-DEF-PROPS>
+                            </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                          </SUB-ELEMENTS>
+                        </IMPLEMENTATION-DATA-TYPE>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                    <AR-PACKAGE>
+                      <SHORT-NAME>PortInterfaces</SHORT-NAME>
+                      <ELEMENTS>
+                        <CLIENT-SERVER-INTERFACE>
+                          <SHORT-NAME>DataServices_SystemTime</SHORT-NAME>
+                          <IS-SERVICE>true</IS-SERVICE>
+                          <OPERATIONS>
+                            <CLIENT-SERVER-OPERATION>
+                              <SHORT-NAME>ReadData</SHORT-NAME>
+                              <ARGUMENTS>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>Data</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/SysTime/Dcm/ImplementationDataTypes/Array4</TYPE-TREF>
+                                  <DIRECTION>OUT</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                              </ARGUMENTS>
+                              <POSSIBLE-ERROR-REFS>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/SysTime/Dcm/PortInterfaces/DataServices_SystemTime/E_NOT_OK</POSSIBLE-ERROR-REF>
+                              </POSSIBLE-ERROR-REFS>
+                            </CLIENT-SERVER-OPERATION>
+                          </OPERATIONS>
+                          <POSSIBLE-ERRORS>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>E_NOT_OK</SHORT-NAME>
+                              <ERROR-CODE>1</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                          </POSSIBLE-ERRORS>
+                        </CLIENT-SERVER-INTERFACE>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                  </AR-PACKAGES>
+                </AR-PACKAGE>
+%{: if(SysTimeDetUsage) }%\
+                <!-- Det -->
+
+                <AR-PACKAGE>
+                  <SHORT-NAME>Det</SHORT-NAME>
+                  <AR-PACKAGES>
+                    <AR-PACKAGE>
+                      <SHORT-NAME>PortInterfaces</SHORT-NAME>
+                      <ELEMENTS>
+                        <CLIENT-SERVER-INTERFACE>
+                          <SHORT-NAME>DETService</SHORT-NAME>
+                          <IS-SERVICE>true</IS-SERVICE>
+                          <OPERATIONS>
+                            <CLIENT-SERVER-OPERATION>
+                              <SHORT-NAME>ReportError</SHORT-NAME>
+                              <ARGUMENTS>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>InstanceId</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>ApiId</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>ErrorId</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                              </ARGUMENTS>
+                              <POSSIBLE-ERROR-REFS>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/SysTime/Det/PortInterfaces/DETService/E_OK</POSSIBLE-ERROR-REF>
+                              </POSSIBLE-ERROR-REFS>
+                            </CLIENT-SERVER-OPERATION>
+                          </OPERATIONS>
+                          <POSSIBLE-ERRORS>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>E_OK</SHORT-NAME>
+                              <ERROR-CODE>0</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                          </POSSIBLE-ERRORS>
+                        </CLIENT-SERVER-INTERFACE>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                  </AR-PACKAGES>
+                </AR-PACKAGE>
+%{:}%\
+              </AR-PACKAGES>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

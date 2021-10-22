@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-0-3.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://autosar.org/schema/r4.0">
+    <AR-PACKAGES>
+        <AR-PACKAGE UUID="4615ae21-471d-4d39-af10-ec3f69efc63b">
+            <SHORT-NAME>Nxtr</SHORT-NAME>
+            <ELEMENTS>
+                <ECUC-MODULE-DEF UUID="ff42317c-88d4-44d7-908f-94fcbf3558f1">
+                    <SHORT-NAME>MotAg1Meas</SHORT-NAME>
+                    <DESC>
+                        <L-2 L="EN">Configuration of the MotAg1Meas.</L-2>
+                    </DESC>
+                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                    <SUPPORTED-CONFIG-VARIANTS>
+                        <SUPPORTED-CONFIG-VARIANT>VARIANT-PRE-COMPILE</SUPPORTED-CONFIG-VARIANT>
+                    </SUPPORTED-CONFIG-VARIANTS>
+                    <CONTAINERS>
+                        <!-- Parameter Container Definition: MotAg1MeasGeneral -->
+                        <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:05cfa96e-f380-4904-b18b-78fb0f722d8d">
+                            <SHORT-NAME>MotAg1MeasGeneral</SHORT-NAME>
+                            <DESC>
+                                <L-2 L="EN">This container contains the configuration (parameters) of the MotAg1Meas.</L-2>
+                            </DESC>
+                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                            <MULTIPLE-CONFIGURATION-CONTAINER>false</MULTIPLE-CONFIGURATION-CONTAINER>
+                            <PARAMETERS>
+                                <!-- PARAMETER DEFINITION: DIQEPIF -->
+                                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:083152e3-94d7-46be-b5eb-7ca8d9635735">
+                                    <SHORT-NAME>DIQEPIF</SHORT-NAME>
+                                    <DESC>
+                                        <L-2 L="EN">Disables usage of QEP readings. Motor position readings switch to SPI interface</L-2>
+                                    </DESC>
+                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                    <IMPLEMENTATION-CONFIG-CLASSES>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                    </IMPLEMENTATION-CONFIG-CLASSES>
+                                    <ORIGIN>NXTR</ORIGIN>
+                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                    <DEFAULT-VALUE>false</DEFAULT-VALUE>
+                                </ECUC-BOOLEAN-PARAM-DEF>
+                                <!-- PARAMETER DEFINITION: MOTAG1PRTCLFLTNTCNR -->
+                                <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:3d5db513-7e5f-4de4-94f2-03278000ae89">
+                                    <SHORT-NAME>MOTAG1PRTCLFLTNTCNR</SHORT-NAME>
+                                    <DESC>
+                                        <L-2 L="EN">Motor Angle 0 Protocol Fault NTC Number</L-2>
+                                    </DESC>
+                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                    <IMPLEMENTATION-CONFIG-CLASSES>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                    </IMPLEMENTATION-CONFIG-CLASSES>
+                                    <ORIGIN>Nxtr</ORIGIN>
+                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                    <DEFAULT-VALUE>NTCNR_0X085</DEFAULT-VALUE>
+                                    <LITERALS>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:5a53b05a-6593-4003-b9a2-6701d6e45d19">
+                                            <SHORT-NAME>NTCNR_0X083</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:e7121739-986d-40d9-8f6f-7185a09d8ec8">
+                                            <SHORT-NAME>NTCNR_0X084</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:d6b22a25-fec3-4fc0-9fc1-5c50bc3f53b0">
+                                            <SHORT-NAME>NTCNR_0X085</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:35ee1b24-1526-4cc2-8c89-224da99d73a5">
+                                            <SHORT-NAME>NTCNR_0X086</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:f7087633-0b74-461f-9f62-7621ff6f8360">
+                                            <SHORT-NAME>NTCNR_0X087</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:823939f3-199d-4cff-816b-b348eaf11a08">
+                                            <SHORT-NAME>NTCNR_0X088</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:c360b384-4086-410f-8830-6f48f8aebff0">
+                                            <SHORT-NAME>NTCNR_0X089</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:47970d79-6115-45ba-9a0b-d7b302efd0dd">
+                                            <SHORT-NAME>NTCNR_0X08A</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                    </LITERALS>
+                                </ECUC-ENUMERATION-PARAM-DEF>
+                            </PARAMETERS>
+                        </ECUC-PARAM-CONF-CONTAINER-DEF>
+                    </CONTAINERS>
+                </ECUC-MODULE-DEF>
+            </ELEMENTS>
+        </AR-PACKAGE>
+    </AR-PACKAGES>
+</AUTOSAR>

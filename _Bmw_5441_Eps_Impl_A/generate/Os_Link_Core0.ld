@@ -1,0 +1,9821 @@
+/**********************************************************************************************************************
+ *  COPYRIGHT
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  \verbatim
+ *
+ *                 This software is copyright protected and proprietary to Vctr Informatik GmbH.
+ *                 Vctr Informatik GmbH grants to you only those rights as set out in the license conditions.
+ *                 All other rights remain with Vctr Informatik GmbH.
+ *  \endverbatim
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  LICENSE
+ *  -------------------------------------------------------------------------------------------------------------------
+ *            Module: Os
+ *           Program: MSR BAC 4.x (MSR_Bmw_SLP4)
+ *          Customer: Nxtr Automotive Corporation
+ *       Expiry Date: Not restricted
+ *  Ordered Derivat.: Renesas RH850 P1M R7F701363EAFP
+ *    License Scope : The usage is restricted to CBD1700369_D04
+ *
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  FILE DESCRIPTION
+ *  -------------------------------------------------------------------------------------------------------------------
+ *              File: Os_Link_Core0.ld
+ *   Generation Time: 2018-06-08 17:29:38
+ *           Project: EPS - Version 1.0
+ *          Delivery: CBD1700369_D04
+ *      Tool Version: DaVinci Configurator (beta) 5.16.35 SP2
+ *
+ *
+ *********************************************************************************************************************/
+
+/**********************************************************************************************************************
+ ! BETA VERSION                                                                                                       !
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ ! These programs are fully operative programs. With regard to the fact that the programs are a beta-version only,    !
+ ! Vctr Informatik's liability shall be expressly excluded in cases of ordinary negligence, to the extent           !
+ ! admissible by law or statute.                                                                                      !
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+ *  CODE SECTIONS
+ *********************************************************************************************************************/
+
+#if defined ( OS_LINK_INTVEC_CODE )
+.OS_INTVEC_CORE0_CODE ALIGN(512) :> .
+_OS_INTVEC_CORE0_CODE_START = ADDR(.OS_INTVEC_CORE0_CODE);
+_OS_INTVEC_CORE0_CODE_END = ENDADDR(.OS_INTVEC_CORE0_CODE) - 1;
+#endif
+
+#if defined ( OS_LINK_EXCVEC_CODE )
+.OS_EXCVEC_CORE0_CODE ALIGN(512) :> .
+_OS_EXCVEC_CORE0_CODE_START = ADDR(.OS_EXCVEC_CORE0_CODE);
+_OS_EXCVEC_CORE0_CODE_END = ENDADDR(.OS_EXCVEC_CORE0_CODE) - 1;
+#endif
+
+#if defined ( OS_LINK_CALLOUT_CODE )
+.OS_Fr_IrqLine0_CODE ALIGN(4) :> .
+_OS_Fr_IrqLine0_CODE_START = ADDR(.OS_Fr_IrqLine0_CODE);
+_OS_Fr_IrqLine0_CODE_END = ENDADDR(.OS_Fr_IrqLine0_CODE) - 1;
+.OS_Fr_IrqTimer0_CODE ALIGN(4) :> .
+_OS_Fr_IrqTimer0_CODE_START = ADDR(.OS_Fr_IrqTimer0_CODE);
+_OS_Fr_IrqTimer0_CODE_END = ENDADDR(.OS_Fr_IrqTimer0_CODE) - 1;
+.OS_MCU_ECM_EIC_CAT2_ISR_CODE ALIGN(4) :> .
+_OS_MCU_ECM_EIC_CAT2_ISR_CODE_START = ADDR(.OS_MCU_ECM_EIC_CAT2_ISR_CODE);
+_OS_MCU_ECM_EIC_CAT2_ISR_CODE_END = ENDADDR(.OS_MCU_ECM_EIC_CAT2_ISR_CODE) - 1;
+.OS_NtWrapS_CmnMfgSrv_CallSvc10_CODE ALIGN(4) :> .
+_OS_NtWrapS_CmnMfgSrv_CallSvc10_CODE_START = ADDR(.OS_NtWrapS_CmnMfgSrv_CallSvc10_CODE);
+_OS_NtWrapS_CmnMfgSrv_CallSvc10_CODE_END = ENDADDR(.OS_NtWrapS_CmnMfgSrv_CallSvc10_CODE) - 1;
+.OS_NtWrapS_CmnMfgSrv_CallSvc7_CODE ALIGN(4) :> .
+_OS_NtWrapS_CmnMfgSrv_CallSvc7_CODE_START = ADDR(.OS_NtWrapS_CmnMfgSrv_CallSvc7_CODE);
+_OS_NtWrapS_CmnMfgSrv_CallSvc7_CODE_END = ENDADDR(.OS_NtWrapS_CmnMfgSrv_CallSvc7_CODE) - 1;
+.OS_NtWrapS_NvM_EraseNvBlock_CODE ALIGN(4) :> .
+_OS_NtWrapS_NvM_EraseNvBlock_CODE_START = ADDR(.OS_NtWrapS_NvM_EraseNvBlock_CODE);
+_OS_NtWrapS_NvM_EraseNvBlock_CODE_END = ENDADDR(.OS_NtWrapS_NvM_EraseNvBlock_CODE) - 1;
+.OS_NtWrapS_NvM_GetDataIndex_CODE ALIGN(4) :> .
+_OS_NtWrapS_NvM_GetDataIndex_CODE_START = ADDR(.OS_NtWrapS_NvM_GetDataIndex_CODE);
+_OS_NtWrapS_NvM_GetDataIndex_CODE_END = ENDADDR(.OS_NtWrapS_NvM_GetDataIndex_CODE) - 1;
+.OS_NtWrapS_NvM_GetErrorStatus_CODE ALIGN(4) :> .
+_OS_NtWrapS_NvM_GetErrorStatus_CODE_START = ADDR(.OS_NtWrapS_NvM_GetErrorStatus_CODE);
+_OS_NtWrapS_NvM_GetErrorStatus_CODE_END = ENDADDR(.OS_NtWrapS_NvM_GetErrorStatus_CODE) - 1;
+.OS_NtWrapS_NvM_InvalidateNvBlock_CODE ALIGN(4) :> .
+_OS_NtWrapS_NvM_InvalidateNvBlock_CODE_START = ADDR(.OS_NtWrapS_NvM_InvalidateNvBlock_CODE);
+_OS_NtWrapS_NvM_InvalidateNvBlock_CODE_END = ENDADDR(.OS_NtWrapS_NvM_InvalidateNvBlock_CODE) - 1;
+.OS_NtWrapS_NvM_ReadBlock_CODE ALIGN(4) :> .
+_OS_NtWrapS_NvM_ReadBlock_CODE_START = ADDR(.OS_NtWrapS_NvM_ReadBlock_CODE);
+_OS_NtWrapS_NvM_ReadBlock_CODE_END = ENDADDR(.OS_NtWrapS_NvM_ReadBlock_CODE) - 1;
+.OS_NtWrapS_NvM_SetBlockProtection_CODE ALIGN(4) :> .
+_OS_NtWrapS_NvM_SetBlockProtection_CODE_START = ADDR(.OS_NtWrapS_NvM_SetBlockProtection_CODE);
+_OS_NtWrapS_NvM_SetBlockProtection_CODE_END = ENDADDR(.OS_NtWrapS_NvM_SetBlockProtection_CODE) - 1;
+.OS_NtWrapS_NvM_SetDataIndex_CODE ALIGN(4) :> .
+_OS_NtWrapS_NvM_SetDataIndex_CODE_START = ADDR(.OS_NtWrapS_NvM_SetDataIndex_CODE);
+_OS_NtWrapS_NvM_SetDataIndex_CODE_END = ENDADDR(.OS_NtWrapS_NvM_SetDataIndex_CODE) - 1;
+.OS_NtWrapS_NvM_SetRamBlockStatus_CODE ALIGN(4) :> .
+_OS_NtWrapS_NvM_SetRamBlockStatus_CODE_START = ADDR(.OS_NtWrapS_NvM_SetRamBlockStatus_CODE);
+_OS_NtWrapS_NvM_SetRamBlockStatus_CODE_END = ENDADDR(.OS_NtWrapS_NvM_SetRamBlockStatus_CODE) - 1;
+.OS_NtWrapS_NvM_WriteBlock_CODE ALIGN(4) :> .
+_OS_NtWrapS_NvM_WriteBlock_CODE_START = ADDR(.OS_NtWrapS_NvM_WriteBlock_CODE);
+_OS_NtWrapS_NvM_WriteBlock_CODE_END = ENDADDR(.OS_NtWrapS_NvM_WriteBlock_CODE) - 1;
+.OS_NtWrapS_Rte_Call_CopyCalPageReq_Oper_CODE ALIGN(4) :> .
+_OS_NtWrapS_Rte_Call_CopyCalPageReq_Oper_CODE_START = ADDR(.OS_NtWrapS_Rte_Call_CopyCalPageReq_Oper_CODE);
+_OS_NtWrapS_Rte_Call_CopyCalPageReq_Oper_CODE_END = ENDADDR(.OS_NtWrapS_Rte_Call_CopyCalPageReq_Oper_CODE) - 1;
+.OS_NtWrapS_Rte_Call_SetCalPageReq_Oper_CODE ALIGN(4) :> .
+_OS_NtWrapS_Rte_Call_SetCalPageReq_Oper_CODE_START = ADDR(.OS_NtWrapS_Rte_Call_SetCalPageReq_Oper_CODE);
+_OS_NtWrapS_Rte_Call_SetCalPageReq_Oper_CODE_END = ENDADDR(.OS_NtWrapS_Rte_Call_SetCalPageReq_Oper_CODE) - 1;
+.OS_NtWrapS_SyncCrc_GetAvlCrcHwUnit_CODE ALIGN(4) :> .
+_OS_NtWrapS_SyncCrc_GetAvlCrcHwUnit_CODE_START = ADDR(.OS_NtWrapS_SyncCrc_GetAvlCrcHwUnit_CODE);
+_OS_NtWrapS_SyncCrc_GetAvlCrcHwUnit_CODE_END = ENDADDR(.OS_NtWrapS_SyncCrc_GetAvlCrcHwUnit_CODE) - 1;
+.OS_NtWrapS_SyncCrc_RelsCrcHwUnit_CODE ALIGN(4) :> .
+_OS_NtWrapS_SyncCrc_RelsCrcHwUnit_CODE_START = ADDR(.OS_NtWrapS_SyncCrc_RelsCrcHwUnit_CODE);
+_OS_NtWrapS_SyncCrc_RelsCrcHwUnit_CODE_END = ENDADDR(.OS_NtWrapS_SyncCrc_RelsCrcHwUnit_CODE) - 1;
+.OS_NtWrapS_Xcp_Event_CODE ALIGN(4) :> .
+_OS_NtWrapS_Xcp_Event_CODE_START = ADDR(.OS_NtWrapS_Xcp_Event_CODE);
+_OS_NtWrapS_Xcp_Event_CODE_END = ENDADDR(.OS_NtWrapS_Xcp_Event_CODE) - 1;
+.OS_SPI_CSIG0_TIC_CAT2_ISR_CODE ALIGN(4) :> .
+_OS_SPI_CSIG0_TIC_CAT2_ISR_CODE_START = ADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_CODE);
+_OS_SPI_CSIG0_TIC_CAT2_ISR_CODE_END = ENDADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_CODE) - 1;
+.OS_SPI_CSIG0_TIRE_CAT2_ISR_CODE ALIGN(4) :> .
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_CODE_START = ADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_CODE);
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_CODE_END = ENDADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_CODE) - 1;
+.OS_SPI_CSIG0_TIR_CAT2_ISR_CODE ALIGN(4) :> .
+_OS_SPI_CSIG0_TIR_CAT2_ISR_CODE_START = ADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_CODE);
+_OS_SPI_CSIG0_TIR_CAT2_ISR_CODE_END = ENDADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_CODE) - 1;
+.OS_SPI_CSIH2_TIC_CAT2_ISR_CODE ALIGN(4) :> .
+_OS_SPI_CSIH2_TIC_CAT2_ISR_CODE_START = ADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_CODE);
+_OS_SPI_CSIH2_TIC_CAT2_ISR_CODE_END = ENDADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_CODE) - 1;
+.OS_SPI_CSIH2_TIRE_CAT2_ISR_CODE ALIGN(4) :> .
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_CODE_START = ADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_CODE);
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_CODE_END = ENDADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_CODE) - 1;
+.OS_SPI_CSIH2_TIR_CAT2_ISR_CODE ALIGN(4) :> .
+_OS_SPI_CSIH2_TIR_CAT2_ISR_CODE_START = ADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_CODE);
+_OS_SPI_CSIH2_TIR_CAT2_ISR_CODE_END = ENDADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_CODE) - 1;
+.OS_Task_100ms_Appl10_CODE ALIGN(4) :> .
+_OS_Task_100ms_Appl10_CODE_START = ADDR(.OS_Task_100ms_Appl10_CODE);
+_OS_Task_100ms_Appl10_CODE_END = ENDADDR(.OS_Task_100ms_Appl10_CODE) - 1;
+.OS_Task_100ms_Appl7_CODE ALIGN(4) :> .
+_OS_Task_100ms_Appl7_CODE_START = ADDR(.OS_Task_100ms_Appl7_CODE);
+_OS_Task_100ms_Appl7_CODE_END = ENDADDR(.OS_Task_100ms_Appl7_CODE) - 1;
+.OS_Task_100ms_Appl9_CODE ALIGN(4) :> .
+_OS_Task_100ms_Appl9_CODE_START = ADDR(.OS_Task_100ms_Appl9_CODE);
+_OS_Task_100ms_Appl9_CODE_END = ENDADDR(.OS_Task_100ms_Appl9_CODE) - 1;
+.OS_Task_10msBsw_Appl10_CODE ALIGN(4) :> .
+_OS_Task_10msBsw_Appl10_CODE_START = ADDR(.OS_Task_10msBsw_Appl10_CODE);
+_OS_Task_10msBsw_Appl10_CODE_END = ENDADDR(.OS_Task_10msBsw_Appl10_CODE) - 1;
+.OS_Task_10ms_Appl10_CODE ALIGN(4) :> .
+_OS_Task_10ms_Appl10_CODE_START = ADDR(.OS_Task_10ms_Appl10_CODE);
+_OS_Task_10ms_Appl10_CODE_END = ENDADDR(.OS_Task_10ms_Appl10_CODE) - 1;
+.OS_Task_10ms_Appl7_CODE ALIGN(4) :> .
+_OS_Task_10ms_Appl7_CODE_START = ADDR(.OS_Task_10ms_Appl7_CODE);
+_OS_Task_10ms_Appl7_CODE_END = ENDADDR(.OS_Task_10ms_Appl7_CODE) - 1;
+.OS_Task_10ms_Appl8_CODE ALIGN(4) :> .
+_OS_Task_10ms_Appl8_CODE_START = ADDR(.OS_Task_10ms_Appl8_CODE);
+_OS_Task_10ms_Appl8_CODE_END = ENDADDR(.OS_Task_10ms_Appl8_CODE) - 1;
+.OS_Task_10ms_Appl9_CODE ALIGN(4) :> .
+_OS_Task_10ms_Appl9_CODE_START = ADDR(.OS_Task_10ms_Appl9_CODE);
+_OS_Task_10ms_Appl9_CODE_END = ENDADDR(.OS_Task_10ms_Appl9_CODE) - 1;
+.OS_Task_2msA_Appl10_CODE ALIGN(4) :> .
+_OS_Task_2msA_Appl10_CODE_START = ADDR(.OS_Task_2msA_Appl10_CODE);
+_OS_Task_2msA_Appl10_CODE_END = ENDADDR(.OS_Task_2msA_Appl10_CODE) - 1;
+.OS_Task_2msB_Appl10_CODE ALIGN(4) :> .
+_OS_Task_2msB_Appl10_CODE_START = ADDR(.OS_Task_2msB_Appl10_CODE);
+_OS_Task_2msB_Appl10_CODE_END = ENDADDR(.OS_Task_2msB_Appl10_CODE) - 1;
+.OS_Task_2msTmplMonr_Appl10_CODE ALIGN(4) :> .
+_OS_Task_2msTmplMonr_Appl10_CODE_START = ADDR(.OS_Task_2msTmplMonr_Appl10_CODE);
+_OS_Task_2msTmplMonr_Appl10_CODE_END = ENDADDR(.OS_Task_2msTmplMonr_Appl10_CODE) - 1;
+.OS_Task_2ms_Appl7_CODE ALIGN(4) :> .
+_OS_Task_2ms_Appl7_CODE_START = ADDR(.OS_Task_2ms_Appl7_CODE);
+_OS_Task_2ms_Appl7_CODE_END = ENDADDR(.OS_Task_2ms_Appl7_CODE) - 1;
+.OS_Task_2ms_Appl8_CODE ALIGN(4) :> .
+_OS_Task_2ms_Appl8_CODE_START = ADDR(.OS_Task_2ms_Appl8_CODE);
+_OS_Task_2ms_Appl8_CODE_END = ENDADDR(.OS_Task_2ms_Appl8_CODE) - 1;
+.OS_Task_2ms_Appl9_CODE ALIGN(4) :> .
+_OS_Task_2ms_Appl9_CODE_START = ADDR(.OS_Task_2ms_Appl9_CODE);
+_OS_Task_2ms_Appl9_CODE_END = ENDADDR(.OS_Task_2ms_Appl9_CODE) - 1;
+.OS_Task_4msBsw_Appl10_CODE ALIGN(4) :> .
+_OS_Task_4msBsw_Appl10_CODE_START = ADDR(.OS_Task_4msBsw_Appl10_CODE);
+_OS_Task_4msBsw_Appl10_CODE_END = ENDADDR(.OS_Task_4msBsw_Appl10_CODE) - 1;
+.OS_Task_4ms_Appl10_CODE ALIGN(4) :> .
+_OS_Task_4ms_Appl10_CODE_START = ADDR(.OS_Task_4ms_Appl10_CODE);
+_OS_Task_4ms_Appl10_CODE_END = ENDADDR(.OS_Task_4ms_Appl10_CODE) - 1;
+.OS_Task_4ms_Appl7_CODE ALIGN(4) :> .
+_OS_Task_4ms_Appl7_CODE_START = ADDR(.OS_Task_4ms_Appl7_CODE);
+_OS_Task_4ms_Appl7_CODE_END = ENDADDR(.OS_Task_4ms_Appl7_CODE) - 1;
+.OS_Task_5msBsw_Appl10_CODE ALIGN(4) :> .
+_OS_Task_5msBsw_Appl10_CODE_START = ADDR(.OS_Task_5msBsw_Appl10_CODE);
+_OS_Task_5msBsw_Appl10_CODE_END = ENDADDR(.OS_Task_5msBsw_Appl10_CODE) - 1;
+.OS_Task_Coding_Appl10_CODE ALIGN(4) :> .
+_OS_Task_Coding_Appl10_CODE_START = ADDR(.OS_Task_Coding_Appl10_CODE);
+_OS_Task_Coding_Appl10_CODE_END = ENDADDR(.OS_Task_Coding_Appl10_CODE) - 1;
+.OS_Task_ComBsw_Appl10_CODE ALIGN(4) :> .
+_OS_Task_ComBsw_Appl10_CODE_START = ADDR(.OS_Task_ComBsw_Appl10_CODE);
+_OS_Task_ComBsw_Appl10_CODE_END = ENDADDR(.OS_Task_ComBsw_Appl10_CODE) - 1;
+.OS_Task_InitBsw_Appl10_CODE ALIGN(4) :> .
+_OS_Task_InitBsw_Appl10_CODE_START = ADDR(.OS_Task_InitBsw_Appl10_CODE);
+_OS_Task_InitBsw_Appl10_CODE_END = ENDADDR(.OS_Task_InitBsw_Appl10_CODE) - 1;
+.OS_Task_Init_Appl10_CODE ALIGN(4) :> .
+_OS_Task_Init_Appl10_CODE_START = ADDR(.OS_Task_Init_Appl10_CODE);
+_OS_Task_Init_Appl10_CODE_END = ENDADDR(.OS_Task_Init_Appl10_CODE) - 1;
+.OS_Task_Init_Appl7_CODE ALIGN(4) :> .
+_OS_Task_Init_Appl7_CODE_START = ADDR(.OS_Task_Init_Appl7_CODE);
+_OS_Task_Init_Appl7_CODE_END = ENDADDR(.OS_Task_Init_Appl7_CODE) - 1;
+.OS_Task_Init_Appl8_CODE ALIGN(4) :> .
+_OS_Task_Init_Appl8_CODE_START = ADDR(.OS_Task_Init_Appl8_CODE);
+_OS_Task_Init_Appl8_CODE_END = ENDADDR(.OS_Task_Init_Appl8_CODE) - 1;
+.OS_Task_Init_Appl9_CODE ALIGN(4) :> .
+_OS_Task_Init_Appl9_CODE_START = ADDR(.OS_Task_Init_Appl9_CODE);
+_OS_Task_Init_Appl9_CODE_END = ENDADDR(.OS_Task_Init_Appl9_CODE) - 1;
+#endif
+
+#ifdef OS_LINK_INTVEC_CODE
+# undef OS_LINK_INTVEC_CODE
+#endif
+
+#ifdef OS_LINK_EXCVEC_CODE
+# undef OS_LINK_EXCVEC_CODE
+#endif
+
+#ifdef OS_LINK_CALLOUT_CODE
+# undef OS_LINK_CALLOUT_CODE
+#endif
+
+
+/**********************************************************************************************************************
+ *  CONST SECTIONS
+ *********************************************************************************************************************/
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_KERNEL ) || defined ( OS_LINK_CONST_KERNEL_FAR )
+.OS_CORE0_CONST ALIGN(4) :> .
+_OS_CORE0_CONST_START = ADDR(.OS_CORE0_CONST);
+_OS_CORE0_CONST_END = ENDADDR(.OS_CORE0_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_KERNEL ) || defined ( OS_LINK_CONST_KERNEL_NEAR )
+.OS_CORE0_CONST_FAST ALIGN(4) :> .
+_OS_CORE0_CONST_FAST_START = ADDR(.OS_CORE0_CONST_FAST);
+_OS_CORE0_CONST_FAST_END = ENDADDR(.OS_CORE0_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_INTVEC_CONST )
+.OS_INTVEC_CORE0_CONST ALIGN(4) :> .
+_OS_INTVEC_CORE0_CONST_START = ADDR(.OS_INTVEC_CORE0_CONST);
+_OS_INTVEC_CORE0_CONST_END = ENDADDR(.OS_INTVEC_CORE0_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_EXCVEC_CONST )
+.OS_EXCVEC_CORE0_CONST ALIGN(4) :> .
+_OS_EXCVEC_CORE0_CONST_START = ADDR(.OS_EXCVEC_CORE0_CONST);
+_OS_EXCVEC_CORE0_CONST_END = ENDADDR(.OS_EXCVEC_CORE0_CONST) - 1;
+#endif
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_APP ) || defined ( OS_LINK_CONST_APP_APPL0 ) || defined ( OS_LINK_CONST_APP_APPL0_FAR )
+.OS_Appl0_CONST ALIGN(4) :> .
+_OS_Appl0_CONST_START = ADDR(.OS_Appl0_CONST);
+_OS_Appl0_CONST_END = ENDADDR(.OS_Appl0_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_APP ) || defined ( OS_LINK_CONST_APP_APPL0 ) || defined ( OS_LINK_CONST_APP_APPL0_NEAR )
+.OS_Appl0_CONST_FAST ALIGN(4) :> .
+_OS_Appl0_CONST_FAST_START = ADDR(.OS_Appl0_CONST_FAST);
+_OS_Appl0_CONST_FAST_END = ENDADDR(.OS_Appl0_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_APP ) || defined ( OS_LINK_CONST_APP_APPL0 ) || defined ( OS_LINK_CONST_APP_APPL0_INIT )
+
+.ROM_OS_Appl0_VAR ROM(.OS_Appl0_VAR) :> .
+_ROM_OS_Appl0_VAR_START = ADDR(.ROM_OS_Appl0_VAR);
+_ROM_OS_Appl0_VAR_END = ENDADDR(.ROM_OS_Appl0_VAR);
+
+.ROM_OS_Appl0_VAR_ZERO_INIT ROM(.OS_Appl0_VAR_ZERO_INIT) :> .
+_ROM_OS_Appl0_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Appl0_VAR_ZERO_INIT);
+_ROM_OS_Appl0_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Appl0_VAR_ZERO_INIT);
+
+.ROM_OS_Appl0_VAR_FAST ROM(.OS_Appl0_VAR_FAST) :> .
+_ROM_OS_Appl0_VAR_FAST_START = ADDR(.ROM_OS_Appl0_VAR_FAST);
+_ROM_OS_Appl0_VAR_FAST_END = ENDADDR(.ROM_OS_Appl0_VAR_FAST);
+
+.ROM_OS_Appl0_VAR_FAST_ZERO_INIT ROM(.OS_Appl0_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Appl0_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Appl0_VAR_FAST_ZERO_INIT);
+_ROM_OS_Appl0_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Appl0_VAR_FAST_ZERO_INIT);
+
+.ROM_OS_Appl0_VAR_NOCACHE ROM(.OS_Appl0_VAR_NOCACHE) :> .
+_ROM_OS_Appl0_VAR_NOCACHE_START = ADDR(.ROM_OS_Appl0_VAR_NOCACHE);
+_ROM_OS_Appl0_VAR_NOCACHE_END = ENDADDR(.ROM_OS_Appl0_VAR_NOCACHE);
+
+.ROM_OS_Appl0_VAR_NOCACHE_ZERO_INIT ROM(.OS_Appl0_VAR_NOCACHE_ZERO_INIT) :> .
+_ROM_OS_Appl0_VAR_NOCACHE_ZERO_INIT_START = ADDR(.ROM_OS_Appl0_VAR_NOCACHE_ZERO_INIT);
+_ROM_OS_Appl0_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.ROM_OS_Appl0_VAR_NOCACHE_ZERO_INIT);
+
+.ROM_OS_Appl0_VAR_FAST_NOCACHE ROM(.OS_Appl0_VAR_FAST_NOCACHE) :> .
+_ROM_OS_Appl0_VAR_FAST_NOCACHE_START = ADDR(.ROM_OS_Appl0_VAR_FAST_NOCACHE);
+_ROM_OS_Appl0_VAR_FAST_NOCACHE_END = ENDADDR(.ROM_OS_Appl0_VAR_FAST_NOCACHE);
+
+.ROM_OS_Appl0_VAR_FAST_NOCACHE_ZERO_INIT ROM(.OS_Appl0_VAR_FAST_NOCACHE_ZERO_INIT) :> .
+_ROM_OS_Appl0_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.ROM_OS_Appl0_VAR_FAST_NOCACHE_ZERO_INIT);
+_ROM_OS_Appl0_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.ROM_OS_Appl0_VAR_FAST_NOCACHE_ZERO_INIT);
+#endif
+
+#ifdef OS_LINK_CONST_APP_APPL0
+# undef OS_LINK_CONST_APP_APPL0
+#endif
+
+#ifdef OS_LINK_CONST_APP_APPL0_FAR
+# undef OS_LINK_CONST_APP_APPL0_FAR
+#endif
+
+#ifdef OS_LINK_CONST_APP_APPL0_NEAR
+# undef OS_LINK_CONST_APP_APPL0_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_APP_APPL0_INIT
+# undef OS_LINK_CONST_APP_APPL0_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_APP ) || defined ( OS_LINK_CONST_APP_APPL10 ) || defined ( OS_LINK_CONST_APP_APPL10_FAR )
+.OS_Appl10_CONST ALIGN(4) :> .
+_OS_Appl10_CONST_START = ADDR(.OS_Appl10_CONST);
+_OS_Appl10_CONST_END = ENDADDR(.OS_Appl10_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_APP ) || defined ( OS_LINK_CONST_APP_APPL10 ) || defined ( OS_LINK_CONST_APP_APPL10_NEAR )
+.OS_Appl10_CONST_FAST ALIGN(4) :> .
+_OS_Appl10_CONST_FAST_START = ADDR(.OS_Appl10_CONST_FAST);
+_OS_Appl10_CONST_FAST_END = ENDADDR(.OS_Appl10_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_APP ) || defined ( OS_LINK_CONST_APP_APPL10 ) || defined ( OS_LINK_CONST_APP_APPL10_INIT )
+
+.ROM_OS_Appl10_VAR ROM(.OS_Appl10_VAR) :> .
+_ROM_OS_Appl10_VAR_START = ADDR(.ROM_OS_Appl10_VAR);
+_ROM_OS_Appl10_VAR_END = ENDADDR(.ROM_OS_Appl10_VAR);
+
+.ROM_OS_Appl10_VAR_ZERO_INIT ROM(.OS_Appl10_VAR_ZERO_INIT) :> .
+_ROM_OS_Appl10_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Appl10_VAR_ZERO_INIT);
+_ROM_OS_Appl10_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Appl10_VAR_ZERO_INIT);
+
+.ROM_OS_Appl10_VAR_FAST ROM(.OS_Appl10_VAR_FAST) :> .
+_ROM_OS_Appl10_VAR_FAST_START = ADDR(.ROM_OS_Appl10_VAR_FAST);
+_ROM_OS_Appl10_VAR_FAST_END = ENDADDR(.ROM_OS_Appl10_VAR_FAST);
+
+.ROM_OS_Appl10_VAR_FAST_ZERO_INIT ROM(.OS_Appl10_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Appl10_VAR_FAST_ZERO_INIT);
+_ROM_OS_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Appl10_VAR_FAST_ZERO_INIT);
+
+.ROM_OS_Appl10_VAR_NOCACHE ROM(.OS_Appl10_VAR_NOCACHE) :> .
+_ROM_OS_Appl10_VAR_NOCACHE_START = ADDR(.ROM_OS_Appl10_VAR_NOCACHE);
+_ROM_OS_Appl10_VAR_NOCACHE_END = ENDADDR(.ROM_OS_Appl10_VAR_NOCACHE);
+
+.ROM_OS_Appl10_VAR_NOCACHE_ZERO_INIT ROM(.OS_Appl10_VAR_NOCACHE_ZERO_INIT) :> .
+_ROM_OS_Appl10_VAR_NOCACHE_ZERO_INIT_START = ADDR(.ROM_OS_Appl10_VAR_NOCACHE_ZERO_INIT);
+_ROM_OS_Appl10_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.ROM_OS_Appl10_VAR_NOCACHE_ZERO_INIT);
+
+.ROM_OS_Appl10_VAR_FAST_NOCACHE ROM(.OS_Appl10_VAR_FAST_NOCACHE) :> .
+_ROM_OS_Appl10_VAR_FAST_NOCACHE_START = ADDR(.ROM_OS_Appl10_VAR_FAST_NOCACHE);
+_ROM_OS_Appl10_VAR_FAST_NOCACHE_END = ENDADDR(.ROM_OS_Appl10_VAR_FAST_NOCACHE);
+
+.ROM_OS_Appl10_VAR_FAST_NOCACHE_ZERO_INIT ROM(.OS_Appl10_VAR_FAST_NOCACHE_ZERO_INIT) :> .
+_ROM_OS_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.ROM_OS_Appl10_VAR_FAST_NOCACHE_ZERO_INIT);
+_ROM_OS_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.ROM_OS_Appl10_VAR_FAST_NOCACHE_ZERO_INIT);
+#endif
+
+#ifdef OS_LINK_CONST_APP_APPL10
+# undef OS_LINK_CONST_APP_APPL10
+#endif
+
+#ifdef OS_LINK_CONST_APP_APPL10_FAR
+# undef OS_LINK_CONST_APP_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_CONST_APP_APPL10_NEAR
+# undef OS_LINK_CONST_APP_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_APP_APPL10_INIT
+# undef OS_LINK_CONST_APP_APPL10_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_APP ) || defined ( OS_LINK_CONST_APP_APPL7 ) || defined ( OS_LINK_CONST_APP_APPL7_FAR )
+.OS_Appl7_CONST ALIGN(4) :> .
+_OS_Appl7_CONST_START = ADDR(.OS_Appl7_CONST);
+_OS_Appl7_CONST_END = ENDADDR(.OS_Appl7_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_APP ) || defined ( OS_LINK_CONST_APP_APPL7 ) || defined ( OS_LINK_CONST_APP_APPL7_NEAR )
+.OS_Appl7_CONST_FAST ALIGN(4) :> .
+_OS_Appl7_CONST_FAST_START = ADDR(.OS_Appl7_CONST_FAST);
+_OS_Appl7_CONST_FAST_END = ENDADDR(.OS_Appl7_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_APP ) || defined ( OS_LINK_CONST_APP_APPL7 ) || defined ( OS_LINK_CONST_APP_APPL7_INIT )
+
+.ROM_OS_Appl7_VAR ROM(.OS_Appl7_VAR) :> .
+_ROM_OS_Appl7_VAR_START = ADDR(.ROM_OS_Appl7_VAR);
+_ROM_OS_Appl7_VAR_END = ENDADDR(.ROM_OS_Appl7_VAR);
+
+.ROM_OS_Appl7_VAR_ZERO_INIT ROM(.OS_Appl7_VAR_ZERO_INIT) :> .
+_ROM_OS_Appl7_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Appl7_VAR_ZERO_INIT);
+_ROM_OS_Appl7_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Appl7_VAR_ZERO_INIT);
+
+.ROM_OS_Appl7_VAR_FAST ROM(.OS_Appl7_VAR_FAST) :> .
+_ROM_OS_Appl7_VAR_FAST_START = ADDR(.ROM_OS_Appl7_VAR_FAST);
+_ROM_OS_Appl7_VAR_FAST_END = ENDADDR(.ROM_OS_Appl7_VAR_FAST);
+
+.ROM_OS_Appl7_VAR_FAST_ZERO_INIT ROM(.OS_Appl7_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Appl7_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Appl7_VAR_FAST_ZERO_INIT);
+_ROM_OS_Appl7_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Appl7_VAR_FAST_ZERO_INIT);
+
+.ROM_OS_Appl7_VAR_NOCACHE ROM(.OS_Appl7_VAR_NOCACHE) :> .
+_ROM_OS_Appl7_VAR_NOCACHE_START = ADDR(.ROM_OS_Appl7_VAR_NOCACHE);
+_ROM_OS_Appl7_VAR_NOCACHE_END = ENDADDR(.ROM_OS_Appl7_VAR_NOCACHE);
+
+.ROM_OS_Appl7_VAR_NOCACHE_ZERO_INIT ROM(.OS_Appl7_VAR_NOCACHE_ZERO_INIT) :> .
+_ROM_OS_Appl7_VAR_NOCACHE_ZERO_INIT_START = ADDR(.ROM_OS_Appl7_VAR_NOCACHE_ZERO_INIT);
+_ROM_OS_Appl7_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.ROM_OS_Appl7_VAR_NOCACHE_ZERO_INIT);
+
+.ROM_OS_Appl7_VAR_FAST_NOCACHE ROM(.OS_Appl7_VAR_FAST_NOCACHE) :> .
+_ROM_OS_Appl7_VAR_FAST_NOCACHE_START = ADDR(.ROM_OS_Appl7_VAR_FAST_NOCACHE);
+_ROM_OS_Appl7_VAR_FAST_NOCACHE_END = ENDADDR(.ROM_OS_Appl7_VAR_FAST_NOCACHE);
+
+.ROM_OS_Appl7_VAR_FAST_NOCACHE_ZERO_INIT ROM(.OS_Appl7_VAR_FAST_NOCACHE_ZERO_INIT) :> .
+_ROM_OS_Appl7_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.ROM_OS_Appl7_VAR_FAST_NOCACHE_ZERO_INIT);
+_ROM_OS_Appl7_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.ROM_OS_Appl7_VAR_FAST_NOCACHE_ZERO_INIT);
+#endif
+
+#ifdef OS_LINK_CONST_APP_APPL7
+# undef OS_LINK_CONST_APP_APPL7
+#endif
+
+#ifdef OS_LINK_CONST_APP_APPL7_FAR
+# undef OS_LINK_CONST_APP_APPL7_FAR
+#endif
+
+#ifdef OS_LINK_CONST_APP_APPL7_NEAR
+# undef OS_LINK_CONST_APP_APPL7_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_APP_APPL7_INIT
+# undef OS_LINK_CONST_APP_APPL7_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_APP ) || defined ( OS_LINK_CONST_APP_APPL8 ) || defined ( OS_LINK_CONST_APP_APPL8_FAR )
+.OS_Appl8_CONST ALIGN(4) :> .
+_OS_Appl8_CONST_START = ADDR(.OS_Appl8_CONST);
+_OS_Appl8_CONST_END = ENDADDR(.OS_Appl8_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_APP ) || defined ( OS_LINK_CONST_APP_APPL8 ) || defined ( OS_LINK_CONST_APP_APPL8_NEAR )
+.OS_Appl8_CONST_FAST ALIGN(4) :> .
+_OS_Appl8_CONST_FAST_START = ADDR(.OS_Appl8_CONST_FAST);
+_OS_Appl8_CONST_FAST_END = ENDADDR(.OS_Appl8_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_APP ) || defined ( OS_LINK_CONST_APP_APPL8 ) || defined ( OS_LINK_CONST_APP_APPL8_INIT )
+
+.ROM_OS_Appl8_VAR ROM(.OS_Appl8_VAR) :> .
+_ROM_OS_Appl8_VAR_START = ADDR(.ROM_OS_Appl8_VAR);
+_ROM_OS_Appl8_VAR_END = ENDADDR(.ROM_OS_Appl8_VAR);
+
+.ROM_OS_Appl8_VAR_ZERO_INIT ROM(.OS_Appl8_VAR_ZERO_INIT) :> .
+_ROM_OS_Appl8_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Appl8_VAR_ZERO_INIT);
+_ROM_OS_Appl8_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Appl8_VAR_ZERO_INIT);
+
+.ROM_OS_Appl8_VAR_FAST ROM(.OS_Appl8_VAR_FAST) :> .
+_ROM_OS_Appl8_VAR_FAST_START = ADDR(.ROM_OS_Appl8_VAR_FAST);
+_ROM_OS_Appl8_VAR_FAST_END = ENDADDR(.ROM_OS_Appl8_VAR_FAST);
+
+.ROM_OS_Appl8_VAR_FAST_ZERO_INIT ROM(.OS_Appl8_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Appl8_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Appl8_VAR_FAST_ZERO_INIT);
+_ROM_OS_Appl8_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Appl8_VAR_FAST_ZERO_INIT);
+
+.ROM_OS_Appl8_VAR_NOCACHE ROM(.OS_Appl8_VAR_NOCACHE) :> .
+_ROM_OS_Appl8_VAR_NOCACHE_START = ADDR(.ROM_OS_Appl8_VAR_NOCACHE);
+_ROM_OS_Appl8_VAR_NOCACHE_END = ENDADDR(.ROM_OS_Appl8_VAR_NOCACHE);
+
+.ROM_OS_Appl8_VAR_NOCACHE_ZERO_INIT ROM(.OS_Appl8_VAR_NOCACHE_ZERO_INIT) :> .
+_ROM_OS_Appl8_VAR_NOCACHE_ZERO_INIT_START = ADDR(.ROM_OS_Appl8_VAR_NOCACHE_ZERO_INIT);
+_ROM_OS_Appl8_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.ROM_OS_Appl8_VAR_NOCACHE_ZERO_INIT);
+
+.ROM_OS_Appl8_VAR_FAST_NOCACHE ROM(.OS_Appl8_VAR_FAST_NOCACHE) :> .
+_ROM_OS_Appl8_VAR_FAST_NOCACHE_START = ADDR(.ROM_OS_Appl8_VAR_FAST_NOCACHE);
+_ROM_OS_Appl8_VAR_FAST_NOCACHE_END = ENDADDR(.ROM_OS_Appl8_VAR_FAST_NOCACHE);
+
+.ROM_OS_Appl8_VAR_FAST_NOCACHE_ZERO_INIT ROM(.OS_Appl8_VAR_FAST_NOCACHE_ZERO_INIT) :> .
+_ROM_OS_Appl8_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.ROM_OS_Appl8_VAR_FAST_NOCACHE_ZERO_INIT);
+_ROM_OS_Appl8_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.ROM_OS_Appl8_VAR_FAST_NOCACHE_ZERO_INIT);
+#endif
+
+#ifdef OS_LINK_CONST_APP_APPL8
+# undef OS_LINK_CONST_APP_APPL8
+#endif
+
+#ifdef OS_LINK_CONST_APP_APPL8_FAR
+# undef OS_LINK_CONST_APP_APPL8_FAR
+#endif
+
+#ifdef OS_LINK_CONST_APP_APPL8_NEAR
+# undef OS_LINK_CONST_APP_APPL8_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_APP_APPL8_INIT
+# undef OS_LINK_CONST_APP_APPL8_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_APP ) || defined ( OS_LINK_CONST_APP_APPL9 ) || defined ( OS_LINK_CONST_APP_APPL9_FAR )
+.OS_Appl9_CONST ALIGN(4) :> .
+_OS_Appl9_CONST_START = ADDR(.OS_Appl9_CONST);
+_OS_Appl9_CONST_END = ENDADDR(.OS_Appl9_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_APP ) || defined ( OS_LINK_CONST_APP_APPL9 ) || defined ( OS_LINK_CONST_APP_APPL9_NEAR )
+.OS_Appl9_CONST_FAST ALIGN(4) :> .
+_OS_Appl9_CONST_FAST_START = ADDR(.OS_Appl9_CONST_FAST);
+_OS_Appl9_CONST_FAST_END = ENDADDR(.OS_Appl9_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_APP ) || defined ( OS_LINK_CONST_APP_APPL9 ) || defined ( OS_LINK_CONST_APP_APPL9_INIT )
+
+.ROM_OS_Appl9_VAR ROM(.OS_Appl9_VAR) :> .
+_ROM_OS_Appl9_VAR_START = ADDR(.ROM_OS_Appl9_VAR);
+_ROM_OS_Appl9_VAR_END = ENDADDR(.ROM_OS_Appl9_VAR);
+
+.ROM_OS_Appl9_VAR_ZERO_INIT ROM(.OS_Appl9_VAR_ZERO_INIT) :> .
+_ROM_OS_Appl9_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Appl9_VAR_ZERO_INIT);
+_ROM_OS_Appl9_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Appl9_VAR_ZERO_INIT);
+
+.ROM_OS_Appl9_VAR_FAST ROM(.OS_Appl9_VAR_FAST) :> .
+_ROM_OS_Appl9_VAR_FAST_START = ADDR(.ROM_OS_Appl9_VAR_FAST);
+_ROM_OS_Appl9_VAR_FAST_END = ENDADDR(.ROM_OS_Appl9_VAR_FAST);
+
+.ROM_OS_Appl9_VAR_FAST_ZERO_INIT ROM(.OS_Appl9_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Appl9_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Appl9_VAR_FAST_ZERO_INIT);
+_ROM_OS_Appl9_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Appl9_VAR_FAST_ZERO_INIT);
+
+.ROM_OS_Appl9_VAR_NOCACHE ROM(.OS_Appl9_VAR_NOCACHE) :> .
+_ROM_OS_Appl9_VAR_NOCACHE_START = ADDR(.ROM_OS_Appl9_VAR_NOCACHE);
+_ROM_OS_Appl9_VAR_NOCACHE_END = ENDADDR(.ROM_OS_Appl9_VAR_NOCACHE);
+
+.ROM_OS_Appl9_VAR_NOCACHE_ZERO_INIT ROM(.OS_Appl9_VAR_NOCACHE_ZERO_INIT) :> .
+_ROM_OS_Appl9_VAR_NOCACHE_ZERO_INIT_START = ADDR(.ROM_OS_Appl9_VAR_NOCACHE_ZERO_INIT);
+_ROM_OS_Appl9_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.ROM_OS_Appl9_VAR_NOCACHE_ZERO_INIT);
+
+.ROM_OS_Appl9_VAR_FAST_NOCACHE ROM(.OS_Appl9_VAR_FAST_NOCACHE) :> .
+_ROM_OS_Appl9_VAR_FAST_NOCACHE_START = ADDR(.ROM_OS_Appl9_VAR_FAST_NOCACHE);
+_ROM_OS_Appl9_VAR_FAST_NOCACHE_END = ENDADDR(.ROM_OS_Appl9_VAR_FAST_NOCACHE);
+
+.ROM_OS_Appl9_VAR_FAST_NOCACHE_ZERO_INIT ROM(.OS_Appl9_VAR_FAST_NOCACHE_ZERO_INIT) :> .
+_ROM_OS_Appl9_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.ROM_OS_Appl9_VAR_FAST_NOCACHE_ZERO_INIT);
+_ROM_OS_Appl9_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.ROM_OS_Appl9_VAR_FAST_NOCACHE_ZERO_INIT);
+#endif
+
+#ifdef OS_LINK_CONST_APP_APPL9
+# undef OS_LINK_CONST_APP_APPL9
+#endif
+
+#ifdef OS_LINK_CONST_APP_APPL9_FAR
+# undef OS_LINK_CONST_APP_APPL9_FAR
+#endif
+
+#ifdef OS_LINK_CONST_APP_APPL9_NEAR
+# undef OS_LINK_CONST_APP_APPL9_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_APP_APPL9_INIT
+# undef OS_LINK_CONST_APP_APPL9_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_APP ) || defined ( OS_LINK_CONST_APP_SYSTEMAPPLICATION ) || defined ( OS_LINK_CONST_APP_SYSTEMAPPLICATION_FAR )
+.OS_SystemApplication_CONST ALIGN(4) :> .
+_OS_SystemApplication_CONST_START = ADDR(.OS_SystemApplication_CONST);
+_OS_SystemApplication_CONST_END = ENDADDR(.OS_SystemApplication_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_APP ) || defined ( OS_LINK_CONST_APP_SYSTEMAPPLICATION ) || defined ( OS_LINK_CONST_APP_SYSTEMAPPLICATION_NEAR )
+.OS_SystemApplication_CONST_FAST ALIGN(4) :> .
+_OS_SystemApplication_CONST_FAST_START = ADDR(.OS_SystemApplication_CONST_FAST);
+_OS_SystemApplication_CONST_FAST_END = ENDADDR(.OS_SystemApplication_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_APP ) || defined ( OS_LINK_CONST_APP_SYSTEMAPPLICATION ) || defined ( OS_LINK_CONST_APP_SYSTEMAPPLICATION_INIT )
+
+.ROM_OS_SystemApplication_VAR ROM(.OS_SystemApplication_VAR) :> .
+_ROM_OS_SystemApplication_VAR_START = ADDR(.ROM_OS_SystemApplication_VAR);
+_ROM_OS_SystemApplication_VAR_END = ENDADDR(.ROM_OS_SystemApplication_VAR);
+
+.ROM_OS_SystemApplication_VAR_ZERO_INIT ROM(.OS_SystemApplication_VAR_ZERO_INIT) :> .
+_ROM_OS_SystemApplication_VAR_ZERO_INIT_START = ADDR(.ROM_OS_SystemApplication_VAR_ZERO_INIT);
+_ROM_OS_SystemApplication_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_SystemApplication_VAR_ZERO_INIT);
+
+.ROM_OS_SystemApplication_VAR_FAST ROM(.OS_SystemApplication_VAR_FAST) :> .
+_ROM_OS_SystemApplication_VAR_FAST_START = ADDR(.ROM_OS_SystemApplication_VAR_FAST);
+_ROM_OS_SystemApplication_VAR_FAST_END = ENDADDR(.ROM_OS_SystemApplication_VAR_FAST);
+
+.ROM_OS_SystemApplication_VAR_FAST_ZERO_INIT ROM(.OS_SystemApplication_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_SystemApplication_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_SystemApplication_VAR_FAST_ZERO_INIT);
+_ROM_OS_SystemApplication_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_SystemApplication_VAR_FAST_ZERO_INIT);
+
+.ROM_OS_SystemApplication_VAR_NOCACHE ROM(.OS_SystemApplication_VAR_NOCACHE) :> .
+_ROM_OS_SystemApplication_VAR_NOCACHE_START = ADDR(.ROM_OS_SystemApplication_VAR_NOCACHE);
+_ROM_OS_SystemApplication_VAR_NOCACHE_END = ENDADDR(.ROM_OS_SystemApplication_VAR_NOCACHE);
+
+.ROM_OS_SystemApplication_VAR_NOCACHE_ZERO_INIT ROM(.OS_SystemApplication_VAR_NOCACHE_ZERO_INIT) :> .
+_ROM_OS_SystemApplication_VAR_NOCACHE_ZERO_INIT_START = ADDR(.ROM_OS_SystemApplication_VAR_NOCACHE_ZERO_INIT);
+_ROM_OS_SystemApplication_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.ROM_OS_SystemApplication_VAR_NOCACHE_ZERO_INIT);
+
+.ROM_OS_SystemApplication_VAR_FAST_NOCACHE ROM(.OS_SystemApplication_VAR_FAST_NOCACHE) :> .
+_ROM_OS_SystemApplication_VAR_FAST_NOCACHE_START = ADDR(.ROM_OS_SystemApplication_VAR_FAST_NOCACHE);
+_ROM_OS_SystemApplication_VAR_FAST_NOCACHE_END = ENDADDR(.ROM_OS_SystemApplication_VAR_FAST_NOCACHE);
+
+.ROM_OS_SystemApplication_VAR_FAST_NOCACHE_ZERO_INIT ROM(.OS_SystemApplication_VAR_FAST_NOCACHE_ZERO_INIT) :> .
+_ROM_OS_SystemApplication_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.ROM_OS_SystemApplication_VAR_FAST_NOCACHE_ZERO_INIT);
+_ROM_OS_SystemApplication_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.ROM_OS_SystemApplication_VAR_FAST_NOCACHE_ZERO_INIT);
+#endif
+
+#ifdef OS_LINK_CONST_APP_SYSTEMAPPLICATION
+# undef OS_LINK_CONST_APP_SYSTEMAPPLICATION
+#endif
+
+#ifdef OS_LINK_CONST_APP_SYSTEMAPPLICATION_FAR
+# undef OS_LINK_CONST_APP_SYSTEMAPPLICATION_FAR
+#endif
+
+#ifdef OS_LINK_CONST_APP_SYSTEMAPPLICATION_NEAR
+# undef OS_LINK_CONST_APP_SYSTEMAPPLICATION_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_APP_SYSTEMAPPLICATION_INIT
+# undef OS_LINK_CONST_APP_SYSTEMAPPLICATION_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_IDLETASK_OSCORE_CORE0 ) || defined ( OS_LINK_CONST_TASK_IDLETASK_OSCORE_CORE0_FAR )
+.OS_IdleTask_OsCore_CORE0_CONST ALIGN(4) :> .
+_OS_IdleTask_OsCore_CORE0_CONST_START = ADDR(.OS_IdleTask_OsCore_CORE0_CONST);
+_OS_IdleTask_OsCore_CORE0_CONST_END = ENDADDR(.OS_IdleTask_OsCore_CORE0_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_IDLETASK_OSCORE_CORE0 ) || defined ( OS_LINK_CONST_TASK_IDLETASK_OSCORE_CORE0_NEAR )
+.OS_IdleTask_OsCore_CORE0_CONST_FAST ALIGN(4) :> .
+_OS_IdleTask_OsCore_CORE0_CONST_FAST_START = ADDR(.OS_IdleTask_OsCore_CORE0_CONST_FAST);
+_OS_IdleTask_OsCore_CORE0_CONST_FAST_END = ENDADDR(.OS_IdleTask_OsCore_CORE0_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_IDLETASK_OSCORE_CORE0 ) || defined ( OS_LINK_CONST_TASK_IDLETASK_OSCORE_CORE0_INIT )
+
+.ROM_OS_IdleTask_OsCore_CORE0_VAR ROM(.OS_IdleTask_OsCore_CORE0_VAR) :> .
+_ROM_OS_IdleTask_OsCore_CORE0_VAR_START = ADDR(.ROM_OS_IdleTask_OsCore_CORE0_VAR);
+_ROM_OS_IdleTask_OsCore_CORE0_VAR_END = ENDADDR(.ROM_OS_IdleTask_OsCore_CORE0_VAR);
+
+.ROM_OS_IdleTask_OsCore_CORE0_VAR_NOINIT ROM(.OS_IdleTask_OsCore_CORE0_VAR_NOINIT) :> .
+_ROM_OS_IdleTask_OsCore_CORE0_VAR_NOINIT_START = ADDR(.ROM_OS_IdleTask_OsCore_CORE0_VAR_NOINIT);
+_ROM_OS_IdleTask_OsCore_CORE0_VAR_NOINIT_END = ENDADDR(.ROM_OS_IdleTask_OsCore_CORE0_VAR_NOINIT);
+
+.ROM_OS_IdleTask_OsCore_CORE0_VAR_ZERO_INIT ROM(.OS_IdleTask_OsCore_CORE0_VAR_ZERO_INIT) :> .
+_ROM_OS_IdleTask_OsCore_CORE0_VAR_ZERO_INIT_START = ADDR(.ROM_OS_IdleTask_OsCore_CORE0_VAR_ZERO_INIT);
+_ROM_OS_IdleTask_OsCore_CORE0_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_IdleTask_OsCore_CORE0_VAR_ZERO_INIT);
+
+.ROM_OS_IdleTask_OsCore_CORE0_VAR_FAST ROM(.OS_IdleTask_OsCore_CORE0_VAR_FAST) :> .
+_ROM_OS_IdleTask_OsCore_CORE0_VAR_FAST_START = ADDR(.ROM_OS_IdleTask_OsCore_CORE0_VAR_FAST);
+_ROM_OS_IdleTask_OsCore_CORE0_VAR_FAST_END = ENDADDR(.ROM_OS_IdleTask_OsCore_CORE0_VAR_FAST);
+
+.ROM_OS_IdleTask_OsCore_CORE0_VAR_FAST_NOINIT ROM(.OS_IdleTask_OsCore_CORE0_VAR_FAST_NOINIT) :> .
+_ROM_OS_IdleTask_OsCore_CORE0_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_IdleTask_OsCore_CORE0_VAR_FAST_NOINIT);
+_ROM_OS_IdleTask_OsCore_CORE0_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_IdleTask_OsCore_CORE0_VAR_FAST_NOINIT);
+
+.ROM_OS_IdleTask_OsCore_CORE0_VAR_FAST_ZERO_INIT ROM(.OS_IdleTask_OsCore_CORE0_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_IdleTask_OsCore_CORE0_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_IdleTask_OsCore_CORE0_VAR_FAST_ZERO_INIT);
+_ROM_OS_IdleTask_OsCore_CORE0_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_IdleTask_OsCore_CORE0_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_TASK_IDLETASK_OSCORE_CORE0
+# undef OS_LINK_CONST_TASK_IDLETASK_OSCORE_CORE0
+#endif
+
+#ifdef OS_LINK_CONST_TASK_IDLETASK_OSCORE_CORE0_FAR
+# undef OS_LINK_CONST_TASK_IDLETASK_OSCORE_CORE0_FAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_IDLETASK_OSCORE_CORE0_NEAR
+# undef OS_LINK_CONST_TASK_IDLETASK_OSCORE_CORE0_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_IDLETASK_OSCORE_CORE0_INIT
+# undef OS_LINK_CONST_TASK_IDLETASK_OSCORE_CORE0_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_100MS_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_100MS_APPL10_FAR )
+.OS_Task_100ms_Appl10_CONST ALIGN(4) :> .
+_OS_Task_100ms_Appl10_CONST_START = ADDR(.OS_Task_100ms_Appl10_CONST);
+_OS_Task_100ms_Appl10_CONST_END = ENDADDR(.OS_Task_100ms_Appl10_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_100MS_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_100MS_APPL10_NEAR )
+.OS_Task_100ms_Appl10_CONST_FAST ALIGN(4) :> .
+_OS_Task_100ms_Appl10_CONST_FAST_START = ADDR(.OS_Task_100ms_Appl10_CONST_FAST);
+_OS_Task_100ms_Appl10_CONST_FAST_END = ENDADDR(.OS_Task_100ms_Appl10_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_100MS_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_100MS_APPL10_INIT )
+
+.ROM_OS_Task_100ms_Appl10_VAR ROM(.OS_Task_100ms_Appl10_VAR) :> .
+_ROM_OS_Task_100ms_Appl10_VAR_START = ADDR(.ROM_OS_Task_100ms_Appl10_VAR);
+_ROM_OS_Task_100ms_Appl10_VAR_END = ENDADDR(.ROM_OS_Task_100ms_Appl10_VAR);
+
+.ROM_OS_Task_100ms_Appl10_VAR_NOINIT ROM(.OS_Task_100ms_Appl10_VAR_NOINIT) :> .
+_ROM_OS_Task_100ms_Appl10_VAR_NOINIT_START = ADDR(.ROM_OS_Task_100ms_Appl10_VAR_NOINIT);
+_ROM_OS_Task_100ms_Appl10_VAR_NOINIT_END = ENDADDR(.ROM_OS_Task_100ms_Appl10_VAR_NOINIT);
+
+.ROM_OS_Task_100ms_Appl10_VAR_ZERO_INIT ROM(.OS_Task_100ms_Appl10_VAR_ZERO_INIT) :> .
+_ROM_OS_Task_100ms_Appl10_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Task_100ms_Appl10_VAR_ZERO_INIT);
+_ROM_OS_Task_100ms_Appl10_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_100ms_Appl10_VAR_ZERO_INIT);
+
+.ROM_OS_Task_100ms_Appl10_VAR_FAST ROM(.OS_Task_100ms_Appl10_VAR_FAST) :> .
+_ROM_OS_Task_100ms_Appl10_VAR_FAST_START = ADDR(.ROM_OS_Task_100ms_Appl10_VAR_FAST);
+_ROM_OS_Task_100ms_Appl10_VAR_FAST_END = ENDADDR(.ROM_OS_Task_100ms_Appl10_VAR_FAST);
+
+.ROM_OS_Task_100ms_Appl10_VAR_FAST_NOINIT ROM(.OS_Task_100ms_Appl10_VAR_FAST_NOINIT) :> .
+_ROM_OS_Task_100ms_Appl10_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Task_100ms_Appl10_VAR_FAST_NOINIT);
+_ROM_OS_Task_100ms_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Task_100ms_Appl10_VAR_FAST_NOINIT);
+
+.ROM_OS_Task_100ms_Appl10_VAR_FAST_ZERO_INIT ROM(.OS_Task_100ms_Appl10_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Task_100ms_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Task_100ms_Appl10_VAR_FAST_ZERO_INIT);
+_ROM_OS_Task_100ms_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_100ms_Appl10_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_100MS_APPL10
+# undef OS_LINK_CONST_TASK_TASK_100MS_APPL10
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_100MS_APPL10_FAR
+# undef OS_LINK_CONST_TASK_TASK_100MS_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_100MS_APPL10_NEAR
+# undef OS_LINK_CONST_TASK_TASK_100MS_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_100MS_APPL10_INIT
+# undef OS_LINK_CONST_TASK_TASK_100MS_APPL10_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_100MS_APPL7 ) || defined ( OS_LINK_CONST_TASK_TASK_100MS_APPL7_FAR )
+.OS_Task_100ms_Appl7_CONST ALIGN(4) :> .
+_OS_Task_100ms_Appl7_CONST_START = ADDR(.OS_Task_100ms_Appl7_CONST);
+_OS_Task_100ms_Appl7_CONST_END = ENDADDR(.OS_Task_100ms_Appl7_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_100MS_APPL7 ) || defined ( OS_LINK_CONST_TASK_TASK_100MS_APPL7_NEAR )
+.OS_Task_100ms_Appl7_CONST_FAST ALIGN(4) :> .
+_OS_Task_100ms_Appl7_CONST_FAST_START = ADDR(.OS_Task_100ms_Appl7_CONST_FAST);
+_OS_Task_100ms_Appl7_CONST_FAST_END = ENDADDR(.OS_Task_100ms_Appl7_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_100MS_APPL7 ) || defined ( OS_LINK_CONST_TASK_TASK_100MS_APPL7_INIT )
+
+.ROM_OS_Task_100ms_Appl7_VAR ROM(.OS_Task_100ms_Appl7_VAR) :> .
+_ROM_OS_Task_100ms_Appl7_VAR_START = ADDR(.ROM_OS_Task_100ms_Appl7_VAR);
+_ROM_OS_Task_100ms_Appl7_VAR_END = ENDADDR(.ROM_OS_Task_100ms_Appl7_VAR);
+
+.ROM_OS_Task_100ms_Appl7_VAR_NOINIT ROM(.OS_Task_100ms_Appl7_VAR_NOINIT) :> .
+_ROM_OS_Task_100ms_Appl7_VAR_NOINIT_START = ADDR(.ROM_OS_Task_100ms_Appl7_VAR_NOINIT);
+_ROM_OS_Task_100ms_Appl7_VAR_NOINIT_END = ENDADDR(.ROM_OS_Task_100ms_Appl7_VAR_NOINIT);
+
+.ROM_OS_Task_100ms_Appl7_VAR_ZERO_INIT ROM(.OS_Task_100ms_Appl7_VAR_ZERO_INIT) :> .
+_ROM_OS_Task_100ms_Appl7_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Task_100ms_Appl7_VAR_ZERO_INIT);
+_ROM_OS_Task_100ms_Appl7_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_100ms_Appl7_VAR_ZERO_INIT);
+
+.ROM_OS_Task_100ms_Appl7_VAR_FAST ROM(.OS_Task_100ms_Appl7_VAR_FAST) :> .
+_ROM_OS_Task_100ms_Appl7_VAR_FAST_START = ADDR(.ROM_OS_Task_100ms_Appl7_VAR_FAST);
+_ROM_OS_Task_100ms_Appl7_VAR_FAST_END = ENDADDR(.ROM_OS_Task_100ms_Appl7_VAR_FAST);
+
+.ROM_OS_Task_100ms_Appl7_VAR_FAST_NOINIT ROM(.OS_Task_100ms_Appl7_VAR_FAST_NOINIT) :> .
+_ROM_OS_Task_100ms_Appl7_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Task_100ms_Appl7_VAR_FAST_NOINIT);
+_ROM_OS_Task_100ms_Appl7_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Task_100ms_Appl7_VAR_FAST_NOINIT);
+
+.ROM_OS_Task_100ms_Appl7_VAR_FAST_ZERO_INIT ROM(.OS_Task_100ms_Appl7_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Task_100ms_Appl7_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Task_100ms_Appl7_VAR_FAST_ZERO_INIT);
+_ROM_OS_Task_100ms_Appl7_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_100ms_Appl7_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_100MS_APPL7
+# undef OS_LINK_CONST_TASK_TASK_100MS_APPL7
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_100MS_APPL7_FAR
+# undef OS_LINK_CONST_TASK_TASK_100MS_APPL7_FAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_100MS_APPL7_NEAR
+# undef OS_LINK_CONST_TASK_TASK_100MS_APPL7_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_100MS_APPL7_INIT
+# undef OS_LINK_CONST_TASK_TASK_100MS_APPL7_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_100MS_APPL9 ) || defined ( OS_LINK_CONST_TASK_TASK_100MS_APPL9_FAR )
+.OS_Task_100ms_Appl9_CONST ALIGN(4) :> .
+_OS_Task_100ms_Appl9_CONST_START = ADDR(.OS_Task_100ms_Appl9_CONST);
+_OS_Task_100ms_Appl9_CONST_END = ENDADDR(.OS_Task_100ms_Appl9_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_100MS_APPL9 ) || defined ( OS_LINK_CONST_TASK_TASK_100MS_APPL9_NEAR )
+.OS_Task_100ms_Appl9_CONST_FAST ALIGN(4) :> .
+_OS_Task_100ms_Appl9_CONST_FAST_START = ADDR(.OS_Task_100ms_Appl9_CONST_FAST);
+_OS_Task_100ms_Appl9_CONST_FAST_END = ENDADDR(.OS_Task_100ms_Appl9_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_100MS_APPL9 ) || defined ( OS_LINK_CONST_TASK_TASK_100MS_APPL9_INIT )
+
+.ROM_OS_Task_100ms_Appl9_VAR ROM(.OS_Task_100ms_Appl9_VAR) :> .
+_ROM_OS_Task_100ms_Appl9_VAR_START = ADDR(.ROM_OS_Task_100ms_Appl9_VAR);
+_ROM_OS_Task_100ms_Appl9_VAR_END = ENDADDR(.ROM_OS_Task_100ms_Appl9_VAR);
+
+.ROM_OS_Task_100ms_Appl9_VAR_NOINIT ROM(.OS_Task_100ms_Appl9_VAR_NOINIT) :> .
+_ROM_OS_Task_100ms_Appl9_VAR_NOINIT_START = ADDR(.ROM_OS_Task_100ms_Appl9_VAR_NOINIT);
+_ROM_OS_Task_100ms_Appl9_VAR_NOINIT_END = ENDADDR(.ROM_OS_Task_100ms_Appl9_VAR_NOINIT);
+
+.ROM_OS_Task_100ms_Appl9_VAR_ZERO_INIT ROM(.OS_Task_100ms_Appl9_VAR_ZERO_INIT) :> .
+_ROM_OS_Task_100ms_Appl9_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Task_100ms_Appl9_VAR_ZERO_INIT);
+_ROM_OS_Task_100ms_Appl9_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_100ms_Appl9_VAR_ZERO_INIT);
+
+.ROM_OS_Task_100ms_Appl9_VAR_FAST ROM(.OS_Task_100ms_Appl9_VAR_FAST) :> .
+_ROM_OS_Task_100ms_Appl9_VAR_FAST_START = ADDR(.ROM_OS_Task_100ms_Appl9_VAR_FAST);
+_ROM_OS_Task_100ms_Appl9_VAR_FAST_END = ENDADDR(.ROM_OS_Task_100ms_Appl9_VAR_FAST);
+
+.ROM_OS_Task_100ms_Appl9_VAR_FAST_NOINIT ROM(.OS_Task_100ms_Appl9_VAR_FAST_NOINIT) :> .
+_ROM_OS_Task_100ms_Appl9_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Task_100ms_Appl9_VAR_FAST_NOINIT);
+_ROM_OS_Task_100ms_Appl9_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Task_100ms_Appl9_VAR_FAST_NOINIT);
+
+.ROM_OS_Task_100ms_Appl9_VAR_FAST_ZERO_INIT ROM(.OS_Task_100ms_Appl9_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Task_100ms_Appl9_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Task_100ms_Appl9_VAR_FAST_ZERO_INIT);
+_ROM_OS_Task_100ms_Appl9_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_100ms_Appl9_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_100MS_APPL9
+# undef OS_LINK_CONST_TASK_TASK_100MS_APPL9
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_100MS_APPL9_FAR
+# undef OS_LINK_CONST_TASK_TASK_100MS_APPL9_FAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_100MS_APPL9_NEAR
+# undef OS_LINK_CONST_TASK_TASK_100MS_APPL9_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_100MS_APPL9_INIT
+# undef OS_LINK_CONST_TASK_TASK_100MS_APPL9_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_10MSBSW_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_10MSBSW_APPL10_FAR )
+.OS_Task_10msBsw_Appl10_CONST ALIGN(4) :> .
+_OS_Task_10msBsw_Appl10_CONST_START = ADDR(.OS_Task_10msBsw_Appl10_CONST);
+_OS_Task_10msBsw_Appl10_CONST_END = ENDADDR(.OS_Task_10msBsw_Appl10_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_10MSBSW_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_10MSBSW_APPL10_NEAR )
+.OS_Task_10msBsw_Appl10_CONST_FAST ALIGN(4) :> .
+_OS_Task_10msBsw_Appl10_CONST_FAST_START = ADDR(.OS_Task_10msBsw_Appl10_CONST_FAST);
+_OS_Task_10msBsw_Appl10_CONST_FAST_END = ENDADDR(.OS_Task_10msBsw_Appl10_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_10MSBSW_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_10MSBSW_APPL10_INIT )
+
+.ROM_OS_Task_10msBsw_Appl10_VAR ROM(.OS_Task_10msBsw_Appl10_VAR) :> .
+_ROM_OS_Task_10msBsw_Appl10_VAR_START = ADDR(.ROM_OS_Task_10msBsw_Appl10_VAR);
+_ROM_OS_Task_10msBsw_Appl10_VAR_END = ENDADDR(.ROM_OS_Task_10msBsw_Appl10_VAR);
+
+.ROM_OS_Task_10msBsw_Appl10_VAR_NOINIT ROM(.OS_Task_10msBsw_Appl10_VAR_NOINIT) :> .
+_ROM_OS_Task_10msBsw_Appl10_VAR_NOINIT_START = ADDR(.ROM_OS_Task_10msBsw_Appl10_VAR_NOINIT);
+_ROM_OS_Task_10msBsw_Appl10_VAR_NOINIT_END = ENDADDR(.ROM_OS_Task_10msBsw_Appl10_VAR_NOINIT);
+
+.ROM_OS_Task_10msBsw_Appl10_VAR_ZERO_INIT ROM(.OS_Task_10msBsw_Appl10_VAR_ZERO_INIT) :> .
+_ROM_OS_Task_10msBsw_Appl10_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Task_10msBsw_Appl10_VAR_ZERO_INIT);
+_ROM_OS_Task_10msBsw_Appl10_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_10msBsw_Appl10_VAR_ZERO_INIT);
+
+.ROM_OS_Task_10msBsw_Appl10_VAR_FAST ROM(.OS_Task_10msBsw_Appl10_VAR_FAST) :> .
+_ROM_OS_Task_10msBsw_Appl10_VAR_FAST_START = ADDR(.ROM_OS_Task_10msBsw_Appl10_VAR_FAST);
+_ROM_OS_Task_10msBsw_Appl10_VAR_FAST_END = ENDADDR(.ROM_OS_Task_10msBsw_Appl10_VAR_FAST);
+
+.ROM_OS_Task_10msBsw_Appl10_VAR_FAST_NOINIT ROM(.OS_Task_10msBsw_Appl10_VAR_FAST_NOINIT) :> .
+_ROM_OS_Task_10msBsw_Appl10_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Task_10msBsw_Appl10_VAR_FAST_NOINIT);
+_ROM_OS_Task_10msBsw_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Task_10msBsw_Appl10_VAR_FAST_NOINIT);
+
+.ROM_OS_Task_10msBsw_Appl10_VAR_FAST_ZERO_INIT ROM(.OS_Task_10msBsw_Appl10_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Task_10msBsw_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Task_10msBsw_Appl10_VAR_FAST_ZERO_INIT);
+_ROM_OS_Task_10msBsw_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_10msBsw_Appl10_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_10MSBSW_APPL10
+# undef OS_LINK_CONST_TASK_TASK_10MSBSW_APPL10
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_10MSBSW_APPL10_FAR
+# undef OS_LINK_CONST_TASK_TASK_10MSBSW_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_10MSBSW_APPL10_NEAR
+# undef OS_LINK_CONST_TASK_TASK_10MSBSW_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_10MSBSW_APPL10_INIT
+# undef OS_LINK_CONST_TASK_TASK_10MSBSW_APPL10_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_10MS_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_10MS_APPL10_FAR )
+.OS_Task_10ms_Appl10_CONST ALIGN(4) :> .
+_OS_Task_10ms_Appl10_CONST_START = ADDR(.OS_Task_10ms_Appl10_CONST);
+_OS_Task_10ms_Appl10_CONST_END = ENDADDR(.OS_Task_10ms_Appl10_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_10MS_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_10MS_APPL10_NEAR )
+.OS_Task_10ms_Appl10_CONST_FAST ALIGN(4) :> .
+_OS_Task_10ms_Appl10_CONST_FAST_START = ADDR(.OS_Task_10ms_Appl10_CONST_FAST);
+_OS_Task_10ms_Appl10_CONST_FAST_END = ENDADDR(.OS_Task_10ms_Appl10_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_10MS_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_10MS_APPL10_INIT )
+
+.ROM_OS_Task_10ms_Appl10_VAR ROM(.OS_Task_10ms_Appl10_VAR) :> .
+_ROM_OS_Task_10ms_Appl10_VAR_START = ADDR(.ROM_OS_Task_10ms_Appl10_VAR);
+_ROM_OS_Task_10ms_Appl10_VAR_END = ENDADDR(.ROM_OS_Task_10ms_Appl10_VAR);
+
+.ROM_OS_Task_10ms_Appl10_VAR_NOINIT ROM(.OS_Task_10ms_Appl10_VAR_NOINIT) :> .
+_ROM_OS_Task_10ms_Appl10_VAR_NOINIT_START = ADDR(.ROM_OS_Task_10ms_Appl10_VAR_NOINIT);
+_ROM_OS_Task_10ms_Appl10_VAR_NOINIT_END = ENDADDR(.ROM_OS_Task_10ms_Appl10_VAR_NOINIT);
+
+.ROM_OS_Task_10ms_Appl10_VAR_ZERO_INIT ROM(.OS_Task_10ms_Appl10_VAR_ZERO_INIT) :> .
+_ROM_OS_Task_10ms_Appl10_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Task_10ms_Appl10_VAR_ZERO_INIT);
+_ROM_OS_Task_10ms_Appl10_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_10ms_Appl10_VAR_ZERO_INIT);
+
+.ROM_OS_Task_10ms_Appl10_VAR_FAST ROM(.OS_Task_10ms_Appl10_VAR_FAST) :> .
+_ROM_OS_Task_10ms_Appl10_VAR_FAST_START = ADDR(.ROM_OS_Task_10ms_Appl10_VAR_FAST);
+_ROM_OS_Task_10ms_Appl10_VAR_FAST_END = ENDADDR(.ROM_OS_Task_10ms_Appl10_VAR_FAST);
+
+.ROM_OS_Task_10ms_Appl10_VAR_FAST_NOINIT ROM(.OS_Task_10ms_Appl10_VAR_FAST_NOINIT) :> .
+_ROM_OS_Task_10ms_Appl10_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Task_10ms_Appl10_VAR_FAST_NOINIT);
+_ROM_OS_Task_10ms_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Task_10ms_Appl10_VAR_FAST_NOINIT);
+
+.ROM_OS_Task_10ms_Appl10_VAR_FAST_ZERO_INIT ROM(.OS_Task_10ms_Appl10_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Task_10ms_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Task_10ms_Appl10_VAR_FAST_ZERO_INIT);
+_ROM_OS_Task_10ms_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_10ms_Appl10_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_10MS_APPL10
+# undef OS_LINK_CONST_TASK_TASK_10MS_APPL10
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_10MS_APPL10_FAR
+# undef OS_LINK_CONST_TASK_TASK_10MS_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_10MS_APPL10_NEAR
+# undef OS_LINK_CONST_TASK_TASK_10MS_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_10MS_APPL10_INIT
+# undef OS_LINK_CONST_TASK_TASK_10MS_APPL10_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_10MS_APPL7 ) || defined ( OS_LINK_CONST_TASK_TASK_10MS_APPL7_FAR )
+.OS_Task_10ms_Appl7_CONST ALIGN(4) :> .
+_OS_Task_10ms_Appl7_CONST_START = ADDR(.OS_Task_10ms_Appl7_CONST);
+_OS_Task_10ms_Appl7_CONST_END = ENDADDR(.OS_Task_10ms_Appl7_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_10MS_APPL7 ) || defined ( OS_LINK_CONST_TASK_TASK_10MS_APPL7_NEAR )
+.OS_Task_10ms_Appl7_CONST_FAST ALIGN(4) :> .
+_OS_Task_10ms_Appl7_CONST_FAST_START = ADDR(.OS_Task_10ms_Appl7_CONST_FAST);
+_OS_Task_10ms_Appl7_CONST_FAST_END = ENDADDR(.OS_Task_10ms_Appl7_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_10MS_APPL7 ) || defined ( OS_LINK_CONST_TASK_TASK_10MS_APPL7_INIT )
+
+.ROM_OS_Task_10ms_Appl7_VAR ROM(.OS_Task_10ms_Appl7_VAR) :> .
+_ROM_OS_Task_10ms_Appl7_VAR_START = ADDR(.ROM_OS_Task_10ms_Appl7_VAR);
+_ROM_OS_Task_10ms_Appl7_VAR_END = ENDADDR(.ROM_OS_Task_10ms_Appl7_VAR);
+
+.ROM_OS_Task_10ms_Appl7_VAR_NOINIT ROM(.OS_Task_10ms_Appl7_VAR_NOINIT) :> .
+_ROM_OS_Task_10ms_Appl7_VAR_NOINIT_START = ADDR(.ROM_OS_Task_10ms_Appl7_VAR_NOINIT);
+_ROM_OS_Task_10ms_Appl7_VAR_NOINIT_END = ENDADDR(.ROM_OS_Task_10ms_Appl7_VAR_NOINIT);
+
+.ROM_OS_Task_10ms_Appl7_VAR_ZERO_INIT ROM(.OS_Task_10ms_Appl7_VAR_ZERO_INIT) :> .
+_ROM_OS_Task_10ms_Appl7_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Task_10ms_Appl7_VAR_ZERO_INIT);
+_ROM_OS_Task_10ms_Appl7_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_10ms_Appl7_VAR_ZERO_INIT);
+
+.ROM_OS_Task_10ms_Appl7_VAR_FAST ROM(.OS_Task_10ms_Appl7_VAR_FAST) :> .
+_ROM_OS_Task_10ms_Appl7_VAR_FAST_START = ADDR(.ROM_OS_Task_10ms_Appl7_VAR_FAST);
+_ROM_OS_Task_10ms_Appl7_VAR_FAST_END = ENDADDR(.ROM_OS_Task_10ms_Appl7_VAR_FAST);
+
+.ROM_OS_Task_10ms_Appl7_VAR_FAST_NOINIT ROM(.OS_Task_10ms_Appl7_VAR_FAST_NOINIT) :> .
+_ROM_OS_Task_10ms_Appl7_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Task_10ms_Appl7_VAR_FAST_NOINIT);
+_ROM_OS_Task_10ms_Appl7_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Task_10ms_Appl7_VAR_FAST_NOINIT);
+
+.ROM_OS_Task_10ms_Appl7_VAR_FAST_ZERO_INIT ROM(.OS_Task_10ms_Appl7_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Task_10ms_Appl7_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Task_10ms_Appl7_VAR_FAST_ZERO_INIT);
+_ROM_OS_Task_10ms_Appl7_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_10ms_Appl7_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_10MS_APPL7
+# undef OS_LINK_CONST_TASK_TASK_10MS_APPL7
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_10MS_APPL7_FAR
+# undef OS_LINK_CONST_TASK_TASK_10MS_APPL7_FAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_10MS_APPL7_NEAR
+# undef OS_LINK_CONST_TASK_TASK_10MS_APPL7_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_10MS_APPL7_INIT
+# undef OS_LINK_CONST_TASK_TASK_10MS_APPL7_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_10MS_APPL8 ) || defined ( OS_LINK_CONST_TASK_TASK_10MS_APPL8_FAR )
+.OS_Task_10ms_Appl8_CONST ALIGN(4) :> .
+_OS_Task_10ms_Appl8_CONST_START = ADDR(.OS_Task_10ms_Appl8_CONST);
+_OS_Task_10ms_Appl8_CONST_END = ENDADDR(.OS_Task_10ms_Appl8_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_10MS_APPL8 ) || defined ( OS_LINK_CONST_TASK_TASK_10MS_APPL8_NEAR )
+.OS_Task_10ms_Appl8_CONST_FAST ALIGN(4) :> .
+_OS_Task_10ms_Appl8_CONST_FAST_START = ADDR(.OS_Task_10ms_Appl8_CONST_FAST);
+_OS_Task_10ms_Appl8_CONST_FAST_END = ENDADDR(.OS_Task_10ms_Appl8_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_10MS_APPL8 ) || defined ( OS_LINK_CONST_TASK_TASK_10MS_APPL8_INIT )
+
+.ROM_OS_Task_10ms_Appl8_VAR ROM(.OS_Task_10ms_Appl8_VAR) :> .
+_ROM_OS_Task_10ms_Appl8_VAR_START = ADDR(.ROM_OS_Task_10ms_Appl8_VAR);
+_ROM_OS_Task_10ms_Appl8_VAR_END = ENDADDR(.ROM_OS_Task_10ms_Appl8_VAR);
+
+.ROM_OS_Task_10ms_Appl8_VAR_NOINIT ROM(.OS_Task_10ms_Appl8_VAR_NOINIT) :> .
+_ROM_OS_Task_10ms_Appl8_VAR_NOINIT_START = ADDR(.ROM_OS_Task_10ms_Appl8_VAR_NOINIT);
+_ROM_OS_Task_10ms_Appl8_VAR_NOINIT_END = ENDADDR(.ROM_OS_Task_10ms_Appl8_VAR_NOINIT);
+
+.ROM_OS_Task_10ms_Appl8_VAR_ZERO_INIT ROM(.OS_Task_10ms_Appl8_VAR_ZERO_INIT) :> .
+_ROM_OS_Task_10ms_Appl8_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Task_10ms_Appl8_VAR_ZERO_INIT);
+_ROM_OS_Task_10ms_Appl8_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_10ms_Appl8_VAR_ZERO_INIT);
+
+.ROM_OS_Task_10ms_Appl8_VAR_FAST ROM(.OS_Task_10ms_Appl8_VAR_FAST) :> .
+_ROM_OS_Task_10ms_Appl8_VAR_FAST_START = ADDR(.ROM_OS_Task_10ms_Appl8_VAR_FAST);
+_ROM_OS_Task_10ms_Appl8_VAR_FAST_END = ENDADDR(.ROM_OS_Task_10ms_Appl8_VAR_FAST);
+
+.ROM_OS_Task_10ms_Appl8_VAR_FAST_NOINIT ROM(.OS_Task_10ms_Appl8_VAR_FAST_NOINIT) :> .
+_ROM_OS_Task_10ms_Appl8_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Task_10ms_Appl8_VAR_FAST_NOINIT);
+_ROM_OS_Task_10ms_Appl8_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Task_10ms_Appl8_VAR_FAST_NOINIT);
+
+.ROM_OS_Task_10ms_Appl8_VAR_FAST_ZERO_INIT ROM(.OS_Task_10ms_Appl8_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Task_10ms_Appl8_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Task_10ms_Appl8_VAR_FAST_ZERO_INIT);
+_ROM_OS_Task_10ms_Appl8_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_10ms_Appl8_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_10MS_APPL8
+# undef OS_LINK_CONST_TASK_TASK_10MS_APPL8
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_10MS_APPL8_FAR
+# undef OS_LINK_CONST_TASK_TASK_10MS_APPL8_FAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_10MS_APPL8_NEAR
+# undef OS_LINK_CONST_TASK_TASK_10MS_APPL8_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_10MS_APPL8_INIT
+# undef OS_LINK_CONST_TASK_TASK_10MS_APPL8_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_10MS_APPL9 ) || defined ( OS_LINK_CONST_TASK_TASK_10MS_APPL9_FAR )
+.OS_Task_10ms_Appl9_CONST ALIGN(4) :> .
+_OS_Task_10ms_Appl9_CONST_START = ADDR(.OS_Task_10ms_Appl9_CONST);
+_OS_Task_10ms_Appl9_CONST_END = ENDADDR(.OS_Task_10ms_Appl9_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_10MS_APPL9 ) || defined ( OS_LINK_CONST_TASK_TASK_10MS_APPL9_NEAR )
+.OS_Task_10ms_Appl9_CONST_FAST ALIGN(4) :> .
+_OS_Task_10ms_Appl9_CONST_FAST_START = ADDR(.OS_Task_10ms_Appl9_CONST_FAST);
+_OS_Task_10ms_Appl9_CONST_FAST_END = ENDADDR(.OS_Task_10ms_Appl9_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_10MS_APPL9 ) || defined ( OS_LINK_CONST_TASK_TASK_10MS_APPL9_INIT )
+
+.ROM_OS_Task_10ms_Appl9_VAR ROM(.OS_Task_10ms_Appl9_VAR) :> .
+_ROM_OS_Task_10ms_Appl9_VAR_START = ADDR(.ROM_OS_Task_10ms_Appl9_VAR);
+_ROM_OS_Task_10ms_Appl9_VAR_END = ENDADDR(.ROM_OS_Task_10ms_Appl9_VAR);
+
+.ROM_OS_Task_10ms_Appl9_VAR_NOINIT ROM(.OS_Task_10ms_Appl9_VAR_NOINIT) :> .
+_ROM_OS_Task_10ms_Appl9_VAR_NOINIT_START = ADDR(.ROM_OS_Task_10ms_Appl9_VAR_NOINIT);
+_ROM_OS_Task_10ms_Appl9_VAR_NOINIT_END = ENDADDR(.ROM_OS_Task_10ms_Appl9_VAR_NOINIT);
+
+.ROM_OS_Task_10ms_Appl9_VAR_ZERO_INIT ROM(.OS_Task_10ms_Appl9_VAR_ZERO_INIT) :> .
+_ROM_OS_Task_10ms_Appl9_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Task_10ms_Appl9_VAR_ZERO_INIT);
+_ROM_OS_Task_10ms_Appl9_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_10ms_Appl9_VAR_ZERO_INIT);
+
+.ROM_OS_Task_10ms_Appl9_VAR_FAST ROM(.OS_Task_10ms_Appl9_VAR_FAST) :> .
+_ROM_OS_Task_10ms_Appl9_VAR_FAST_START = ADDR(.ROM_OS_Task_10ms_Appl9_VAR_FAST);
+_ROM_OS_Task_10ms_Appl9_VAR_FAST_END = ENDADDR(.ROM_OS_Task_10ms_Appl9_VAR_FAST);
+
+.ROM_OS_Task_10ms_Appl9_VAR_FAST_NOINIT ROM(.OS_Task_10ms_Appl9_VAR_FAST_NOINIT) :> .
+_ROM_OS_Task_10ms_Appl9_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Task_10ms_Appl9_VAR_FAST_NOINIT);
+_ROM_OS_Task_10ms_Appl9_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Task_10ms_Appl9_VAR_FAST_NOINIT);
+
+.ROM_OS_Task_10ms_Appl9_VAR_FAST_ZERO_INIT ROM(.OS_Task_10ms_Appl9_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Task_10ms_Appl9_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Task_10ms_Appl9_VAR_FAST_ZERO_INIT);
+_ROM_OS_Task_10ms_Appl9_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_10ms_Appl9_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_10MS_APPL9
+# undef OS_LINK_CONST_TASK_TASK_10MS_APPL9
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_10MS_APPL9_FAR
+# undef OS_LINK_CONST_TASK_TASK_10MS_APPL9_FAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_10MS_APPL9_NEAR
+# undef OS_LINK_CONST_TASK_TASK_10MS_APPL9_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_10MS_APPL9_INIT
+# undef OS_LINK_CONST_TASK_TASK_10MS_APPL9_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_2MSA_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_2MSA_APPL10_FAR )
+.OS_Task_2msA_Appl10_CONST ALIGN(4) :> .
+_OS_Task_2msA_Appl10_CONST_START = ADDR(.OS_Task_2msA_Appl10_CONST);
+_OS_Task_2msA_Appl10_CONST_END = ENDADDR(.OS_Task_2msA_Appl10_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_2MSA_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_2MSA_APPL10_NEAR )
+.OS_Task_2msA_Appl10_CONST_FAST ALIGN(4) :> .
+_OS_Task_2msA_Appl10_CONST_FAST_START = ADDR(.OS_Task_2msA_Appl10_CONST_FAST);
+_OS_Task_2msA_Appl10_CONST_FAST_END = ENDADDR(.OS_Task_2msA_Appl10_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_2MSA_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_2MSA_APPL10_INIT )
+
+.ROM_OS_Task_2msA_Appl10_VAR ROM(.OS_Task_2msA_Appl10_VAR) :> .
+_ROM_OS_Task_2msA_Appl10_VAR_START = ADDR(.ROM_OS_Task_2msA_Appl10_VAR);
+_ROM_OS_Task_2msA_Appl10_VAR_END = ENDADDR(.ROM_OS_Task_2msA_Appl10_VAR);
+
+.ROM_OS_Task_2msA_Appl10_VAR_NOINIT ROM(.OS_Task_2msA_Appl10_VAR_NOINIT) :> .
+_ROM_OS_Task_2msA_Appl10_VAR_NOINIT_START = ADDR(.ROM_OS_Task_2msA_Appl10_VAR_NOINIT);
+_ROM_OS_Task_2msA_Appl10_VAR_NOINIT_END = ENDADDR(.ROM_OS_Task_2msA_Appl10_VAR_NOINIT);
+
+.ROM_OS_Task_2msA_Appl10_VAR_ZERO_INIT ROM(.OS_Task_2msA_Appl10_VAR_ZERO_INIT) :> .
+_ROM_OS_Task_2msA_Appl10_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Task_2msA_Appl10_VAR_ZERO_INIT);
+_ROM_OS_Task_2msA_Appl10_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_2msA_Appl10_VAR_ZERO_INIT);
+
+.ROM_OS_Task_2msA_Appl10_VAR_FAST ROM(.OS_Task_2msA_Appl10_VAR_FAST) :> .
+_ROM_OS_Task_2msA_Appl10_VAR_FAST_START = ADDR(.ROM_OS_Task_2msA_Appl10_VAR_FAST);
+_ROM_OS_Task_2msA_Appl10_VAR_FAST_END = ENDADDR(.ROM_OS_Task_2msA_Appl10_VAR_FAST);
+
+.ROM_OS_Task_2msA_Appl10_VAR_FAST_NOINIT ROM(.OS_Task_2msA_Appl10_VAR_FAST_NOINIT) :> .
+_ROM_OS_Task_2msA_Appl10_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Task_2msA_Appl10_VAR_FAST_NOINIT);
+_ROM_OS_Task_2msA_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Task_2msA_Appl10_VAR_FAST_NOINIT);
+
+.ROM_OS_Task_2msA_Appl10_VAR_FAST_ZERO_INIT ROM(.OS_Task_2msA_Appl10_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Task_2msA_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Task_2msA_Appl10_VAR_FAST_ZERO_INIT);
+_ROM_OS_Task_2msA_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_2msA_Appl10_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_2MSA_APPL10
+# undef OS_LINK_CONST_TASK_TASK_2MSA_APPL10
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_2MSA_APPL10_FAR
+# undef OS_LINK_CONST_TASK_TASK_2MSA_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_2MSA_APPL10_NEAR
+# undef OS_LINK_CONST_TASK_TASK_2MSA_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_2MSA_APPL10_INIT
+# undef OS_LINK_CONST_TASK_TASK_2MSA_APPL10_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_2MSB_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_2MSB_APPL10_FAR )
+.OS_Task_2msB_Appl10_CONST ALIGN(4) :> .
+_OS_Task_2msB_Appl10_CONST_START = ADDR(.OS_Task_2msB_Appl10_CONST);
+_OS_Task_2msB_Appl10_CONST_END = ENDADDR(.OS_Task_2msB_Appl10_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_2MSB_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_2MSB_APPL10_NEAR )
+.OS_Task_2msB_Appl10_CONST_FAST ALIGN(4) :> .
+_OS_Task_2msB_Appl10_CONST_FAST_START = ADDR(.OS_Task_2msB_Appl10_CONST_FAST);
+_OS_Task_2msB_Appl10_CONST_FAST_END = ENDADDR(.OS_Task_2msB_Appl10_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_2MSB_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_2MSB_APPL10_INIT )
+
+.ROM_OS_Task_2msB_Appl10_VAR ROM(.OS_Task_2msB_Appl10_VAR) :> .
+_ROM_OS_Task_2msB_Appl10_VAR_START = ADDR(.ROM_OS_Task_2msB_Appl10_VAR);
+_ROM_OS_Task_2msB_Appl10_VAR_END = ENDADDR(.ROM_OS_Task_2msB_Appl10_VAR);
+
+.ROM_OS_Task_2msB_Appl10_VAR_NOINIT ROM(.OS_Task_2msB_Appl10_VAR_NOINIT) :> .
+_ROM_OS_Task_2msB_Appl10_VAR_NOINIT_START = ADDR(.ROM_OS_Task_2msB_Appl10_VAR_NOINIT);
+_ROM_OS_Task_2msB_Appl10_VAR_NOINIT_END = ENDADDR(.ROM_OS_Task_2msB_Appl10_VAR_NOINIT);
+
+.ROM_OS_Task_2msB_Appl10_VAR_ZERO_INIT ROM(.OS_Task_2msB_Appl10_VAR_ZERO_INIT) :> .
+_ROM_OS_Task_2msB_Appl10_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Task_2msB_Appl10_VAR_ZERO_INIT);
+_ROM_OS_Task_2msB_Appl10_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_2msB_Appl10_VAR_ZERO_INIT);
+
+.ROM_OS_Task_2msB_Appl10_VAR_FAST ROM(.OS_Task_2msB_Appl10_VAR_FAST) :> .
+_ROM_OS_Task_2msB_Appl10_VAR_FAST_START = ADDR(.ROM_OS_Task_2msB_Appl10_VAR_FAST);
+_ROM_OS_Task_2msB_Appl10_VAR_FAST_END = ENDADDR(.ROM_OS_Task_2msB_Appl10_VAR_FAST);
+
+.ROM_OS_Task_2msB_Appl10_VAR_FAST_NOINIT ROM(.OS_Task_2msB_Appl10_VAR_FAST_NOINIT) :> .
+_ROM_OS_Task_2msB_Appl10_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Task_2msB_Appl10_VAR_FAST_NOINIT);
+_ROM_OS_Task_2msB_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Task_2msB_Appl10_VAR_FAST_NOINIT);
+
+.ROM_OS_Task_2msB_Appl10_VAR_FAST_ZERO_INIT ROM(.OS_Task_2msB_Appl10_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Task_2msB_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Task_2msB_Appl10_VAR_FAST_ZERO_INIT);
+_ROM_OS_Task_2msB_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_2msB_Appl10_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_2MSB_APPL10
+# undef OS_LINK_CONST_TASK_TASK_2MSB_APPL10
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_2MSB_APPL10_FAR
+# undef OS_LINK_CONST_TASK_TASK_2MSB_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_2MSB_APPL10_NEAR
+# undef OS_LINK_CONST_TASK_TASK_2MSB_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_2MSB_APPL10_INIT
+# undef OS_LINK_CONST_TASK_TASK_2MSB_APPL10_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_2MSTMPLMONR_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_2MSTMPLMONR_APPL10_FAR )
+.OS_Task_2msTmplMonr_Appl10_CONST ALIGN(4) :> .
+_OS_Task_2msTmplMonr_Appl10_CONST_START = ADDR(.OS_Task_2msTmplMonr_Appl10_CONST);
+_OS_Task_2msTmplMonr_Appl10_CONST_END = ENDADDR(.OS_Task_2msTmplMonr_Appl10_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_2MSTMPLMONR_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_2MSTMPLMONR_APPL10_NEAR )
+.OS_Task_2msTmplMonr_Appl10_CONST_FAST ALIGN(4) :> .
+_OS_Task_2msTmplMonr_Appl10_CONST_FAST_START = ADDR(.OS_Task_2msTmplMonr_Appl10_CONST_FAST);
+_OS_Task_2msTmplMonr_Appl10_CONST_FAST_END = ENDADDR(.OS_Task_2msTmplMonr_Appl10_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_2MSTMPLMONR_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_2MSTMPLMONR_APPL10_INIT )
+
+.ROM_OS_Task_2msTmplMonr_Appl10_VAR ROM(.OS_Task_2msTmplMonr_Appl10_VAR) :> .
+_ROM_OS_Task_2msTmplMonr_Appl10_VAR_START = ADDR(.ROM_OS_Task_2msTmplMonr_Appl10_VAR);
+_ROM_OS_Task_2msTmplMonr_Appl10_VAR_END = ENDADDR(.ROM_OS_Task_2msTmplMonr_Appl10_VAR);
+
+.ROM_OS_Task_2msTmplMonr_Appl10_VAR_NOINIT ROM(.OS_Task_2msTmplMonr_Appl10_VAR_NOINIT) :> .
+_ROM_OS_Task_2msTmplMonr_Appl10_VAR_NOINIT_START = ADDR(.ROM_OS_Task_2msTmplMonr_Appl10_VAR_NOINIT);
+_ROM_OS_Task_2msTmplMonr_Appl10_VAR_NOINIT_END = ENDADDR(.ROM_OS_Task_2msTmplMonr_Appl10_VAR_NOINIT);
+
+.ROM_OS_Task_2msTmplMonr_Appl10_VAR_ZERO_INIT ROM(.OS_Task_2msTmplMonr_Appl10_VAR_ZERO_INIT) :> .
+_ROM_OS_Task_2msTmplMonr_Appl10_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Task_2msTmplMonr_Appl10_VAR_ZERO_INIT);
+_ROM_OS_Task_2msTmplMonr_Appl10_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_2msTmplMonr_Appl10_VAR_ZERO_INIT);
+
+.ROM_OS_Task_2msTmplMonr_Appl10_VAR_FAST ROM(.OS_Task_2msTmplMonr_Appl10_VAR_FAST) :> .
+_ROM_OS_Task_2msTmplMonr_Appl10_VAR_FAST_START = ADDR(.ROM_OS_Task_2msTmplMonr_Appl10_VAR_FAST);
+_ROM_OS_Task_2msTmplMonr_Appl10_VAR_FAST_END = ENDADDR(.ROM_OS_Task_2msTmplMonr_Appl10_VAR_FAST);
+
+.ROM_OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOINIT ROM(.OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOINIT) :> .
+_ROM_OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOINIT);
+_ROM_OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOINIT);
+
+.ROM_OS_Task_2msTmplMonr_Appl10_VAR_FAST_ZERO_INIT ROM(.OS_Task_2msTmplMonr_Appl10_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Task_2msTmplMonr_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Task_2msTmplMonr_Appl10_VAR_FAST_ZERO_INIT);
+_ROM_OS_Task_2msTmplMonr_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_2msTmplMonr_Appl10_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_2MSTMPLMONR_APPL10
+# undef OS_LINK_CONST_TASK_TASK_2MSTMPLMONR_APPL10
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_2MSTMPLMONR_APPL10_FAR
+# undef OS_LINK_CONST_TASK_TASK_2MSTMPLMONR_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_2MSTMPLMONR_APPL10_NEAR
+# undef OS_LINK_CONST_TASK_TASK_2MSTMPLMONR_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_2MSTMPLMONR_APPL10_INIT
+# undef OS_LINK_CONST_TASK_TASK_2MSTMPLMONR_APPL10_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_2MS_APPL7 ) || defined ( OS_LINK_CONST_TASK_TASK_2MS_APPL7_FAR )
+.OS_Task_2ms_Appl7_CONST ALIGN(4) :> .
+_OS_Task_2ms_Appl7_CONST_START = ADDR(.OS_Task_2ms_Appl7_CONST);
+_OS_Task_2ms_Appl7_CONST_END = ENDADDR(.OS_Task_2ms_Appl7_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_2MS_APPL7 ) || defined ( OS_LINK_CONST_TASK_TASK_2MS_APPL7_NEAR )
+.OS_Task_2ms_Appl7_CONST_FAST ALIGN(4) :> .
+_OS_Task_2ms_Appl7_CONST_FAST_START = ADDR(.OS_Task_2ms_Appl7_CONST_FAST);
+_OS_Task_2ms_Appl7_CONST_FAST_END = ENDADDR(.OS_Task_2ms_Appl7_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_2MS_APPL7 ) || defined ( OS_LINK_CONST_TASK_TASK_2MS_APPL7_INIT )
+
+.ROM_OS_Task_2ms_Appl7_VAR ROM(.OS_Task_2ms_Appl7_VAR) :> .
+_ROM_OS_Task_2ms_Appl7_VAR_START = ADDR(.ROM_OS_Task_2ms_Appl7_VAR);
+_ROM_OS_Task_2ms_Appl7_VAR_END = ENDADDR(.ROM_OS_Task_2ms_Appl7_VAR);
+
+.ROM_OS_Task_2ms_Appl7_VAR_NOINIT ROM(.OS_Task_2ms_Appl7_VAR_NOINIT) :> .
+_ROM_OS_Task_2ms_Appl7_VAR_NOINIT_START = ADDR(.ROM_OS_Task_2ms_Appl7_VAR_NOINIT);
+_ROM_OS_Task_2ms_Appl7_VAR_NOINIT_END = ENDADDR(.ROM_OS_Task_2ms_Appl7_VAR_NOINIT);
+
+.ROM_OS_Task_2ms_Appl7_VAR_ZERO_INIT ROM(.OS_Task_2ms_Appl7_VAR_ZERO_INIT) :> .
+_ROM_OS_Task_2ms_Appl7_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Task_2ms_Appl7_VAR_ZERO_INIT);
+_ROM_OS_Task_2ms_Appl7_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_2ms_Appl7_VAR_ZERO_INIT);
+
+.ROM_OS_Task_2ms_Appl7_VAR_FAST ROM(.OS_Task_2ms_Appl7_VAR_FAST) :> .
+_ROM_OS_Task_2ms_Appl7_VAR_FAST_START = ADDR(.ROM_OS_Task_2ms_Appl7_VAR_FAST);
+_ROM_OS_Task_2ms_Appl7_VAR_FAST_END = ENDADDR(.ROM_OS_Task_2ms_Appl7_VAR_FAST);
+
+.ROM_OS_Task_2ms_Appl7_VAR_FAST_NOINIT ROM(.OS_Task_2ms_Appl7_VAR_FAST_NOINIT) :> .
+_ROM_OS_Task_2ms_Appl7_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Task_2ms_Appl7_VAR_FAST_NOINIT);
+_ROM_OS_Task_2ms_Appl7_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Task_2ms_Appl7_VAR_FAST_NOINIT);
+
+.ROM_OS_Task_2ms_Appl7_VAR_FAST_ZERO_INIT ROM(.OS_Task_2ms_Appl7_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Task_2ms_Appl7_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Task_2ms_Appl7_VAR_FAST_ZERO_INIT);
+_ROM_OS_Task_2ms_Appl7_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_2ms_Appl7_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_2MS_APPL7
+# undef OS_LINK_CONST_TASK_TASK_2MS_APPL7
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_2MS_APPL7_FAR
+# undef OS_LINK_CONST_TASK_TASK_2MS_APPL7_FAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_2MS_APPL7_NEAR
+# undef OS_LINK_CONST_TASK_TASK_2MS_APPL7_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_2MS_APPL7_INIT
+# undef OS_LINK_CONST_TASK_TASK_2MS_APPL7_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_2MS_APPL8 ) || defined ( OS_LINK_CONST_TASK_TASK_2MS_APPL8_FAR )
+.OS_Task_2ms_Appl8_CONST ALIGN(4) :> .
+_OS_Task_2ms_Appl8_CONST_START = ADDR(.OS_Task_2ms_Appl8_CONST);
+_OS_Task_2ms_Appl8_CONST_END = ENDADDR(.OS_Task_2ms_Appl8_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_2MS_APPL8 ) || defined ( OS_LINK_CONST_TASK_TASK_2MS_APPL8_NEAR )
+.OS_Task_2ms_Appl8_CONST_FAST ALIGN(4) :> .
+_OS_Task_2ms_Appl8_CONST_FAST_START = ADDR(.OS_Task_2ms_Appl8_CONST_FAST);
+_OS_Task_2ms_Appl8_CONST_FAST_END = ENDADDR(.OS_Task_2ms_Appl8_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_2MS_APPL8 ) || defined ( OS_LINK_CONST_TASK_TASK_2MS_APPL8_INIT )
+
+.ROM_OS_Task_2ms_Appl8_VAR ROM(.OS_Task_2ms_Appl8_VAR) :> .
+_ROM_OS_Task_2ms_Appl8_VAR_START = ADDR(.ROM_OS_Task_2ms_Appl8_VAR);
+_ROM_OS_Task_2ms_Appl8_VAR_END = ENDADDR(.ROM_OS_Task_2ms_Appl8_VAR);
+
+.ROM_OS_Task_2ms_Appl8_VAR_NOINIT ROM(.OS_Task_2ms_Appl8_VAR_NOINIT) :> .
+_ROM_OS_Task_2ms_Appl8_VAR_NOINIT_START = ADDR(.ROM_OS_Task_2ms_Appl8_VAR_NOINIT);
+_ROM_OS_Task_2ms_Appl8_VAR_NOINIT_END = ENDADDR(.ROM_OS_Task_2ms_Appl8_VAR_NOINIT);
+
+.ROM_OS_Task_2ms_Appl8_VAR_ZERO_INIT ROM(.OS_Task_2ms_Appl8_VAR_ZERO_INIT) :> .
+_ROM_OS_Task_2ms_Appl8_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Task_2ms_Appl8_VAR_ZERO_INIT);
+_ROM_OS_Task_2ms_Appl8_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_2ms_Appl8_VAR_ZERO_INIT);
+
+.ROM_OS_Task_2ms_Appl8_VAR_FAST ROM(.OS_Task_2ms_Appl8_VAR_FAST) :> .
+_ROM_OS_Task_2ms_Appl8_VAR_FAST_START = ADDR(.ROM_OS_Task_2ms_Appl8_VAR_FAST);
+_ROM_OS_Task_2ms_Appl8_VAR_FAST_END = ENDADDR(.ROM_OS_Task_2ms_Appl8_VAR_FAST);
+
+.ROM_OS_Task_2ms_Appl8_VAR_FAST_NOINIT ROM(.OS_Task_2ms_Appl8_VAR_FAST_NOINIT) :> .
+_ROM_OS_Task_2ms_Appl8_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Task_2ms_Appl8_VAR_FAST_NOINIT);
+_ROM_OS_Task_2ms_Appl8_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Task_2ms_Appl8_VAR_FAST_NOINIT);
+
+.ROM_OS_Task_2ms_Appl8_VAR_FAST_ZERO_INIT ROM(.OS_Task_2ms_Appl8_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Task_2ms_Appl8_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Task_2ms_Appl8_VAR_FAST_ZERO_INIT);
+_ROM_OS_Task_2ms_Appl8_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_2ms_Appl8_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_2MS_APPL8
+# undef OS_LINK_CONST_TASK_TASK_2MS_APPL8
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_2MS_APPL8_FAR
+# undef OS_LINK_CONST_TASK_TASK_2MS_APPL8_FAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_2MS_APPL8_NEAR
+# undef OS_LINK_CONST_TASK_TASK_2MS_APPL8_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_2MS_APPL8_INIT
+# undef OS_LINK_CONST_TASK_TASK_2MS_APPL8_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_2MS_APPL9 ) || defined ( OS_LINK_CONST_TASK_TASK_2MS_APPL9_FAR )
+.OS_Task_2ms_Appl9_CONST ALIGN(4) :> .
+_OS_Task_2ms_Appl9_CONST_START = ADDR(.OS_Task_2ms_Appl9_CONST);
+_OS_Task_2ms_Appl9_CONST_END = ENDADDR(.OS_Task_2ms_Appl9_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_2MS_APPL9 ) || defined ( OS_LINK_CONST_TASK_TASK_2MS_APPL9_NEAR )
+.OS_Task_2ms_Appl9_CONST_FAST ALIGN(4) :> .
+_OS_Task_2ms_Appl9_CONST_FAST_START = ADDR(.OS_Task_2ms_Appl9_CONST_FAST);
+_OS_Task_2ms_Appl9_CONST_FAST_END = ENDADDR(.OS_Task_2ms_Appl9_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_2MS_APPL9 ) || defined ( OS_LINK_CONST_TASK_TASK_2MS_APPL9_INIT )
+
+.ROM_OS_Task_2ms_Appl9_VAR ROM(.OS_Task_2ms_Appl9_VAR) :> .
+_ROM_OS_Task_2ms_Appl9_VAR_START = ADDR(.ROM_OS_Task_2ms_Appl9_VAR);
+_ROM_OS_Task_2ms_Appl9_VAR_END = ENDADDR(.ROM_OS_Task_2ms_Appl9_VAR);
+
+.ROM_OS_Task_2ms_Appl9_VAR_NOINIT ROM(.OS_Task_2ms_Appl9_VAR_NOINIT) :> .
+_ROM_OS_Task_2ms_Appl9_VAR_NOINIT_START = ADDR(.ROM_OS_Task_2ms_Appl9_VAR_NOINIT);
+_ROM_OS_Task_2ms_Appl9_VAR_NOINIT_END = ENDADDR(.ROM_OS_Task_2ms_Appl9_VAR_NOINIT);
+
+.ROM_OS_Task_2ms_Appl9_VAR_ZERO_INIT ROM(.OS_Task_2ms_Appl9_VAR_ZERO_INIT) :> .
+_ROM_OS_Task_2ms_Appl9_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Task_2ms_Appl9_VAR_ZERO_INIT);
+_ROM_OS_Task_2ms_Appl9_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_2ms_Appl9_VAR_ZERO_INIT);
+
+.ROM_OS_Task_2ms_Appl9_VAR_FAST ROM(.OS_Task_2ms_Appl9_VAR_FAST) :> .
+_ROM_OS_Task_2ms_Appl9_VAR_FAST_START = ADDR(.ROM_OS_Task_2ms_Appl9_VAR_FAST);
+_ROM_OS_Task_2ms_Appl9_VAR_FAST_END = ENDADDR(.ROM_OS_Task_2ms_Appl9_VAR_FAST);
+
+.ROM_OS_Task_2ms_Appl9_VAR_FAST_NOINIT ROM(.OS_Task_2ms_Appl9_VAR_FAST_NOINIT) :> .
+_ROM_OS_Task_2ms_Appl9_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Task_2ms_Appl9_VAR_FAST_NOINIT);
+_ROM_OS_Task_2ms_Appl9_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Task_2ms_Appl9_VAR_FAST_NOINIT);
+
+.ROM_OS_Task_2ms_Appl9_VAR_FAST_ZERO_INIT ROM(.OS_Task_2ms_Appl9_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Task_2ms_Appl9_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Task_2ms_Appl9_VAR_FAST_ZERO_INIT);
+_ROM_OS_Task_2ms_Appl9_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_2ms_Appl9_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_2MS_APPL9
+# undef OS_LINK_CONST_TASK_TASK_2MS_APPL9
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_2MS_APPL9_FAR
+# undef OS_LINK_CONST_TASK_TASK_2MS_APPL9_FAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_2MS_APPL9_NEAR
+# undef OS_LINK_CONST_TASK_TASK_2MS_APPL9_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_2MS_APPL9_INIT
+# undef OS_LINK_CONST_TASK_TASK_2MS_APPL9_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_4MSBSW_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_4MSBSW_APPL10_FAR )
+.OS_Task_4msBsw_Appl10_CONST ALIGN(4) :> .
+_OS_Task_4msBsw_Appl10_CONST_START = ADDR(.OS_Task_4msBsw_Appl10_CONST);
+_OS_Task_4msBsw_Appl10_CONST_END = ENDADDR(.OS_Task_4msBsw_Appl10_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_4MSBSW_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_4MSBSW_APPL10_NEAR )
+.OS_Task_4msBsw_Appl10_CONST_FAST ALIGN(4) :> .
+_OS_Task_4msBsw_Appl10_CONST_FAST_START = ADDR(.OS_Task_4msBsw_Appl10_CONST_FAST);
+_OS_Task_4msBsw_Appl10_CONST_FAST_END = ENDADDR(.OS_Task_4msBsw_Appl10_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_4MSBSW_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_4MSBSW_APPL10_INIT )
+
+.ROM_OS_Task_4msBsw_Appl10_VAR ROM(.OS_Task_4msBsw_Appl10_VAR) :> .
+_ROM_OS_Task_4msBsw_Appl10_VAR_START = ADDR(.ROM_OS_Task_4msBsw_Appl10_VAR);
+_ROM_OS_Task_4msBsw_Appl10_VAR_END = ENDADDR(.ROM_OS_Task_4msBsw_Appl10_VAR);
+
+.ROM_OS_Task_4msBsw_Appl10_VAR_NOINIT ROM(.OS_Task_4msBsw_Appl10_VAR_NOINIT) :> .
+_ROM_OS_Task_4msBsw_Appl10_VAR_NOINIT_START = ADDR(.ROM_OS_Task_4msBsw_Appl10_VAR_NOINIT);
+_ROM_OS_Task_4msBsw_Appl10_VAR_NOINIT_END = ENDADDR(.ROM_OS_Task_4msBsw_Appl10_VAR_NOINIT);
+
+.ROM_OS_Task_4msBsw_Appl10_VAR_ZERO_INIT ROM(.OS_Task_4msBsw_Appl10_VAR_ZERO_INIT) :> .
+_ROM_OS_Task_4msBsw_Appl10_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Task_4msBsw_Appl10_VAR_ZERO_INIT);
+_ROM_OS_Task_4msBsw_Appl10_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_4msBsw_Appl10_VAR_ZERO_INIT);
+
+.ROM_OS_Task_4msBsw_Appl10_VAR_FAST ROM(.OS_Task_4msBsw_Appl10_VAR_FAST) :> .
+_ROM_OS_Task_4msBsw_Appl10_VAR_FAST_START = ADDR(.ROM_OS_Task_4msBsw_Appl10_VAR_FAST);
+_ROM_OS_Task_4msBsw_Appl10_VAR_FAST_END = ENDADDR(.ROM_OS_Task_4msBsw_Appl10_VAR_FAST);
+
+.ROM_OS_Task_4msBsw_Appl10_VAR_FAST_NOINIT ROM(.OS_Task_4msBsw_Appl10_VAR_FAST_NOINIT) :> .
+_ROM_OS_Task_4msBsw_Appl10_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Task_4msBsw_Appl10_VAR_FAST_NOINIT);
+_ROM_OS_Task_4msBsw_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Task_4msBsw_Appl10_VAR_FAST_NOINIT);
+
+.ROM_OS_Task_4msBsw_Appl10_VAR_FAST_ZERO_INIT ROM(.OS_Task_4msBsw_Appl10_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Task_4msBsw_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Task_4msBsw_Appl10_VAR_FAST_ZERO_INIT);
+_ROM_OS_Task_4msBsw_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_4msBsw_Appl10_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_4MSBSW_APPL10
+# undef OS_LINK_CONST_TASK_TASK_4MSBSW_APPL10
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_4MSBSW_APPL10_FAR
+# undef OS_LINK_CONST_TASK_TASK_4MSBSW_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_4MSBSW_APPL10_NEAR
+# undef OS_LINK_CONST_TASK_TASK_4MSBSW_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_4MSBSW_APPL10_INIT
+# undef OS_LINK_CONST_TASK_TASK_4MSBSW_APPL10_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_4MS_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_4MS_APPL10_FAR )
+.OS_Task_4ms_Appl10_CONST ALIGN(4) :> .
+_OS_Task_4ms_Appl10_CONST_START = ADDR(.OS_Task_4ms_Appl10_CONST);
+_OS_Task_4ms_Appl10_CONST_END = ENDADDR(.OS_Task_4ms_Appl10_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_4MS_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_4MS_APPL10_NEAR )
+.OS_Task_4ms_Appl10_CONST_FAST ALIGN(4) :> .
+_OS_Task_4ms_Appl10_CONST_FAST_START = ADDR(.OS_Task_4ms_Appl10_CONST_FAST);
+_OS_Task_4ms_Appl10_CONST_FAST_END = ENDADDR(.OS_Task_4ms_Appl10_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_4MS_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_4MS_APPL10_INIT )
+
+.ROM_OS_Task_4ms_Appl10_VAR ROM(.OS_Task_4ms_Appl10_VAR) :> .
+_ROM_OS_Task_4ms_Appl10_VAR_START = ADDR(.ROM_OS_Task_4ms_Appl10_VAR);
+_ROM_OS_Task_4ms_Appl10_VAR_END = ENDADDR(.ROM_OS_Task_4ms_Appl10_VAR);
+
+.ROM_OS_Task_4ms_Appl10_VAR_NOINIT ROM(.OS_Task_4ms_Appl10_VAR_NOINIT) :> .
+_ROM_OS_Task_4ms_Appl10_VAR_NOINIT_START = ADDR(.ROM_OS_Task_4ms_Appl10_VAR_NOINIT);
+_ROM_OS_Task_4ms_Appl10_VAR_NOINIT_END = ENDADDR(.ROM_OS_Task_4ms_Appl10_VAR_NOINIT);
+
+.ROM_OS_Task_4ms_Appl10_VAR_ZERO_INIT ROM(.OS_Task_4ms_Appl10_VAR_ZERO_INIT) :> .
+_ROM_OS_Task_4ms_Appl10_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Task_4ms_Appl10_VAR_ZERO_INIT);
+_ROM_OS_Task_4ms_Appl10_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_4ms_Appl10_VAR_ZERO_INIT);
+
+.ROM_OS_Task_4ms_Appl10_VAR_FAST ROM(.OS_Task_4ms_Appl10_VAR_FAST) :> .
+_ROM_OS_Task_4ms_Appl10_VAR_FAST_START = ADDR(.ROM_OS_Task_4ms_Appl10_VAR_FAST);
+_ROM_OS_Task_4ms_Appl10_VAR_FAST_END = ENDADDR(.ROM_OS_Task_4ms_Appl10_VAR_FAST);
+
+.ROM_OS_Task_4ms_Appl10_VAR_FAST_NOINIT ROM(.OS_Task_4ms_Appl10_VAR_FAST_NOINIT) :> .
+_ROM_OS_Task_4ms_Appl10_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Task_4ms_Appl10_VAR_FAST_NOINIT);
+_ROM_OS_Task_4ms_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Task_4ms_Appl10_VAR_FAST_NOINIT);
+
+.ROM_OS_Task_4ms_Appl10_VAR_FAST_ZERO_INIT ROM(.OS_Task_4ms_Appl10_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Task_4ms_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Task_4ms_Appl10_VAR_FAST_ZERO_INIT);
+_ROM_OS_Task_4ms_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_4ms_Appl10_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_4MS_APPL10
+# undef OS_LINK_CONST_TASK_TASK_4MS_APPL10
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_4MS_APPL10_FAR
+# undef OS_LINK_CONST_TASK_TASK_4MS_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_4MS_APPL10_NEAR
+# undef OS_LINK_CONST_TASK_TASK_4MS_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_4MS_APPL10_INIT
+# undef OS_LINK_CONST_TASK_TASK_4MS_APPL10_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_4MS_APPL7 ) || defined ( OS_LINK_CONST_TASK_TASK_4MS_APPL7_FAR )
+.OS_Task_4ms_Appl7_CONST ALIGN(4) :> .
+_OS_Task_4ms_Appl7_CONST_START = ADDR(.OS_Task_4ms_Appl7_CONST);
+_OS_Task_4ms_Appl7_CONST_END = ENDADDR(.OS_Task_4ms_Appl7_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_4MS_APPL7 ) || defined ( OS_LINK_CONST_TASK_TASK_4MS_APPL7_NEAR )
+.OS_Task_4ms_Appl7_CONST_FAST ALIGN(4) :> .
+_OS_Task_4ms_Appl7_CONST_FAST_START = ADDR(.OS_Task_4ms_Appl7_CONST_FAST);
+_OS_Task_4ms_Appl7_CONST_FAST_END = ENDADDR(.OS_Task_4ms_Appl7_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_4MS_APPL7 ) || defined ( OS_LINK_CONST_TASK_TASK_4MS_APPL7_INIT )
+
+.ROM_OS_Task_4ms_Appl7_VAR ROM(.OS_Task_4ms_Appl7_VAR) :> .
+_ROM_OS_Task_4ms_Appl7_VAR_START = ADDR(.ROM_OS_Task_4ms_Appl7_VAR);
+_ROM_OS_Task_4ms_Appl7_VAR_END = ENDADDR(.ROM_OS_Task_4ms_Appl7_VAR);
+
+.ROM_OS_Task_4ms_Appl7_VAR_NOINIT ROM(.OS_Task_4ms_Appl7_VAR_NOINIT) :> .
+_ROM_OS_Task_4ms_Appl7_VAR_NOINIT_START = ADDR(.ROM_OS_Task_4ms_Appl7_VAR_NOINIT);
+_ROM_OS_Task_4ms_Appl7_VAR_NOINIT_END = ENDADDR(.ROM_OS_Task_4ms_Appl7_VAR_NOINIT);
+
+.ROM_OS_Task_4ms_Appl7_VAR_ZERO_INIT ROM(.OS_Task_4ms_Appl7_VAR_ZERO_INIT) :> .
+_ROM_OS_Task_4ms_Appl7_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Task_4ms_Appl7_VAR_ZERO_INIT);
+_ROM_OS_Task_4ms_Appl7_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_4ms_Appl7_VAR_ZERO_INIT);
+
+.ROM_OS_Task_4ms_Appl7_VAR_FAST ROM(.OS_Task_4ms_Appl7_VAR_FAST) :> .
+_ROM_OS_Task_4ms_Appl7_VAR_FAST_START = ADDR(.ROM_OS_Task_4ms_Appl7_VAR_FAST);
+_ROM_OS_Task_4ms_Appl7_VAR_FAST_END = ENDADDR(.ROM_OS_Task_4ms_Appl7_VAR_FAST);
+
+.ROM_OS_Task_4ms_Appl7_VAR_FAST_NOINIT ROM(.OS_Task_4ms_Appl7_VAR_FAST_NOINIT) :> .
+_ROM_OS_Task_4ms_Appl7_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Task_4ms_Appl7_VAR_FAST_NOINIT);
+_ROM_OS_Task_4ms_Appl7_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Task_4ms_Appl7_VAR_FAST_NOINIT);
+
+.ROM_OS_Task_4ms_Appl7_VAR_FAST_ZERO_INIT ROM(.OS_Task_4ms_Appl7_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Task_4ms_Appl7_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Task_4ms_Appl7_VAR_FAST_ZERO_INIT);
+_ROM_OS_Task_4ms_Appl7_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_4ms_Appl7_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_4MS_APPL7
+# undef OS_LINK_CONST_TASK_TASK_4MS_APPL7
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_4MS_APPL7_FAR
+# undef OS_LINK_CONST_TASK_TASK_4MS_APPL7_FAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_4MS_APPL7_NEAR
+# undef OS_LINK_CONST_TASK_TASK_4MS_APPL7_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_4MS_APPL7_INIT
+# undef OS_LINK_CONST_TASK_TASK_4MS_APPL7_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_5MSBSW_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_5MSBSW_APPL10_FAR )
+.OS_Task_5msBsw_Appl10_CONST ALIGN(4) :> .
+_OS_Task_5msBsw_Appl10_CONST_START = ADDR(.OS_Task_5msBsw_Appl10_CONST);
+_OS_Task_5msBsw_Appl10_CONST_END = ENDADDR(.OS_Task_5msBsw_Appl10_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_5MSBSW_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_5MSBSW_APPL10_NEAR )
+.OS_Task_5msBsw_Appl10_CONST_FAST ALIGN(4) :> .
+_OS_Task_5msBsw_Appl10_CONST_FAST_START = ADDR(.OS_Task_5msBsw_Appl10_CONST_FAST);
+_OS_Task_5msBsw_Appl10_CONST_FAST_END = ENDADDR(.OS_Task_5msBsw_Appl10_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_5MSBSW_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_5MSBSW_APPL10_INIT )
+
+.ROM_OS_Task_5msBsw_Appl10_VAR ROM(.OS_Task_5msBsw_Appl10_VAR) :> .
+_ROM_OS_Task_5msBsw_Appl10_VAR_START = ADDR(.ROM_OS_Task_5msBsw_Appl10_VAR);
+_ROM_OS_Task_5msBsw_Appl10_VAR_END = ENDADDR(.ROM_OS_Task_5msBsw_Appl10_VAR);
+
+.ROM_OS_Task_5msBsw_Appl10_VAR_NOINIT ROM(.OS_Task_5msBsw_Appl10_VAR_NOINIT) :> .
+_ROM_OS_Task_5msBsw_Appl10_VAR_NOINIT_START = ADDR(.ROM_OS_Task_5msBsw_Appl10_VAR_NOINIT);
+_ROM_OS_Task_5msBsw_Appl10_VAR_NOINIT_END = ENDADDR(.ROM_OS_Task_5msBsw_Appl10_VAR_NOINIT);
+
+.ROM_OS_Task_5msBsw_Appl10_VAR_ZERO_INIT ROM(.OS_Task_5msBsw_Appl10_VAR_ZERO_INIT) :> .
+_ROM_OS_Task_5msBsw_Appl10_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Task_5msBsw_Appl10_VAR_ZERO_INIT);
+_ROM_OS_Task_5msBsw_Appl10_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_5msBsw_Appl10_VAR_ZERO_INIT);
+
+.ROM_OS_Task_5msBsw_Appl10_VAR_FAST ROM(.OS_Task_5msBsw_Appl10_VAR_FAST) :> .
+_ROM_OS_Task_5msBsw_Appl10_VAR_FAST_START = ADDR(.ROM_OS_Task_5msBsw_Appl10_VAR_FAST);
+_ROM_OS_Task_5msBsw_Appl10_VAR_FAST_END = ENDADDR(.ROM_OS_Task_5msBsw_Appl10_VAR_FAST);
+
+.ROM_OS_Task_5msBsw_Appl10_VAR_FAST_NOINIT ROM(.OS_Task_5msBsw_Appl10_VAR_FAST_NOINIT) :> .
+_ROM_OS_Task_5msBsw_Appl10_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Task_5msBsw_Appl10_VAR_FAST_NOINIT);
+_ROM_OS_Task_5msBsw_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Task_5msBsw_Appl10_VAR_FAST_NOINIT);
+
+.ROM_OS_Task_5msBsw_Appl10_VAR_FAST_ZERO_INIT ROM(.OS_Task_5msBsw_Appl10_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Task_5msBsw_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Task_5msBsw_Appl10_VAR_FAST_ZERO_INIT);
+_ROM_OS_Task_5msBsw_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_5msBsw_Appl10_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_5MSBSW_APPL10
+# undef OS_LINK_CONST_TASK_TASK_5MSBSW_APPL10
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_5MSBSW_APPL10_FAR
+# undef OS_LINK_CONST_TASK_TASK_5MSBSW_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_5MSBSW_APPL10_NEAR
+# undef OS_LINK_CONST_TASK_TASK_5MSBSW_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_5MSBSW_APPL10_INIT
+# undef OS_LINK_CONST_TASK_TASK_5MSBSW_APPL10_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_CODING_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_CODING_APPL10_FAR )
+.OS_Task_Coding_Appl10_CONST ALIGN(4) :> .
+_OS_Task_Coding_Appl10_CONST_START = ADDR(.OS_Task_Coding_Appl10_CONST);
+_OS_Task_Coding_Appl10_CONST_END = ENDADDR(.OS_Task_Coding_Appl10_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_CODING_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_CODING_APPL10_NEAR )
+.OS_Task_Coding_Appl10_CONST_FAST ALIGN(4) :> .
+_OS_Task_Coding_Appl10_CONST_FAST_START = ADDR(.OS_Task_Coding_Appl10_CONST_FAST);
+_OS_Task_Coding_Appl10_CONST_FAST_END = ENDADDR(.OS_Task_Coding_Appl10_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_CODING_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_CODING_APPL10_INIT )
+
+.ROM_OS_Task_Coding_Appl10_VAR ROM(.OS_Task_Coding_Appl10_VAR) :> .
+_ROM_OS_Task_Coding_Appl10_VAR_START = ADDR(.ROM_OS_Task_Coding_Appl10_VAR);
+_ROM_OS_Task_Coding_Appl10_VAR_END = ENDADDR(.ROM_OS_Task_Coding_Appl10_VAR);
+
+.ROM_OS_Task_Coding_Appl10_VAR_NOINIT ROM(.OS_Task_Coding_Appl10_VAR_NOINIT) :> .
+_ROM_OS_Task_Coding_Appl10_VAR_NOINIT_START = ADDR(.ROM_OS_Task_Coding_Appl10_VAR_NOINIT);
+_ROM_OS_Task_Coding_Appl10_VAR_NOINIT_END = ENDADDR(.ROM_OS_Task_Coding_Appl10_VAR_NOINIT);
+
+.ROM_OS_Task_Coding_Appl10_VAR_ZERO_INIT ROM(.OS_Task_Coding_Appl10_VAR_ZERO_INIT) :> .
+_ROM_OS_Task_Coding_Appl10_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Task_Coding_Appl10_VAR_ZERO_INIT);
+_ROM_OS_Task_Coding_Appl10_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_Coding_Appl10_VAR_ZERO_INIT);
+
+.ROM_OS_Task_Coding_Appl10_VAR_FAST ROM(.OS_Task_Coding_Appl10_VAR_FAST) :> .
+_ROM_OS_Task_Coding_Appl10_VAR_FAST_START = ADDR(.ROM_OS_Task_Coding_Appl10_VAR_FAST);
+_ROM_OS_Task_Coding_Appl10_VAR_FAST_END = ENDADDR(.ROM_OS_Task_Coding_Appl10_VAR_FAST);
+
+.ROM_OS_Task_Coding_Appl10_VAR_FAST_NOINIT ROM(.OS_Task_Coding_Appl10_VAR_FAST_NOINIT) :> .
+_ROM_OS_Task_Coding_Appl10_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Task_Coding_Appl10_VAR_FAST_NOINIT);
+_ROM_OS_Task_Coding_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Task_Coding_Appl10_VAR_FAST_NOINIT);
+
+.ROM_OS_Task_Coding_Appl10_VAR_FAST_ZERO_INIT ROM(.OS_Task_Coding_Appl10_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Task_Coding_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Task_Coding_Appl10_VAR_FAST_ZERO_INIT);
+_ROM_OS_Task_Coding_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_Coding_Appl10_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_CODING_APPL10
+# undef OS_LINK_CONST_TASK_TASK_CODING_APPL10
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_CODING_APPL10_FAR
+# undef OS_LINK_CONST_TASK_TASK_CODING_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_CODING_APPL10_NEAR
+# undef OS_LINK_CONST_TASK_TASK_CODING_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_CODING_APPL10_INIT
+# undef OS_LINK_CONST_TASK_TASK_CODING_APPL10_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_COMBSW_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_COMBSW_APPL10_FAR )
+.OS_Task_ComBsw_Appl10_CONST ALIGN(4) :> .
+_OS_Task_ComBsw_Appl10_CONST_START = ADDR(.OS_Task_ComBsw_Appl10_CONST);
+_OS_Task_ComBsw_Appl10_CONST_END = ENDADDR(.OS_Task_ComBsw_Appl10_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_COMBSW_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_COMBSW_APPL10_NEAR )
+.OS_Task_ComBsw_Appl10_CONST_FAST ALIGN(4) :> .
+_OS_Task_ComBsw_Appl10_CONST_FAST_START = ADDR(.OS_Task_ComBsw_Appl10_CONST_FAST);
+_OS_Task_ComBsw_Appl10_CONST_FAST_END = ENDADDR(.OS_Task_ComBsw_Appl10_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_COMBSW_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_COMBSW_APPL10_INIT )
+
+.ROM_OS_Task_ComBsw_Appl10_VAR ROM(.OS_Task_ComBsw_Appl10_VAR) :> .
+_ROM_OS_Task_ComBsw_Appl10_VAR_START = ADDR(.ROM_OS_Task_ComBsw_Appl10_VAR);
+_ROM_OS_Task_ComBsw_Appl10_VAR_END = ENDADDR(.ROM_OS_Task_ComBsw_Appl10_VAR);
+
+.ROM_OS_Task_ComBsw_Appl10_VAR_NOINIT ROM(.OS_Task_ComBsw_Appl10_VAR_NOINIT) :> .
+_ROM_OS_Task_ComBsw_Appl10_VAR_NOINIT_START = ADDR(.ROM_OS_Task_ComBsw_Appl10_VAR_NOINIT);
+_ROM_OS_Task_ComBsw_Appl10_VAR_NOINIT_END = ENDADDR(.ROM_OS_Task_ComBsw_Appl10_VAR_NOINIT);
+
+.ROM_OS_Task_ComBsw_Appl10_VAR_ZERO_INIT ROM(.OS_Task_ComBsw_Appl10_VAR_ZERO_INIT) :> .
+_ROM_OS_Task_ComBsw_Appl10_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Task_ComBsw_Appl10_VAR_ZERO_INIT);
+_ROM_OS_Task_ComBsw_Appl10_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_ComBsw_Appl10_VAR_ZERO_INIT);
+
+.ROM_OS_Task_ComBsw_Appl10_VAR_FAST ROM(.OS_Task_ComBsw_Appl10_VAR_FAST) :> .
+_ROM_OS_Task_ComBsw_Appl10_VAR_FAST_START = ADDR(.ROM_OS_Task_ComBsw_Appl10_VAR_FAST);
+_ROM_OS_Task_ComBsw_Appl10_VAR_FAST_END = ENDADDR(.ROM_OS_Task_ComBsw_Appl10_VAR_FAST);
+
+.ROM_OS_Task_ComBsw_Appl10_VAR_FAST_NOINIT ROM(.OS_Task_ComBsw_Appl10_VAR_FAST_NOINIT) :> .
+_ROM_OS_Task_ComBsw_Appl10_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Task_ComBsw_Appl10_VAR_FAST_NOINIT);
+_ROM_OS_Task_ComBsw_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Task_ComBsw_Appl10_VAR_FAST_NOINIT);
+
+.ROM_OS_Task_ComBsw_Appl10_VAR_FAST_ZERO_INIT ROM(.OS_Task_ComBsw_Appl10_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Task_ComBsw_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Task_ComBsw_Appl10_VAR_FAST_ZERO_INIT);
+_ROM_OS_Task_ComBsw_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_ComBsw_Appl10_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_COMBSW_APPL10
+# undef OS_LINK_CONST_TASK_TASK_COMBSW_APPL10
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_COMBSW_APPL10_FAR
+# undef OS_LINK_CONST_TASK_TASK_COMBSW_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_COMBSW_APPL10_NEAR
+# undef OS_LINK_CONST_TASK_TASK_COMBSW_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_COMBSW_APPL10_INIT
+# undef OS_LINK_CONST_TASK_TASK_COMBSW_APPL10_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_INITBSW_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_INITBSW_APPL10_FAR )
+.OS_Task_InitBsw_Appl10_CONST ALIGN(4) :> .
+_OS_Task_InitBsw_Appl10_CONST_START = ADDR(.OS_Task_InitBsw_Appl10_CONST);
+_OS_Task_InitBsw_Appl10_CONST_END = ENDADDR(.OS_Task_InitBsw_Appl10_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_INITBSW_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_INITBSW_APPL10_NEAR )
+.OS_Task_InitBsw_Appl10_CONST_FAST ALIGN(4) :> .
+_OS_Task_InitBsw_Appl10_CONST_FAST_START = ADDR(.OS_Task_InitBsw_Appl10_CONST_FAST);
+_OS_Task_InitBsw_Appl10_CONST_FAST_END = ENDADDR(.OS_Task_InitBsw_Appl10_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_INITBSW_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_INITBSW_APPL10_INIT )
+
+.ROM_OS_Task_InitBsw_Appl10_VAR ROM(.OS_Task_InitBsw_Appl10_VAR) :> .
+_ROM_OS_Task_InitBsw_Appl10_VAR_START = ADDR(.ROM_OS_Task_InitBsw_Appl10_VAR);
+_ROM_OS_Task_InitBsw_Appl10_VAR_END = ENDADDR(.ROM_OS_Task_InitBsw_Appl10_VAR);
+
+.ROM_OS_Task_InitBsw_Appl10_VAR_NOINIT ROM(.OS_Task_InitBsw_Appl10_VAR_NOINIT) :> .
+_ROM_OS_Task_InitBsw_Appl10_VAR_NOINIT_START = ADDR(.ROM_OS_Task_InitBsw_Appl10_VAR_NOINIT);
+_ROM_OS_Task_InitBsw_Appl10_VAR_NOINIT_END = ENDADDR(.ROM_OS_Task_InitBsw_Appl10_VAR_NOINIT);
+
+.ROM_OS_Task_InitBsw_Appl10_VAR_ZERO_INIT ROM(.OS_Task_InitBsw_Appl10_VAR_ZERO_INIT) :> .
+_ROM_OS_Task_InitBsw_Appl10_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Task_InitBsw_Appl10_VAR_ZERO_INIT);
+_ROM_OS_Task_InitBsw_Appl10_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_InitBsw_Appl10_VAR_ZERO_INIT);
+
+.ROM_OS_Task_InitBsw_Appl10_VAR_FAST ROM(.OS_Task_InitBsw_Appl10_VAR_FAST) :> .
+_ROM_OS_Task_InitBsw_Appl10_VAR_FAST_START = ADDR(.ROM_OS_Task_InitBsw_Appl10_VAR_FAST);
+_ROM_OS_Task_InitBsw_Appl10_VAR_FAST_END = ENDADDR(.ROM_OS_Task_InitBsw_Appl10_VAR_FAST);
+
+.ROM_OS_Task_InitBsw_Appl10_VAR_FAST_NOINIT ROM(.OS_Task_InitBsw_Appl10_VAR_FAST_NOINIT) :> .
+_ROM_OS_Task_InitBsw_Appl10_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Task_InitBsw_Appl10_VAR_FAST_NOINIT);
+_ROM_OS_Task_InitBsw_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Task_InitBsw_Appl10_VAR_FAST_NOINIT);
+
+.ROM_OS_Task_InitBsw_Appl10_VAR_FAST_ZERO_INIT ROM(.OS_Task_InitBsw_Appl10_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Task_InitBsw_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Task_InitBsw_Appl10_VAR_FAST_ZERO_INIT);
+_ROM_OS_Task_InitBsw_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_InitBsw_Appl10_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_INITBSW_APPL10
+# undef OS_LINK_CONST_TASK_TASK_INITBSW_APPL10
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_INITBSW_APPL10_FAR
+# undef OS_LINK_CONST_TASK_TASK_INITBSW_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_INITBSW_APPL10_NEAR
+# undef OS_LINK_CONST_TASK_TASK_INITBSW_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_INITBSW_APPL10_INIT
+# undef OS_LINK_CONST_TASK_TASK_INITBSW_APPL10_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_INIT_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_INIT_APPL10_FAR )
+.OS_Task_Init_Appl10_CONST ALIGN(4) :> .
+_OS_Task_Init_Appl10_CONST_START = ADDR(.OS_Task_Init_Appl10_CONST);
+_OS_Task_Init_Appl10_CONST_END = ENDADDR(.OS_Task_Init_Appl10_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_INIT_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_INIT_APPL10_NEAR )
+.OS_Task_Init_Appl10_CONST_FAST ALIGN(4) :> .
+_OS_Task_Init_Appl10_CONST_FAST_START = ADDR(.OS_Task_Init_Appl10_CONST_FAST);
+_OS_Task_Init_Appl10_CONST_FAST_END = ENDADDR(.OS_Task_Init_Appl10_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_INIT_APPL10 ) || defined ( OS_LINK_CONST_TASK_TASK_INIT_APPL10_INIT )
+
+.ROM_OS_Task_Init_Appl10_VAR ROM(.OS_Task_Init_Appl10_VAR) :> .
+_ROM_OS_Task_Init_Appl10_VAR_START = ADDR(.ROM_OS_Task_Init_Appl10_VAR);
+_ROM_OS_Task_Init_Appl10_VAR_END = ENDADDR(.ROM_OS_Task_Init_Appl10_VAR);
+
+.ROM_OS_Task_Init_Appl10_VAR_NOINIT ROM(.OS_Task_Init_Appl10_VAR_NOINIT) :> .
+_ROM_OS_Task_Init_Appl10_VAR_NOINIT_START = ADDR(.ROM_OS_Task_Init_Appl10_VAR_NOINIT);
+_ROM_OS_Task_Init_Appl10_VAR_NOINIT_END = ENDADDR(.ROM_OS_Task_Init_Appl10_VAR_NOINIT);
+
+.ROM_OS_Task_Init_Appl10_VAR_ZERO_INIT ROM(.OS_Task_Init_Appl10_VAR_ZERO_INIT) :> .
+_ROM_OS_Task_Init_Appl10_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Task_Init_Appl10_VAR_ZERO_INIT);
+_ROM_OS_Task_Init_Appl10_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_Init_Appl10_VAR_ZERO_INIT);
+
+.ROM_OS_Task_Init_Appl10_VAR_FAST ROM(.OS_Task_Init_Appl10_VAR_FAST) :> .
+_ROM_OS_Task_Init_Appl10_VAR_FAST_START = ADDR(.ROM_OS_Task_Init_Appl10_VAR_FAST);
+_ROM_OS_Task_Init_Appl10_VAR_FAST_END = ENDADDR(.ROM_OS_Task_Init_Appl10_VAR_FAST);
+
+.ROM_OS_Task_Init_Appl10_VAR_FAST_NOINIT ROM(.OS_Task_Init_Appl10_VAR_FAST_NOINIT) :> .
+_ROM_OS_Task_Init_Appl10_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Task_Init_Appl10_VAR_FAST_NOINIT);
+_ROM_OS_Task_Init_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Task_Init_Appl10_VAR_FAST_NOINIT);
+
+.ROM_OS_Task_Init_Appl10_VAR_FAST_ZERO_INIT ROM(.OS_Task_Init_Appl10_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Task_Init_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Task_Init_Appl10_VAR_FAST_ZERO_INIT);
+_ROM_OS_Task_Init_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_Init_Appl10_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_INIT_APPL10
+# undef OS_LINK_CONST_TASK_TASK_INIT_APPL10
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_INIT_APPL10_FAR
+# undef OS_LINK_CONST_TASK_TASK_INIT_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_INIT_APPL10_NEAR
+# undef OS_LINK_CONST_TASK_TASK_INIT_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_INIT_APPL10_INIT
+# undef OS_LINK_CONST_TASK_TASK_INIT_APPL10_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_INIT_APPL7 ) || defined ( OS_LINK_CONST_TASK_TASK_INIT_APPL7_FAR )
+.OS_Task_Init_Appl7_CONST ALIGN(4) :> .
+_OS_Task_Init_Appl7_CONST_START = ADDR(.OS_Task_Init_Appl7_CONST);
+_OS_Task_Init_Appl7_CONST_END = ENDADDR(.OS_Task_Init_Appl7_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_INIT_APPL7 ) || defined ( OS_LINK_CONST_TASK_TASK_INIT_APPL7_NEAR )
+.OS_Task_Init_Appl7_CONST_FAST ALIGN(4) :> .
+_OS_Task_Init_Appl7_CONST_FAST_START = ADDR(.OS_Task_Init_Appl7_CONST_FAST);
+_OS_Task_Init_Appl7_CONST_FAST_END = ENDADDR(.OS_Task_Init_Appl7_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_INIT_APPL7 ) || defined ( OS_LINK_CONST_TASK_TASK_INIT_APPL7_INIT )
+
+.ROM_OS_Task_Init_Appl7_VAR ROM(.OS_Task_Init_Appl7_VAR) :> .
+_ROM_OS_Task_Init_Appl7_VAR_START = ADDR(.ROM_OS_Task_Init_Appl7_VAR);
+_ROM_OS_Task_Init_Appl7_VAR_END = ENDADDR(.ROM_OS_Task_Init_Appl7_VAR);
+
+.ROM_OS_Task_Init_Appl7_VAR_NOINIT ROM(.OS_Task_Init_Appl7_VAR_NOINIT) :> .
+_ROM_OS_Task_Init_Appl7_VAR_NOINIT_START = ADDR(.ROM_OS_Task_Init_Appl7_VAR_NOINIT);
+_ROM_OS_Task_Init_Appl7_VAR_NOINIT_END = ENDADDR(.ROM_OS_Task_Init_Appl7_VAR_NOINIT);
+
+.ROM_OS_Task_Init_Appl7_VAR_ZERO_INIT ROM(.OS_Task_Init_Appl7_VAR_ZERO_INIT) :> .
+_ROM_OS_Task_Init_Appl7_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Task_Init_Appl7_VAR_ZERO_INIT);
+_ROM_OS_Task_Init_Appl7_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_Init_Appl7_VAR_ZERO_INIT);
+
+.ROM_OS_Task_Init_Appl7_VAR_FAST ROM(.OS_Task_Init_Appl7_VAR_FAST) :> .
+_ROM_OS_Task_Init_Appl7_VAR_FAST_START = ADDR(.ROM_OS_Task_Init_Appl7_VAR_FAST);
+_ROM_OS_Task_Init_Appl7_VAR_FAST_END = ENDADDR(.ROM_OS_Task_Init_Appl7_VAR_FAST);
+
+.ROM_OS_Task_Init_Appl7_VAR_FAST_NOINIT ROM(.OS_Task_Init_Appl7_VAR_FAST_NOINIT) :> .
+_ROM_OS_Task_Init_Appl7_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Task_Init_Appl7_VAR_FAST_NOINIT);
+_ROM_OS_Task_Init_Appl7_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Task_Init_Appl7_VAR_FAST_NOINIT);
+
+.ROM_OS_Task_Init_Appl7_VAR_FAST_ZERO_INIT ROM(.OS_Task_Init_Appl7_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Task_Init_Appl7_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Task_Init_Appl7_VAR_FAST_ZERO_INIT);
+_ROM_OS_Task_Init_Appl7_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_Init_Appl7_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_INIT_APPL7
+# undef OS_LINK_CONST_TASK_TASK_INIT_APPL7
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_INIT_APPL7_FAR
+# undef OS_LINK_CONST_TASK_TASK_INIT_APPL7_FAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_INIT_APPL7_NEAR
+# undef OS_LINK_CONST_TASK_TASK_INIT_APPL7_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_INIT_APPL7_INIT
+# undef OS_LINK_CONST_TASK_TASK_INIT_APPL7_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_INIT_APPL8 ) || defined ( OS_LINK_CONST_TASK_TASK_INIT_APPL8_FAR )
+.OS_Task_Init_Appl8_CONST ALIGN(4) :> .
+_OS_Task_Init_Appl8_CONST_START = ADDR(.OS_Task_Init_Appl8_CONST);
+_OS_Task_Init_Appl8_CONST_END = ENDADDR(.OS_Task_Init_Appl8_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_INIT_APPL8 ) || defined ( OS_LINK_CONST_TASK_TASK_INIT_APPL8_NEAR )
+.OS_Task_Init_Appl8_CONST_FAST ALIGN(4) :> .
+_OS_Task_Init_Appl8_CONST_FAST_START = ADDR(.OS_Task_Init_Appl8_CONST_FAST);
+_OS_Task_Init_Appl8_CONST_FAST_END = ENDADDR(.OS_Task_Init_Appl8_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_INIT_APPL8 ) || defined ( OS_LINK_CONST_TASK_TASK_INIT_APPL8_INIT )
+
+.ROM_OS_Task_Init_Appl8_VAR ROM(.OS_Task_Init_Appl8_VAR) :> .
+_ROM_OS_Task_Init_Appl8_VAR_START = ADDR(.ROM_OS_Task_Init_Appl8_VAR);
+_ROM_OS_Task_Init_Appl8_VAR_END = ENDADDR(.ROM_OS_Task_Init_Appl8_VAR);
+
+.ROM_OS_Task_Init_Appl8_VAR_NOINIT ROM(.OS_Task_Init_Appl8_VAR_NOINIT) :> .
+_ROM_OS_Task_Init_Appl8_VAR_NOINIT_START = ADDR(.ROM_OS_Task_Init_Appl8_VAR_NOINIT);
+_ROM_OS_Task_Init_Appl8_VAR_NOINIT_END = ENDADDR(.ROM_OS_Task_Init_Appl8_VAR_NOINIT);
+
+.ROM_OS_Task_Init_Appl8_VAR_ZERO_INIT ROM(.OS_Task_Init_Appl8_VAR_ZERO_INIT) :> .
+_ROM_OS_Task_Init_Appl8_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Task_Init_Appl8_VAR_ZERO_INIT);
+_ROM_OS_Task_Init_Appl8_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_Init_Appl8_VAR_ZERO_INIT);
+
+.ROM_OS_Task_Init_Appl8_VAR_FAST ROM(.OS_Task_Init_Appl8_VAR_FAST) :> .
+_ROM_OS_Task_Init_Appl8_VAR_FAST_START = ADDR(.ROM_OS_Task_Init_Appl8_VAR_FAST);
+_ROM_OS_Task_Init_Appl8_VAR_FAST_END = ENDADDR(.ROM_OS_Task_Init_Appl8_VAR_FAST);
+
+.ROM_OS_Task_Init_Appl8_VAR_FAST_NOINIT ROM(.OS_Task_Init_Appl8_VAR_FAST_NOINIT) :> .
+_ROM_OS_Task_Init_Appl8_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Task_Init_Appl8_VAR_FAST_NOINIT);
+_ROM_OS_Task_Init_Appl8_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Task_Init_Appl8_VAR_FAST_NOINIT);
+
+.ROM_OS_Task_Init_Appl8_VAR_FAST_ZERO_INIT ROM(.OS_Task_Init_Appl8_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Task_Init_Appl8_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Task_Init_Appl8_VAR_FAST_ZERO_INIT);
+_ROM_OS_Task_Init_Appl8_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_Init_Appl8_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_INIT_APPL8
+# undef OS_LINK_CONST_TASK_TASK_INIT_APPL8
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_INIT_APPL8_FAR
+# undef OS_LINK_CONST_TASK_TASK_INIT_APPL8_FAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_INIT_APPL8_NEAR
+# undef OS_LINK_CONST_TASK_TASK_INIT_APPL8_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_INIT_APPL8_INIT
+# undef OS_LINK_CONST_TASK_TASK_INIT_APPL8_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_INIT_APPL9 ) || defined ( OS_LINK_CONST_TASK_TASK_INIT_APPL9_FAR )
+.OS_Task_Init_Appl9_CONST ALIGN(4) :> .
+_OS_Task_Init_Appl9_CONST_START = ADDR(.OS_Task_Init_Appl9_CONST);
+_OS_Task_Init_Appl9_CONST_END = ENDADDR(.OS_Task_Init_Appl9_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_INIT_APPL9 ) || defined ( OS_LINK_CONST_TASK_TASK_INIT_APPL9_NEAR )
+.OS_Task_Init_Appl9_CONST_FAST ALIGN(4) :> .
+_OS_Task_Init_Appl9_CONST_FAST_START = ADDR(.OS_Task_Init_Appl9_CONST_FAST);
+_OS_Task_Init_Appl9_CONST_FAST_END = ENDADDR(.OS_Task_Init_Appl9_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_TASK ) || defined ( OS_LINK_CONST_TASK_TASK_INIT_APPL9 ) || defined ( OS_LINK_CONST_TASK_TASK_INIT_APPL9_INIT )
+
+.ROM_OS_Task_Init_Appl9_VAR ROM(.OS_Task_Init_Appl9_VAR) :> .
+_ROM_OS_Task_Init_Appl9_VAR_START = ADDR(.ROM_OS_Task_Init_Appl9_VAR);
+_ROM_OS_Task_Init_Appl9_VAR_END = ENDADDR(.ROM_OS_Task_Init_Appl9_VAR);
+
+.ROM_OS_Task_Init_Appl9_VAR_NOINIT ROM(.OS_Task_Init_Appl9_VAR_NOINIT) :> .
+_ROM_OS_Task_Init_Appl9_VAR_NOINIT_START = ADDR(.ROM_OS_Task_Init_Appl9_VAR_NOINIT);
+_ROM_OS_Task_Init_Appl9_VAR_NOINIT_END = ENDADDR(.ROM_OS_Task_Init_Appl9_VAR_NOINIT);
+
+.ROM_OS_Task_Init_Appl9_VAR_ZERO_INIT ROM(.OS_Task_Init_Appl9_VAR_ZERO_INIT) :> .
+_ROM_OS_Task_Init_Appl9_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Task_Init_Appl9_VAR_ZERO_INIT);
+_ROM_OS_Task_Init_Appl9_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_Init_Appl9_VAR_ZERO_INIT);
+
+.ROM_OS_Task_Init_Appl9_VAR_FAST ROM(.OS_Task_Init_Appl9_VAR_FAST) :> .
+_ROM_OS_Task_Init_Appl9_VAR_FAST_START = ADDR(.ROM_OS_Task_Init_Appl9_VAR_FAST);
+_ROM_OS_Task_Init_Appl9_VAR_FAST_END = ENDADDR(.ROM_OS_Task_Init_Appl9_VAR_FAST);
+
+.ROM_OS_Task_Init_Appl9_VAR_FAST_NOINIT ROM(.OS_Task_Init_Appl9_VAR_FAST_NOINIT) :> .
+_ROM_OS_Task_Init_Appl9_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Task_Init_Appl9_VAR_FAST_NOINIT);
+_ROM_OS_Task_Init_Appl9_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Task_Init_Appl9_VAR_FAST_NOINIT);
+
+.ROM_OS_Task_Init_Appl9_VAR_FAST_ZERO_INIT ROM(.OS_Task_Init_Appl9_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Task_Init_Appl9_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Task_Init_Appl9_VAR_FAST_ZERO_INIT);
+_ROM_OS_Task_Init_Appl9_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Task_Init_Appl9_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_INIT_APPL9
+# undef OS_LINK_CONST_TASK_TASK_INIT_APPL9
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_INIT_APPL9_FAR
+# undef OS_LINK_CONST_TASK_TASK_INIT_APPL9_FAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_INIT_APPL9_NEAR
+# undef OS_LINK_CONST_TASK_TASK_INIT_APPL9_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_TASK_TASK_INIT_APPL9_INIT
+# undef OS_LINK_CONST_TASK_TASK_INIT_APPL9_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_COUNTERISR_OSCOUNTER ) || defined ( OS_LINK_CONST_ISR_COUNTERISR_OSCOUNTER_FAR )
+.OS_CounterIsr_OsCounter_CONST ALIGN(4) :> .
+_OS_CounterIsr_OsCounter_CONST_START = ADDR(.OS_CounterIsr_OsCounter_CONST);
+_OS_CounterIsr_OsCounter_CONST_END = ENDADDR(.OS_CounterIsr_OsCounter_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_COUNTERISR_OSCOUNTER ) || defined ( OS_LINK_CONST_ISR_COUNTERISR_OSCOUNTER_NEAR )
+.OS_CounterIsr_OsCounter_CONST_FAST ALIGN(4) :> .
+_OS_CounterIsr_OsCounter_CONST_FAST_START = ADDR(.OS_CounterIsr_OsCounter_CONST_FAST);
+_OS_CounterIsr_OsCounter_CONST_FAST_END = ENDADDR(.OS_CounterIsr_OsCounter_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_COUNTERISR_OSCOUNTER ) || defined ( OS_LINK_CONST_ISR_COUNTERISR_OSCOUNTER_INIT )
+
+.ROM_OS_CounterIsr_OsCounter_VAR ROM(.OS_CounterIsr_OsCounter_VAR) :> .
+_ROM_OS_CounterIsr_OsCounter_VAR_START = ADDR(.ROM_OS_CounterIsr_OsCounter_VAR);
+_ROM_OS_CounterIsr_OsCounter_VAR_END = ENDADDR(.ROM_OS_CounterIsr_OsCounter_VAR);
+
+.ROM_OS_CounterIsr_OsCounter_VAR_NOINIT ROM(.OS_CounterIsr_OsCounter_VAR_NOINIT) :> .
+_ROM_OS_CounterIsr_OsCounter_VAR_NOINIT_START = ADDR(.ROM_OS_CounterIsr_OsCounter_VAR_NOINIT);
+_ROM_OS_CounterIsr_OsCounter_VAR_NOINIT_END = ENDADDR(.ROM_OS_CounterIsr_OsCounter_VAR_NOINIT);
+
+.ROM_OS_CounterIsr_OsCounter_VAR_ZERO_INIT ROM(.OS_CounterIsr_OsCounter_VAR_ZERO_INIT) :> .
+_ROM_OS_CounterIsr_OsCounter_VAR_ZERO_INIT_START = ADDR(.ROM_OS_CounterIsr_OsCounter_VAR_ZERO_INIT);
+_ROM_OS_CounterIsr_OsCounter_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_CounterIsr_OsCounter_VAR_ZERO_INIT);
+
+.ROM_OS_CounterIsr_OsCounter_VAR_FAST ROM(.OS_CounterIsr_OsCounter_VAR_FAST) :> .
+_ROM_OS_CounterIsr_OsCounter_VAR_FAST_START = ADDR(.ROM_OS_CounterIsr_OsCounter_VAR_FAST);
+_ROM_OS_CounterIsr_OsCounter_VAR_FAST_END = ENDADDR(.ROM_OS_CounterIsr_OsCounter_VAR_FAST);
+
+.ROM_OS_CounterIsr_OsCounter_VAR_FAST_NOINIT ROM(.OS_CounterIsr_OsCounter_VAR_FAST_NOINIT) :> .
+_ROM_OS_CounterIsr_OsCounter_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_CounterIsr_OsCounter_VAR_FAST_NOINIT);
+_ROM_OS_CounterIsr_OsCounter_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_CounterIsr_OsCounter_VAR_FAST_NOINIT);
+
+.ROM_OS_CounterIsr_OsCounter_VAR_FAST_ZERO_INIT ROM(.OS_CounterIsr_OsCounter_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_CounterIsr_OsCounter_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_CounterIsr_OsCounter_VAR_FAST_ZERO_INIT);
+_ROM_OS_CounterIsr_OsCounter_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_CounterIsr_OsCounter_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_ISR_COUNTERISR_OSCOUNTER
+# undef OS_LINK_CONST_ISR_COUNTERISR_OSCOUNTER
+#endif
+
+#ifdef OS_LINK_CONST_ISR_COUNTERISR_OSCOUNTER_FAR
+# undef OS_LINK_CONST_ISR_COUNTERISR_OSCOUNTER_FAR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_COUNTERISR_OSCOUNTER_NEAR
+# undef OS_LINK_CONST_ISR_COUNTERISR_OSCOUNTER_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_COUNTERISR_OSCOUNTER_INIT
+# undef OS_LINK_CONST_ISR_COUNTERISR_OSCOUNTER_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_FR_IRQLINE0 ) || defined ( OS_LINK_CONST_ISR_FR_IRQLINE0_FAR )
+.OS_Fr_IrqLine0_CONST ALIGN(4) :> .
+_OS_Fr_IrqLine0_CONST_START = ADDR(.OS_Fr_IrqLine0_CONST);
+_OS_Fr_IrqLine0_CONST_END = ENDADDR(.OS_Fr_IrqLine0_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_FR_IRQLINE0 ) || defined ( OS_LINK_CONST_ISR_FR_IRQLINE0_NEAR )
+.OS_Fr_IrqLine0_CONST_FAST ALIGN(4) :> .
+_OS_Fr_IrqLine0_CONST_FAST_START = ADDR(.OS_Fr_IrqLine0_CONST_FAST);
+_OS_Fr_IrqLine0_CONST_FAST_END = ENDADDR(.OS_Fr_IrqLine0_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_FR_IRQLINE0 ) || defined ( OS_LINK_CONST_ISR_FR_IRQLINE0_INIT )
+
+.ROM_OS_Fr_IrqLine0_VAR ROM(.OS_Fr_IrqLine0_VAR) :> .
+_ROM_OS_Fr_IrqLine0_VAR_START = ADDR(.ROM_OS_Fr_IrqLine0_VAR);
+_ROM_OS_Fr_IrqLine0_VAR_END = ENDADDR(.ROM_OS_Fr_IrqLine0_VAR);
+
+.ROM_OS_Fr_IrqLine0_VAR_NOINIT ROM(.OS_Fr_IrqLine0_VAR_NOINIT) :> .
+_ROM_OS_Fr_IrqLine0_VAR_NOINIT_START = ADDR(.ROM_OS_Fr_IrqLine0_VAR_NOINIT);
+_ROM_OS_Fr_IrqLine0_VAR_NOINIT_END = ENDADDR(.ROM_OS_Fr_IrqLine0_VAR_NOINIT);
+
+.ROM_OS_Fr_IrqLine0_VAR_ZERO_INIT ROM(.OS_Fr_IrqLine0_VAR_ZERO_INIT) :> .
+_ROM_OS_Fr_IrqLine0_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Fr_IrqLine0_VAR_ZERO_INIT);
+_ROM_OS_Fr_IrqLine0_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Fr_IrqLine0_VAR_ZERO_INIT);
+
+.ROM_OS_Fr_IrqLine0_VAR_FAST ROM(.OS_Fr_IrqLine0_VAR_FAST) :> .
+_ROM_OS_Fr_IrqLine0_VAR_FAST_START = ADDR(.ROM_OS_Fr_IrqLine0_VAR_FAST);
+_ROM_OS_Fr_IrqLine0_VAR_FAST_END = ENDADDR(.ROM_OS_Fr_IrqLine0_VAR_FAST);
+
+.ROM_OS_Fr_IrqLine0_VAR_FAST_NOINIT ROM(.OS_Fr_IrqLine0_VAR_FAST_NOINIT) :> .
+_ROM_OS_Fr_IrqLine0_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Fr_IrqLine0_VAR_FAST_NOINIT);
+_ROM_OS_Fr_IrqLine0_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Fr_IrqLine0_VAR_FAST_NOINIT);
+
+.ROM_OS_Fr_IrqLine0_VAR_FAST_ZERO_INIT ROM(.OS_Fr_IrqLine0_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Fr_IrqLine0_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Fr_IrqLine0_VAR_FAST_ZERO_INIT);
+_ROM_OS_Fr_IrqLine0_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Fr_IrqLine0_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_ISR_FR_IRQLINE0
+# undef OS_LINK_CONST_ISR_FR_IRQLINE0
+#endif
+
+#ifdef OS_LINK_CONST_ISR_FR_IRQLINE0_FAR
+# undef OS_LINK_CONST_ISR_FR_IRQLINE0_FAR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_FR_IRQLINE0_NEAR
+# undef OS_LINK_CONST_ISR_FR_IRQLINE0_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_FR_IRQLINE0_INIT
+# undef OS_LINK_CONST_ISR_FR_IRQLINE0_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_FR_IRQTIMER0 ) || defined ( OS_LINK_CONST_ISR_FR_IRQTIMER0_FAR )
+.OS_Fr_IrqTimer0_CONST ALIGN(4) :> .
+_OS_Fr_IrqTimer0_CONST_START = ADDR(.OS_Fr_IrqTimer0_CONST);
+_OS_Fr_IrqTimer0_CONST_END = ENDADDR(.OS_Fr_IrqTimer0_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_FR_IRQTIMER0 ) || defined ( OS_LINK_CONST_ISR_FR_IRQTIMER0_NEAR )
+.OS_Fr_IrqTimer0_CONST_FAST ALIGN(4) :> .
+_OS_Fr_IrqTimer0_CONST_FAST_START = ADDR(.OS_Fr_IrqTimer0_CONST_FAST);
+_OS_Fr_IrqTimer0_CONST_FAST_END = ENDADDR(.OS_Fr_IrqTimer0_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_FR_IRQTIMER0 ) || defined ( OS_LINK_CONST_ISR_FR_IRQTIMER0_INIT )
+
+.ROM_OS_Fr_IrqTimer0_VAR ROM(.OS_Fr_IrqTimer0_VAR) :> .
+_ROM_OS_Fr_IrqTimer0_VAR_START = ADDR(.ROM_OS_Fr_IrqTimer0_VAR);
+_ROM_OS_Fr_IrqTimer0_VAR_END = ENDADDR(.ROM_OS_Fr_IrqTimer0_VAR);
+
+.ROM_OS_Fr_IrqTimer0_VAR_NOINIT ROM(.OS_Fr_IrqTimer0_VAR_NOINIT) :> .
+_ROM_OS_Fr_IrqTimer0_VAR_NOINIT_START = ADDR(.ROM_OS_Fr_IrqTimer0_VAR_NOINIT);
+_ROM_OS_Fr_IrqTimer0_VAR_NOINIT_END = ENDADDR(.ROM_OS_Fr_IrqTimer0_VAR_NOINIT);
+
+.ROM_OS_Fr_IrqTimer0_VAR_ZERO_INIT ROM(.OS_Fr_IrqTimer0_VAR_ZERO_INIT) :> .
+_ROM_OS_Fr_IrqTimer0_VAR_ZERO_INIT_START = ADDR(.ROM_OS_Fr_IrqTimer0_VAR_ZERO_INIT);
+_ROM_OS_Fr_IrqTimer0_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_Fr_IrqTimer0_VAR_ZERO_INIT);
+
+.ROM_OS_Fr_IrqTimer0_VAR_FAST ROM(.OS_Fr_IrqTimer0_VAR_FAST) :> .
+_ROM_OS_Fr_IrqTimer0_VAR_FAST_START = ADDR(.ROM_OS_Fr_IrqTimer0_VAR_FAST);
+_ROM_OS_Fr_IrqTimer0_VAR_FAST_END = ENDADDR(.ROM_OS_Fr_IrqTimer0_VAR_FAST);
+
+.ROM_OS_Fr_IrqTimer0_VAR_FAST_NOINIT ROM(.OS_Fr_IrqTimer0_VAR_FAST_NOINIT) :> .
+_ROM_OS_Fr_IrqTimer0_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_Fr_IrqTimer0_VAR_FAST_NOINIT);
+_ROM_OS_Fr_IrqTimer0_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_Fr_IrqTimer0_VAR_FAST_NOINIT);
+
+.ROM_OS_Fr_IrqTimer0_VAR_FAST_ZERO_INIT ROM(.OS_Fr_IrqTimer0_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_Fr_IrqTimer0_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_Fr_IrqTimer0_VAR_FAST_ZERO_INIT);
+_ROM_OS_Fr_IrqTimer0_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_Fr_IrqTimer0_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_ISR_FR_IRQTIMER0
+# undef OS_LINK_CONST_ISR_FR_IRQTIMER0
+#endif
+
+#ifdef OS_LINK_CONST_ISR_FR_IRQTIMER0_FAR
+# undef OS_LINK_CONST_ISR_FR_IRQTIMER0_FAR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_FR_IRQTIMER0_NEAR
+# undef OS_LINK_CONST_ISR_FR_IRQTIMER0_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_FR_IRQTIMER0_INIT
+# undef OS_LINK_CONST_ISR_FR_IRQTIMER0_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_MCU_ECM_EIC_CAT2_ISR ) || defined ( OS_LINK_CONST_ISR_MCU_ECM_EIC_CAT2_ISR_FAR )
+.OS_MCU_ECM_EIC_CAT2_ISR_CONST ALIGN(4) :> .
+_OS_MCU_ECM_EIC_CAT2_ISR_CONST_START = ADDR(.OS_MCU_ECM_EIC_CAT2_ISR_CONST);
+_OS_MCU_ECM_EIC_CAT2_ISR_CONST_END = ENDADDR(.OS_MCU_ECM_EIC_CAT2_ISR_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_MCU_ECM_EIC_CAT2_ISR ) || defined ( OS_LINK_CONST_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR )
+.OS_MCU_ECM_EIC_CAT2_ISR_CONST_FAST ALIGN(4) :> .
+_OS_MCU_ECM_EIC_CAT2_ISR_CONST_FAST_START = ADDR(.OS_MCU_ECM_EIC_CAT2_ISR_CONST_FAST);
+_OS_MCU_ECM_EIC_CAT2_ISR_CONST_FAST_END = ENDADDR(.OS_MCU_ECM_EIC_CAT2_ISR_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_MCU_ECM_EIC_CAT2_ISR ) || defined ( OS_LINK_CONST_ISR_MCU_ECM_EIC_CAT2_ISR_INIT )
+
+.ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR ROM(.OS_MCU_ECM_EIC_CAT2_ISR_VAR) :> .
+_ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_START = ADDR(.ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR);
+_ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_END = ENDADDR(.ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR);
+
+.ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOINIT ROM(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOINIT) :> .
+_ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOINIT_START = ADDR(.ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOINIT);
+_ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOINIT_END = ENDADDR(.ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOINIT);
+
+.ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_ZERO_INIT ROM(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_ZERO_INIT) :> .
+_ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_ZERO_INIT_START = ADDR(.ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_ZERO_INIT);
+_ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_ZERO_INIT);
+
+.ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST ROM(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST) :> .
+_ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_START = ADDR(.ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST);
+_ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_END = ENDADDR(.ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST);
+
+.ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOINIT ROM(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOINIT) :> .
+_ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOINIT);
+_ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOINIT);
+
+.ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_ZERO_INIT ROM(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_ZERO_INIT);
+_ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_ISR_MCU_ECM_EIC_CAT2_ISR
+# undef OS_LINK_CONST_ISR_MCU_ECM_EIC_CAT2_ISR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_MCU_ECM_EIC_CAT2_ISR_FAR
+# undef OS_LINK_CONST_ISR_MCU_ECM_EIC_CAT2_ISR_FAR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR
+# undef OS_LINK_CONST_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_MCU_ECM_EIC_CAT2_ISR_INIT
+# undef OS_LINK_CONST_ISR_MCU_ECM_EIC_CAT2_ISR_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIG0_TIC_CAT2_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR )
+.OS_SPI_CSIG0_TIC_CAT2_ISR_CONST ALIGN(4) :> .
+_OS_SPI_CSIG0_TIC_CAT2_ISR_CONST_START = ADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_CONST);
+_OS_SPI_CSIG0_TIC_CAT2_ISR_CONST_END = ENDADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIG0_TIC_CAT2_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR )
+.OS_SPI_CSIG0_TIC_CAT2_ISR_CONST_FAST ALIGN(4) :> .
+_OS_SPI_CSIG0_TIC_CAT2_ISR_CONST_FAST_START = ADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_CONST_FAST);
+_OS_SPI_CSIG0_TIC_CAT2_ISR_CONST_FAST_END = ENDADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIG0_TIC_CAT2_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIG0_TIC_CAT2_ISR_INIT )
+
+.ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR ROM(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR) :> .
+_ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_START = ADDR(.ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR);
+_ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_END = ENDADDR(.ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR);
+
+.ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOINIT ROM(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOINIT) :> .
+_ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOINIT_START = ADDR(.ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOINIT);
+_ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOINIT_END = ENDADDR(.ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOINIT);
+
+.ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_ZERO_INIT ROM(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_ZERO_INIT) :> .
+_ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_ZERO_INIT_START = ADDR(.ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_ZERO_INIT);
+_ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_ZERO_INIT);
+
+.ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST ROM(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST) :> .
+_ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_START = ADDR(.ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST);
+_ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_END = ENDADDR(.ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST);
+
+.ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOINIT ROM(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOINIT) :> .
+_ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOINIT);
+_ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOINIT);
+
+.ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_ZERO_INIT ROM(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_ZERO_INIT);
+_ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_ISR_SPI_CSIG0_TIC_CAT2_ISR
+# undef OS_LINK_CONST_ISR_SPI_CSIG0_TIC_CAT2_ISR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR
+# undef OS_LINK_CONST_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR
+# undef OS_LINK_CONST_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_SPI_CSIG0_TIC_CAT2_ISR_INIT
+# undef OS_LINK_CONST_ISR_SPI_CSIG0_TIC_CAT2_ISR_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIG0_TIRE_CAT2_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR )
+.OS_SPI_CSIG0_TIRE_CAT2_ISR_CONST ALIGN(4) :> .
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_CONST_START = ADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_CONST);
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_CONST_END = ENDADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIG0_TIRE_CAT2_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR )
+.OS_SPI_CSIG0_TIRE_CAT2_ISR_CONST_FAST ALIGN(4) :> .
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_CONST_FAST_START = ADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_CONST_FAST);
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_CONST_FAST_END = ENDADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIG0_TIRE_CAT2_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIG0_TIRE_CAT2_ISR_INIT )
+
+.ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR ROM(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR) :> .
+_ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_START = ADDR(.ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR);
+_ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_END = ENDADDR(.ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR);
+
+.ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOINIT ROM(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOINIT) :> .
+_ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOINIT_START = ADDR(.ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOINIT);
+_ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOINIT_END = ENDADDR(.ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOINIT);
+
+.ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_ZERO_INIT ROM(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_ZERO_INIT) :> .
+_ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_ZERO_INIT_START = ADDR(.ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_ZERO_INIT);
+_ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_ZERO_INIT);
+
+.ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST ROM(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST) :> .
+_ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_START = ADDR(.ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST);
+_ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_END = ENDADDR(.ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST);
+
+.ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOINIT ROM(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOINIT) :> .
+_ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOINIT);
+_ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOINIT);
+
+.ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_ZERO_INIT ROM(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_ZERO_INIT);
+_ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_ISR_SPI_CSIG0_TIRE_CAT2_ISR
+# undef OS_LINK_CONST_ISR_SPI_CSIG0_TIRE_CAT2_ISR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR
+# undef OS_LINK_CONST_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR
+# undef OS_LINK_CONST_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_SPI_CSIG0_TIRE_CAT2_ISR_INIT
+# undef OS_LINK_CONST_ISR_SPI_CSIG0_TIRE_CAT2_ISR_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIG0_TIR_CAT2_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR )
+.OS_SPI_CSIG0_TIR_CAT2_ISR_CONST ALIGN(4) :> .
+_OS_SPI_CSIG0_TIR_CAT2_ISR_CONST_START = ADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_CONST);
+_OS_SPI_CSIG0_TIR_CAT2_ISR_CONST_END = ENDADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIG0_TIR_CAT2_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR )
+.OS_SPI_CSIG0_TIR_CAT2_ISR_CONST_FAST ALIGN(4) :> .
+_OS_SPI_CSIG0_TIR_CAT2_ISR_CONST_FAST_START = ADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_CONST_FAST);
+_OS_SPI_CSIG0_TIR_CAT2_ISR_CONST_FAST_END = ENDADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIG0_TIR_CAT2_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIG0_TIR_CAT2_ISR_INIT )
+
+.ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR ROM(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR) :> .
+_ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_START = ADDR(.ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR);
+_ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_END = ENDADDR(.ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR);
+
+.ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOINIT ROM(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOINIT) :> .
+_ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOINIT_START = ADDR(.ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOINIT);
+_ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOINIT_END = ENDADDR(.ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOINIT);
+
+.ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_ZERO_INIT ROM(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_ZERO_INIT) :> .
+_ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_ZERO_INIT_START = ADDR(.ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_ZERO_INIT);
+_ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_ZERO_INIT);
+
+.ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST ROM(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST) :> .
+_ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_START = ADDR(.ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST);
+_ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_END = ENDADDR(.ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST);
+
+.ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOINIT ROM(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOINIT) :> .
+_ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOINIT);
+_ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOINIT);
+
+.ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_ZERO_INIT ROM(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_ZERO_INIT);
+_ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_ISR_SPI_CSIG0_TIR_CAT2_ISR
+# undef OS_LINK_CONST_ISR_SPI_CSIG0_TIR_CAT2_ISR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR
+# undef OS_LINK_CONST_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR
+# undef OS_LINK_CONST_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_SPI_CSIG0_TIR_CAT2_ISR_INIT
+# undef OS_LINK_CONST_ISR_SPI_CSIG0_TIR_CAT2_ISR_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIH2_TIC_CAT2_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR )
+.OS_SPI_CSIH2_TIC_CAT2_ISR_CONST ALIGN(4) :> .
+_OS_SPI_CSIH2_TIC_CAT2_ISR_CONST_START = ADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_CONST);
+_OS_SPI_CSIH2_TIC_CAT2_ISR_CONST_END = ENDADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIH2_TIC_CAT2_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR )
+.OS_SPI_CSIH2_TIC_CAT2_ISR_CONST_FAST ALIGN(4) :> .
+_OS_SPI_CSIH2_TIC_CAT2_ISR_CONST_FAST_START = ADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_CONST_FAST);
+_OS_SPI_CSIH2_TIC_CAT2_ISR_CONST_FAST_END = ENDADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIH2_TIC_CAT2_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIH2_TIC_CAT2_ISR_INIT )
+
+.ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR ROM(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR) :> .
+_ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_START = ADDR(.ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR);
+_ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_END = ENDADDR(.ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR);
+
+.ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOINIT ROM(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOINIT) :> .
+_ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOINIT_START = ADDR(.ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOINIT);
+_ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOINIT_END = ENDADDR(.ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOINIT);
+
+.ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_ZERO_INIT ROM(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_ZERO_INIT) :> .
+_ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_ZERO_INIT_START = ADDR(.ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_ZERO_INIT);
+_ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_ZERO_INIT);
+
+.ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST ROM(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST) :> .
+_ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_START = ADDR(.ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST);
+_ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_END = ENDADDR(.ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST);
+
+.ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOINIT ROM(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOINIT) :> .
+_ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOINIT);
+_ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOINIT);
+
+.ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_ZERO_INIT ROM(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_ZERO_INIT);
+_ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_ISR_SPI_CSIH2_TIC_CAT2_ISR
+# undef OS_LINK_CONST_ISR_SPI_CSIH2_TIC_CAT2_ISR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR
+# undef OS_LINK_CONST_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR
+# undef OS_LINK_CONST_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_SPI_CSIH2_TIC_CAT2_ISR_INIT
+# undef OS_LINK_CONST_ISR_SPI_CSIH2_TIC_CAT2_ISR_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIH2_TIRE_CAT2_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR )
+.OS_SPI_CSIH2_TIRE_CAT2_ISR_CONST ALIGN(4) :> .
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_CONST_START = ADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_CONST);
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_CONST_END = ENDADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIH2_TIRE_CAT2_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR )
+.OS_SPI_CSIH2_TIRE_CAT2_ISR_CONST_FAST ALIGN(4) :> .
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_CONST_FAST_START = ADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_CONST_FAST);
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_CONST_FAST_END = ENDADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIH2_TIRE_CAT2_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIH2_TIRE_CAT2_ISR_INIT )
+
+.ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR ROM(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR) :> .
+_ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_START = ADDR(.ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR);
+_ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_END = ENDADDR(.ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR);
+
+.ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOINIT ROM(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOINIT) :> .
+_ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOINIT_START = ADDR(.ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOINIT);
+_ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOINIT_END = ENDADDR(.ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOINIT);
+
+.ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_ZERO_INIT ROM(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_ZERO_INIT) :> .
+_ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_ZERO_INIT_START = ADDR(.ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_ZERO_INIT);
+_ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_ZERO_INIT);
+
+.ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST ROM(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST) :> .
+_ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_START = ADDR(.ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST);
+_ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_END = ENDADDR(.ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST);
+
+.ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOINIT ROM(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOINIT) :> .
+_ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOINIT);
+_ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOINIT);
+
+.ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_ZERO_INIT ROM(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_ZERO_INIT);
+_ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_ISR_SPI_CSIH2_TIRE_CAT2_ISR
+# undef OS_LINK_CONST_ISR_SPI_CSIH2_TIRE_CAT2_ISR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR
+# undef OS_LINK_CONST_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR
+# undef OS_LINK_CONST_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_SPI_CSIH2_TIRE_CAT2_ISR_INIT
+# undef OS_LINK_CONST_ISR_SPI_CSIH2_TIRE_CAT2_ISR_INIT
+#endif
+
+
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIH2_TIR_CAT2_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR )
+.OS_SPI_CSIH2_TIR_CAT2_ISR_CONST ALIGN(4) :> .
+_OS_SPI_CSIH2_TIR_CAT2_ISR_CONST_START = ADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_CONST);
+_OS_SPI_CSIH2_TIR_CAT2_ISR_CONST_END = ENDADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_CONST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIH2_TIR_CAT2_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR )
+.OS_SPI_CSIH2_TIR_CAT2_ISR_CONST_FAST ALIGN(4) :> .
+_OS_SPI_CSIH2_TIR_CAT2_ISR_CONST_FAST_START = ADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_CONST_FAST);
+_OS_SPI_CSIH2_TIR_CAT2_ISR_CONST_FAST_END = ENDADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_CONST_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_CONST ) || defined ( OS_LINK_CONST_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIH2_TIR_CAT2_ISR ) || defined ( OS_LINK_CONST_ISR_SPI_CSIH2_TIR_CAT2_ISR_INIT )
+
+.ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR ROM(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR) :> .
+_ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_START = ADDR(.ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR);
+_ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_END = ENDADDR(.ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR);
+
+.ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOINIT ROM(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOINIT) :> .
+_ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOINIT_START = ADDR(.ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOINIT);
+_ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOINIT_END = ENDADDR(.ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOINIT);
+
+.ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_ZERO_INIT ROM(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_ZERO_INIT) :> .
+_ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_ZERO_INIT_START = ADDR(.ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_ZERO_INIT);
+_ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_ZERO_INIT_END = ENDADDR(.ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_ZERO_INIT);
+
+.ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST ROM(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST) :> .
+_ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_START = ADDR(.ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST);
+_ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_END = ENDADDR(.ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST);
+
+.ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOINIT ROM(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOINIT) :> .
+_ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOINIT_START = ADDR(.ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOINIT);
+_ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOINIT_END = ENDADDR(.ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOINIT);
+
+.ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_ZERO_INIT ROM(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_ZERO_INIT) :> .
+_ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_ZERO_INIT_START = ADDR(.ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_ZERO_INIT);
+_ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_ZERO_INIT_END = ENDADDR(.ROM_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_ZERO_INIT);
+
+#endif
+
+#ifdef OS_LINK_CONST_ISR_SPI_CSIH2_TIR_CAT2_ISR
+# undef OS_LINK_CONST_ISR_SPI_CSIH2_TIR_CAT2_ISR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR
+# undef OS_LINK_CONST_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR
+# undef OS_LINK_CONST_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR
+#endif
+
+#ifdef OS_LINK_CONST_ISR_SPI_CSIH2_TIR_CAT2_ISR_INIT
+# undef OS_LINK_CONST_ISR_SPI_CSIH2_TIR_CAT2_ISR_INIT
+#endif
+
+
+
+#ifdef OS_LINK_CONST
+# undef OS_LINK_CONST
+#endif
+
+#ifdef OS_LINK_CONST_APP
+# undef OS_LINK_CONST_APP
+#endif
+
+#ifdef OS_LINK_CONST_TASK
+# undef OS_LINK_CONST_TASK
+#endif
+
+#ifdef OS_LINK_CONST_ISR
+# undef OS_LINK_CONST_ISR
+#endif
+
+#ifdef OS_LINK_CONST_KERNEL
+# undef OS_LINK_CONST_KERNEL
+#endif
+
+#ifdef OS_LINK_CONST_KERNEL_FAR
+# undef OS_LINK_CONST_KERNEL_FAR
+#endif
+
+#ifdef OS_LINK_CONST_KERNEL_NEAR
+# undef OS_LINK_CONST_KERNEL_NEAR
+#endif
+
+#ifdef OS_LINK_INTVEC_CONST
+# undef OS_LINK_INTVEC_CONST
+#endif
+
+#ifdef OS_LINK_EXCVEC_CONST
+# undef OS_LINK_EXCVEC_CONST
+#endif
+
+
+/**********************************************************************************************************************
+ *  VAR SECTIONS
+ *********************************************************************************************************************/
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_KERNEL ) || defined ( OS_LINK_VAR_KERNEL_FAR ) || defined ( OS_LINK_VAR_KERNEL_FAR_CACHE ) || defined ( OS_LINK_VAR_KERNEL_FAR_CACHE_INIT )
+.OS_CORE0_VAR ALIGN(4) :> .
+_OS_CORE0_VAR_START = ADDR(.OS_CORE0_VAR);
+_OS_CORE0_VAR_END = ENDADDR(.OS_CORE0_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_KERNEL ) || defined ( OS_LINK_VAR_KERNEL_FAR ) || defined ( OS_LINK_VAR_KERNEL_FAR_CACHE ) || defined ( OS_LINK_VAR_KERNEL_FAR_CACHE_NOINIT )
+.OS_CORE0_VAR_NOINIT ALIGN(4) :> .
+_OS_CORE0_VAR_NOINIT_START = ADDR(.OS_CORE0_VAR_NOINIT);
+_OS_CORE0_VAR_NOINIT_END = ENDADDR(.OS_CORE0_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_KERNEL ) || defined ( OS_LINK_VAR_KERNEL_NEAR ) || defined ( OS_LINK_VAR_KERNEL_NEAR_CACHE ) || defined ( OS_LINK_VAR_KERNEL_NEAR_CACHE_INIT )
+.OS_CORE0_VAR_FAST ALIGN(4) :> .
+_OS_CORE0_VAR_FAST_START = ADDR(.OS_CORE0_VAR_FAST);
+_OS_CORE0_VAR_FAST_END = ENDADDR(.OS_CORE0_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_KERNEL ) || defined ( OS_LINK_VAR_KERNEL_NEAR ) || defined ( OS_LINK_VAR_KERNEL_NEAR_CACHE ) || defined ( OS_LINK_VAR_KERNEL_NEAR_CACHE_NOINIT )
+.OS_CORE0_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_CORE0_VAR_FAST_NOINIT_START = ADDR(.OS_CORE0_VAR_FAST_NOINIT);
+_OS_CORE0_VAR_FAST_NOINIT_END = ENDADDR(.OS_CORE0_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_KERNEL ) || defined ( OS_LINK_VAR_KERNEL_FAR ) || defined ( OS_LINK_VAR_KERNEL_FAR_NOCACHE ) || defined ( OS_LINK_VAR_KERNEL_FAR_NOCACHE_INIT )
+.OS_CORE0_VAR_NOCACHE ALIGN(4) :> .
+_OS_CORE0_VAR_NOCACHE_START = ADDR(.OS_CORE0_VAR_NOCACHE);
+_OS_CORE0_VAR_NOCACHE_END = ENDADDR(.OS_CORE0_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_KERNEL ) || defined ( OS_LINK_VAR_KERNEL_FAR ) || defined ( OS_LINK_VAR_KERNEL_FAR_NOCACHE ) || defined ( OS_LINK_VAR_KERNEL_FAR_NOCACHE_NOINIT )
+.OS_CORE0_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_CORE0_VAR_NOCACHE_NOINIT_START = ADDR(.OS_CORE0_VAR_NOCACHE_NOINIT);
+_OS_CORE0_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_CORE0_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_KERNEL ) || defined ( OS_LINK_VAR_KERNEL_NEAR ) || defined ( OS_LINK_VAR_KERNEL_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_KERNEL_NEAR_NOCACHE_INIT )
+.OS_CORE0_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_CORE0_VAR_FAST_NOCACHE_START = ADDR(.OS_CORE0_VAR_FAST_NOCACHE);
+_OS_CORE0_VAR_FAST_NOCACHE_END = ENDADDR(.OS_CORE0_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_KERNEL ) || defined ( OS_LINK_VAR_KERNEL_NEAR ) || defined ( OS_LINK_VAR_KERNEL_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_KERNEL_NEAR_NOCACHE_NOINIT )
+.OS_CORE0_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_CORE0_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_CORE0_VAR_FAST_NOCACHE_NOINIT);
+_OS_CORE0_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_CORE0_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_KERNEL_TRACE ) || defined ( OS_LINK_KERNEL_TRACE_FAR )
+.OS_PUBLIC_CORE0_VAR_NOINIT ALIGN(4) :> .
+_OS_PUBLIC_CORE0_VAR_NOINIT_START = ADDR(.OS_PUBLIC_CORE0_VAR_NOINIT);
+_OS_PUBLIC_CORE0_VAR_NOINIT_END = ENDADDR(.OS_PUBLIC_CORE0_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_KERNEL_TRACE ) || defined ( OS_LINK_KERNEL_TRACE_NEAR )
+.OS_PUBLIC_CORE0_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_PUBLIC_CORE0_VAR_FAST_NOINIT_START = ADDR(.OS_PUBLIC_CORE0_VAR_FAST_NOINIT);
+_OS_PUBLIC_CORE0_VAR_FAST_NOINIT_END = ENDADDR(.OS_PUBLIC_CORE0_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_KERNEL_BARRIERS ) || defined ( OS_LINK_KERNEL_BARRIERS_FAR )
+.OS_BARRIER_CORE0_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_BARRIER_CORE0_VAR_NOCACHE_NOINIT_START = ADDR(.OS_BARRIER_CORE0_VAR_NOCACHE_NOINIT);
+_OS_BARRIER_CORE0_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_BARRIER_CORE0_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_KERNEL_BARRIERS ) || defined ( OS_LINK_KERNEL_BARRIERS_NEAR )
+.OS_BARRIER_CORE0_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_BARRIER_CORE0_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_BARRIER_CORE0_VAR_FAST_NOCACHE_NOINIT);
+_OS_BARRIER_CORE0_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_BARRIER_CORE0_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_KERNEL_CORESTATUS ) || defined ( OS_LINK_KERNEL_CORESTATUS_FAR )
+.OS_CORESTATUS_CORE0_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_CORESTATUS_CORE0_VAR_NOCACHE_NOINIT_START = ADDR(.OS_CORESTATUS_CORE0_VAR_NOCACHE_NOINIT);
+_OS_CORESTATUS_CORE0_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_CORESTATUS_CORE0_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_KERNEL_CORESTATUS ) || defined ( OS_LINK_KERNEL_CORESTATUS_NEAR )
+.OS_CORESTATUS_CORE0_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_CORESTATUS_CORE0_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_CORESTATUS_CORE0_VAR_FAST_NOCACHE_NOINIT);
+_OS_CORESTATUS_CORE0_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_CORESTATUS_CORE0_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+
+#ifdef OS_LINK_VAR_APP_APPL0
+. = ALIGN(4);
+_OS_Appl0_VAR_ALL_START = .;
+__OS_Appl0_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL0 ) || defined ( OS_LINK_VAR_APP_APPL0_FAR ) || defined ( OS_LINK_VAR_APP_APPL0_FAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL0_FAR_CACHE_INIT )
+.OS_Appl0_VAR ALIGN(4) :> .
+_OS_Appl0_VAR_START = ADDR(.OS_Appl0_VAR);
+_OS_Appl0_VAR_END = ENDADDR(.OS_Appl0_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL0 ) || defined ( OS_LINK_VAR_APP_APPL0_FAR ) || defined ( OS_LINK_VAR_APP_APPL0_FAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL0_FAR_CACHE_NOINIT )
+.OS_Appl0_VAR_NOINIT ALIGN(4) :> .
+_OS_Appl0_VAR_NOINIT_START = ADDR(.OS_Appl0_VAR_NOINIT);
+_OS_Appl0_VAR_NOINIT_END = ENDADDR(.OS_Appl0_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL0 ) || defined ( OS_LINK_VAR_APP_APPL0_FAR ) || defined ( OS_LINK_VAR_APP_APPL0_FAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL0_FAR_CACHE_ZERO_INIT )
+.OS_Appl0_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Appl0_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Appl0_VAR_ZERO_INIT_START = ADDR(.OS_Appl0_VAR_ZERO_INIT);
+_OS_Appl0_VAR_ZERO_INIT_END = ENDADDR(.OS_Appl0_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL0 ) || defined ( OS_LINK_VAR_APP_APPL0_NEAR ) || defined ( OS_LINK_VAR_APP_APPL0_NEAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL0_NEAR_CACHE_INIT )
+.OS_Appl0_VAR_FAST ALIGN(4) :> .
+_OS_Appl0_VAR_FAST_START = ADDR(.OS_Appl0_VAR_FAST);
+_OS_Appl0_VAR_FAST_END = ENDADDR(.OS_Appl0_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL0 ) || defined ( OS_LINK_VAR_APP_APPL0_NEAR ) || defined ( OS_LINK_VAR_APP_APPL0_NEAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL0_NEAR_CACHE_NOINIT )
+.OS_Appl0_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Appl0_VAR_FAST_NOINIT_START = ADDR(.OS_Appl0_VAR_FAST_NOINIT);
+_OS_Appl0_VAR_FAST_NOINIT_END = ENDADDR(.OS_Appl0_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL0 ) || defined ( OS_LINK_VAR_APP_APPL0_NEAR ) || defined ( OS_LINK_VAR_APP_APPL0_NEAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL0_NEAR_CACHE_ZERO_INIT )
+.OS_Appl0_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Appl0_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Appl0_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Appl0_VAR_FAST_ZERO_INIT);
+_OS_Appl0_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Appl0_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL0 ) || defined ( OS_LINK_VAR_APP_APPL0_FAR ) || defined ( OS_LINK_VAR_APP_APPL0_FAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL0_FAR_NOCACHE_INIT )
+.OS_Appl0_VAR_NOCACHE ALIGN(4) :> .
+_OS_Appl0_VAR_NOCACHE_START = ADDR(.OS_Appl0_VAR_NOCACHE);
+_OS_Appl0_VAR_NOCACHE_END = ENDADDR(.OS_Appl0_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL0 ) || defined ( OS_LINK_VAR_APP_APPL0_FAR ) || defined ( OS_LINK_VAR_APP_APPL0_FAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL0_FAR_NOCACHE_NOINIT )
+.OS_Appl0_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Appl0_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Appl0_VAR_NOCACHE_NOINIT);
+_OS_Appl0_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Appl0_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL0 ) || defined ( OS_LINK_VAR_APP_APPL0_FAR ) || defined ( OS_LINK_VAR_APP_APPL0_FAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL0_FAR_NOCACHE_ZERO_INIT )
+.OS_Appl0_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Appl0_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Appl0_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Appl0_VAR_NOCACHE_ZERO_INIT);
+_OS_Appl0_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Appl0_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL0 ) || defined ( OS_LINK_VAR_APP_APPL0_NEAR ) || defined ( OS_LINK_VAR_APP_APPL0_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL0_NEAR_NOCACHE_INIT )
+.OS_Appl0_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Appl0_VAR_FAST_NOCACHE_START = ADDR(.OS_Appl0_VAR_FAST_NOCACHE);
+_OS_Appl0_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Appl0_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL0 ) || defined ( OS_LINK_VAR_APP_APPL0_NEAR ) || defined ( OS_LINK_VAR_APP_APPL0_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL0_NEAR_NOCACHE_NOINIT )
+.OS_Appl0_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Appl0_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Appl0_VAR_FAST_NOCACHE_NOINIT);
+_OS_Appl0_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Appl0_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL0 ) || defined ( OS_LINK_VAR_APP_APPL0_NEAR ) || defined ( OS_LINK_VAR_APP_APPL0_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL0_NEAR_NOCACHE_ZERO_INIT )
+.OS_Appl0_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Appl0_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Appl0_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Appl0_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Appl0_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Appl0_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL0
+. = ALIGN(4);
+_OS_Appl0_VAR_ALL_END = .-1;
+__OS_Appl0_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_APP_APPL0
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL0_FAR
+# undef OS_LINK_VAR_APP_APPL0_FAR
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL0_FAR_CACHE
+# undef OS_LINK_VAR_APP_APPL0_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL0_FAR_CACHE_INIT
+# undef OS_LINK_VAR_APP_APPL0_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL0_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_APP_APPL0_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL0_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_APP_APPL0_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL0_FAR_NOCACHE
+# undef OS_LINK_VAR_APP_APPL0_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL0_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_APP_APPL0_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL0_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_APP_APPL0_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL0_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_APP_APPL0_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL0_NEAR
+# undef OS_LINK_VAR_APP_APPL0_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL0_NEAR_CACHE
+# undef OS_LINK_VAR_APP_APPL0_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL0_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_APP_APPL0_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL0_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_APP_APPL0_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL0_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_APP_APPL0_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL0_NEAR_NOCACHE
+# undef OS_LINK_VAR_APP_APPL0_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL0_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_APP_APPL0_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL0_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_APP_APPL0_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL0_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_APP_APPL0_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_APP_APPL10
+. = ALIGN(4);
+_OS_Appl10_VAR_ALL_START = .;
+__OS_Appl10_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL10 ) || defined ( OS_LINK_VAR_APP_APPL10_FAR ) || defined ( OS_LINK_VAR_APP_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL10_FAR_CACHE_INIT )
+.OS_Appl10_VAR ALIGN(4) :> .
+_OS_Appl10_VAR_START = ADDR(.OS_Appl10_VAR);
+_OS_Appl10_VAR_END = ENDADDR(.OS_Appl10_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL10 ) || defined ( OS_LINK_VAR_APP_APPL10_FAR ) || defined ( OS_LINK_VAR_APP_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL10_FAR_CACHE_NOINIT )
+.OS_Appl10_VAR_NOINIT ALIGN(4) :> .
+_OS_Appl10_VAR_NOINIT_START = ADDR(.OS_Appl10_VAR_NOINIT);
+_OS_Appl10_VAR_NOINIT_END = ENDADDR(.OS_Appl10_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL10 ) || defined ( OS_LINK_VAR_APP_APPL10_FAR ) || defined ( OS_LINK_VAR_APP_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL10_FAR_CACHE_ZERO_INIT )
+.OS_Appl10_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Appl10_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Appl10_VAR_ZERO_INIT_START = ADDR(.OS_Appl10_VAR_ZERO_INIT);
+_OS_Appl10_VAR_ZERO_INIT_END = ENDADDR(.OS_Appl10_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL10 ) || defined ( OS_LINK_VAR_APP_APPL10_NEAR ) || defined ( OS_LINK_VAR_APP_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL10_NEAR_CACHE_INIT )
+.OS_Appl10_VAR_FAST ALIGN(4) :> .
+_OS_Appl10_VAR_FAST_START = ADDR(.OS_Appl10_VAR_FAST);
+_OS_Appl10_VAR_FAST_END = ENDADDR(.OS_Appl10_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL10 ) || defined ( OS_LINK_VAR_APP_APPL10_NEAR ) || defined ( OS_LINK_VAR_APP_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL10_NEAR_CACHE_NOINIT )
+.OS_Appl10_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Appl10_VAR_FAST_NOINIT_START = ADDR(.OS_Appl10_VAR_FAST_NOINIT);
+_OS_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.OS_Appl10_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL10 ) || defined ( OS_LINK_VAR_APP_APPL10_NEAR ) || defined ( OS_LINK_VAR_APP_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL10_NEAR_CACHE_ZERO_INIT )
+.OS_Appl10_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Appl10_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Appl10_VAR_FAST_ZERO_INIT);
+_OS_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Appl10_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL10 ) || defined ( OS_LINK_VAR_APP_APPL10_FAR ) || defined ( OS_LINK_VAR_APP_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL10_FAR_NOCACHE_INIT )
+.OS_Appl10_VAR_NOCACHE ALIGN(4) :> .
+_OS_Appl10_VAR_NOCACHE_START = ADDR(.OS_Appl10_VAR_NOCACHE);
+_OS_Appl10_VAR_NOCACHE_END = ENDADDR(.OS_Appl10_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL10 ) || defined ( OS_LINK_VAR_APP_APPL10_FAR ) || defined ( OS_LINK_VAR_APP_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL10_FAR_NOCACHE_NOINIT )
+.OS_Appl10_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Appl10_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Appl10_VAR_NOCACHE_NOINIT);
+_OS_Appl10_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Appl10_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL10 ) || defined ( OS_LINK_VAR_APP_APPL10_FAR ) || defined ( OS_LINK_VAR_APP_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL10_FAR_NOCACHE_ZERO_INIT )
+.OS_Appl10_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Appl10_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Appl10_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Appl10_VAR_NOCACHE_ZERO_INIT);
+_OS_Appl10_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Appl10_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL10 ) || defined ( OS_LINK_VAR_APP_APPL10_NEAR ) || defined ( OS_LINK_VAR_APP_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL10_NEAR_NOCACHE_INIT )
+.OS_Appl10_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Appl10_VAR_FAST_NOCACHE_START = ADDR(.OS_Appl10_VAR_FAST_NOCACHE);
+_OS_Appl10_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Appl10_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL10 ) || defined ( OS_LINK_VAR_APP_APPL10_NEAR ) || defined ( OS_LINK_VAR_APP_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL10_NEAR_NOCACHE_NOINIT )
+.OS_Appl10_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Appl10_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Appl10_VAR_FAST_NOCACHE_NOINIT);
+_OS_Appl10_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Appl10_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL10 ) || defined ( OS_LINK_VAR_APP_APPL10_NEAR ) || defined ( OS_LINK_VAR_APP_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL10_NEAR_NOCACHE_ZERO_INIT )
+.OS_Appl10_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Appl10_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL10
+. = ALIGN(4);
+_OS_Appl10_VAR_ALL_END = .-1;
+__OS_Appl10_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_APP_APPL10
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL10_FAR
+# undef OS_LINK_VAR_APP_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL10_FAR_CACHE
+# undef OS_LINK_VAR_APP_APPL10_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL10_FAR_CACHE_INIT
+# undef OS_LINK_VAR_APP_APPL10_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL10_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_APP_APPL10_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL10_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_APP_APPL10_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL10_FAR_NOCACHE
+# undef OS_LINK_VAR_APP_APPL10_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL10_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_APP_APPL10_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL10_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_APP_APPL10_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL10_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_APP_APPL10_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL10_NEAR
+# undef OS_LINK_VAR_APP_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL10_NEAR_CACHE
+# undef OS_LINK_VAR_APP_APPL10_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL10_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_APP_APPL10_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL10_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_APP_APPL10_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL10_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_APP_APPL10_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL10_NEAR_NOCACHE
+# undef OS_LINK_VAR_APP_APPL10_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL10_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_APP_APPL10_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL10_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_APP_APPL10_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL10_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_APP_APPL10_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_APP_APPL7
+. = ALIGN(4);
+_OS_Appl7_VAR_ALL_START = .;
+__OS_Appl7_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL7 ) || defined ( OS_LINK_VAR_APP_APPL7_FAR ) || defined ( OS_LINK_VAR_APP_APPL7_FAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL7_FAR_CACHE_INIT )
+.OS_Appl7_VAR ALIGN(4) :> .
+_OS_Appl7_VAR_START = ADDR(.OS_Appl7_VAR);
+_OS_Appl7_VAR_END = ENDADDR(.OS_Appl7_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL7 ) || defined ( OS_LINK_VAR_APP_APPL7_FAR ) || defined ( OS_LINK_VAR_APP_APPL7_FAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL7_FAR_CACHE_NOINIT )
+.OS_Appl7_VAR_NOINIT ALIGN(4) :> .
+_OS_Appl7_VAR_NOINIT_START = ADDR(.OS_Appl7_VAR_NOINIT);
+_OS_Appl7_VAR_NOINIT_END = ENDADDR(.OS_Appl7_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL7 ) || defined ( OS_LINK_VAR_APP_APPL7_FAR ) || defined ( OS_LINK_VAR_APP_APPL7_FAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL7_FAR_CACHE_ZERO_INIT )
+.OS_Appl7_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Appl7_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Appl7_VAR_ZERO_INIT_START = ADDR(.OS_Appl7_VAR_ZERO_INIT);
+_OS_Appl7_VAR_ZERO_INIT_END = ENDADDR(.OS_Appl7_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL7 ) || defined ( OS_LINK_VAR_APP_APPL7_NEAR ) || defined ( OS_LINK_VAR_APP_APPL7_NEAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL7_NEAR_CACHE_INIT )
+.OS_Appl7_VAR_FAST ALIGN(4) :> .
+_OS_Appl7_VAR_FAST_START = ADDR(.OS_Appl7_VAR_FAST);
+_OS_Appl7_VAR_FAST_END = ENDADDR(.OS_Appl7_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL7 ) || defined ( OS_LINK_VAR_APP_APPL7_NEAR ) || defined ( OS_LINK_VAR_APP_APPL7_NEAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL7_NEAR_CACHE_NOINIT )
+.OS_Appl7_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Appl7_VAR_FAST_NOINIT_START = ADDR(.OS_Appl7_VAR_FAST_NOINIT);
+_OS_Appl7_VAR_FAST_NOINIT_END = ENDADDR(.OS_Appl7_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL7 ) || defined ( OS_LINK_VAR_APP_APPL7_NEAR ) || defined ( OS_LINK_VAR_APP_APPL7_NEAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL7_NEAR_CACHE_ZERO_INIT )
+.OS_Appl7_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Appl7_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Appl7_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Appl7_VAR_FAST_ZERO_INIT);
+_OS_Appl7_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Appl7_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL7 ) || defined ( OS_LINK_VAR_APP_APPL7_FAR ) || defined ( OS_LINK_VAR_APP_APPL7_FAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL7_FAR_NOCACHE_INIT )
+.OS_Appl7_VAR_NOCACHE ALIGN(4) :> .
+_OS_Appl7_VAR_NOCACHE_START = ADDR(.OS_Appl7_VAR_NOCACHE);
+_OS_Appl7_VAR_NOCACHE_END = ENDADDR(.OS_Appl7_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL7 ) || defined ( OS_LINK_VAR_APP_APPL7_FAR ) || defined ( OS_LINK_VAR_APP_APPL7_FAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL7_FAR_NOCACHE_NOINIT )
+.OS_Appl7_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Appl7_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Appl7_VAR_NOCACHE_NOINIT);
+_OS_Appl7_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Appl7_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL7 ) || defined ( OS_LINK_VAR_APP_APPL7_FAR ) || defined ( OS_LINK_VAR_APP_APPL7_FAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL7_FAR_NOCACHE_ZERO_INIT )
+.OS_Appl7_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Appl7_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Appl7_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Appl7_VAR_NOCACHE_ZERO_INIT);
+_OS_Appl7_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Appl7_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL7 ) || defined ( OS_LINK_VAR_APP_APPL7_NEAR ) || defined ( OS_LINK_VAR_APP_APPL7_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL7_NEAR_NOCACHE_INIT )
+.OS_Appl7_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Appl7_VAR_FAST_NOCACHE_START = ADDR(.OS_Appl7_VAR_FAST_NOCACHE);
+_OS_Appl7_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Appl7_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL7 ) || defined ( OS_LINK_VAR_APP_APPL7_NEAR ) || defined ( OS_LINK_VAR_APP_APPL7_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL7_NEAR_NOCACHE_NOINIT )
+.OS_Appl7_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Appl7_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Appl7_VAR_FAST_NOCACHE_NOINIT);
+_OS_Appl7_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Appl7_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL7 ) || defined ( OS_LINK_VAR_APP_APPL7_NEAR ) || defined ( OS_LINK_VAR_APP_APPL7_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL7_NEAR_NOCACHE_ZERO_INIT )
+.OS_Appl7_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Appl7_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Appl7_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Appl7_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Appl7_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Appl7_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL7
+. = ALIGN(4);
+_OS_Appl7_VAR_ALL_END = .-1;
+__OS_Appl7_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_APP_APPL7
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL7_FAR
+# undef OS_LINK_VAR_APP_APPL7_FAR
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL7_FAR_CACHE
+# undef OS_LINK_VAR_APP_APPL7_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL7_FAR_CACHE_INIT
+# undef OS_LINK_VAR_APP_APPL7_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL7_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_APP_APPL7_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL7_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_APP_APPL7_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL7_FAR_NOCACHE
+# undef OS_LINK_VAR_APP_APPL7_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL7_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_APP_APPL7_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL7_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_APP_APPL7_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL7_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_APP_APPL7_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL7_NEAR
+# undef OS_LINK_VAR_APP_APPL7_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL7_NEAR_CACHE
+# undef OS_LINK_VAR_APP_APPL7_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL7_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_APP_APPL7_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL7_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_APP_APPL7_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL7_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_APP_APPL7_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL7_NEAR_NOCACHE
+# undef OS_LINK_VAR_APP_APPL7_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL7_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_APP_APPL7_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL7_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_APP_APPL7_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL7_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_APP_APPL7_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_APP_APPL8
+. = ALIGN(4);
+_OS_Appl8_VAR_ALL_START = .;
+__OS_Appl8_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL8 ) || defined ( OS_LINK_VAR_APP_APPL8_FAR ) || defined ( OS_LINK_VAR_APP_APPL8_FAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL8_FAR_CACHE_INIT )
+.OS_Appl8_VAR ALIGN(4) :> .
+_OS_Appl8_VAR_START = ADDR(.OS_Appl8_VAR);
+_OS_Appl8_VAR_END = ENDADDR(.OS_Appl8_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL8 ) || defined ( OS_LINK_VAR_APP_APPL8_FAR ) || defined ( OS_LINK_VAR_APP_APPL8_FAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL8_FAR_CACHE_NOINIT )
+.OS_Appl8_VAR_NOINIT ALIGN(4) :> .
+_OS_Appl8_VAR_NOINIT_START = ADDR(.OS_Appl8_VAR_NOINIT);
+_OS_Appl8_VAR_NOINIT_END = ENDADDR(.OS_Appl8_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL8 ) || defined ( OS_LINK_VAR_APP_APPL8_FAR ) || defined ( OS_LINK_VAR_APP_APPL8_FAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL8_FAR_CACHE_ZERO_INIT )
+.OS_Appl8_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Appl8_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Appl8_VAR_ZERO_INIT_START = ADDR(.OS_Appl8_VAR_ZERO_INIT);
+_OS_Appl8_VAR_ZERO_INIT_END = ENDADDR(.OS_Appl8_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL8 ) || defined ( OS_LINK_VAR_APP_APPL8_NEAR ) || defined ( OS_LINK_VAR_APP_APPL8_NEAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL8_NEAR_CACHE_INIT )
+.OS_Appl8_VAR_FAST ALIGN(4) :> .
+_OS_Appl8_VAR_FAST_START = ADDR(.OS_Appl8_VAR_FAST);
+_OS_Appl8_VAR_FAST_END = ENDADDR(.OS_Appl8_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL8 ) || defined ( OS_LINK_VAR_APP_APPL8_NEAR ) || defined ( OS_LINK_VAR_APP_APPL8_NEAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL8_NEAR_CACHE_NOINIT )
+.OS_Appl8_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Appl8_VAR_FAST_NOINIT_START = ADDR(.OS_Appl8_VAR_FAST_NOINIT);
+_OS_Appl8_VAR_FAST_NOINIT_END = ENDADDR(.OS_Appl8_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL8 ) || defined ( OS_LINK_VAR_APP_APPL8_NEAR ) || defined ( OS_LINK_VAR_APP_APPL8_NEAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL8_NEAR_CACHE_ZERO_INIT )
+.OS_Appl8_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Appl8_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Appl8_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Appl8_VAR_FAST_ZERO_INIT);
+_OS_Appl8_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Appl8_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL8 ) || defined ( OS_LINK_VAR_APP_APPL8_FAR ) || defined ( OS_LINK_VAR_APP_APPL8_FAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL8_FAR_NOCACHE_INIT )
+.OS_Appl8_VAR_NOCACHE ALIGN(4) :> .
+_OS_Appl8_VAR_NOCACHE_START = ADDR(.OS_Appl8_VAR_NOCACHE);
+_OS_Appl8_VAR_NOCACHE_END = ENDADDR(.OS_Appl8_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL8 ) || defined ( OS_LINK_VAR_APP_APPL8_FAR ) || defined ( OS_LINK_VAR_APP_APPL8_FAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL8_FAR_NOCACHE_NOINIT )
+.OS_Appl8_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Appl8_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Appl8_VAR_NOCACHE_NOINIT);
+_OS_Appl8_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Appl8_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL8 ) || defined ( OS_LINK_VAR_APP_APPL8_FAR ) || defined ( OS_LINK_VAR_APP_APPL8_FAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL8_FAR_NOCACHE_ZERO_INIT )
+.OS_Appl8_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Appl8_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Appl8_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Appl8_VAR_NOCACHE_ZERO_INIT);
+_OS_Appl8_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Appl8_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL8 ) || defined ( OS_LINK_VAR_APP_APPL8_NEAR ) || defined ( OS_LINK_VAR_APP_APPL8_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL8_NEAR_NOCACHE_INIT )
+.OS_Appl8_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Appl8_VAR_FAST_NOCACHE_START = ADDR(.OS_Appl8_VAR_FAST_NOCACHE);
+_OS_Appl8_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Appl8_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL8 ) || defined ( OS_LINK_VAR_APP_APPL8_NEAR ) || defined ( OS_LINK_VAR_APP_APPL8_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL8_NEAR_NOCACHE_NOINIT )
+.OS_Appl8_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Appl8_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Appl8_VAR_FAST_NOCACHE_NOINIT);
+_OS_Appl8_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Appl8_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL8 ) || defined ( OS_LINK_VAR_APP_APPL8_NEAR ) || defined ( OS_LINK_VAR_APP_APPL8_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL8_NEAR_NOCACHE_ZERO_INIT )
+.OS_Appl8_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Appl8_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Appl8_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Appl8_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Appl8_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Appl8_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL8
+. = ALIGN(4);
+_OS_Appl8_VAR_ALL_END = .-1;
+__OS_Appl8_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_APP_APPL8
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL8_FAR
+# undef OS_LINK_VAR_APP_APPL8_FAR
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL8_FAR_CACHE
+# undef OS_LINK_VAR_APP_APPL8_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL8_FAR_CACHE_INIT
+# undef OS_LINK_VAR_APP_APPL8_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL8_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_APP_APPL8_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL8_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_APP_APPL8_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL8_FAR_NOCACHE
+# undef OS_LINK_VAR_APP_APPL8_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL8_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_APP_APPL8_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL8_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_APP_APPL8_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL8_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_APP_APPL8_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL8_NEAR
+# undef OS_LINK_VAR_APP_APPL8_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL8_NEAR_CACHE
+# undef OS_LINK_VAR_APP_APPL8_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL8_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_APP_APPL8_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL8_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_APP_APPL8_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL8_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_APP_APPL8_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL8_NEAR_NOCACHE
+# undef OS_LINK_VAR_APP_APPL8_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL8_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_APP_APPL8_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL8_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_APP_APPL8_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL8_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_APP_APPL8_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_APP_APPL9
+. = ALIGN(4);
+_OS_Appl9_VAR_ALL_START = .;
+__OS_Appl9_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL9 ) || defined ( OS_LINK_VAR_APP_APPL9_FAR ) || defined ( OS_LINK_VAR_APP_APPL9_FAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL9_FAR_CACHE_INIT )
+.OS_Appl9_VAR ALIGN(4) :> .
+_OS_Appl9_VAR_START = ADDR(.OS_Appl9_VAR);
+_OS_Appl9_VAR_END = ENDADDR(.OS_Appl9_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL9 ) || defined ( OS_LINK_VAR_APP_APPL9_FAR ) || defined ( OS_LINK_VAR_APP_APPL9_FAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL9_FAR_CACHE_NOINIT )
+.OS_Appl9_VAR_NOINIT ALIGN(4) :> .
+_OS_Appl9_VAR_NOINIT_START = ADDR(.OS_Appl9_VAR_NOINIT);
+_OS_Appl9_VAR_NOINIT_END = ENDADDR(.OS_Appl9_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL9 ) || defined ( OS_LINK_VAR_APP_APPL9_FAR ) || defined ( OS_LINK_VAR_APP_APPL9_FAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL9_FAR_CACHE_ZERO_INIT )
+.OS_Appl9_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Appl9_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Appl9_VAR_ZERO_INIT_START = ADDR(.OS_Appl9_VAR_ZERO_INIT);
+_OS_Appl9_VAR_ZERO_INIT_END = ENDADDR(.OS_Appl9_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL9 ) || defined ( OS_LINK_VAR_APP_APPL9_NEAR ) || defined ( OS_LINK_VAR_APP_APPL9_NEAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL9_NEAR_CACHE_INIT )
+.OS_Appl9_VAR_FAST ALIGN(4) :> .
+_OS_Appl9_VAR_FAST_START = ADDR(.OS_Appl9_VAR_FAST);
+_OS_Appl9_VAR_FAST_END = ENDADDR(.OS_Appl9_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL9 ) || defined ( OS_LINK_VAR_APP_APPL9_NEAR ) || defined ( OS_LINK_VAR_APP_APPL9_NEAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL9_NEAR_CACHE_NOINIT )
+.OS_Appl9_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Appl9_VAR_FAST_NOINIT_START = ADDR(.OS_Appl9_VAR_FAST_NOINIT);
+_OS_Appl9_VAR_FAST_NOINIT_END = ENDADDR(.OS_Appl9_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL9 ) || defined ( OS_LINK_VAR_APP_APPL9_NEAR ) || defined ( OS_LINK_VAR_APP_APPL9_NEAR_CACHE ) || defined ( OS_LINK_VAR_APP_APPL9_NEAR_CACHE_ZERO_INIT )
+.OS_Appl9_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Appl9_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Appl9_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Appl9_VAR_FAST_ZERO_INIT);
+_OS_Appl9_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Appl9_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL9 ) || defined ( OS_LINK_VAR_APP_APPL9_FAR ) || defined ( OS_LINK_VAR_APP_APPL9_FAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL9_FAR_NOCACHE_INIT )
+.OS_Appl9_VAR_NOCACHE ALIGN(4) :> .
+_OS_Appl9_VAR_NOCACHE_START = ADDR(.OS_Appl9_VAR_NOCACHE);
+_OS_Appl9_VAR_NOCACHE_END = ENDADDR(.OS_Appl9_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL9 ) || defined ( OS_LINK_VAR_APP_APPL9_FAR ) || defined ( OS_LINK_VAR_APP_APPL9_FAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL9_FAR_NOCACHE_NOINIT )
+.OS_Appl9_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Appl9_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Appl9_VAR_NOCACHE_NOINIT);
+_OS_Appl9_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Appl9_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL9 ) || defined ( OS_LINK_VAR_APP_APPL9_FAR ) || defined ( OS_LINK_VAR_APP_APPL9_FAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL9_FAR_NOCACHE_ZERO_INIT )
+.OS_Appl9_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Appl9_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Appl9_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Appl9_VAR_NOCACHE_ZERO_INIT);
+_OS_Appl9_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Appl9_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL9 ) || defined ( OS_LINK_VAR_APP_APPL9_NEAR ) || defined ( OS_LINK_VAR_APP_APPL9_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL9_NEAR_NOCACHE_INIT )
+.OS_Appl9_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Appl9_VAR_FAST_NOCACHE_START = ADDR(.OS_Appl9_VAR_FAST_NOCACHE);
+_OS_Appl9_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Appl9_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL9 ) || defined ( OS_LINK_VAR_APP_APPL9_NEAR ) || defined ( OS_LINK_VAR_APP_APPL9_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL9_NEAR_NOCACHE_NOINIT )
+.OS_Appl9_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Appl9_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Appl9_VAR_FAST_NOCACHE_NOINIT);
+_OS_Appl9_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Appl9_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_APPL9 ) || defined ( OS_LINK_VAR_APP_APPL9_NEAR ) || defined ( OS_LINK_VAR_APP_APPL9_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_APPL9_NEAR_NOCACHE_ZERO_INIT )
+.OS_Appl9_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Appl9_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Appl9_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Appl9_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Appl9_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Appl9_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL9
+. = ALIGN(4);
+_OS_Appl9_VAR_ALL_END = .-1;
+__OS_Appl9_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_APP_APPL9
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL9_FAR
+# undef OS_LINK_VAR_APP_APPL9_FAR
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL9_FAR_CACHE
+# undef OS_LINK_VAR_APP_APPL9_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL9_FAR_CACHE_INIT
+# undef OS_LINK_VAR_APP_APPL9_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL9_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_APP_APPL9_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL9_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_APP_APPL9_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL9_FAR_NOCACHE
+# undef OS_LINK_VAR_APP_APPL9_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL9_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_APP_APPL9_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL9_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_APP_APPL9_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL9_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_APP_APPL9_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL9_NEAR
+# undef OS_LINK_VAR_APP_APPL9_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL9_NEAR_CACHE
+# undef OS_LINK_VAR_APP_APPL9_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL9_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_APP_APPL9_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL9_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_APP_APPL9_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL9_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_APP_APPL9_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL9_NEAR_NOCACHE
+# undef OS_LINK_VAR_APP_APPL9_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL9_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_APP_APPL9_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL9_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_APP_APPL9_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_APPL9_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_APP_APPL9_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_APP_SYSTEMAPPLICATION
+. = ALIGN(4);
+_OS_SystemApplication_VAR_ALL_START = .;
+__OS_SystemApplication_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_CACHE ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_CACHE_INIT )
+.OS_SystemApplication_VAR ALIGN(4) :> .
+_OS_SystemApplication_VAR_START = ADDR(.OS_SystemApplication_VAR);
+_OS_SystemApplication_VAR_END = ENDADDR(.OS_SystemApplication_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_CACHE ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_CACHE_NOINIT )
+.OS_SystemApplication_VAR_NOINIT ALIGN(4) :> .
+_OS_SystemApplication_VAR_NOINIT_START = ADDR(.OS_SystemApplication_VAR_NOINIT);
+_OS_SystemApplication_VAR_NOINIT_END = ENDADDR(.OS_SystemApplication_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_CACHE ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_CACHE_ZERO_INIT )
+.OS_SystemApplication_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_SystemApplication_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_SystemApplication_VAR_ZERO_INIT_START = ADDR(.OS_SystemApplication_VAR_ZERO_INIT);
+_OS_SystemApplication_VAR_ZERO_INIT_END = ENDADDR(.OS_SystemApplication_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_CACHE ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_CACHE_INIT )
+.OS_SystemApplication_VAR_FAST ALIGN(4) :> .
+_OS_SystemApplication_VAR_FAST_START = ADDR(.OS_SystemApplication_VAR_FAST);
+_OS_SystemApplication_VAR_FAST_END = ENDADDR(.OS_SystemApplication_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_CACHE ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_CACHE_NOINIT )
+.OS_SystemApplication_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_SystemApplication_VAR_FAST_NOINIT_START = ADDR(.OS_SystemApplication_VAR_FAST_NOINIT);
+_OS_SystemApplication_VAR_FAST_NOINIT_END = ENDADDR(.OS_SystemApplication_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_CACHE ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_CACHE_ZERO_INIT )
+.OS_SystemApplication_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_SystemApplication_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_SystemApplication_VAR_FAST_ZERO_INIT_START = ADDR(.OS_SystemApplication_VAR_FAST_ZERO_INIT);
+_OS_SystemApplication_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_SystemApplication_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_NOCACHE_INIT )
+.OS_SystemApplication_VAR_NOCACHE ALIGN(4) :> .
+_OS_SystemApplication_VAR_NOCACHE_START = ADDR(.OS_SystemApplication_VAR_NOCACHE);
+_OS_SystemApplication_VAR_NOCACHE_END = ENDADDR(.OS_SystemApplication_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_NOCACHE_NOINIT )
+.OS_SystemApplication_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_SystemApplication_VAR_NOCACHE_NOINIT_START = ADDR(.OS_SystemApplication_VAR_NOCACHE_NOINIT);
+_OS_SystemApplication_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_SystemApplication_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_NOCACHE_ZERO_INIT )
+.OS_SystemApplication_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_SystemApplication_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_SystemApplication_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_SystemApplication_VAR_NOCACHE_ZERO_INIT);
+_OS_SystemApplication_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_SystemApplication_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_NOCACHE_INIT )
+.OS_SystemApplication_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_SystemApplication_VAR_FAST_NOCACHE_START = ADDR(.OS_SystemApplication_VAR_FAST_NOCACHE);
+_OS_SystemApplication_VAR_FAST_NOCACHE_END = ENDADDR(.OS_SystemApplication_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_NOCACHE_NOINIT )
+.OS_SystemApplication_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_SystemApplication_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_SystemApplication_VAR_FAST_NOCACHE_NOINIT);
+_OS_SystemApplication_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_SystemApplication_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_APP ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_NOCACHE_ZERO_INIT )
+.OS_SystemApplication_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_SystemApplication_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_SystemApplication_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_SystemApplication_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_SystemApplication_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_SystemApplication_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_APP_SYSTEMAPPLICATION
+. = ALIGN(4);
+_OS_SystemApplication_VAR_ALL_END = .-1;
+__OS_SystemApplication_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_APP_SYSTEMAPPLICATION
+#endif
+
+#ifdef OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR
+# undef OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR
+#endif
+
+#ifdef OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_CACHE
+# undef OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_CACHE_INIT
+# undef OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_NOCACHE
+# undef OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_APP_SYSTEMAPPLICATION_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR
+# undef OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_CACHE
+# undef OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_NOCACHE
+# undef OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_APP_SYSTEMAPPLICATION_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0
+. = ALIGN(4);
+_OS_IdleTask_OsCore_CORE0_VAR_ALL_START = .;
+__OS_IdleTask_OsCore_CORE0_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0 ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_CACHE_INIT )
+.OS_IdleTask_OsCore_CORE0_VAR ALIGN(4) :> .
+_OS_IdleTask_OsCore_CORE0_VAR_START = ADDR(.OS_IdleTask_OsCore_CORE0_VAR);
+_OS_IdleTask_OsCore_CORE0_VAR_END = ENDADDR(.OS_IdleTask_OsCore_CORE0_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0 ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_CACHE_NOINIT )
+.OS_IdleTask_OsCore_CORE0_VAR_NOINIT ALIGN(4) :> .
+_OS_IdleTask_OsCore_CORE0_VAR_NOINIT_START = ADDR(.OS_IdleTask_OsCore_CORE0_VAR_NOINIT);
+_OS_IdleTask_OsCore_CORE0_VAR_NOINIT_END = ENDADDR(.OS_IdleTask_OsCore_CORE0_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0 ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_CACHE_ZERO_INIT )
+.OS_IdleTask_OsCore_CORE0_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_IdleTask_OsCore_CORE0_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_IdleTask_OsCore_CORE0_VAR_ZERO_INIT_START = ADDR(.OS_IdleTask_OsCore_CORE0_VAR_ZERO_INIT);
+_OS_IdleTask_OsCore_CORE0_VAR_ZERO_INIT_END = ENDADDR(.OS_IdleTask_OsCore_CORE0_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0 ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_CACHE_INIT )
+.OS_IdleTask_OsCore_CORE0_VAR_FAST ALIGN(4) :> .
+_OS_IdleTask_OsCore_CORE0_VAR_FAST_START = ADDR(.OS_IdleTask_OsCore_CORE0_VAR_FAST);
+_OS_IdleTask_OsCore_CORE0_VAR_FAST_END = ENDADDR(.OS_IdleTask_OsCore_CORE0_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0 ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_CACHE_NOINIT )
+.OS_IdleTask_OsCore_CORE0_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_IdleTask_OsCore_CORE0_VAR_FAST_NOINIT_START = ADDR(.OS_IdleTask_OsCore_CORE0_VAR_FAST_NOINIT);
+_OS_IdleTask_OsCore_CORE0_VAR_FAST_NOINIT_END = ENDADDR(.OS_IdleTask_OsCore_CORE0_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0 ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_CACHE_ZERO_INIT )
+.OS_IdleTask_OsCore_CORE0_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_IdleTask_OsCore_CORE0_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_IdleTask_OsCore_CORE0_VAR_FAST_ZERO_INIT_START = ADDR(.OS_IdleTask_OsCore_CORE0_VAR_FAST_ZERO_INIT);
+_OS_IdleTask_OsCore_CORE0_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_IdleTask_OsCore_CORE0_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0 ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_NOCACHE_INIT )
+.OS_IdleTask_OsCore_CORE0_VAR_NOCACHE ALIGN(4) :> .
+_OS_IdleTask_OsCore_CORE0_VAR_NOCACHE_START = ADDR(.OS_IdleTask_OsCore_CORE0_VAR_NOCACHE);
+_OS_IdleTask_OsCore_CORE0_VAR_NOCACHE_END = ENDADDR(.OS_IdleTask_OsCore_CORE0_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0 ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_NOCACHE_NOINIT )
+.OS_IdleTask_OsCore_CORE0_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_IdleTask_OsCore_CORE0_VAR_NOCACHE_NOINIT_START = ADDR(.OS_IdleTask_OsCore_CORE0_VAR_NOCACHE_NOINIT);
+_OS_IdleTask_OsCore_CORE0_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_IdleTask_OsCore_CORE0_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0 ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_NOCACHE_ZERO_INIT )
+.OS_IdleTask_OsCore_CORE0_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_IdleTask_OsCore_CORE0_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_IdleTask_OsCore_CORE0_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_IdleTask_OsCore_CORE0_VAR_NOCACHE_ZERO_INIT);
+_OS_IdleTask_OsCore_CORE0_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_IdleTask_OsCore_CORE0_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0 ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_NOCACHE_INIT )
+.OS_IdleTask_OsCore_CORE0_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_IdleTask_OsCore_CORE0_VAR_FAST_NOCACHE_START = ADDR(.OS_IdleTask_OsCore_CORE0_VAR_FAST_NOCACHE);
+_OS_IdleTask_OsCore_CORE0_VAR_FAST_NOCACHE_END = ENDADDR(.OS_IdleTask_OsCore_CORE0_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0 ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_NOCACHE_NOINIT )
+.OS_IdleTask_OsCore_CORE0_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_IdleTask_OsCore_CORE0_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_IdleTask_OsCore_CORE0_VAR_FAST_NOCACHE_NOINIT);
+_OS_IdleTask_OsCore_CORE0_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_IdleTask_OsCore_CORE0_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0 ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_NOCACHE_ZERO_INIT )
+.OS_IdleTask_OsCore_CORE0_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_IdleTask_OsCore_CORE0_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_IdleTask_OsCore_CORE0_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_IdleTask_OsCore_CORE0_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_IdleTask_OsCore_CORE0_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_IdleTask_OsCore_CORE0_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0
+. = ALIGN(4);
+_OS_IdleTask_OsCore_CORE0_VAR_ALL_END = .-1;
+__OS_IdleTask_OsCore_CORE0_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0
+#endif
+
+#ifdef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR
+# undef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_CACHE
+# undef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_NOCACHE
+# undef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR
+# undef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_CACHE
+# undef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_NOCACHE
+# undef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_IDLETASK_OSCORE_CORE0_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL10
+. = ALIGN(4);
+_OS_Task_100ms_Appl10_VAR_ALL_START = .;
+__OS_Task_100ms_Appl10_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_CACHE_INIT )
+.OS_Task_100ms_Appl10_VAR ALIGN(4) :> .
+_OS_Task_100ms_Appl10_VAR_START = ADDR(.OS_Task_100ms_Appl10_VAR);
+_OS_Task_100ms_Appl10_VAR_END = ENDADDR(.OS_Task_100ms_Appl10_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_CACHE_NOINIT )
+.OS_Task_100ms_Appl10_VAR_NOINIT ALIGN(4) :> .
+_OS_Task_100ms_Appl10_VAR_NOINIT_START = ADDR(.OS_Task_100ms_Appl10_VAR_NOINIT);
+_OS_Task_100ms_Appl10_VAR_NOINIT_END = ENDADDR(.OS_Task_100ms_Appl10_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_CACHE_ZERO_INIT )
+.OS_Task_100ms_Appl10_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Task_100ms_Appl10_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Task_100ms_Appl10_VAR_ZERO_INIT_START = ADDR(.OS_Task_100ms_Appl10_VAR_ZERO_INIT);
+_OS_Task_100ms_Appl10_VAR_ZERO_INIT_END = ENDADDR(.OS_Task_100ms_Appl10_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_CACHE_INIT )
+.OS_Task_100ms_Appl10_VAR_FAST ALIGN(4) :> .
+_OS_Task_100ms_Appl10_VAR_FAST_START = ADDR(.OS_Task_100ms_Appl10_VAR_FAST);
+_OS_Task_100ms_Appl10_VAR_FAST_END = ENDADDR(.OS_Task_100ms_Appl10_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_CACHE_NOINIT )
+.OS_Task_100ms_Appl10_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Task_100ms_Appl10_VAR_FAST_NOINIT_START = ADDR(.OS_Task_100ms_Appl10_VAR_FAST_NOINIT);
+_OS_Task_100ms_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.OS_Task_100ms_Appl10_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_CACHE_ZERO_INIT )
+.OS_Task_100ms_Appl10_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Task_100ms_Appl10_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Task_100ms_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Task_100ms_Appl10_VAR_FAST_ZERO_INIT);
+_OS_Task_100ms_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Task_100ms_Appl10_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_NOCACHE_INIT )
+.OS_Task_100ms_Appl10_VAR_NOCACHE ALIGN(4) :> .
+_OS_Task_100ms_Appl10_VAR_NOCACHE_START = ADDR(.OS_Task_100ms_Appl10_VAR_NOCACHE);
+_OS_Task_100ms_Appl10_VAR_NOCACHE_END = ENDADDR(.OS_Task_100ms_Appl10_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_NOCACHE_NOINIT )
+.OS_Task_100ms_Appl10_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_100ms_Appl10_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Task_100ms_Appl10_VAR_NOCACHE_NOINIT);
+_OS_Task_100ms_Appl10_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_100ms_Appl10_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_NOCACHE_ZERO_INIT )
+.OS_Task_100ms_Appl10_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_100ms_Appl10_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_100ms_Appl10_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_100ms_Appl10_VAR_NOCACHE_ZERO_INIT);
+_OS_Task_100ms_Appl10_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_100ms_Appl10_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_NOCACHE_INIT )
+.OS_Task_100ms_Appl10_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Task_100ms_Appl10_VAR_FAST_NOCACHE_START = ADDR(.OS_Task_100ms_Appl10_VAR_FAST_NOCACHE);
+_OS_Task_100ms_Appl10_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Task_100ms_Appl10_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_NOCACHE_NOINIT )
+.OS_Task_100ms_Appl10_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_100ms_Appl10_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Task_100ms_Appl10_VAR_FAST_NOCACHE_NOINIT);
+_OS_Task_100ms_Appl10_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_100ms_Appl10_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_NOCACHE_ZERO_INIT )
+.OS_Task_100ms_Appl10_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_100ms_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_100ms_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_100ms_Appl10_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Task_100ms_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_100ms_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL10
+. = ALIGN(4);
+_OS_Task_100ms_Appl10_VAR_ALL_END = .-1;
+__OS_Task_100ms_Appl10_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL10
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL10_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL10_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL7
+. = ALIGN(4);
+_OS_Task_100ms_Appl7_VAR_ALL_START = .;
+__OS_Task_100ms_Appl7_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_CACHE_INIT )
+.OS_Task_100ms_Appl7_VAR ALIGN(4) :> .
+_OS_Task_100ms_Appl7_VAR_START = ADDR(.OS_Task_100ms_Appl7_VAR);
+_OS_Task_100ms_Appl7_VAR_END = ENDADDR(.OS_Task_100ms_Appl7_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_CACHE_NOINIT )
+.OS_Task_100ms_Appl7_VAR_NOINIT ALIGN(4) :> .
+_OS_Task_100ms_Appl7_VAR_NOINIT_START = ADDR(.OS_Task_100ms_Appl7_VAR_NOINIT);
+_OS_Task_100ms_Appl7_VAR_NOINIT_END = ENDADDR(.OS_Task_100ms_Appl7_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_CACHE_ZERO_INIT )
+.OS_Task_100ms_Appl7_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Task_100ms_Appl7_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Task_100ms_Appl7_VAR_ZERO_INIT_START = ADDR(.OS_Task_100ms_Appl7_VAR_ZERO_INIT);
+_OS_Task_100ms_Appl7_VAR_ZERO_INIT_END = ENDADDR(.OS_Task_100ms_Appl7_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_CACHE_INIT )
+.OS_Task_100ms_Appl7_VAR_FAST ALIGN(4) :> .
+_OS_Task_100ms_Appl7_VAR_FAST_START = ADDR(.OS_Task_100ms_Appl7_VAR_FAST);
+_OS_Task_100ms_Appl7_VAR_FAST_END = ENDADDR(.OS_Task_100ms_Appl7_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_CACHE_NOINIT )
+.OS_Task_100ms_Appl7_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Task_100ms_Appl7_VAR_FAST_NOINIT_START = ADDR(.OS_Task_100ms_Appl7_VAR_FAST_NOINIT);
+_OS_Task_100ms_Appl7_VAR_FAST_NOINIT_END = ENDADDR(.OS_Task_100ms_Appl7_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_CACHE_ZERO_INIT )
+.OS_Task_100ms_Appl7_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Task_100ms_Appl7_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Task_100ms_Appl7_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Task_100ms_Appl7_VAR_FAST_ZERO_INIT);
+_OS_Task_100ms_Appl7_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Task_100ms_Appl7_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_NOCACHE_INIT )
+.OS_Task_100ms_Appl7_VAR_NOCACHE ALIGN(4) :> .
+_OS_Task_100ms_Appl7_VAR_NOCACHE_START = ADDR(.OS_Task_100ms_Appl7_VAR_NOCACHE);
+_OS_Task_100ms_Appl7_VAR_NOCACHE_END = ENDADDR(.OS_Task_100ms_Appl7_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_NOCACHE_NOINIT )
+.OS_Task_100ms_Appl7_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_100ms_Appl7_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Task_100ms_Appl7_VAR_NOCACHE_NOINIT);
+_OS_Task_100ms_Appl7_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_100ms_Appl7_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_NOCACHE_ZERO_INIT )
+.OS_Task_100ms_Appl7_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_100ms_Appl7_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_100ms_Appl7_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_100ms_Appl7_VAR_NOCACHE_ZERO_INIT);
+_OS_Task_100ms_Appl7_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_100ms_Appl7_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_NOCACHE_INIT )
+.OS_Task_100ms_Appl7_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Task_100ms_Appl7_VAR_FAST_NOCACHE_START = ADDR(.OS_Task_100ms_Appl7_VAR_FAST_NOCACHE);
+_OS_Task_100ms_Appl7_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Task_100ms_Appl7_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_NOCACHE_NOINIT )
+.OS_Task_100ms_Appl7_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_100ms_Appl7_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Task_100ms_Appl7_VAR_FAST_NOCACHE_NOINIT);
+_OS_Task_100ms_Appl7_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_100ms_Appl7_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_NOCACHE_ZERO_INIT )
+.OS_Task_100ms_Appl7_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_100ms_Appl7_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_100ms_Appl7_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_100ms_Appl7_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Task_100ms_Appl7_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_100ms_Appl7_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL7
+. = ALIGN(4);
+_OS_Task_100ms_Appl7_VAR_ALL_END = .-1;
+__OS_Task_100ms_Appl7_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL7
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL7_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL7_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL9
+. = ALIGN(4);
+_OS_Task_100ms_Appl9_VAR_ALL_START = .;
+__OS_Task_100ms_Appl9_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_CACHE_INIT )
+.OS_Task_100ms_Appl9_VAR ALIGN(4) :> .
+_OS_Task_100ms_Appl9_VAR_START = ADDR(.OS_Task_100ms_Appl9_VAR);
+_OS_Task_100ms_Appl9_VAR_END = ENDADDR(.OS_Task_100ms_Appl9_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_CACHE_NOINIT )
+.OS_Task_100ms_Appl9_VAR_NOINIT ALIGN(4) :> .
+_OS_Task_100ms_Appl9_VAR_NOINIT_START = ADDR(.OS_Task_100ms_Appl9_VAR_NOINIT);
+_OS_Task_100ms_Appl9_VAR_NOINIT_END = ENDADDR(.OS_Task_100ms_Appl9_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_CACHE_ZERO_INIT )
+.OS_Task_100ms_Appl9_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Task_100ms_Appl9_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Task_100ms_Appl9_VAR_ZERO_INIT_START = ADDR(.OS_Task_100ms_Appl9_VAR_ZERO_INIT);
+_OS_Task_100ms_Appl9_VAR_ZERO_INIT_END = ENDADDR(.OS_Task_100ms_Appl9_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_CACHE_INIT )
+.OS_Task_100ms_Appl9_VAR_FAST ALIGN(4) :> .
+_OS_Task_100ms_Appl9_VAR_FAST_START = ADDR(.OS_Task_100ms_Appl9_VAR_FAST);
+_OS_Task_100ms_Appl9_VAR_FAST_END = ENDADDR(.OS_Task_100ms_Appl9_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_CACHE_NOINIT )
+.OS_Task_100ms_Appl9_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Task_100ms_Appl9_VAR_FAST_NOINIT_START = ADDR(.OS_Task_100ms_Appl9_VAR_FAST_NOINIT);
+_OS_Task_100ms_Appl9_VAR_FAST_NOINIT_END = ENDADDR(.OS_Task_100ms_Appl9_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_CACHE_ZERO_INIT )
+.OS_Task_100ms_Appl9_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Task_100ms_Appl9_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Task_100ms_Appl9_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Task_100ms_Appl9_VAR_FAST_ZERO_INIT);
+_OS_Task_100ms_Appl9_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Task_100ms_Appl9_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_NOCACHE_INIT )
+.OS_Task_100ms_Appl9_VAR_NOCACHE ALIGN(4) :> .
+_OS_Task_100ms_Appl9_VAR_NOCACHE_START = ADDR(.OS_Task_100ms_Appl9_VAR_NOCACHE);
+_OS_Task_100ms_Appl9_VAR_NOCACHE_END = ENDADDR(.OS_Task_100ms_Appl9_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_NOCACHE_NOINIT )
+.OS_Task_100ms_Appl9_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_100ms_Appl9_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Task_100ms_Appl9_VAR_NOCACHE_NOINIT);
+_OS_Task_100ms_Appl9_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_100ms_Appl9_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_NOCACHE_ZERO_INIT )
+.OS_Task_100ms_Appl9_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_100ms_Appl9_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_100ms_Appl9_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_100ms_Appl9_VAR_NOCACHE_ZERO_INIT);
+_OS_Task_100ms_Appl9_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_100ms_Appl9_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_NOCACHE_INIT )
+.OS_Task_100ms_Appl9_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Task_100ms_Appl9_VAR_FAST_NOCACHE_START = ADDR(.OS_Task_100ms_Appl9_VAR_FAST_NOCACHE);
+_OS_Task_100ms_Appl9_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Task_100ms_Appl9_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_NOCACHE_NOINIT )
+.OS_Task_100ms_Appl9_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_100ms_Appl9_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Task_100ms_Appl9_VAR_FAST_NOCACHE_NOINIT);
+_OS_Task_100ms_Appl9_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_100ms_Appl9_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_NOCACHE_ZERO_INIT )
+.OS_Task_100ms_Appl9_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_100ms_Appl9_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_100ms_Appl9_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_100ms_Appl9_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Task_100ms_Appl9_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_100ms_Appl9_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL9
+. = ALIGN(4);
+_OS_Task_100ms_Appl9_VAR_ALL_END = .-1;
+__OS_Task_100ms_Appl9_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL9
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL9_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_100MS_APPL9_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10
+. = ALIGN(4);
+_OS_Task_10msBsw_Appl10_VAR_ALL_START = .;
+__OS_Task_10msBsw_Appl10_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_CACHE_INIT )
+.OS_Task_10msBsw_Appl10_VAR ALIGN(4) :> .
+_OS_Task_10msBsw_Appl10_VAR_START = ADDR(.OS_Task_10msBsw_Appl10_VAR);
+_OS_Task_10msBsw_Appl10_VAR_END = ENDADDR(.OS_Task_10msBsw_Appl10_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_CACHE_NOINIT )
+.OS_Task_10msBsw_Appl10_VAR_NOINIT ALIGN(4) :> .
+_OS_Task_10msBsw_Appl10_VAR_NOINIT_START = ADDR(.OS_Task_10msBsw_Appl10_VAR_NOINIT);
+_OS_Task_10msBsw_Appl10_VAR_NOINIT_END = ENDADDR(.OS_Task_10msBsw_Appl10_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_CACHE_ZERO_INIT )
+.OS_Task_10msBsw_Appl10_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Task_10msBsw_Appl10_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Task_10msBsw_Appl10_VAR_ZERO_INIT_START = ADDR(.OS_Task_10msBsw_Appl10_VAR_ZERO_INIT);
+_OS_Task_10msBsw_Appl10_VAR_ZERO_INIT_END = ENDADDR(.OS_Task_10msBsw_Appl10_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_CACHE_INIT )
+.OS_Task_10msBsw_Appl10_VAR_FAST ALIGN(4) :> .
+_OS_Task_10msBsw_Appl10_VAR_FAST_START = ADDR(.OS_Task_10msBsw_Appl10_VAR_FAST);
+_OS_Task_10msBsw_Appl10_VAR_FAST_END = ENDADDR(.OS_Task_10msBsw_Appl10_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_CACHE_NOINIT )
+.OS_Task_10msBsw_Appl10_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Task_10msBsw_Appl10_VAR_FAST_NOINIT_START = ADDR(.OS_Task_10msBsw_Appl10_VAR_FAST_NOINIT);
+_OS_Task_10msBsw_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.OS_Task_10msBsw_Appl10_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_CACHE_ZERO_INIT )
+.OS_Task_10msBsw_Appl10_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Task_10msBsw_Appl10_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Task_10msBsw_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Task_10msBsw_Appl10_VAR_FAST_ZERO_INIT);
+_OS_Task_10msBsw_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Task_10msBsw_Appl10_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_NOCACHE_INIT )
+.OS_Task_10msBsw_Appl10_VAR_NOCACHE ALIGN(4) :> .
+_OS_Task_10msBsw_Appl10_VAR_NOCACHE_START = ADDR(.OS_Task_10msBsw_Appl10_VAR_NOCACHE);
+_OS_Task_10msBsw_Appl10_VAR_NOCACHE_END = ENDADDR(.OS_Task_10msBsw_Appl10_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_NOCACHE_NOINIT )
+.OS_Task_10msBsw_Appl10_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_10msBsw_Appl10_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Task_10msBsw_Appl10_VAR_NOCACHE_NOINIT);
+_OS_Task_10msBsw_Appl10_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_10msBsw_Appl10_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_NOCACHE_ZERO_INIT )
+.OS_Task_10msBsw_Appl10_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_10msBsw_Appl10_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_10msBsw_Appl10_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_10msBsw_Appl10_VAR_NOCACHE_ZERO_INIT);
+_OS_Task_10msBsw_Appl10_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_10msBsw_Appl10_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_NOCACHE_INIT )
+.OS_Task_10msBsw_Appl10_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Task_10msBsw_Appl10_VAR_FAST_NOCACHE_START = ADDR(.OS_Task_10msBsw_Appl10_VAR_FAST_NOCACHE);
+_OS_Task_10msBsw_Appl10_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Task_10msBsw_Appl10_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_NOCACHE_NOINIT )
+.OS_Task_10msBsw_Appl10_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_10msBsw_Appl10_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Task_10msBsw_Appl10_VAR_FAST_NOCACHE_NOINIT);
+_OS_Task_10msBsw_Appl10_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_10msBsw_Appl10_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_NOCACHE_ZERO_INIT )
+.OS_Task_10msBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_10msBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_10msBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_10msBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Task_10msBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_10msBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10
+. = ALIGN(4);
+_OS_Task_10msBsw_Appl10_VAR_ALL_END = .-1;
+__OS_Task_10msBsw_Appl10_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR
+# undef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR
+# undef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MSBSW_APPL10_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL10
+. = ALIGN(4);
+_OS_Task_10ms_Appl10_VAR_ALL_START = .;
+__OS_Task_10ms_Appl10_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_CACHE_INIT )
+.OS_Task_10ms_Appl10_VAR ALIGN(4) :> .
+_OS_Task_10ms_Appl10_VAR_START = ADDR(.OS_Task_10ms_Appl10_VAR);
+_OS_Task_10ms_Appl10_VAR_END = ENDADDR(.OS_Task_10ms_Appl10_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_CACHE_NOINIT )
+.OS_Task_10ms_Appl10_VAR_NOINIT ALIGN(4) :> .
+_OS_Task_10ms_Appl10_VAR_NOINIT_START = ADDR(.OS_Task_10ms_Appl10_VAR_NOINIT);
+_OS_Task_10ms_Appl10_VAR_NOINIT_END = ENDADDR(.OS_Task_10ms_Appl10_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_CACHE_ZERO_INIT )
+.OS_Task_10ms_Appl10_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Task_10ms_Appl10_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Task_10ms_Appl10_VAR_ZERO_INIT_START = ADDR(.OS_Task_10ms_Appl10_VAR_ZERO_INIT);
+_OS_Task_10ms_Appl10_VAR_ZERO_INIT_END = ENDADDR(.OS_Task_10ms_Appl10_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_CACHE_INIT )
+.OS_Task_10ms_Appl10_VAR_FAST ALIGN(4) :> .
+_OS_Task_10ms_Appl10_VAR_FAST_START = ADDR(.OS_Task_10ms_Appl10_VAR_FAST);
+_OS_Task_10ms_Appl10_VAR_FAST_END = ENDADDR(.OS_Task_10ms_Appl10_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_CACHE_NOINIT )
+.OS_Task_10ms_Appl10_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Task_10ms_Appl10_VAR_FAST_NOINIT_START = ADDR(.OS_Task_10ms_Appl10_VAR_FAST_NOINIT);
+_OS_Task_10ms_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.OS_Task_10ms_Appl10_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_CACHE_ZERO_INIT )
+.OS_Task_10ms_Appl10_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Task_10ms_Appl10_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Task_10ms_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Task_10ms_Appl10_VAR_FAST_ZERO_INIT);
+_OS_Task_10ms_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Task_10ms_Appl10_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_NOCACHE_INIT )
+.OS_Task_10ms_Appl10_VAR_NOCACHE ALIGN(4) :> .
+_OS_Task_10ms_Appl10_VAR_NOCACHE_START = ADDR(.OS_Task_10ms_Appl10_VAR_NOCACHE);
+_OS_Task_10ms_Appl10_VAR_NOCACHE_END = ENDADDR(.OS_Task_10ms_Appl10_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_NOCACHE_NOINIT )
+.OS_Task_10ms_Appl10_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_10ms_Appl10_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Task_10ms_Appl10_VAR_NOCACHE_NOINIT);
+_OS_Task_10ms_Appl10_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_10ms_Appl10_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_NOCACHE_ZERO_INIT )
+.OS_Task_10ms_Appl10_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_10ms_Appl10_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_10ms_Appl10_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_10ms_Appl10_VAR_NOCACHE_ZERO_INIT);
+_OS_Task_10ms_Appl10_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_10ms_Appl10_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_NOCACHE_INIT )
+.OS_Task_10ms_Appl10_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Task_10ms_Appl10_VAR_FAST_NOCACHE_START = ADDR(.OS_Task_10ms_Appl10_VAR_FAST_NOCACHE);
+_OS_Task_10ms_Appl10_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Task_10ms_Appl10_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_NOCACHE_NOINIT )
+.OS_Task_10ms_Appl10_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_10ms_Appl10_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Task_10ms_Appl10_VAR_FAST_NOCACHE_NOINIT);
+_OS_Task_10ms_Appl10_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_10ms_Appl10_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_NOCACHE_ZERO_INIT )
+.OS_Task_10ms_Appl10_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_10ms_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_10ms_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_10ms_Appl10_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Task_10ms_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_10ms_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL10
+. = ALIGN(4);
+_OS_Task_10ms_Appl10_VAR_ALL_END = .-1;
+__OS_Task_10ms_Appl10_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL10
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL10_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL10_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL7
+. = ALIGN(4);
+_OS_Task_10ms_Appl7_VAR_ALL_START = .;
+__OS_Task_10ms_Appl7_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_CACHE_INIT )
+.OS_Task_10ms_Appl7_VAR ALIGN(4) :> .
+_OS_Task_10ms_Appl7_VAR_START = ADDR(.OS_Task_10ms_Appl7_VAR);
+_OS_Task_10ms_Appl7_VAR_END = ENDADDR(.OS_Task_10ms_Appl7_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_CACHE_NOINIT )
+.OS_Task_10ms_Appl7_VAR_NOINIT ALIGN(4) :> .
+_OS_Task_10ms_Appl7_VAR_NOINIT_START = ADDR(.OS_Task_10ms_Appl7_VAR_NOINIT);
+_OS_Task_10ms_Appl7_VAR_NOINIT_END = ENDADDR(.OS_Task_10ms_Appl7_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_CACHE_ZERO_INIT )
+.OS_Task_10ms_Appl7_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Task_10ms_Appl7_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Task_10ms_Appl7_VAR_ZERO_INIT_START = ADDR(.OS_Task_10ms_Appl7_VAR_ZERO_INIT);
+_OS_Task_10ms_Appl7_VAR_ZERO_INIT_END = ENDADDR(.OS_Task_10ms_Appl7_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_CACHE_INIT )
+.OS_Task_10ms_Appl7_VAR_FAST ALIGN(4) :> .
+_OS_Task_10ms_Appl7_VAR_FAST_START = ADDR(.OS_Task_10ms_Appl7_VAR_FAST);
+_OS_Task_10ms_Appl7_VAR_FAST_END = ENDADDR(.OS_Task_10ms_Appl7_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_CACHE_NOINIT )
+.OS_Task_10ms_Appl7_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Task_10ms_Appl7_VAR_FAST_NOINIT_START = ADDR(.OS_Task_10ms_Appl7_VAR_FAST_NOINIT);
+_OS_Task_10ms_Appl7_VAR_FAST_NOINIT_END = ENDADDR(.OS_Task_10ms_Appl7_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_CACHE_ZERO_INIT )
+.OS_Task_10ms_Appl7_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Task_10ms_Appl7_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Task_10ms_Appl7_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Task_10ms_Appl7_VAR_FAST_ZERO_INIT);
+_OS_Task_10ms_Appl7_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Task_10ms_Appl7_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_NOCACHE_INIT )
+.OS_Task_10ms_Appl7_VAR_NOCACHE ALIGN(4) :> .
+_OS_Task_10ms_Appl7_VAR_NOCACHE_START = ADDR(.OS_Task_10ms_Appl7_VAR_NOCACHE);
+_OS_Task_10ms_Appl7_VAR_NOCACHE_END = ENDADDR(.OS_Task_10ms_Appl7_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_NOCACHE_NOINIT )
+.OS_Task_10ms_Appl7_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_10ms_Appl7_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Task_10ms_Appl7_VAR_NOCACHE_NOINIT);
+_OS_Task_10ms_Appl7_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_10ms_Appl7_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_NOCACHE_ZERO_INIT )
+.OS_Task_10ms_Appl7_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_10ms_Appl7_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_10ms_Appl7_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_10ms_Appl7_VAR_NOCACHE_ZERO_INIT);
+_OS_Task_10ms_Appl7_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_10ms_Appl7_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_NOCACHE_INIT )
+.OS_Task_10ms_Appl7_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Task_10ms_Appl7_VAR_FAST_NOCACHE_START = ADDR(.OS_Task_10ms_Appl7_VAR_FAST_NOCACHE);
+_OS_Task_10ms_Appl7_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Task_10ms_Appl7_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_NOCACHE_NOINIT )
+.OS_Task_10ms_Appl7_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_10ms_Appl7_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Task_10ms_Appl7_VAR_FAST_NOCACHE_NOINIT);
+_OS_Task_10ms_Appl7_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_10ms_Appl7_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_NOCACHE_ZERO_INIT )
+.OS_Task_10ms_Appl7_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_10ms_Appl7_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_10ms_Appl7_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_10ms_Appl7_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Task_10ms_Appl7_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_10ms_Appl7_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL7
+. = ALIGN(4);
+_OS_Task_10ms_Appl7_VAR_ALL_END = .-1;
+__OS_Task_10ms_Appl7_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL7
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL7_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL7_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL8
+. = ALIGN(4);
+_OS_Task_10ms_Appl8_VAR_ALL_START = .;
+__OS_Task_10ms_Appl8_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_CACHE_INIT )
+.OS_Task_10ms_Appl8_VAR ALIGN(4) :> .
+_OS_Task_10ms_Appl8_VAR_START = ADDR(.OS_Task_10ms_Appl8_VAR);
+_OS_Task_10ms_Appl8_VAR_END = ENDADDR(.OS_Task_10ms_Appl8_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_CACHE_NOINIT )
+.OS_Task_10ms_Appl8_VAR_NOINIT ALIGN(4) :> .
+_OS_Task_10ms_Appl8_VAR_NOINIT_START = ADDR(.OS_Task_10ms_Appl8_VAR_NOINIT);
+_OS_Task_10ms_Appl8_VAR_NOINIT_END = ENDADDR(.OS_Task_10ms_Appl8_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_CACHE_ZERO_INIT )
+.OS_Task_10ms_Appl8_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Task_10ms_Appl8_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Task_10ms_Appl8_VAR_ZERO_INIT_START = ADDR(.OS_Task_10ms_Appl8_VAR_ZERO_INIT);
+_OS_Task_10ms_Appl8_VAR_ZERO_INIT_END = ENDADDR(.OS_Task_10ms_Appl8_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_CACHE_INIT )
+.OS_Task_10ms_Appl8_VAR_FAST ALIGN(4) :> .
+_OS_Task_10ms_Appl8_VAR_FAST_START = ADDR(.OS_Task_10ms_Appl8_VAR_FAST);
+_OS_Task_10ms_Appl8_VAR_FAST_END = ENDADDR(.OS_Task_10ms_Appl8_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_CACHE_NOINIT )
+.OS_Task_10ms_Appl8_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Task_10ms_Appl8_VAR_FAST_NOINIT_START = ADDR(.OS_Task_10ms_Appl8_VAR_FAST_NOINIT);
+_OS_Task_10ms_Appl8_VAR_FAST_NOINIT_END = ENDADDR(.OS_Task_10ms_Appl8_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_CACHE_ZERO_INIT )
+.OS_Task_10ms_Appl8_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Task_10ms_Appl8_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Task_10ms_Appl8_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Task_10ms_Appl8_VAR_FAST_ZERO_INIT);
+_OS_Task_10ms_Appl8_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Task_10ms_Appl8_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_NOCACHE_INIT )
+.OS_Task_10ms_Appl8_VAR_NOCACHE ALIGN(4) :> .
+_OS_Task_10ms_Appl8_VAR_NOCACHE_START = ADDR(.OS_Task_10ms_Appl8_VAR_NOCACHE);
+_OS_Task_10ms_Appl8_VAR_NOCACHE_END = ENDADDR(.OS_Task_10ms_Appl8_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_NOCACHE_NOINIT )
+.OS_Task_10ms_Appl8_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_10ms_Appl8_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Task_10ms_Appl8_VAR_NOCACHE_NOINIT);
+_OS_Task_10ms_Appl8_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_10ms_Appl8_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_NOCACHE_ZERO_INIT )
+.OS_Task_10ms_Appl8_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_10ms_Appl8_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_10ms_Appl8_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_10ms_Appl8_VAR_NOCACHE_ZERO_INIT);
+_OS_Task_10ms_Appl8_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_10ms_Appl8_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_NOCACHE_INIT )
+.OS_Task_10ms_Appl8_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Task_10ms_Appl8_VAR_FAST_NOCACHE_START = ADDR(.OS_Task_10ms_Appl8_VAR_FAST_NOCACHE);
+_OS_Task_10ms_Appl8_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Task_10ms_Appl8_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_NOCACHE_NOINIT )
+.OS_Task_10ms_Appl8_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_10ms_Appl8_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Task_10ms_Appl8_VAR_FAST_NOCACHE_NOINIT);
+_OS_Task_10ms_Appl8_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_10ms_Appl8_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_NOCACHE_ZERO_INIT )
+.OS_Task_10ms_Appl8_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_10ms_Appl8_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_10ms_Appl8_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_10ms_Appl8_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Task_10ms_Appl8_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_10ms_Appl8_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL8
+. = ALIGN(4);
+_OS_Task_10ms_Appl8_VAR_ALL_END = .-1;
+__OS_Task_10ms_Appl8_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL8
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL8_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL8_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL9
+. = ALIGN(4);
+_OS_Task_10ms_Appl9_VAR_ALL_START = .;
+__OS_Task_10ms_Appl9_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_CACHE_INIT )
+.OS_Task_10ms_Appl9_VAR ALIGN(4) :> .
+_OS_Task_10ms_Appl9_VAR_START = ADDR(.OS_Task_10ms_Appl9_VAR);
+_OS_Task_10ms_Appl9_VAR_END = ENDADDR(.OS_Task_10ms_Appl9_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_CACHE_NOINIT )
+.OS_Task_10ms_Appl9_VAR_NOINIT ALIGN(4) :> .
+_OS_Task_10ms_Appl9_VAR_NOINIT_START = ADDR(.OS_Task_10ms_Appl9_VAR_NOINIT);
+_OS_Task_10ms_Appl9_VAR_NOINIT_END = ENDADDR(.OS_Task_10ms_Appl9_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_CACHE_ZERO_INIT )
+.OS_Task_10ms_Appl9_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Task_10ms_Appl9_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Task_10ms_Appl9_VAR_ZERO_INIT_START = ADDR(.OS_Task_10ms_Appl9_VAR_ZERO_INIT);
+_OS_Task_10ms_Appl9_VAR_ZERO_INIT_END = ENDADDR(.OS_Task_10ms_Appl9_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_CACHE_INIT )
+.OS_Task_10ms_Appl9_VAR_FAST ALIGN(4) :> .
+_OS_Task_10ms_Appl9_VAR_FAST_START = ADDR(.OS_Task_10ms_Appl9_VAR_FAST);
+_OS_Task_10ms_Appl9_VAR_FAST_END = ENDADDR(.OS_Task_10ms_Appl9_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_CACHE_NOINIT )
+.OS_Task_10ms_Appl9_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Task_10ms_Appl9_VAR_FAST_NOINIT_START = ADDR(.OS_Task_10ms_Appl9_VAR_FAST_NOINIT);
+_OS_Task_10ms_Appl9_VAR_FAST_NOINIT_END = ENDADDR(.OS_Task_10ms_Appl9_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_CACHE_ZERO_INIT )
+.OS_Task_10ms_Appl9_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Task_10ms_Appl9_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Task_10ms_Appl9_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Task_10ms_Appl9_VAR_FAST_ZERO_INIT);
+_OS_Task_10ms_Appl9_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Task_10ms_Appl9_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_NOCACHE_INIT )
+.OS_Task_10ms_Appl9_VAR_NOCACHE ALIGN(4) :> .
+_OS_Task_10ms_Appl9_VAR_NOCACHE_START = ADDR(.OS_Task_10ms_Appl9_VAR_NOCACHE);
+_OS_Task_10ms_Appl9_VAR_NOCACHE_END = ENDADDR(.OS_Task_10ms_Appl9_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_NOCACHE_NOINIT )
+.OS_Task_10ms_Appl9_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_10ms_Appl9_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Task_10ms_Appl9_VAR_NOCACHE_NOINIT);
+_OS_Task_10ms_Appl9_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_10ms_Appl9_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_NOCACHE_ZERO_INIT )
+.OS_Task_10ms_Appl9_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_10ms_Appl9_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_10ms_Appl9_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_10ms_Appl9_VAR_NOCACHE_ZERO_INIT);
+_OS_Task_10ms_Appl9_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_10ms_Appl9_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_NOCACHE_INIT )
+.OS_Task_10ms_Appl9_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Task_10ms_Appl9_VAR_FAST_NOCACHE_START = ADDR(.OS_Task_10ms_Appl9_VAR_FAST_NOCACHE);
+_OS_Task_10ms_Appl9_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Task_10ms_Appl9_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_NOCACHE_NOINIT )
+.OS_Task_10ms_Appl9_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_10ms_Appl9_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Task_10ms_Appl9_VAR_FAST_NOCACHE_NOINIT);
+_OS_Task_10ms_Appl9_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_10ms_Appl9_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_NOCACHE_ZERO_INIT )
+.OS_Task_10ms_Appl9_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_10ms_Appl9_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_10ms_Appl9_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_10ms_Appl9_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Task_10ms_Appl9_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_10ms_Appl9_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL9
+. = ALIGN(4);
+_OS_Task_10ms_Appl9_VAR_ALL_END = .-1;
+__OS_Task_10ms_Appl9_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL9
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL9_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_10MS_APPL9_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSA_APPL10
+. = ALIGN(4);
+_OS_Task_2msA_Appl10_VAR_ALL_START = .;
+__OS_Task_2msA_Appl10_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_CACHE_INIT )
+.OS_Task_2msA_Appl10_VAR ALIGN(4) :> .
+_OS_Task_2msA_Appl10_VAR_START = ADDR(.OS_Task_2msA_Appl10_VAR);
+_OS_Task_2msA_Appl10_VAR_END = ENDADDR(.OS_Task_2msA_Appl10_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_CACHE_NOINIT )
+.OS_Task_2msA_Appl10_VAR_NOINIT ALIGN(4) :> .
+_OS_Task_2msA_Appl10_VAR_NOINIT_START = ADDR(.OS_Task_2msA_Appl10_VAR_NOINIT);
+_OS_Task_2msA_Appl10_VAR_NOINIT_END = ENDADDR(.OS_Task_2msA_Appl10_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_CACHE_ZERO_INIT )
+.OS_Task_2msA_Appl10_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Task_2msA_Appl10_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Task_2msA_Appl10_VAR_ZERO_INIT_START = ADDR(.OS_Task_2msA_Appl10_VAR_ZERO_INIT);
+_OS_Task_2msA_Appl10_VAR_ZERO_INIT_END = ENDADDR(.OS_Task_2msA_Appl10_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_CACHE_INIT )
+.OS_Task_2msA_Appl10_VAR_FAST ALIGN(4) :> .
+_OS_Task_2msA_Appl10_VAR_FAST_START = ADDR(.OS_Task_2msA_Appl10_VAR_FAST);
+_OS_Task_2msA_Appl10_VAR_FAST_END = ENDADDR(.OS_Task_2msA_Appl10_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_CACHE_NOINIT )
+.OS_Task_2msA_Appl10_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Task_2msA_Appl10_VAR_FAST_NOINIT_START = ADDR(.OS_Task_2msA_Appl10_VAR_FAST_NOINIT);
+_OS_Task_2msA_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.OS_Task_2msA_Appl10_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_CACHE_ZERO_INIT )
+.OS_Task_2msA_Appl10_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Task_2msA_Appl10_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Task_2msA_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Task_2msA_Appl10_VAR_FAST_ZERO_INIT);
+_OS_Task_2msA_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Task_2msA_Appl10_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_NOCACHE_INIT )
+.OS_Task_2msA_Appl10_VAR_NOCACHE ALIGN(4) :> .
+_OS_Task_2msA_Appl10_VAR_NOCACHE_START = ADDR(.OS_Task_2msA_Appl10_VAR_NOCACHE);
+_OS_Task_2msA_Appl10_VAR_NOCACHE_END = ENDADDR(.OS_Task_2msA_Appl10_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_NOCACHE_NOINIT )
+.OS_Task_2msA_Appl10_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_2msA_Appl10_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Task_2msA_Appl10_VAR_NOCACHE_NOINIT);
+_OS_Task_2msA_Appl10_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_2msA_Appl10_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_NOCACHE_ZERO_INIT )
+.OS_Task_2msA_Appl10_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_2msA_Appl10_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_2msA_Appl10_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_2msA_Appl10_VAR_NOCACHE_ZERO_INIT);
+_OS_Task_2msA_Appl10_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_2msA_Appl10_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_NOCACHE_INIT )
+.OS_Task_2msA_Appl10_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Task_2msA_Appl10_VAR_FAST_NOCACHE_START = ADDR(.OS_Task_2msA_Appl10_VAR_FAST_NOCACHE);
+_OS_Task_2msA_Appl10_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Task_2msA_Appl10_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_NOCACHE_NOINIT )
+.OS_Task_2msA_Appl10_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_2msA_Appl10_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Task_2msA_Appl10_VAR_FAST_NOCACHE_NOINIT);
+_OS_Task_2msA_Appl10_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_2msA_Appl10_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_NOCACHE_ZERO_INIT )
+.OS_Task_2msA_Appl10_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_2msA_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_2msA_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_2msA_Appl10_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Task_2msA_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_2msA_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSA_APPL10
+. = ALIGN(4);
+_OS_Task_2msA_Appl10_VAR_ALL_END = .-1;
+__OS_Task_2msA_Appl10_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_TASK_TASK_2MSA_APPL10
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR
+# undef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR
+# undef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MSA_APPL10_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSB_APPL10
+. = ALIGN(4);
+_OS_Task_2msB_Appl10_VAR_ALL_START = .;
+__OS_Task_2msB_Appl10_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_CACHE_INIT )
+.OS_Task_2msB_Appl10_VAR ALIGN(4) :> .
+_OS_Task_2msB_Appl10_VAR_START = ADDR(.OS_Task_2msB_Appl10_VAR);
+_OS_Task_2msB_Appl10_VAR_END = ENDADDR(.OS_Task_2msB_Appl10_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_CACHE_NOINIT )
+.OS_Task_2msB_Appl10_VAR_NOINIT ALIGN(4) :> .
+_OS_Task_2msB_Appl10_VAR_NOINIT_START = ADDR(.OS_Task_2msB_Appl10_VAR_NOINIT);
+_OS_Task_2msB_Appl10_VAR_NOINIT_END = ENDADDR(.OS_Task_2msB_Appl10_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_CACHE_ZERO_INIT )
+.OS_Task_2msB_Appl10_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Task_2msB_Appl10_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Task_2msB_Appl10_VAR_ZERO_INIT_START = ADDR(.OS_Task_2msB_Appl10_VAR_ZERO_INIT);
+_OS_Task_2msB_Appl10_VAR_ZERO_INIT_END = ENDADDR(.OS_Task_2msB_Appl10_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_CACHE_INIT )
+.OS_Task_2msB_Appl10_VAR_FAST ALIGN(4) :> .
+_OS_Task_2msB_Appl10_VAR_FAST_START = ADDR(.OS_Task_2msB_Appl10_VAR_FAST);
+_OS_Task_2msB_Appl10_VAR_FAST_END = ENDADDR(.OS_Task_2msB_Appl10_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_CACHE_NOINIT )
+.OS_Task_2msB_Appl10_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Task_2msB_Appl10_VAR_FAST_NOINIT_START = ADDR(.OS_Task_2msB_Appl10_VAR_FAST_NOINIT);
+_OS_Task_2msB_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.OS_Task_2msB_Appl10_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_CACHE_ZERO_INIT )
+.OS_Task_2msB_Appl10_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Task_2msB_Appl10_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Task_2msB_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Task_2msB_Appl10_VAR_FAST_ZERO_INIT);
+_OS_Task_2msB_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Task_2msB_Appl10_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_NOCACHE_INIT )
+.OS_Task_2msB_Appl10_VAR_NOCACHE ALIGN(4) :> .
+_OS_Task_2msB_Appl10_VAR_NOCACHE_START = ADDR(.OS_Task_2msB_Appl10_VAR_NOCACHE);
+_OS_Task_2msB_Appl10_VAR_NOCACHE_END = ENDADDR(.OS_Task_2msB_Appl10_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_NOCACHE_NOINIT )
+.OS_Task_2msB_Appl10_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_2msB_Appl10_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Task_2msB_Appl10_VAR_NOCACHE_NOINIT);
+_OS_Task_2msB_Appl10_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_2msB_Appl10_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_NOCACHE_ZERO_INIT )
+.OS_Task_2msB_Appl10_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_2msB_Appl10_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_2msB_Appl10_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_2msB_Appl10_VAR_NOCACHE_ZERO_INIT);
+_OS_Task_2msB_Appl10_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_2msB_Appl10_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_NOCACHE_INIT )
+.OS_Task_2msB_Appl10_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Task_2msB_Appl10_VAR_FAST_NOCACHE_START = ADDR(.OS_Task_2msB_Appl10_VAR_FAST_NOCACHE);
+_OS_Task_2msB_Appl10_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Task_2msB_Appl10_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_NOCACHE_NOINIT )
+.OS_Task_2msB_Appl10_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_2msB_Appl10_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Task_2msB_Appl10_VAR_FAST_NOCACHE_NOINIT);
+_OS_Task_2msB_Appl10_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_2msB_Appl10_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_NOCACHE_ZERO_INIT )
+.OS_Task_2msB_Appl10_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_2msB_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_2msB_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_2msB_Appl10_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Task_2msB_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_2msB_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSB_APPL10
+. = ALIGN(4);
+_OS_Task_2msB_Appl10_VAR_ALL_END = .-1;
+__OS_Task_2msB_Appl10_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_TASK_TASK_2MSB_APPL10
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR
+# undef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR
+# undef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MSB_APPL10_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10
+. = ALIGN(4);
+_OS_Task_2msTmplMonr_Appl10_VAR_ALL_START = .;
+__OS_Task_2msTmplMonr_Appl10_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_CACHE_INIT )
+.OS_Task_2msTmplMonr_Appl10_VAR ALIGN(4) :> .
+_OS_Task_2msTmplMonr_Appl10_VAR_START = ADDR(.OS_Task_2msTmplMonr_Appl10_VAR);
+_OS_Task_2msTmplMonr_Appl10_VAR_END = ENDADDR(.OS_Task_2msTmplMonr_Appl10_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_CACHE_NOINIT )
+.OS_Task_2msTmplMonr_Appl10_VAR_NOINIT ALIGN(4) :> .
+_OS_Task_2msTmplMonr_Appl10_VAR_NOINIT_START = ADDR(.OS_Task_2msTmplMonr_Appl10_VAR_NOINIT);
+_OS_Task_2msTmplMonr_Appl10_VAR_NOINIT_END = ENDADDR(.OS_Task_2msTmplMonr_Appl10_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_CACHE_ZERO_INIT )
+.OS_Task_2msTmplMonr_Appl10_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Task_2msTmplMonr_Appl10_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Task_2msTmplMonr_Appl10_VAR_ZERO_INIT_START = ADDR(.OS_Task_2msTmplMonr_Appl10_VAR_ZERO_INIT);
+_OS_Task_2msTmplMonr_Appl10_VAR_ZERO_INIT_END = ENDADDR(.OS_Task_2msTmplMonr_Appl10_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_CACHE_INIT )
+.OS_Task_2msTmplMonr_Appl10_VAR_FAST ALIGN(4) :> .
+_OS_Task_2msTmplMonr_Appl10_VAR_FAST_START = ADDR(.OS_Task_2msTmplMonr_Appl10_VAR_FAST);
+_OS_Task_2msTmplMonr_Appl10_VAR_FAST_END = ENDADDR(.OS_Task_2msTmplMonr_Appl10_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_CACHE_NOINIT )
+.OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOINIT_START = ADDR(.OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOINIT);
+_OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_CACHE_ZERO_INIT )
+.OS_Task_2msTmplMonr_Appl10_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Task_2msTmplMonr_Appl10_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Task_2msTmplMonr_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Task_2msTmplMonr_Appl10_VAR_FAST_ZERO_INIT);
+_OS_Task_2msTmplMonr_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Task_2msTmplMonr_Appl10_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_NOCACHE_INIT )
+.OS_Task_2msTmplMonr_Appl10_VAR_NOCACHE ALIGN(4) :> .
+_OS_Task_2msTmplMonr_Appl10_VAR_NOCACHE_START = ADDR(.OS_Task_2msTmplMonr_Appl10_VAR_NOCACHE);
+_OS_Task_2msTmplMonr_Appl10_VAR_NOCACHE_END = ENDADDR(.OS_Task_2msTmplMonr_Appl10_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_NOCACHE_NOINIT )
+.OS_Task_2msTmplMonr_Appl10_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_2msTmplMonr_Appl10_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Task_2msTmplMonr_Appl10_VAR_NOCACHE_NOINIT);
+_OS_Task_2msTmplMonr_Appl10_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_2msTmplMonr_Appl10_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_NOCACHE_ZERO_INIT )
+.OS_Task_2msTmplMonr_Appl10_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_2msTmplMonr_Appl10_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_2msTmplMonr_Appl10_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_2msTmplMonr_Appl10_VAR_NOCACHE_ZERO_INIT);
+_OS_Task_2msTmplMonr_Appl10_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_2msTmplMonr_Appl10_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_NOCACHE_INIT )
+.OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOCACHE_START = ADDR(.OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOCACHE);
+_OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_NOCACHE_NOINIT )
+.OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOCACHE_NOINIT);
+_OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_NOCACHE_ZERO_INIT )
+.OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_2msTmplMonr_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10
+. = ALIGN(4);
+_OS_Task_2msTmplMonr_Appl10_VAR_ALL_END = .-1;
+__OS_Task_2msTmplMonr_Appl10_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR
+# undef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR
+# undef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MSTMPLMONR_APPL10_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL7
+. = ALIGN(4);
+_OS_Task_2ms_Appl7_VAR_ALL_START = .;
+__OS_Task_2ms_Appl7_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_CACHE_INIT )
+.OS_Task_2ms_Appl7_VAR ALIGN(4) :> .
+_OS_Task_2ms_Appl7_VAR_START = ADDR(.OS_Task_2ms_Appl7_VAR);
+_OS_Task_2ms_Appl7_VAR_END = ENDADDR(.OS_Task_2ms_Appl7_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_CACHE_NOINIT )
+.OS_Task_2ms_Appl7_VAR_NOINIT ALIGN(4) :> .
+_OS_Task_2ms_Appl7_VAR_NOINIT_START = ADDR(.OS_Task_2ms_Appl7_VAR_NOINIT);
+_OS_Task_2ms_Appl7_VAR_NOINIT_END = ENDADDR(.OS_Task_2ms_Appl7_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_CACHE_ZERO_INIT )
+.OS_Task_2ms_Appl7_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Task_2ms_Appl7_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Task_2ms_Appl7_VAR_ZERO_INIT_START = ADDR(.OS_Task_2ms_Appl7_VAR_ZERO_INIT);
+_OS_Task_2ms_Appl7_VAR_ZERO_INIT_END = ENDADDR(.OS_Task_2ms_Appl7_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_CACHE_INIT )
+.OS_Task_2ms_Appl7_VAR_FAST ALIGN(4) :> .
+_OS_Task_2ms_Appl7_VAR_FAST_START = ADDR(.OS_Task_2ms_Appl7_VAR_FAST);
+_OS_Task_2ms_Appl7_VAR_FAST_END = ENDADDR(.OS_Task_2ms_Appl7_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_CACHE_NOINIT )
+.OS_Task_2ms_Appl7_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Task_2ms_Appl7_VAR_FAST_NOINIT_START = ADDR(.OS_Task_2ms_Appl7_VAR_FAST_NOINIT);
+_OS_Task_2ms_Appl7_VAR_FAST_NOINIT_END = ENDADDR(.OS_Task_2ms_Appl7_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_CACHE_ZERO_INIT )
+.OS_Task_2ms_Appl7_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Task_2ms_Appl7_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Task_2ms_Appl7_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Task_2ms_Appl7_VAR_FAST_ZERO_INIT);
+_OS_Task_2ms_Appl7_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Task_2ms_Appl7_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_NOCACHE_INIT )
+.OS_Task_2ms_Appl7_VAR_NOCACHE ALIGN(4) :> .
+_OS_Task_2ms_Appl7_VAR_NOCACHE_START = ADDR(.OS_Task_2ms_Appl7_VAR_NOCACHE);
+_OS_Task_2ms_Appl7_VAR_NOCACHE_END = ENDADDR(.OS_Task_2ms_Appl7_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_NOCACHE_NOINIT )
+.OS_Task_2ms_Appl7_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_2ms_Appl7_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Task_2ms_Appl7_VAR_NOCACHE_NOINIT);
+_OS_Task_2ms_Appl7_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_2ms_Appl7_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_NOCACHE_ZERO_INIT )
+.OS_Task_2ms_Appl7_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_2ms_Appl7_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_2ms_Appl7_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_2ms_Appl7_VAR_NOCACHE_ZERO_INIT);
+_OS_Task_2ms_Appl7_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_2ms_Appl7_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_NOCACHE_INIT )
+.OS_Task_2ms_Appl7_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Task_2ms_Appl7_VAR_FAST_NOCACHE_START = ADDR(.OS_Task_2ms_Appl7_VAR_FAST_NOCACHE);
+_OS_Task_2ms_Appl7_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Task_2ms_Appl7_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_NOCACHE_NOINIT )
+.OS_Task_2ms_Appl7_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_2ms_Appl7_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Task_2ms_Appl7_VAR_FAST_NOCACHE_NOINIT);
+_OS_Task_2ms_Appl7_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_2ms_Appl7_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_NOCACHE_ZERO_INIT )
+.OS_Task_2ms_Appl7_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_2ms_Appl7_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_2ms_Appl7_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_2ms_Appl7_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Task_2ms_Appl7_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_2ms_Appl7_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL7
+. = ALIGN(4);
+_OS_Task_2ms_Appl7_VAR_ALL_END = .-1;
+__OS_Task_2ms_Appl7_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL7
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL7_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL7_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL8
+. = ALIGN(4);
+_OS_Task_2ms_Appl8_VAR_ALL_START = .;
+__OS_Task_2ms_Appl8_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_CACHE_INIT )
+.OS_Task_2ms_Appl8_VAR ALIGN(4) :> .
+_OS_Task_2ms_Appl8_VAR_START = ADDR(.OS_Task_2ms_Appl8_VAR);
+_OS_Task_2ms_Appl8_VAR_END = ENDADDR(.OS_Task_2ms_Appl8_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_CACHE_NOINIT )
+.OS_Task_2ms_Appl8_VAR_NOINIT ALIGN(4) :> .
+_OS_Task_2ms_Appl8_VAR_NOINIT_START = ADDR(.OS_Task_2ms_Appl8_VAR_NOINIT);
+_OS_Task_2ms_Appl8_VAR_NOINIT_END = ENDADDR(.OS_Task_2ms_Appl8_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_CACHE_ZERO_INIT )
+.OS_Task_2ms_Appl8_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Task_2ms_Appl8_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Task_2ms_Appl8_VAR_ZERO_INIT_START = ADDR(.OS_Task_2ms_Appl8_VAR_ZERO_INIT);
+_OS_Task_2ms_Appl8_VAR_ZERO_INIT_END = ENDADDR(.OS_Task_2ms_Appl8_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_CACHE_INIT )
+.OS_Task_2ms_Appl8_VAR_FAST ALIGN(4) :> .
+_OS_Task_2ms_Appl8_VAR_FAST_START = ADDR(.OS_Task_2ms_Appl8_VAR_FAST);
+_OS_Task_2ms_Appl8_VAR_FAST_END = ENDADDR(.OS_Task_2ms_Appl8_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_CACHE_NOINIT )
+.OS_Task_2ms_Appl8_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Task_2ms_Appl8_VAR_FAST_NOINIT_START = ADDR(.OS_Task_2ms_Appl8_VAR_FAST_NOINIT);
+_OS_Task_2ms_Appl8_VAR_FAST_NOINIT_END = ENDADDR(.OS_Task_2ms_Appl8_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_CACHE_ZERO_INIT )
+.OS_Task_2ms_Appl8_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Task_2ms_Appl8_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Task_2ms_Appl8_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Task_2ms_Appl8_VAR_FAST_ZERO_INIT);
+_OS_Task_2ms_Appl8_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Task_2ms_Appl8_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_NOCACHE_INIT )
+.OS_Task_2ms_Appl8_VAR_NOCACHE ALIGN(4) :> .
+_OS_Task_2ms_Appl8_VAR_NOCACHE_START = ADDR(.OS_Task_2ms_Appl8_VAR_NOCACHE);
+_OS_Task_2ms_Appl8_VAR_NOCACHE_END = ENDADDR(.OS_Task_2ms_Appl8_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_NOCACHE_NOINIT )
+.OS_Task_2ms_Appl8_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_2ms_Appl8_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Task_2ms_Appl8_VAR_NOCACHE_NOINIT);
+_OS_Task_2ms_Appl8_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_2ms_Appl8_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_NOCACHE_ZERO_INIT )
+.OS_Task_2ms_Appl8_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_2ms_Appl8_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_2ms_Appl8_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_2ms_Appl8_VAR_NOCACHE_ZERO_INIT);
+_OS_Task_2ms_Appl8_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_2ms_Appl8_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_NOCACHE_INIT )
+.OS_Task_2ms_Appl8_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Task_2ms_Appl8_VAR_FAST_NOCACHE_START = ADDR(.OS_Task_2ms_Appl8_VAR_FAST_NOCACHE);
+_OS_Task_2ms_Appl8_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Task_2ms_Appl8_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_NOCACHE_NOINIT )
+.OS_Task_2ms_Appl8_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_2ms_Appl8_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Task_2ms_Appl8_VAR_FAST_NOCACHE_NOINIT);
+_OS_Task_2ms_Appl8_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_2ms_Appl8_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_NOCACHE_ZERO_INIT )
+.OS_Task_2ms_Appl8_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_2ms_Appl8_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_2ms_Appl8_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_2ms_Appl8_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Task_2ms_Appl8_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_2ms_Appl8_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL8
+. = ALIGN(4);
+_OS_Task_2ms_Appl8_VAR_ALL_END = .-1;
+__OS_Task_2ms_Appl8_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL8
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL8_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL8_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL9
+. = ALIGN(4);
+_OS_Task_2ms_Appl9_VAR_ALL_START = .;
+__OS_Task_2ms_Appl9_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_CACHE_INIT )
+.OS_Task_2ms_Appl9_VAR ALIGN(4) :> .
+_OS_Task_2ms_Appl9_VAR_START = ADDR(.OS_Task_2ms_Appl9_VAR);
+_OS_Task_2ms_Appl9_VAR_END = ENDADDR(.OS_Task_2ms_Appl9_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_CACHE_NOINIT )
+.OS_Task_2ms_Appl9_VAR_NOINIT ALIGN(4) :> .
+_OS_Task_2ms_Appl9_VAR_NOINIT_START = ADDR(.OS_Task_2ms_Appl9_VAR_NOINIT);
+_OS_Task_2ms_Appl9_VAR_NOINIT_END = ENDADDR(.OS_Task_2ms_Appl9_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_CACHE_ZERO_INIT )
+.OS_Task_2ms_Appl9_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Task_2ms_Appl9_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Task_2ms_Appl9_VAR_ZERO_INIT_START = ADDR(.OS_Task_2ms_Appl9_VAR_ZERO_INIT);
+_OS_Task_2ms_Appl9_VAR_ZERO_INIT_END = ENDADDR(.OS_Task_2ms_Appl9_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_CACHE_INIT )
+.OS_Task_2ms_Appl9_VAR_FAST ALIGN(4) :> .
+_OS_Task_2ms_Appl9_VAR_FAST_START = ADDR(.OS_Task_2ms_Appl9_VAR_FAST);
+_OS_Task_2ms_Appl9_VAR_FAST_END = ENDADDR(.OS_Task_2ms_Appl9_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_CACHE_NOINIT )
+.OS_Task_2ms_Appl9_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Task_2ms_Appl9_VAR_FAST_NOINIT_START = ADDR(.OS_Task_2ms_Appl9_VAR_FAST_NOINIT);
+_OS_Task_2ms_Appl9_VAR_FAST_NOINIT_END = ENDADDR(.OS_Task_2ms_Appl9_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_CACHE_ZERO_INIT )
+.OS_Task_2ms_Appl9_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Task_2ms_Appl9_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Task_2ms_Appl9_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Task_2ms_Appl9_VAR_FAST_ZERO_INIT);
+_OS_Task_2ms_Appl9_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Task_2ms_Appl9_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_NOCACHE_INIT )
+.OS_Task_2ms_Appl9_VAR_NOCACHE ALIGN(4) :> .
+_OS_Task_2ms_Appl9_VAR_NOCACHE_START = ADDR(.OS_Task_2ms_Appl9_VAR_NOCACHE);
+_OS_Task_2ms_Appl9_VAR_NOCACHE_END = ENDADDR(.OS_Task_2ms_Appl9_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_NOCACHE_NOINIT )
+.OS_Task_2ms_Appl9_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_2ms_Appl9_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Task_2ms_Appl9_VAR_NOCACHE_NOINIT);
+_OS_Task_2ms_Appl9_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_2ms_Appl9_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_NOCACHE_ZERO_INIT )
+.OS_Task_2ms_Appl9_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_2ms_Appl9_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_2ms_Appl9_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_2ms_Appl9_VAR_NOCACHE_ZERO_INIT);
+_OS_Task_2ms_Appl9_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_2ms_Appl9_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_NOCACHE_INIT )
+.OS_Task_2ms_Appl9_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Task_2ms_Appl9_VAR_FAST_NOCACHE_START = ADDR(.OS_Task_2ms_Appl9_VAR_FAST_NOCACHE);
+_OS_Task_2ms_Appl9_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Task_2ms_Appl9_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_NOCACHE_NOINIT )
+.OS_Task_2ms_Appl9_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_2ms_Appl9_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Task_2ms_Appl9_VAR_FAST_NOCACHE_NOINIT);
+_OS_Task_2ms_Appl9_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_2ms_Appl9_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_NOCACHE_ZERO_INIT )
+.OS_Task_2ms_Appl9_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_2ms_Appl9_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_2ms_Appl9_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_2ms_Appl9_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Task_2ms_Appl9_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_2ms_Appl9_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL9
+. = ALIGN(4);
+_OS_Task_2ms_Appl9_VAR_ALL_END = .-1;
+__OS_Task_2ms_Appl9_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL9
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL9_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_2MS_APPL9_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10
+. = ALIGN(4);
+_OS_Task_4msBsw_Appl10_VAR_ALL_START = .;
+__OS_Task_4msBsw_Appl10_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_CACHE_INIT )
+.OS_Task_4msBsw_Appl10_VAR ALIGN(4) :> .
+_OS_Task_4msBsw_Appl10_VAR_START = ADDR(.OS_Task_4msBsw_Appl10_VAR);
+_OS_Task_4msBsw_Appl10_VAR_END = ENDADDR(.OS_Task_4msBsw_Appl10_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_CACHE_NOINIT )
+.OS_Task_4msBsw_Appl10_VAR_NOINIT ALIGN(4) :> .
+_OS_Task_4msBsw_Appl10_VAR_NOINIT_START = ADDR(.OS_Task_4msBsw_Appl10_VAR_NOINIT);
+_OS_Task_4msBsw_Appl10_VAR_NOINIT_END = ENDADDR(.OS_Task_4msBsw_Appl10_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_CACHE_ZERO_INIT )
+.OS_Task_4msBsw_Appl10_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Task_4msBsw_Appl10_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Task_4msBsw_Appl10_VAR_ZERO_INIT_START = ADDR(.OS_Task_4msBsw_Appl10_VAR_ZERO_INIT);
+_OS_Task_4msBsw_Appl10_VAR_ZERO_INIT_END = ENDADDR(.OS_Task_4msBsw_Appl10_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_CACHE_INIT )
+.OS_Task_4msBsw_Appl10_VAR_FAST ALIGN(4) :> .
+_OS_Task_4msBsw_Appl10_VAR_FAST_START = ADDR(.OS_Task_4msBsw_Appl10_VAR_FAST);
+_OS_Task_4msBsw_Appl10_VAR_FAST_END = ENDADDR(.OS_Task_4msBsw_Appl10_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_CACHE_NOINIT )
+.OS_Task_4msBsw_Appl10_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Task_4msBsw_Appl10_VAR_FAST_NOINIT_START = ADDR(.OS_Task_4msBsw_Appl10_VAR_FAST_NOINIT);
+_OS_Task_4msBsw_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.OS_Task_4msBsw_Appl10_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_CACHE_ZERO_INIT )
+.OS_Task_4msBsw_Appl10_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Task_4msBsw_Appl10_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Task_4msBsw_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Task_4msBsw_Appl10_VAR_FAST_ZERO_INIT);
+_OS_Task_4msBsw_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Task_4msBsw_Appl10_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_NOCACHE_INIT )
+.OS_Task_4msBsw_Appl10_VAR_NOCACHE ALIGN(4) :> .
+_OS_Task_4msBsw_Appl10_VAR_NOCACHE_START = ADDR(.OS_Task_4msBsw_Appl10_VAR_NOCACHE);
+_OS_Task_4msBsw_Appl10_VAR_NOCACHE_END = ENDADDR(.OS_Task_4msBsw_Appl10_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_NOCACHE_NOINIT )
+.OS_Task_4msBsw_Appl10_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_4msBsw_Appl10_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Task_4msBsw_Appl10_VAR_NOCACHE_NOINIT);
+_OS_Task_4msBsw_Appl10_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_4msBsw_Appl10_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_NOCACHE_ZERO_INIT )
+.OS_Task_4msBsw_Appl10_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_4msBsw_Appl10_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_4msBsw_Appl10_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_4msBsw_Appl10_VAR_NOCACHE_ZERO_INIT);
+_OS_Task_4msBsw_Appl10_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_4msBsw_Appl10_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_NOCACHE_INIT )
+.OS_Task_4msBsw_Appl10_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Task_4msBsw_Appl10_VAR_FAST_NOCACHE_START = ADDR(.OS_Task_4msBsw_Appl10_VAR_FAST_NOCACHE);
+_OS_Task_4msBsw_Appl10_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Task_4msBsw_Appl10_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_NOCACHE_NOINIT )
+.OS_Task_4msBsw_Appl10_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_4msBsw_Appl10_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Task_4msBsw_Appl10_VAR_FAST_NOCACHE_NOINIT);
+_OS_Task_4msBsw_Appl10_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_4msBsw_Appl10_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_NOCACHE_ZERO_INIT )
+.OS_Task_4msBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_4msBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_4msBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_4msBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Task_4msBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_4msBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10
+. = ALIGN(4);
+_OS_Task_4msBsw_Appl10_VAR_ALL_END = .-1;
+__OS_Task_4msBsw_Appl10_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR
+# undef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR
+# undef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_4MSBSW_APPL10_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL10
+. = ALIGN(4);
+_OS_Task_4ms_Appl10_VAR_ALL_START = .;
+__OS_Task_4ms_Appl10_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_CACHE_INIT )
+.OS_Task_4ms_Appl10_VAR ALIGN(4) :> .
+_OS_Task_4ms_Appl10_VAR_START = ADDR(.OS_Task_4ms_Appl10_VAR);
+_OS_Task_4ms_Appl10_VAR_END = ENDADDR(.OS_Task_4ms_Appl10_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_CACHE_NOINIT )
+.OS_Task_4ms_Appl10_VAR_NOINIT ALIGN(4) :> .
+_OS_Task_4ms_Appl10_VAR_NOINIT_START = ADDR(.OS_Task_4ms_Appl10_VAR_NOINIT);
+_OS_Task_4ms_Appl10_VAR_NOINIT_END = ENDADDR(.OS_Task_4ms_Appl10_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_CACHE_ZERO_INIT )
+.OS_Task_4ms_Appl10_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Task_4ms_Appl10_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Task_4ms_Appl10_VAR_ZERO_INIT_START = ADDR(.OS_Task_4ms_Appl10_VAR_ZERO_INIT);
+_OS_Task_4ms_Appl10_VAR_ZERO_INIT_END = ENDADDR(.OS_Task_4ms_Appl10_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_CACHE_INIT )
+.OS_Task_4ms_Appl10_VAR_FAST ALIGN(4) :> .
+_OS_Task_4ms_Appl10_VAR_FAST_START = ADDR(.OS_Task_4ms_Appl10_VAR_FAST);
+_OS_Task_4ms_Appl10_VAR_FAST_END = ENDADDR(.OS_Task_4ms_Appl10_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_CACHE_NOINIT )
+.OS_Task_4ms_Appl10_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Task_4ms_Appl10_VAR_FAST_NOINIT_START = ADDR(.OS_Task_4ms_Appl10_VAR_FAST_NOINIT);
+_OS_Task_4ms_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.OS_Task_4ms_Appl10_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_CACHE_ZERO_INIT )
+.OS_Task_4ms_Appl10_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Task_4ms_Appl10_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Task_4ms_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Task_4ms_Appl10_VAR_FAST_ZERO_INIT);
+_OS_Task_4ms_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Task_4ms_Appl10_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_NOCACHE_INIT )
+.OS_Task_4ms_Appl10_VAR_NOCACHE ALIGN(4) :> .
+_OS_Task_4ms_Appl10_VAR_NOCACHE_START = ADDR(.OS_Task_4ms_Appl10_VAR_NOCACHE);
+_OS_Task_4ms_Appl10_VAR_NOCACHE_END = ENDADDR(.OS_Task_4ms_Appl10_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_NOCACHE_NOINIT )
+.OS_Task_4ms_Appl10_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_4ms_Appl10_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Task_4ms_Appl10_VAR_NOCACHE_NOINIT);
+_OS_Task_4ms_Appl10_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_4ms_Appl10_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_NOCACHE_ZERO_INIT )
+.OS_Task_4ms_Appl10_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_4ms_Appl10_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_4ms_Appl10_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_4ms_Appl10_VAR_NOCACHE_ZERO_INIT);
+_OS_Task_4ms_Appl10_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_4ms_Appl10_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_NOCACHE_INIT )
+.OS_Task_4ms_Appl10_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Task_4ms_Appl10_VAR_FAST_NOCACHE_START = ADDR(.OS_Task_4ms_Appl10_VAR_FAST_NOCACHE);
+_OS_Task_4ms_Appl10_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Task_4ms_Appl10_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_NOCACHE_NOINIT )
+.OS_Task_4ms_Appl10_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_4ms_Appl10_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Task_4ms_Appl10_VAR_FAST_NOCACHE_NOINIT);
+_OS_Task_4ms_Appl10_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_4ms_Appl10_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_NOCACHE_ZERO_INIT )
+.OS_Task_4ms_Appl10_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_4ms_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_4ms_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_4ms_Appl10_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Task_4ms_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_4ms_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL10
+. = ALIGN(4);
+_OS_Task_4ms_Appl10_VAR_ALL_END = .-1;
+__OS_Task_4ms_Appl10_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL10
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL10_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL10_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL7
+. = ALIGN(4);
+_OS_Task_4ms_Appl7_VAR_ALL_START = .;
+__OS_Task_4ms_Appl7_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_CACHE_INIT )
+.OS_Task_4ms_Appl7_VAR ALIGN(4) :> .
+_OS_Task_4ms_Appl7_VAR_START = ADDR(.OS_Task_4ms_Appl7_VAR);
+_OS_Task_4ms_Appl7_VAR_END = ENDADDR(.OS_Task_4ms_Appl7_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_CACHE_NOINIT )
+.OS_Task_4ms_Appl7_VAR_NOINIT ALIGN(4) :> .
+_OS_Task_4ms_Appl7_VAR_NOINIT_START = ADDR(.OS_Task_4ms_Appl7_VAR_NOINIT);
+_OS_Task_4ms_Appl7_VAR_NOINIT_END = ENDADDR(.OS_Task_4ms_Appl7_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_CACHE_ZERO_INIT )
+.OS_Task_4ms_Appl7_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Task_4ms_Appl7_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Task_4ms_Appl7_VAR_ZERO_INIT_START = ADDR(.OS_Task_4ms_Appl7_VAR_ZERO_INIT);
+_OS_Task_4ms_Appl7_VAR_ZERO_INIT_END = ENDADDR(.OS_Task_4ms_Appl7_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_CACHE_INIT )
+.OS_Task_4ms_Appl7_VAR_FAST ALIGN(4) :> .
+_OS_Task_4ms_Appl7_VAR_FAST_START = ADDR(.OS_Task_4ms_Appl7_VAR_FAST);
+_OS_Task_4ms_Appl7_VAR_FAST_END = ENDADDR(.OS_Task_4ms_Appl7_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_CACHE_NOINIT )
+.OS_Task_4ms_Appl7_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Task_4ms_Appl7_VAR_FAST_NOINIT_START = ADDR(.OS_Task_4ms_Appl7_VAR_FAST_NOINIT);
+_OS_Task_4ms_Appl7_VAR_FAST_NOINIT_END = ENDADDR(.OS_Task_4ms_Appl7_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_CACHE_ZERO_INIT )
+.OS_Task_4ms_Appl7_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Task_4ms_Appl7_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Task_4ms_Appl7_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Task_4ms_Appl7_VAR_FAST_ZERO_INIT);
+_OS_Task_4ms_Appl7_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Task_4ms_Appl7_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_NOCACHE_INIT )
+.OS_Task_4ms_Appl7_VAR_NOCACHE ALIGN(4) :> .
+_OS_Task_4ms_Appl7_VAR_NOCACHE_START = ADDR(.OS_Task_4ms_Appl7_VAR_NOCACHE);
+_OS_Task_4ms_Appl7_VAR_NOCACHE_END = ENDADDR(.OS_Task_4ms_Appl7_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_NOCACHE_NOINIT )
+.OS_Task_4ms_Appl7_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_4ms_Appl7_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Task_4ms_Appl7_VAR_NOCACHE_NOINIT);
+_OS_Task_4ms_Appl7_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_4ms_Appl7_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_NOCACHE_ZERO_INIT )
+.OS_Task_4ms_Appl7_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_4ms_Appl7_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_4ms_Appl7_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_4ms_Appl7_VAR_NOCACHE_ZERO_INIT);
+_OS_Task_4ms_Appl7_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_4ms_Appl7_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_NOCACHE_INIT )
+.OS_Task_4ms_Appl7_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Task_4ms_Appl7_VAR_FAST_NOCACHE_START = ADDR(.OS_Task_4ms_Appl7_VAR_FAST_NOCACHE);
+_OS_Task_4ms_Appl7_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Task_4ms_Appl7_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_NOCACHE_NOINIT )
+.OS_Task_4ms_Appl7_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_4ms_Appl7_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Task_4ms_Appl7_VAR_FAST_NOCACHE_NOINIT);
+_OS_Task_4ms_Appl7_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_4ms_Appl7_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_NOCACHE_ZERO_INIT )
+.OS_Task_4ms_Appl7_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_4ms_Appl7_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_4ms_Appl7_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_4ms_Appl7_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Task_4ms_Appl7_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_4ms_Appl7_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL7
+. = ALIGN(4);
+_OS_Task_4ms_Appl7_VAR_ALL_END = .-1;
+__OS_Task_4ms_Appl7_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL7
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL7_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_4MS_APPL7_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10
+. = ALIGN(4);
+_OS_Task_5msBsw_Appl10_VAR_ALL_START = .;
+__OS_Task_5msBsw_Appl10_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_CACHE_INIT )
+.OS_Task_5msBsw_Appl10_VAR ALIGN(4) :> .
+_OS_Task_5msBsw_Appl10_VAR_START = ADDR(.OS_Task_5msBsw_Appl10_VAR);
+_OS_Task_5msBsw_Appl10_VAR_END = ENDADDR(.OS_Task_5msBsw_Appl10_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_CACHE_NOINIT )
+.OS_Task_5msBsw_Appl10_VAR_NOINIT ALIGN(4) :> .
+_OS_Task_5msBsw_Appl10_VAR_NOINIT_START = ADDR(.OS_Task_5msBsw_Appl10_VAR_NOINIT);
+_OS_Task_5msBsw_Appl10_VAR_NOINIT_END = ENDADDR(.OS_Task_5msBsw_Appl10_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_CACHE_ZERO_INIT )
+.OS_Task_5msBsw_Appl10_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Task_5msBsw_Appl10_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Task_5msBsw_Appl10_VAR_ZERO_INIT_START = ADDR(.OS_Task_5msBsw_Appl10_VAR_ZERO_INIT);
+_OS_Task_5msBsw_Appl10_VAR_ZERO_INIT_END = ENDADDR(.OS_Task_5msBsw_Appl10_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_CACHE_INIT )
+.OS_Task_5msBsw_Appl10_VAR_FAST ALIGN(4) :> .
+_OS_Task_5msBsw_Appl10_VAR_FAST_START = ADDR(.OS_Task_5msBsw_Appl10_VAR_FAST);
+_OS_Task_5msBsw_Appl10_VAR_FAST_END = ENDADDR(.OS_Task_5msBsw_Appl10_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_CACHE_NOINIT )
+.OS_Task_5msBsw_Appl10_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Task_5msBsw_Appl10_VAR_FAST_NOINIT_START = ADDR(.OS_Task_5msBsw_Appl10_VAR_FAST_NOINIT);
+_OS_Task_5msBsw_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.OS_Task_5msBsw_Appl10_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_CACHE_ZERO_INIT )
+.OS_Task_5msBsw_Appl10_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Task_5msBsw_Appl10_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Task_5msBsw_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Task_5msBsw_Appl10_VAR_FAST_ZERO_INIT);
+_OS_Task_5msBsw_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Task_5msBsw_Appl10_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_NOCACHE_INIT )
+.OS_Task_5msBsw_Appl10_VAR_NOCACHE ALIGN(4) :> .
+_OS_Task_5msBsw_Appl10_VAR_NOCACHE_START = ADDR(.OS_Task_5msBsw_Appl10_VAR_NOCACHE);
+_OS_Task_5msBsw_Appl10_VAR_NOCACHE_END = ENDADDR(.OS_Task_5msBsw_Appl10_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_NOCACHE_NOINIT )
+.OS_Task_5msBsw_Appl10_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_5msBsw_Appl10_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Task_5msBsw_Appl10_VAR_NOCACHE_NOINIT);
+_OS_Task_5msBsw_Appl10_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_5msBsw_Appl10_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_NOCACHE_ZERO_INIT )
+.OS_Task_5msBsw_Appl10_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_5msBsw_Appl10_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_5msBsw_Appl10_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_5msBsw_Appl10_VAR_NOCACHE_ZERO_INIT);
+_OS_Task_5msBsw_Appl10_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_5msBsw_Appl10_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_NOCACHE_INIT )
+.OS_Task_5msBsw_Appl10_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Task_5msBsw_Appl10_VAR_FAST_NOCACHE_START = ADDR(.OS_Task_5msBsw_Appl10_VAR_FAST_NOCACHE);
+_OS_Task_5msBsw_Appl10_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Task_5msBsw_Appl10_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_NOCACHE_NOINIT )
+.OS_Task_5msBsw_Appl10_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_5msBsw_Appl10_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Task_5msBsw_Appl10_VAR_FAST_NOCACHE_NOINIT);
+_OS_Task_5msBsw_Appl10_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_5msBsw_Appl10_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_NOCACHE_ZERO_INIT )
+.OS_Task_5msBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_5msBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_5msBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_5msBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Task_5msBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_5msBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10
+. = ALIGN(4);
+_OS_Task_5msBsw_Appl10_VAR_ALL_END = .-1;
+__OS_Task_5msBsw_Appl10_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR
+# undef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR
+# undef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_5MSBSW_APPL10_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_TASK_TASK_CODING_APPL10
+. = ALIGN(4);
+_OS_Task_Coding_Appl10_VAR_ALL_START = .;
+__OS_Task_Coding_Appl10_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_CACHE_INIT )
+.OS_Task_Coding_Appl10_VAR ALIGN(4) :> .
+_OS_Task_Coding_Appl10_VAR_START = ADDR(.OS_Task_Coding_Appl10_VAR);
+_OS_Task_Coding_Appl10_VAR_END = ENDADDR(.OS_Task_Coding_Appl10_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_CACHE_NOINIT )
+.OS_Task_Coding_Appl10_VAR_NOINIT ALIGN(4) :> .
+_OS_Task_Coding_Appl10_VAR_NOINIT_START = ADDR(.OS_Task_Coding_Appl10_VAR_NOINIT);
+_OS_Task_Coding_Appl10_VAR_NOINIT_END = ENDADDR(.OS_Task_Coding_Appl10_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_CACHE_ZERO_INIT )
+.OS_Task_Coding_Appl10_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Task_Coding_Appl10_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Task_Coding_Appl10_VAR_ZERO_INIT_START = ADDR(.OS_Task_Coding_Appl10_VAR_ZERO_INIT);
+_OS_Task_Coding_Appl10_VAR_ZERO_INIT_END = ENDADDR(.OS_Task_Coding_Appl10_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_CACHE_INIT )
+.OS_Task_Coding_Appl10_VAR_FAST ALIGN(4) :> .
+_OS_Task_Coding_Appl10_VAR_FAST_START = ADDR(.OS_Task_Coding_Appl10_VAR_FAST);
+_OS_Task_Coding_Appl10_VAR_FAST_END = ENDADDR(.OS_Task_Coding_Appl10_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_CACHE_NOINIT )
+.OS_Task_Coding_Appl10_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Task_Coding_Appl10_VAR_FAST_NOINIT_START = ADDR(.OS_Task_Coding_Appl10_VAR_FAST_NOINIT);
+_OS_Task_Coding_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.OS_Task_Coding_Appl10_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_CACHE_ZERO_INIT )
+.OS_Task_Coding_Appl10_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Task_Coding_Appl10_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Task_Coding_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Task_Coding_Appl10_VAR_FAST_ZERO_INIT);
+_OS_Task_Coding_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Task_Coding_Appl10_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_NOCACHE_INIT )
+.OS_Task_Coding_Appl10_VAR_NOCACHE ALIGN(4) :> .
+_OS_Task_Coding_Appl10_VAR_NOCACHE_START = ADDR(.OS_Task_Coding_Appl10_VAR_NOCACHE);
+_OS_Task_Coding_Appl10_VAR_NOCACHE_END = ENDADDR(.OS_Task_Coding_Appl10_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_NOCACHE_NOINIT )
+.OS_Task_Coding_Appl10_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_Coding_Appl10_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Task_Coding_Appl10_VAR_NOCACHE_NOINIT);
+_OS_Task_Coding_Appl10_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_Coding_Appl10_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_NOCACHE_ZERO_INIT )
+.OS_Task_Coding_Appl10_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_Coding_Appl10_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_Coding_Appl10_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_Coding_Appl10_VAR_NOCACHE_ZERO_INIT);
+_OS_Task_Coding_Appl10_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_Coding_Appl10_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_NOCACHE_INIT )
+.OS_Task_Coding_Appl10_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Task_Coding_Appl10_VAR_FAST_NOCACHE_START = ADDR(.OS_Task_Coding_Appl10_VAR_FAST_NOCACHE);
+_OS_Task_Coding_Appl10_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Task_Coding_Appl10_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_NOCACHE_NOINIT )
+.OS_Task_Coding_Appl10_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_Coding_Appl10_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Task_Coding_Appl10_VAR_FAST_NOCACHE_NOINIT);
+_OS_Task_Coding_Appl10_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_Coding_Appl10_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_NOCACHE_ZERO_INIT )
+.OS_Task_Coding_Appl10_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_Coding_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_Coding_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_Coding_Appl10_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Task_Coding_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_Coding_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_CODING_APPL10
+. = ALIGN(4);
+_OS_Task_Coding_Appl10_VAR_ALL_END = .-1;
+__OS_Task_Coding_Appl10_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_TASK_TASK_CODING_APPL10
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR
+# undef OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_CODING_APPL10_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR
+# undef OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_CODING_APPL10_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10
+. = ALIGN(4);
+_OS_Task_ComBsw_Appl10_VAR_ALL_START = .;
+__OS_Task_ComBsw_Appl10_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_CACHE_INIT )
+.OS_Task_ComBsw_Appl10_VAR ALIGN(4) :> .
+_OS_Task_ComBsw_Appl10_VAR_START = ADDR(.OS_Task_ComBsw_Appl10_VAR);
+_OS_Task_ComBsw_Appl10_VAR_END = ENDADDR(.OS_Task_ComBsw_Appl10_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_CACHE_NOINIT )
+.OS_Task_ComBsw_Appl10_VAR_NOINIT ALIGN(4) :> .
+_OS_Task_ComBsw_Appl10_VAR_NOINIT_START = ADDR(.OS_Task_ComBsw_Appl10_VAR_NOINIT);
+_OS_Task_ComBsw_Appl10_VAR_NOINIT_END = ENDADDR(.OS_Task_ComBsw_Appl10_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_CACHE_ZERO_INIT )
+.OS_Task_ComBsw_Appl10_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Task_ComBsw_Appl10_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Task_ComBsw_Appl10_VAR_ZERO_INIT_START = ADDR(.OS_Task_ComBsw_Appl10_VAR_ZERO_INIT);
+_OS_Task_ComBsw_Appl10_VAR_ZERO_INIT_END = ENDADDR(.OS_Task_ComBsw_Appl10_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_CACHE_INIT )
+.OS_Task_ComBsw_Appl10_VAR_FAST ALIGN(4) :> .
+_OS_Task_ComBsw_Appl10_VAR_FAST_START = ADDR(.OS_Task_ComBsw_Appl10_VAR_FAST);
+_OS_Task_ComBsw_Appl10_VAR_FAST_END = ENDADDR(.OS_Task_ComBsw_Appl10_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_CACHE_NOINIT )
+.OS_Task_ComBsw_Appl10_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Task_ComBsw_Appl10_VAR_FAST_NOINIT_START = ADDR(.OS_Task_ComBsw_Appl10_VAR_FAST_NOINIT);
+_OS_Task_ComBsw_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.OS_Task_ComBsw_Appl10_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_CACHE_ZERO_INIT )
+.OS_Task_ComBsw_Appl10_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Task_ComBsw_Appl10_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Task_ComBsw_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Task_ComBsw_Appl10_VAR_FAST_ZERO_INIT);
+_OS_Task_ComBsw_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Task_ComBsw_Appl10_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_NOCACHE_INIT )
+.OS_Task_ComBsw_Appl10_VAR_NOCACHE ALIGN(4) :> .
+_OS_Task_ComBsw_Appl10_VAR_NOCACHE_START = ADDR(.OS_Task_ComBsw_Appl10_VAR_NOCACHE);
+_OS_Task_ComBsw_Appl10_VAR_NOCACHE_END = ENDADDR(.OS_Task_ComBsw_Appl10_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_NOCACHE_NOINIT )
+.OS_Task_ComBsw_Appl10_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_ComBsw_Appl10_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Task_ComBsw_Appl10_VAR_NOCACHE_NOINIT);
+_OS_Task_ComBsw_Appl10_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_ComBsw_Appl10_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_NOCACHE_ZERO_INIT )
+.OS_Task_ComBsw_Appl10_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_ComBsw_Appl10_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_ComBsw_Appl10_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_ComBsw_Appl10_VAR_NOCACHE_ZERO_INIT);
+_OS_Task_ComBsw_Appl10_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_ComBsw_Appl10_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_NOCACHE_INIT )
+.OS_Task_ComBsw_Appl10_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Task_ComBsw_Appl10_VAR_FAST_NOCACHE_START = ADDR(.OS_Task_ComBsw_Appl10_VAR_FAST_NOCACHE);
+_OS_Task_ComBsw_Appl10_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Task_ComBsw_Appl10_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_NOCACHE_NOINIT )
+.OS_Task_ComBsw_Appl10_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_ComBsw_Appl10_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Task_ComBsw_Appl10_VAR_FAST_NOCACHE_NOINIT);
+_OS_Task_ComBsw_Appl10_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_ComBsw_Appl10_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_NOCACHE_ZERO_INIT )
+.OS_Task_ComBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_ComBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_ComBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_ComBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Task_ComBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_ComBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10
+. = ALIGN(4);
+_OS_Task_ComBsw_Appl10_VAR_ALL_END = .-1;
+__OS_Task_ComBsw_Appl10_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR
+# undef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR
+# undef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_COMBSW_APPL10_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10
+. = ALIGN(4);
+_OS_Task_InitBsw_Appl10_VAR_ALL_START = .;
+__OS_Task_InitBsw_Appl10_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_CACHE_INIT )
+.OS_Task_InitBsw_Appl10_VAR ALIGN(4) :> .
+_OS_Task_InitBsw_Appl10_VAR_START = ADDR(.OS_Task_InitBsw_Appl10_VAR);
+_OS_Task_InitBsw_Appl10_VAR_END = ENDADDR(.OS_Task_InitBsw_Appl10_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_CACHE_NOINIT )
+.OS_Task_InitBsw_Appl10_VAR_NOINIT ALIGN(4) :> .
+_OS_Task_InitBsw_Appl10_VAR_NOINIT_START = ADDR(.OS_Task_InitBsw_Appl10_VAR_NOINIT);
+_OS_Task_InitBsw_Appl10_VAR_NOINIT_END = ENDADDR(.OS_Task_InitBsw_Appl10_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_CACHE_ZERO_INIT )
+.OS_Task_InitBsw_Appl10_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Task_InitBsw_Appl10_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Task_InitBsw_Appl10_VAR_ZERO_INIT_START = ADDR(.OS_Task_InitBsw_Appl10_VAR_ZERO_INIT);
+_OS_Task_InitBsw_Appl10_VAR_ZERO_INIT_END = ENDADDR(.OS_Task_InitBsw_Appl10_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_CACHE_INIT )
+.OS_Task_InitBsw_Appl10_VAR_FAST ALIGN(4) :> .
+_OS_Task_InitBsw_Appl10_VAR_FAST_START = ADDR(.OS_Task_InitBsw_Appl10_VAR_FAST);
+_OS_Task_InitBsw_Appl10_VAR_FAST_END = ENDADDR(.OS_Task_InitBsw_Appl10_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_CACHE_NOINIT )
+.OS_Task_InitBsw_Appl10_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Task_InitBsw_Appl10_VAR_FAST_NOINIT_START = ADDR(.OS_Task_InitBsw_Appl10_VAR_FAST_NOINIT);
+_OS_Task_InitBsw_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.OS_Task_InitBsw_Appl10_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_CACHE_ZERO_INIT )
+.OS_Task_InitBsw_Appl10_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Task_InitBsw_Appl10_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Task_InitBsw_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Task_InitBsw_Appl10_VAR_FAST_ZERO_INIT);
+_OS_Task_InitBsw_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Task_InitBsw_Appl10_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_NOCACHE_INIT )
+.OS_Task_InitBsw_Appl10_VAR_NOCACHE ALIGN(4) :> .
+_OS_Task_InitBsw_Appl10_VAR_NOCACHE_START = ADDR(.OS_Task_InitBsw_Appl10_VAR_NOCACHE);
+_OS_Task_InitBsw_Appl10_VAR_NOCACHE_END = ENDADDR(.OS_Task_InitBsw_Appl10_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_NOCACHE_NOINIT )
+.OS_Task_InitBsw_Appl10_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_InitBsw_Appl10_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Task_InitBsw_Appl10_VAR_NOCACHE_NOINIT);
+_OS_Task_InitBsw_Appl10_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_InitBsw_Appl10_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_NOCACHE_ZERO_INIT )
+.OS_Task_InitBsw_Appl10_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_InitBsw_Appl10_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_InitBsw_Appl10_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_InitBsw_Appl10_VAR_NOCACHE_ZERO_INIT);
+_OS_Task_InitBsw_Appl10_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_InitBsw_Appl10_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_NOCACHE_INIT )
+.OS_Task_InitBsw_Appl10_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Task_InitBsw_Appl10_VAR_FAST_NOCACHE_START = ADDR(.OS_Task_InitBsw_Appl10_VAR_FAST_NOCACHE);
+_OS_Task_InitBsw_Appl10_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Task_InitBsw_Appl10_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_NOCACHE_NOINIT )
+.OS_Task_InitBsw_Appl10_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_InitBsw_Appl10_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Task_InitBsw_Appl10_VAR_FAST_NOCACHE_NOINIT);
+_OS_Task_InitBsw_Appl10_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_InitBsw_Appl10_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_NOCACHE_ZERO_INIT )
+.OS_Task_InitBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_InitBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_InitBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_InitBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Task_InitBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_InitBsw_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10
+. = ALIGN(4);
+_OS_Task_InitBsw_Appl10_VAR_ALL_END = .-1;
+__OS_Task_InitBsw_Appl10_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR
+# undef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR
+# undef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_INITBSW_APPL10_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL10
+. = ALIGN(4);
+_OS_Task_Init_Appl10_VAR_ALL_START = .;
+__OS_Task_Init_Appl10_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_CACHE_INIT )
+.OS_Task_Init_Appl10_VAR ALIGN(4) :> .
+_OS_Task_Init_Appl10_VAR_START = ADDR(.OS_Task_Init_Appl10_VAR);
+_OS_Task_Init_Appl10_VAR_END = ENDADDR(.OS_Task_Init_Appl10_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_CACHE_NOINIT )
+.OS_Task_Init_Appl10_VAR_NOINIT ALIGN(4) :> .
+_OS_Task_Init_Appl10_VAR_NOINIT_START = ADDR(.OS_Task_Init_Appl10_VAR_NOINIT);
+_OS_Task_Init_Appl10_VAR_NOINIT_END = ENDADDR(.OS_Task_Init_Appl10_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_CACHE_ZERO_INIT )
+.OS_Task_Init_Appl10_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Task_Init_Appl10_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Task_Init_Appl10_VAR_ZERO_INIT_START = ADDR(.OS_Task_Init_Appl10_VAR_ZERO_INIT);
+_OS_Task_Init_Appl10_VAR_ZERO_INIT_END = ENDADDR(.OS_Task_Init_Appl10_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_CACHE_INIT )
+.OS_Task_Init_Appl10_VAR_FAST ALIGN(4) :> .
+_OS_Task_Init_Appl10_VAR_FAST_START = ADDR(.OS_Task_Init_Appl10_VAR_FAST);
+_OS_Task_Init_Appl10_VAR_FAST_END = ENDADDR(.OS_Task_Init_Appl10_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_CACHE_NOINIT )
+.OS_Task_Init_Appl10_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Task_Init_Appl10_VAR_FAST_NOINIT_START = ADDR(.OS_Task_Init_Appl10_VAR_FAST_NOINIT);
+_OS_Task_Init_Appl10_VAR_FAST_NOINIT_END = ENDADDR(.OS_Task_Init_Appl10_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_CACHE_ZERO_INIT )
+.OS_Task_Init_Appl10_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Task_Init_Appl10_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Task_Init_Appl10_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Task_Init_Appl10_VAR_FAST_ZERO_INIT);
+_OS_Task_Init_Appl10_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Task_Init_Appl10_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_NOCACHE_INIT )
+.OS_Task_Init_Appl10_VAR_NOCACHE ALIGN(4) :> .
+_OS_Task_Init_Appl10_VAR_NOCACHE_START = ADDR(.OS_Task_Init_Appl10_VAR_NOCACHE);
+_OS_Task_Init_Appl10_VAR_NOCACHE_END = ENDADDR(.OS_Task_Init_Appl10_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_NOCACHE_NOINIT )
+.OS_Task_Init_Appl10_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_Init_Appl10_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Task_Init_Appl10_VAR_NOCACHE_NOINIT);
+_OS_Task_Init_Appl10_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_Init_Appl10_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_NOCACHE_ZERO_INIT )
+.OS_Task_Init_Appl10_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_Init_Appl10_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_Init_Appl10_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_Init_Appl10_VAR_NOCACHE_ZERO_INIT);
+_OS_Task_Init_Appl10_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_Init_Appl10_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_NOCACHE_INIT )
+.OS_Task_Init_Appl10_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Task_Init_Appl10_VAR_FAST_NOCACHE_START = ADDR(.OS_Task_Init_Appl10_VAR_FAST_NOCACHE);
+_OS_Task_Init_Appl10_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Task_Init_Appl10_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_NOCACHE_NOINIT )
+.OS_Task_Init_Appl10_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_Init_Appl10_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Task_Init_Appl10_VAR_FAST_NOCACHE_NOINIT);
+_OS_Task_Init_Appl10_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_Init_Appl10_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_NOCACHE_ZERO_INIT )
+.OS_Task_Init_Appl10_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_Init_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_Init_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_Init_Appl10_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Task_Init_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_Init_Appl10_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL10
+. = ALIGN(4);
+_OS_Task_Init_Appl10_VAR_ALL_END = .-1;
+__OS_Task_Init_Appl10_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL10
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL10_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL10_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL7
+. = ALIGN(4);
+_OS_Task_Init_Appl7_VAR_ALL_START = .;
+__OS_Task_Init_Appl7_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_CACHE_INIT )
+.OS_Task_Init_Appl7_VAR ALIGN(4) :> .
+_OS_Task_Init_Appl7_VAR_START = ADDR(.OS_Task_Init_Appl7_VAR);
+_OS_Task_Init_Appl7_VAR_END = ENDADDR(.OS_Task_Init_Appl7_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_CACHE_NOINIT )
+.OS_Task_Init_Appl7_VAR_NOINIT ALIGN(4) :> .
+_OS_Task_Init_Appl7_VAR_NOINIT_START = ADDR(.OS_Task_Init_Appl7_VAR_NOINIT);
+_OS_Task_Init_Appl7_VAR_NOINIT_END = ENDADDR(.OS_Task_Init_Appl7_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_CACHE_ZERO_INIT )
+.OS_Task_Init_Appl7_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Task_Init_Appl7_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Task_Init_Appl7_VAR_ZERO_INIT_START = ADDR(.OS_Task_Init_Appl7_VAR_ZERO_INIT);
+_OS_Task_Init_Appl7_VAR_ZERO_INIT_END = ENDADDR(.OS_Task_Init_Appl7_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_CACHE_INIT )
+.OS_Task_Init_Appl7_VAR_FAST ALIGN(4) :> .
+_OS_Task_Init_Appl7_VAR_FAST_START = ADDR(.OS_Task_Init_Appl7_VAR_FAST);
+_OS_Task_Init_Appl7_VAR_FAST_END = ENDADDR(.OS_Task_Init_Appl7_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_CACHE_NOINIT )
+.OS_Task_Init_Appl7_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Task_Init_Appl7_VAR_FAST_NOINIT_START = ADDR(.OS_Task_Init_Appl7_VAR_FAST_NOINIT);
+_OS_Task_Init_Appl7_VAR_FAST_NOINIT_END = ENDADDR(.OS_Task_Init_Appl7_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_CACHE_ZERO_INIT )
+.OS_Task_Init_Appl7_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Task_Init_Appl7_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Task_Init_Appl7_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Task_Init_Appl7_VAR_FAST_ZERO_INIT);
+_OS_Task_Init_Appl7_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Task_Init_Appl7_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_NOCACHE_INIT )
+.OS_Task_Init_Appl7_VAR_NOCACHE ALIGN(4) :> .
+_OS_Task_Init_Appl7_VAR_NOCACHE_START = ADDR(.OS_Task_Init_Appl7_VAR_NOCACHE);
+_OS_Task_Init_Appl7_VAR_NOCACHE_END = ENDADDR(.OS_Task_Init_Appl7_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_NOCACHE_NOINIT )
+.OS_Task_Init_Appl7_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_Init_Appl7_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Task_Init_Appl7_VAR_NOCACHE_NOINIT);
+_OS_Task_Init_Appl7_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_Init_Appl7_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_NOCACHE_ZERO_INIT )
+.OS_Task_Init_Appl7_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_Init_Appl7_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_Init_Appl7_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_Init_Appl7_VAR_NOCACHE_ZERO_INIT);
+_OS_Task_Init_Appl7_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_Init_Appl7_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_NOCACHE_INIT )
+.OS_Task_Init_Appl7_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Task_Init_Appl7_VAR_FAST_NOCACHE_START = ADDR(.OS_Task_Init_Appl7_VAR_FAST_NOCACHE);
+_OS_Task_Init_Appl7_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Task_Init_Appl7_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_NOCACHE_NOINIT )
+.OS_Task_Init_Appl7_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_Init_Appl7_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Task_Init_Appl7_VAR_FAST_NOCACHE_NOINIT);
+_OS_Task_Init_Appl7_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_Init_Appl7_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_NOCACHE_ZERO_INIT )
+.OS_Task_Init_Appl7_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_Init_Appl7_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_Init_Appl7_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_Init_Appl7_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Task_Init_Appl7_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_Init_Appl7_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL7
+. = ALIGN(4);
+_OS_Task_Init_Appl7_VAR_ALL_END = .-1;
+__OS_Task_Init_Appl7_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL7
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL7_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL7_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL8
+. = ALIGN(4);
+_OS_Task_Init_Appl8_VAR_ALL_START = .;
+__OS_Task_Init_Appl8_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_CACHE_INIT )
+.OS_Task_Init_Appl8_VAR ALIGN(4) :> .
+_OS_Task_Init_Appl8_VAR_START = ADDR(.OS_Task_Init_Appl8_VAR);
+_OS_Task_Init_Appl8_VAR_END = ENDADDR(.OS_Task_Init_Appl8_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_CACHE_NOINIT )
+.OS_Task_Init_Appl8_VAR_NOINIT ALIGN(4) :> .
+_OS_Task_Init_Appl8_VAR_NOINIT_START = ADDR(.OS_Task_Init_Appl8_VAR_NOINIT);
+_OS_Task_Init_Appl8_VAR_NOINIT_END = ENDADDR(.OS_Task_Init_Appl8_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_CACHE_ZERO_INIT )
+.OS_Task_Init_Appl8_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Task_Init_Appl8_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Task_Init_Appl8_VAR_ZERO_INIT_START = ADDR(.OS_Task_Init_Appl8_VAR_ZERO_INIT);
+_OS_Task_Init_Appl8_VAR_ZERO_INIT_END = ENDADDR(.OS_Task_Init_Appl8_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_CACHE_INIT )
+.OS_Task_Init_Appl8_VAR_FAST ALIGN(4) :> .
+_OS_Task_Init_Appl8_VAR_FAST_START = ADDR(.OS_Task_Init_Appl8_VAR_FAST);
+_OS_Task_Init_Appl8_VAR_FAST_END = ENDADDR(.OS_Task_Init_Appl8_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_CACHE_NOINIT )
+.OS_Task_Init_Appl8_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Task_Init_Appl8_VAR_FAST_NOINIT_START = ADDR(.OS_Task_Init_Appl8_VAR_FAST_NOINIT);
+_OS_Task_Init_Appl8_VAR_FAST_NOINIT_END = ENDADDR(.OS_Task_Init_Appl8_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_CACHE_ZERO_INIT )
+.OS_Task_Init_Appl8_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Task_Init_Appl8_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Task_Init_Appl8_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Task_Init_Appl8_VAR_FAST_ZERO_INIT);
+_OS_Task_Init_Appl8_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Task_Init_Appl8_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_NOCACHE_INIT )
+.OS_Task_Init_Appl8_VAR_NOCACHE ALIGN(4) :> .
+_OS_Task_Init_Appl8_VAR_NOCACHE_START = ADDR(.OS_Task_Init_Appl8_VAR_NOCACHE);
+_OS_Task_Init_Appl8_VAR_NOCACHE_END = ENDADDR(.OS_Task_Init_Appl8_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_NOCACHE_NOINIT )
+.OS_Task_Init_Appl8_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_Init_Appl8_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Task_Init_Appl8_VAR_NOCACHE_NOINIT);
+_OS_Task_Init_Appl8_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_Init_Appl8_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_NOCACHE_ZERO_INIT )
+.OS_Task_Init_Appl8_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_Init_Appl8_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_Init_Appl8_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_Init_Appl8_VAR_NOCACHE_ZERO_INIT);
+_OS_Task_Init_Appl8_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_Init_Appl8_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_NOCACHE_INIT )
+.OS_Task_Init_Appl8_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Task_Init_Appl8_VAR_FAST_NOCACHE_START = ADDR(.OS_Task_Init_Appl8_VAR_FAST_NOCACHE);
+_OS_Task_Init_Appl8_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Task_Init_Appl8_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_NOCACHE_NOINIT )
+.OS_Task_Init_Appl8_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_Init_Appl8_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Task_Init_Appl8_VAR_FAST_NOCACHE_NOINIT);
+_OS_Task_Init_Appl8_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_Init_Appl8_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_NOCACHE_ZERO_INIT )
+.OS_Task_Init_Appl8_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_Init_Appl8_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_Init_Appl8_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_Init_Appl8_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Task_Init_Appl8_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_Init_Appl8_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL8
+. = ALIGN(4);
+_OS_Task_Init_Appl8_VAR_ALL_END = .-1;
+__OS_Task_Init_Appl8_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL8
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL8_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL8_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL9
+. = ALIGN(4);
+_OS_Task_Init_Appl9_VAR_ALL_START = .;
+__OS_Task_Init_Appl9_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_CACHE_INIT )
+.OS_Task_Init_Appl9_VAR ALIGN(4) :> .
+_OS_Task_Init_Appl9_VAR_START = ADDR(.OS_Task_Init_Appl9_VAR);
+_OS_Task_Init_Appl9_VAR_END = ENDADDR(.OS_Task_Init_Appl9_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_CACHE_NOINIT )
+.OS_Task_Init_Appl9_VAR_NOINIT ALIGN(4) :> .
+_OS_Task_Init_Appl9_VAR_NOINIT_START = ADDR(.OS_Task_Init_Appl9_VAR_NOINIT);
+_OS_Task_Init_Appl9_VAR_NOINIT_END = ENDADDR(.OS_Task_Init_Appl9_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_CACHE_ZERO_INIT )
+.OS_Task_Init_Appl9_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Task_Init_Appl9_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Task_Init_Appl9_VAR_ZERO_INIT_START = ADDR(.OS_Task_Init_Appl9_VAR_ZERO_INIT);
+_OS_Task_Init_Appl9_VAR_ZERO_INIT_END = ENDADDR(.OS_Task_Init_Appl9_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_CACHE_INIT )
+.OS_Task_Init_Appl9_VAR_FAST ALIGN(4) :> .
+_OS_Task_Init_Appl9_VAR_FAST_START = ADDR(.OS_Task_Init_Appl9_VAR_FAST);
+_OS_Task_Init_Appl9_VAR_FAST_END = ENDADDR(.OS_Task_Init_Appl9_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_CACHE_NOINIT )
+.OS_Task_Init_Appl9_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Task_Init_Appl9_VAR_FAST_NOINIT_START = ADDR(.OS_Task_Init_Appl9_VAR_FAST_NOINIT);
+_OS_Task_Init_Appl9_VAR_FAST_NOINIT_END = ENDADDR(.OS_Task_Init_Appl9_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_CACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_CACHE_ZERO_INIT )
+.OS_Task_Init_Appl9_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Task_Init_Appl9_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Task_Init_Appl9_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Task_Init_Appl9_VAR_FAST_ZERO_INIT);
+_OS_Task_Init_Appl9_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Task_Init_Appl9_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_NOCACHE_INIT )
+.OS_Task_Init_Appl9_VAR_NOCACHE ALIGN(4) :> .
+_OS_Task_Init_Appl9_VAR_NOCACHE_START = ADDR(.OS_Task_Init_Appl9_VAR_NOCACHE);
+_OS_Task_Init_Appl9_VAR_NOCACHE_END = ENDADDR(.OS_Task_Init_Appl9_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_NOCACHE_NOINIT )
+.OS_Task_Init_Appl9_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_Init_Appl9_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Task_Init_Appl9_VAR_NOCACHE_NOINIT);
+_OS_Task_Init_Appl9_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_Init_Appl9_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_NOCACHE_ZERO_INIT )
+.OS_Task_Init_Appl9_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_Init_Appl9_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_Init_Appl9_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_Init_Appl9_VAR_NOCACHE_ZERO_INIT);
+_OS_Task_Init_Appl9_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_Init_Appl9_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_NOCACHE_INIT )
+.OS_Task_Init_Appl9_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Task_Init_Appl9_VAR_FAST_NOCACHE_START = ADDR(.OS_Task_Init_Appl9_VAR_FAST_NOCACHE);
+_OS_Task_Init_Appl9_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Task_Init_Appl9_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_NOCACHE_NOINIT )
+.OS_Task_Init_Appl9_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Task_Init_Appl9_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Task_Init_Appl9_VAR_FAST_NOCACHE_NOINIT);
+_OS_Task_Init_Appl9_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Task_Init_Appl9_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_TASK ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9 ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_NOCACHE_ZERO_INIT )
+.OS_Task_Init_Appl9_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Task_Init_Appl9_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Task_Init_Appl9_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Task_Init_Appl9_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Task_Init_Appl9_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Task_Init_Appl9_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL9
+. = ALIGN(4);
+_OS_Task_Init_Appl9_VAR_ALL_END = .-1;
+__OS_Task_Init_Appl9_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL9
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL9_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_CACHE
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_NOCACHE
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_TASK_TASK_INIT_APPL9_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER
+. = ALIGN(4);
+_OS_CounterIsr_OsCounter_VAR_ALL_START = .;
+__OS_CounterIsr_OsCounter_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_CACHE_INIT )
+.OS_CounterIsr_OsCounter_VAR ALIGN(4) :> .
+_OS_CounterIsr_OsCounter_VAR_START = ADDR(.OS_CounterIsr_OsCounter_VAR);
+_OS_CounterIsr_OsCounter_VAR_END = ENDADDR(.OS_CounterIsr_OsCounter_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_CACHE_NOINIT )
+.OS_CounterIsr_OsCounter_VAR_NOINIT ALIGN(4) :> .
+_OS_CounterIsr_OsCounter_VAR_NOINIT_START = ADDR(.OS_CounterIsr_OsCounter_VAR_NOINIT);
+_OS_CounterIsr_OsCounter_VAR_NOINIT_END = ENDADDR(.OS_CounterIsr_OsCounter_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_CACHE_ZERO_INIT )
+.OS_CounterIsr_OsCounter_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_CounterIsr_OsCounter_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_CounterIsr_OsCounter_VAR_ZERO_INIT_START = ADDR(.OS_CounterIsr_OsCounter_VAR_ZERO_INIT);
+_OS_CounterIsr_OsCounter_VAR_ZERO_INIT_END = ENDADDR(.OS_CounterIsr_OsCounter_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_CACHE_INIT )
+.OS_CounterIsr_OsCounter_VAR_FAST ALIGN(4) :> .
+_OS_CounterIsr_OsCounter_VAR_FAST_START = ADDR(.OS_CounterIsr_OsCounter_VAR_FAST);
+_OS_CounterIsr_OsCounter_VAR_FAST_END = ENDADDR(.OS_CounterIsr_OsCounter_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_CACHE_NOINIT )
+.OS_CounterIsr_OsCounter_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_CounterIsr_OsCounter_VAR_FAST_NOINIT_START = ADDR(.OS_CounterIsr_OsCounter_VAR_FAST_NOINIT);
+_OS_CounterIsr_OsCounter_VAR_FAST_NOINIT_END = ENDADDR(.OS_CounterIsr_OsCounter_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_CACHE_ZERO_INIT )
+.OS_CounterIsr_OsCounter_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_CounterIsr_OsCounter_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_CounterIsr_OsCounter_VAR_FAST_ZERO_INIT_START = ADDR(.OS_CounterIsr_OsCounter_VAR_FAST_ZERO_INIT);
+_OS_CounterIsr_OsCounter_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_CounterIsr_OsCounter_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_NOCACHE_INIT )
+.OS_CounterIsr_OsCounter_VAR_NOCACHE ALIGN(4) :> .
+_OS_CounterIsr_OsCounter_VAR_NOCACHE_START = ADDR(.OS_CounterIsr_OsCounter_VAR_NOCACHE);
+_OS_CounterIsr_OsCounter_VAR_NOCACHE_END = ENDADDR(.OS_CounterIsr_OsCounter_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_NOCACHE_NOINIT )
+.OS_CounterIsr_OsCounter_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_CounterIsr_OsCounter_VAR_NOCACHE_NOINIT_START = ADDR(.OS_CounterIsr_OsCounter_VAR_NOCACHE_NOINIT);
+_OS_CounterIsr_OsCounter_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_CounterIsr_OsCounter_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_NOCACHE_ZERO_INIT )
+.OS_CounterIsr_OsCounter_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_CounterIsr_OsCounter_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_CounterIsr_OsCounter_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_CounterIsr_OsCounter_VAR_NOCACHE_ZERO_INIT);
+_OS_CounterIsr_OsCounter_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_CounterIsr_OsCounter_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_NOCACHE_INIT )
+.OS_CounterIsr_OsCounter_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_CounterIsr_OsCounter_VAR_FAST_NOCACHE_START = ADDR(.OS_CounterIsr_OsCounter_VAR_FAST_NOCACHE);
+_OS_CounterIsr_OsCounter_VAR_FAST_NOCACHE_END = ENDADDR(.OS_CounterIsr_OsCounter_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_NOCACHE_NOINIT )
+.OS_CounterIsr_OsCounter_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_CounterIsr_OsCounter_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_CounterIsr_OsCounter_VAR_FAST_NOCACHE_NOINIT);
+_OS_CounterIsr_OsCounter_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_CounterIsr_OsCounter_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_NOCACHE_ZERO_INIT )
+.OS_CounterIsr_OsCounter_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_CounterIsr_OsCounter_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_CounterIsr_OsCounter_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_CounterIsr_OsCounter_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_CounterIsr_OsCounter_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_CounterIsr_OsCounter_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER
+. = ALIGN(4);
+_OS_CounterIsr_OsCounter_VAR_ALL_END = .-1;
+__OS_CounterIsr_OsCounter_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER
+#endif
+
+#ifdef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR
+# undef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_CACHE
+# undef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_CACHE_INIT
+# undef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_NOCACHE
+# undef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR
+# undef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_CACHE
+# undef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_NOCACHE
+# undef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_COUNTERISR_OSCOUNTER_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQLINE0
+. = ALIGN(4);
+_OS_Fr_IrqLine0_VAR_ALL_START = .;
+__OS_Fr_IrqLine0_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0 ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_FAR ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_CACHE_INIT )
+.OS_Fr_IrqLine0_VAR ALIGN(4) :> .
+_OS_Fr_IrqLine0_VAR_START = ADDR(.OS_Fr_IrqLine0_VAR);
+_OS_Fr_IrqLine0_VAR_END = ENDADDR(.OS_Fr_IrqLine0_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0 ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_FAR ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_CACHE_NOINIT )
+.OS_Fr_IrqLine0_VAR_NOINIT ALIGN(4) :> .
+_OS_Fr_IrqLine0_VAR_NOINIT_START = ADDR(.OS_Fr_IrqLine0_VAR_NOINIT);
+_OS_Fr_IrqLine0_VAR_NOINIT_END = ENDADDR(.OS_Fr_IrqLine0_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0 ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_FAR ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_CACHE_ZERO_INIT )
+.OS_Fr_IrqLine0_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Fr_IrqLine0_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Fr_IrqLine0_VAR_ZERO_INIT_START = ADDR(.OS_Fr_IrqLine0_VAR_ZERO_INIT);
+_OS_Fr_IrqLine0_VAR_ZERO_INIT_END = ENDADDR(.OS_Fr_IrqLine0_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0 ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_CACHE_INIT )
+.OS_Fr_IrqLine0_VAR_FAST ALIGN(4) :> .
+_OS_Fr_IrqLine0_VAR_FAST_START = ADDR(.OS_Fr_IrqLine0_VAR_FAST);
+_OS_Fr_IrqLine0_VAR_FAST_END = ENDADDR(.OS_Fr_IrqLine0_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0 ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_CACHE_NOINIT )
+.OS_Fr_IrqLine0_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Fr_IrqLine0_VAR_FAST_NOINIT_START = ADDR(.OS_Fr_IrqLine0_VAR_FAST_NOINIT);
+_OS_Fr_IrqLine0_VAR_FAST_NOINIT_END = ENDADDR(.OS_Fr_IrqLine0_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0 ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_CACHE_ZERO_INIT )
+.OS_Fr_IrqLine0_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Fr_IrqLine0_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Fr_IrqLine0_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Fr_IrqLine0_VAR_FAST_ZERO_INIT);
+_OS_Fr_IrqLine0_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Fr_IrqLine0_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0 ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_FAR ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_NOCACHE_INIT )
+.OS_Fr_IrqLine0_VAR_NOCACHE ALIGN(4) :> .
+_OS_Fr_IrqLine0_VAR_NOCACHE_START = ADDR(.OS_Fr_IrqLine0_VAR_NOCACHE);
+_OS_Fr_IrqLine0_VAR_NOCACHE_END = ENDADDR(.OS_Fr_IrqLine0_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0 ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_FAR ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_NOCACHE_NOINIT )
+.OS_Fr_IrqLine0_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Fr_IrqLine0_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Fr_IrqLine0_VAR_NOCACHE_NOINIT);
+_OS_Fr_IrqLine0_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Fr_IrqLine0_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0 ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_FAR ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_NOCACHE_ZERO_INIT )
+.OS_Fr_IrqLine0_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Fr_IrqLine0_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Fr_IrqLine0_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Fr_IrqLine0_VAR_NOCACHE_ZERO_INIT);
+_OS_Fr_IrqLine0_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Fr_IrqLine0_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0 ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_NOCACHE_INIT )
+.OS_Fr_IrqLine0_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Fr_IrqLine0_VAR_FAST_NOCACHE_START = ADDR(.OS_Fr_IrqLine0_VAR_FAST_NOCACHE);
+_OS_Fr_IrqLine0_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Fr_IrqLine0_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0 ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_NOCACHE_NOINIT )
+.OS_Fr_IrqLine0_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Fr_IrqLine0_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Fr_IrqLine0_VAR_FAST_NOCACHE_NOINIT);
+_OS_Fr_IrqLine0_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Fr_IrqLine0_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0 ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_NOCACHE_ZERO_INIT )
+.OS_Fr_IrqLine0_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Fr_IrqLine0_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Fr_IrqLine0_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Fr_IrqLine0_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Fr_IrqLine0_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Fr_IrqLine0_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQLINE0
+. = ALIGN(4);
+_OS_Fr_IrqLine0_VAR_ALL_END = .-1;
+__OS_Fr_IrqLine0_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_ISR_FR_IRQLINE0
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQLINE0_FAR
+# undef OS_LINK_VAR_ISR_FR_IRQLINE0_FAR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_CACHE
+# undef OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_CACHE_INIT
+# undef OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_NOCACHE
+# undef OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_FR_IRQLINE0_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR
+# undef OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_CACHE
+# undef OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_NOCACHE
+# undef OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_FR_IRQLINE0_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQTIMER0
+. = ALIGN(4);
+_OS_Fr_IrqTimer0_VAR_ALL_START = .;
+__OS_Fr_IrqTimer0_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0 ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_CACHE_INIT )
+.OS_Fr_IrqTimer0_VAR ALIGN(4) :> .
+_OS_Fr_IrqTimer0_VAR_START = ADDR(.OS_Fr_IrqTimer0_VAR);
+_OS_Fr_IrqTimer0_VAR_END = ENDADDR(.OS_Fr_IrqTimer0_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0 ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_CACHE_NOINIT )
+.OS_Fr_IrqTimer0_VAR_NOINIT ALIGN(4) :> .
+_OS_Fr_IrqTimer0_VAR_NOINIT_START = ADDR(.OS_Fr_IrqTimer0_VAR_NOINIT);
+_OS_Fr_IrqTimer0_VAR_NOINIT_END = ENDADDR(.OS_Fr_IrqTimer0_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0 ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_CACHE_ZERO_INIT )
+.OS_Fr_IrqTimer0_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_Fr_IrqTimer0_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_Fr_IrqTimer0_VAR_ZERO_INIT_START = ADDR(.OS_Fr_IrqTimer0_VAR_ZERO_INIT);
+_OS_Fr_IrqTimer0_VAR_ZERO_INIT_END = ENDADDR(.OS_Fr_IrqTimer0_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0 ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_CACHE_INIT )
+.OS_Fr_IrqTimer0_VAR_FAST ALIGN(4) :> .
+_OS_Fr_IrqTimer0_VAR_FAST_START = ADDR(.OS_Fr_IrqTimer0_VAR_FAST);
+_OS_Fr_IrqTimer0_VAR_FAST_END = ENDADDR(.OS_Fr_IrqTimer0_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0 ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_CACHE_NOINIT )
+.OS_Fr_IrqTimer0_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_Fr_IrqTimer0_VAR_FAST_NOINIT_START = ADDR(.OS_Fr_IrqTimer0_VAR_FAST_NOINIT);
+_OS_Fr_IrqTimer0_VAR_FAST_NOINIT_END = ENDADDR(.OS_Fr_IrqTimer0_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0 ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_CACHE_ZERO_INIT )
+.OS_Fr_IrqTimer0_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_Fr_IrqTimer0_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_Fr_IrqTimer0_VAR_FAST_ZERO_INIT_START = ADDR(.OS_Fr_IrqTimer0_VAR_FAST_ZERO_INIT);
+_OS_Fr_IrqTimer0_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_Fr_IrqTimer0_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0 ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_NOCACHE_INIT )
+.OS_Fr_IrqTimer0_VAR_NOCACHE ALIGN(4) :> .
+_OS_Fr_IrqTimer0_VAR_NOCACHE_START = ADDR(.OS_Fr_IrqTimer0_VAR_NOCACHE);
+_OS_Fr_IrqTimer0_VAR_NOCACHE_END = ENDADDR(.OS_Fr_IrqTimer0_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0 ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_NOCACHE_NOINIT )
+.OS_Fr_IrqTimer0_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Fr_IrqTimer0_VAR_NOCACHE_NOINIT_START = ADDR(.OS_Fr_IrqTimer0_VAR_NOCACHE_NOINIT);
+_OS_Fr_IrqTimer0_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_Fr_IrqTimer0_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0 ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_NOCACHE_ZERO_INIT )
+.OS_Fr_IrqTimer0_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Fr_IrqTimer0_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Fr_IrqTimer0_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_Fr_IrqTimer0_VAR_NOCACHE_ZERO_INIT);
+_OS_Fr_IrqTimer0_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Fr_IrqTimer0_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0 ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_NOCACHE_INIT )
+.OS_Fr_IrqTimer0_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_Fr_IrqTimer0_VAR_FAST_NOCACHE_START = ADDR(.OS_Fr_IrqTimer0_VAR_FAST_NOCACHE);
+_OS_Fr_IrqTimer0_VAR_FAST_NOCACHE_END = ENDADDR(.OS_Fr_IrqTimer0_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0 ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_NOCACHE_NOINIT )
+.OS_Fr_IrqTimer0_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_Fr_IrqTimer0_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_Fr_IrqTimer0_VAR_FAST_NOCACHE_NOINIT);
+_OS_Fr_IrqTimer0_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_Fr_IrqTimer0_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0 ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_NOCACHE_ZERO_INIT )
+.OS_Fr_IrqTimer0_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_Fr_IrqTimer0_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_Fr_IrqTimer0_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_Fr_IrqTimer0_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_Fr_IrqTimer0_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_Fr_IrqTimer0_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQTIMER0
+. = ALIGN(4);
+_OS_Fr_IrqTimer0_VAR_ALL_END = .-1;
+__OS_Fr_IrqTimer0_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_ISR_FR_IRQTIMER0
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR
+# undef OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_CACHE
+# undef OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_CACHE_INIT
+# undef OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_NOCACHE
+# undef OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_FR_IRQTIMER0_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR
+# undef OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_CACHE
+# undef OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_NOCACHE
+# undef OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_FR_IRQTIMER0_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR
+. = ALIGN(4);
+_OS_MCU_ECM_EIC_CAT2_ISR_VAR_ALL_START = .;
+__OS_MCU_ECM_EIC_CAT2_ISR_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_CACHE_INIT )
+.OS_MCU_ECM_EIC_CAT2_ISR_VAR ALIGN(4) :> .
+_OS_MCU_ECM_EIC_CAT2_ISR_VAR_START = ADDR(.OS_MCU_ECM_EIC_CAT2_ISR_VAR);
+_OS_MCU_ECM_EIC_CAT2_ISR_VAR_END = ENDADDR(.OS_MCU_ECM_EIC_CAT2_ISR_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_CACHE_NOINIT )
+.OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOINIT ALIGN(4) :> .
+_OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOINIT_START = ADDR(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOINIT);
+_OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOINIT_END = ENDADDR(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_CACHE_ZERO_INIT )
+.OS_MCU_ECM_EIC_CAT2_ISR_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_MCU_ECM_EIC_CAT2_ISR_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_MCU_ECM_EIC_CAT2_ISR_VAR_ZERO_INIT_START = ADDR(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_ZERO_INIT);
+_OS_MCU_ECM_EIC_CAT2_ISR_VAR_ZERO_INIT_END = ENDADDR(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_CACHE_INIT )
+.OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST ALIGN(4) :> .
+_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_START = ADDR(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST);
+_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_END = ENDADDR(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_CACHE_NOINIT )
+.OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOINIT_START = ADDR(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOINIT);
+_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOINIT_END = ENDADDR(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_CACHE_ZERO_INIT )
+.OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_ZERO_INIT_START = ADDR(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_ZERO_INIT);
+_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_NOCACHE_INIT )
+.OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOCACHE ALIGN(4) :> .
+_OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOCACHE_START = ADDR(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOCACHE);
+_OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOCACHE_END = ENDADDR(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_NOCACHE_NOINIT )
+.OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOCACHE_NOINIT_START = ADDR(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOCACHE_NOINIT);
+_OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_NOCACHE_ZERO_INIT )
+.OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOCACHE_ZERO_INIT);
+_OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_NOCACHE_INIT )
+.OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOCACHE_START = ADDR(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOCACHE);
+_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOCACHE_END = ENDADDR(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_NOCACHE_NOINIT )
+.OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT);
+_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_NOCACHE_ZERO_INIT )
+.OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_MCU_ECM_EIC_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR
+. = ALIGN(4);
+_OS_MCU_ECM_EIC_CAT2_ISR_VAR_ALL_END = .-1;
+__OS_MCU_ECM_EIC_CAT2_ISR_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR
+# undef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_CACHE
+# undef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_CACHE_INIT
+# undef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_NOCACHE
+# undef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR
+# undef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_CACHE
+# undef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_NOCACHE
+# undef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_MCU_ECM_EIC_CAT2_ISR_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR
+. = ALIGN(4);
+_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_ALL_START = .;
+__OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_CACHE_INIT )
+.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR ALIGN(4) :> .
+_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_START = ADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR);
+_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_END = ENDADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_CACHE_NOINIT )
+.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOINIT ALIGN(4) :> .
+_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOINIT_START = ADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOINIT);
+_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOINIT_END = ENDADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_CACHE_ZERO_INIT )
+.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_ZERO_INIT_START = ADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_ZERO_INIT);
+_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_ZERO_INIT_END = ENDADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_CACHE_INIT )
+.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST ALIGN(4) :> .
+_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_START = ADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST);
+_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_END = ENDADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_CACHE_NOINIT )
+.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOINIT_START = ADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOINIT);
+_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOINIT_END = ENDADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_CACHE_ZERO_INIT )
+.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_ZERO_INIT_START = ADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_ZERO_INIT);
+_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_NOCACHE_INIT )
+.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOCACHE ALIGN(4) :> .
+_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOCACHE_START = ADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOCACHE);
+_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOCACHE_END = ENDADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_NOCACHE_NOINIT )
+.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOCACHE_NOINIT_START = ADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOCACHE_NOINIT);
+_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_NOCACHE_ZERO_INIT )
+.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOCACHE_ZERO_INIT);
+_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_NOCACHE_INIT )
+.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOCACHE_START = ADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOCACHE);
+_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOCACHE_END = ENDADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_NOCACHE_NOINIT )
+.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT);
+_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_NOCACHE_ZERO_INIT )
+.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR
+. = ALIGN(4);
+_OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_ALL_END = .-1;
+__OS_SPI_CSIG0_TIC_CAT2_ISR_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_CACHE
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_CACHE_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_NOCACHE
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_CACHE
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_NOCACHE
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIC_CAT2_ISR_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR
+. = ALIGN(4);
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_ALL_START = .;
+__OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_CACHE_INIT )
+.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR ALIGN(4) :> .
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_START = ADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR);
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_END = ENDADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_CACHE_NOINIT )
+.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOINIT ALIGN(4) :> .
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOINIT_START = ADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOINIT);
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOINIT_END = ENDADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_CACHE_ZERO_INIT )
+.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_ZERO_INIT_START = ADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_ZERO_INIT);
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_ZERO_INIT_END = ENDADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_CACHE_INIT )
+.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST ALIGN(4) :> .
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_START = ADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST);
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_END = ENDADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_CACHE_NOINIT )
+.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOINIT_START = ADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOINIT);
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOINIT_END = ENDADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_CACHE_ZERO_INIT )
+.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_ZERO_INIT_START = ADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_ZERO_INIT);
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_NOCACHE_INIT )
+.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOCACHE ALIGN(4) :> .
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOCACHE_START = ADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOCACHE);
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOCACHE_END = ENDADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_NOCACHE_NOINIT )
+.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOCACHE_NOINIT_START = ADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOCACHE_NOINIT);
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_NOCACHE_ZERO_INIT )
+.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOCACHE_ZERO_INIT);
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_NOCACHE_INIT )
+.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOCACHE_START = ADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOCACHE);
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOCACHE_END = ENDADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_NOCACHE_NOINIT )
+.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT);
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_NOCACHE_ZERO_INIT )
+.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR
+. = ALIGN(4);
+_OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_ALL_END = .-1;
+__OS_SPI_CSIG0_TIRE_CAT2_ISR_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_CACHE
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_CACHE_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_NOCACHE
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_CACHE
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_NOCACHE
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIRE_CAT2_ISR_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR
+. = ALIGN(4);
+_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_ALL_START = .;
+__OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_CACHE_INIT )
+.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR ALIGN(4) :> .
+_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_START = ADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR);
+_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_END = ENDADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_CACHE_NOINIT )
+.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOINIT ALIGN(4) :> .
+_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOINIT_START = ADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOINIT);
+_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOINIT_END = ENDADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_CACHE_ZERO_INIT )
+.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_ZERO_INIT_START = ADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_ZERO_INIT);
+_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_ZERO_INIT_END = ENDADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_CACHE_INIT )
+.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST ALIGN(4) :> .
+_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_START = ADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST);
+_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_END = ENDADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_CACHE_NOINIT )
+.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOINIT_START = ADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOINIT);
+_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOINIT_END = ENDADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_CACHE_ZERO_INIT )
+.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_ZERO_INIT_START = ADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_ZERO_INIT);
+_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_NOCACHE_INIT )
+.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOCACHE ALIGN(4) :> .
+_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOCACHE_START = ADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOCACHE);
+_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOCACHE_END = ENDADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_NOCACHE_NOINIT )
+.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOCACHE_NOINIT_START = ADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOCACHE_NOINIT);
+_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_NOCACHE_ZERO_INIT )
+.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOCACHE_ZERO_INIT);
+_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_NOCACHE_INIT )
+.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOCACHE_START = ADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOCACHE);
+_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOCACHE_END = ENDADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_NOCACHE_NOINIT )
+.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT);
+_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_NOCACHE_ZERO_INIT )
+.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR
+. = ALIGN(4);
+_OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_ALL_END = .-1;
+__OS_SPI_CSIG0_TIR_CAT2_ISR_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_CACHE
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_CACHE_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_NOCACHE
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_CACHE
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_NOCACHE
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIG0_TIR_CAT2_ISR_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR
+. = ALIGN(4);
+_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_ALL_START = .;
+__OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_CACHE_INIT )
+.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR ALIGN(4) :> .
+_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_START = ADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR);
+_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_END = ENDADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_CACHE_NOINIT )
+.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOINIT ALIGN(4) :> .
+_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOINIT_START = ADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOINIT);
+_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOINIT_END = ENDADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_CACHE_ZERO_INIT )
+.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_ZERO_INIT_START = ADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_ZERO_INIT);
+_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_ZERO_INIT_END = ENDADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_CACHE_INIT )
+.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST ALIGN(4) :> .
+_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_START = ADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST);
+_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_END = ENDADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_CACHE_NOINIT )
+.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOINIT_START = ADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOINIT);
+_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOINIT_END = ENDADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_CACHE_ZERO_INIT )
+.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_ZERO_INIT_START = ADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_ZERO_INIT);
+_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_NOCACHE_INIT )
+.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOCACHE ALIGN(4) :> .
+_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOCACHE_START = ADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOCACHE);
+_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOCACHE_END = ENDADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_NOCACHE_NOINIT )
+.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOCACHE_NOINIT_START = ADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOCACHE_NOINIT);
+_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_NOCACHE_ZERO_INIT )
+.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOCACHE_ZERO_INIT);
+_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_NOCACHE_INIT )
+.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOCACHE_START = ADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOCACHE);
+_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOCACHE_END = ENDADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_NOCACHE_NOINIT )
+.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT);
+_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_NOCACHE_ZERO_INIT )
+.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR
+. = ALIGN(4);
+_OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_ALL_END = .-1;
+__OS_SPI_CSIH2_TIC_CAT2_ISR_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_CACHE
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_CACHE_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_NOCACHE
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_CACHE
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_NOCACHE
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIC_CAT2_ISR_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR
+. = ALIGN(4);
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_ALL_START = .;
+__OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_CACHE_INIT )
+.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR ALIGN(4) :> .
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_START = ADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR);
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_END = ENDADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_CACHE_NOINIT )
+.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOINIT ALIGN(4) :> .
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOINIT_START = ADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOINIT);
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOINIT_END = ENDADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_CACHE_ZERO_INIT )
+.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_ZERO_INIT_START = ADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_ZERO_INIT);
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_ZERO_INIT_END = ENDADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_CACHE_INIT )
+.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST ALIGN(4) :> .
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_START = ADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST);
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_END = ENDADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_CACHE_NOINIT )
+.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOINIT_START = ADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOINIT);
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOINIT_END = ENDADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_CACHE_ZERO_INIT )
+.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_ZERO_INIT_START = ADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_ZERO_INIT);
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_NOCACHE_INIT )
+.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOCACHE ALIGN(4) :> .
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOCACHE_START = ADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOCACHE);
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOCACHE_END = ENDADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_NOCACHE_NOINIT )
+.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOCACHE_NOINIT_START = ADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOCACHE_NOINIT);
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_NOCACHE_ZERO_INIT )
+.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOCACHE_ZERO_INIT);
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_NOCACHE_INIT )
+.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOCACHE_START = ADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOCACHE);
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOCACHE_END = ENDADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_NOCACHE_NOINIT )
+.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT);
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_NOCACHE_ZERO_INIT )
+.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR
+. = ALIGN(4);
+_OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_ALL_END = .-1;
+__OS_SPI_CSIH2_TIRE_CAT2_ISR_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_CACHE
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_CACHE_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_NOCACHE
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_CACHE
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_NOCACHE
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIRE_CAT2_ISR_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR
+. = ALIGN(4);
+_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_ALL_START = .;
+__OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_ALL_START = .;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_CACHE_INIT )
+.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR ALIGN(4) :> .
+_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_START = ADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR);
+_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_END = ENDADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_CACHE_NOINIT )
+.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOINIT ALIGN(4) :> .
+_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOINIT_START = ADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOINIT);
+_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOINIT_END = ENDADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_CACHE_ZERO_INIT )
+.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_ZERO_INIT ALIGN(4) :> .
+.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_ZERO_INIT_bss CLEAR :> .
+_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_ZERO_INIT_START = ADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_ZERO_INIT);
+_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_ZERO_INIT_END = ENDADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_CACHE_INIT )
+.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST ALIGN(4) :> .
+_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_START = ADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST);
+_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_END = ENDADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_CACHE_NOINIT )
+.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOINIT ALIGN(4) :> .
+_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOINIT_START = ADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOINIT);
+_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOINIT_END = ENDADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_CACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_CACHE_ZERO_INIT )
+.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_ZERO_INIT ALIGN(4) :> .
+.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_ZERO_INIT_bss CLEAR :> .
+_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_ZERO_INIT_START = ADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_ZERO_INIT);
+_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_ZERO_INIT_END = ENDADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_NOCACHE_INIT )
+.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOCACHE ALIGN(4) :> .
+_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOCACHE_START = ADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOCACHE);
+_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOCACHE_END = ENDADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_NOCACHE_NOINIT )
+.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOCACHE_NOINIT_START = ADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOCACHE_NOINIT);
+_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOCACHE_NOINIT_END = ENDADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_NOCACHE_ZERO_INIT )
+.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_START = ADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOCACHE_ZERO_INIT);
+_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_NOCACHE_INIT )
+.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOCACHE ALIGN(4) :> .
+_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOCACHE_START = ADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOCACHE);
+_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOCACHE_END = ENDADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOCACHE) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_NOCACHE_NOINIT )
+.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT ALIGN(4) :> .
+_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT_START = ADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT);
+_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT_END = ENDADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOCACHE_NOINIT) - 1;
+#endif
+
+#if defined ( OS_LINK_VAR ) || defined ( OS_LINK_VAR_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_NOCACHE ) || defined ( OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_NOCACHE_ZERO_INIT )
+.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT ALIGN(4) :> .
+.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_bss CLEAR :> .
+_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_START = ADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT);
+_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_END = ENDADDR(.OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_FAST_NOCACHE_ZERO_INIT_bss) - 1;
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR
+. = ALIGN(4);
+_OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_ALL_END = .-1;
+__OS_SPI_CSIH2_TIR_CAT2_ISR_VAR_ALL_END = .-1;
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_CACHE
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_CACHE_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_NOCACHE
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_FAR_NOCACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_CACHE
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_CACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_CACHE_ZERO_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_NOCACHE
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_NOCACHE_ZERO_INIT
+# undef OS_LINK_VAR_ISR_SPI_CSIH2_TIR_CAT2_ISR_NEAR_NOCACHE_ZERO_INIT
+#endif
+
+
+#ifdef OS_LINK_VAR
+# undef OS_LINK_VAR
+#endif
+
+#ifdef OS_LINK_VAR_APP
+# undef OS_LINK_VAR_APP
+#endif
+
+#ifdef OS_LINK_VAR_TASK
+# undef OS_LINK_VAR_TASK
+#endif
+
+#ifdef OS_LINK_VAR_ISR
+# undef OS_LINK_VAR_ISR
+#endif
+
+#ifdef OS_LINK_KERNEL_TRACE
+# undef OS_LINK_KERNEL_TRACE
+#endif
+
+#ifdef OS_LINK_KERNEL_TRACE_FAR
+# undef OS_LINK_KERNEL_TRACE_FAR
+#endif
+
+#ifdef OS_LINK_KERNEL_TRACE_NEAR
+# undef OS_LINK_KERNEL_TRACE_NEAR
+#endif
+
+#ifdef OS_LINK_KERNEL_BARRIERS
+# undef OS_LINK_KERNEL_BARRIERS
+#endif
+
+#ifdef OS_LINK_KERNEL_BARRIERS_FAR
+# undef OS_LINK_KERNEL_BARRIERS_FAR
+#endif
+
+#ifdef OS_LINK_KERNEL_BARRIERS_NEAR
+# undef OS_LINK_KERNEL_BARRIERS_NEAR
+#endif
+
+#ifdef OS_LINK_KERNEL_CORESTATUS
+# undef OS_LINK_KERNEL_CORESTATUS
+#endif
+
+#ifdef OS_LINK_KERNEL_CORESTATUS_FAR
+# undef OS_LINK_KERNEL_CORESTATUS_FAR
+#endif
+
+#ifdef OS_LINK_KERNEL_CORESTATUS_NEAR
+# undef OS_LINK_KERNEL_CORESTATUS_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_KERNEL
+# undef OS_LINK_VAR_KERNEL
+#endif
+
+#ifdef OS_LINK_VAR_KERNEL_FAR
+# undef OS_LINK_VAR_KERNEL_FAR
+#endif
+
+#ifdef OS_LINK_VAR_KERNEL_FAR_CACHE
+# undef OS_LINK_VAR_KERNEL_FAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_KERNEL_FAR_CACHE_INIT
+# undef OS_LINK_VAR_KERNEL_FAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_KERNEL_FAR_CACHE_NOINIT
+# undef OS_LINK_VAR_KERNEL_FAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_KERNEL_FAR_NOCACHE
+# undef OS_LINK_VAR_KERNEL_FAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_KERNEL_FAR_NOCACHE_INIT
+# undef OS_LINK_VAR_KERNEL_FAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_KERNEL_FAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_KERNEL_FAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_KERNEL_NEAR
+# undef OS_LINK_VAR_KERNEL_NEAR
+#endif
+
+#ifdef OS_LINK_VAR_KERNEL_NEAR_CACHE
+# undef OS_LINK_VAR_KERNEL_NEAR_CACHE
+#endif
+
+#ifdef OS_LINK_VAR_KERNEL_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_KERNEL_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_KERNEL_NEAR_CACHE_NOINIT
+# undef OS_LINK_VAR_KERNEL_NEAR_CACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_KERNEL_NEAR_NOCACHE
+# undef OS_LINK_VAR_KERNEL_NEAR_NOCACHE
+#endif
+
+#ifdef OS_LINK_VAR_KERNEL_NEAR_NOCACHE_INIT
+# undef OS_LINK_VAR_KERNEL_NEAR_NOCACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_KERNEL_NEAR_NOCACHE_NOINIT
+# undef OS_LINK_VAR_KERNEL_NEAR_NOCACHE_NOINIT
+#endif
+
+#ifdef OS_LINK_VAR_KERNEL_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_KERNEL_NEAR_CACHE_INIT
+#endif
+
+#ifdef OS_LINK_VAR_KERNEL_NEAR_CACHE_INIT
+# undef OS_LINK_VAR_KERNEL_NEAR_CACHE_INIT
+#endif
+
+

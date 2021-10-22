@@ -1,0 +1,1025 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+*  \file
+*
+*  \brief       BMW SWC Darh
+*
+*  This file contains the implementation of the BMW SWC Darh
+*  for usage in the BMW Platform Software.
+*
+*  \project     BMW Platform Software
+*
+*  \copyright   BMW AG 2017
+*
+*  \version     5.1.0
+*
+*  \remarks     -
+*
+*/
+-->
+<!-- !LINKSTO EB_DARH_PACKAGE_STRUCT, 1 -->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-2-2_STRICT_COMPACT.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>BMW</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>Platform</SHORT-NAME>
+          <AR-PACKAGES>
+
+            <!-- Darh -->
+            <AR-PACKAGE>
+              <SHORT-NAME>Darh</SHORT-NAME>
+              <AR-PACKAGES>
+
+                <!-- Darh SwComponentTypes -->
+                <AR-PACKAGE>
+                  <SHORT-NAME>SwComponentTypes</SHORT-NAME>
+                  <ELEMENTS>
+
+                    <APPLICATION-SW-COMPONENT-TYPE>
+                      <SHORT-NAME>Darh</SHORT-NAME>
+
+                      <!-- Darh ports -->
+                      <!-- !LINKSTO DARH_083,9 -->
+                      <PORTS>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>NvMNotifyJobFinished</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Darh/NvM/PortInterfaces/NvMNotifyJobFinished</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>Com</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE"
+                            >/BMW/Platform/Darh/Tp/PortInterfaces/Darh_Com</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>RoeStatePort</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Darh/PortInterfaces/RoeStateInterface</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>DmIsDtcActiveResponse</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE"
+                            >/BMW/Platform/Darh/Dcm/PortInterfaces/DataServices_ActivelyReportedDtc</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <!-- !LINKSTO DARH_080,1 -->
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>GeneralDiagnosticInfoPort</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE"
+                            >/BMW/Platform/Darh/Dem/PortInterfaces/Darh_GeneralDiagnosticInfo</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <!-- !LINKSTO DARH_081,1 -->
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>DmTestAppl</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE"
+                            >/BMW/Platform/Darh/Dem/PortInterfaces/Darh_DiagnosticMonitor</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>ApplicationDTCInfoPort</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE"
+                            >/BMW/Platform/Darh/Dem/PortInterfaces/Darh_DiagnosticInfo</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <!-- !LINKSTO DARH_081,1 -->
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>DmTestCom</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE"
+                            >/BMW/Platform/Darh/Dem/PortInterfaces/Darh_DiagnosticMonitor</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>NetworkDTCInfoPort</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE"
+                            >/BMW/Platform/Darh/Dem/PortInterfaces/Darh_DiagnosticInfo</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>EventDataChangedPort</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE"
+                            >/BMW/Platform/Darh/Dem/PortInterfaces/GeneralCallbackEventDataChanged</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>ReportErrorMode</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="MODE-SWITCH-INTERFACE"
+                            >/BMW/Platform/Darh/PortInterfaces/DarhReportErrorModeInterface</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>ControlPort</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE"
+                            >/BMW/Platform/Darh/PortInterfaces/DarhControlInterface</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>DmClientTriggerDtcEntry</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE"
+                            >/BMW/Platform/Darh/Dcm/PortInterfaces/RoutineServices_TriggerDTC</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>StartStopRoutineDiagnoseMaster</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE"
+                            >/BMW/Platform/Darh/Dcm/PortInterfaces/RoutineServices_StartStopRoutineDiagnoseMaster</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>LifeCycleRequest</SHORT-NAME>
+                          <REQUIRED-COM-SPECS>
+                            <NONQUEUED-RECEIVER-COM-SPEC>
+                              <DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Darh/PortInterfaces/ILifeCycleRequest/requestMode</DATA-ELEMENT-REF>
+                              <HANDLE-OUT-OF-RANGE>NONE</HANDLE-OUT-OF-RANGE>
+                              <USES-END-TO-END-PROTECTION>false</USES-END-TO-END-PROTECTION>
+                              <ALIVE-TIMEOUT>0.0</ALIVE-TIMEOUT>
+                              <ENABLE-UPDATE>false</ENABLE-UPDATE>
+                              <HANDLE-NEVER-RECEIVED>false</HANDLE-NEVER-RECEIVED>
+                              <HANDLE-TIMEOUT-TYPE>NONE</HANDLE-TIMEOUT-TYPE>
+                              <INIT-VALUE>
+                                <NUMERICAL-VALUE-SPECIFICATION>
+                                  <SHORT-LABEL>DARH_STOPPED</SHORT-LABEL>
+                                  <VALUE>2</VALUE>
+                                </NUMERICAL-VALUE-SPECIFICATION>
+                              </INIT-VALUE>
+                            </NONQUEUED-RECEIVER-COM-SPEC>
+                          </REQUIRED-COM-SPECS>
+                          <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE"
+                            >/BMW/Platform/Darh/PortInterfaces/ILifeCycleRequest</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <PR-PORT-PROTOTYPE>
+                          <SHORT-NAME>LifeCycle</SHORT-NAME>
+                          <PROVIDED-COM-SPECS>
+                             <MODE-SWITCH-SENDER-COM-SPEC>
+                                <ENHANCED-MODE-API>true</ENHANCED-MODE-API>
+                                <MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Darh/PortInterfaces/ILifeCycle/Mode</MODE-GROUP-REF>
+                                <QUEUE-LENGTH>2</QUEUE-LENGTH>
+                             </MODE-SWITCH-SENDER-COM-SPEC>
+                          </PROVIDED-COM-SPECS>
+                          <PROVIDED-REQUIRED-INTERFACE-TREF DEST="MODE-SWITCH-INTERFACE">/BMW/Platform/Darh/PortInterfaces/ILifeCycle</PROVIDED-REQUIRED-INTERFACE-TREF>
+                        </PR-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>DiagnoseMasterStatus</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE"
+                            >/BMW/Platform/Darh/NvM/PortInterfaces/Darh_NvMService</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <!-- !LINKSTO DARH_178,2 -->
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>ErrorQueueBlock</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE"
+                            >/BMW/Platform/Darh/NvM/PortInterfaces/Darh_NvMService</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <!-- !LINKSTO DARH_194,1 -->
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>ReportDynamicallyEventPort</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE"
+                            >/BMW/Platform/Darh/PortInterfaces/DarhReportDynamicallyEvent</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                      </PORTS>
+
+                      <!-- Darh InternalBehaviors -->
+                      <INTERNAL-BEHAVIORS>
+                        <SWC-INTERNAL-BEHAVIOR>
+                          <SHORT-NAME>InternalBehavior</SHORT-NAME>
+
+                          <!-- Darh DataTypeMappingRefs -->
+                          <DATA-TYPE-MAPPING-REFS>
+                            <DATA-TYPE-MAPPING-REF DEST="DATA-TYPE-MAPPING-SET"
+                              >/BMW/Platform/Darh/DataTypeMappingSets/Darh_ModeRequestTypeMappings</DATA-TYPE-MAPPING-REF>
+                            <DATA-TYPE-MAPPING-REF DEST="DATA-TYPE-MAPPING-SET"
+                              >/BMW/Platform/Darh/Dcm/DataTypeMappingSets/Dcm_ModeRequestTypeMappings</DATA-TYPE-MAPPING-REF>
+                          </DATA-TYPE-MAPPING-REFS>
+
+                          <!-- Darh ExclusiveAreas -->
+                          <EXCLUSIVE-AREAS>
+                            <EXCLUSIVE-AREA>
+                              <SHORT-NAME>ExclusiveArea_0</SHORT-NAME>
+                            </EXCLUSIVE-AREA>
+                          </EXCLUSIVE-AREAS>
+
+                          <!-- Darh Events -->
+                          <!-- !LINKSTO DARH_084,9 -->
+                          <EVENTS>
+                            <DATA-RECEIVED-EVENT>
+                              <SHORT-NAME>LifeCycleRequest</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Darh/SwComponentTypes/Darh/InternalBehavior/LifeCycleHandler</START-ON-EVENT-REF>
+                              <DATA-IREF>
+                                <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Darh/SwComponentTypes/Darh/LifeCycleRequest</CONTEXT-R-PORT-REF>
+                                <TARGET-DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Darh/PortInterfaces/ILifeCycleRequest/requestMode</TARGET-DATA-ELEMENT-REF>
+                              </DATA-IREF>
+                            </DATA-RECEIVED-EVENT>
+
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>E_WriteDataBlockNotification</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Darh/SwComponentTypes/Darh/InternalBehavior/WriteDataBlockNotification</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Darh/SwComponentTypes/Darh/NvMNotifyJobFinished</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Darh/NvM/PortInterfaces/NvMNotifyJobFinished/JobFinished</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>OperationInvokedEvent_SetRoeSuspended</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY"
+                                >/BMW/Platform/Darh/SwComponentTypes/Darh/InternalBehavior/SetRoeSuspended</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE"
+                                  >/BMW/Platform/Darh/SwComponentTypes/Darh/ControlPort</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION"
+                                  >/BMW/Platform/Darh/PortInterfaces/DarhControlInterface/SetRoeSuspended</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>OperationInvokedEvent_EventDataChanged</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY"
+                                >/BMW/Platform/Darh/SwComponentTypes/Darh/InternalBehavior/EventDataChanged</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE"
+                                  >/BMW/Platform/Darh/SwComponentTypes/Darh/EventDataChangedPort</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION"
+                                  >/BMW/Platform/Darh/Dem/PortInterfaces/GeneralCallbackEventDataChanged/EventDataChanged</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+
+                            <TIMING-EVENT>
+                              <SHORT-NAME>TimingEvent</SHORT-NAME>
+                              <DISABLED-MODE-IREFS>
+                                <DISABLED-MODE-IREF>
+                                  <CONTEXT-PORT-REF DEST="PR-PORT-PROTOTYPE"
+                                    >/BMW/Platform/Darh/SwComponentTypes/Darh/LifeCycle</CONTEXT-PORT-REF>
+                                  <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF
+                                    DEST="MODE-DECLARATION-GROUP-PROTOTYPE"
+                                    >/BMW/Platform/Darh/PortInterfaces/ILifeCycle/Mode</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                                  <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION"
+                                    >/BMW/Platform/Darh/ModeDeclarationGroups/Darh_LifeCycle/DARH_INITIALIZED</TARGET-MODE-DECLARATION-REF>
+                                </DISABLED-MODE-IREF>
+                                <DISABLED-MODE-IREF>
+                                  <CONTEXT-PORT-REF DEST="PR-PORT-PROTOTYPE"
+                                    >/BMW/Platform/Darh/SwComponentTypes/Darh/LifeCycle</CONTEXT-PORT-REF>
+                                  <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF
+                                    DEST="MODE-DECLARATION-GROUP-PROTOTYPE"
+                                    >/BMW/Platform/Darh/PortInterfaces/ILifeCycle/Mode</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                                  <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION"
+                                    >/BMW/Platform/Darh/ModeDeclarationGroups/Darh_LifeCycle/DARH_STOPPED</TARGET-MODE-DECLARATION-REF>
+                                </DISABLED-MODE-IREF>
+                              </DISABLED-MODE-IREFS>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY"
+                                >/BMW/Platform/Darh/SwComponentTypes/Darh/InternalBehavior/QueueHandler</START-ON-EVENT-REF>
+                              <PERIOD>1.0</PERIOD>
+                            </TIMING-EVENT>
+
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>OperationInvokedEvent_ConditionCheckReadActivelyReportedDtc</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY"
+                                >/BMW/Platform/Darh/SwComponentTypes/Darh/InternalBehavior/ConditionCheckReadActivelyReportedDtc</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE"
+                                  >/BMW/Platform/Darh/SwComponentTypes/Darh/DmIsDtcActiveResponse</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION"
+                                  >/BMW/Platform/Darh/Dcm/PortInterfaces/DataServices_ActivelyReportedDtc/ConditionCheckRead</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>OperationInvokedEvent_ReadActivelyReportedDtcLength</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY"
+                                >/BMW/Platform/Darh/SwComponentTypes/Darh/InternalBehavior/ReadActivelyReportedDtcLength</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE"
+                                  >/BMW/Platform/Darh/SwComponentTypes/Darh/DmIsDtcActiveResponse</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION"
+                                  >/BMW/Platform/Darh/Dcm/PortInterfaces/DataServices_ActivelyReportedDtc/ReadDataLength</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>OperationInvokedEvent_ReadActivelyReportedDtc</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY"
+                                >/BMW/Platform/Darh/SwComponentTypes/Darh/InternalBehavior/ReadActivelyReportedDtc</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE"
+                                  >/BMW/Platform/Darh/SwComponentTypes/Darh/DmIsDtcActiveResponse</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION"
+                                  >/BMW/Platform/Darh/Dcm/PortInterfaces/DataServices_ActivelyReportedDtc/ReadData</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>OperationInvokedEvent_StartRoutineTriggerDtc</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY"
+                                >/BMW/Platform/Darh/SwComponentTypes/Darh/InternalBehavior/StartRoutineTriggerDtc</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE"
+                                  >/BMW/Platform/Darh/SwComponentTypes/Darh/DmClientTriggerDtcEntry</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION"
+                                  >/BMW/Platform/Darh/Dcm/PortInterfaces/RoutineServices_TriggerDTC/Start</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>OperationInvokedEvent_StartRoutineDiagnoseMaster</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY"
+                                >/BMW/Platform/Darh/SwComponentTypes/Darh/InternalBehavior/StartRoutineDiagnoseMaster</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE"
+                                  >/BMW/Platform/Darh/SwComponentTypes/Darh/StartStopRoutineDiagnoseMaster</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION"
+                                  >/BMW/Platform/Darh/Dcm/PortInterfaces/RoutineServices_StartStopRoutineDiagnoseMaster/Start</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>OperationInvokedEvent_StopRoutineDiagnoseMaster</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY"
+                                >/BMW/Platform/Darh/SwComponentTypes/Darh/InternalBehavior/StopRoutineDiagnoseMaster</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE"
+                                  >/BMW/Platform/Darh/SwComponentTypes/Darh/StartStopRoutineDiagnoseMaster</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION"
+                                  >/BMW/Platform/Darh/Dcm/PortInterfaces/RoutineServices_StartStopRoutineDiagnoseMaster/Stop</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>OperationInvokedEvent_GetRoeState</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY"
+                                >/BMW/Platform/Darh/SwComponentTypes/Darh/InternalBehavior/GetRoeState</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE"
+                                  >/BMW/Platform/Darh/SwComponentTypes/Darh/RoeStatePort</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION"
+                                  >/BMW/Platform/Darh/PortInterfaces/RoeStateInterface/GetRoeState</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+
+                          </EVENTS>
+
+                          <HANDLE-TERMINATION-AND-RESTART>NO-SUPPORT</HANDLE-TERMINATION-AND-RESTART>
+
+                          <!-- !LINKSTO DARH_017,2, DARH_214,1, DARH_215,1 -->
+                          <INCLUDED-DATA-TYPE-SETS>
+                            <INCLUDED-DATA-TYPE-SET>
+                              <DATA-TYPE-REFS>
+                                <DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Darh/ImplementationDataTypes/Darh_SuspendedStateType</DATA-TYPE-REF>
+                                <DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Darh/ImplementationDataTypes/Darh_RoeStateType</DATA-TYPE-REF>
+                              </DATA-TYPE-REFS>
+                            </INCLUDED-DATA-TYPE-SET>
+                          </INCLUDED-DATA-TYPE-SETS>
+
+                          <!-- Darh PortApiOptions -->
+                          <PORT-API-OPTIONS>
+                            <PORT-API-OPTION>
+                              <ENABLE-TAKE-ADDRESS>false</ENABLE-TAKE-ADDRESS>
+                              <INDIRECT-API>false</INDIRECT-API>
+                              <PORT-REF DEST="R-PORT-PROTOTYPE"
+                                >/BMW/Platform/Darh/SwComponentTypes/Darh/DmTestAppl</PORT-REF>
+                            </PORT-API-OPTION>
+                            <PORT-API-OPTION>
+                              <ENABLE-TAKE-ADDRESS>false</ENABLE-TAKE-ADDRESS>
+                              <INDIRECT-API>false</INDIRECT-API>
+                              <PORT-REF DEST="P-PORT-PROTOTYPE"
+                                >/BMW/Platform/Darh/SwComponentTypes/Darh/EventDataChangedPort</PORT-REF>
+                            </PORT-API-OPTION>
+                            <PORT-API-OPTION>
+                              <ENABLE-TAKE-ADDRESS>false</ENABLE-TAKE-ADDRESS>
+                              <INDIRECT-API>false</INDIRECT-API>
+                              <PORT-REF DEST="R-PORT-PROTOTYPE"
+                                >/BMW/Platform/Darh/SwComponentTypes/Darh/NetworkDTCInfoPort</PORT-REF>
+                            </PORT-API-OPTION>
+                            <PORT-API-OPTION>
+                              <ENABLE-TAKE-ADDRESS>false</ENABLE-TAKE-ADDRESS>
+                              <INDIRECT-API>false</INDIRECT-API>
+                              <PORT-REF DEST="R-PORT-PROTOTYPE"
+                                >/BMW/Platform/Darh/SwComponentTypes/Darh/GeneralDiagnosticInfoPort</PORT-REF>
+                            </PORT-API-OPTION>
+                            <PORT-API-OPTION>
+                              <ENABLE-TAKE-ADDRESS>false</ENABLE-TAKE-ADDRESS>
+                              <INDIRECT-API>false</INDIRECT-API>
+                              <PORT-REF DEST="P-PORT-PROTOTYPE"
+                                >/BMW/Platform/Darh/SwComponentTypes/Darh/DmClientTriggerDtcEntry</PORT-REF>
+                            </PORT-API-OPTION>
+                            <PORT-API-OPTION>
+                              <ENABLE-TAKE-ADDRESS>false</ENABLE-TAKE-ADDRESS>
+                              <INDIRECT-API>false</INDIRECT-API>
+                              <PORT-REF DEST="P-PORT-PROTOTYPE"
+                                >/BMW/Platform/Darh/SwComponentTypes/Darh/ControlPort</PORT-REF>
+                            </PORT-API-OPTION>
+                            <PORT-API-OPTION>
+                              <ENABLE-TAKE-ADDRESS>false</ENABLE-TAKE-ADDRESS>
+                              <INDIRECT-API>false</INDIRECT-API>
+                              <PORT-REF DEST="R-PORT-PROTOTYPE"
+                                >/BMW/Platform/Darh/SwComponentTypes/Darh/DmTestCom</PORT-REF>
+                            </PORT-API-OPTION>
+                            <PORT-API-OPTION>
+                              <ENABLE-TAKE-ADDRESS>false</ENABLE-TAKE-ADDRESS>
+                              <INDIRECT-API>false</INDIRECT-API>
+                              <PORT-REF DEST="R-PORT-PROTOTYPE"
+                                >/BMW/Platform/Darh/SwComponentTypes/Darh/ApplicationDTCInfoPort</PORT-REF>
+                            </PORT-API-OPTION>
+                            <PORT-API-OPTION>
+                              <ENABLE-TAKE-ADDRESS>false</ENABLE-TAKE-ADDRESS>
+                              <INDIRECT-API>false</INDIRECT-API>
+                              <PORT-REF DEST="P-PORT-PROTOTYPE"
+                                >/BMW/Platform/Darh/SwComponentTypes/Darh/DmIsDtcActiveResponse</PORT-REF>
+                            </PORT-API-OPTION>
+                            <PORT-API-OPTION>
+                              <ENABLE-TAKE-ADDRESS>false</ENABLE-TAKE-ADDRESS>
+                              <INDIRECT-API>false</INDIRECT-API>
+                              <PORT-REF DEST="R-PORT-PROTOTYPE"
+                                >/BMW/Platform/Darh/SwComponentTypes/Darh/ReportErrorMode</PORT-REF>
+                            </PORT-API-OPTION>
+                            <PORT-API-OPTION>
+                              <ENABLE-TAKE-ADDRESS>false</ENABLE-TAKE-ADDRESS>
+                              <INDIRECT-API>false</INDIRECT-API>
+                              <PORT-REF DEST="P-PORT-PROTOTYPE"
+                                >/BMW/Platform/Darh/SwComponentTypes/Darh/RoeStatePort</PORT-REF>
+                            </PORT-API-OPTION>
+                            <PORT-API-OPTION>
+                              <ENABLE-TAKE-ADDRESS>false</ENABLE-TAKE-ADDRESS>
+                              <INDIRECT-API>false</INDIRECT-API>
+                              <PORT-REF DEST="R-PORT-PROTOTYPE"
+                                >/BMW/Platform/Darh/SwComponentTypes/Darh/LifeCycleRequest</PORT-REF>
+                            </PORT-API-OPTION>
+                            <PORT-API-OPTION>
+                              <ENABLE-TAKE-ADDRESS>false</ENABLE-TAKE-ADDRESS>
+                              <INDIRECT-API>false</INDIRECT-API>
+                              <PORT-REF DEST="PR-PORT-PROTOTYPE"
+                                >/BMW/Platform/Darh/SwComponentTypes/Darh/LifeCycle</PORT-REF>
+                            </PORT-API-OPTION>
+                            <!-- !LINKSTO DARH_194,1 -->
+                            <PORT-API-OPTION>
+                              <ENABLE-TAKE-ADDRESS>false</ENABLE-TAKE-ADDRESS>
+                              <INDIRECT-API>false</INDIRECT-API>
+                              <PORT-REF DEST="R-PORT-PROTOTYPE"
+                                >/BMW/Platform/Darh/SwComponentTypes/Darh/ReportDynamicallyEventPort</PORT-REF>
+                            </PORT-API-OPTION>
+                          </PORT-API-OPTIONS>
+
+                          <!-- Darh Runnables -->
+                          <!-- !LINKSTO DARH_084,9 -->
+                          <RUNNABLES>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>WriteDataBlockNotification</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SYMBOL>Darh_NvMNotifyJobFinishedDiagnoseMasterStatus</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>LifeCycleHandler</SHORT-NAME>
+                              <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                                <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA"
+                                  >/BMW/Platform/Darh/SwComponentTypes/Darh/InternalBehavior/ExclusiveArea_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                              </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <DATA-READ-ACCESSS>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>dra_ILifeCycleRequest_requestMode</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE"
+                                        >/BMW/Platform/Darh/SwComponentTypes/Darh/LifeCycleRequest</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE"
+                                        >/BMW/Platform/Darh/PortInterfaces/ILifeCycleRequest/requestMode</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+                              </DATA-READ-ACCESSS>
+                              <MODE-ACCESS-POINTS>
+                                <MODE-ACCESS-POINT>
+                                  <MODE-GROUP-IREF>
+                                    <P-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                      <CONTEXT-P-PORT-REF DEST="PR-PORT-PROTOTYPE">/BMW/Platform/Darh/SwComponentTypes/Darh/LifeCycle</CONTEXT-P-PORT-REF>
+                                      <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Darh/PortInterfaces/ILifeCycle/Mode</TARGET-MODE-GROUP-REF>
+                                    </P-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-ACCESS-POINT>
+                              </MODE-ACCESS-POINTS>
+                              <MODE-SWITCH-POINTS>
+                                <MODE-SWITCH-POINT>
+                                  <SHORT-NAME>LifeCycle</SHORT-NAME>
+                                  <MODE-GROUP-IREF>
+                                    <CONTEXT-P-PORT-REF DEST="PR-PORT-PROTOTYPE">/BMW/Platform/Darh/SwComponentTypes/Darh/LifeCycle</CONTEXT-P-PORT-REF>
+                                    <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Darh/PortInterfaces/ILifeCycle/Mode</TARGET-MODE-GROUP-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-SWITCH-POINT>
+                              </MODE-SWITCH-POINTS>
+                              <SYMBOL>Darh_LifeCycleHandler</SYMBOL>
+                            </RUNNABLE-ENTITY>
+
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>QueueHandler</SHORT-NAME>
+                              <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                                <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA"
+                                  >/BMW/Platform/Darh/SwComponentTypes/Darh/InternalBehavior/ExclusiveArea_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                              </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <!-- !LINKSTO DARH_041,1 -->
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <DATA-SEND-POINTS>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>Com</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Darh/SwComponentTypes/Darh/Com</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Darh/Tp/PortInterfaces/Darh_Com/data</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+                              </DATA-SEND-POINTS>
+                              <SERVER-CALL-POINTS>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Darh_ErrorQueueHandler</SYMBOL>
+                            </RUNNABLE-ENTITY>
+
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>SetRoeSuspended</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <!-- !LINKSTO DARH_022,2 -->
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Darh_SetRoeSuspendedHandler</SYMBOL>
+                            </RUNNABLE-ENTITY>
+
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>EventDataChanged</SHORT-NAME>
+                              <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                                <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA"
+                                  >/BMW/Platform/Darh/SwComponentTypes/Darh/InternalBehavior/ExclusiveArea_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                              </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <!-- !LINKSTO DARH_028,1 -->
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>GeneralDiag_GetFreezeFrameData</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE"
+                                      >/BMW/Platform/Darh/SwComponentTypes/Darh/GeneralDiagnosticInfoPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION"
+                                      >/BMW/Platform/Darh/Dem/PortInterfaces/Darh_GeneralDiagnosticInfo/GetEventFreezeFrameData</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>ErrorQueueBlock_SetRamBlockStatus</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE"
+                                      >/BMW/Platform/Darh/SwComponentTypes/Darh/ErrorQueueBlock</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION"
+                                      >/BMW/Platform/Darh/NvM/PortInterfaces/Darh_NvMService/SetRamBlockStatus</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <!-- !LINKSTO DARH_194,1 -->
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>ReportDynamicallyEventPort_EventToReport</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE"
+                                      >/BMW/Platform/Darh/SwComponentTypes/Darh/ReportDynamicallyEventPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION"
+                                      >/BMW/Platform/Darh/PortInterfaces/DarhReportDynamicallyEvent/EventToReport</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Darh_EventDataChangedHandler</SYMBOL>
+                            </RUNNABLE-ENTITY>
+
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>ConditionCheckRead</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <!-- !LINKSTO DARH_046,2 -->
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <MODE-ACCESS-POINTS>
+                                <MODE-ACCESS-POINT>
+                                  <MODE-GROUP-IREF>
+                                    <P-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                      <CONTEXT-P-PORT-REF DEST="PR-PORT-PROTOTYPE">/BMW/Platform/Darh/SwComponentTypes/Darh/LifeCycle</CONTEXT-P-PORT-REF>
+                                      <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Darh/PortInterfaces/ILifeCycle/Mode</TARGET-MODE-GROUP-REF>
+                                    </P-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-ACCESS-POINT>
+                              </MODE-ACCESS-POINTS>
+                              <SERVER-CALL-POINTS>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Darh_ConditionCheckReadErrorQueueHandler</SYMBOL>
+                            </RUNNABLE-ENTITY>
+
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>ReadErrorQueueLength</SHORT-NAME>
+                              <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                                <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA"
+                                  >/BMW/Platform/Darh/SwComponentTypes/Darh/InternalBehavior/ExclusiveArea_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                              </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <!-- !LINKSTO DARH_048,1 -->
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Darh_ReadErrorQueueLengthHandler</SYMBOL>
+                            </RUNNABLE-ENTITY>
+
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>ReadErrorQueue</SHORT-NAME>
+                              <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                                <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA"
+                                  >/BMW/Platform/Darh/SwComponentTypes/Darh/InternalBehavior/ExclusiveArea_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                              </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <!-- !LINKSTO DARH_051,1 -->
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>GeneralDiag_GetDTCOfEvent</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE"
+                                      >/BMW/Platform/Darh/SwComponentTypes/Darh/GeneralDiagnosticInfoPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION"
+                                      >/BMW/Platform/Darh/Dem/PortInterfaces/Darh_GeneralDiagnosticInfo/GetDTCOfEvent</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Darh_ReadErrorQueueDataHandler</SYMBOL>
+                            </RUNNABLE-ENTITY>
+
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>ConditionCheckReadActivelyReportedDtc</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <!-- !LINKSTO DARH_065,2 -->
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <MODE-ACCESS-POINTS>
+                                <MODE-ACCESS-POINT>
+                                  <MODE-GROUP-IREF>
+                                    <P-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                      <CONTEXT-P-PORT-REF DEST="PR-PORT-PROTOTYPE">/BMW/Platform/Darh/SwComponentTypes/Darh/LifeCycle</CONTEXT-P-PORT-REF>
+                                      <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Darh/PortInterfaces/ILifeCycle/Mode</TARGET-MODE-GROUP-REF>
+                                    </P-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-ACCESS-POINT>
+                              </MODE-ACCESS-POINTS>
+                              <SERVER-CALL-POINTS>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Darh_ConditionCheckReadActivelyReportedDtcHandler</SYMBOL>
+                            </RUNNABLE-ENTITY>
+
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>ReadActivelyReportedDtcLength</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <!-- !LINKSTO DARH_069,1 -->
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+                                <!-- !LINKSTO DARH_194,1 -->
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>ReportDynamicallyEventPort_EventToReportCount</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE"
+                                      >/BMW/Platform/Darh/SwComponentTypes/Darh/ReportDynamicallyEventPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION"
+                                      >/BMW/Platform/Darh/PortInterfaces/DarhReportDynamicallyEvent/EventToReportCount</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Darh_ReadActivelyReportedDtcLengthHandler</SYMBOL>
+                            </RUNNABLE-ENTITY>
+
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>ReadActivelyReportedDtc</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <!-- !LINKSTO DARH_066,1 -->
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>GeneralDiag_GetDTCOfEvent</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE"
+                                      >/BMW/Platform/Darh/SwComponentTypes/Darh/GeneralDiagnosticInfoPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION"
+                                      >/BMW/Platform/Darh/Dem/PortInterfaces/Darh_GeneralDiagnosticInfo/GetDTCOfEvent</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <!-- !LINKSTO DARH_194,1 -->
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>ReportDynamicallyEventPort_EventToReport</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE"
+                                      >/BMW/Platform/Darh/SwComponentTypes/Darh/ReportDynamicallyEventPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION"
+                                      >/BMW/Platform/Darh/PortInterfaces/DarhReportDynamicallyEvent/EventToReport</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>ReportDynamicallyEventPort_EventIdx2EventId</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE"
+                                      >/BMW/Platform/Darh/SwComponentTypes/Darh/ReportDynamicallyEventPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION"
+                                      >/BMW/Platform/Darh/PortInterfaces/DarhReportDynamicallyEvent/EventIdx2EventId</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>ReportDynamicallyEventPort_EventToReportCount</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE"
+                                      >/BMW/Platform/Darh/SwComponentTypes/Darh/ReportDynamicallyEventPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION"
+                                      >/BMW/Platform/Darh/PortInterfaces/DarhReportDynamicallyEvent/EventToReportCount</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Darh_ReadActivelyReportedDtcDataHandler</SYMBOL>
+                            </RUNNABLE-ENTITY>
+
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>StartRoutineTriggerDtc</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <!-- !LINKSTO DARH_071,2 -->
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>DmTestCom_SetEventStatus</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE"
+                                      >/BMW/Platform/Darh/SwComponentTypes/Darh/DmTestCom</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION"
+                                      >/BMW/Platform/Darh/Dem/PortInterfaces/Darh_DiagnosticMonitor/SetEventStatus</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>ApplicationDTC_GetDTCOfEvent</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE"
+                                      >/BMW/Platform/Darh/SwComponentTypes/Darh/ApplicationDTCInfoPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION"
+                                      >/BMW/Platform/Darh/Dem/PortInterfaces/Darh_DiagnosticInfo/GetDTCOfEvent</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>NetworkDTCInfo_GetDTCOfEvent</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE"
+                                      >/BMW/Platform/Darh/SwComponentTypes/Darh/NetworkDTCInfoPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION"
+                                      >/BMW/Platform/Darh/Dem/PortInterfaces/Darh_DiagnosticInfo/GetDTCOfEvent</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>ApplicationDTC_GetEvtStatus</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE"
+                                      >/BMW/Platform/Darh/SwComponentTypes/Darh/DmTestAppl</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION"
+                                      >/BMW/Platform/Darh/Dem/PortInterfaces/Darh_DiagnosticMonitor/SetEventStatus</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Darh_StartRoutineTriggerDtcHandler</SYMBOL>
+                            </RUNNABLE-ENTITY>
+
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>StartRoutineDiagnoseMaster</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>DiagnoseMasterStatus_WriteBlock</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE"
+                                      >/BMW/Platform/Darh/SwComponentTypes/Darh/DiagnoseMasterStatus</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION"
+                                      >/BMW/Platform/Darh/NvM/PortInterfaces/Darh_NvMService/WriteBlock</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Darh_StartRoutineDiagnoseMasterHandler</SYMBOL>
+                            </RUNNABLE-ENTITY>
+
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>StopRoutineDiagnoseMaster</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>DiagnoseMasterStatus_WriteBlock</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE"
+                                      >/BMW/Platform/Darh/SwComponentTypes/Darh/DiagnoseMasterStatus</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION"
+                                      >/BMW/Platform/Darh/NvM/PortInterfaces/Darh_NvMService/WriteBlock</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Darh_StopRoutineDiagnoseMasterHandler</SYMBOL>
+                            </RUNNABLE-ENTITY>
+
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>GetRoeState</SHORT-NAME>
+                              <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                                <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA"
+                                  >/BMW/Platform/Darh/SwComponentTypes/Darh/InternalBehavior/ExclusiveArea_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                              </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Darh_ReadRoeStateDataHandler</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                          </RUNNABLES>
+                          <SERVICE-DEPENDENCYS>
+                            <SWC-SERVICE-DEPENDENCY>
+                              <SHORT-NAME>DarhNvmServiceNeed</SHORT-NAME>
+                              <ASSIGNED-PORTS>
+                                <ROLE-BASED-PORT-ASSIGNMENT>
+                                  <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Darh/SwComponentTypes/Darh/ErrorQueueBlock</PORT-PROTOTYPE-REF>
+                                  <ROLE>NvMService</ROLE>
+                                </ROLE-BASED-PORT-ASSIGNMENT>
+                              </ASSIGNED-PORTS>
+                              <SERVICE-NEEDS>
+                                <NV-BLOCK-NEEDS>
+                                  <SHORT-NAME>sn_DarhNvmServiceNeed</SHORT-NAME>
+                                  <N-DATA-SETS>1</N-DATA-SETS>
+                                  <RESTORE-AT-START>true</RESTORE-AT-START>
+                                  <STORE-AT-SHUTDOWN>true</STORE-AT-SHUTDOWN>
+                                </NV-BLOCK-NEEDS>
+                              </SERVICE-NEEDS>
+                            </SWC-SERVICE-DEPENDENCY>
+                            <SWC-SERVICE-DEPENDENCY>
+                              <SHORT-NAME>DarhNvmAddressServiceNeed</SHORT-NAME>
+                              <ASSIGNED-PORTS>
+                                <ROLE-BASED-PORT-ASSIGNMENT>
+                                  <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Darh/SwComponentTypes/Darh/DiagnoseMasterStatus</PORT-PROTOTYPE-REF>
+                                  <ROLE>NvMService</ROLE>
+                                </ROLE-BASED-PORT-ASSIGNMENT>
+                              </ASSIGNED-PORTS>
+                              <SERVICE-NEEDS>
+                                <NV-BLOCK-NEEDS>
+                                  <SHORT-NAME>sn_DarhNvmAddressServiceNeed</SHORT-NAME>
+                                  <N-DATA-SETS>1</N-DATA-SETS>
+                                  <RESTORE-AT-START>true</RESTORE-AT-START>
+                                  <STORE-AT-SHUTDOWN>false</STORE-AT-SHUTDOWN>
+                                </NV-BLOCK-NEEDS>
+                              </SERVICE-NEEDS>
+                            </SWC-SERVICE-DEPENDENCY>
+                            <SWC-SERVICE-DEPENDENCY>
+                              <SHORT-NAME>DarhDcmServiceNeeds</SHORT-NAME>
+                              <ASSIGNED-PORTS>
+                                <ROLE-BASED-PORT-ASSIGNMENT>
+                                  <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Darh/SwComponentTypes/Darh/DmClientTriggerDtcEntry</PORT-PROTOTYPE-REF>
+                                  <ROLE>RoutineServices</ROLE>
+                                </ROLE-BASED-PORT-ASSIGNMENT>
+                                <ROLE-BASED-PORT-ASSIGNMENT>
+                                  <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Darh/SwComponentTypes/Darh/StartStopRoutineDiagnoseMaster</PORT-PROTOTYPE-REF>
+                                  <ROLE>RoutineServices</ROLE>
+                                </ROLE-BASED-PORT-ASSIGNMENT>
+                                <ROLE-BASED-PORT-ASSIGNMENT>
+                                  <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Darh/SwComponentTypes/Darh/DmIsDtcActiveResponse</PORT-PROTOTYPE-REF>
+                                  <ROLE>DataServices</ROLE>
+                                </ROLE-BASED-PORT-ASSIGNMENT>
+                              </ASSIGNED-PORTS>
+                              <SERVICE-NEEDS>
+                                <DIAGNOSTIC-COMMUNICATION-MANAGER-NEEDS>
+                                  <SHORT-NAME>sn_DarhDcmServiceNeeds</SHORT-NAME>
+                                </DIAGNOSTIC-COMMUNICATION-MANAGER-NEEDS>
+                              </SERVICE-NEEDS>
+                            </SWC-SERVICE-DEPENDENCY>
+                            <SWC-SERVICE-DEPENDENCY>
+                              <SHORT-NAME>DemServiceNeeds</SHORT-NAME>
+                              <ASSIGNED-PORTS>
+                                <ROLE-BASED-PORT-ASSIGNMENT>
+                                  <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Darh/SwComponentTypes/Darh/EventDataChangedPort</PORT-PROTOTYPE-REF>
+                                  <ROLE>GeneralCallbackEventDataChanged</ROLE>
+                                </ROLE-BASED-PORT-ASSIGNMENT>
+                                <ROLE-BASED-PORT-ASSIGNMENT>
+                                  <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Darh/SwComponentTypes/Darh/GeneralDiagnosticInfoPort</PORT-PROTOTYPE-REF>
+                                  <ROLE>GeneralDiagnosticInfo</ROLE>
+                                </ROLE-BASED-PORT-ASSIGNMENT>
+                              </ASSIGNED-PORTS>
+                              <SERVICE-NEEDS>
+                                <DIAGNOSTIC-EVENT-MANAGER-NEEDS>
+                                  <SHORT-NAME>sn_DemServiceNeeds</SHORT-NAME>
+                                </DIAGNOSTIC-EVENT-MANAGER-NEEDS>
+                              </SERVICE-NEEDS>
+                            </SWC-SERVICE-DEPENDENCY>
+                            <SWC-SERVICE-DEPENDENCY>
+                              <SHORT-NAME>DarhDummyNetworkDtcServiceNeeds</SHORT-NAME>
+                              <DESC>
+                                <L-2 L="FOR-ALL">DTC vale shall be set to: 0xC90400 + (0x4000 * ECUDiagnosticAddress) + 0x07FF&#xD;
+Event destination: primary origin&#xD;
+Event kind: DEM_EVENT_KIND_SWC&#xD;
+Description: Dummy Network DTC</L-2>
+                              </DESC>
+                              <ASSIGNED-PORTS>
+                                <ROLE-BASED-PORT-ASSIGNMENT>
+                                  <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Darh/SwComponentTypes/Darh/DmTestCom</PORT-PROTOTYPE-REF>
+                                  <ROLE>Darh_DiagnosticMonitor</ROLE>
+                                </ROLE-BASED-PORT-ASSIGNMENT>
+                                <ROLE-BASED-PORT-ASSIGNMENT>
+                                  <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Darh/SwComponentTypes/Darh/NetworkDTCInfoPort</PORT-PROTOTYPE-REF>
+                                  <ROLE>DiagnosticInfo</ROLE>
+                                </ROLE-BASED-PORT-ASSIGNMENT>
+                              </ASSIGNED-PORTS>
+                              <SERVICE-NEEDS>
+                                <DIAGNOSTIC-EVENT-NEEDS>
+                                  <SHORT-NAME>sn_DarhDtcServiceNeeds</SHORT-NAME>
+                                  <ADMIN-DATA/>
+                                  <INTRODUCTION/>
+                                  <AUDIENCES/>
+                                  <CONSIDER-PTO-STATUS>false</CONSIDER-PTO-STATUS>
+                                  <DIAG-EVENT-DEBOUNCE-ALGORITHM>
+                                    <DIAG-EVENT-DEBOUNCE-MONITOR-INTERNAL>
+                                       <SHORT-NAME>InternalDebounce</SHORT-NAME>
+                                    </DIAG-EVENT-DEBOUNCE-MONITOR-INTERNAL>
+                                  </DIAG-EVENT-DEBOUNCE-ALGORITHM>
+                                  <DTC-KIND>NON-EMMISSION-RELATED-DTC</DTC-KIND>
+                                </DIAGNOSTIC-EVENT-NEEDS>
+                              </SERVICE-NEEDS>
+                            </SWC-SERVICE-DEPENDENCY>
+                            <SWC-SERVICE-DEPENDENCY>
+                              <SHORT-NAME>DarhDummyApplicationDtcServiceNeeds</SHORT-NAME>
+                              <DESC>
+                                <L-2 L="FOR-ALL">DTC vale shall be set to: 0x02FF00 + ECUDiagnosticAddress&#xD;
+Event destination: primary origin&#xD;
+Event kind: DEM_EVENT_KIND_SWC&#xD;
+Description: Dummy Application DTC</L-2>
+                              </DESC>
+                              <ASSIGNED-PORTS>
+                                <ROLE-BASED-PORT-ASSIGNMENT>
+                                  <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Darh/SwComponentTypes/Darh/DmTestAppl</PORT-PROTOTYPE-REF>
+                                  <ROLE>Darh_DiagnosticMonitor</ROLE>
+                                </ROLE-BASED-PORT-ASSIGNMENT>
+                                <ROLE-BASED-PORT-ASSIGNMENT>
+                                  <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Darh/SwComponentTypes/Darh/ApplicationDTCInfoPort</PORT-PROTOTYPE-REF>
+                                  <ROLE>DiagnosticInfo</ROLE>
+                                </ROLE-BASED-PORT-ASSIGNMENT>
+                              </ASSIGNED-PORTS>
+                              <SERVICE-NEEDS>
+                                <DIAGNOSTIC-EVENT-NEEDS>
+                                  <SHORT-NAME>sn_DarhApplicationDtcServiceNeeds</SHORT-NAME>
+                                  <ADMIN-DATA/>
+                                  <INTRODUCTION/>
+                                  <AUDIENCES/>
+                                  <CONSIDER-PTO-STATUS>false</CONSIDER-PTO-STATUS>
+                                  <DIAG-EVENT-DEBOUNCE-ALGORITHM>
+                                    <DIAG-EVENT-DEBOUNCE-MONITOR-INTERNAL>
+                                       <SHORT-NAME>InternalDebounce</SHORT-NAME>
+                                    </DIAG-EVENT-DEBOUNCE-MONITOR-INTERNAL>
+                                  </DIAG-EVENT-DEBOUNCE-ALGORITHM>
+                                  <DTC-KIND>NON-EMMISSION-RELATED-DTC</DTC-KIND>
+                                </DIAGNOSTIC-EVENT-NEEDS>
+                              </SERVICE-NEEDS>
+                            </SWC-SERVICE-DEPENDENCY>
+                          </SERVICE-DEPENDENCYS>
+                          <!-- !LINKSTO DARH_001,1 -->
+                          <SUPPORTS-MULTIPLE-INSTANTIATION>false</SUPPORTS-MULTIPLE-INSTANTIATION>
+
+                        </SWC-INTERNAL-BEHAVIOR>
+                      </INTERNAL-BEHAVIORS>
+                    </APPLICATION-SW-COMPONENT-TYPE>
+
+                  </ELEMENTS>
+                </AR-PACKAGE>
+
+                <!-- Darh SwcImplementations -->
+                <AR-PACKAGE>
+                  <SHORT-NAME>SwcImplementations</SHORT-NAME>
+                  <ELEMENTS>
+                    <SWC-IMPLEMENTATION>
+                      <SHORT-NAME>Darh_Implementation</SHORT-NAME>
+                      <CODE-DESCRIPTORS>
+                        <CODE>
+                          <SHORT-NAME>CodeDescriptor</SHORT-NAME>
+                          <ARTIFACT-DESCRIPTORS>
+                            <AUTOSAR-ENGINEERING-OBJECT>
+                              <SHORT-LABEL>EngObject</SHORT-LABEL>
+                              <CATEGORY>SWSRC</CATEGORY>
+                            </AUTOSAR-ENGINEERING-OBJECT>
+                          </ARTIFACT-DESCRIPTORS>
+                        </CODE>
+                      </CODE-DESCRIPTORS>
+                      <PROGRAMMING-LANGUAGE>C</PROGRAMMING-LANGUAGE>
+                      <RESOURCE-CONSUMPTION>
+                        <SHORT-NAME>Resources</SHORT-NAME>
+                      </RESOURCE-CONSUMPTION>
+                      <SW-VERSION>5.1.0</SW-VERSION>
+                      <VENDOR-ID>5</VENDOR-ID>
+                      <BEHAVIOR-REF DEST="SWC-INTERNAL-BEHAVIOR"
+                        >/BMW/Platform/Darh/SwComponentTypes/Darh/InternalBehavior</BEHAVIOR-REF>
+                    </SWC-IMPLEMENTATION>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+
+              </AR-PACKAGES>
+            </AR-PACKAGE>
+
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

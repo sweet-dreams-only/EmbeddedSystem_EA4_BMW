@@ -1,0 +1,1966 @@
+%{+ Coding_Functions }%
+%{#
+GetGeneralConfig()
+GetAreasConfig(True)
+GetCryptoConfig()
+}%
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ *  \file
+ *
+ *  \brief      Coding - This file is the SW-C description for the Coding module.
+ *
+ * \project     BMW Platform Software
+ *
+ *  \copyright  BMW AG 2016 - 2017
+ *
+ *  \version    5.2.1
+ *
+ */
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-3-0_STRICT_COMPACT.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>BMW</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>Platform</SHORT-NAME>
+          <AR-PACKAGES>
+            <!-- Coding -->
+            <AR-PACKAGE>
+              <SHORT-NAME>Coding</SHORT-NAME>
+              <AR-PACKAGES>
+                <!-- Dlog -->
+                <AR-PACKAGE>
+                  <SHORT-NAME>Dlog</SHORT-NAME>
+                  <AR-PACKAGES>
+                    <!-- Dlog ImplementationDataTypes -->
+                    <AR-PACKAGE>
+                      <SHORT-NAME>ImplementationDataTypes</SHORT-NAME>
+                      <ELEMENTS>
+                        <IMPLEMENTATION-DATA-TYPE>
+                          <SHORT-NAME>Dlog_ProgIdArrayType</SHORT-NAME>
+                          <CATEGORY>ARRAY</CATEGORY>
+                          <SUB-ELEMENTS>
+                            <IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                              <SHORT-NAME>Dlog_ProgIdSubArrayType</SHORT-NAME>
+                              <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                              <ARRAY-SIZE>8</ARRAY-SIZE>
+                              <ARRAY-SIZE-SEMANTICS>FIXED-SIZE</ARRAY-SIZE-SEMANTICS>
+                              <SW-DATA-DEF-PROPS>
+                                <SW-DATA-DEF-PROPS-VARIANTS>
+                                  <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                    <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                                  </SW-DATA-DEF-PROPS-CONDITIONAL>
+                                </SW-DATA-DEF-PROPS-VARIANTS>
+                              </SW-DATA-DEF-PROPS>
+                            </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                          </SUB-ELEMENTS>
+                        </IMPLEMENTATION-DATA-TYPE>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                    <!-- Dlog PortInterfaces -->
+                    <AR-PACKAGE>
+                      <SHORT-NAME>PortInterfaces</SHORT-NAME>
+                      <ELEMENTS>
+                        <SENDER-RECEIVER-INTERFACE>
+                          <SHORT-NAME>ProgId</SHORT-NAME>
+                          <IS-SERVICE>false</IS-SERVICE>
+                          <DATA-ELEMENTS>
+                            <VARIABLE-DATA-PROTOTYPE>
+                              <SHORT-NAME>progId</SHORT-NAME>
+                              <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Dlog/ImplementationDataTypes/Dlog_ProgIdArrayType</TYPE-TREF>
+                            </VARIABLE-DATA-PROTOTYPE>
+                          </DATA-ELEMENTS>
+                        </SENDER-RECEIVER-INTERFACE>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                  </AR-PACKAGES>
+                </AR-PACKAGE>
+                <!-- Vin -->
+                <AR-PACKAGE>
+                  <SHORT-NAME>Vin</SHORT-NAME>
+                  <AR-PACKAGES>
+                    <!-- Vin CompuMethods -->
+                    <AR-PACKAGE>
+                      <SHORT-NAME>CompuMethods</SHORT-NAME>
+                      <ELEMENTS>
+                        <COMPU-METHOD>
+                          <SHORT-NAME>CM_VinQualifier</SHORT-NAME>
+                          <CATEGORY>TEXTTABLE</CATEGORY>
+                          <COMPU-INTERNAL-TO-PHYS>
+                            <COMPU-SCALES>
+                              <COMPU-SCALE>
+                                <SHORT-LABEL>VIN_QUAL_INIT</SHORT-LABEL>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>VIN_QUAL_INIT</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                              <COMPU-SCALE>
+                                <SHORT-LABEL>VIN_QUAL_RECEIVED</SHORT-LABEL>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">1</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">1</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>VIN_QUAL_RECEIVED</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                              <COMPU-SCALE>
+                                <SHORT-LABEL>VIN_QUAL_EQ_INTERNAL</SHORT-LABEL>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">2</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">2</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>VIN_QUAL_EQ_INTERNAL</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                              <COMPU-SCALE>
+                                <SHORT-LABEL>VIN_QUAL_SECURE_PENDING</SHORT-LABEL>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">4</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">4</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>VIN_QUAL_SECURE_PENDING</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                              <COMPU-SCALE>
+                                <SHORT-LABEL>VIN_QUAL_SECURE_FINISHED</SHORT-LABEL>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">8</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">8</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>VIN_QUAL_SECURE_FINISHED</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                              <COMPU-SCALE>
+                                <SHORT-LABEL>VIN_QUAL_SECURE_OK</SHORT-LABEL>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">16</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">16</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>VIN_QUAL_SECURE_OK</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                              <COMPU-SCALE>
+                                <SHORT-LABEL>VIN_QUAL_SECURE_MASK</SHORT-LABEL>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">28</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">28</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>VIN_QUAL_SECURE_MASK</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                            </COMPU-SCALES>
+                            <COMPU-DEFAULT-VALUE>
+                              <VT>VIN_QUAL_INIT</VT>
+                            </COMPU-DEFAULT-VALUE>
+                          </COMPU-INTERNAL-TO-PHYS>
+                        </COMPU-METHOD>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                    <!-- Vin ImplementationDataTypes -->
+                    <AR-PACKAGE>
+                      <SHORT-NAME>ImplementationDataTypes</SHORT-NAME>
+                      <ELEMENTS>
+                        <IMPLEMENTATION-DATA-TYPE>
+                          <SHORT-NAME>VinArrayType</SHORT-NAME>
+                          <CATEGORY>ARRAY</CATEGORY>
+                          <SUB-ELEMENTS>
+                            <IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                              <SHORT-NAME>idteVinSubArray</SHORT-NAME>
+                              <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                              <ARRAY-SIZE>7</ARRAY-SIZE>
+                              <ARRAY-SIZE-SEMANTICS>FIXED-SIZE</ARRAY-SIZE-SEMANTICS>
+                              <SW-DATA-DEF-PROPS>
+                                <SW-DATA-DEF-PROPS-VARIANTS>
+                                  <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                    <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                                  </SW-DATA-DEF-PROPS-CONDITIONAL>
+                                </SW-DATA-DEF-PROPS-VARIANTS>
+                              </SW-DATA-DEF-PROPS>
+                            </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                          </SUB-ELEMENTS>
+                        </IMPLEMENTATION-DATA-TYPE>
+                        <IMPLEMENTATION-DATA-TYPE>
+                          <SHORT-NAME>Vin_QualifierType</SHORT-NAME>
+                          <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                          <SW-DATA-DEF-PROPS>
+                            <SW-DATA-DEF-PROPS-VARIANTS>
+                              <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                <COMPU-METHOD-REF DEST="COMPU-METHOD">/BMW/Platform/Coding/Vin/CompuMethods/CM_VinQualifier</COMPU-METHOD-REF>
+                                <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                              </SW-DATA-DEF-PROPS-CONDITIONAL>
+                            </SW-DATA-DEF-PROPS-VARIANTS>
+                          </SW-DATA-DEF-PROPS>
+                        </IMPLEMENTATION-DATA-TYPE>
+                        <IMPLEMENTATION-DATA-TYPE>
+                          <SHORT-NAME>Vin_VinType</SHORT-NAME>
+                          <CATEGORY>STRUCTURE</CATEGORY>
+                          <SUB-ELEMENTS>
+                            <IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                              <SHORT-NAME>Vin</SHORT-NAME>
+                              <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                              <SW-DATA-DEF-PROPS>
+                                <SW-DATA-DEF-PROPS-VARIANTS>
+                                  <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                    <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Vin/ImplementationDataTypes/VinArrayType</IMPLEMENTATION-DATA-TYPE-REF>
+                                  </SW-DATA-DEF-PROPS-CONDITIONAL>
+                                </SW-DATA-DEF-PROPS-VARIANTS>
+                              </SW-DATA-DEF-PROPS>
+                            </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                            <IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                              <SHORT-NAME>Qualifier</SHORT-NAME>
+                              <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                              <SW-DATA-DEF-PROPS>
+                                <SW-DATA-DEF-PROPS-VARIANTS>
+                                  <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                    <SW-BIT-REPRESENTATION>
+                                      <BIT-POSITION>0</BIT-POSITION>
+                                      <NUMBER-OF-BITS>4</NUMBER-OF-BITS>
+                                    </SW-BIT-REPRESENTATION>
+                                    <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Vin/ImplementationDataTypes/Vin_QualifierType</IMPLEMENTATION-DATA-TYPE-REF>
+                                  </SW-DATA-DEF-PROPS-CONDITIONAL>
+                                </SW-DATA-DEF-PROPS-VARIANTS>
+                              </SW-DATA-DEF-PROPS>
+                            </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                          </SUB-ELEMENTS>
+                        </IMPLEMENTATION-DATA-TYPE>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                    <!-- Vin PortInterfaces -->
+                    <AR-PACKAGE>
+                      <SHORT-NAME>PortInterfaces</SHORT-NAME>
+                      <ELEMENTS>
+                        <SENDER-RECEIVER-INTERFACE>
+                          <SHORT-NAME>Vin</SHORT-NAME>
+                          <IS-SERVICE>false</IS-SERVICE>
+                          <DATA-ELEMENTS>
+                            <VARIABLE-DATA-PROTOTYPE>
+                              <SHORT-NAME>Vin</SHORT-NAME>
+                              <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Vin/ImplementationDataTypes/Vin_VinType</TYPE-TREF>
+                            </VARIABLE-DATA-PROTOTYPE>
+                          </DATA-ELEMENTS>
+                        </SENDER-RECEIVER-INTERFACE>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                  </AR-PACKAGES>
+                </AR-PACKAGE>
+%{: if cryptoConfig.csm }%
+                <!-- Csm -->
+                <AR-PACKAGE>
+                  <SHORT-NAME>Csm</SHORT-NAME>
+                  <AR-PACKAGES>
+                    <!-- Csm CompuMethods -->
+                    <AR-PACKAGE>
+                      <SHORT-NAME>CompuMethods</SHORT-NAME>
+                      <ELEMENTS>
+                        <COMPU-METHOD>
+                          <SHORT-NAME>CM_Crypto_VerifyResultType</SHORT-NAME>
+                          <CATEGORY>TEXTTABLE</CATEGORY>
+                          <COMPU-INTERNAL-TO-PHYS>
+                            <COMPU-SCALES>
+                              <COMPU-SCALE>
+                                <SHORT-LABEL>CRYPTO_E_VER_OK</SHORT-LABEL>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>CRYPTO_E_VER_OK</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                              <COMPU-SCALE>
+                                <SHORT-LABEL>CRYPTO_E_VER_NOT_OK</SHORT-LABEL>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">1</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">1</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>CRYPTO_E_VER_NOT_OK</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                            </COMPU-SCALES>
+                          </COMPU-INTERNAL-TO-PHYS>
+                        </COMPU-METHOD>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                    <!-- Csm ImplementationDataTypes -->
+                    <AR-PACKAGE>
+                      <SHORT-NAME>ImplementationDataTypes</SHORT-NAME>
+                      <ELEMENTS>
+                        <IMPLEMENTATION-DATA-TYPE>
+                          <SHORT-NAME>Crypto_VerifyResultType</SHORT-NAME>
+                          <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                          <SW-DATA-DEF-PROPS>
+                            <SW-DATA-DEF-PROPS-VARIANTS>
+                              <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                <COMPU-METHOD-REF DEST="COMPU-METHOD">/BMW/Platform/Coding/Csm/CompuMethods/CM_Crypto_VerifyResultType</COMPU-METHOD-REF>
+                                <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                              </SW-DATA-DEF-PROPS-CONDITIONAL>
+                            </SW-DATA-DEF-PROPS-VARIANTS>
+                          </SW-DATA-DEF-PROPS>
+                        </IMPLEMENTATION-DATA-TYPE>
+                        <IMPLEMENTATION-DATA-TYPE>
+                          <SHORT-NAME>Csm_HashDataType</SHORT-NAME>
+                          <CATEGORY>ARRAY</CATEGORY>
+                          <SUB-ELEMENTS>
+                            <IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                              <SHORT-NAME>SubCsm_HashDataType</SHORT-NAME>
+                              <CATEGORY>TYPE_REFERENCE</CATEGORY>
+%{#   area_size=max(cryptoConfig.csm_hash_size+codingConfig.cps_size,
+      max(map(lambda x: x.area_size, codingConfig.coding_areas_list)))
+#}%
+                              <ARRAY-SIZE>%{=area_size}%</ARRAY-SIZE>
+                              <ARRAY-SIZE-SEMANTICS>FIXED-SIZE</ARRAY-SIZE-SEMANTICS>
+                              <SW-DATA-DEF-PROPS>
+                                <SW-DATA-DEF-PROPS-VARIANTS>
+                                  <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                    <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                                  </SW-DATA-DEF-PROPS-CONDITIONAL>
+                                </SW-DATA-DEF-PROPS-VARIANTS>
+                              </SW-DATA-DEF-PROPS>
+                            </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                          </SUB-ELEMENTS>
+                        </IMPLEMENTATION-DATA-TYPE>
+                        <IMPLEMENTATION-DATA-TYPE>
+                          <SHORT-NAME>Csm_HashResultType</SHORT-NAME>
+                          <CATEGORY>ARRAY</CATEGORY>
+                          <SUB-ELEMENTS>
+                            <IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                              <SHORT-NAME>SubCsm_HashResultType</SHORT-NAME>
+                              <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                              <ARRAY-SIZE>%{= cryptoConfig.csm_hash_size }%</ARRAY-SIZE>
+                              <ARRAY-SIZE-SEMANTICS>FIXED-SIZE</ARRAY-SIZE-SEMANTICS>
+                              <SW-DATA-DEF-PROPS>
+                                <SW-DATA-DEF-PROPS-VARIANTS>
+                                  <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                    <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                                  </SW-DATA-DEF-PROPS-CONDITIONAL>
+                                </SW-DATA-DEF-PROPS-VARIANTS>
+                              </SW-DATA-DEF-PROPS>
+                            </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                          </SUB-ELEMENTS>
+                        </IMPLEMENTATION-DATA-TYPE>
+                        <IMPLEMENTATION-DATA-TYPE>
+                          <SHORT-NAME>Csm_SignatureVerifyCompareType</SHORT-NAME>
+                          <CATEGORY>ARRAY</CATEGORY>
+                          <SUB-ELEMENTS>
+                            <IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                              <SHORT-NAME>SubCsm_SignatureVerifyCompareType</SHORT-NAME>
+                              <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                              <ARRAY-SIZE>%{= generalConfig.signature_size }%</ARRAY-SIZE>
+                              <ARRAY-SIZE-SEMANTICS>FIXED-SIZE</ARRAY-SIZE-SEMANTICS>
+                              <SW-DATA-DEF-PROPS>
+                                <SW-DATA-DEF-PROPS-VARIANTS>
+                                  <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                    <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                                  </SW-DATA-DEF-PROPS-CONDITIONAL>
+                                </SW-DATA-DEF-PROPS-VARIANTS>
+                              </SW-DATA-DEF-PROPS>
+                            </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                          </SUB-ELEMENTS>
+                        </IMPLEMENTATION-DATA-TYPE>
+                        <IMPLEMENTATION-DATA-TYPE>
+                          <SHORT-NAME>Csm_SignatureVerifyDataType</SHORT-NAME>
+                          <CATEGORY>ARRAY</CATEGORY>
+                          <SUB-ELEMENTS>
+                            <IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                              <SHORT-NAME>SubCsm_SignatureVerifyDataType</SHORT-NAME>
+                              <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                              <ARRAY-SIZE>%{= cryptoConfig.csm_hash_size }%</ARRAY-SIZE>
+                              <ARRAY-SIZE-SEMANTICS>FIXED-SIZE</ARRAY-SIZE-SEMANTICS>
+                              <SW-DATA-DEF-PROPS>
+                                <SW-DATA-DEF-PROPS-VARIANTS>
+                                  <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                    <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                                  </SW-DATA-DEF-PROPS-CONDITIONAL>
+                                </SW-DATA-DEF-PROPS-VARIANTS>
+                              </SW-DATA-DEF-PROPS>
+                            </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                          </SUB-ELEMENTS>
+                        </IMPLEMENTATION-DATA-TYPE>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                    <!-- Csm PortInterfaces -->
+                    <AR-PACKAGE>
+                      <SHORT-NAME>PortInterfaces</SHORT-NAME>
+                      <ELEMENTS>
+                        <CLIENT-SERVER-INTERFACE>
+                          <SHORT-NAME>CsmHash</SHORT-NAME>
+                          <IS-SERVICE>true</IS-SERVICE>
+                          <OPERATIONS>
+                            <CLIENT-SERVER-OPERATION>
+                              <SHORT-NAME>Hash</SHORT-NAME>
+                              <ARGUMENTS>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>dataBuffer</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Csm/ImplementationDataTypes/Csm_HashDataType</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                  <SERVER-ARGUMENT-IMPL-POLICY>USE-ARRAY-BASE-TYPE</SERVER-ARGUMENT-IMPL-POLICY>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>dataLength</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint32</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                  <SERVER-ARGUMENT-IMPL-POLICY>USE-ARGUMENT-TYPE</SERVER-ARGUMENT-IMPL-POLICY>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>resultBuffer</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Csm/ImplementationDataTypes/Csm_HashResultType</TYPE-TREF>
+                                  <DIRECTION>OUT</DIRECTION>
+                                  <SERVER-ARGUMENT-IMPL-POLICY>USE-ARRAY-BASE-TYPE</SERVER-ARGUMENT-IMPL-POLICY>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>resultLength</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint32</TYPE-TREF>
+                                  <DIRECTION>OUT</DIRECTION>
+                                  <SERVER-ARGUMENT-IMPL-POLICY>USE-ARGUMENT-TYPE</SERVER-ARGUMENT-IMPL-POLICY>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                              </ARGUMENTS>
+                              <POSSIBLE-ERROR-REFS>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Csm/PortInterfaces/CsmHash/CSM_E_BUSY</POSSIBLE-ERROR-REF>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Csm/PortInterfaces/CsmHash/CSM_E_SMALL_BUFFER</POSSIBLE-ERROR-REF>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Csm/PortInterfaces/CsmHash/E_NOT_OK</POSSIBLE-ERROR-REF>
+                              </POSSIBLE-ERROR-REFS>
+                            </CLIENT-SERVER-OPERATION>
+                          </OPERATIONS>
+                          <POSSIBLE-ERRORS>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>E_NOT_OK</SHORT-NAME>
+                              <ERROR-CODE>1</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>CSM_E_BUSY</SHORT-NAME>
+                              <ERROR-CODE>2</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>CSM_E_SMALL_BUFFER</SHORT-NAME>
+                              <ERROR-CODE>3</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                          </POSSIBLE-ERRORS>
+                        </CLIENT-SERVER-INTERFACE>
+                        <CLIENT-SERVER-INTERFACE>
+                          <SHORT-NAME>CsmSignatureVerify</SHORT-NAME>
+                          <IS-SERVICE>true</IS-SERVICE>
+                          <OPERATIONS>
+                            <CLIENT-SERVER-OPERATION>
+                              <SHORT-NAME>SignatureVerify</SHORT-NAME>
+                              <ARGUMENTS>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>dataBuffer</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Csm/ImplementationDataTypes/Csm_SignatureVerifyDataType</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                  <SERVER-ARGUMENT-IMPL-POLICY>USE-ARRAY-BASE-TYPE</SERVER-ARGUMENT-IMPL-POLICY>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>dataLength</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint32</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                  <SERVER-ARGUMENT-IMPL-POLICY>USE-ARGUMENT-TYPE</SERVER-ARGUMENT-IMPL-POLICY>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>compareBuffer</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Csm/ImplementationDataTypes/Csm_SignatureVerifyCompareType</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                  <SERVER-ARGUMENT-IMPL-POLICY>USE-ARRAY-BASE-TYPE</SERVER-ARGUMENT-IMPL-POLICY>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>compareLength</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint32</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                  <SERVER-ARGUMENT-IMPL-POLICY>USE-ARGUMENT-TYPE</SERVER-ARGUMENT-IMPL-POLICY>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>resultBuffer</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Csm/ImplementationDataTypes/Crypto_VerifyResultType</TYPE-TREF>
+                                  <DIRECTION>OUT</DIRECTION>
+                                  <SERVER-ARGUMENT-IMPL-POLICY>USE-ARGUMENT-TYPE</SERVER-ARGUMENT-IMPL-POLICY>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                              </ARGUMENTS>
+                              <POSSIBLE-ERROR-REFS>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Csm/PortInterfaces/CsmSignatureVerify/CSM_E_BUSY</POSSIBLE-ERROR-REF>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Csm/PortInterfaces/CsmSignatureVerify/CSM_E_SMALL_BUFFER</POSSIBLE-ERROR-REF>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Csm/PortInterfaces/CsmSignatureVerify/E_NOT_OK</POSSIBLE-ERROR-REF>
+                              </POSSIBLE-ERROR-REFS>
+                            </CLIENT-SERVER-OPERATION>
+                          </OPERATIONS>
+                          <POSSIBLE-ERRORS>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>E_NOT_OK</SHORT-NAME>
+                              <ERROR-CODE>1</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>CSM_E_BUSY</SHORT-NAME>
+                              <ERROR-CODE>2</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>CSM_E_SMALL_BUFFER</SHORT-NAME>
+                              <ERROR-CODE>3</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                          </POSSIBLE-ERRORS>
+                        </CLIENT-SERVER-INTERFACE>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                  </AR-PACKAGES>
+                </AR-PACKAGE>
+%{:}%
+                <!-- Dem -->
+                <AR-PACKAGE>
+                  <SHORT-NAME>Dem</SHORT-NAME>
+                  <AR-PACKAGES>
+                    <!-- Dem DataConstrs -->
+                    <AR-PACKAGE>
+                      <SHORT-NAME>DataConstrs</SHORT-NAME>
+                      <ELEMENTS>
+                        <DATA-CONSTR>
+                          <SHORT-NAME>Dem_EventStatusType</SHORT-NAME>
+                          <DATA-CONSTR-RULES>
+                            <DATA-CONSTR-RULE>
+                              <INTERNAL-CONSTRS>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x00</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x04</UPPER-LIMIT>
+                              </INTERNAL-CONSTRS>
+                            </DATA-CONSTR-RULE>
+                          </DATA-CONSTR-RULES>
+                        </DATA-CONSTR>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                    <!-- Dem CompuMethods -->
+                    <AR-PACKAGE>
+                      <SHORT-NAME>CompuMethods</SHORT-NAME>
+                      <ELEMENTS>
+                        <COMPU-METHOD>
+                          <SHORT-NAME>Dem_EventStatusType</SHORT-NAME>
+                          <CATEGORY>TEXTTABLE</CATEGORY>
+                          <COMPU-INTERNAL-TO-PHYS>
+                            <COMPU-SCALES>
+                              <COMPU-SCALE>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x00</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x00</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>DEM_EVENT_STATUS_PASSED</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                              <COMPU-SCALE>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x01</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x01</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>DEM_EVENT_STATUS_FAILED</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                              <COMPU-SCALE>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x02</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x02</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>DEM_EVENT_STATUS_PREPASSED</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                              <COMPU-SCALE>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x03</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x03</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>DEM_EVENT_STATUS_PREFAILED</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                              <COMPU-SCALE>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x04</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x04</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>DEM_EVENT_STATUS_FDC_THRESHOLD_REACHED</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                            </COMPU-SCALES>
+                          </COMPU-INTERNAL-TO-PHYS>
+                        </COMPU-METHOD>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                    <!-- Dem ImplementationDataTypes -->
+                    <AR-PACKAGE>
+                      <SHORT-NAME>ImplementationDataTypes</SHORT-NAME>
+                      <ELEMENTS>
+                        <IMPLEMENTATION-DATA-TYPE>
+                          <SHORT-NAME>Dem_EventStatusType</SHORT-NAME>
+                          <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                          <SW-DATA-DEF-PROPS>
+                            <SW-DATA-DEF-PROPS-VARIANTS>
+                              <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                <COMPU-METHOD-REF DEST="COMPU-METHOD">/BMW/Platform/Coding/Dem/CompuMethods/Dem_EventStatusType</COMPU-METHOD-REF>
+                                <DATA-CONSTR-REF DEST="DATA-CONSTR">/BMW/Platform/Coding/Dem/DataConstrs/Dem_EventStatusType</DATA-CONSTR-REF>
+                                <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                                <SW-IMPL-POLICY>STANDARD</SW-IMPL-POLICY>
+                              </SW-DATA-DEF-PROPS-CONDITIONAL>
+                            </SW-DATA-DEF-PROPS-VARIANTS>
+                          </SW-DATA-DEF-PROPS>
+                        </IMPLEMENTATION-DATA-TYPE>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                    <!-- Dem PortInterfaces -->
+                    <AR-PACKAGE>
+                      <SHORT-NAME>PortInterfaces</SHORT-NAME>
+                      <ELEMENTS>
+                        <CLIENT-SERVER-INTERFACE>
+                          <SHORT-NAME>DiagnosticMonitor</SHORT-NAME>
+                          <IS-SERVICE>true</IS-SERVICE>
+                          <OPERATIONS>
+                            <CLIENT-SERVER-OPERATION>
+                              <SHORT-NAME>SetEventStatus</SHORT-NAME>
+                              <ARGUMENTS>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>EventStatus</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Dem/ImplementationDataTypes/Dem_EventStatusType</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                              </ARGUMENTS>
+                              <POSSIBLE-ERROR-REFS>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Dem/PortInterfaces/DiagnosticMonitor/E_OK</POSSIBLE-ERROR-REF>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Dem/PortInterfaces/DiagnosticMonitor/E_NOT_OK</POSSIBLE-ERROR-REF>
+                              </POSSIBLE-ERROR-REFS>
+                            </CLIENT-SERVER-OPERATION>
+                          </OPERATIONS>
+                          <POSSIBLE-ERRORS>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>E_OK</SHORT-NAME>
+                              <ERROR-CODE>0</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>E_NOT_OK</SHORT-NAME>
+                              <ERROR-CODE>1</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                          </POSSIBLE-ERRORS>
+                        </CLIENT-SERVER-INTERFACE>
+                        <CLIENT-SERVER-INTERFACE>
+                          <SHORT-NAME>CallbackClearEventAllowed</SHORT-NAME>
+                          <IS-SERVICE>true</IS-SERVICE>
+                          <OPERATIONS>
+                            <CLIENT-SERVER-OPERATION>
+                              <SHORT-NAME>ClearEventAllowed</SHORT-NAME>
+                              <ARGUMENTS>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>allowed</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/boolean</TYPE-TREF>
+                                  <DIRECTION>OUT</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                              </ARGUMENTS>
+                              <POSSIBLE-ERROR-REFS>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Dem/PortInterfaces/CallbackClearEventAllowed/E_OK</POSSIBLE-ERROR-REF>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Dem/PortInterfaces/CallbackClearEventAllowed/E_NOT_OK</POSSIBLE-ERROR-REF>
+                              </POSSIBLE-ERROR-REFS>
+                            </CLIENT-SERVER-OPERATION>
+                          </OPERATIONS>
+                          <POSSIBLE-ERRORS>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>E_OK</SHORT-NAME>
+                              <ERROR-CODE>0</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>E_NOT_OK</SHORT-NAME>
+                              <ERROR-CODE>1</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                          </POSSIBLE-ERRORS>
+                        </CLIENT-SERVER-INTERFACE>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                  </AR-PACKAGES>
+                </AR-PACKAGE>
+                <!-- NvM -->
+                <AR-PACKAGE>
+                  <SHORT-NAME>NvM</SHORT-NAME>
+                  <AR-PACKAGES>
+                    <!-- NvM DataConstrs -->
+                    <AR-PACKAGE>
+                      <SHORT-NAME>DataConstrs</SHORT-NAME>
+                      <ELEMENTS>
+                        <DATA-CONSTR>
+                        <SHORT-NAME>NvM_RequestResultType</SHORT-NAME>
+                          <DATA-CONSTR-RULES>
+                            <DATA-CONSTR-RULE>
+                              <INTERNAL-CONSTRS>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x00</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x08</UPPER-LIMIT>
+                              </INTERNAL-CONSTRS>
+                            </DATA-CONSTR-RULE>
+                          </DATA-CONSTR-RULES>
+                        </DATA-CONSTR>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                    <!-- NvM CompuMethods -->
+                    <AR-PACKAGE>
+                      <SHORT-NAME>CompuMethods</SHORT-NAME>
+                      <ELEMENTS>
+                        <COMPU-METHOD>
+                          <SHORT-NAME>NvM_RequestResultType</SHORT-NAME>
+                          <CATEGORY>TEXTTABLE</CATEGORY>
+                          <COMPU-INTERNAL-TO-PHYS>
+                            <COMPU-SCALES>
+                              <COMPU-SCALE>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x00</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x00</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>NVM_REQ_OK</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                              <COMPU-SCALE>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x01</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x01</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>NVM_REQ_NOT_OK</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                              <COMPU-SCALE>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x02</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x02</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>NVM_REQ_PENDING</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                              <COMPU-SCALE>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x03</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x03</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>NVM_REQ_INTEGRITY_FAILED</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                              <COMPU-SCALE>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x04</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x04</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>NVM_REQ_BLOCK_SKIPPED</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                              <COMPU-SCALE>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x05</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x05</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>NVM_REQ_NV_INVALIDATED</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                              <COMPU-SCALE>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x06</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x06</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>NVM_REQ_CANCELED</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                              <COMPU-SCALE>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x07</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x07</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>NVM_REQ_REDUNDANCY_FAILED</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                              <COMPU-SCALE>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x08</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x08</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>NVM_REQ_RESTORED_FROM_ROM</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                            </COMPU-SCALES>
+                          </COMPU-INTERNAL-TO-PHYS>
+                        </COMPU-METHOD>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                    <!-- NvM ImplementationDataTypes -->
+                    <AR-PACKAGE>
+                      <SHORT-NAME>ImplementationDataTypes</SHORT-NAME>
+                      <ELEMENTS>
+                        <IMPLEMENTATION-DATA-TYPE>
+                          <SHORT-NAME>NvM_RequestResultType</SHORT-NAME>
+                          <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                          <SW-DATA-DEF-PROPS>
+                            <SW-DATA-DEF-PROPS-VARIANTS>
+                              <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                <COMPU-METHOD-REF DEST="COMPU-METHOD">/BMW/Platform/Coding/NvM/CompuMethods/NvM_RequestResultType</COMPU-METHOD-REF>
+                                <DATA-CONSTR-REF DEST="DATA-CONSTR">/BMW/Platform/Coding/NvM/DataConstrs/NvM_RequestResultType</DATA-CONSTR-REF>
+                                <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                              </SW-DATA-DEF-PROPS-CONDITIONAL>
+                            </SW-DATA-DEF-PROPS-VARIANTS>
+                          </SW-DATA-DEF-PROPS>
+                        </IMPLEMENTATION-DATA-TYPE>
+                        <IMPLEMENTATION-DATA-TYPE>
+                          <SHORT-NAME>ConstVoidPtr</SHORT-NAME>
+                          <CATEGORY>DATA_REFERENCE</CATEGORY>
+                          <SW-DATA-DEF-PROPS>
+                            <SW-DATA-DEF-PROPS-VARIANTS>
+                              <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                <SW-POINTER-TARGET-PROPS>
+                                  <TARGET-CATEGORY>VALUE</TARGET-CATEGORY>
+                                  <SW-DATA-DEF-PROPS>
+                                    <SW-DATA-DEF-PROPS-VARIANTS>
+                                      <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                        <BASE-TYPE-REF DEST="SW-BASE-TYPE">/AUTOSAR_Platform/BaseTypes/void</BASE-TYPE-REF>
+                                        <SW-IMPL-POLICY>CONST</SW-IMPL-POLICY>
+                                      </SW-DATA-DEF-PROPS-CONDITIONAL>
+                                    </SW-DATA-DEF-PROPS-VARIANTS>
+                                  </SW-DATA-DEF-PROPS>
+                                </SW-POINTER-TARGET-PROPS>
+                              </SW-DATA-DEF-PROPS-CONDITIONAL>
+                            </SW-DATA-DEF-PROPS-VARIANTS>
+                          </SW-DATA-DEF-PROPS>
+                        </IMPLEMENTATION-DATA-TYPE>
+                        <IMPLEMENTATION-DATA-TYPE>
+                          <SHORT-NAME>VoidPtr</SHORT-NAME>
+                          <CATEGORY>DATA_REFERENCE</CATEGORY>
+                          <SW-DATA-DEF-PROPS>
+                            <SW-DATA-DEF-PROPS-VARIANTS>
+                              <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                <SW-POINTER-TARGET-PROPS>
+                                  <TARGET-CATEGORY>VALUE</TARGET-CATEGORY>
+                                  <SW-DATA-DEF-PROPS>
+                                    <SW-DATA-DEF-PROPS-VARIANTS>
+                                      <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                        <BASE-TYPE-REF DEST="SW-BASE-TYPE">/AUTOSAR_Platform/BaseTypes/void</BASE-TYPE-REF>
+                                      </SW-DATA-DEF-PROPS-CONDITIONAL>
+                                    </SW-DATA-DEF-PROPS-VARIANTS>
+                                  </SW-DATA-DEF-PROPS>
+                                </SW-POINTER-TARGET-PROPS>
+                              </SW-DATA-DEF-PROPS-CONDITIONAL>
+                            </SW-DATA-DEF-PROPS-VARIANTS>
+                          </SW-DATA-DEF-PROPS>
+                        </IMPLEMENTATION-DATA-TYPE>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                    <!-- NvM PortInterfaces -->
+                    <AR-PACKAGE>
+                      <SHORT-NAME>PortInterfaces</SHORT-NAME>
+                      <ELEMENTS>
+                        <CLIENT-SERVER-INTERFACE>
+                          <SHORT-NAME>NvMService</SHORT-NAME>
+                          <IS-SERVICE>true</IS-SERVICE>
+                          <OPERATIONS>
+                            <CLIENT-SERVER-OPERATION>
+                              <SHORT-NAME>ReadBlock</SHORT-NAME>
+                              <ARGUMENTS>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>DstPtr</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/NvM/ImplementationDataTypes/VoidPtr</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                              </ARGUMENTS>
+                              <POSSIBLE-ERROR-REFS>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/NvM/PortInterfaces/NvMService/E_OK</POSSIBLE-ERROR-REF>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/NvM/PortInterfaces/NvMService/E_NOT_OK</POSSIBLE-ERROR-REF>
+                              </POSSIBLE-ERROR-REFS>
+                            </CLIENT-SERVER-OPERATION>
+                            <CLIENT-SERVER-OPERATION>
+                              <SHORT-NAME>WriteBlock</SHORT-NAME>
+                              <ARGUMENTS>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>SrcPtr</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/NvM/ImplementationDataTypes/ConstVoidPtr</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                              </ARGUMENTS>
+                              <POSSIBLE-ERROR-REFS>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/NvM/PortInterfaces/NvMService/E_OK</POSSIBLE-ERROR-REF>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/NvM/PortInterfaces/NvMService/E_NOT_OK</POSSIBLE-ERROR-REF>
+                              </POSSIBLE-ERROR-REFS>
+                            </CLIENT-SERVER-OPERATION>
+                          </OPERATIONS>
+                          <POSSIBLE-ERRORS>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>E_OK</SHORT-NAME>
+                              <ERROR-CODE>0</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>E_NOT_OK</SHORT-NAME>
+                              <ERROR-CODE>1</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                          </POSSIBLE-ERRORS>
+                        </CLIENT-SERVER-INTERFACE>
+                        <CLIENT-SERVER-INTERFACE>
+                          <SHORT-NAME>NvMNotifyJobFinished</SHORT-NAME>
+                          <IS-SERVICE>true</IS-SERVICE>
+                          <OPERATIONS>
+                            <CLIENT-SERVER-OPERATION>
+                            <SHORT-NAME>JobFinished</SHORT-NAME>
+                              <ARGUMENTS>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>ServiceId</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>JobResult</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/NvM/ImplementationDataTypes/NvM_RequestResultType</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                              </ARGUMENTS>
+                              <POSSIBLE-ERROR-REFS>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/NvM/PortInterfaces/NvMNotifyJobFinished/E_OK</POSSIBLE-ERROR-REF>
+                              </POSSIBLE-ERROR-REFS>
+                            </CLIENT-SERVER-OPERATION>
+                          </OPERATIONS>
+                          <POSSIBLE-ERRORS>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>E_OK</SHORT-NAME>
+                              <ERROR-CODE>0</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                          </POSSIBLE-ERRORS>
+                        </CLIENT-SERVER-INTERFACE>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                  </AR-PACKAGES>
+                </AR-PACKAGE>
+%{: if generalConfig.dev_error_detect }%
+                <!-- Det -->
+                <AR-PACKAGE>
+                  <SHORT-NAME>Det</SHORT-NAME>
+                  <AR-PACKAGES>
+                    <!-- Det PortInterfaces -->
+                    <AR-PACKAGE>
+                      <SHORT-NAME>PortInterfaces</SHORT-NAME>
+                      <ELEMENTS>
+                        <CLIENT-SERVER-INTERFACE>
+                          <SHORT-NAME>DETService</SHORT-NAME>
+                          <IS-SERVICE>true</IS-SERVICE>
+                          <OPERATIONS>
+                            <CLIENT-SERVER-OPERATION>
+                              <SHORT-NAME>ReportError</SHORT-NAME>
+                              <ARGUMENTS>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>InstanceId</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>ApiId</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>ErrorId</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                              </ARGUMENTS>
+                              <POSSIBLE-ERROR-REFS>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Det/PortInterfaces/DETService/E_OK</POSSIBLE-ERROR-REF>
+                              </POSSIBLE-ERROR-REFS>
+                            </CLIENT-SERVER-OPERATION>
+                          </OPERATIONS>
+                          <POSSIBLE-ERRORS>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>E_OK</SHORT-NAME>
+                              <ERROR-CODE>0</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                          </POSSIBLE-ERRORS>
+                        </CLIENT-SERVER-INTERFACE>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                  </AR-PACKAGES>
+                </AR-PACKAGE>
+%{:}%
+                <!-- Dcm -->
+                <AR-PACKAGE>
+                  <SHORT-NAME>Dcm</SHORT-NAME>
+                  <AR-PACKAGES>
+                    <!-- Dcm DataConstrs -->
+                    <AR-PACKAGE>
+                      <SHORT-NAME>DataConstrs</SHORT-NAME>
+                      <ELEMENTS>
+                        <DATA-CONSTR>
+                           <SHORT-NAME>Dcm_OpStatusType</SHORT-NAME>
+                           <DATA-CONSTR-RULES>
+                              <DATA-CONSTR-RULE>
+                                 <INTERNAL-CONSTRS>
+                                    <LOWER-LIMIT>0x00</LOWER-LIMIT>
+                                    <UPPER-LIMIT>0x03</UPPER-LIMIT>
+                                 </INTERNAL-CONSTRS>
+                              </DATA-CONSTR-RULE>
+                           </DATA-CONSTR-RULES>
+                        </DATA-CONSTR>
+                        <DATA-CONSTR>
+                          <SHORT-NAME>Dcm_NegativeResponseCodeType</SHORT-NAME>
+                          <DATA-CONSTR-RULES>
+                            <DATA-CONSTR-RULE>
+                              <INTERNAL-CONSTRS>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x10</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0xFE</UPPER-LIMIT>
+                              </INTERNAL-CONSTRS>
+                            </DATA-CONSTR-RULE>
+                          </DATA-CONSTR-RULES>
+                        </DATA-CONSTR>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                    <!-- Dcm CompuMethods -->
+                    <AR-PACKAGE>
+                      <SHORT-NAME>CompuMethods</SHORT-NAME>
+                      <ELEMENTS>
+                        <COMPU-METHOD>
+                          <SHORT-NAME>Dcm_NegativeResponseCodeType</SHORT-NAME>
+                          <CATEGORY>TEXTTABLE</CATEGORY>
+                           <COMPU-INTERNAL-TO-PHYS>
+                             <COMPU-SCALES>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x8F</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x8F</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_BRAKESWITCH_NOTCLOSED</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x21</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x21</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_BUSYREPEATREQUEST</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x22</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x22</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_CONDITIONSNOTCORRECT</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x84</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x84</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_ENGINEISNOTRUNNING</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x83</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x83</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_ENGINEISRUNNING</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x85</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x85</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_ENGINERUNTIMETOOLOW</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x36</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x36</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_EXCEEDNUMBEROFATTEMPTS</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x26</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x26</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_FAILUREPREVENTSEXECUTIONOFREQUESTEDACTION</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x72</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x72</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_GENERALPROGRAMMINGFAILURE</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x10</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x10</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_GENERALREJECT</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x13</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x13</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_INCORRECTMESSAGELENGTHORINVALIDFORMAT</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x35</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x35</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_INVALIDKEY</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x25</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x25</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_NORESPONSEFROMSUBNETCOMPONENT</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x31</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x31</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_REQUESTOUTOFRANGE</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x24</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x24</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_REQUESTSEQUENCEERROR</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x37</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x37</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_REQUIREDTIMEDELAYNOTEXPIRED</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x14</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x14</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_RESPONSETOOLONG</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x81</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x81</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_RPMTOOHIGH</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x82</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x82</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_RPMTOOLOW</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x33</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x33</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_SECURITYACCESSDENIED</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x11</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x11</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_SERVICENOTSUPPORTED</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x7F</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x7F</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_SERVICENOTSUPPORTEDINACTIVESESSION</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x90</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x90</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_SHIFTERLEVERNOTINPARK</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x12</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x12</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_SUBFUNCTIONNOTSUPPORTED</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x7E</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x7E</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_SUBFUNCTIONNOTSUPPORTEDINACTIVESESSION</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x86</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x86</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_TEMPERATURETOOHIGH</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x87</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x87</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_TEMPERATURETOOLOW</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x8A</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x8A</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_THROTTLE_PEDALTOOHIGH</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x8B</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x8B</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_THROTTLE_PEDALTOOLOW</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x91</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x91</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_TORQUECONVERTERCLUTCHLOCKED</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x71</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x71</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_TRANSFERDATASUSPENDED</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x8D</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x8D</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_TRANSMISSIONRANGENOTINGEAR</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x8C</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x8C</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_TRANSMISSIONRANGENOTINNEUTRAL</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x70</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x70</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_UPLOADDOWNLOADNOTACCEPTED</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x88</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x88</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_VEHICLESPEEDTOOHIGH</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x89</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x89</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_VEHICLESPEEDTOOLOW</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x92</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x92</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_VOLTAGETOOHIGH</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x93</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x93</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_VOLTAGETOOLOW</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x73</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x73</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_WRONGBLOCKSEQUENCECOUNTER</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0xF0</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0xF0</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_VMSCNC_0</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0xF1</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0xF1</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_VMSCNC_1</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0xF2</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0xF2</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_VMSCNC_2</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0xF3</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0xF3</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_VMSCNC_3</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0xF4</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0xF4</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_VMSCNC_4</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0xF5</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0xF5</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_VMSCNC_5</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0xF6</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0xF6</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_VMSCNC_6</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0xF7</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0xF7</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_VMSCNC_7</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0xF8</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0xF8</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_VMSCNC_8</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0xF9</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0xF9</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_VMSCNC_9</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0xFA</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0xFA</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_VMSCNC_A</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0xFB</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0xFB</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_VMSCNC_B</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0xFC</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0xFC</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_VMSCNC_C</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0xFD</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0xFD</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_VMSCNC_D</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                                <COMPU-SCALE>
+                                   <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0xFE</LOWER-LIMIT>
+                                   <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0xFE</UPPER-LIMIT>
+                                   <COMPU-CONST>
+                                      <VT>DCM_E_VMSCNC_E</VT>
+                                   </COMPU-CONST>
+                                </COMPU-SCALE>
+                             </COMPU-SCALES>
+                          </COMPU-INTERNAL-TO-PHYS>
+                        </COMPU-METHOD>
+                        <COMPU-METHOD>
+                          <SHORT-NAME>Dcm_ConfirmationStatusType</SHORT-NAME>
+                          <CATEGORY>TEXTTABLE</CATEGORY>
+                          <COMPU-INTERNAL-TO-PHYS>
+                            <COMPU-SCALES>
+                              <COMPU-SCALE>
+                                <SHORT-LABEL>DCM_RES_POS_OK</SHORT-LABEL>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>DCM_RES_POS_OK</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                              <COMPU-SCALE>
+                                <SHORT-LABEL>DCM_RES_POS_NOT_OK</SHORT-LABEL>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">1</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">1</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>DCM_RES_POS_NOT_OK</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                              <COMPU-SCALE>
+                                <SHORT-LABEL>DCM_RES_NEG_OK</SHORT-LABEL>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">2</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">2</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>DCM_RES_NEG_OK</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                              <COMPU-SCALE>
+                                <SHORT-LABEL>DCM_RES_NEG_NOT_OK</SHORT-LABEL>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">3</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">3</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>DCM_RES_NEG_NOT_OK</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                            </COMPU-SCALES>
+                          </COMPU-INTERNAL-TO-PHYS>
+                        </COMPU-METHOD>
+                        <COMPU-METHOD>
+                          <SHORT-NAME>Dcm_OpStatusType</SHORT-NAME>
+                          <CATEGORY>TEXTTABLE</CATEGORY>
+                          <COMPU-INTERNAL-TO-PHYS>
+                            <COMPU-SCALES>
+                              <COMPU-SCALE>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x00</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x00</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>DCM_INITIAL</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                              <COMPU-SCALE>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x01</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x01</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>DCM_PENDING</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                              <COMPU-SCALE>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x02</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x02</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>DCM_CANCEL</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                              <COMPU-SCALE>
+                                <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x03</LOWER-LIMIT>
+                                <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x03</UPPER-LIMIT>
+                                <COMPU-CONST>
+                                  <VT>DCM_FORCE_RCRRP_OK</VT>
+                                </COMPU-CONST>
+                              </COMPU-SCALE>
+                            </COMPU-SCALES>
+                          </COMPU-INTERNAL-TO-PHYS>
+                        </COMPU-METHOD>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                    <!-- Dcm ImplementationDataTypes -->
+                    <AR-PACKAGE>
+                      <SHORT-NAME>ImplementationDataTypes</SHORT-NAME>
+                      <ELEMENTS>
+                        <IMPLEMENTATION-DATA-TYPE>
+                          <SHORT-NAME>Dcm_NegativeResponseCodeType</SHORT-NAME>
+                          <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                          <SW-DATA-DEF-PROPS>
+                            <SW-DATA-DEF-PROPS-VARIANTS>
+                              <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                <COMPU-METHOD-REF DEST="COMPU-METHOD">/BMW/Platform/Coding/Dcm/CompuMethods/Dcm_NegativeResponseCodeType</COMPU-METHOD-REF>
+                                <DATA-CONSTR-REF DEST="DATA-CONSTR">/BMW/Platform/Coding/Dcm/DataConstrs/Dcm_NegativeResponseCodeType</DATA-CONSTR-REF>
+                                <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                              </SW-DATA-DEF-PROPS-CONDITIONAL>
+                            </SW-DATA-DEF-PROPS-VARIANTS>
+                          </SW-DATA-DEF-PROPS>
+                        </IMPLEMENTATION-DATA-TYPE>
+                        <IMPLEMENTATION-DATA-TYPE>
+                          <SHORT-NAME>Dcm_OpStatusType</SHORT-NAME>
+                          <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                          <SW-DATA-DEF-PROPS>
+                            <SW-DATA-DEF-PROPS-VARIANTS>
+                              <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                <COMPU-METHOD-REF DEST="COMPU-METHOD">/BMW/Platform/Coding/Dcm/CompuMethods/Dcm_OpStatusType</COMPU-METHOD-REF>
+                                <DATA-CONSTR-REF DEST="DATA-CONSTR">/BMW/Platform/Coding/Dcm/DataConstrs/Dcm_OpStatusType</DATA-CONSTR-REF>
+                                <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                              </SW-DATA-DEF-PROPS-CONDITIONAL>
+                            </SW-DATA-DEF-PROPS-VARIANTS>
+                          </SW-DATA-DEF-PROPS>
+                        </IMPLEMENTATION-DATA-TYPE>
+                        <IMPLEMENTATION-DATA-TYPE>
+                          <SHORT-NAME>Dcm_ConfirmationStatusType</SHORT-NAME>
+                          <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                          <SW-DATA-DEF-PROPS>
+                            <SW-DATA-DEF-PROPS-VARIANTS>
+                              <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                <COMPU-METHOD-REF DEST="COMPU-METHOD">/BMW/Platform/Coding/Dcm/CompuMethods/Dcm_ConfirmationStatusType</COMPU-METHOD-REF>
+                                <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                              </SW-DATA-DEF-PROPS-CONDITIONAL>
+                            </SW-DATA-DEF-PROPS-VARIANTS>
+                          </SW-DATA-DEF-PROPS>
+                        </IMPLEMENTATION-DATA-TYPE>
+                        <IMPLEMENTATION-DATA-TYPE>
+                          <SHORT-NAME>Dcm_Data6ByteType</SHORT-NAME>
+                          <CATEGORY>ARRAY</CATEGORY>
+                          <SW-DATA-DEF-PROPS>
+                            <SW-DATA-DEF-PROPS-VARIANTS>
+                              <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                <SW-CALIBRATION-ACCESS>READ-ONLY</SW-CALIBRATION-ACCESS>
+                              </SW-DATA-DEF-PROPS-CONDITIONAL>
+                            </SW-DATA-DEF-PROPS-VARIANTS>
+                          </SW-DATA-DEF-PROPS>
+                          <SUB-ELEMENTS>
+                            <IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                              <SHORT-NAME>Dcm_Data6ByteTypeElement</SHORT-NAME>
+                              <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                              <ARRAY-SIZE>6</ARRAY-SIZE>
+                              <ARRAY-SIZE-SEMANTICS>FIXED-SIZE</ARRAY-SIZE-SEMANTICS>
+                              <SW-DATA-DEF-PROPS>
+                                <SW-DATA-DEF-PROPS-VARIANTS>
+                                  <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                    <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                                  </SW-DATA-DEF-PROPS-CONDITIONAL>
+                                </SW-DATA-DEF-PROPS-VARIANTS>
+                              </SW-DATA-DEF-PROPS>
+                            </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                          </SUB-ELEMENTS>
+                        </IMPLEMENTATION-DATA-TYPE>
+                        <IMPLEMENTATION-DATA-TYPE>
+                          <SHORT-NAME>Dcm_Data9ByteType</SHORT-NAME>
+                          <CATEGORY>ARRAY</CATEGORY>
+                          <SW-DATA-DEF-PROPS>
+                            <SW-DATA-DEF-PROPS-VARIANTS>
+                              <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                <SW-CALIBRATION-ACCESS>READ-ONLY</SW-CALIBRATION-ACCESS>
+                              </SW-DATA-DEF-PROPS-CONDITIONAL>
+                            </SW-DATA-DEF-PROPS-VARIANTS>
+                          </SW-DATA-DEF-PROPS>
+                          <SUB-ELEMENTS>
+                            <IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                              <SHORT-NAME>Dcm_Data9ByteTypeElement</SHORT-NAME>
+                              <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                              <ARRAY-SIZE>9</ARRAY-SIZE>
+                              <ARRAY-SIZE-SEMANTICS>FIXED-SIZE</ARRAY-SIZE-SEMANTICS>
+                              <SW-DATA-DEF-PROPS>
+                                <SW-DATA-DEF-PROPS-VARIANTS>
+                                  <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                    <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                                  </SW-DATA-DEF-PROPS-CONDITIONAL>
+                                </SW-DATA-DEF-PROPS-VARIANTS>
+                              </SW-DATA-DEF-PROPS>
+                            </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                          </SUB-ELEMENTS>
+                        </IMPLEMENTATION-DATA-TYPE>
+                        <IMPLEMENTATION-DATA-TYPE>
+                          <SHORT-NAME>Dcm_Data18ByteType</SHORT-NAME>
+                          <CATEGORY>ARRAY</CATEGORY>
+                          <SW-DATA-DEF-PROPS>
+                            <SW-DATA-DEF-PROPS-VARIANTS>
+                              <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                <SW-CALIBRATION-ACCESS>READ-ONLY</SW-CALIBRATION-ACCESS>
+                              </SW-DATA-DEF-PROPS-CONDITIONAL>
+                            </SW-DATA-DEF-PROPS-VARIANTS>
+                          </SW-DATA-DEF-PROPS>
+                          <SUB-ELEMENTS>
+                            <IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                              <SHORT-NAME>Dcm_Data18ByteTypeElement</SHORT-NAME>
+                              <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                              <ARRAY-SIZE>18</ARRAY-SIZE>
+                              <ARRAY-SIZE-SEMANTICS>FIXED-SIZE</ARRAY-SIZE-SEMANTICS>
+                              <SW-DATA-DEF-PROPS>
+                                <SW-DATA-DEF-PROPS-VARIANTS>
+                                  <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                    <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                                  </SW-DATA-DEF-PROPS-CONDITIONAL>
+                                </SW-DATA-DEF-PROPS-VARIANTS>
+                              </SW-DATA-DEF-PROPS>
+                            </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                          </SUB-ELEMENTS>
+                        </IMPLEMENTATION-DATA-TYPE>
+                        <IMPLEMENTATION-DATA-TYPE>
+                          <SHORT-NAME>Dcm_Data1014ByteType</SHORT-NAME>
+                          <CATEGORY>ARRAY</CATEGORY>
+                          <SW-DATA-DEF-PROPS>
+                            <SW-DATA-DEF-PROPS-VARIANTS>
+                              <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                <SW-CALIBRATION-ACCESS>READ-ONLY</SW-CALIBRATION-ACCESS>
+                              </SW-DATA-DEF-PROPS-CONDITIONAL>
+                            </SW-DATA-DEF-PROPS-VARIANTS>
+                          </SW-DATA-DEF-PROPS>
+                          <SUB-ELEMENTS>
+                            <IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                              <SHORT-NAME>Dcm_Data1014ByteTypeElement</SHORT-NAME>
+                              <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                              <ARRAY-SIZE>1014</ARRAY-SIZE>
+                              <ARRAY-SIZE-SEMANTICS>FIXED-SIZE</ARRAY-SIZE-SEMANTICS>
+                              <SW-DATA-DEF-PROPS>
+                                <SW-DATA-DEF-PROPS-VARIANTS>
+                                  <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                    <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                                  </SW-DATA-DEF-PROPS-CONDITIONAL>
+                                </SW-DATA-DEF-PROPS-VARIANTS>
+                              </SW-DATA-DEF-PROPS>
+                            </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                          </SUB-ELEMENTS>
+                        </IMPLEMENTATION-DATA-TYPE>
+                        <IMPLEMENTATION-DATA-TYPE>
+                          <SHORT-NAME>Dcm_Data1024ByteType</SHORT-NAME>
+                          <CATEGORY>ARRAY</CATEGORY>
+                          <SUB-ELEMENTS>
+                            <IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                              <SHORT-NAME>Dcm_Data1024ByteTypeElement</SHORT-NAME>
+                              <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                              <ARRAY-SIZE>1024</ARRAY-SIZE>
+                              <ARRAY-SIZE-SEMANTICS>FIXED-SIZE</ARRAY-SIZE-SEMANTICS>
+                              <SW-DATA-DEF-PROPS>
+                                <SW-DATA-DEF-PROPS-VARIANTS>
+                                  <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                    <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                                  </SW-DATA-DEF-PROPS-CONDITIONAL>
+                                </SW-DATA-DEF-PROPS-VARIANTS>
+                              </SW-DATA-DEF-PROPS>
+                            </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                          </SUB-ELEMENTS>
+                        </IMPLEMENTATION-DATA-TYPE>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                    <!-- Dcm PortInterfaces -->
+                    <AR-PACKAGE>
+                      <SHORT-NAME>PortInterfaces</SHORT-NAME>
+                      <ELEMENTS>
+                        <CLIENT-SERVER-INTERFACE>
+                          <SHORT-NAME>ServiceRequestNotification</SHORT-NAME>
+                          <IS-SERVICE>true</IS-SERVICE>
+                          <OPERATIONS>
+                            <CLIENT-SERVER-OPERATION>
+                              <SHORT-NAME>Confirmation</SHORT-NAME>
+                              <ARGUMENTS>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>SID</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>ReqType</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>SourceAddress</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint16</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>ConfirmationStatus</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Dcm/ImplementationDataTypes/Dcm_ConfirmationStatusType</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                              </ARGUMENTS>
+                              <POSSIBLE-ERROR-REFS>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Dcm/PortInterfaces/ServiceRequestNotification/E_OK</POSSIBLE-ERROR-REF>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Dcm/PortInterfaces/ServiceRequestNotification/E_NOT_OK</POSSIBLE-ERROR-REF>
+                              </POSSIBLE-ERROR-REFS>
+                            </CLIENT-SERVER-OPERATION>
+                            <CLIENT-SERVER-OPERATION>
+                              <SHORT-NAME>Indication</SHORT-NAME>
+                              <ARGUMENTS>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>SID</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>RequestData</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Dcm/ImplementationDataTypes/Dcm_Data1024ByteType</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>DataSize</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint16</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>ReqType</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>SourceAddress</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint16</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>ErrorCode</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Dcm/ImplementationDataTypes/Dcm_NegativeResponseCodeType</TYPE-TREF>
+                                  <DIRECTION>OUT</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                              </ARGUMENTS>
+                              <POSSIBLE-ERROR-REFS>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Dcm/PortInterfaces/ServiceRequestNotification/E_OK</POSSIBLE-ERROR-REF>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Dcm/PortInterfaces/ServiceRequestNotification/E_NOT_OK</POSSIBLE-ERROR-REF>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Dcm/PortInterfaces/ServiceRequestNotification/E_REQUEST_NOT_ACCEPTED</POSSIBLE-ERROR-REF>
+                              </POSSIBLE-ERROR-REFS>
+                            </CLIENT-SERVER-OPERATION>
+                          </OPERATIONS>
+                          <POSSIBLE-ERRORS>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>E_OK</SHORT-NAME>
+                              <ERROR-CODE>0</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>E_NOT_OK</SHORT-NAME>
+                              <ERROR-CODE>1</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>E_REQUEST_NOT_ACCEPTED</SHORT-NAME>
+                              <ERROR-CODE>8</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                          </POSSIBLE-ERRORS>
+                        </CLIENT-SERVER-INTERFACE>
+                        <CLIENT-SERVER-INTERFACE>
+                          <SHORT-NAME>DataServices_DcmDspData_CPS</SHORT-NAME>
+                          <IS-SERVICE>true</IS-SERVICE>
+                          <OPERATIONS>
+                            <CLIENT-SERVER-OPERATION>
+                              <SHORT-NAME>ReadData</SHORT-NAME>
+                              <ARGUMENTS>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>Data</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Dcm/ImplementationDataTypes/Dcm_Data18ByteType</TYPE-TREF>
+                                  <DIRECTION>OUT</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                              </ARGUMENTS>
+                              <POSSIBLE-ERROR-REFS>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Dcm/PortInterfaces/DataServices_DcmDspData_CPS/E_OK</POSSIBLE-ERROR-REF>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Dcm/PortInterfaces/DataServices_DcmDspData_CPS/E_NOT_OK</POSSIBLE-ERROR-REF>
+                              </POSSIBLE-ERROR-REFS>
+                            </CLIENT-SERVER-OPERATION>
+                            <CLIENT-SERVER-OPERATION>
+                              <SHORT-NAME>ConditionCheckRead</SHORT-NAME>
+                              <ARGUMENTS>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>ErrorCode</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Dcm/ImplementationDataTypes/Dcm_NegativeResponseCodeType</TYPE-TREF>
+                                  <DIRECTION>OUT</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                              </ARGUMENTS>
+                              <POSSIBLE-ERROR-REFS>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Dcm/PortInterfaces/DataServices_DcmDspData_CPS/E_OK</POSSIBLE-ERROR-REF>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Dcm/PortInterfaces/DataServices_DcmDspData_CPS/E_NOT_OK</POSSIBLE-ERROR-REF>
+                              </POSSIBLE-ERROR-REFS>
+                            </CLIENT-SERVER-OPERATION>
+                          </OPERATIONS>
+                          <POSSIBLE-ERRORS>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>E_OK</SHORT-NAME>
+                              <ERROR-CODE>0</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>E_NOT_OK</SHORT-NAME>
+                              <ERROR-CODE>1</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                          </POSSIBLE-ERRORS>
+                        </CLIENT-SERVER-INTERFACE>
+                        <CLIENT-SERVER-INTERFACE>
+                          <SHORT-NAME>DataServices_DcmDspData_protocolData</SHORT-NAME>
+                          <IS-SERVICE>true</IS-SERVICE>
+                          <OPERATIONS>
+                            <CLIENT-SERVER-OPERATION>
+                              <SHORT-NAME>ReadData</SHORT-NAME>
+                              <ARGUMENTS>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>Data</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Dcm/ImplementationDataTypes/Dcm_Data9ByteType</TYPE-TREF>
+                                  <DIRECTION>OUT</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                              </ARGUMENTS>
+                              <POSSIBLE-ERROR-REFS>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Dcm/PortInterfaces/DataServices_DcmDspData_protocolData/E_OK</POSSIBLE-ERROR-REF>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Dcm/PortInterfaces/DataServices_DcmDspData_protocolData/E_NOT_OK</POSSIBLE-ERROR-REF>
+                              </POSSIBLE-ERROR-REFS>
+                            </CLIENT-SERVER-OPERATION>
+                            <CLIENT-SERVER-OPERATION>
+                              <SHORT-NAME>ConditionCheckRead</SHORT-NAME>
+                              <ARGUMENTS>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>ErrorCode</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Dcm/ImplementationDataTypes/Dcm_NegativeResponseCodeType</TYPE-TREF>
+                                  <DIRECTION>OUT</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                              </ARGUMENTS>
+                              <POSSIBLE-ERROR-REFS>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Dcm/PortInterfaces/DataServices_DcmDspData_protocolData/E_OK</POSSIBLE-ERROR-REF>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Dcm/PortInterfaces/DataServices_DcmDspData_protocolData/E_NOT_OK</POSSIBLE-ERROR-REF>
+                              </POSSIBLE-ERROR-REFS>
+                            </CLIENT-SERVER-OPERATION>
+                          </OPERATIONS>
+                          <POSSIBLE-ERRORS>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>E_OK</SHORT-NAME>
+                              <ERROR-CODE>0</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>E_NOT_OK</SHORT-NAME>
+                              <ERROR-CODE>1</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                          </POSSIBLE-ERRORS>
+                        </CLIENT-SERVER-INTERFACE>
+                        <CLIENT-SERVER-INTERFACE>
+                          <SHORT-NAME>RoutineServices_DcmDspRoutine_readNCD</SHORT-NAME>
+                          <IS-SERVICE>true</IS-SERVICE>
+                          <OPERATIONS>
+                            <CLIENT-SERVER-OPERATION>
+                              <SHORT-NAME>Start</SHORT-NAME>
+                              <ARGUMENTS>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>DcmDspStartRoutineInSignal</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Dcm/ImplementationDataTypes/Dcm_Data6ByteType</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>OpStatus</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Dcm/ImplementationDataTypes/Dcm_OpStatusType</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>DcmDspStartRoutineOutSignal</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Dcm/ImplementationDataTypes/Dcm_Data1024ByteType</TYPE-TREF>
+                                  <DIRECTION>OUT</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>DataLength</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint16</TYPE-TREF>
+                                  <DIRECTION>INOUT</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>ErrorCode</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Dcm/ImplementationDataTypes/Dcm_NegativeResponseCodeType</TYPE-TREF>
+                                  <DIRECTION>OUT</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                              </ARGUMENTS>
+                              <POSSIBLE-ERROR-REFS>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Dcm/PortInterfaces/RoutineServices_DcmDspRoutine_readNCD/E_NOT_OK</POSSIBLE-ERROR-REF>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Dcm/PortInterfaces/RoutineServices_DcmDspRoutine_readNCD/DCM_E_PENDING</POSSIBLE-ERROR-REF>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Dcm/PortInterfaces/RoutineServices_DcmDspRoutine_readNCD/DCM_E_FORCE_RCRRP</POSSIBLE-ERROR-REF>
+                              </POSSIBLE-ERROR-REFS>
+                            </CLIENT-SERVER-OPERATION>
+                          </OPERATIONS>
+                          <POSSIBLE-ERRORS>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>E_NOT_OK</SHORT-NAME>
+                              <ERROR-CODE>1</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>DCM_E_PENDING</SHORT-NAME>
+                              <ERROR-CODE>10</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>DCM_E_FORCE_RCRRP</SHORT-NAME>
+                              <ERROR-CODE>12</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                          </POSSIBLE-ERRORS>
+                        </CLIENT-SERVER-INTERFACE>
+                        <CLIENT-SERVER-INTERFACE>
+                          <SHORT-NAME>RoutineServices_DcmDspRoutine_writeNCD</SHORT-NAME>
+                          <IS-SERVICE>true</IS-SERVICE>
+                          <OPERATIONS>
+                            <CLIENT-SERVER-OPERATION>
+                              <SHORT-NAME>Start</SHORT-NAME>
+                              <ARGUMENTS>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>DcmDspStartRoutineInSignal</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Dcm/ImplementationDataTypes/Dcm_Data1024ByteType</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>OpStatus</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Dcm/ImplementationDataTypes/Dcm_OpStatusType</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>DataLength</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint16</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>ErrorCode</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Dcm/ImplementationDataTypes/Dcm_NegativeResponseCodeType</TYPE-TREF>
+                                  <DIRECTION>OUT</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                              </ARGUMENTS>
+                              <POSSIBLE-ERROR-REFS>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Dcm/PortInterfaces/RoutineServices_DcmDspRoutine_writeNCD/E_NOT_OK</POSSIBLE-ERROR-REF>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Dcm/PortInterfaces/RoutineServices_DcmDspRoutine_writeNCD/DCM_E_PENDING</POSSIBLE-ERROR-REF>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Dcm/PortInterfaces/RoutineServices_DcmDspRoutine_writeNCD/DCM_E_FORCE_RCRRP</POSSIBLE-ERROR-REF>
+                              </POSSIBLE-ERROR-REFS>
+                            </CLIENT-SERVER-OPERATION>
+                          </OPERATIONS>
+                          <POSSIBLE-ERRORS>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>E_NOT_OK</SHORT-NAME>
+                              <ERROR-CODE>1</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>DCM_E_PENDING</SHORT-NAME>
+                              <ERROR-CODE>10</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>DCM_E_FORCE_RCRRP</SHORT-NAME>
+                              <ERROR-CODE>12</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                          </POSSIBLE-ERRORS>
+                        </CLIENT-SERVER-INTERFACE>
+                        <CLIENT-SERVER-INTERFACE>
+                          <SHORT-NAME>RoutineServices_DcmDspRoutine_checkNCD</SHORT-NAME>
+                          <IS-SERVICE>true</IS-SERVICE>
+                          <OPERATIONS>
+                            <CLIENT-SERVER-OPERATION>
+                              <SHORT-NAME>Start</SHORT-NAME>
+                              <ARGUMENTS>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>DcmDspStartRoutineInSignal</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Dcm/ImplementationDataTypes/Dcm_Data18ByteType</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>OpStatus</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Dcm/ImplementationDataTypes/Dcm_OpStatusType</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>DcmDspStartRoutineOutSignal</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</TYPE-TREF>
+                                  <DIRECTION>OUT</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>DataLength</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint16</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>ErrorCode</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Coding/Dcm/ImplementationDataTypes/Dcm_NegativeResponseCodeType</TYPE-TREF>
+                                  <DIRECTION>OUT</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                              </ARGUMENTS>
+                              <POSSIBLE-ERROR-REFS>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Dcm/PortInterfaces/RoutineServices_DcmDspRoutine_checkNCD/E_NOT_OK</POSSIBLE-ERROR-REF>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Dcm/PortInterfaces/RoutineServices_DcmDspRoutine_checkNCD/DCM_E_PENDING</POSSIBLE-ERROR-REF>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Coding/Dcm/PortInterfaces/RoutineServices_DcmDspRoutine_checkNCD/DCM_E_FORCE_RCRRP</POSSIBLE-ERROR-REF>
+                              </POSSIBLE-ERROR-REFS>
+                            </CLIENT-SERVER-OPERATION>
+                          </OPERATIONS>
+                          <POSSIBLE-ERRORS>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>E_NOT_OK</SHORT-NAME>
+                              <ERROR-CODE>1</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>DCM_E_PENDING</SHORT-NAME>
+                              <ERROR-CODE>10</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>DCM_E_FORCE_RCRRP</SHORT-NAME>
+                              <ERROR-CODE>12</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                          </POSSIBLE-ERRORS>
+                        </CLIENT-SERVER-INTERFACE>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                  </AR-PACKAGES>
+                </AR-PACKAGE>
+              </AR-PACKAGES>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

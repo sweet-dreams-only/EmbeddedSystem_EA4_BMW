@@ -1,0 +1,56 @@
+#
+# Example CMakeLists.txt for BAC Module
+#
+
+cmake_minimum_required(VERSION 3.1)
+SET(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
+LIST(INSERT CMAKE_MODULE_PATH 0 "$ENV{BPS_CMAKE_MODULE_PATH}")
+
+project(Dlog.classic C CXX)
+include (BAC)
+
+bps_module_adapter(
+    Dlog
+      classic
+
+    SRC
+      Dlog_BootMode.c
+      Dlog_CodingAdapter.c
+      Dlog_Ecu.c
+      Dlog_Memory.c
+      Dlog_Mode.c
+      Dlog_NvMAdapter.c
+      Dlog_Swe.c
+      Dlog_SweGet.c
+      Dlog_SweException.c
+      Dlog_SweInit.c
+      Dlog_SweStatus.c
+      Dlog_TimingParameters.c
+      Dlog_UserAdapter.c
+    GENERATE/INCLUDE
+      DlogClassic_Cfg.h.pgen
+      Dlog_CfgCommon.h.pgen
+      Dlog_HweTable.h.pgen
+      Dlog_Nvm.h.pgen
+      Dlog_PBCfg.h.pgen
+      Dlog_SweTable.h.pgen
+      Dlog_UDSAdapterAdd.h.pgen
+      DlogClassic_Version.h.pgen
+    GENERATE/META
+      Dlog_internal.arxml.pgen
+      Dlog_interfaces.arxml.pgen
+      Dlog_ext_interfaces.arxml.pgen
+    GENERATE/SRC
+      Dlog_HweTable.c.pgen
+      Dlog_Nvm.c.pgen
+      Dlog_PBCfg.c.pgen
+      Dlog_SweTable.c.pgen
+      Dlog_UDSAdapter.c.pgen
+    GENERATE/INPUT
+      Dlog
+      DlogClassic
+      DlogShared
+      Coding
+    DOC
+      intmanual
+)

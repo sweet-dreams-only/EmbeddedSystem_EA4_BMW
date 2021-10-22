@@ -1,0 +1,43 @@
+<#@ AutosarXml processor="ArDirectiveProcessor" requires="arPrefix='ar';arNamespace='http://autosar.org/4.0.3'" #>
+<#@ template inherits="AutosarDirectiveProcessor.ArGtcBase" debug="false" #>
+<#@ output extension="" #>
+<#@ include file="Helper.tt" #>/**********************************************************************************************************************
+ * Copyright 2018 Nxtr
+ * Nxtr Confidential
+ *
+ * Module File Name  : BmwTunSetHndlr_Cfg.h
+ * Module Description: Configuration Header file for CF081A
+ * Project           : CBD
+ * Author            : Krzysztof Byrski
+ * Generator         : <#= GeneratorName #> <#= GeneratorVersion #>
+ * Generation Time   : <#= DateTime.Now.ToString( "dd.MM.yyyy HH:mm:ss" ) #>
+ **********************************************************************************************************************
+ * Version Control:
+ * %version:          2 %
+ * %derived_by:       nz2999 %
+ *---------------------------------------------------------------------------------------------------------------------
+ * Date      Rev      Author    Change Description                                                             SCR #
+ * --------  -------  --------  ----------------------------------------------------------------------------  ---------
+ * 03/28/18  1        KByrski   Initial version of template                                                   EA4#16250
+ * 03/28/18  1        KByrski   Update template as per Design 3.0.0                                           EA4#22925
+ *********************************************************************************************************************/
+
+/******************************************* Multiple Include Protection *********************************************/
+#ifndef BMWTUNSETHNDLR_CFG_H
+#define BMWTUNSETHNDLR_CFG_H
+
+/************************************************ Include Statements *************************************************/
+#include "Rte_BmwTunSetHndlr.h"
+
+/****************************************************** Macros *******************************************************/
+<#
+ChangeContext( Xp.ModuleConfAtDefRefTo( "BmwTunSetHndlr" ) );
+
+string DESININIDXNOTPRSNT         = ValueOf( Xp.ValueAtDefRefTo( "BmwTunSetHndlrGeneral/DESININIDXNOTPRSNT" ) );
+string DESININOPTSETAISXNOTPRSNT  = ValueOf( Xp.ValueAtDefRefTo( "BmwTunSetHndlrGeneral/DESININOPTSETAISXNOTPRSNT" ) );
+#>
+#define BMWTUNSETHNDLR_DESININIDXNOTPRSNT_CNT_ENUM         (<#= DESININIDXNOTPRSNT #>)
+#define BMWTUNSETHNDLR_DESININOPTSETAISXNOTPRSNT_CNT_ENUM  (<#= DESININOPTSETAISXNOTPRSNT #>)
+
+/**************************************** End Of Multiple Include Protection *****************************************/
+#endif /* BMWTUNSETHNDLR_CFG_H */

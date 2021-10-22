@@ -1,0 +1,93 @@
+<#@ AutosarXml processor="ArDirectiveProcessor" requires="arPrefix='ar';arNamespace='http://autosar.org/4.0.3'" #>
+<#@ template inherits="AutosarDirectiveProcessor.ArGtcBase" debug="true" #>
+<#@ output extension="" #>
+<#@ include file="Helper.tt" #>
+/**********************************************************************************************************************
+* Copyright 2015 Nxtr
+* Nxtr Confidential
+*
+* Module File Name:   CDD_Adc0CfgAndUse_Cfg.h
+* Module Description: Configuration Header file for ADC0
+* Project           : CBD
+* Author            : Selva Sengottaiyan
+***********************************************************************************************************************
+* Version Control:
+* %version:          1 %
+* %derived_by:       nzt9hv %
+*---------------------------------------------------------------------------------------------------------------------
+* Date      Rev     Author  Change Description                                                              SCR #
+* --------  ------- ------- ---------------------------------------------------------------------------     ----------
+* 05/01/15  1       Selva     Initial version of the ADC header template                                    EA4#492
+**********************************************************************************************************************/
+
+/******************************************* Multiple Include Protection *********************************************/
+#ifndef ADC0CFGANDUSE_CFG_H
+#define ADC0CFGANDUSE_CFG_H
+
+/************************************************ Include Statements *************************************************/
+#include "Std_Types.h"
+
+/******************************************** File Level Rule Deviations *********************************************/
+
+/****************************************************** Macros *******************************************************/
+<# ChangeContext( Xp.ModuleConfAtDefRefTo( "Adc0CfgAndUse" ) ); #>
+
+<# int ADCD0VCR00 = ValueOf( Xp.ValueAtDefRefTo( "Adc0CfgAndUseGeneral/ADCD0VCR00" ) ); #>
+<# int ADCD0VCR01 = ValueOf( Xp.ValueAtDefRefTo( "Adc0CfgAndUseGeneral/ADCD0VCR01" ) ); #>
+<# int ADCD0VCR02 = ValueOf( Xp.ValueAtDefRefTo( "Adc0CfgAndUseGeneral/ADCD0VCR02" ) ); #>
+<# int ADCD0VCR03 = ValueOf( Xp.ValueAtDefRefTo( "Adc0CfgAndUseGeneral/ADCD0VCR03" ) ); #>
+<# int ADCD0VCR04 = ValueOf( Xp.ValueAtDefRefTo( "Adc0CfgAndUseGeneral/ADCD0VCR04" ) ); #>
+<# int ADCD0VCR05 = ValueOf( Xp.ValueAtDefRefTo( "Adc0CfgAndUseGeneral/ADCD0VCR05" ) ); #>
+<# int ADCD0VCR06 = ValueOf( Xp.ValueAtDefRefTo( "Adc0CfgAndUseGeneral/ADCD0VCR06" ) ); #>
+<# int ADCD0VCR07 = ValueOf( Xp.ValueAtDefRefTo( "Adc0CfgAndUseGeneral/ADCD0VCR07" ) ); #>
+<# int ADCD0VCR08 = ValueOf( Xp.ValueAtDefRefTo( "Adc0CfgAndUseGeneral/ADCD0VCR08" ) ); #>
+<# int ADCD0VCR09 = ValueOf( Xp.ValueAtDefRefTo( "Adc0CfgAndUseGeneral/ADCD0VCR09" ) ); #>
+<# int ADCD0VCR10 = ValueOf( Xp.ValueAtDefRefTo( "Adc0CfgAndUseGeneral/ADCD0VCR10" ) ); #>
+<# int ADCD0VCR11 = ValueOf( Xp.ValueAtDefRefTo( "Adc0CfgAndUseGeneral/ADCD0VCR11" ) ); #>
+<# int ADCD0VCR12 = ValueOf( Xp.ValueAtDefRefTo( "Adc0CfgAndUseGeneral/ADCD0VCR12" ) ); #>
+<# int ADCD0VCR13 = ValueOf( Xp.ValueAtDefRefTo( "Adc0CfgAndUseGeneral/ADCD0VCR13" ) ); #>
+<# int ADCD0VCR14 = ValueOf( Xp.ValueAtDefRefTo( "Adc0CfgAndUseGeneral/ADCD0VCR14" ) ); #>
+<# int ADCD0VCR15 = ValueOf( Xp.ValueAtDefRefTo( "Adc0CfgAndUseGeneral/ADCD0VCR15" ) ); #>
+<# int ADCD0VCR16 = ValueOf( Xp.ValueAtDefRefTo( "Adc0CfgAndUseGeneral/ADCD0VCR16" ) ); #>
+<# int ADCD0VCR17 = ValueOf( Xp.ValueAtDefRefTo( "Adc0CfgAndUseGeneral/ADCD0VCR17" ) ); #>
+<# int ADCD0VCR18 = ValueOf( Xp.ValueAtDefRefTo( "Adc0CfgAndUseGeneral/ADCD0VCR18" ) ); #>
+<# int ADCD0VCR19 = ValueOf( Xp.ValueAtDefRefTo( "Adc0CfgAndUseGeneral/ADCD0VCR19" ) ); #>
+<# int ADCD0VCR20 = ValueOf( Xp.ValueAtDefRefTo( "Adc0CfgAndUseGeneral/ADCD0VCR20" ) ); #>
+<# int ADCD0SGVCSP2 = ValueOf( Xp.ValueAtDefRefTo( "Adc0CfgAndUseGeneral/ADCD0SGVCSP2" ) ); #>
+<# int ADCD0SGVCSP3 = ValueOf( Xp.ValueAtDefRefTo( "Adc0CfgAndUseGeneral/ADCD0SGVCSP3" ) ); #>
+<# int ADCD0SGVCEP2 = ValueOf( Xp.ValueAtDefRefTo( "Adc0CfgAndUseGeneral/ADCD0SGVCEP2" ) ); #>
+<# int ADCD0SGVCEP3 = ValueOf( Xp.ValueAtDefRefTo( "Adc0CfgAndUseGeneral/ADCD0SGVCEP3" ) ); #>
+
+
+#define ADC0CFGANDUSE_ADCD0VCR00_CNT_U32		<#=  ADCD0VCR00 #>U
+#define ADC0CFGANDUSE_ADCD0VCR01_CNT_U32		<#=  ADCD0VCR01 #>U
+#define ADC0CFGANDUSE_ADCD0VCR02_CNT_U32		<#=  ADCD0VCR02 #>U
+#define ADC0CFGANDUSE_ADCD0VCR03_CNT_U32		<#=  ADCD0VCR03 #>U
+#define ADC0CFGANDUSE_ADCD0VCR04_CNT_U32		<#=  ADCD0VCR04 #>U
+#define ADC0CFGANDUSE_ADCD0VCR05_CNT_U32		<#=  ADCD0VCR05 #>U
+#define ADC0CFGANDUSE_ADCD0VCR06_CNT_U32		<#=  ADCD0VCR06 #>U
+#define ADC0CFGANDUSE_ADCD0VCR07_CNT_U32		<#=  ADCD0VCR07 #>U
+#define ADC0CFGANDUSE_ADCD0VCR08_CNT_U32		<#=  ADCD0VCR08 #>U
+#define ADC0CFGANDUSE_ADCD0VCR09_CNT_U32		<#=  ADCD0VCR09 #>U
+#define ADC0CFGANDUSE_ADCD0VCR10_CNT_U32		<#=  ADCD0VCR10 #>U
+#define ADC0CFGANDUSE_ADCD0VCR11_CNT_U32		<#=  ADCD0VCR11 #>U
+#define ADC0CFGANDUSE_ADCD0VCR12_CNT_U32		<#=  ADCD0VCR12 #>U
+#define ADC0CFGANDUSE_ADCD0VCR13_CNT_U32		<#=  ADCD0VCR13 #>U
+#define ADC0CFGANDUSE_ADCD0VCR14_CNT_U32		<#=  ADCD0VCR14 #>U
+#define ADC0CFGANDUSE_ADCD0VCR15_CNT_U32		<#=  ADCD0VCR15 #>U
+#define ADC0CFGANDUSE_ADCD0VCR16_CNT_U32		<#=  ADCD0VCR16 #>U
+#define ADC0CFGANDUSE_ADCD0VCR17_CNT_U32		<#=  ADCD0VCR17 #>U
+#define ADC0CFGANDUSE_ADCD0VCR18_CNT_U32		<#=  ADCD0VCR18 #>U
+#define ADC0CFGANDUSE_ADCD0VCR19_CNT_U32		<#=  ADCD0VCR19 #>U
+#define ADC0CFGANDUSE_ADCD0VCR20_CNT_U32		<#=  ADCD0VCR20 #>U
+#define ADC0CFGANDUSE_ADCD0SGVCSP2_CNT_U08      <#=  ADCD0SGVCSP2 #>U
+#define ADC0CFGANDUSE_ADCD0SGVCEP2_CNT_U08      <#=  ADCD0SGVCEP2 #>U
+#define ADC0CFGANDUSE_ADCD0SGVCSP3_CNT_U08      <#=  ADCD0SGVCSP3 #>U
+#define ADC0CFGANDUSE_ADCD0SGVCEP3_CNT_U08      <#=  ADCD0SGVCEP3 #>U
+
+
+/*********************************************** Exported Declarations ***********************************************/
+
+/**************************************** End Of Multiple Include Protection *****************************************/
+#endif /* ADC0CFGANDUSE_CFG_H */
+

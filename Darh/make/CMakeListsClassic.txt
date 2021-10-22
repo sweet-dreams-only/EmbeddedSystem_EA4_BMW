@@ -1,0 +1,38 @@
+#
+# Darh CMakeLists.txt
+#
+
+cmake_minimum_required(VERSION 3.1)
+SET(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
+LIST(INSERT CMAKE_MODULE_PATH 0 "$ENV{BPS_CMAKE_MODULE_PATH}")
+
+project(Darh.classic C CXX)
+include (BAC)
+
+bps_module_adapter(
+   Darh
+   classic
+
+   SRC
+      Darh_ApplAdapter.c
+      Darh_ConcAdapter.c
+      Darh_ErrMemAdapter.c
+      Darh_NvMAdapter.c
+      Darh_UDSAdapter.c
+      Darh_DataServicesHandler.c
+      Darh_EvtDataChngdHandler.c
+      Darh_MgmtHandler.c
+   GENERATE/INCLUDE
+      DarhClassic_Version.h.pgen
+      DarhClassic_Cfg.h.pgen
+   GENERATE/META
+      Darh_ext_interfaces.arxml.pgen
+      Darh_interfaces.arxml.pgen
+      Darh_internal.arxml.pgen
+   DOC
+      intmanual
+   GENERATE/INPUT
+      Darh
+      DarhClassic
+      Dem
+)

@@ -1,0 +1,937 @@
+<RDEF> I Includes
+<R>I C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c C:/component/AR200A_ArSuprt_Impl/include/ASR4.0.3/Std_Types.h 2
+<R>I C:/component/AR200A_ArSuprt_Impl/include/ASR4.0.3/Std_Types.h C:/component/AR201A_ArCplrSuprt_Impl/include/ASR4.0.3/Platform_Types.h 63
+<R>I C:/component/AR200A_ArSuprt_Impl/include/ASR4.0.3/Std_Types.h C:/component/AR201A_ArCplrSuprt_Impl/include/ASR4.0.3/Compiler.h 64
+<R>I C:/component/AR201A_ArCplrSuprt_Impl/include/ASR4.0.3/Compiler.h C:/component/AR201A_ArCplrSuprt_Impl/tools/contract/Compiler_Cfg.h 56
+<R>I C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 3
+<DEFINE> NXTRFIL_H C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 20 I DF OM - - - O
+<R>I C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h C:/component/AR200A_ArSuprt_Impl/include/ASR4.0.3/Std_Types.h 23
+<R>I C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h C:/component/AR999A_ArchGlbPrm_Impl/include/ArchGlbPrm.h 24
+<R>I C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h 25
+<R>I C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h C:/component/TL103A_CplrSuprt/include/2013.5.5/ansi/math.h 24
+<R>I C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h C:/component/AR200A_ArSuprt_Impl/include/ASR4.0.3/Std_Types.h 25
+<DEFINE> FilSt C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 33 I DC MB F N fs -
+<DEFINE> FilGain C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 34 I DC MB F N fs -
+<DEFINE> FilLpRec1 C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 35 I DC OT F N {s} -
+<DEFINE> FilLpRec C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 38 I DC MB F N {sFilLpRec1} -
+<DEFINE> CorrnFac C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 39 I DC MB F N fs -
+<DEFINE> FilHpRec1 C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 40 I DC OT F N {s} -
+<EXTN> FilLpUpdGain C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 42
+<DEFINE> FrqPole C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 42 I DC OV P N fs R
+<DEFINE> TiStep C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 43 I DC OV P N fs R
+<DEFINE> FilLpRecPtr C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 44 I DC OV P N p{sFilLpRec1} R
+<DEFINE> FilLpUpdGain C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 42 I DC OF F X (.,fs,fs,p{sFilLpRec1}) -
+<EXTN> FilLpUpdOutp_f32 C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 46
+<DEFINE> Inp C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 46 I DC OV P N fs R
+<DEFINE> FilLpRecPtr C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 47 I DC OV P N p{sFilLpRec1} R
+<DEFINE> FilLpUpdOutp_f32 C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 46 I DC OF F X (fs,fs,p{sFilLpRec1}) -
+<EXTN> FilLpInit C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 49
+<DEFINE> Inp C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 49 I DC OV P N fs R
+<DEFINE> FrqPole C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 50 I DC OV P N fs R
+<DEFINE> TiStep C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 51 I DC OV P N fs R
+<DEFINE> FilLpRecPtr C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 52 I DC OV P N p{sFilLpRec1} R
+<DEFINE> FilLpInit C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 49 I DC OF F X (.,fs,fs,fs,p{sFilLpRec1}) -
+<EXTN> FilHpUpdGain C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 54
+<DEFINE> FrqPole C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 54 I DC OV P N fs R
+<DEFINE> TiStep C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 55 I DC OV P N fs R
+<DEFINE> FilHpRecPtr C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 56 I DC OV P N p{sFilHpRec1} R
+<DEFINE> FilHpUpdGain C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 54 I DC OF F X (.,fs,fs,p{sFilHpRec1}) -
+<EXTN> FilHpUpdOutp_f32 C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 58
+<DEFINE> Inp C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 58 I DC OV P N fs R
+<DEFINE> FilHpRecPtr C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 59 I DC OV P N p{sFilHpRec1} R
+<DEFINE> FilHpUpdOutp_f32 C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 58 I DC OF F X (fs,fs,p{sFilHpRec1}) -
+<EXTN> FilHpInit C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 61
+<DEFINE> Inp C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 61 I DC OV P N fs R
+<DEFINE> FrqPole C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 62 I DC OV P N fs R
+<DEFINE> TiStep C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 63 I DC OV P N fs R
+<DEFINE> FilHpRecPtr C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 64 I DC OV P N p{sFilHpRec1} R
+<DEFINE> FilHpInit C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 61 I DC OF F X (.,fs,fs,fs,p{sFilHpRec1}) -
+<EXTD> FilLpUpdGain C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 82
+<DEFINE> FrqPole C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 82 I DC OV B N fs R
+<DEFINE> TiStep C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 83 I DC OV B N fs R
+<DEFINE> FilLpRecPtr C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 84 I DC OV B N p{sFilLpRec1} R
+<DEFINE> FilLpUpdGain C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 82 I DR OF F X (.,fs,fs,p{sFilLpRec1}) -
+<DEFINE> FilLpUpdGain C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 82 I DF OF F X (.,fs,fs,p{sFilLpRec1}) -
+<RDEF> C Calls
+<R>C FilLpUpdGain Exp_f32 86
+<RDEF> X Refers-to
+<R>X FilLpUpdGain Exp_f32 86 R
+<LIT> 1.0 F P C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 86 32 I FN fs B X
+<CTLG> FilLpUpdGain 1
+<CTLG> 1 2
+<CTLG> 2 4
+<CTLGN> 85 87 87 87 
+<S>
+<S>STFIL  C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h
+<S>STNAM  FilLpUpdGain
+<S>STCYC  1
+<S>STMCC  0 (1:1)
+<S>STMIF  0
+<S>STSUB  1
+<S>STAKI  2
+<S>STLIN  0
+<S>STXLN  1
+<S>STBAK  0
+<S>STELF  0
+<S>STGTO  0
+<S>STKNT  0
+<S>STKDN  0.00   
+<S>STUNV  0
+<S>STLCT  0
+<S>STPTH  1
+<S>STPDN  1.00   
+<S>STPBG  0
+<S>STLOP  0
+<S>STM07  1
+<S>STM19  0
+<S>STAV1  1
+<S>STAV2  1
+<S>STAV3  1
+<S>STST1  1
+<S>STST2  1
+<S>STST3  1
+<S>STPAR  3
+<S>STCAL  1
+<S>STFN1  1
+<S>STFN2  0
+
+<EXTD> FilLpUpdOutp_f32 C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 103
+<DEFINE> Inp C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 103 I DC OV B N fs R
+<DEFINE> FilLpRecPtr C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 104 I DC OV B N p{sFilLpRec1} R
+<DEFINE> FilLpUpdOutp_f32 C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 103 I DR OF F X (fs,fs,p{sFilLpRec1}) -
+<DEFINE> FilLpUpdOutp_f32 C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 103 I DF OF F X (fs,fs,p{sFilLpRec1}) -
+<CTLG> FilLpUpdOutp_f32 1
+<CTLG> 1 2
+<CTLG> 2 4
+<CTLGN> 105 107 107 107 
+<S>
+<S>STFIL  C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h
+<S>STNAM  FilLpUpdOutp_f32
+<S>STCYC  1
+<S>STMCC  0 (1:1)
+<S>STMIF  0
+<S>STSUB  0
+<S>STAKI  1
+<S>STLIN  0
+<S>STXLN  2
+<S>STBAK  0
+<S>STELF  0
+<S>STGTO  0
+<S>STKNT  0
+<S>STKDN  0.00   
+<S>STUNV  0
+<S>STLCT  0
+<S>STPTH  1
+<S>STPDN  0.50   
+<S>STPBG  0
+<S>STLOP  0
+<S>STM07  1
+<S>STM19  1
+<S>STAV1  0
+<S>STAV2  0
+<S>STAV3  0
+<S>STST1  2
+<S>STST2  2
+<S>STST3  2
+<S>STPAR  2
+<S>STCAL  0
+<S>STFN1  1
+<S>STFN2  0
+
+<EXTD> FilLpInit C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 125
+<DEFINE> Inp C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 125 I DC OV B N fs R
+<DEFINE> FrqPole C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 126 I DC OV B N fs R
+<DEFINE> TiStep C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 127 I DC OV B N fs R
+<DEFINE> FilLpRecPtr C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 128 I DC OV B N p{sFilLpRec1} R
+<DEFINE> FilLpInit C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 125 I DR OF F X (.,fs,fs,fs,p{sFilLpRec1}) -
+<DEFINE> FilLpInit C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 125 I DF OF F X (.,fs,fs,fs,p{sFilLpRec1}) -
+<R>C FilLpInit FilLpUpdGain 131
+<R>X FilLpInit FilLpUpdGain 131 R
+<CTLG> FilLpInit 1
+<CTLG> 1 2
+<CTLG> 2 4
+<CTLGN> 129 132 132 132 
+<S>
+<S>STFIL  C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h
+<S>STNAM  FilLpInit
+<S>STCYC  1
+<S>STMCC  0 (1:1)
+<S>STMIF  0
+<S>STSUB  1
+<S>STAKI  2
+<S>STLIN  0
+<S>STXLN  2
+<S>STBAK  0
+<S>STELF  0
+<S>STGTO  0
+<S>STKNT  0
+<S>STKDN  0.00   
+<S>STUNV  0
+<S>STLCT  0
+<S>STPTH  1
+<S>STPDN  0.50   
+<S>STPBG  0
+<S>STLOP  0
+<S>STM07  1
+<S>STM19  0
+<S>STAV1  0
+<S>STAV2  0
+<S>STAV3  0
+<S>STST1  2
+<S>STST2  2
+<S>STST3  2
+<S>STPAR  4
+<S>STCAL  1
+<S>STFN1  1
+<S>STFN2  0
+
+<EXTD> FilHpUpdGain C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 150
+<DEFINE> FrqPole C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 150 I DC OV B N fs R
+<DEFINE> TiStep C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 151 I DC OV B N fs R
+<DEFINE> FilHpRecPtr C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 152 I DC OV B N p{sFilHpRec1} R
+<DEFINE> FilHpUpdGain C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 150 I DR OF F X (.,fs,fs,p{sFilHpRec1}) -
+<DEFINE> FilHpUpdGain C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 150 I DF OF F X (.,fs,fs,p{sFilHpRec1}) -
+<R>C FilHpUpdGain Exp_f32 155
+<R>X FilHpUpdGain Exp_f32 155 R
+<R>C FilHpUpdGain Sqrt_f32 155
+<R>X FilHpUpdGain Sqrt_f32 155 R
+<LIT> 1.0 f P C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 154 34 I FN fs B X
+<LIT> 2.0 f P C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 155 82 I FN fs B X
+<LIT> 1.0 f P C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 155 98 I FN fs B X
+<LIT> 2.0 f P C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 155 107 I FN fs B X
+<LIT> 2.0 f P C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 155 135 I FN fs B X
+<R>C FilHpUpdGain FilLpUpdGain 156
+<R>X FilHpUpdGain FilLpUpdGain 156 R
+<CTLG> FilHpUpdGain 1
+<CTLG> 1 2
+<CTLG> 2 4
+<CTLGN> 153 157 157 157 
+<S>
+<S>STFIL  C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h
+<S>STNAM  FilHpUpdGain
+<S>STCYC  1
+<S>STMCC  0 (1:1)
+<S>STMIF  0
+<S>STSUB  3
+<S>STAKI  4
+<S>STLIN  0
+<S>STXLN  3
+<S>STBAK  0
+<S>STELF  0
+<S>STGTO  0
+<S>STKNT  0
+<S>STKDN  0.00   
+<S>STUNV  0
+<S>STLCT  0
+<S>STPTH  1
+<S>STPDN  0.33   
+<S>STPBG  0
+<S>STLOP  0
+<S>STM07  1
+<S>STM19  0
+<S>STAV1  0
+<S>STAV2  0
+<S>STAV3  0
+<S>STST1  2
+<S>STST2  2
+<S>STST3  2
+<S>STPAR  3
+<S>STCAL  3
+<S>STFN1  1
+<S>STFN2  0
+
+<EXTD> FilHpUpdOutp_f32 C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 175
+<DEFINE> Inp C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 175 I DC OV B N fs R
+<DEFINE> FilHpRecPtr C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 176 I DC OV B N p{sFilHpRec1} R
+<DEFINE> FilHpUpdOutp_f32 C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 175 I DR OF F X (fs,fs,p{sFilHpRec1}) -
+<DEFINE> FilHpUpdOutp_f32 C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 175 I DF OF F X (fs,fs,p{sFilHpRec1}) -
+<R>C FilHpUpdOutp_f32 FilLpUpdOutp_f32 178
+<R>X FilHpUpdOutp_f32 FilLpUpdOutp_f32 178 R
+<CTLG> FilHpUpdOutp_f32 1
+<CTLG> 1 3
+<CTLGN> 177 178 178 
+<S>
+<S>STFIL  C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h
+<S>STNAM  FilHpUpdOutp_f32
+<S>STCYC  1
+<S>STMCC  0 (1:1)
+<S>STMIF  0
+<S>STSUB  1
+<S>STAKI  2
+<S>STLIN  0
+<S>STXLN  1
+<S>STBAK  0
+<S>STELF  0
+<S>STGTO  0
+<S>STKNT  0
+<S>STKDN  0.00   
+<S>STUNV  0
+<S>STLCT  0
+<S>STPTH  1
+<S>STPDN  1.00   
+<S>STPBG  0
+<S>STLOP  0
+<S>STM07  1
+<S>STM19  1
+<S>STAV1  1
+<S>STAV2  1
+<S>STAV3  1
+<S>STST1  1
+<S>STST2  1
+<S>STST3  1
+<S>STPAR  2
+<S>STCAL  1
+<S>STFN1  1
+<S>STFN2  0
+
+<EXTD> FilHpInit C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 197
+<DEFINE> Inp C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 197 I DC OV B N fs R
+<DEFINE> FrqPole C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 198 I DC OV B N fs R
+<DEFINE> TiStep C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 199 I DC OV B N fs R
+<DEFINE> FilHpRecPtr C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 200 I DC OV B N p{sFilHpRec1} R
+<DEFINE> FilHpInit C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 197 I DR OF F X (.,fs,fs,fs,p{sFilHpRec1}) -
+<DEFINE> FilHpInit C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h 197 I DF OF F X (.,fs,fs,fs,p{sFilHpRec1}) -
+<R>C FilHpInit FilLpInit 202
+<R>X FilHpInit FilLpInit 202 R
+<R>C FilHpInit FilHpUpdGain 203
+<R>X FilHpInit FilHpUpdGain 203 R
+<CTLG> FilHpInit 1
+<CTLG> 1 2
+<CTLG> 2 4
+<CTLGN> 201 204 204 204 
+<S>
+<S>STFIL  C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h
+<S>STNAM  FilHpInit
+<S>STCYC  1
+<S>STMCC  0 (1:1)
+<S>STMIF  0
+<S>STSUB  2
+<S>STAKI  3
+<S>STLIN  0
+<S>STXLN  2
+<S>STBAK  0
+<S>STELF  0
+<S>STGTO  0
+<S>STKNT  0
+<S>STKDN  0.00   
+<S>STUNV  0
+<S>STLCT  0
+<S>STPTH  1
+<S>STPDN  0.50   
+<S>STPBG  0
+<S>STLOP  0
+<S>STM07  1
+<S>STM19  0
+<S>STAV1  0
+<S>STAV2  0
+<S>STAV3  0
+<S>STST1  2
+<S>STST2  2
+<S>STST3  2
+<S>STPAR  4
+<S>STCAL  2
+<S>STFN1  1
+<S>STFN2  0
+
+<R>I C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.h 4
+<R>I C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.h C:/component/AR200A_ArSuprt_Impl/include/ASR4.0.3/Std_Types.h 5
+<EXTD> Test_FilLpUpdGain C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 6
+<DEFINE> FrqPole C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 6 N DC OV B N fs R
+<DEFINE> TiStep C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 7 N DC OV B N fs R
+<DEFINE> FilLpRecPtr C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 8 N DC OV B N p{sFilLpRec1} R
+<DEFINE> Test_FilLpUpdGain C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 6 N DR OF F X (.,fs,fs,p{sFilLpRec1}) -
+<DEFINE> Test_FilLpUpdGain C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 6 N DF OF F X (.,fs,fs,p{sFilLpRec1}) -
+<R>C Test_FilLpUpdGain FilLpUpdGain 10
+<R>X Test_FilLpUpdGain FilLpUpdGain 10 R
+<CTLG> Test_FilLpUpdGain 1
+<CTLG> 1 2
+<CTLG> 2 4
+<CTLGN> 9 11 11 11 
+<S>
+<S>STFIL  C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c
+<S>STNAM  Test_FilLpUpdGain
+<S>STCYC  1
+<S>STMCC  0 (1:1)
+<S>STMIF  0
+<S>STSUB  1
+<S>STAKI  2
+<S>STLIN  1
+<S>STXLN  1
+<S>STBAK  0
+<S>STELF  0
+<S>STGTO  0
+<S>STKNT  0
+<S>STKDN  0.00   
+<S>STUNV  0
+<S>STLCT  0
+<S>STPTH  1
+<S>STPDN  1.00   
+<S>STPBG  0
+<S>STLOP  0
+<S>STM07  1
+<S>STM19  0
+<S>STAV1  11
+<S>STAV2  11
+<S>STAV3  11
+<S>STST1  1
+<S>STST2  1
+<S>STST3  1
+<S>STPAR  3
+<S>STCAL  1
+<S>STFN1  7
+<S>STFN2  4
+
+<EXTD> Test_FilLpUpdOutp C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 13
+<DEFINE> Inp C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 13 N DC OV B N fs R
+<DEFINE> FilLpRecPtr C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 14 N DC OV B N p{sFilLpRec1} R
+<DEFINE> Test_FilLpUpdOutp C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 13 N DR OF F X (fs,fs,p{sFilLpRec1}) -
+<DEFINE> Test_FilLpUpdOutp C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 13 N DF OF F X (fs,fs,p{sFilLpRec1}) -
+<R>C Test_FilLpUpdOutp FilLpUpdOutp_f32 16
+<R>X Test_FilLpUpdOutp FilLpUpdOutp_f32 16 R
+<CTLG> Test_FilLpUpdOutp 1
+<CTLG> 1 3
+<CTLGN> 15 16 16 
+<S>
+<S>STFIL  C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c
+<S>STNAM  Test_FilLpUpdOutp
+<S>STCYC  1
+<S>STMCC  0 (1:1)
+<S>STMIF  0
+<S>STSUB  1
+<S>STAKI  2
+<S>STLIN  1
+<S>STXLN  1
+<S>STBAK  0
+<S>STELF  0
+<S>STGTO  0
+<S>STKNT  0
+<S>STKDN  0.00   
+<S>STUNV  0
+<S>STLCT  0
+<S>STPTH  1
+<S>STPDN  1.00   
+<S>STPBG  0
+<S>STLOP  0
+<S>STM07  1
+<S>STM19  1
+<S>STAV1  12
+<S>STAV2  12
+<S>STAV3  12
+<S>STST1  1
+<S>STST2  1
+<S>STST3  1
+<S>STPAR  2
+<S>STCAL  1
+<S>STFN1  9
+<S>STFN2  3
+
+<EXTD> Test_FilLpInit C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 19
+<DEFINE> Inp C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 19 N DC OV B N fs R
+<DEFINE> FrqPole C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 20 N DC OV B N fs R
+<DEFINE> TiStep C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 21 N DC OV B N fs R
+<DEFINE> FilLpRecPtr C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 22 N DC OV B N p{sFilLpRec1} R
+<DEFINE> Test_FilLpInit C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 19 N DR OF F X (.,fs,fs,fs,p{sFilLpRec1}) -
+<DEFINE> Test_FilLpInit C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 19 N DF OF F X (.,fs,fs,fs,p{sFilLpRec1}) -
+<R>C Test_FilLpInit FilLpInit 24
+<R>X Test_FilLpInit FilLpInit 24 R
+<CTLG> Test_FilLpInit 1
+<CTLG> 1 2
+<CTLG> 2 4
+<CTLGN> 23 25 25 25 
+<S>
+<S>STFIL  C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c
+<S>STNAM  Test_FilLpInit
+<S>STCYC  1
+<S>STMCC  0 (1:1)
+<S>STMIF  0
+<S>STSUB  1
+<S>STAKI  2
+<S>STLIN  1
+<S>STXLN  1
+<S>STBAK  0
+<S>STELF  0
+<S>STGTO  0
+<S>STKNT  0
+<S>STKDN  0.00   
+<S>STUNV  0
+<S>STLCT  0
+<S>STPTH  1
+<S>STPDN  1.00   
+<S>STPBG  0
+<S>STLOP  0
+<S>STM07  1
+<S>STM19  0
+<S>STAV1  13
+<S>STAV2  13
+<S>STAV3  13
+<S>STST1  1
+<S>STST2  1
+<S>STST3  1
+<S>STPAR  4
+<S>STCAL  1
+<S>STFN1  8
+<S>STFN2  5
+
+<EXTD> Test_FilHpUpdGain C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 27
+<DEFINE> FrqPole C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 27 N DC OV B N fs R
+<DEFINE> TiStep C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 28 N DC OV B N fs R
+<DEFINE> FilHpRecPtr C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 29 N DC OV B N p{sFilHpRec1} R
+<DEFINE> Test_FilHpUpdGain C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 27 N DR OF F X (.,fs,fs,p{sFilHpRec1}) -
+<DEFINE> Test_FilHpUpdGain C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 27 N DF OF F X (.,fs,fs,p{sFilHpRec1}) -
+<R>C Test_FilHpUpdGain FilHpUpdGain 31
+<R>X Test_FilHpUpdGain FilHpUpdGain 31 R
+<CTLG> Test_FilHpUpdGain 1
+<CTLG> 1 2
+<CTLG> 2 4
+<CTLGN> 30 32 32 32 
+<S>
+<S>STFIL  C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c
+<S>STNAM  Test_FilHpUpdGain
+<S>STCYC  1
+<S>STMCC  0 (1:1)
+<S>STMIF  0
+<S>STSUB  1
+<S>STAKI  2
+<S>STLIN  1
+<S>STXLN  1
+<S>STBAK  0
+<S>STELF  0
+<S>STGTO  0
+<S>STKNT  0
+<S>STKDN  0.00   
+<S>STUNV  0
+<S>STLCT  0
+<S>STPTH  1
+<S>STPDN  1.00   
+<S>STPBG  0
+<S>STLOP  0
+<S>STM07  1
+<S>STM19  0
+<S>STAV1  11
+<S>STAV2  11
+<S>STAV3  11
+<S>STST1  1
+<S>STST2  1
+<S>STST3  1
+<S>STPAR  3
+<S>STCAL  1
+<S>STFN1  7
+<S>STFN2  4
+
+<EXTD> Test_FilHpUpdOutp C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 34
+<DEFINE> Inp C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 34 N DC OV B N fs R
+<DEFINE> FilHpRecPtr C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 35 N DC OV B N p{sFilHpRec1} R
+<DEFINE> Test_FilHpUpdOutp C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 34 N DR OF F X (fs,fs,p{sFilHpRec1}) -
+<DEFINE> Test_FilHpUpdOutp C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 34 N DF OF F X (fs,fs,p{sFilHpRec1}) -
+<R>C Test_FilHpUpdOutp FilHpUpdOutp_f32 37
+<R>X Test_FilHpUpdOutp FilHpUpdOutp_f32 37 R
+<CTLG> Test_FilHpUpdOutp 1
+<CTLG> 1 3
+<CTLGN> 36 37 37 
+<S>
+<S>STFIL  C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c
+<S>STNAM  Test_FilHpUpdOutp
+<S>STCYC  1
+<S>STMCC  0 (1:1)
+<S>STMIF  0
+<S>STSUB  1
+<S>STAKI  2
+<S>STLIN  1
+<S>STXLN  1
+<S>STBAK  0
+<S>STELF  0
+<S>STGTO  0
+<S>STKNT  0
+<S>STKDN  0.00   
+<S>STUNV  0
+<S>STLCT  0
+<S>STPTH  1
+<S>STPDN  1.00   
+<S>STPBG  0
+<S>STLOP  0
+<S>STM07  1
+<S>STM19  1
+<S>STAV1  12
+<S>STAV2  12
+<S>STAV3  12
+<S>STST1  1
+<S>STST2  1
+<S>STST3  1
+<S>STPAR  2
+<S>STCAL  1
+<S>STFN1  9
+<S>STFN2  3
+
+<EXTD> Test_FilHpInit C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 40
+<DEFINE> Inp C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 40 N DC OV B N fs R
+<DEFINE> FrqPole C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 41 N DC OV B N fs R
+<DEFINE> TiStep C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 42 N DC OV B N fs R
+<DEFINE> FilHpRecPtr C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 43 N DC OV B N p{sFilHpRec1} R
+<DEFINE> Test_FilHpInit C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 40 N DR OF F X (.,fs,fs,fs,p{sFilHpRec1}) -
+<DEFINE> Test_FilHpInit C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c 40 N DF OF F X (.,fs,fs,fs,p{sFilHpRec1}) -
+<R>C Test_FilHpInit FilHpInit 45
+<R>X Test_FilHpInit FilHpInit 45 R
+<CTLG> Test_FilHpInit 1
+<CTLG> 1 2
+<CTLG> 2 4
+<CTLGN> 44 46 46 46 
+<S>
+<S>STFIL  C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c
+<S>STNAM  Test_FilHpInit
+<S>STCYC  1
+<S>STMCC  0 (1:1)
+<S>STMIF  0
+<S>STSUB  1
+<S>STAKI  2
+<S>STLIN  1
+<S>STXLN  1
+<S>STBAK  0
+<S>STELF  0
+<S>STGTO  0
+<S>STKNT  0
+<S>STKDN  0.00   
+<S>STUNV  0
+<S>STLCT  0
+<S>STPTH  1
+<S>STPDN  1.00   
+<S>STPBG  0
+<S>STLOP  0
+<S>STM07  1
+<S>STM19  0
+<S>STAV1  13
+<S>STAV2  13
+<S>STAV3  13
+<S>STST1  1
+<S>STST2  1
+<S>STST3  1
+<S>STPAR  4
+<S>STCAL  1
+<S>STFN1  8
+<S>STFN2  5
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Abslt_f32_f32
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Abslt_u08_s08
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Abslt_u16_s16
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Abslt_u32_s32
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Arctan2_f32
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Blnd_f32
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Cos_f32
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Exp_f32
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h
+<S>STNAM  FilLpUpdGain
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h
+<S>STNAM  FilLpInit
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Sqrt_f32
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h
+<S>STNAM  FilHpUpdGain
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h
+<S>STNAM  FilHpInit
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h
+<S>STNAM  FilLpUpdOutp_f32
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR104A_NxtrFil_Impl/include/NxtrFil.h
+<S>STNAM  FilHpUpdOutp_f32
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Lim_f32
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Lim_s08
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Lim_s16
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Lim_s32
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Lim_u08
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Lim_u16
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Lim_u32
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Max_f32
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Max_s08
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Max_s16
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Max_s32
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Max_u08
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Max_u16
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Max_u32
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Min_f32
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Min_s08
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Min_s16
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Min_s32
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Min_u08
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Min_u16
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Min_u32
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Mod_f32
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Sign_s08_f32
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Sign_s08_s08
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Sign_s08_s16
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Sign_s08_s32
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR100A_NxtrMath_Impl/include/NxtrMath.h
+<S>STNAM  Sin_f32
+<S>STRET  0
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c
+<S>STNAM  Test_FilHpInit
+<S>STRET  1
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c
+<S>STNAM  Test_FilHpUpdGain
+<S>STRET  1
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c
+<S>STNAM  Test_FilHpUpdOutp
+<S>STRET  1
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c
+<S>STNAM  Test_FilLpInit
+<S>STRET  1
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c
+<S>STNAM  Test_FilLpUpdGain
+<S>STRET  1
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c
+<S>STNAM  Test_FilLpUpdOutp
+<S>STRET  1
+<S>STUNR  0
+
+<S>
+<S>STFIL  C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c
+<S>STNAM  C:/component/AR104A_NxtrFil_Impl/tools/contract/NxtrFil_TestHarness.c
+<S>STNTB  NON-TOKEN BASED STATISTICS...
+<S>STSCT  0
+<S>STECT  0
+<S>STFNC  6
+<S>STFCO  16
+<S>STTKB  TOKEN BASED STATISTICS...
+<S>STVAR  25
+<S>STOPT  12
+<S>STOPN  25
+<S>STTOT  257
+<S>STZIP  155
+<S>STHAL  159
+<S>STSHN  508
+<S>STDIF  10.43  
+<S>STEFF  13962
+<S>STVOL  1339
+<S>STDEV  2.33   
+<S>STBUG  1
+<S>STTPP  48
+<S>STTLN  36
+<S>STM20  98
+<S>STM21  156
+<S>STM22  6
+<S>STM28  0
+<S>STM33  0
+<S>STBCS  BASIC COCOMO STATISTICS...
+<S>STBMO  0.099  
+<S>STBMS  0.100  
+<S>STBME  0.094  
+<S>STTDO  1.038  
+<S>STTDS  1.117  
+<S>STTDE  1.174  
+<S>STCOM  COMMENT BASED STATISTICS...
+<S>STCDN  0.000  
+

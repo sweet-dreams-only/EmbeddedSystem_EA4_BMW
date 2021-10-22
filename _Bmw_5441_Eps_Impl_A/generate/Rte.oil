@@ -1,0 +1,878 @@
+/**********************************************************************************************************************
+ *  COPYRIGHT
+ *  -------------------------------------------------------------------------------------------------------------------
+ *
+ *                This software is copyright protected and proprietary to Vctr Informatik GmbH.
+ *                Vctr Informatik GmbH grants to you only those rights as set out in the license conditions.
+ *                All other rights remain with Vctr Informatik GmbH.
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  FILE DESCRIPTION
+ *  -------------------------------------------------------------------------------------------------------------------
+ *          File:  Rte.oil
+ *        Config:  EPS.dpa
+ *   ECU-Project:  EPS
+ *
+ *     Generator:  MICROSAR RTE Generator Version 4.16.0
+ *                 RTE Core Version 1.16.0
+ *       License:  Unlimited license CBD1700369 for Nxtr Automotive Corporation
+ *
+ *   Description:  OIL-File containing project specific OS definitions for the MICROSAR RTE
+ *********************************************************************************************************************/
+
+/**********************************************************************************************************************
+ *                                              P L E A S E   N O T E
+ *
+ * The attributes in this file must not be changed. Missing mandatory attributes must be set in the including file.
+ * They are presented as a comment in the corresponding object definition containing a list of all legal values.
+ *********************************************************************************************************************/
+
+   TASK Task_100ms_Appl10 {
+      ACTIVATION = 1:"@RO@";
+      PRIORITY = 39:"@RO@";
+      SCHEDULE = FULL:"@RO@";
+// TIMING_PROTECTION = FALSE|TRUE; (AUTOSAR OS only)
+      AUTOSTART = FALSE:"@RO@";
+      EVENT = Rte_Ev_Cyclic_Task_100ms_Appl10_0_100ms:"@RO@";
+      EVENT = Rte_Ev_MS_Task_100ms_Appl10:"@RO@";
+      EVENT = Rte_Ev_Run1_Darh_QueueHandler:"@RO@";
+      EVENT = Rte_Ev_Run_BmwMsgSlot121Bas1Repn2BusFrChA_CON_VEH_Missing_Oper:"@RO@";
+      EVENT = Rte_Ev_Run_BmwMsgSlot121Bas1Repn2BusFrChA_CON_VEH_Received_Oper:"@RO@";
+      EVENT = Rte_Ev_Run_BmwMsgSlot55Bas3Repn4BusFrChA_V_VEH_Missing_Oper:"@RO@";
+      EVENT = Rte_Ev_Run_BmwMsgSlot55Bas3Repn4BusFrChA_V_VEH_Received_Oper:"@RO@";
+      EVENT = Rte_Ev_Run_Vin_Vin_LifeCycleModeRequest:"@RO@";
+      EVENT = Rte_Ev_Run_Vin_Vin_OnComOff:"@RO@";
+      EVENT = Rte_Ev_Run_Vin_Vin_OnComOn:"@RO@";
+      EVENT = Rte_Ev_Run_Vin_Vin_OnVinChangeIndicatorAck:"@RO@";
+      EVENT = Rte_Ev_Run_Vin_Vin_ReceiveFromCom:"@RO@";
+      RESOURCE = Rte_Res_Vin_VinState:"@RO@";
+      ACCESSING_APPLICATION = Appl7;
+      ACCESSING_APPLICATION = Appl8;
+      ACCESSING_APPLICATION = Appl9;
+   }:"@RO@@NR@";
+
+   ALARM Rte_Al_TE_Darh_QueueHandler {
+      COUNTER = OsCounter;
+      ACTION = SETEVENT
+      {
+         TASK = Task_100ms_Appl10;
+         EVENT = Rte_Ev_Run1_Darh_QueueHandler;
+      }:"@ROC@";
+      AUTOSTART = FALSE:"@RO@";
+   }:"@RO@@NR@";
+
+   ALARM Rte_Al_TE_Task_100ms_Appl10_0_100ms {
+      COUNTER = OsCounter;
+      ACTION = SETEVENT
+      {
+         TASK = Task_100ms_Appl10;
+         EVENT = Rte_Ev_Cyclic_Task_100ms_Appl10_0_100ms;
+      }:"@ROC@";
+      AUTOSTART = FALSE:"@RO@";
+   }:"@RO@@NR@";
+
+   TASK Task_100ms_Appl7 {
+      ACTIVATION = 1:"@RO@";
+      PRIORITY = 36:"@RO@";
+      SCHEDULE = FULL:"@RO@";
+// TIMING_PROTECTION = FALSE|TRUE; (AUTOSAR OS only)
+      AUTOSTART = FALSE:"@RO@";
+      ACCESSING_APPLICATION = Appl10;
+      ACCESSING_APPLICATION = Appl9;
+   }:"@RO@@NR@";
+
+   ALARM Rte_Al_TE_Task_100ms_Appl7_0_100ms {
+      COUNTER = OsCounter;
+      ACTION = ACTIVATETASK
+      {
+         TASK = Task_100ms_Appl7;
+      }:"@ROC@";
+      AUTOSTART = FALSE:"@RO@";
+      ACCESSING_APPLICATION = Appl10;
+   }:"@RO@@NR@";
+
+   TASK Task_100ms_Appl9 {
+      ACTIVATION = 1:"@RO@";
+      PRIORITY = 38:"@RO@";
+      SCHEDULE = FULL:"@RO@";
+// TIMING_PROTECTION = FALSE|TRUE; (AUTOSAR OS only)
+      AUTOSTART = FALSE:"@RO@";
+      ACCESSING_APPLICATION = Appl10;
+      ACCESSING_APPLICATION = Appl7;
+   }:"@RO@@NR@";
+
+   ALARM Rte_Al_TE_Task_100ms_Appl9_0_100ms {
+      COUNTER = OsCounter;
+      ACTION = ACTIVATETASK
+      {
+         TASK = Task_100ms_Appl9;
+      }:"@ROC@";
+      AUTOSTART = FALSE:"@RO@";
+      ACCESSING_APPLICATION = Appl10;
+   }:"@RO@@NR@";
+
+   TASK Task_10msBsw_Appl10 {
+      ACTIVATION = 1:"@RO@";
+      PRIORITY = 44:"@RO@";
+      SCHEDULE = FULL:"@RO@";
+// TIMING_PROTECTION = FALSE|TRUE; (AUTOSAR OS only)
+      AUTOSTART = FALSE:"@RO@";
+      RESOURCE = Rte_Res_Vin_VinState:"@RO@";
+      ACCESSING_APPLICATION = Appl7;
+      ACCESSING_APPLICATION = Appl9;
+   }:"@RO@@NR@";
+
+   ALARM Rte_Al_TE2_Task_10msBsw_Appl10_0_10ms {
+      COUNTER = OsCounter;
+      ACTION = ACTIVATETASK
+      {
+         TASK = Task_10msBsw_Appl10;
+      }:"@ROC@";
+      AUTOSTART = FALSE:"@RO@";
+   }:"@RO@@NR@";
+
+   TASK Task_10ms_Appl10 {
+      ACTIVATION = 1:"@RO@";
+      PRIORITY = 49:"@RO@";
+      SCHEDULE = FULL:"@RO@";
+// TIMING_PROTECTION = FALSE|TRUE; (AUTOSAR OS only)
+      AUTOSTART = FALSE:"@RO@";
+      EVENT = Rte_Ev_Cyclic_Task_10ms_Appl10_0_10ms:"@RO@";
+      EVENT = Rte_Ev_MS_Task_10ms_Appl10:"@RO@";
+      EVENT = Rte_Ev_Run1_Stm_Runnable_InitialCELSupervision:"@RO@";
+      EVENT = Rte_Ev_Run1_Stm_Runnable_StopCentralErrorLockSupervision:"@RO@";
+      EVENT = Rte_Ev_Run1_SysTime_ReceiveSignal:"@RO@";
+      EVENT = Rte_Ev_Run_BmwMsgSlot107Bas0Repn1BusFrChA_OFFS_QUAD_EPS_Missing_Oper:"@RO@";
+      EVENT = Rte_Ev_Run_BmwMsgSlot107Bas0Repn1BusFrChA_OFFS_QUAD_EPS_Received_Oper:"@RO@";
+      EVENT = Rte_Ev_Run_BmwMsgSlot108Bas0Repn2BusFrChA_STEA_OFFS_Missing_Oper:"@RO@";
+      EVENT = Rte_Ev_Run_BmwMsgSlot108Bas0Repn2BusFrChA_STEA_OFFS_Received_Oper:"@RO@";
+      EVENT = Rte_Ev_Run_BmwMsgSlot269Bas2Repn4BusFrChA_CTR_VIB_STW_DISP_EXMI_SP2015_Missing:"@RO@";
+      EVENT = Rte_Ev_Run_BmwMsgSlot269Bas2Repn4BusFrChA_CTR_VIB_STW_DISP_EXMI_SP2015_Received:"@RO@";
+      EVENT = Rte_Ev_Run_BmwMsgSlot276Bas4Repn8BusFrChA_MILE_KM_Missing_Oper:"@RO@";
+      EVENT = Rte_Ev_Run_BmwMsgSlot276Bas4Repn8BusFrChA_MILE_KM_Received_Oper:"@RO@";
+      EVENT = Rte_Ev_Run_BmwMsgSlot53Bas3Repn8BusFrChA_SU_CLE_DRDY_DXP_Miss:"@RO@";
+      EVENT = Rte_Ev_Run_BmwMsgSlot53Bas3Repn8BusFrChA_SU_CLE_DRDY_DXP_Rxd:"@RO@";
+      EVENT = Rte_Ev_Run_BmwMsgSlot55Bas0Repn2BusFrChA_ACLNY_MASSCNTR_Missing_Oper:"@RO@";
+      EVENT = Rte_Ev_Run_BmwMsgSlot55Bas0Repn2BusFrChA_ACLNY_MASSCNTR_Received_Oper:"@RO@";
+      EVENT = Rte_Ev_Run_BmwMsgSlot56Bas0Repn2BusFrChA_VYAW_VEH_Missing_Oper:"@RO@";
+      EVENT = Rte_Ev_Run_BmwMsgSlot56Bas0Repn2BusFrChA_VYAW_VEH_Received_Oper:"@RO@";
+      EVENT = Rte_Ev_Run_BmwMsgSlot68Bas0Repn2BusFrChA_TAR_QTA_STRMOM_DV_Miss:"@RO@";
+      EVENT = Rte_Ev_Run_BmwMsgSlot68Bas0Repn2BusFrChA_TAR_QTA_STRMOM_DV_Rxd:"@RO@";
+      EVENT = Rte_Ev_Run_BmwMsgSlot68Bas0Repn2BusFrChA_TAR_STMOM_DV_ACT_Miss:"@RO@";
+      EVENT = Rte_Ev_Run_BmwMsgSlot68Bas0Repn2BusFrChA_TAR_STMOM_DV_ACT_Rxd:"@RO@";
+      EVENT = Rte_Ev_Run_BmwMsgSlot68Bas1Repn2BusFrChA_ENERG_DGR_DRDY_Missing_Oper:"@RO@";
+      EVENT = Rte_Ev_Run_BmwMsgSlot68Bas1Repn2BusFrChA_ENERG_DGR_DRDY_Received_Oper:"@RO@";
+      EVENT = Rte_Ev_Run_BswM_BswM_Read_StdDiag_ComControlModeRequest:"@RO@";
+      EVENT = Rte_Ev_Run_Coding_LifeCycleHandler:"@RO@";
+      EVENT = Rte_Ev_Run_Coding_SessionChange:"@RO@";
+      EVENT = Rte_Ev_Run_Coding_VinReceiveHandler:"@RO@";
+      EVENT = Rte_Ev_Run_Darh_LifeCycleHandler:"@RO@";
+      EVENT = Rte_Ev_Run_Dlog_Dlog_ModeSwitchAckLifeCycle:"@RO@";
+      EVENT = Rte_Ev_Run_Dlog_Dlog_ModeSwitchRequestLifeCycle:"@RO@";
+      EVENT = Rte_Ev_Run_Omc_LifeCycleHandler:"@RO@";
+      EVENT = Rte_Ev_Run_Rmh_RxRequestMsg:"@RO@";
+      EVENT = Rte_Ev_Run_StdDiag_LifeCycleHandler:"@RO@";
+      EVENT = Rte_Ev_Run_StdDiag_SessionChange_DefaultSession:"@RO@";
+      EVENT = Rte_Ev_Run_StdDiag_SessionChange_OtherSession:"@RO@";
+      EVENT = Rte_Ev_Run_Stm_Runnable_ErrorCentralErrorLock:"@RO@";
+      EVENT = Rte_Ev_Run_Stm_Runnable_ErrorEnergyMode:"@RO@";
+      EVENT = Rte_Ev_Run_Stm_Runnable_ReceiveCentralErrorLock:"@RO@";
+      EVENT = Rte_Ev_Run_Stm_Runnable_ReceiveEnergyMode:"@RO@";
+      EVENT = Rte_Ev_Run_SysTime_LifeCycleHandler:"@RO@";
+      ACCESSING_APPLICATION = Appl7;
+      ACCESSING_APPLICATION = Appl8;
+      ACCESSING_APPLICATION = Appl9;
+   }:"@RO@@NR@";
+
+   ALARM Rte_Al_TE_Task_10ms_Appl10_0_10ms {
+      COUNTER = OsCounter;
+      ACTION = SETEVENT
+      {
+         TASK = Task_10ms_Appl10;
+         EVENT = Rte_Ev_Cyclic_Task_10ms_Appl10_0_10ms;
+      }:"@ROC@";
+      AUTOSTART = FALSE:"@RO@";
+   }:"@RO@@NR@";
+
+   TASK Task_10ms_Appl7 {
+      ACTIVATION = 1:"@RO@";
+      PRIORITY = 45:"@RO@";
+      SCHEDULE = FULL:"@RO@";
+// TIMING_PROTECTION = FALSE|TRUE; (AUTOSAR OS only)
+      AUTOSTART = FALSE:"@RO@";
+      ACCESSING_APPLICATION = Appl10;
+   }:"@RO@@NR@";
+
+   ALARM Rte_Al_TE_Task_10ms_Appl7_0_10ms {
+      COUNTER = OsCounter;
+      ACTION = ACTIVATETASK
+      {
+         TASK = Task_10ms_Appl7;
+      }:"@ROC@";
+      AUTOSTART = FALSE:"@RO@";
+      ACCESSING_APPLICATION = Appl10;
+   }:"@RO@@NR@";
+
+   TASK Task_10ms_Appl8 {
+      ACTIVATION = 1:"@RO@";
+      PRIORITY = 46:"@RO@";
+      SCHEDULE = FULL:"@RO@";
+// TIMING_PROTECTION = FALSE|TRUE; (AUTOSAR OS only)
+      AUTOSTART = FALSE:"@RO@";
+      ACCESSING_APPLICATION = Appl10;
+   }:"@RO@@NR@";
+
+   ALARM Rte_Al_TE_Task_10ms_Appl8_0_10ms {
+      COUNTER = OsCounter;
+      ACTION = ACTIVATETASK
+      {
+         TASK = Task_10ms_Appl8;
+      }:"@ROC@";
+      AUTOSTART = FALSE:"@RO@";
+      ACCESSING_APPLICATION = Appl10;
+   }:"@RO@@NR@";
+
+   TASK Task_10ms_Appl9 {
+      ACTIVATION = 1:"@RO@";
+      PRIORITY = 47:"@RO@";
+      SCHEDULE = FULL:"@RO@";
+// TIMING_PROTECTION = FALSE|TRUE; (AUTOSAR OS only)
+      AUTOSTART = FALSE:"@RO@";
+      ACCESSING_APPLICATION = Appl10;
+   }:"@RO@@NR@";
+
+   ALARM Rte_Al_TE_Task_10ms_Appl9_0_10ms {
+      COUNTER = OsCounter;
+      ACTION = ACTIVATETASK
+      {
+         TASK = Task_10ms_Appl9;
+      }:"@ROC@";
+      AUTOSTART = FALSE:"@RO@";
+      ACCESSING_APPLICATION = Appl10;
+   }:"@RO@@NR@";
+
+   TASK Task_2msA_Appl10 {
+      ACTIVATION = 1:"@RO@";
+      PRIORITY = 78:"@RO@";
+      SCHEDULE = FULL:"@RO@";
+// TIMING_PROTECTION = FALSE|TRUE; (AUTOSAR OS only)
+      AUTOSTART = FALSE:"@RO@";
+      ACCESSING_APPLICATION = Appl7;
+      ACCESSING_APPLICATION = Appl8;
+      ACCESSING_APPLICATION = Appl9;
+   }:"@RO@@NR@";
+
+   ALARM Rte_Al_TE_Task_2msA_Appl10_0_2ms {
+      COUNTER = OsCounter;
+      ACTION = ACTIVATETASK
+      {
+         TASK = Task_2msA_Appl10;
+      }:"@ROC@";
+      AUTOSTART = FALSE:"@RO@";
+   }:"@RO@@NR@";
+
+   TASK Task_2msB_Appl10 {
+      ACTIVATION = 1:"@RO@";
+      PRIORITY = 74:"@RO@";
+      SCHEDULE = FULL:"@RO@";
+// TIMING_PROTECTION = FALSE|TRUE; (AUTOSAR OS only)
+      AUTOSTART = FALSE:"@RO@";
+      ACCESSING_APPLICATION = Appl7;
+      ACCESSING_APPLICATION = Appl8;
+      ACCESSING_APPLICATION = Appl9;
+   }:"@RO@@NR@";
+
+   ALARM Rte_Al_TE_Task_2msB_Appl10_0_2ms {
+      COUNTER = OsCounter;
+      ACTION = ACTIVATETASK
+      {
+         TASK = Task_2msB_Appl10;
+      }:"@ROC@";
+      AUTOSTART = FALSE:"@RO@";
+   }:"@RO@@NR@";
+
+   TASK Task_2msTmplMonr_Appl10 {
+      ACTIVATION = 1:"@RO@";
+      PRIORITY = 79:"@RO@";
+      SCHEDULE = FULL:"@RO@";
+// TIMING_PROTECTION = FALSE|TRUE; (AUTOSAR OS only)
+      AUTOSTART = FALSE:"@RO@";
+   }:"@RO@@NR@";
+
+   ALARM Rte_Al_TE_Task_2msTmplMonr_Appl10_0_2ms {
+      COUNTER = OsCounter;
+      ACTION = ACTIVATETASK
+      {
+         TASK = Task_2msTmplMonr_Appl10;
+      }:"@ROC@";
+      AUTOSTART = FALSE:"@RO@";
+   }:"@RO@@NR@";
+
+   TASK Task_2ms_Appl7 {
+      ACTIVATION = 1:"@RO@";
+      PRIORITY = 76:"@RO@";
+      SCHEDULE = FULL:"@RO@";
+// TIMING_PROTECTION = FALSE|TRUE; (AUTOSAR OS only)
+      AUTOSTART = FALSE:"@RO@";
+      ACCESSING_APPLICATION = Appl10;
+      ACCESSING_APPLICATION = Appl9;
+   }:"@RO@@NR@";
+
+   ALARM Rte_Al_TE_Task_2ms_Appl7_0_2ms {
+      COUNTER = OsCounter;
+      ACTION = ACTIVATETASK
+      {
+         TASK = Task_2ms_Appl7;
+      }:"@ROC@";
+      AUTOSTART = FALSE:"@RO@";
+      ACCESSING_APPLICATION = Appl10;
+   }:"@RO@@NR@";
+
+   TASK Task_2ms_Appl8 {
+      ACTIVATION = 1:"@RO@";
+      PRIORITY = 77:"@RO@";
+      SCHEDULE = FULL:"@RO@";
+// TIMING_PROTECTION = FALSE|TRUE; (AUTOSAR OS only)
+      AUTOSTART = FALSE:"@RO@";
+      ACCESSING_APPLICATION = Appl10;
+   }:"@RO@@NR@";
+
+   ALARM Rte_Al_TE_Task_2ms_Appl8_0_2ms {
+      COUNTER = OsCounter;
+      ACTION = ACTIVATETASK
+      {
+         TASK = Task_2ms_Appl8;
+      }:"@ROC@";
+      AUTOSTART = FALSE:"@RO@";
+      ACCESSING_APPLICATION = Appl10;
+   }:"@RO@@NR@";
+
+   TASK Task_2ms_Appl9 {
+      ACTIVATION = 1:"@RO@";
+      PRIORITY = 75:"@RO@";
+      SCHEDULE = FULL:"@RO@";
+// TIMING_PROTECTION = FALSE|TRUE; (AUTOSAR OS only)
+      AUTOSTART = FALSE:"@RO@";
+      ACCESSING_APPLICATION = Appl10;
+      ACCESSING_APPLICATION = Appl7;
+   }:"@RO@@NR@";
+
+   ALARM Rte_Al_TE_Task_2ms_Appl9_0_2ms {
+      COUNTER = OsCounter;
+      ACTION = ACTIVATETASK
+      {
+         TASK = Task_2ms_Appl9;
+      }:"@ROC@";
+      AUTOSTART = FALSE:"@RO@";
+      ACCESSING_APPLICATION = Appl10;
+   }:"@RO@@NR@";
+
+   TASK Task_4msBsw_Appl10 {
+      ACTIVATION = 1:"@RO@";
+      PRIORITY = 80:"@RO@";
+      SCHEDULE = FULL:"@RO@";
+// TIMING_PROTECTION = FALSE|TRUE; (AUTOSAR OS only)
+      AUTOSTART = FALSE:"@RO@";
+   }:"@RO@@NR@";
+
+   ALARM Rte_Al_TE2_Task_4msBsw_Appl10_0_4ms {
+      COUNTER = OsCounter;
+      ACTION = ACTIVATETASK
+      {
+         TASK = Task_4msBsw_Appl10;
+      }:"@ROC@";
+      AUTOSTART = FALSE:"@RO@";
+   }:"@RO@@NR@";
+
+   TASK Task_4ms_Appl10 {
+      ACTIVATION = 1:"@RO@";
+      PRIORITY = 69:"@RO@";
+      SCHEDULE = FULL:"@RO@";
+// TIMING_PROTECTION = FALSE|TRUE; (AUTOSAR OS only)
+      AUTOSTART = FALSE:"@RO@";
+      ACCESSING_APPLICATION = Appl7;
+      ACCESSING_APPLICATION = Appl8;
+      ACCESSING_APPLICATION = Appl9;
+   }:"@RO@@NR@";
+
+   ALARM Rte_Al_TE_Task_4ms_Appl10_0_4ms {
+      COUNTER = OsCounter;
+      ACTION = ACTIVATETASK
+      {
+         TASK = Task_4ms_Appl10;
+      }:"@ROC@";
+      AUTOSTART = FALSE:"@RO@";
+   }:"@RO@@NR@";
+
+   TASK Task_4ms_Appl7 {
+      ACTIVATION = 1:"@RO@";
+      PRIORITY = 66:"@RO@";
+      SCHEDULE = FULL:"@RO@";
+// TIMING_PROTECTION = FALSE|TRUE; (AUTOSAR OS only)
+      AUTOSTART = FALSE:"@RO@";
+      ACCESSING_APPLICATION = Appl10;
+   }:"@RO@@NR@";
+
+   ALARM Rte_Al_TE_Task_4ms_Appl7_0_4ms {
+      COUNTER = OsCounter;
+      ACTION = ACTIVATETASK
+      {
+         TASK = Task_4ms_Appl7;
+      }:"@ROC@";
+      AUTOSTART = FALSE:"@RO@";
+      ACCESSING_APPLICATION = Appl10;
+   }:"@RO@@NR@";
+
+   TASK Task_5msBsw_Appl10 {
+      ACTIVATION = 1:"@RO@";
+      PRIORITY = 59:"@RO@";
+      SCHEDULE = FULL:"@RO@";
+// TIMING_PROTECTION = FALSE|TRUE; (AUTOSAR OS only)
+      AUTOSTART = FALSE:"@RO@";
+      EVENT = Rte_Ev_Cyclic2_Task_5msBsw_Appl10_0_5ms:"@RO@";
+      EVENT = Rte_Ev_WP_Task_5msBsw_Appl10:"@RO@";
+   }:"@RO@@NR@";
+
+   ALARM Rte_Al_TE2_Task_5msBsw_Appl10_0_5ms {
+      COUNTER = OsCounter;
+      ACTION = SETEVENT
+      {
+         TASK = Task_5msBsw_Appl10;
+         EVENT = Rte_Ev_Cyclic2_Task_5msBsw_Appl10_0_5ms;
+      }:"@ROC@";
+      AUTOSTART = FALSE:"@RO@";
+   }:"@RO@@NR@";
+
+   TASK Task_Coding_Appl10 {
+      ACTIVATION = 1:"@RO@";
+      PRIORITY = 30:"@RO@";
+      SCHEDULE = FULL:"@RO@";
+// TIMING_PROTECTION = FALSE|TRUE; (AUTOSAR OS only)
+      AUTOSTART = FALSE:"@RO@";
+      EVENT = Rte_Ev_Run_Coding_R_CheckNCD:"@RO@";
+      EVENT = Rte_Ev_Run_Coding_R_ConditionCheckReadCPS:"@RO@";
+      EVENT = Rte_Ev_Run_Coding_R_ReadCPS:"@RO@";
+      EVENT = Rte_Ev_Run_Coding_R_ReadNCD:"@RO@";
+      EVENT = Rte_Ev_Run_Coding_R_ReadProtocolData:"@RO@";
+      EVENT = Rte_Ev_Run_Coding_R_WriteNCD:"@RO@";
+   }:"@RO@@NR@";
+
+   TASK Task_ComBsw_Appl10 {
+      ACTIVATION = 1:"@RO@";
+      PRIORITY = 60:"@RO@";
+      SCHEDULE = FULL:"@RO@";
+// TIMING_PROTECTION = FALSE|TRUE; (AUTOSAR OS only)
+      AUTOSTART = FALSE:"@RO@";
+      EVENT = Rte_Ev_Cyclic2_Task_ComBsw_Appl10_0_5ms:"@RO@";
+      EVENT = Rte_Ev_Cyclic_Task_ComBsw_Appl10_0_10ms:"@RO@";
+      ACCESSING_APPLICATION = Appl7;
+      ACCESSING_APPLICATION = Appl8;
+      ACCESSING_APPLICATION = Appl9;
+   }:"@RO@@NR@";
+
+   ALARM Rte_Al_TE2_Task_ComBsw_Appl10_0_5ms {
+      COUNTER = FrCycleCounter;
+      ACTION = SETEVENT
+      {
+         TASK = Task_ComBsw_Appl10;
+         EVENT = Rte_Ev_Cyclic2_Task_ComBsw_Appl10_0_5ms;
+      }:"@ROC@";
+      AUTOSTART = FALSE:"@RO@";
+   }:"@RO@@NR@";
+
+   ALARM Rte_Al_TE_Task_ComBsw_Appl10_0_10ms {
+      COUNTER = FrCycleCounter;
+      ACTION = SETEVENT
+      {
+         TASK = Task_ComBsw_Appl10;
+         EVENT = Rte_Ev_Cyclic_Task_ComBsw_Appl10_0_10ms;
+      }:"@ROC@";
+      AUTOSTART = FALSE:"@RO@";
+   }:"@RO@@NR@";
+
+   TASK Task_Init_Appl10 {
+      ACTIVATION = 1:"@RO@";
+      PRIORITY = 100:"@RO@";
+      SCHEDULE = FULL:"@RO@";
+// TIMING_PROTECTION = FALSE|TRUE; (AUTOSAR OS only)
+      AUTOSTART = FALSE:"@RO@";
+      ACCESSING_APPLICATION = Appl7;
+      ACCESSING_APPLICATION = Appl8;
+      ACCESSING_APPLICATION = Appl9;
+   }:"@RO@@NR@";
+
+   TASK Task_Init_Appl7 {
+      ACTIVATION = 1:"@RO@";
+      PRIORITY = 96:"@RO@";
+      SCHEDULE = FULL:"@RO@";
+// TIMING_PROTECTION = FALSE|TRUE; (AUTOSAR OS only)
+      AUTOSTART = FALSE:"@RO@";
+      ACCESSING_APPLICATION = Appl10;
+      ACCESSING_APPLICATION = Appl9;
+   }:"@RO@@NR@";
+
+   TASK Task_Init_Appl8 {
+      ACTIVATION = 1:"@RO@";
+      PRIORITY = 97:"@RO@";
+      SCHEDULE = FULL:"@RO@";
+// TIMING_PROTECTION = FALSE|TRUE; (AUTOSAR OS only)
+      AUTOSTART = FALSE:"@RO@";
+      ACCESSING_APPLICATION = Appl10;
+   }:"@RO@@NR@";
+
+   TASK Task_Init_Appl9 {
+      ACTIVATION = 1:"@RO@";
+      PRIORITY = 98:"@RO@";
+      SCHEDULE = FULL:"@RO@";
+// TIMING_PROTECTION = FALSE|TRUE; (AUTOSAR OS only)
+      AUTOSTART = FALSE:"@RO@";
+      ACCESSING_APPLICATION = Appl10;
+      ACCESSING_APPLICATION = Appl7;
+   }:"@RO@@NR@";
+
+   EVENT Rte_Ev_Cyclic2_Task_5msBsw_Appl10_0_5ms {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Cyclic2_Task_ComBsw_Appl10_0_5ms {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Cyclic_Task_100ms_Appl10_0_100ms {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Cyclic_Task_10ms_Appl10_0_10ms {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Cyclic_Task_ComBsw_Appl10_0_10ms {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_MS_Task_100ms_Appl10 {
+      MASK = 0x04;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_MS_Task_10ms_Appl10 {
+      MASK = 0x04;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run1_Darh_QueueHandler {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run1_Stm_Runnable_InitialCELSupervision {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run1_Stm_Runnable_StopCentralErrorLockSupervision {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run1_SysTime_ReceiveSignal {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_BmwMsgSlot107Bas0Repn1BusFrChA_OFFS_QUAD_EPS_Missing_Oper {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_BmwMsgSlot107Bas0Repn1BusFrChA_OFFS_QUAD_EPS_Received_Oper {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_BmwMsgSlot108Bas0Repn2BusFrChA_STEA_OFFS_Missing_Oper {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_BmwMsgSlot108Bas0Repn2BusFrChA_STEA_OFFS_Received_Oper {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_BmwMsgSlot121Bas1Repn2BusFrChA_CON_VEH_Missing_Oper {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_BmwMsgSlot121Bas1Repn2BusFrChA_CON_VEH_Received_Oper {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_BmwMsgSlot269Bas2Repn4BusFrChA_CTR_VIB_STW_DISP_EXMI_SP2015_Missing {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_BmwMsgSlot269Bas2Repn4BusFrChA_CTR_VIB_STW_DISP_EXMI_SP2015_Received {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_BmwMsgSlot276Bas4Repn8BusFrChA_MILE_KM_Missing_Oper {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_BmwMsgSlot276Bas4Repn8BusFrChA_MILE_KM_Received_Oper {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_BmwMsgSlot53Bas3Repn8BusFrChA_SU_CLE_DRDY_DXP_Miss {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_BmwMsgSlot53Bas3Repn8BusFrChA_SU_CLE_DRDY_DXP_Rxd {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_BmwMsgSlot55Bas0Repn2BusFrChA_ACLNY_MASSCNTR_Missing_Oper {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_BmwMsgSlot55Bas0Repn2BusFrChA_ACLNY_MASSCNTR_Received_Oper {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_BmwMsgSlot55Bas3Repn4BusFrChA_V_VEH_Missing_Oper {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_BmwMsgSlot55Bas3Repn4BusFrChA_V_VEH_Received_Oper {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_BmwMsgSlot56Bas0Repn2BusFrChA_VYAW_VEH_Missing_Oper {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_BmwMsgSlot56Bas0Repn2BusFrChA_VYAW_VEH_Received_Oper {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_BmwMsgSlot68Bas0Repn2BusFrChA_TAR_QTA_STRMOM_DV_Miss {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_BmwMsgSlot68Bas0Repn2BusFrChA_TAR_QTA_STRMOM_DV_Rxd {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_BmwMsgSlot68Bas0Repn2BusFrChA_TAR_STMOM_DV_ACT_Miss {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_BmwMsgSlot68Bas0Repn2BusFrChA_TAR_STMOM_DV_ACT_Rxd {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_BmwMsgSlot68Bas1Repn2BusFrChA_ENERG_DGR_DRDY_Missing_Oper {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_BmwMsgSlot68Bas1Repn2BusFrChA_ENERG_DGR_DRDY_Received_Oper {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_BswM_BswM_Read_StdDiag_ComControlModeRequest {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_Coding_LifeCycleHandler {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_Coding_R_CheckNCD {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_Coding_R_ConditionCheckReadCPS {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_Coding_R_ReadCPS {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_Coding_R_ReadNCD {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_Coding_R_ReadProtocolData {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_Coding_R_WriteNCD {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_Coding_SessionChange {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_Coding_VinReceiveHandler {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_Darh_LifeCycleHandler {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_Dlog_Dlog_ModeSwitchAckLifeCycle {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_Dlog_Dlog_ModeSwitchRequestLifeCycle {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_Omc_LifeCycleHandler {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_Rmh_RxRequestMsg {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_StdDiag_LifeCycleHandler {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_StdDiag_SessionChange_DefaultSession {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_StdDiag_SessionChange_OtherSession {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_Stm_Runnable_ErrorCentralErrorLock {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_Stm_Runnable_ErrorEnergyMode {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_Stm_Runnable_ReceiveCentralErrorLock {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_Stm_Runnable_ReceiveEnergyMode {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_SysTime_LifeCycleHandler {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_Vin_Vin_LifeCycleModeRequest {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_Vin_Vin_OnComOff {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_Vin_Vin_OnComOn {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_Vin_Vin_OnVinChangeIndicatorAck {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Run_Vin_Vin_ReceiveFromCom {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_WP_Task_5msBsw_Appl10 {
+      MASK = 0x02;
+   }:"@ROC@@NR@";
+
+   RESOURCE Rte_Res_Vin_VinState {
+      RESOURCEPROPERTY = STANDARD;
+      ACCESSING_APPLICATION = Appl10;
+   }:"@ROC@@NR@";
+
+
+   APPLICATION Appl10 {
+      TRUSTED = FALSE;
+// Add the following four attributes according to your needs.
+// Note: They do not have a default value and are therefore necessary in the configuration.
+//      STARTUPHOOK = FALSE;
+//      SHUTDOWNHOOK = FALSE;
+//      ERRORHOOK = FALSE;
+//      HAS_RESTARTTASK = FALSE;
+      TASK = Task_100ms_Appl10;
+      ALARM = Rte_Al_TE_Darh_QueueHandler;
+      ALARM = Rte_Al_TE_Task_100ms_Appl10_0_100ms;
+      TASK = Task_10msBsw_Appl10;
+      ALARM = Rte_Al_TE2_Task_10msBsw_Appl10_0_10ms;
+      TASK = Task_10ms_Appl10;
+      ALARM = Rte_Al_TE_Task_10ms_Appl10_0_10ms;
+      TASK = Task_2msA_Appl10;
+      ALARM = Rte_Al_TE_Task_2msA_Appl10_0_2ms;
+      TASK = Task_2msB_Appl10;
+      ALARM = Rte_Al_TE_Task_2msB_Appl10_0_2ms;
+      TASK = Task_2msTmplMonr_Appl10;
+      ALARM = Rte_Al_TE_Task_2msTmplMonr_Appl10_0_2ms;
+      TASK = Task_4msBsw_Appl10;
+      ALARM = Rte_Al_TE2_Task_4msBsw_Appl10_0_4ms;
+      TASK = Task_4ms_Appl10;
+      ALARM = Rte_Al_TE_Task_4ms_Appl10_0_4ms;
+      TASK = Task_5msBsw_Appl10;
+      ALARM = Rte_Al_TE2_Task_5msBsw_Appl10_0_5ms;
+      TASK = Task_Coding_Appl10;
+      TASK = Task_ComBsw_Appl10;
+      ALARM = Rte_Al_TE2_Task_ComBsw_Appl10_0_5ms;
+      ALARM = Rte_Al_TE_Task_ComBsw_Appl10_0_10ms;
+      TASK = Task_Init_Appl10;
+      RESOURCE = Rte_Res_Vin_VinState;
+  };
+
+   APPLICATION Appl7 {
+      TRUSTED = FALSE;
+// Add the following four attributes according to your needs.
+// Note: They do not have a default value and are therefore necessary in the configuration.
+//      STARTUPHOOK = FALSE;
+//      SHUTDOWNHOOK = FALSE;
+//      ERRORHOOK = FALSE;
+//      HAS_RESTARTTASK = FALSE;
+      TASK = Task_100ms_Appl7;
+      ALARM = Rte_Al_TE_Task_100ms_Appl7_0_100ms;
+      TASK = Task_10ms_Appl7;
+      ALARM = Rte_Al_TE_Task_10ms_Appl7_0_10ms;
+      TASK = Task_2ms_Appl7;
+      ALARM = Rte_Al_TE_Task_2ms_Appl7_0_2ms;
+      TASK = Task_4ms_Appl7;
+      ALARM = Rte_Al_TE_Task_4ms_Appl7_0_4ms;
+      TASK = Task_Init_Appl7;
+  };
+
+   APPLICATION Appl8 {
+      TRUSTED = FALSE;
+// Add the following four attributes according to your needs.
+// Note: They do not have a default value and are therefore necessary in the configuration.
+//      STARTUPHOOK = FALSE;
+//      SHUTDOWNHOOK = FALSE;
+//      ERRORHOOK = FALSE;
+//      HAS_RESTARTTASK = FALSE;
+      TASK = Task_10ms_Appl8;
+      ALARM = Rte_Al_TE_Task_10ms_Appl8_0_10ms;
+      TASK = Task_2ms_Appl8;
+      ALARM = Rte_Al_TE_Task_2ms_Appl8_0_2ms;
+      TASK = Task_Init_Appl8;
+  };
+
+   APPLICATION Appl9 {
+      TRUSTED = FALSE;
+// Add the following four attributes according to your needs.
+// Note: They do not have a default value and are therefore necessary in the configuration.
+//      STARTUPHOOK = FALSE;
+//      SHUTDOWNHOOK = FALSE;
+//      ERRORHOOK = FALSE;
+//      HAS_RESTARTTASK = FALSE;
+      TASK = Task_100ms_Appl9;
+      ALARM = Rte_Al_TE_Task_100ms_Appl9_0_100ms;
+      TASK = Task_10ms_Appl9;
+      ALARM = Rte_Al_TE_Task_10ms_Appl9_0_10ms;
+      TASK = Task_2ms_Appl9;
+      ALARM = Rte_Al_TE_Task_2ms_Appl9_0_2ms;
+      TASK = Task_Init_Appl9;
+  };

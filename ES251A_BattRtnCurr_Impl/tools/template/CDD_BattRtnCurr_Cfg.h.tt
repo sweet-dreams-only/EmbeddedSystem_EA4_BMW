@@ -1,0 +1,79 @@
+<#@ AutosarXml processor="ArDirectiveProcessor" requires="arPrefix='ar';arNamespace='http://autosar.org/4.0.3'" #>
+<#@ template inherits="AutosarDirectiveProcessor.ArGtcBase" debug="false" #>
+<#@ output extension="" #>
+<#@ include file="Helper.tt" #>/**********************************************************************************************************************
+ * Copyright 2017 Nxtr
+ * Nxtr Confidential
+ *
+ * Module File Name  : CDD_BattRtnCurr_Cfg.h
+ * Module Description: Configuration Header file for ES251A
+ * Project           : CBD
+ * Author            : Krzysztof Byrski
+ **********************************************************************************************************************
+ * Version Control:
+ * %version:          2 %
+ * %derived_by:       nz2999 %
+ *---------------------------------------------------------------------------------------------------------------------
+ * Date      Rev      Author    Change Description                                                             SCR #
+ * --------  -------  --------  ----------------------------------------------------------------------------  ---------
+ * 08/01/17  1        KByrski   Initial version                                                               EA4#13927
+ * 10/11/17  2        KByrski   Updated as per Design version 1.1.0                                           EA4#16024
+ *********************************************************************************************************************/
+
+/******************************************* Multiple Include Protection *********************************************/
+#ifndef CDD_BATTRTNCURR_CFG_H
+#define CDD_BATTRTNCURR_CFG_H
+
+/************************************************ Include Statements *************************************************/
+#include "Std_Types.h"
+
+/****************************************************** Macros *******************************************************/
+<#
+ChangeContext( Xp.ModuleConfAtDefRefTo( "BattRtnCurr" ) );
+
+string CURRESTIMDIFTHD = ValueOf( Xp.ValueAtDefRefTo( "BattRtnCurrGeneral/CURRESTIMDIFTHD" ) );
+string FAILSTEP        = ValueOf( Xp.ValueAtDefRefTo( "BattRtnCurrGeneral/FAILSTEP" ) ) + "U";
+string PASSSTEP        = ValueOf( Xp.ValueAtDefRefTo( "BattRtnCurrGeneral/PASSSTEP" ) ) + "U";
+string FASTLOOPPROC    = ValueOf( Xp.ValueAtDefRefTo( "BattRtnCurrGeneral/FASTLOOPPROC" ) ) ? "TRUE" : "FALSE";
+string FILCUTFREQ      = ValueOf( Xp.ValueAtDefRefTo( "BattRtnCurrGeneral/FILCUTFREQ" ) );
+string GAIN            = ValueOf( Xp.ValueAtDefRefTo( "BattRtnCurrGeneral/GAIN" ) );
+string LOWRTHD         = ValueOf( Xp.ValueAtDefRefTo( "BattRtnCurrGeneral/LOWRTHD" ) );
+string OFFSET          = ValueOf( Xp.ValueAtDefRefTo( "BattRtnCurrGeneral/OFFSET" ) );
+string OUTPMAX         = ValueOf( Xp.ValueAtDefRefTo( "BattRtnCurrGeneral/OUTPMAX" ) );
+string OUTPMIN         = ValueOf( Xp.ValueAtDefRefTo( "BattRtnCurrGeneral/OUTPMIN" ) );
+string UPPRTHD         = ValueOf( Xp.ValueAtDefRefTo( "BattRtnCurrGeneral/UPPRTHD" ) );
+
+CURRESTIMDIFTHD = (CURRESTIMDIFTHD.Contains(".") ? CURRESTIMDIFTHD : CURRESTIMDIFTHD + ".0") + "F";
+FILCUTFREQ      = (FILCUTFREQ.Contains(".")      ? FILCUTFREQ      : FILCUTFREQ      + ".0") + "F";
+GAIN            = (GAIN.Contains(".")            ? GAIN            : GAIN            + ".0") + "F";
+LOWRTHD         = (LOWRTHD.Contains(".")         ? LOWRTHD         : LOWRTHD         + ".0") + "F";
+OFFSET          = (OFFSET.Contains(".")          ? OFFSET          : OFFSET          + ".0") + "F";
+OUTPMAX         = (OUTPMAX.Contains(".")         ? OUTPMAX         : OUTPMAX         + ".0") + "F";
+OUTPMIN         = (OUTPMIN.Contains(".")         ? OUTPMIN         : OUTPMIN         + ".0") + "F";
+UPPRTHD         = (UPPRTHD.Contains(".")         ? UPPRTHD         : UPPRTHD         + ".0") + "F";
+#>
+/* Battery Return Current Estimated Current Difference Threshold */
+#define BATTRTNCURR_CURRESTIMDIFTHD_AMPR_F32 (<#= CURRESTIMDIFTHD #>)
+/* Battery Return Current Fail Step */
+#define BATTRTNCURR_FAILSTEP_CNT_U16         (<#= FAILSTEP #>)
+/* Battery Return Current Pass Step */
+#define BATTRTNCURR_PASSSTEP_CNT_U16         (<#= PASSSTEP #>)
+/* Battery Return Current Fast Loop Process */
+#define BATTRTNCURR_FASTLOOPPROC_CNT_LOGL    (<#= FASTLOOPPROC #>)
+/* Battery Return Current Filter Cutoff Frequency */
+#define BATTRTNCURR_FILCUTFREQ_HZ_F32        (<#= FILCUTFREQ #>)
+/* Battery Return Current Gain */
+#define BATTRTNCURR_GAIN_AMPRPERVOLT_F32     (<#= GAIN #>)
+/* Battery Return Current Lower Threshold */
+#define BATTRTNCURR_LOWRTHD_AMPR_F32         (<#= LOWRTHD #>)
+/* Battery Return Current Offset */
+#define BATTRTNCURR_OFFSET_VOLT_F32          (<#= OFFSET #>)
+/* Battery Return Current Output Max */
+#define BATTRTNCURR_OUTPMAX_AMPR_F32         (<#= OUTPMAX #>)
+/* Battery Return Current Output Min */
+#define BATTRTNCURR_OUTPMIN_AMPR_F32         (<#= OUTPMIN #>)
+/* Battery Return Current Upper Threshold */
+#define BATTRTNCURR_UPPRTHD_AMPR_F32         (<#= UPPRTHD #>)
+
+/**************************************** End Of Multiple Include Protection *****************************************/
+#endif /* CDD_BATTRTNCURR_CFG_H */

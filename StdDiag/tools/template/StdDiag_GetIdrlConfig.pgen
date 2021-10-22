@@ -1,0 +1,55 @@
+%{#\
+into(module("StdDiag"))
+StdDiagIDRLSupport = exists(rel('StdDiagProvideIDRL'))
+leave()
+}%\
+%{: if StdDiagIDRLSupport }%\
+%{#
+
+# maximum size of individual data (minimum required size is 1 byte)
+maxIndivDIDdataSize = 1
+# dictionary with key = DataIdentifier, value = DataSize
+DIDSizeTable = {}
+
+into(module("StdDiag"))
+into(container("StdDiagProvideIDRL"))
+logger.info("Checking data size of IDRL DIDs...")
+}%\
+%{@ ref("IDRLClient/IndivData") }%\
+%{#
+
+# get all IDRL DIDs configured in StdDiag
+thisDIDValue = value(ref('DIDValue'))
+logger.info("Found IDRL DID 0x{0:X}...".format(thisDIDValue))
+
+thisSize = value(ref('MaxDataSize'))
+logger.info("Related DataSize in Byte: {0} ".format(thisSize))
+
+# add key/value to dictionary
+DIDSizeTable[thisDIDValue] = thisSize
+
+# check if this is the maximum DataSize
+if (thisSize > maxIndivDIDdataSize):
+   maxIndivDIDdataSize = thisSize
+
+}%\
+%{@}%\
+%{#
+leave() #StdDiagProvideIDRL
+leave() #StdDiag
+
+foundDIDs = DIDSizeTable.keys()
+
+logger.info("Total found IDRL DIDs:")
+for thisKey in foundDIDs:
+  logger.info("IDRL DID: 0x{0:X} ".format(thisKey))
+  logger.info("DataSize in Byte: {0} ".format(DIDSizeTable[thisKey]))
+
+logger.info("Maximum DataSize in Byte: {0} ".format(maxIndivDIDdataSize))
+
+}%\
+%{: else }%\
+%{#
+logger.info("No configuration container StdDiagProvideIDRL found, so IDRL is disabled.")
+}%\
+%{:}%

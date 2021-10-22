@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+********************************************************************************
+** Project      = AUTOSAR Renesas R4.0.3 P1x MCAL Components                  **
+** Module       = R403_WDG_P1x_BSWMDT.arxml                                   **
+** Version      = 1.0.7                                                       **
+********************************************************************************
+**                                  COPYRIGHT                                 **
+********************************************************************************
+** Copyright(c) 2013-2017 Renesas Electronics Corporation                     **
+********************************************************************************
+** Purpose:                                                                   **
+** Provides the BSW module description of WDG Driver Component for AUTOSAR    **
+** release 4.0.3                                                              **
+**                                                                            **
+********************************************************************************
+**                                                                            **
+** Unless otherwise agreed upon in writing between your company and           **
+** Renesas Electronics Corporation the following shall apply!                 **
+**                                                                            **
+** Warranty Disclaimer                                                        **
+**                                                                            **
+** There is no warranty of any kind whatsoever granted by Renesas. Any        **
+** warranty is expressly disclaimed and excluded by Renesas, either expressed **
+** or implied,including but not limited to those for non-infringement of      **
+** intellectual property, merchantability and/or fitness for the particular   **
+** purpose.                                                                   **
+**                                                                            **
+** Renesas shall not have any obligation to maintain, service or provide bug  **
+** fixes for the supplied Product(s) and/or the Application.                  **
+**                                                                            **
+** Each User is solely responsible for determining the appropriateness of     **
+** using the Product(s) and assumes all risks associated with its exercise    **
+** of rights under this Agreement, including, but not limited to the risks    **
+** and costs of program errors, compliance with applicable laws, damage to    **
+** or loss of data, programs or equipment, and unavailability or              **
+** interruption of operations.                                                **
+**                                                                            **
+** Limitation of Liability                                                    **
+**                                                                            **
+** In no event shall Renesas be liable to the User for any incidental,        **
+** consequential, indirect, or punitive damage (including but not limited     **
+** to lost profits) regardless of whether such liability is based on breach   **
+** of contract, tort, strict liability, breach of warranties, failure of      **
+** essential purpose or otherwise and even if advised of the possibility of   **
+** such damages. Renesas shall not be liable for any services or products     **
+** provided by third party vendors, developers or consultants identified or   **
+** referred to the User by Renesas in connection with the Product(s) and/or   **
+** the Application.                                                           **
+**                                                                            **
+********************************************************************************
+** Environment:                                                               **
+**              Devices:        RH850/P1M:  R7F701310, R7F701311,             **
+**                                          R7F701312, R7F701314,             **
+**                                          R7F701315, R7F701304,             **
+**                                          R7F701305, R7F701318,             **
+**                                          R7F701319, R7F701320,             **
+**                                          R7F701321, R7F701322,             **
+**                                          R7F701323, R7F701313              **
+**                                                                            **
+********************************************************************************
+**                      Revision Control History                              **
+********************************************************************************
+** V1.0.0:  30-Sep-2013,  Initial Version                                     **
+**                                                                            **
+** V1.0.1:  05-Feb-2014, As per CR 75, for mantis issue 18116,                **
+**                       The following changes are made:                      **
+**                       1. Environment section is updated to add P1x devices.**
+**                       2. SW-VERSION is updated.                            **
+**                       3. Copyright information is updated.                 **
+** V1.0.2:  05-Feb-2014, As per CR 04, software patch version is incremented. **
+** V1.0.3:  26-Sep-2014, As per CR 004,  following changes are made:          **
+**                       1. Software minor version is increased.              **
+**                       2. Environment section is updated for devices.       **
+** V1.0.4:  25-Feb-2016, As part of P1x V4.01.00 release,the following        **
+**                       changes are made,                                    **
+**                       1. As per JIRA ticket ARDAAAE-1378,Exclusive area    **
+**                          tags are added for all Interrupt entities and     **
+**                          added Called entities.                            **
+**                       2. Software patch version is updated.                **
+** V1.0.5:  09-Jun-2016, As part of P1x V4.01.01 release,the following        **
+**                       changes are made,                                    **
+**                       1. As per JIRA ticket ARDAAAE-1752,BSW-CALLED-ENTITY **
+**                          added for AUTOSAR api Wdg_GetVersionInfo          **
+**                       2. Software patch version is updated.                **
+**                       3. As per JIRA ticket ARDAAAE-1378,                  **
+**                          CAN-ENTER-EXCLUSIVE-AREA-REF is updated.          **
+**                       4. As per ARDAAAE-1909,Warranty Disclaimer           **
+**                          description is updated.                           **
+** V1.0.6:  25-Aug-2016, Following change is made                             **
+**                       1. As per ARDAAAE-1962,BSW-MODULE-ENTRY added for    **
+**                          AUTOSAR APIs                                      **
+** V1.0.7:  13-Feb-2017, Following changes are made                           **
+**                       1. Software patch version is updated.                **
+**                       2. Copyright information is updated.                 **
+**                       3. As per ARDAAAE-2329,the placement of Service Id's **
+**                          are corrected for Autosar API's.                  **
+** *****************************************************************************
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-0-3.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="999de427-1ab5-40fc-b445-6055bca47403">
+      <SHORT-NAME>Renesas</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE UUID="f33b25eb-39cd-469d-9063-d321dc25fd86">
+          <SHORT-NAME>EcucDefs_Wdg0</SHORT-NAME>
+          <ELEMENTS>
+            <BSW-IMPLEMENTATION UUID="57481b46-8790-4399-841a-5c7388320db2">
+              <SHORT-NAME>Wdg_Impl</SHORT-NAME>
+              <PROGRAMMING-LANGUAGE>C</PROGRAMMING-LANGUAGE>
+              <SW-VERSION>1.0.12</SW-VERSION>
+              <VENDOR-ID>59</VENDOR-ID>
+              <AR-RELEASE-VERSION>4.0.3</AR-RELEASE-VERSION>
+              <BEHAVIOR-REF DEST="BSW-INTERNAL-BEHAVIOR">/Renesas/EcucDefs_Wdg0/Wdg/BswInternalBehavior_0</BEHAVIOR-REF>
+              <VENDOR-API-INFIX>DriverA</VENDOR-API-INFIX>
+              <VENDOR-SPECIFIC-MODULE-DEF-REFS>
+                <VENDOR-SPECIFIC-MODULE-DEF-REF DEST="ECUC-MODULE-DEF">/Renesas/DriverA/Wdg</VENDOR-SPECIFIC-MODULE-DEF-REF>
+              </VENDOR-SPECIFIC-MODULE-DEF-REFS>
+            </BSW-IMPLEMENTATION>
+            <BSW-MODULE-DESCRIPTION UUID="d06fc0a6-2b24-4335-9452-f31daae52a77">
+              <SHORT-NAME>Wdg</SHORT-NAME>
+              <MODULE-ID>102</MODULE-ID>
+              <BSW-MODULE-DEPENDENCYS>
+                <BSW-MODULE-DEPENDENCY UUID="ECUS:ed467020-bd3d-4ac7-aba0-c0735393c1bb">
+                  <SHORT-NAME>BswModuleDependency_0</SHORT-NAME>
+                </BSW-MODULE-DEPENDENCY>
+              </BSW-MODULE-DEPENDENCYS>
+              <INTERNAL-BEHAVIORS>
+                <BSW-INTERNAL-BEHAVIOR UUID="82ec057b-4374-455d-9d66-82efe6ba7fd2">
+                  <SHORT-NAME>BswInternalBehavior_0</SHORT-NAME>
+                  <EXCLUSIVE-AREAS>
+                    <EXCLUSIVE-AREA UUID="4691142e-ee8a-4626-904d-e4a64a44754c">
+                      <SHORT-NAME>TRIGG_PROTECTION</SHORT-NAME>
+                    </EXCLUSIVE-AREA>
+                    <EXCLUSIVE-AREA UUID="a9752cba-415d-4c3a-bbed-10e41b54a04d">
+                      <SHORT-NAME>MODE_SWITCH_PROTECTION</SHORT-NAME>
+                    </EXCLUSIVE-AREA>
+                  </EXCLUSIVE-AREAS>
+                  <ENTITYS>
+                    <BSW-INTERRUPT-ENTITY UUID="c5e504d1-4126-4274-8d49-8b07968f39a9">
+                      <SHORT-NAME>BswInterruptEntity_0</SHORT-NAME>
+                      <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Wdg0/Wdg/BswInternalBehavior_0/TRIGG_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                      </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                      <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Wdg0/WDG_59_DRIVERA_TRIGGERFUNCTION_ISR</IMPLEMENTED-ENTRY-REF>
+                      <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                      <INTERRUPT-SOURCE>INTWDTA0</INTERRUPT-SOURCE>
+                    </BSW-INTERRUPT-ENTITY>
+                    <BSW-INTERRUPT-ENTITY UUID="788b8df8-93af-4648-a972-423e27c0938e">
+                      <SHORT-NAME>BswInterruptEntity_1</SHORT-NAME>
+                      <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Wdg0/Wdg/BswInternalBehavior_0/TRIGG_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                      </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                      <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Wdg0/WDG_59_DRIVERA_TRIGGERFUNCTION_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                      <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                      <INTERRUPT-SOURCE>INTWDTA0</INTERRUPT-SOURCE>
+                    </BSW-INTERRUPT-ENTITY>
+                    <BSW-CALLED-ENTITY UUID="ECUS:73caf7e3-4bb6-43a5-8fe7-862448e52dfb">
+                      <SHORT-NAME>BswCalledEntity_0</SHORT-NAME>
+                      <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Wdg0/Wdg/BswInternalBehavior_0/TRIGG_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Wdg0/Wdg/BswInternalBehavior_0/MODE_SWITCH_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                      </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                      <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Wdg0/Wdg_59_DriverA_Init</IMPLEMENTED-ENTRY-REF>
+                    </BSW-CALLED-ENTITY>
+                    <BSW-CALLED-ENTITY UUID="027afb67-1b6c-4014-95d0-db5571cfa86f">
+                      <SHORT-NAME>BswCalledEntity_1</SHORT-NAME>
+                      <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Wdg0/Wdg/BswInternalBehavior_0/TRIGG_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Wdg0/Wdg/BswInternalBehavior_0/MODE_SWITCH_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                      </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                      <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Wdg0/Wdg_59_DriverA_SetMode</IMPLEMENTED-ENTRY-REF>
+                    </BSW-CALLED-ENTITY>
+                    <BSW-CALLED-ENTITY UUID="e0aa2ecf-0e04-424c-a1a7-0b87acb8ed98">
+                      <SHORT-NAME>BswCalledEntity_2</SHORT-NAME>
+                      <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Wdg0/Wdg/BswInternalBehavior_0/TRIGG_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                      </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                      <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Wdg0/Wdg_59_DriverA_SetTriggerCondition</IMPLEMENTED-ENTRY-REF>
+                    </BSW-CALLED-ENTITY>
+                    <BSW-CALLED-ENTITY UUID="ECUS:73caf7e3-4bb6-43a5-8fe7-862448e52dfc">
+                      <SHORT-NAME>BswCalledEntity_3</SHORT-NAME>
+                      <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Wdg0/Wdg_59_DriverA_GetVersionInfo</IMPLEMENTED-ENTRY-REF>
+                    </BSW-CALLED-ENTITY>
+                  </ENTITYS>
+                </BSW-INTERNAL-BEHAVIOR>
+              </INTERNAL-BEHAVIORS>
+            </BSW-MODULE-DESCRIPTION>
+            <BSW-MODULE-ENTRY UUID="e2fe47e7-8bd2-4480-817b-e1a16e7531af">
+              <SHORT-NAME>WDG_59_DRIVERA_TRIGGERFUNCTION_ISR</SHORT-NAME>
+              <IS-REENTRANT>true</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>INTERRUPT</CALL-TYPE>
+              <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY UUID="86552552-2ec5-4c49-9b16-7edabe0e689a">
+              <SHORT-NAME>WDG_59_DRIVERA_TRIGGERFUNCTION_CAT2_ISR</SHORT-NAME>
+              <IS-REENTRANT>true</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>INTERRUPT</CALL-TYPE>
+              <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY UUID="86552552-2ec5-4c49-9b16-7edabe0e689c">
+              <SHORT-NAME>Wdg_59_DriverA_Init</SHORT-NAME>
+              <SERVICE-ID>0</SERVICE-ID>
+              <IS-REENTRANT>false</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>REGULAR</CALL-TYPE>
+              <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY UUID="86552552-2ec5-4c49-9b16-7edabe0e684c">
+              <SHORT-NAME>Wdg_59_DriverA_SetMode</SHORT-NAME>
+              <SERVICE-ID>1</SERVICE-ID>
+              <IS-REENTRANT>false</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>REGULAR</CALL-TYPE>
+              <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY UUID="86552552-2ec5-4c49-9b16-7edabe0e684g">
+              <SHORT-NAME>Wdg_59_DriverA_SetTriggerCondition</SHORT-NAME>
+              <SERVICE-ID>3</SERVICE-ID>
+              <IS-REENTRANT>false</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>REGULAR</CALL-TYPE>
+              <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY UUID="86552552-2ec5-4c49-9b16-7edabe0e674g">
+              <SHORT-NAME>Wdg_59_DriverA_GetVersionInfo</SHORT-NAME>
+              <SERVICE-ID>4</SERVICE-ID>
+              <IS-REENTRANT>true</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>REGULAR</CALL-TYPE>
+              <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+            </BSW-MODULE-ENTRY>
+          </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

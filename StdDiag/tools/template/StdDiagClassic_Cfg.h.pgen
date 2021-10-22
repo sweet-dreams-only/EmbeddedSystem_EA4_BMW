@@ -1,0 +1,205 @@
+/**
+*  \file
+*
+*  \brief       BMW SWC StdDiag
+*
+*  This file is the configuration header file of the module StdDiag
+*  for usage in the BMW AUTOSAR Core.
+*
+*  \project     BMW Platform Software
+*
+*  \copyright   BMW AG 2015 - 2017
+*
+*  \version     5.4.0
+*
+*  \remarks     The StdDiag module is responsible for BMW specific session
+*               handling and handles a number of BMW specific diagnostic requests.
+*
+*/
+
+/*------------------------------------------------------------------------------
+*
+*  THIS FILE WAS GENERATED. DO NOT MODIFY!
+*
+*  GENERATOR       : %{= generation_tool() }% %{= generation_version_info() }%
+*
+*  GENERATION TIME : %{= generation_timestamp() }%
+*
+------------------------------------------------------------------------------*/
+
+
+#ifndef STDDIAGCLASSIC_CFG_H
+#define STDDIAGCLASSIC_CFG_H
+
+/*------------------------------------------------------------------------------
+                      Include Section
+-------------------------------------------------------------------------------*/
+
+#include "BUtil/PlatformTypes.h"
+#include "StdDiagClassic_Version.h"
+
+/*------------------------------------------------------------------------------
+                      Macros
+-------------------------------------------------------------------------------*/
+
+/* check version of the module */
+#if (!StdDiagClassic_CHECK_VERSION(5,4,0))
+   #error "Version of StdDiagClassic_Cfg.h does not match the version of the module!"
+#endif
+
+
+%{#
+into(module("StdDiag"))
+StdDiagIDRLSupport = exists(rel('StdDiagProvideIDRL'))
+leave()
+}%\
+%{: if(StdDiagIDRLSupport) }%\
+%{+ StdDiag_GetIdrlConfig.pgen }%\
+%{:}%\
+
+%{#
+into(module("StdDiagClassic"))
+StdDiagADTSupport = exists(rel("StdDiagApplicationDataTransfer"))
+leave()
+}%\
+%{: if(StdDiagADTSupport) }%\
+%{+ StdDiag_GetAdtConfig.pgen }%\
+%{:}%\
+%{#
+
+into(module("StdDiagClassic"))
+with(container("StdDiagGeneral")):
+  StdDiagDetUsage = value(ref("StdDiagDevErrorDetect"))
+  StdDiagClearSecErrorMemory = value(ref("StdDiagClearSecondaryErrorMemory"))
+
+StdDiagUserDefinedMemory = exists(rel('StdDiagUserDefinedMemory'))
+StdDiagClearSecErrorMemorySupport = StdDiagClearSecErrorMemory and StdDiagUserDefinedMemory
+
+if((StdDiagClearSecErrorMemory) and (not StdDiagUserDefinedMemory)):
+  logger.error("StdDiagClearSecondaryErrorMemory is set to true but no container StdDiagUserDefinedMemory exists.")
+
+
+StdDiagDLTSupport = exists(rel('StdDiagProvideDLTSupport'))
+
+DltLogChannelNumber = 0
+if(StdDiagDLTSupport):
+  DltLogChannelNumber = value(ref("StdDiagNumberSupportedDLTLogChannels"))
+
+}%\
+
+/**
+ * \brief Definition of groupOfDTC for all DTCs according to ISO14229-1 Annex D.1
+ */
+#define STDDIAG_DTCGROUP_ALL_DTCS       0xFFFFFFu
+
+/**
+ * \brief clear secondary error memory
+ *
+ * This parameter determines whether clearing of the secondary error memory shall be supported
+ * STD_ON  : clearing of the secondary error memory shall be supported
+ * STD_OFF : clearing of the secondary error memory shall not be supported
+ */
+#define STDDIAG_CLEAR_SEC_ERROR_MEMORY  STD_%{? StdDiagClearSecErrorMemorySupport:ON:OFF}%
+
+%{: if StdDiagClearSecErrorMemorySupport }%\
+%{#
+into(container("StdDiagUserDefinedMemory"))
+}%\
+/**
+ * \brief User defined memory name
+ *
+ * This parameter determines the value to address the user defined memory
+ * representing the BMW secondary error memory.
+ */
+#define STDDIAG_SECONDARY_ERROR_MEMORY DEM_DTC_ORIGIN_USERDEFINED_MEMORY_%{= value(ref('StdDiagUserDefinedMemoryName')) }%
+
+%{#
+leave()
+}%\
+%{:}%\
+%{: if(StdDiagIDRLSupport) }%\
+
+/**
+ * \brief the size of the buffer size for the individual data
+ *
+ * This parameter determines the size of the buffer for the individual data,
+ * if the IDRL is supported.
+ */
+#define STDDIAG_BUFFER_SIZE_INDIV_DATA   %{= maxIndivDIDdataSize}%u
+
+%{#
+reset()
+into(module("StdDiag"))
+counterIDRL = count(ref("IDRLClient/IndivData"))
+}%\
+%{: if(counterIDRL > 0) }%\
+%{# firstDID = "" }%\
+%{@ ref("IDRLClient/IndivData") }%
+%{: if (firstDID == "") }%\
+%{# firstDID = shortname() }%\
+%{:}%\
+%{@}%
+/**
+ * \brief common return value for OperateIndivData interface
+ *
+ * This macro defines a common return value for the error code E_PENDING of the
+ * DID specific interfaces OperateIndivData. As the interfaces are generated, all
+ * error codes E_PENDING have the same value.
+ */
+#define STDDIAG_E_OperateIndivData_E_PENDING  RTE_E_OperateIndivData%{= firstDID }%_E_PENDING
+
+%{:}%\
+
+/**
+ * \brief the IDRL client number
+ *
+ * This parameter determines the number of the IDRL clients,
+ * if the IDRL is supported.
+ */
+#define STDDIAG_IDRL_CLIENT_NUMBER       %{= count(ref("IDRLClient")) }%u
+
+%{:}%\
+
+/**
+ * \brief Diagnostic Log and Trace support
+ *
+ * This parameter determines whether the StdDiag module provides an implementation
+ * for Diagnostic Log and Trace support.
+ * STD_ON  : DLT support is provided
+ * STD_OFF : DLT support is not provided
+ */
+#define STDDIAG_DLT_SUPPORT  STD_%{? StdDiagDLTSupport:ON:OFF}%
+
+%{: if(StdDiagDLTSupport) }%\
+/**
+ * \brief Number of Dlt Log Channels
+ *
+ * This parameter determines the number of supported Dlt Log Channels
+ */
+#define STDDIAG_DLT_LOG_CHANNEL_NUMBER  %{= DltLogChannelNumber }%
+
+%{:}%\
+
+/**
+ * \brief Application Data Transfer support
+ *
+ * This parameter determines whether the StdDiag module provides support
+ * for Application Data Transfer.
+ * STD_ON  : ADT support is provided
+ * STD_OFF : ADT support is not provided
+ */
+#define STDDIAG_ADT_SUPPORT  STD_%{? StdDiagADTSupport:ON:OFF}%
+
+%{: if(StdDiagADTSupport) }%\
+/**
+ * \brief Number of Memory Object Identifiers for application data transfer
+ *
+ * This parameter determines the number of Memory Object Identifiers for application data transfer
+ */
+#define STDDIAG_NUMBER_MEMORY_OBJECT_IDENTIFIER %{= numberMemObjIDs }%u
+
+%{:}%\
+
+#endif /* STDDIAGCLASSIC_CFG_H */
+
+

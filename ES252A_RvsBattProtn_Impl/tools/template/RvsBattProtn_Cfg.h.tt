@@ -1,0 +1,71 @@
+<#@ AutosarXml processor="ArDirectiveProcessor" requires="arPrefix='ar';arNamespace='http://autosar.org/4.0.3'" #>
+<#@ template inherits="AutosarDirectiveProcessor.ArGtcBase" debug="false" #>
+<#@ output extension="" #>
+<#@ include file="Helper.tt" #>/**********************************************************************************************************************
+ * Copyright 2017 Nxtr
+ * Nxtr Confidential
+ *
+ * Module File Name  : RvsBattProtn_Cfg.h
+ * Module Description: Configuration Header file for ES252A
+ * Project           : CBD
+ * Author            : Krzysztof Byrski
+ * Generator         : <#= GeneratorName #> <#= GeneratorVersion #>
+ * Generation Time   : <#= DateTime.Now.ToString( "dd.MM.yyyy HH:mm:ss" ) #>
+ **********************************************************************************************************************
+ * Version Control:
+ * %version:          1 %
+ * %derived_by:       nz2999 %
+ *---------------------------------------------------------------------------------------------------------------------
+ * Date      Rev      Author    Change Description                                                             SCR #
+ * --------  -------  --------  ----------------------------------------------------------------------------  ---------
+ * 10/16/17  1        KByrski   Initial version                                                               EA4#14474
+ *********************************************************************************************************************/
+
+/******************************************* Multiple Include Protection *********************************************/
+#ifndef RVSBATTPROTN_CFG_H
+#define RVSBATTPROTN_CFG_H
+
+/************************************************ Include Statements *************************************************/
+#include "Std_Types.h"
+
+/****************************************************** Macros *******************************************************/
+<#
+ChangeContext( Xp.ModuleConfAtDefRefTo( "RvsBattProtn" ) );
+
+string FAILSTEP           = ValueOf( Xp.ValueAtDefRefTo( "RvsBattProtnGeneral/FAILSTEP" ) ) + "U";
+string GNDMEASDVLTGHILIMN = ValueOf( Xp.ValueAtDefRefTo( "RvsBattProtnGeneral/GNDMEASDVLTGHILIMN" ) );
+string GNDMEASDVLTGLOLIMN = ValueOf( Xp.ValueAtDefRefTo( "RvsBattProtnGeneral/GNDMEASDVLTGLOLIMN" ) );
+string PASSSTEP           = ValueOf( Xp.ValueAtDefRefTo( "RvsBattProtnGeneral/PASSSTEP" ) ) + "U";
+string RTNMEASDVLTGHILIMN = ValueOf( Xp.ValueAtDefRefTo( "RvsBattProtnGeneral/RTNMEASDVLTGHILIMN" ) );
+string RTNMEASDVLTGLOLIMN = ValueOf( Xp.ValueAtDefRefTo( "RvsBattProtnGeneral/RTNMEASDVLTGLOLIMN" ) );
+string RVSFLTTHD          = ValueOf( Xp.ValueAtDefRefTo( "RvsBattProtnGeneral/RVSFLTTHD" ) );
+
+GNDMEASDVLTGHILIMN = GNDMEASDVLTGHILIMN.Replace(',', '.');
+GNDMEASDVLTGLOLIMN = GNDMEASDVLTGLOLIMN.Replace(',', '.');
+RTNMEASDVLTGHILIMN = RTNMEASDVLTGHILIMN.Replace(',', '.');
+RTNMEASDVLTGLOLIMN = RTNMEASDVLTGLOLIMN.Replace(',', '.');
+RVSFLTTHD          = RVSFLTTHD.Replace(',', '.');
+
+GNDMEASDVLTGHILIMN = (GNDMEASDVLTGHILIMN.Contains(".") ? GNDMEASDVLTGHILIMN : GNDMEASDVLTGHILIMN + ".0") + "F";
+GNDMEASDVLTGLOLIMN = (GNDMEASDVLTGLOLIMN.Contains(".") ? GNDMEASDVLTGLOLIMN : GNDMEASDVLTGLOLIMN + ".0") + "F";
+RTNMEASDVLTGHILIMN = (RTNMEASDVLTGHILIMN.Contains(".") ? RTNMEASDVLTGHILIMN : RTNMEASDVLTGHILIMN + ".0") + "F";
+RTNMEASDVLTGLOLIMN = (RTNMEASDVLTGLOLIMN.Contains(".") ? RTNMEASDVLTGLOLIMN : RTNMEASDVLTGLOLIMN + ".0") + "F";
+RVSFLTTHD          = (RVSFLTTHD.Contains(".")          ? RVSFLTTHD          : RVSFLTTHD          + ".0") + "F";
+#>
+/* Debounce NTC set strategy step towards FAIL status */
+#define RVSBATTPROTN_FAILSTEP_CNT_U16             (<#= FAILSTEP #>)
+/* Maximum allowed signal level for ground related measures */
+#define RVSBATTPROTN_GNDMEASDVLTGHILIMN_VOLT_F32  (<#= GNDMEASDVLTGHILIMN #>)
+/* Minimum allowed signal level for ground related measures */
+#define RVSBATTPROTN_GNDMEASDVLTGLOLIMN_VOLT_F32  (<#= GNDMEASDVLTGLOLIMN #>)
+/* Debounce NTC set strategy step towards PASS status */
+#define RVSBATTPROTN_PASSSTEP_CNT_U16             (<#= PASSSTEP #>)
+/* Maximum allowed signal level for battery return related measures */
+#define RVSBATTPROTN_RTNMEASDVLTGHILIMN_VOLT_F32  (<#= RTNMEASDVLTGHILIMN #>)
+/* Minimum allowed signal level for battery return related measures */
+#define RVSBATTPROTN_RTNMEASDVLTGLOLIMN_VOLT_F32  (<#= RTNMEASDVLTGLOLIMN #>)
+/* Threshold level for detection of MOSFET malfunction */
+#define RVSBATTPROTN_RVSFLTTHD_VOLT_F32           (<#= RVSFLTTHD #>)
+
+/**************************************** End Of Multiple Include Protection *****************************************/
+#endif /* RVSBATTPROTN_CFG_H */

@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+*  \file
+*
+*  \brief       BMW SWC Stm Stm_interfaces.arxml
+*
+*  \project     BMW Platform Software
+*
+*  \copyright   BMW AG 2017
+*
+*  \version     5.2.0
+*
+*  \remarks
+*/
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 file:AUTOSAR_4-3-0_STRICT_COMPACT.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>BMW</SHORT-NAME>
+      <ELEMENTS/>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>Platform</SHORT-NAME>
+          <ELEMENTS/>
+          <AR-PACKAGES>
+            <AR-PACKAGE>
+              <SHORT-NAME>Stm</SHORT-NAME>
+              <ELEMENTS/>
+              <AR-PACKAGES>
+              <!-- Stm API Types -->
+                <AR-PACKAGE>
+                  <SHORT-NAME>ImplementationDataTypes</SHORT-NAME>
+                  <ELEMENTS>
+                    <IMPLEMENTATION-DATA-TYPE>
+                      <SHORT-NAME>Stm_CentralErrorLockType</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <COMPU-METHOD-REF DEST="COMPU-METHOD">/BMW/Platform/Stm/CompuMethods/Stm_CentralErrorLockValues</COMPU-METHOD-REF>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE>
+                    <IMPLEMENTATION-DATA-TYPE>
+                      <SHORT-NAME>Stm_EnergyStateType</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <COMPU-METHOD-REF DEST="COMPU-METHOD">/BMW/Platform/Stm/CompuMethods/Stm_EnergyStateValues</COMPU-METHOD-REF>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE>
+                    <IMPLEMENTATION-DATA-TYPE>
+                      <SHORT-NAME>Stm_VehicleStateType</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <COMPU-METHOD-REF DEST="COMPU-METHOD">/BMW/Platform/Stm/CompuMethods/Stm_VehicleStateValues</COMPU-METHOD-REF>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+                <AR-PACKAGE>
+                  <SHORT-NAME>CompuMethods</SHORT-NAME>
+                  <ELEMENTS>
+                    <COMPU-METHOD>
+                      <SHORT-NAME>Stm_CentralErrorLockValues</SHORT-NAME>
+                      <CATEGORY>TEXTTABLE</CATEGORY>
+                      <COMPU-INTERNAL-TO-PHYS>
+                        <COMPU-SCALES>
+                          <COMPU-SCALE>
+                            <LOWER-LIMIT>0</LOWER-LIMIT>
+                            <UPPER-LIMIT>0</UPPER-LIMIT>
+                            <COMPU-CONST>
+                              <VT>STM_CEL_UNLOCKED</VT>
+                            </COMPU-CONST>
+                          </COMPU-SCALE>
+                          <COMPU-SCALE>
+                            <LOWER-LIMIT>1</LOWER-LIMIT>
+                            <UPPER-LIMIT>1</UPPER-LIMIT>
+                            <COMPU-CONST>
+                              <VT>STM_CEL_LOCKED</VT>
+                            </COMPU-CONST>
+                          </COMPU-SCALE>
+                          <COMPU-SCALE>
+                            <LOWER-LIMIT>3</LOWER-LIMIT>
+                            <UPPER-LIMIT>3</UPPER-LIMIT>
+                            <COMPU-CONST>
+                              <VT>STM_CEL_INVALID</VT>
+                            </COMPU-CONST>
+                          </COMPU-SCALE>
+                        </COMPU-SCALES>
+                      </COMPU-INTERNAL-TO-PHYS>
+                    </COMPU-METHOD>
+                    <COMPU-METHOD>
+                      <SHORT-NAME>Stm_EnergyStateValues</SHORT-NAME>
+                      <CATEGORY>TEXTTABLE</CATEGORY>
+                      <COMPU-INTERNAL-TO-PHYS>
+                        <COMPU-SCALES>
+                          <COMPU-SCALE>
+                            <LOWER-LIMIT>0</LOWER-LIMIT>
+                            <UPPER-LIMIT>0</UPPER-LIMIT>
+                            <COMPU-CONST>
+                              <VT>STM_ENERGY_GOOD</VT>
+                            </COMPU-CONST>
+                          </COMPU-SCALE>
+                          <COMPU-SCALE>
+                            <LOWER-LIMIT>1</LOWER-LIMIT>
+                            <UPPER-LIMIT>1</UPPER-LIMIT>
+                            <COMPU-CONST>
+                              <VT>STM_ENERGY_OK</VT>
+                            </COMPU-CONST>
+                          </COMPU-SCALE>
+                          <COMPU-SCALE>
+                            <LOWER-LIMIT>2</LOWER-LIMIT>
+                            <UPPER-LIMIT>2</UPPER-LIMIT>
+                            <COMPU-CONST>
+                              <VT>STM_ENERGY_SHORTAGE</VT>
+                            </COMPU-CONST>
+                          </COMPU-SCALE>
+                          <COMPU-SCALE>
+                            <LOWER-LIMIT>3</LOWER-LIMIT>
+                            <UPPER-LIMIT>3</UPPER-LIMIT>
+                            <COMPU-CONST>
+                              <VT>STM_ENERGY_SEVERE_SHORTAGE</VT>
+                            </COMPU-CONST>
+                          </COMPU-SCALE>
+                          <COMPU-SCALE>
+                            <LOWER-LIMIT>15</LOWER-LIMIT>
+                            <UPPER-LIMIT>15</UPPER-LIMIT>
+                            <COMPU-CONST>
+                              <VT>STM_ENERGY_INVALID</VT>
+                            </COMPU-CONST>
+                          </COMPU-SCALE>
+                        </COMPU-SCALES>
+                      </COMPU-INTERNAL-TO-PHYS>
+                    </COMPU-METHOD>
+                    <COMPU-METHOD>
+                      <SHORT-NAME>Stm_VehicleStateValues</SHORT-NAME>
+                      <CATEGORY>TEXTTABLE</CATEGORY>
+                      <COMPU-INTERNAL-TO-PHYS>
+                        <COMPU-SCALES>
+                          <COMPU-SCALE>
+                            <LOWER-LIMIT>1</LOWER-LIMIT>
+                            <UPPER-LIMIT>1</UPPER-LIMIT>
+                            <COMPU-CONST>
+                              <VT>STM_VEHICLE_STATE_PARKING_BN_NOK</VT>
+                            </COMPU-CONST>
+                          </COMPU-SCALE>
+                          <COMPU-SCALE>
+                            <LOWER-LIMIT>2</LOWER-LIMIT>
+                            <UPPER-LIMIT>2</UPPER-LIMIT>
+                            <COMPU-CONST>
+                              <VT>STM_VEHICLE_STATE_PARKING_BN_OK</VT>
+                            </COMPU-CONST>
+                          </COMPU-SCALE>
+                          <COMPU-SCALE>
+                            <LOWER-LIMIT>3</LOWER-LIMIT>
+                            <UPPER-LIMIT>3</UPPER-LIMIT>
+                            <COMPU-CONST>
+                              <VT>STM_VEHICLE_STATE_CUSTOMER_ABSENT</VT>
+                            </COMPU-CONST>
+                          </COMPU-SCALE>
+                          <COMPU-SCALE>
+                            <LOWER-LIMIT>5</LOWER-LIMIT>
+                            <UPPER-LIMIT>5</UPPER-LIMIT>
+                            <COMPU-CONST>
+                              <VT>STM_VEHICLE_STATE_LIVING</VT>
+                            </COMPU-CONST>
+                          </COMPU-SCALE>
+                          <COMPU-SCALE>
+                            <LOWER-LIMIT>7</LOWER-LIMIT>
+                            <UPPER-LIMIT>7</UPPER-LIMIT>
+                            <COMPU-CONST>
+                              <VT>STM_VEHICLE_STATE_CHECK_ANALYS_DIAGNOSTICS</VT>
+                            </COMPU-CONST>
+                          </COMPU-SCALE>
+                          <COMPU-SCALE>
+                            <LOWER-LIMIT>8</LOWER-LIMIT>
+                            <UPPER-LIMIT>8</UPPER-LIMIT>
+                            <COMPU-CONST>
+                              <VT>STM_VEHICLE_STATE_READINESS_TO_DRIVE_INIT</VT>
+                            </COMPU-CONST>
+                          </COMPU-SCALE>
+                          <COMPU-SCALE>
+                            <LOWER-LIMIT>10</LOWER-LIMIT>
+                            <UPPER-LIMIT>10</UPPER-LIMIT>
+                            <COMPU-CONST>
+                              <VT>STM_VEHICLE_STATE_DRIVE</VT>
+                            </COMPU-CONST>
+                          </COMPU-SCALE>
+                          <COMPU-SCALE>
+                            <LOWER-LIMIT>12</LOWER-LIMIT>
+                            <UPPER-LIMIT>12</UPPER-LIMIT>
+                            <COMPU-CONST>
+                              <VT>STM_VEHICLE_STATE_READINESS_TO_DRIVE_STOP</VT>
+                            </COMPU-CONST>
+                          </COMPU-SCALE>
+                          <COMPU-SCALE>
+                            <LOWER-LIMIT>14</LOWER-LIMIT>
+                            <UPPER-LIMIT>14</UPPER-LIMIT>
+                            <COMPU-CONST>
+                              <VT>STM_VEHICLE_STATE_UNAVAILABLE</VT>
+                            </COMPU-CONST>
+                          </COMPU-SCALE>
+                          <COMPU-SCALE>
+                            <LOWER-LIMIT>15</LOWER-LIMIT>
+                            <UPPER-LIMIT>15</UPPER-LIMIT>
+                            <COMPU-CONST>
+                              <VT>STM_VEHICLE_STATE_INVALID</VT>
+                            </COMPU-CONST>
+                          </COMPU-SCALE>
+                        </COMPU-SCALES>
+                      </COMPU-INTERNAL-TO-PHYS>
+                    </COMPU-METHOD>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+                <AR-PACKAGE>
+                  <SHORT-NAME>DataTypeMappingSets</SHORT-NAME>
+                  <ELEMENTS>
+                    <DATA-TYPE-MAPPING-SET>
+                      <SHORT-NAME>Stm_CentralErrorLockModeRequestTypeMap</SHORT-NAME>
+                      <MODE-REQUEST-TYPE-MAPS>
+                        <MODE-REQUEST-TYPE-MAP>
+                          <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Stm/ImplementationDataTypes/Stm_CentralErrorLockType</IMPLEMENTATION-DATA-TYPE-REF>
+                          <MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP">/BMW/Platform/Stm/ModeDeclarationGroups/Stm_CentralErrorLockMode</MODE-GROUP-REF>
+                        </MODE-REQUEST-TYPE-MAP>
+                      </MODE-REQUEST-TYPE-MAPS>
+                    </DATA-TYPE-MAPPING-SET>
+                    <DATA-TYPE-MAPPING-SET>
+                      <SHORT-NAME>Stm_EnergyStateModeRequestTypeMap</SHORT-NAME>
+                      <MODE-REQUEST-TYPE-MAPS>
+                        <MODE-REQUEST-TYPE-MAP>
+                          <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Stm/ImplementationDataTypes/Stm_EnergyStateType</IMPLEMENTATION-DATA-TYPE-REF>
+                          <MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP">/BMW/Platform/Stm/ModeDeclarationGroups/Stm_EnergyStateMode</MODE-GROUP-REF>
+                        </MODE-REQUEST-TYPE-MAP>
+                      </MODE-REQUEST-TYPE-MAPS>
+                    </DATA-TYPE-MAPPING-SET>
+                    <DATA-TYPE-MAPPING-SET>
+                      <SHORT-NAME>Stm_VehicleStatModeRequestTypeMap</SHORT-NAME>
+                      <MODE-REQUEST-TYPE-MAPS>
+                        <MODE-REQUEST-TYPE-MAP>
+                          <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Stm/ImplementationDataTypes/Stm_VehicleStateType</IMPLEMENTATION-DATA-TYPE-REF>
+                          <MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP">/BMW/Platform/Stm/ModeDeclarationGroups/Stm_VehicleStateMode</MODE-GROUP-REF>
+                        </MODE-REQUEST-TYPE-MAP>
+                      </MODE-REQUEST-TYPE-MAPS>
+                    </DATA-TYPE-MAPPING-SET>
+                    <DATA-TYPE-MAPPING-SET>
+                      <SHORT-NAME>Stm_EMLS_Mapping</SHORT-NAME>
+                      <DATA-TYPE-MAPS/>
+                      <MODE-REQUEST-TYPE-MAPS>
+                        <MODE-REQUEST-TYPE-MAP>
+                          <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                          <MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP">/BMW/Platform/Stm/ModeDeclarationGroups/ErrorMemoryLockSignalReceptionMode</MODE-GROUP-REF>
+                        </MODE-REQUEST-TYPE-MAP>
+                      </MODE-REQUEST-TYPE-MAPS>
+                    </DATA-TYPE-MAPPING-SET>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+                <AR-PACKAGE>
+                  <SHORT-NAME>ModeDeclarationGroups</SHORT-NAME>
+                  <ELEMENTS>
+                    <MODE-DECLARATION-GROUP>
+                      <SHORT-NAME>Stm_CentralErrorLockMode</SHORT-NAME>
+                      <INITIAL-MODE-REF DEST="MODE-DECLARATION">/BMW/Platform/Stm/ModeDeclarationGroups/Stm_CentralErrorLockMode/STM_CEL_INVALID</INITIAL-MODE-REF>
+                      <MODE-DECLARATIONS>
+                        <MODE-DECLARATION>
+                          <SHORT-NAME>STM_CEL_INVALID</SHORT-NAME>
+                        </MODE-DECLARATION>
+                        <MODE-DECLARATION>
+                          <SHORT-NAME>STM_CEL_LOCKED</SHORT-NAME>
+                        </MODE-DECLARATION>
+                        <MODE-DECLARATION>
+                          <SHORT-NAME>STM_CEL_UNLOCKED</SHORT-NAME>
+                        </MODE-DECLARATION>
+                      </MODE-DECLARATIONS>
+                    </MODE-DECLARATION-GROUP>
+                    <MODE-DECLARATION-GROUP>
+                      <SHORT-NAME>Stm_EnergyStateMode</SHORT-NAME>
+                      <INITIAL-MODE-REF DEST="MODE-DECLARATION">/BMW/Platform/Stm/ModeDeclarationGroups/Stm_EnergyStateMode/STM_ENERGY_INVALID</INITIAL-MODE-REF>
+                      <MODE-DECLARATIONS>
+                        <MODE-DECLARATION>
+                          <SHORT-NAME>STM_ENERGY_GOOD</SHORT-NAME>
+                        </MODE-DECLARATION>
+                        <MODE-DECLARATION>
+                          <SHORT-NAME>STM_ENERGY_INVALID</SHORT-NAME>
+                        </MODE-DECLARATION>
+                        <MODE-DECLARATION>
+                          <SHORT-NAME>STM_ENERGY_OK</SHORT-NAME>
+                        </MODE-DECLARATION>
+                        <MODE-DECLARATION>
+                          <SHORT-NAME>STM_ENERGY_SEVERE_SHORTAGE</SHORT-NAME>
+                        </MODE-DECLARATION>
+                        <MODE-DECLARATION>
+                          <SHORT-NAME>STM_ENERGY_SHORTAGE</SHORT-NAME>
+                        </MODE-DECLARATION>
+                      </MODE-DECLARATIONS>
+                    </MODE-DECLARATION-GROUP>
+                    <MODE-DECLARATION-GROUP>
+                      <SHORT-NAME>Stm_VehicleStateMode</SHORT-NAME>
+                      <INITIAL-MODE-REF DEST="MODE-DECLARATION">/BMW/Platform/Stm/ModeDeclarationGroups/Stm_VehicleStateMode/STM_VEHICLE_STATE_UNAVAILABLE</INITIAL-MODE-REF>
+                      <MODE-DECLARATIONS>
+                        <MODE-DECLARATION>
+                          <SHORT-NAME>STM_VEHICLE_STATE_PARKING_BN_NOK</SHORT-NAME>
+                        </MODE-DECLARATION>
+                        <MODE-DECLARATION>
+                          <SHORT-NAME>STM_VEHICLE_STATE_PARKING_BN_OK</SHORT-NAME>
+                        </MODE-DECLARATION>
+                        <MODE-DECLARATION>
+                          <SHORT-NAME>STM_VEHICLE_STATE_CUSTOMER_ABSENT</SHORT-NAME>
+                        </MODE-DECLARATION>
+                        <MODE-DECLARATION>
+                          <SHORT-NAME>STM_VEHICLE_STATE_LIVING</SHORT-NAME>
+                        </MODE-DECLARATION>
+                        <MODE-DECLARATION>
+                          <SHORT-NAME>STM_VEHICLE_STATE_CHECK_ANALYS_DIAGNOSTICS</SHORT-NAME>
+                        </MODE-DECLARATION>
+                        <MODE-DECLARATION>
+                          <SHORT-NAME>STM_VEHICLE_STATE_READINESS_TO_DRIVE_INIT</SHORT-NAME>
+                        </MODE-DECLARATION>
+                        <MODE-DECLARATION>
+                          <SHORT-NAME>STM_VEHICLE_STATE_DRIVE</SHORT-NAME>
+                        </MODE-DECLARATION>
+                        <MODE-DECLARATION>
+                          <SHORT-NAME>STM_VEHICLE_STATE_READINESS_TO_DRIVE_STOP</SHORT-NAME>
+                        </MODE-DECLARATION>
+                        <MODE-DECLARATION>
+                          <SHORT-NAME>STM_VEHICLE_STATE_UNAVAILABLE</SHORT-NAME>
+                        </MODE-DECLARATION>
+                        <MODE-DECLARATION>
+                          <SHORT-NAME>STM_VEHICLE_STATE_INVALID</SHORT-NAME>
+                        </MODE-DECLARATION>
+                      </MODE-DECLARATIONS>
+                    </MODE-DECLARATION-GROUP>
+                    <MODE-DECLARATION-GROUP>
+                      <SHORT-NAME>ErrorMemoryLockSignalReceptionMode</SHORT-NAME>
+                      <INITIAL-MODE-REF DEST="MODE-DECLARATION">/BMW/Platform/Stm/ModeDeclarationGroups/ErrorMemoryLockSignalReceptionMode/EM_LOCK_NOT_RECEIVABLE</INITIAL-MODE-REF>
+                      <MODE-DECLARATIONS>
+                        <MODE-DECLARATION>
+                          <SHORT-NAME>EM_LOCK_RECEIVABLE</SHORT-NAME>
+                        </MODE-DECLARATION>
+                        <MODE-DECLARATION>
+                          <SHORT-NAME>EM_LOCK_NOT_RECEIVABLE</SHORT-NAME>
+                        </MODE-DECLARATION>
+                      </MODE-DECLARATIONS>
+                    </MODE-DECLARATION-GROUP>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+                <!--****************************************************************************
+                **                      Interface Definitions                                 **
+                *****************************************************************************-->
+                <!-- Stm API Interfaces -->
+                <AR-PACKAGE>
+                  <SHORT-NAME>PortInterfaces</SHORT-NAME>
+                  <ELEMENTS>
+                    <MODE-SWITCH-INTERFACE>
+                      <SHORT-NAME>EMLockSignalReceptionModeInterface</SHORT-NAME>
+                      <IS-SERVICE>true</IS-SERVICE>
+                      <MODE-GROUP>
+                        <SHORT-NAME>currentEMLockSignalReceptionMode</SHORT-NAME>
+                        <TYPE-TREF DEST="MODE-DECLARATION-GROUP">/BMW/Platform/Stm/ModeDeclarationGroups/ErrorMemoryLockSignalReceptionMode</TYPE-TREF>
+                      </MODE-GROUP>
+                    </MODE-SWITCH-INTERFACE>
+                    <MODE-SWITCH-INTERFACE>
+                      <SHORT-NAME>CentralErrorLockModeInterface</SHORT-NAME>
+                      <IS-SERVICE>false</IS-SERVICE>
+                      <MODE-GROUP>
+                        <SHORT-NAME>currentCentralErrorLockMode</SHORT-NAME>
+                        <TYPE-TREF DEST="MODE-DECLARATION-GROUP">/BMW/Platform/Stm/ModeDeclarationGroups/Stm_CentralErrorLockMode</TYPE-TREF>
+                      </MODE-GROUP>
+                    </MODE-SWITCH-INTERFACE>
+                    <SENDER-RECEIVER-INTERFACE>
+                      <SHORT-NAME>CentralErrorLockSignalInterface</SHORT-NAME>
+                      <IS-SERVICE>false</IS-SERVICE>
+                      <DATA-ELEMENTS>
+                        <VARIABLE-DATA-PROTOTYPE>
+                          <SHORT-NAME>centralErrorLock</SHORT-NAME>
+                          <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Stm/ImplementationDataTypes/Stm_CentralErrorLockType</TYPE-TREF>
+                        </VARIABLE-DATA-PROTOTYPE>
+                      </DATA-ELEMENTS>
+                    </SENDER-RECEIVER-INTERFACE>
+                    <MODE-SWITCH-INTERFACE>
+                      <SHORT-NAME>EnergyStateModeInterface</SHORT-NAME>
+                      <IS-SERVICE>false</IS-SERVICE>
+                      <MODE-GROUP>
+                        <SHORT-NAME>currentEnergyMode</SHORT-NAME>
+                        <TYPE-TREF DEST="MODE-DECLARATION-GROUP">/BMW/Platform/Stm/ModeDeclarationGroups/Stm_EnergyStateMode</TYPE-TREF>
+                      </MODE-GROUP>
+                    </MODE-SWITCH-INTERFACE>
+                    <SENDER-RECEIVER-INTERFACE>
+                      <SHORT-NAME>EnergyStateSignalInterface</SHORT-NAME>
+                      <IS-SERVICE>false</IS-SERVICE>
+                      <DATA-ELEMENTS>
+                        <VARIABLE-DATA-PROTOTYPE>
+                          <SHORT-NAME>energyState</SHORT-NAME>
+                          <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Stm/ImplementationDataTypes/Stm_EnergyStateType</TYPE-TREF>
+                        </VARIABLE-DATA-PROTOTYPE>
+                      </DATA-ELEMENTS>
+                    </SENDER-RECEIVER-INTERFACE>
+                    <MODE-SWITCH-INTERFACE>
+                      <SHORT-NAME>VehicleStateModeInterface</SHORT-NAME>
+                      <IS-SERVICE>false</IS-SERVICE>
+                      <MODE-GROUP>
+                        <SHORT-NAME>currentVehicleStateMode</SHORT-NAME>
+                        <TYPE-TREF DEST="MODE-DECLARATION-GROUP">/BMW/Platform/Stm/ModeDeclarationGroups/Stm_VehicleStateMode</TYPE-TREF>
+                      </MODE-GROUP>
+                    </MODE-SWITCH-INTERFACE>
+                    <SENDER-RECEIVER-INTERFACE>
+                      <SHORT-NAME>VehicleStateSignalInterface</SHORT-NAME>
+                      <IS-SERVICE>false</IS-SERVICE>
+                      <DATA-ELEMENTS>
+                        <VARIABLE-DATA-PROTOTYPE>
+                          <SHORT-NAME>VehicleState</SHORT-NAME>
+                          <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Stm/ImplementationDataTypes/Stm_VehicleStateType</TYPE-TREF>
+                        </VARIABLE-DATA-PROTOTYPE>
+                      </DATA-ELEMENTS>
+                    </SENDER-RECEIVER-INTERFACE>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+              </AR-PACKAGES>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

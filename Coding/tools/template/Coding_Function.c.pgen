@@ -1,0 +1,259 @@
+%{+ Coding_Functions }%
+%{#
+GetGeneralConfig()
+GetAreasConfig(True)
+}%
+/**
+ * \file
+ *
+ * \brief       Coding Function
+ *
+ * \project     BMW Platform Software
+ *
+ * \copyright   BMW AG 2016 - 2017
+ *
+ * \version     5.2.1
+ *
+ */
+
+/*------------------------------------------------------------------------------
+*
+*  THIS FILE WAS GENERATED. DO NOT MODIFY!
+*
+*  GENERATOR       : %{= generation_tool() }% %{= generation_version_info() }%
+*
+*  GENERATION TIME : %{= generation_timestamp() }%
+*
+------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------
+                      Include Section
+------------------------------------------------------------------------------*/
+
+#include "Coding_Data.h"     /* The NvM data is defined here */
+#include "Coding_Function.h"
+
+
+/*------------------------------------------------------------------------------
+                      Macros
+------------------------------------------------------------------------------*/
+
+/**
+ * \brief check version of the module
+ */
+#if (!Coding_CHECK_VERSION(5,2,1))
+  #error "Version of Coding_Function.c does not match the version of the module!"
+#endif
+
+
+/*------------------------------------------------------------------------------
+                      Local Data Types
+------------------------------------------------------------------------------*/
+
+/**
+ * \brief The following union is used to convert raw bytes to float32
+ */
+union Coding_FloatConvert
+{ /* PRQA S 0750 */
+   float32 val; /* PRQA S 3629 */
+   uint8 byteVal[4];
+};
+
+/**
+ * \brief The following union is used to convert raw bytes to float64
+ */
+union Coding_DoubleConvert
+{ /* PRQA S 0750 */
+   float64 val; /* PRQA S 3629 */
+   uint8 byteVal[8];
+};
+
+
+/*------------------------------------------------------------------------------
+                      Global Functions
+------------------------------------------------------------------------------*/
+
+#define Coding_START_SEC_CODE
+#include "Coding_MemMap.h" /* PRQA S 5087 */
+
+%{#
+def build_value_integer(f_type, a_offset, f_start_byte):
+  type_map = {"uint8": (1,"uint8"), "sint8": (1,"uint8"), "uint16": (2,"uint16"), "sint16": (2,"uint16"),
+              "uint32": (4,"uint32"), "sint32": (4,"uint32"), "uint64": (8,"uint64"), "sint64": (8,"uint64")}
+  size = type_map[f_type][0]
+  type = type_map[f_type][1]
+  def build_single_integer_shift(index):
+    return '({type})((({type})Coding_CodingData[{index}u]) << {offset:2}u)'.format(
+      type=type,
+      index=a_offset + f_start_byte + index,
+      offset=8*(size-1-index)
+    )
+  return "((" + type + ")(" + "|\n                           ".join(map(build_single_integer_shift, range(0, size))) + "))"
+}%
+
+%{@ area_context in codingConfig.coding_areas_list }%
+%{#   a_offset=area_context.area_offset #}%
+%{@   function_context in area_context.coding_functions_list }%
+%{#
+        f_name=function_context.function_name
+        f_appl_type=function_context.function_appl_type
+        f_nvram_type=function_context.function_nvram_type
+        f_start_byte=function_context.function_start_byte
+        f_end_byte=function_context.function_end_byte
+        f_mask=function_context.function_mask
+        f_shift=function_context.function_mask_shift
+        f_rule=function_context.function_transformation_rule
+        f_cast=" ("+f_appl_type+")"
+}%
+
+/*----------------------------------------------------------------------------*/
+/**
+ * Function to get current Coding data value of '%{= function_context.function_name }%'
+%{:     if f_cast != "" }%
+ *
+ * - Application Type....: %{= f_appl_type }%
+ * - Nvram Type..........: %{= f_nvram_type }%
+%{:}%
+%{:     if ((f_cast != "") and (f_rule != "")) }%
+ *
+ * - Transformation Rule.: %{= f_rule }%
+%{:}%
+ */
+/*----------------------------------------------------------------------------*/
+%{:     if f_nvram_type=="bytearray" }%
+Coding_ReturnType Coding_Get%{= f_name }%(uint8 funcVal[])
+%{:     else }%
+Coding_ReturnType Coding_Get%{= f_name }%(%{= f_appl_type }% *funcVal)
+%{:}%
+{
+   Coding_ReturnType retVal;
+
+   retVal = Coding_GetAccessPermission();
+
+   if ( CODING_RC_OK == retVal )
+   {
+%{:     if f_nvram_type=="boolean" }%
+      *funcVal = ( ( ( Coding_CodingData[ %{= a_offset + f_start_byte }%u ] & %{= IntToHex(f_mask,"02X") }%u ) >> %{= IntToHex(f_shift,"02X") }%u ) == 0u ) ? FALSE : TRUE;
+%{:}%
+%{:     if (f_nvram_type=="uint8") or (f_nvram_type=="sint8") }%
+      *funcVal =%{= f_cast }% ((%{= f_nvram_type }%)((uint8)((Coding_CodingData[%{= a_offset + f_start_byte }%u] & %{= IntToHex(f_mask,"02X") }%u) >> %{= IntToHex(f_shift,"02X")}%u)));
+%{:     elif "int" in f_nvram_type }%
+      *funcVal =%{= f_cast }% %{= build_value_integer(f_nvram_type, a_offset, f_start_byte) }%;
+%{:}%
+%{:     if "float" in f_nvram_type }%
+%{#
+type_map = {"float32": (4, "Coding_FloatConvert"), "float64": (8, "Coding_DoubleConvert")}
+}%
+      uint8 i;
+      union %{= type_map[f_nvram_type][1] }% convert; /* PRQA S 0759 */
+
+      /* convert raw bytes to float/double */
+      for ( i = 0u; i < %{= type_map[f_nvram_type][0] }%u; i++)
+      {
+         convert.byteVal[ i ] = Coding_CodingData[ %{= a_offset + f_start_byte }%u + i ];
+      }
+      *funcVal = convert.val;
+%{:}%
+%{:     if f_nvram_type=="bytearray" }%
+      uint8 i;
+
+      for ( i = 0u; i < %{= f_end_byte - f_start_byte + 1 }%u; i++ )
+      {
+         funcVal[ i ] = Coding_CodingData[ %{= a_offset + f_start_byte }%u + i ];
+      }
+%{:}%
+%{:     if f_rule!="" }%
+%{#
+          f_rule=f_rule.replace("x","(*funcVal)")
+}%
+      *funcVal =%{= f_cast }% (%{= f_rule}%);
+%{:}%
+   }
+
+   return ( retVal );
+}
+%{@}%
+%{@}%
+%{: if generalConfig.data_check }%
+%{@   area_context in codingConfig.coding_areas_list }%
+%{#     a_offset=area_context.area_offset #}%
+%{@     function_context in area_context.coding_functions_list }%
+%{:       if function_context.function_data_check }%
+%{#
+            f_name=function_context.function_name
+            f_appl_type=function_context.function_appl_type
+            f_nvram_type=function_context.function_nvram_type
+            f_start_byte=function_context.function_start_byte
+            f_end_byte=function_context.function_end_byte
+            f_mask=function_context.function_mask
+            f_shift=function_context.function_mask_shift
+            f_rule=function_context.function_transformation_rule
+            f_cast=" ("+f_appl_type+")"
+}%
+
+/*----------------------------------------------------------------------------*/
+/**
+ * Function to get current Coding data value of '%{= function_context.function_name }%' for range check
+%{:     if f_cast != "" }%
+ *
+ * - Application Type....: %{= f_appl_type }%
+ * - Nvram Type..........: %{= f_nvram_type }%
+%{:}%
+%{:     if ((f_cast != "") and (f_rule != "")) }%
+ *
+ * - Transformation Rule.: %{= f_rule }%
+%{:}%
+ */
+/*----------------------------------------------------------------------------*/
+%{:         if f_appl_type=="bytearray" }%
+const uint8* Coding_Check%{= f_name }%(void)
+%{:         else }%
+%{= f_appl_type }% Coding_Check%{= f_name }%(void)
+%{:}%
+{
+%{:         if ((f_nvram_type!="boolean")and(f_nvram_type!="bytearray")) }%
+   %{= f_appl_type }% value;
+%{:}%
+%{:         if f_nvram_type=="boolean" }%
+   return ( ( ( ( Coding_CodingData[ %{= a_offset + f_start_byte }%u ] & %{= IntToHex(f_mask,"02X") }%u ) >> %{= IntToHex(f_shift,"02X") }%u ) == 0u ) ? FALSE : TRUE );
+%{:}%
+%{:         if (f_nvram_type=="uint8") or (f_nvram_type=="sint8") }%
+   value =%{= f_cast }% ((%{= f_nvram_type }%)((%{= f_nvram_type }%)((uint8)((Coding_CodingData[%{= a_offset + f_start_byte }%u] & %{= IntToHex(f_mask,"02X") }%u) >> %{= IntToHex(f_shift,"02X") }%u))));
+%{:         elif "int" in f_nvram_type }%
+   value =%{= f_cast }% %{= build_value_integer(f_nvram_type, a_offset, f_start_byte) }%;
+%{:}%
+%{:         if "float" in f_nvram_type }%
+%{#
+type_map = {"float32": (4, "Coding_FloatConvert"), "float64": (8, "Coding_DoubleConvert")}
+}%
+      uint8 i;
+      union %{= type_map[f_nvram_type][1] }% convert; /* PRQA S 0759 */
+
+      /* convert raw bytes to float/double */
+      for ( i = 0u; i < %{= type_map[f_nvram_type][0] }%u; i++)
+      {
+         convert.byteVal[ i ] = Coding_CodingData[ %{= a_offset + f_start_byte }%u + i ];
+      }
+   return ( convert.val );
+%{:}%
+%{:         if f_nvram_type=="bytearray" }%
+   return ( &Coding_CodingData[ %{= a_offset + f_start_byte }%u ] );
+%{:}%
+%{:         if f_rule!="" }%
+%{#
+          f_rule=f_rule.replace("x","(value)")
+}%
+   value = %{= f_rule}%;
+%{:}%
+%{:         if ((f_nvram_type!="boolean")and(f_nvram_type!="bytearray")) }%
+   return ( value );
+%{:}%
+}
+%{:}%
+%{@}%
+%{@}%
+%{:}%
+
+
+#define Coding_STOP_SEC_CODE
+#include "Coding_MemMap.h" /* PRQA S 5087 */

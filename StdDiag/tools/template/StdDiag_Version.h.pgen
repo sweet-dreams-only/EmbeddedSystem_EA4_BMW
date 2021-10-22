@@ -1,0 +1,61 @@
+/**
+*  \file
+*
+*  \brief       BMW SWC StdDiag
+*
+*  This file is the generated version header file of the StdDiag module
+*  for usage in the BMW AUTOSAR Core.
+*
+*  \project     BMW Platform Software
+*
+*  \copyright   BMW AG 2015 - 2017
+*
+*  \version     5.3.0
+*
+*  \remarks     --
+*
+*/
+
+/*------------------------------------------------------------------------------
+*
+*  THIS FILE WAS GENERATED. DO NOT MODIFY!
+*
+*  GENERATOR       : %{= generation_tool() }% %{= generation_version_info() }%
+*
+*  GENERATION TIME : %{= generation_timestamp() }%
+*
+------------------------------------------------------------------------------*/
+
+#ifndef StdDiag_VERSION_H
+#define StdDiag_VERSION_H
+
+
+%{# into(container("StdDiag/CommonPublishedInformation")); }%
+/*------------------------------------------------------------------------------
+                      Macros
+------------------------------------------------------------------------------*/
+
+/**
+ * \brief StdDiag header major version
+ */
+#define StdDiag_MAJOR_VERSION        (%{= value(ref("SwMajorVersion")) }%u)
+
+/**
+ * \brief StdDiag header minor version
+ */
+#define StdDiag_MINOR_VERSION        (%{= value(ref("SwMinorVersion")) }%u)
+
+/**
+ * \brief StdDiag header patch version
+ */
+#define StdDiag_PATCH_VERSION        (%{= value(ref("SwPatchVersion")) }%u)
+
+
+/*
+   MISRA-C:2004 Rule 19.7: this macro is only used in preprocessor directive, no function possible
+*/
+/* PRQA S 3453 2 */
+#define StdDiag_CHECK_VERSION(major,minor,patch) \
+ (((major) == StdDiag_MAJOR_VERSION) && ((minor) == StdDiag_MINOR_VERSION) && ((patch) == StdDiag_PATCH_VERSION))
+
+#endif /* StdDiag_VERSION_H */

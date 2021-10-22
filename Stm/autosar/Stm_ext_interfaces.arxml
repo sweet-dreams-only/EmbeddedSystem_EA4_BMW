@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+*  \file
+*
+*  \brief       BMW SWC Stm
+*
+*  \project     BMW Platform Software
+*
+*  \copyright   BMW AG 2017
+*
+*  \version     5.0.0
+*
+*  \remarks
+*/
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 file:AUTOSAR_4-3-0_STRICT_COMPACT.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>BMW</SHORT-NAME>
+      <ELEMENTS/>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>Platform</SHORT-NAME>
+          <ELEMENTS/>
+          <AR-PACKAGES>
+            <AR-PACKAGE>
+              <SHORT-NAME>Stm</SHORT-NAME>
+              <ELEMENTS/>
+              <!--****************************************************************************
+                **                    Expected interface by Stm from BMW integration          **
+                *****************************************************************************-->
+              <AR-PACKAGES>
+                <AR-PACKAGE>
+                  <SHORT-NAME>Dem</SHORT-NAME>
+                  <AR-PACKAGES>
+                    <AR-PACKAGE>
+                      <SHORT-NAME>PortInterfaces</SHORT-NAME>
+                      <ELEMENTS>
+
+                        <!--****************************************************************************
+                          **         Expected interface by Stm which should be provided by Dem          **
+                          *****************************************************************************-->
+
+                        <CLIENT-SERVER-INTERFACE>
+                          <SHORT-NAME>EnableCondition</SHORT-NAME>
+                          <IS-SERVICE>true</IS-SERVICE>
+                          <OPERATIONS>
+                            <CLIENT-SERVER-OPERATION>
+                              <SHORT-NAME>SetEnableCondition</SHORT-NAME>
+                              <ARGUMENTS>
+                                <ARGUMENT-DATA-PROTOTYPE>
+                                  <SHORT-NAME>ConditionFulfilled</SHORT-NAME>
+                                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/boolean</TYPE-TREF>
+                                  <DIRECTION>IN</DIRECTION>
+                                </ARGUMENT-DATA-PROTOTYPE>
+                              </ARGUMENTS>
+                              <POSSIBLE-ERROR-REFS>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Stm/Dem/PortInterfaces/EnableCondition/E_OK</POSSIBLE-ERROR-REF>
+                                <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Stm/Dem/PortInterfaces/EnableCondition/E_NOT_OK</POSSIBLE-ERROR-REF>
+                              </POSSIBLE-ERROR-REFS>
+                            </CLIENT-SERVER-OPERATION>
+                          </OPERATIONS>
+                          <POSSIBLE-ERRORS>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>E_OK</SHORT-NAME>
+                              <ERROR-CODE>0</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                            <APPLICATION-ERROR>
+                              <SHORT-NAME>E_NOT_OK</SHORT-NAME>
+                              <ERROR-CODE>1</ERROR-CODE>
+                            </APPLICATION-ERROR>
+                          </POSSIBLE-ERRORS>
+                        </CLIENT-SERVER-INTERFACE>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                  </AR-PACKAGES>
+                </AR-PACKAGE>
+              </AR-PACKAGES>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

@@ -1,0 +1,395 @@
+<#@ AutosarXml processor="ArDirectiveProcessor" requires="arPrefix='ar';arNamespace='http://autosar.org/schema/r4.0'" #>
+<#@ template inherits="AutosarDirectiveProcessor.ArGtcBase" debug="false" #>
+<#@ output extension="" #>
+<#@ include file="Logger.tt" #>
+<#@ include file="Helper.tt" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#
+
+if ( !ReportIfModuleNotExists( "Error", "Vin_VERIFY_Vin_EXISTS", "BMW_DEF/Vin" ) )
+{
+   ChangeContext( Xp.ModuleConfAtDefRefTo( "BMW_DEF/Vin" ) );
+
+   uint upperMultiplicity = 0;
+
+   /* check if container 'CommonPublishedInformation' exists */
+
+   upperMultiplicity = 1;
+
+   if ( !ReportIfContainerOutOfRange(
+         "Error",
+         "Vin/CommonPublishedInformation",
+         "Vin/CommonPublishedInformation",
+         "CommonPublishedInformation",
+         1,
+         upperMultiplicity ))
+   {
+#>
+<# !LOOP( "./ar:CONTAINERS/ar:ECUC-CONTAINER-VALUE" + Xp.ContainerAtDefRefTo( "CommonPublishedInformation" ).Substring(2) )#>
+<#
+
+   if (!ReportIfValueIsEmpty(
+         "Error",
+         "Vin/CommonPublishedInformation/SwMajorVersion",
+         "/SwMajorVersion",
+         "SwMajorVersion"))
+   {
+      const double minVal = Double.NegativeInfinity;
+      const double maxVal = Double.PositiveInfinity;
+
+      if (!ReportIfValueOutOfRange(
+            "Error",
+            "Vin/CommonPublishedInformation/SwMajorVersion",
+            "/SwMajorVersion",
+            minVal,
+            maxVal))
+      {
+      }
+   }
+
+   if (!ReportIfValueIsEmpty(
+         "Error",
+         "Vin/CommonPublishedInformation/SwMinorVersion",
+         "/SwMinorVersion",
+         "SwMinorVersion"))
+   {
+      const double minVal = Double.NegativeInfinity;
+      const double maxVal = Double.PositiveInfinity;
+
+      if (!ReportIfValueOutOfRange(
+            "Error",
+            "Vin/CommonPublishedInformation/SwMinorVersion",
+            "/SwMinorVersion",
+            minVal,
+            maxVal))
+      {
+      }
+   }
+
+   if (!ReportIfValueIsEmpty(
+         "Error",
+         "Vin/CommonPublishedInformation/SwPatchVersion",
+         "/SwPatchVersion",
+         "SwPatchVersion"))
+   {
+      const double minVal = Double.NegativeInfinity;
+      const double maxVal = Double.PositiveInfinity;
+
+      if (!ReportIfValueOutOfRange(
+            "Error",
+            "Vin/CommonPublishedInformation/SwPatchVersion",
+            "/SwPatchVersion",
+            minVal,
+            maxVal))
+      {
+      }
+   }
+
+#>
+<# !ENDLOOP #>
+<#
+   }
+
+   /* check if container 'VinGeneral' exists */
+
+   upperMultiplicity = 1;
+
+   if ( !ReportIfContainerOutOfRange(
+         "Error",
+         "Vin/VinGeneral",
+         "Vin/VinGeneral",
+         "VinGeneral",
+         1,
+         upperMultiplicity ))
+   {
+#>
+<# !LOOP( "./ar:CONTAINERS/ar:ECUC-CONTAINER-VALUE" + Xp.ContainerAtDefRefTo( "VinGeneral" ).Substring(2) )#>
+<#
+
+   if (!ReportIfValueIsEmpty(
+         "Error",
+         "Vin/VinGeneral/VinDevErrorDetect",
+         "/VinDevErrorDetect",
+         "VinDevErrorDetect"))
+   
+   {
+      if (!ReportIfBooleanValueNotValid(
+            "Error",
+            "Vin/VinGeneral/VinDevErrorDetect",
+            "/VinDevErrorDetect",
+            "VinDevErrorDetect"))
+      {
+      }
+   }
+   
+   if (!ReportIfValueIsEmpty(
+         "Error",
+         "Vin/VinGeneral/VinRequestMessageIdentifier",
+         "/VinRequestMessageIdentifier",
+         "VinRequestMessageIdentifier"))
+   {
+      const double minVal = 0;
+      const double maxVal = 65535;
+
+      if (!ReportIfValueOutOfRange(
+            "Error",
+            "Vin/VinGeneral/VinRequestMessageIdentifier",
+            "/VinRequestMessageIdentifier",
+            minVal,
+            maxVal))
+      {
+      }
+   }
+
+   if (!ReportIfValueIsEmpty(
+         "Error",
+         "Vin/VinGeneral/TimeoutInitialVinRequest",
+         "/TimeoutInitialVinRequest",
+         "TimeoutInitialVinRequest"))
+   {
+      const double minVal = 0.0;
+      const double maxVal = 25.0;
+
+      if (!ReportIfValueOutOfRange(
+            "Error",
+            "Vin/VinGeneral/TimeoutInitialVinRequest",
+            "/TimeoutInitialVinRequest",
+            minVal,
+            maxVal))
+      {
+      }
+   }
+
+   if (!ReportIfValueIsEmpty(
+         "Error",
+         "Vin/VinGeneral/TimeoutSubsequentVinRequests",
+         "/TimeoutSubsequentVinRequests",
+         "TimeoutSubsequentVinRequests"))
+   {
+      const double minVal = 0.1;
+      const double maxVal = 25.0;
+
+      if (!ReportIfValueOutOfRange(
+            "Error",
+            "Vin/VinGeneral/TimeoutSubsequentVinRequests",
+            "/TimeoutSubsequentVinRequests",
+            minVal,
+            maxVal))
+      {
+      }
+   }
+
+   if (!ReportIfValueIsEmpty(
+         "Error",
+         "Vin/VinGeneral/MaxNumberVinRequests",
+         "/MaxNumberVinRequests",
+         "MaxNumberVinRequests"))
+   {
+      const double minVal = 1;
+      const double maxVal = 255;
+
+      if (!ReportIfValueOutOfRange(
+            "Error",
+            "Vin/VinGeneral/MaxNumberVinRequests",
+            "/MaxNumberVinRequests",
+            minVal,
+            maxVal))
+      {
+      }
+   }
+
+   if (!ReportIfValueIsEmpty(
+         "Error",
+         "Vin/VinGeneral/EnableSIAdapter",
+         "/EnableSIAdapter",
+         "EnableSIAdapter"))
+   
+   {
+      if (!ReportIfBooleanValueNotValid(
+            "Error",
+            "Vin/VinGeneral/EnableSIAdapter",
+            "/EnableSIAdapter",
+            "EnableSIAdapter"))
+      {
+      }
+   }
+   
+#>
+<# !ENDLOOP #>
+<#
+   }
+
+   /* check if container 'SecureVin' exists */
+
+   upperMultiplicity = 1;
+
+   if ( !ReportIfContainerOutOfRange(
+         "Error",
+         "Vin/SecureVin",
+         "Vin/SecureVin",
+         "SecureVin",
+         0,
+         upperMultiplicity ))
+   {
+#>
+<# !LOOP( "./ar:CONTAINERS/ar:ECUC-CONTAINER-VALUE" + Xp.ContainerAtDefRefTo( "SecureVin" ).Substring(2) )#>
+<#
+
+   if (!ReportIfValueIsEmpty(
+         "Error",
+         "Vin/SecureVin/SecureVinRequestMessageIdentifier",
+         "/SecureVinRequestMessageIdentifier",
+         "SecureVinRequestMessageIdentifier"))
+   {
+      const double minVal = 0;
+      const double maxVal = 65535;
+
+      if (!ReportIfValueOutOfRange(
+            "Error",
+            "Vin/SecureVin/SecureVinRequestMessageIdentifier",
+            "/SecureVinRequestMessageIdentifier",
+            minVal,
+            maxVal))
+      {
+      }
+   }
+
+   if (!ReportIfValueIsEmpty(
+         "Error",
+         "Vin/SecureVin/TimeoutMac",
+         "/TimeoutMac",
+         "TimeoutMac"))
+   {
+      const double minVal = 0.1;
+      const double maxVal = 3;
+
+      if (!ReportIfValueOutOfRange(
+            "Error",
+            "Vin/SecureVin/TimeoutMac",
+            "/TimeoutMac",
+            minVal,
+            maxVal))
+      {
+      }
+   }
+
+   if (!ReportIfValueIsEmpty(
+         "Error",
+         "Vin/SecureVin/TimeoutCounterbase",
+         "/TimeoutCounterbase",
+         "TimeoutCounterbase"))
+   {
+      const double minVal = 0.1;
+      const double maxVal = 3;
+
+      if (!ReportIfValueOutOfRange(
+            "Error",
+            "Vin/SecureVin/TimeoutCounterbase",
+            "/TimeoutCounterbase",
+            minVal,
+            maxVal))
+      {
+      }
+   }
+
+   if (!ReportIfValueIsEmpty(
+         "Error",
+         "Vin/SecureVin/ErrorlimitCounterbase",
+         "/ErrorlimitCounterbase",
+         "ErrorlimitCounterbase"))
+   {
+      const double minVal = 1;
+      const double maxVal = 10;
+
+      if (!ReportIfValueOutOfRange(
+            "Error",
+            "Vin/SecureVin/ErrorlimitCounterbase",
+            "/ErrorlimitCounterbase",
+            minVal,
+            maxVal))
+      {
+      }
+   }
+
+   if (!ReportIfValueIsEmpty(
+         "Error",
+         "Vin/SecureVin/RemoteSSSId",
+         "/RemoteSSSId",
+         "RemoteSSSId"))
+   {
+      const double minVal = 0;
+      const double maxVal = 255;
+
+      if (!ReportIfValueOutOfRange(
+            "Error",
+            "Vin/SecureVin/RemoteSSSId",
+            "/RemoteSSSId",
+            minVal,
+            maxVal))
+      {
+      }
+   }
+
+#>
+<# !ENDLOOP #>
+<#
+   }
+
+   /* check if container 'MultiConfig' exists */
+   upperMultiplicity = UInt32.MaxValue;
+
+   if ( !ReportIfContainerOutOfRange(
+         "Error",
+         "Vin/MultiConfig",
+         "Vin/MultiConfig",
+         "MultiConfig",
+         1,
+         upperMultiplicity ))
+   {
+#>
+<# !LOOP( "./ar:CONTAINERS/ar:ECUC-CONTAINER-VALUE" + Xp.ContainerAtDefRefTo( "MultiConfig" ).Substring(2) )#>
+<#
+
+   if (!ReportIfValueIsEmpty(
+         "Error",
+         "Vin/MultiConfig/SSVId",
+         "/SSVId",
+         "SSVId"))
+   {
+      const double minVal = 0;
+      const double maxVal = 255;
+
+      if (!ReportIfValueOutOfRange(
+            "Error",
+            "Vin/MultiConfig/SSVId",
+            "/SSVId",
+            minVal,
+            maxVal))
+      {
+      }
+   }
+
+#>
+<# !ENDLOOP #>
+<#
+   }
+
+}
+/* write report */
+int e_status = WriteReport();
+
+if (e_status != 0)
+{
+   /* exit program with error */
+   throw new Exception ("An error occurred during Vin verification. See output log in Vin.autoverify!");
+}
+
+#><#+
+
+/*******************************************************************************
+**                      Member Data                                           **
+*******************************************************************************/
+
+
+/*** End of file **************************************************************/#>

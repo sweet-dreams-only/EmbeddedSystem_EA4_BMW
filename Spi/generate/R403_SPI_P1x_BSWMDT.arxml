@@ -1,0 +1,1603 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+********************************************************************************
+** Project      = AUTOSAR Renesas R4.0.3 P1x MCAL Components                  **
+** Module       = R403_SPI_P1x_BSWMDT.arxml                                   **
+********************************************************************************
+**                                  COPYRIGHT                                 **
+********************************************************************************
+** Copyright(c) 2013-2017 Renesas Electronics Corporation                     **
+********************************************************************************
+** Purpose:                                                                   **
+** Provides the BSW module description of SPI Driver Component for AUTOSAR    **
+** release 4.0.3                                                              **
+**                                                                            **
+********************************************************************************
+**                                                                            **
+** Unless otherwise agreed upon in writing between your company and           **
+** Renesas Electronics Corporation the following shall apply!                 **
+**                                                                            **
+** Warranty Disclaimer                                                        **
+**                                                                            **
+** There is no warranty of any kind whatsoever granted by Renesas. Any        **
+** warranty is expressly disclaimed and excluded by Renesas, either expressed **
+** or implied, including but not limited to those for non-infringement of     **
+** intellectual property, merchantability and/or fitness for the particular   **
+** purpose.                                                                   **
+**                                                                            **
+** Renesas shall not have any obligation to maintain, service or provide bug  **
+** fixes for the supplied Product(s) and/or the Application.                  **
+**                                                                            **
+** Each User is solely responsible for determining the appropriateness of     **
+** using the Product(s) and assumes all risks associated with its exercise    **
+** of rights under this Agreement, including, but not limited to the risks    **
+** and costs of program errors, compliance with applicable laws, damage to    **
+** or loss of data, programs or equipment, and unavailability or              **
+** interruption of operations.                                                **
+**                                                                            **
+** Limitation of Liability                                                    **
+**                                                                            **
+** In no event shall Renesas be liable to the User for any incidental,        **
+** consequential, indirect, or punitive damage (including but not limited     **
+** to lost profits) regardless of whether such liability is based on breach   **
+** of contract, tort, strict liability, breach of warranties, failure of      **
+** essential purpose or otherwise and even if advised of the possibility of   **
+** such damages. Renesas shall not be liable for any services or products     **
+** provided by third party vendors, developers or consultants identified or   **
+** referred to the User by Renesas in connection with the Product(s) and/or   **
+** the Application.                                                           **
+**                                                                            **
+********************************************************************************
+** Environment:                                                               **
+**              Devices:        RH850/P1M:  R7F701310, R7F701311,             **
+**                                          R7F701312, R7F701314,             **
+**                                          R7F701315, R7F701304,             **
+**                                          R7F701305, R7F701318,             **
+**                                          R7F701319, R7F701320,             **
+**                                          R7F701321, R7F701322,             **
+**                                          R7F701323, R7F701313              **
+**                                                                            **
+********************************************************************************
+**                      Revision Control History                              **
+********************************************************************************
+** V1.0.0:  17-Sep-2013   Initial Version                                     **
+**                                                                            **
+** V1.0.1:  28-Jan-2014   Following changes made:                             **
+**                        1. Copyright information updated.                   **
+**                        2. Device list updated to add 100 pin devices.      **
+**                                                                            **
+** V1.0.2:  22-Apr-2014   Software version information is updated.            **
+**                                                                            **
+** V1.0.3:  12-May-2014   As per CR 098 for mantis #19850 Environment section **
+**                        is updated to remove unwanted devices.              **
+**                                                                            **
+** V1.0.4:  30-Jul-2014   Software version information is updated.            **
+**                                                                            **
+** V1.0.5:  29-Oct-2014   Following changes made:                             **
+**                        1.Software version information is updated.          **
+**                        2. BSW-MODULE-ENTRY section is added.               **
+**                                                                            **
+** V1.0.6:  20-Apr-2015   Following changes are made:                         **
+**                        1. Software version information is updated.         **
+**                        2. Updated copyright information.                   **
+** V1.0.7:  19-Jan-2016   Following changes are made:                         **
+**                        1. Software version information is updated.         **
+**                        2. Updated copyright information.                   **
+** V1.0.8:  19-Mar-2016   Following changes are made:                         **
+**                        1. Software version information is updated.         **
+** V1.0.9:  10-Aug-2016   As part of P1x V4.01.01 release, following changes  **
+**                        are made:                                           **
+**                        1. Interrupt category updated for                   **
+**                           BswInterruptEntity_3.                            **
+**                        2. Entry reference updated for BswInterruptEntity_46**
+**                           from SPI_DMA04_ISR to SPI_DMA04_CAT2_ISR for     **
+**                           category CAT-2.                                  **
+**                        3. BSW-CALLED-ENTITY section is added.              **
+**                        4. CAN-ENTER-EXCLUSIVE-AREA-REF tags are updated for**
+**                           BSW-CALLED-ENTITY and BSW-INTERRUPT-ENTITY.      **
+**                        5. Warranty disclaimer section updated.             **
+** V1.0.10:  5-Sep-2016   Following changes are made:                         **
+**                        1. As part of ticket ARDAAAE-2017, the tag EVENTS   **
+**                           and IMPLEMENTED-ENTRY-REF are added for          **
+**                           scheduled function Spi_MainFunction_Handling.    **
+**                        2. Software version information is updated.         **
+** V1.0.11:  15-Feb-2017  Following changes are made:                         **
+**                        1. Copyright information is updated.                **
+**                        2. As part of ARDAAAE-2277,below changes are done:  **
+**                             a. Order of IS-REENTRANT is                    **
+**                                corrected in BSW-MODULE-ENTRY.              **
+**                             b. Spi_GetErrorInfo is mentioned in            **
+**                                BSW-CALLED-ENTITY.                          **
+**                             c. Software version information is updated.    **
+** V1.0.12:  08-Mar-2017  Following changes are made:                         **
+**                        1. As part of ARDAAAE-2415, Software version        **
+**                           information is updated.                          **
+********************************************************************************
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-0-3.xsd">
+    <AR-PACKAGES>
+      <AR-PACKAGE UUID="9233c327-0fa8-4e7a-b6cb-d4d4113d95ae">
+        <SHORT-NAME>Renesas</SHORT-NAME>
+        <AR-PACKAGES>
+          <AR-PACKAGE UUID="97f12725-2ff3-4736-9eeb-878cde5feebc">
+            <SHORT-NAME>EcucDefs_Spi</SHORT-NAME>
+            <ELEMENTS>
+              <BSW-IMPLEMENTATION UUID="62ab9548-ef0f-4933-89d4-79774e1434c1">
+                <SHORT-NAME>Spi_Impl</SHORT-NAME>
+                <PROGRAMMING-LANGUAGE>C</PROGRAMMING-LANGUAGE>
+                <SW-VERSION>1.6.6</SW-VERSION>
+                <VENDOR-ID>59</VENDOR-ID>
+                <AR-RELEASE-VERSION>4.0.3</AR-RELEASE-VERSION>
+                <BEHAVIOR-REF DEST="BSW-INTERNAL-BEHAVIOR">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0</BEHAVIOR-REF>
+                <VENDOR-API-INFIX>Renesas</VENDOR-API-INFIX>
+                <VENDOR-SPECIFIC-MODULE-DEF-REFS>
+                  <VENDOR-SPECIFIC-MODULE-DEF-REF DEST="ECUC-MODULE-DEF">/Renesas/EcucDefs_Spi/Spi</VENDOR-SPECIFIC-MODULE-DEF-REF>
+                </VENDOR-SPECIFIC-MODULE-DEF-REFS>
+              </BSW-IMPLEMENTATION>
+              <BSW-MODULE-DESCRIPTION UUID="69702337-25d5-473d-9791-17993d9ebd98">
+                <SHORT-NAME>Spi</SHORT-NAME>
+                <MODULE-ID>83</MODULE-ID>
+                <INTERNAL-BEHAVIORS>
+                  <BSW-INTERNAL-BEHAVIOR UUID="bfe7aac8-8a3d-4fec-9bd0-e2a5bed1a167">
+                    <SHORT-NAME>BswInternalBehavior_0</SHORT-NAME>
+                    <EXCLUSIVE-AREAS>
+                      <EXCLUSIVE-AREA UUID="b9ca7b6b-9813-4653-85bf-50a69ee110b1">
+                        <SHORT-NAME>SPI_CHIP_SELECT_PROTECTION</SHORT-NAME>
+                      </EXCLUSIVE-AREA>
+                      <EXCLUSIVE-AREA UUID="1489dc9d-004a-431f-bd13-e86c3992e4e4">
+                        <SHORT-NAME>SPI_RAM_DATA_PROTECTION</SHORT-NAME>
+                      </EXCLUSIVE-AREA>
+                    </EXCLUSIVE-AREAS>
+                    <ENTITYS>
+                      <BSW-INTERRUPT-ENTITY UUID="4966a721-4374-4d79-9df7-e32e2f1c24a6">
+                        <SHORT-NAME>BswInterruptEntity_0</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_CHIP_SELECT_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIG0_TIRE_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIG0IRE</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="d458e1ec-07c3-4477-9216-ac38fb501f31">
+                        <SHORT-NAME>BswInterruptEntity_1</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_CHIP_SELECT_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIG0_TIRE_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIG0IRE</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="a69ed499-87ef-485c-b25f-9fbed03a270d">
+                        <SHORT-NAME>BswInterruptEntity_2</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_CHIP_SELECT_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIG0_TIR_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIG0IR</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="994f7ced-48ca-4846-9e6c-5fbdd555058f">
+                        <SHORT-NAME>BswInterruptEntity_3</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_CHIP_SELECT_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIG0_TIR_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIG0IR</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="29f48dc3-0da4-4187-ba48-626bcec77b55">
+                        <SHORT-NAME>BswInterruptEntity_4</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_CHIP_SELECT_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIG0_TIC_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIG0IC</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="75017152-8449-4797-89a9-6e65c1c98fd6">
+                        <SHORT-NAME>BswInterruptEntity_5</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_CHIP_SELECT_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIG0_TIC_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIG0IC</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="2a3ad2fa-e931-47a2-a0ad-1d26a960e050">
+                        <SHORT-NAME>BswInterruptEntity_6</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH3_TIRE_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH3IRE</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="b58f465b-38b7-46fc-adcd-fcb3edb96ca3">
+                        <SHORT-NAME>BswInterruptEntity_7</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH3_TIRE_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH3IRE</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="4c24b92d-0396-47a7-9a6a-5f04ca7cabec">
+                        <SHORT-NAME>BswInterruptEntity_8</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH3_TIR_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH3IR</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="a4b130b9-d74f-41e9-b6f2-713a3e61d31d">
+                        <SHORT-NAME>BswInterruptEntity_9</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH3_TIR_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH3IR</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="6e6bd5a9-fb99-43e7-8b06-08ec128eebe9">
+                        <SHORT-NAME>BswInterruptEntity_10</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH3_TIC_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH3IC</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="fddcbf9f-0d55-4495-ad25-71bdf1fe4c29">
+                        <SHORT-NAME>BswInterruptEntity_11</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH3_TIC_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH3IC</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="69fda8aa-e2a8-4441-86f7-c8e0dc136925">
+                        <SHORT-NAME>BswInterruptEntity_12</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH3_TIJC_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH3IJC</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="57deaffd-6287-4fb8-b1ea-6ae3ee246450">
+                        <SHORT-NAME>BswInterruptEntity_13</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH3_TIJC_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH3IJC</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="dc45c3d1-e606-4c8a-8e3a-b803db8d05cc">
+                        <SHORT-NAME>BswInterruptEntity_14</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH0_TIRE_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH0IRE</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="ac71d2d7-84ff-404f-9894-2167692a1871">
+                        <SHORT-NAME>BswInterruptEntity_15</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH0_TIRE_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH0IRE</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="dd4e2574-421a-4160-a781-7fd633c233ff">
+                        <SHORT-NAME>BswInterruptEntity_16</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH0_TIR_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH0IR</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="51b83573-2fe2-427f-aa5a-2ae78204b74b">
+                        <SHORT-NAME>BswInterruptEntity_17</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH0_TIR_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH0IR</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="2e2eb354-a3ab-42f7-85f8-6c7a609ffe80">
+                        <SHORT-NAME>BswInterruptEntity_18</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH0_TIC_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH0IC</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="6b5c34e6-09c4-4d45-b375-1b0efcdf3c22">
+                        <SHORT-NAME>BswInterruptEntity_19</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH0_TIC_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH0IC</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="b869303f-6789-4cf8-8527-0c2fc8d6568e">
+                        <SHORT-NAME>BswInterruptEntity_20</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH0_TIJC_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH0IJC</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="f2498362-361f-46ec-9c09-091a3c111455">
+                        <SHORT-NAME>BswInterruptEntity_21</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH0_TIJC_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH0IJC</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="9da728c8-c1aa-4982-8785-a39c6aa01a04">
+                        <SHORT-NAME>BswInterruptEntity_22</SHORT-NAME>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH1_TIRE_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH1IRE</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="691fbb92-36f6-4e84-86df-8749fb32612d">
+                        <SHORT-NAME>BswInterruptEntity_23</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH1_TIRE_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH1IRE</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="4f21cad8-048b-46a4-8143-3479f0d62b6a">
+                        <SHORT-NAME>BswInterruptEntity_24</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH1_TIR_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH1IR</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="0d8c4e83-97fb-4d61-8201-d06e2fe3a798">
+                        <SHORT-NAME>BswInterruptEntity_25</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH1_TIR_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH1IR</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="fb61775d-2c28-463b-96cf-4c5ff2417240">
+                        <SHORT-NAME>BswInterruptEntity_26</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH1_TIC_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH1IC</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="7dcdc341-737c-47e5-ba0c-17ffd778feef">
+                        <SHORT-NAME>BswInterruptEntity_27</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH1_TIC_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH1IC</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="bc96f423-448c-4b72-ad14-31e8c6e870b6">
+                        <SHORT-NAME>BswInterruptEntity_28</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH1_TIJC_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH1IJC</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="a6675399-13d4-4554-8352-667bd2ed82ee">
+                        <SHORT-NAME>BswInterruptEntity_29</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH1_TIJC_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH1IJC</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="ab43b3d0-facd-46c2-8f5c-4e12e3ee319c">
+                        <SHORT-NAME>BswInterruptEntity_30</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH2_TIRE_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH2IRE</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="baaa9cf3-e57b-457f-b80d-e7301c6afba8">
+                        <SHORT-NAME>BswInterruptEntity_31</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH2_TIR_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH2IR</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="455c4e72-c856-4ae0-9f1a-d0ede4d0c48f">
+                        <SHORT-NAME>BswInterruptEntity_32</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH2_TIC_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH2IC</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="7fd53382-dc5b-4cbf-acd1-ac8a350000e9">
+                        <SHORT-NAME>BswInterruptEntity_33</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH2_TIJC_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH2IJC</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="daeeae45-1e96-418d-b45f-8ba504cc074b">
+                        <SHORT-NAME>BswInterruptEntity_34</SHORT-NAME>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH2_TIRE_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH2IRE</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="35c81462-c0ea-4426-adb6-16621d75a82b">
+                        <SHORT-NAME>BswInterruptEntity_35</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH2_TIR_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH2IR</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="ba6cadc8-44e5-4816-8393-15a3e428dee9">
+                        <SHORT-NAME>BswInterruptEntity_36</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH2_TIC_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH2IC</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="365de67a-ca46-48af-8bcf-a2bc29ecb729">
+                        <SHORT-NAME>BswInterruptEntity_37</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_CSIH2_TIJC_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTCSIH2IJC</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="505731c8-212b-4160-886d-e6578d146044">
+                        <SHORT-NAME>BswInterruptEntity_38</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA00_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA0</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="25ccbd6d-c0d0-4ed7-8631-cfa63fde49e1">
+                        <SHORT-NAME>BswInterruptEntity_39</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA00_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA0</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="98d84a2b-f5ee-44f3-9aa1-b83eab20ad8b">
+                        <SHORT-NAME>BswInterruptEntity_40</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA01_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA1</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="49800da4-0ffe-46ab-835a-7810d1e7763f">
+                        <SHORT-NAME>BswInterruptEntity_41</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA01_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA1</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="3cbe8a07-4694-45bb-86ef-472695fb2828">
+                        <SHORT-NAME>BswInterruptEntity_42</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA02_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA2</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="eda2a99d-d7fa-4f80-b7b6-9dd658c08fe9">
+                        <SHORT-NAME>BswInterruptEntity_43</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA02_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA2</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="4c2596dc-c2ae-4ec8-bc45-3d157e022ac3">
+                        <SHORT-NAME>BswInterruptEntity_44</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA03_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA3</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="6c428ba9-aed4-4853-bbb3-c30af3388a2c">
+                        <SHORT-NAME>BswInterruptEntity_45</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA03_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA3</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="f5828baa-41a9-49a4-a1a6-9db429563f6e">
+                        <SHORT-NAME>BswInterruptEntity_46</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA04_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA4</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="c3db70b8-4602-477f-941a-0dfbbee7a5c7">
+                        <SHORT-NAME>BswInterruptEntity_47</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA04_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA4</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="371479f0-d475-458a-87c4-94f492b13227">
+                        <SHORT-NAME>BswInterruptEntity_48</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA05_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA5</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="b2a9b544-2b65-4636-8d05-b877f275165a">
+                        <SHORT-NAME>BswInterruptEntity_49</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA05_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA5</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="03ef5512-ed80-4c2f-ae3d-f436fc8d98fb">
+                        <SHORT-NAME>BswInterruptEntity_50</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA06_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA6</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="9c5fd3a6-9551-42bf-85ad-b4db7efec68e">
+                        <SHORT-NAME>BswInterruptEntity_51</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA06_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA6</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="77d6c58e-61f6-471c-867d-f47ebcf72e49">
+                        <SHORT-NAME>BswInterruptEntity_52</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA07_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA7</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="e3a7d1cf-8b65-457d-b725-292a94dd3464">
+                        <SHORT-NAME>BswInterruptEntity_53</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA07_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA7</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="64157aa0-5207-412c-958f-21bb59ac8d7d">
+                        <SHORT-NAME>BswInterruptEntity_54</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA08_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA8</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="e5a25314-e683-47bc-91ad-f3dead64fab2">
+                        <SHORT-NAME>BswInterruptEntity_55</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA08_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA8</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="30d39e12-cc61-44c0-9171-d5fe3e145c90">
+                        <SHORT-NAME>BswInterruptEntity_56</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA09_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA9</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="aaa54652-0b75-4bec-99a3-ce647ef6372d">
+                        <SHORT-NAME>BswInterruptEntity_57</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA09_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA9</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="eec00f70-b6db-4fce-acd5-264ea086df5c">
+                        <SHORT-NAME>BswInterruptEntity_58</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA10_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA10</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="47202417-4420-47af-974d-8a833b5cf1ca">
+                        <SHORT-NAME>BswInterruptEntity_59</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA10_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA10</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="0ac7b102-0389-4a4b-bc6c-cac9074d209c">
+                        <SHORT-NAME>BswInterruptEntity_60</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA11_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA11</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="4ea78058-1cdf-4cad-9d4b-44723b0fcd3b">
+                        <SHORT-NAME>BswInterruptEntity_61</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA11_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA11</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="83579493-786c-44e4-8fdd-15c65c724d7d">
+                        <SHORT-NAME>BswInterruptEntity_62</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA12_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA12</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="0383c55d-5977-4046-8e5a-b35076e1de5d">
+                        <SHORT-NAME>BswInterruptEntity_63</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA12_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA12</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="6fa193de-bffc-4683-b902-f57bf8611856">
+                        <SHORT-NAME>BswInterruptEntity_64</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA13_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA13</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="f8c599f9-da50-456d-9d12-2304da58d4f8">
+                        <SHORT-NAME>BswInterruptEntity_65</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA13_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA13</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="bf1a6dc1-24aa-49a8-bee6-d6168635fe6f">
+                        <SHORT-NAME>BswInterruptEntity_66</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA14_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA14</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="aa065ca4-adf9-4098-abe6-af16523e7fcb">
+                        <SHORT-NAME>BswInterruptEntity_67</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA14_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA14</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="969db098-9628-4ddc-992f-afe3927776cd">
+                        <SHORT-NAME>BswInterruptEntity_68</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA15_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA15</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-INTERRUPT-ENTITY UUID="8f056c35-9823-404c-b8d9-79add2f0d217">
+                        <SHORT-NAME>BswInterruptEntity_69</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                         <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                       </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/SPI_DMA15_CAT2_ISR</IMPLEMENTED-ENTRY-REF>
+                        <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                        <INTERRUPT-SOURCE>INTDMA15</INTERRUPT-SOURCE>
+                      </BSW-INTERRUPT-ENTITY>
+                      <BSW-CALLED-ENTITY UUID="ECUS:73caf7e3-4bb6-43a5-8fe7-862448e52dfb">
+                          <SHORT-NAME>BswCalledEntity_0</SHORT-NAME>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/Spi_Init</IMPLEMENTED-ENTRY-REF>
+                      </BSW-CALLED-ENTITY>
+                      <BSW-CALLED-ENTITY UUID="ECUS:73caf7e3-4bb6-43a5-8fe7-862449e52dfb">
+                          <SHORT-NAME>BswCalledEntity_1</SHORT-NAME>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_CHIP_SELECT_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                          </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/Spi_DeInit</IMPLEMENTED-ENTRY-REF>
+                      </BSW-CALLED-ENTITY>
+                      <BSW-CALLED-ENTITY UUID="ECUS:73caf7e3-4bb6-43a5-8fe7-862440e52dfb">
+                          <SHORT-NAME>BswCalledEntity_2</SHORT-NAME>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/Spi_WriteIB</IMPLEMENTED-ENTRY-REF>
+                      </BSW-CALLED-ENTITY>
+                      <BSW-CALLED-ENTITY UUID="ECUS:73caf7e3-4bb6-43a5-8fe7-862441e52dfb">
+                          <SHORT-NAME>BswCalledEntity_3</SHORT-NAME>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_CHIP_SELECT_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                          </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/Spi_AsyncTransmit</IMPLEMENTED-ENTRY-REF>
+                      </BSW-CALLED-ENTITY>
+                      <BSW-CALLED-ENTITY UUID="ECUS:73caf7e3-4bb6-43a5-8fe7-862442e52dfb">
+                          <SHORT-NAME>BswCalledEntity_4</SHORT-NAME>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/Spi_ReadIB</IMPLEMENTED-ENTRY-REF>
+                      </BSW-CALLED-ENTITY>
+                      <BSW-CALLED-ENTITY UUID="ECUS:976bef65-d8a1-40b0-87de-b3ba91deb5ab">
+                          <SHORT-NAME>BswCalledEntity_5</SHORT-NAME>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/Spi_SetupEB</IMPLEMENTED-ENTRY-REF>
+                      </BSW-CALLED-ENTITY>
+                      <BSW-CALLED-ENTITY UUID="ECUS:73caf7e3-4bb6-43a5-8fe7-862443e52dfb">
+                          <SHORT-NAME>BswCalledEntity_6</SHORT-NAME>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/Spi_GetStatus</IMPLEMENTED-ENTRY-REF>
+                      </BSW-CALLED-ENTITY>
+                      <BSW-CALLED-ENTITY UUID="ECUS:73caf7e3-4bb6-43a5-8fe7-862444e52dfb">
+                          <SHORT-NAME>BswCalledEntity_7</SHORT-NAME>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/Spi_GetJobResult</IMPLEMENTED-ENTRY-REF>
+                      </BSW-CALLED-ENTITY>
+                      <BSW-CALLED-ENTITY UUID="ECUS:73caf7e3-4bb6-43a5-8fe7-862445e52dfb">
+                          <SHORT-NAME>BswCalledEntity_8</SHORT-NAME>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/Spi_GetSequenceResult</IMPLEMENTED-ENTRY-REF>
+                      </BSW-CALLED-ENTITY>
+                      <BSW-CALLED-ENTITY UUID="ECUS:73caf7e3-4bb6-43a5-8fe7-862446e52dfb">
+                          <SHORT-NAME>BswCalledEntity_9</SHORT-NAME>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_CHIP_SELECT_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                          </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/Spi_SyncTransmit</IMPLEMENTED-ENTRY-REF>
+                      </BSW-CALLED-ENTITY>
+                      <BSW-CALLED-ENTITY UUID="ECUS:73caf7e3-4bb6-43a5-8fe7-862447e52dfb">
+                          <SHORT-NAME>BswCalledEntity_10</SHORT-NAME>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/Spi_GetHWUnitStatus</IMPLEMENTED-ENTRY-REF>
+                      </BSW-CALLED-ENTITY>
+                      <BSW-CALLED-ENTITY UUID="ECUS:73caf7e3-4bb6-43a5-8fe7-862540e52dfb">
+                          <SHORT-NAME>BswCalledEntity_11</SHORT-NAME>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                          </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/Spi_Cancel</IMPLEMENTED-ENTRY-REF>
+                      </BSW-CALLED-ENTITY>
+                      <BSW-CALLED-ENTITY UUID="ECUS:73caf7e3-4bb6-43a5-8fe7-862643e52dfb">
+                          <SHORT-NAME>BswCalledEntity_12</SHORT-NAME>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/Spi_SetAsyncMode</IMPLEMENTED-ENTRY-REF>
+                      </BSW-CALLED-ENTITY>
+                      <BSW-CALLED-ENTITY UUID="ECUS:73caf7e3-4bb6-43a5-8fe7-865553e52dfb">
+                          <SHORT-NAME>BswCalledEntity_13</SHORT-NAME>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/Spi_GetVersionInfo</IMPLEMENTED-ENTRY-REF>
+                      </BSW-CALLED-ENTITY>
+                      <BSW-CALLED-ENTITY UUID="ECUS:73caf7e3-4bb6-43a5-8fe7-865553777dfb">
+                          <SHORT-NAME>BswCalledEntity_14</SHORT-NAME>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/Spi_SelfTest</IMPLEMENTED-ENTRY-REF>
+                      </BSW-CALLED-ENTITY>
+                      <BSW-CALLED-ENTITY UUID="ECUS:73caf7e3-4bb6-43a5-8fe7-865558977dfb">
+                          <SHORT-NAME>BswCalledEntity_15</SHORT-NAME>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/Spi_GetErrorInfo</IMPLEMENTED-ENTRY-REF>
+                      </BSW-CALLED-ENTITY>
+                      <BSW-SCHEDULABLE-ENTITY UUID="68ddf43e-8f1d-4d93-abc7-312df9ca2d1a">
+                        <SHORT-NAME>Spi_MainFunction_Handling</SHORT-NAME>
+                        <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                           <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_RAM_DATA_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                           <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/SPI_CHIP_SELECT_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                         </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                        <MINIMUM-START-INTERVAL>0.0000035</MINIMUM-START-INTERVAL>
+                        <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Spi/Spi/Spi_MainFunction_Handling</IMPLEMENTED-ENTRY-REF>
+                      </BSW-SCHEDULABLE-ENTITY>
+                    </ENTITYS>
+                    <EVENTS>
+                     <BSW-TIMING-EVENT UUID="48b69e2d-39e0-4430-9ded-6d7ba83ed416">
+                      <SHORT-NAME>Evt_Spi_MainFunction_Handling</SHORT-NAME>
+                      <LONG-NAME>
+                      <L-4 L="FOR-ALL">Evt_Spi_MainFunction_Handling</L-4>
+                      </LONG-NAME>
+                      <STARTS-ON-EVENT-REF DEST="BSW-SCHEDULABLE-ENTITY">/Renesas/EcucDefs_Spi/Spi/BswInternalBehavior_0/Spi_MainFunction_Handling</STARTS-ON-EVENT-REF>
+                      <PERIOD>0.001</PERIOD>
+                     </BSW-TIMING-EVENT>
+                    </EVENTS>
+                  </BSW-INTERNAL-BEHAVIOR>
+                </INTERNAL-BEHAVIORS>
+              </BSW-MODULE-DESCRIPTION>
+              <BSW-MODULE-ENTRY UUID="2151ae09-a5c6-44c8-bb61-1bad5235e777">
+                <SHORT-NAME>SPI_CSIG0_TIRE_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="7b27b280-a3ff-47a3-94cf-0884bdc8f909">
+                <SHORT-NAME>SPI_CSIG0_TIRE_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="345cb3ec-ad1d-43e5-ab0d-e7d1ba303657">
+                <SHORT-NAME>SPI_CSIG0_TIR_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="586a664e-6dcd-4e7a-8336-b28036e4a4b6">
+                <SHORT-NAME>SPI_CSIG0_TIR_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="da37768d-5ae8-44ed-af2b-dadc32e81159">
+                <SHORT-NAME>SPI_CSIG0_TIC_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="da52b5f6-e4e8-4cc8-95df-2925a0cb7492">
+                <SHORT-NAME>SPI_CSIG0_TIC_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="21153fae-b9e9-4ab5-b3c8-c06e0d79208e">
+                <SHORT-NAME>SPI_CSIH2_TIRE_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="f952363d-f279-45ac-9bad-bbbf757e83ce">
+                <SHORT-NAME>SPI_CSIH2_TIRE_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="4c33c709-0aae-42fb-9359-7413f56329de">
+                <SHORT-NAME>SPI_CSIH2_TIR_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="f3ae5875-1fbe-4e20-abad-e77f5774199d">
+                <SHORT-NAME>SPI_CSIH2_TIR_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="1e9e8908-1034-46a2-89b6-333b07fa36d3">
+                <SHORT-NAME>SPI_CSIH2_TIC_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="fb175930-d79a-49f4-ba38-50e59ea5c598">
+                <SHORT-NAME>SPI_CSIH2_TIC_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="3160a7f7-ded1-4c8e-98a8-692e5f2a28bc">
+                <SHORT-NAME>SPI_CSIH2_TIJC_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="665a8c94-0506-4a3c-9623-9f79cbe7e6a0">
+                <SHORT-NAME>SPI_CSIH2_TIJC_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="58abd71c-bd39-412c-b665-c9c4b84978f0">
+                <SHORT-NAME>SPI_CSIH3_TIRE_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="7988e768-fe33-4317-8438-a2e56a2d78b1">
+                <SHORT-NAME>SPI_CSIH3_TIRE_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="a6ab87af-607b-48b6-bdfd-016ff6de7b81">
+                <SHORT-NAME>SPI_CSIH3_TIR_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="c570b1d8-f3a4-4264-8b24-2a561fb5632e">
+                <SHORT-NAME>SPI_CSIH3_TIR_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="9a8b2a1e-3f4a-4cb6-87da-5102a960cf21">
+                <SHORT-NAME>SPI_CSIH3_TIC_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="38d817fa-7783-467c-b245-b2b76d18ab71">
+                <SHORT-NAME>SPI_CSIH3_TIC_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="50c4f4c4-ed12-42c9-a182-e67b322b7df5">
+                <SHORT-NAME>SPI_CSIH3_TIJC_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="ca5f8261-6268-4231-bda9-4b5d7248dfc9">
+                <SHORT-NAME>SPI_CSIH3_TIJC_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="8187f073-5db7-4e18-8623-1c58591557b3">
+                <SHORT-NAME>SPI_CSIH0_TIRE_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="2c5ed2cf-9b40-4d16-8769-615e05f1a37f">
+                <SHORT-NAME>SPI_CSIH0_TIRE_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="42d25c64-1f42-45a2-a19f-4bc2c8123e74">
+                <SHORT-NAME>SPI_CSIH0_TIR_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="cceaaabf-9515-4e7c-8a41-93b3570706a4">
+                <SHORT-NAME>SPI_CSIH0_TIR_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="299ae2c2-9836-462a-a6e2-bc2e6f7b726d">
+                <SHORT-NAME>SPI_CSIH0_TIC_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="3c272654-2b85-4deb-aabe-6577795b33d3">
+                <SHORT-NAME>SPI_CSIH0_TIC_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="8dcd2fdb-47ff-4682-8a4a-19e7a9be9827">
+                <SHORT-NAME>SPI_CSIH0_TIJC_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="915a74a4-309a-424e-b710-52b9cbd9faeb">
+                <SHORT-NAME>SPI_CSIH0_TIJC_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="ac26791a-895f-4618-8148-82c375e2276e">
+                <SHORT-NAME>SPI_CSIH1_TIRE_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="ea6bf6d0-cfc5-4905-8534-b13685f302f9">
+                <SHORT-NAME>SPI_CSIH1_TIRE_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="0502004f-95b3-48ff-bc5b-f77f40d20670">
+                <SHORT-NAME>SPI_CSIH1_TIR_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="7a0669aa-79ea-44c9-9478-08e14fbeb209">
+                <SHORT-NAME>SPI_CSIH1_TIR_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="7776fa72-dce7-4441-b19f-e9627db5bc6b">
+                <SHORT-NAME>SPI_CSIH1_TIC_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="9da7faec-4a98-4b5d-a817-0e952eb218de">
+                <SHORT-NAME>SPI_CSIH1_TIC_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="aafcae49-7a34-4fd1-a006-10593e5d8357">
+                <SHORT-NAME>SPI_CSIH1_TIJC_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="92dff541-be39-48a4-a220-d863ecfc61ab">
+                <SHORT-NAME>SPI_CSIH1_TIJC_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="40a64da7-bd84-4886-982f-ca9ec44cf92e">
+                <SHORT-NAME>SPI_DMA00_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="4330173b-56e9-4f64-8073-e0f3ebd4e565">
+                <SHORT-NAME>SPI_DMA00_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="b546a1c8-e610-498e-98dc-4250e855fb06">
+                <SHORT-NAME>SPI_DMA01_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="2b7a6779-f17a-4ce7-ac36-5b95afd64b53">
+                <SHORT-NAME>SPI_DMA01_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="a72848c4-64fd-45bd-aba6-589fa8be942d">
+                <SHORT-NAME>SPI_DMA02_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="8dbf5ad8-ed8a-4885-9406-a408759faa72">
+                <SHORT-NAME>SPI_DMA02_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="622e58c8-be62-4790-a316-c4523bbef6bf">
+                <SHORT-NAME>SPI_DMA03_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="32061ff1-ffed-45bc-905a-2cc03ca9b592">
+                <SHORT-NAME>SPI_DMA03_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="8d8f0b44-49e5-4afa-8f86-1c37502d78a9">
+                <SHORT-NAME>SPI_DMA04_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="60f2590f-2d53-4fc7-9c25-4c44de2bbf44">
+                <SHORT-NAME>SPI_DMA04_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="1dc8ad6d-6e5b-4ecb-a53e-43acea2a30bf">
+                <SHORT-NAME>SPI_DMA05_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="af17301f-25fe-4022-9567-bcb26274b261">
+                <SHORT-NAME>SPI_DMA05_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="ad7d9822-eb87-4192-a5bd-b20866e90037">
+                <SHORT-NAME>SPI_DMA06_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="74d21486-8e4c-4bc9-85bc-1c057ab9a1d7">
+                <SHORT-NAME>SPI_DMA06_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="44f76824-724c-4886-b181-e9e487e6420d">
+                <SHORT-NAME>SPI_DMA07_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="8319a5c4-804d-424f-8cb7-6a20dff80ad1">
+                <SHORT-NAME>SPI_DMA07_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="7c99680e-040b-4961-b128-4500bebdc21d">
+                <SHORT-NAME>SPI_DMA08_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="2d57e9bc-adf4-424f-83b5-f933fa54d7a5">
+                <SHORT-NAME>SPI_DMA08_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="61fb5200-01c0-4aec-a16d-ed42595426db">
+                <SHORT-NAME>SPI_DMA09_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="204598ef-8e29-4fa4-9889-373641ad450e">
+                <SHORT-NAME>SPI_DMA09_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="b10819d2-8ce2-46d6-995f-0e0d6d2d1612">
+                <SHORT-NAME>SPI_DMA10_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="3e0af0a1-e1eb-48cb-9d3b-61fb799b3b83">
+                <SHORT-NAME>SPI_DMA10_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="c9db28ea-ced7-4967-a4c3-1a409856cf53">
+                <SHORT-NAME>SPI_DMA11_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="f170c82d-e5e2-4428-96f4-5fcd957d48be">
+                <SHORT-NAME>SPI_DMA11_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="61cbfaaa-766c-47eb-8b24-4324164ba390">
+                <SHORT-NAME>SPI_DMA12_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="1bf323cd-6a07-404c-b144-b5133979a173">
+                <SHORT-NAME>SPI_DMA12_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="cd7236b3-2d36-4899-bb0e-0428b0847dfb">
+                <SHORT-NAME>SPI_DMA13_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="4b0017c8-79e2-4130-9caa-84ebce858d21">
+                <SHORT-NAME>SPI_DMA13_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="1abc4873-91eb-4cad-bd09-3369ebeef965">
+                <SHORT-NAME>SPI_DMA14_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="a809bd01-26d5-415d-9d38-4fc12af644dc">
+                <SHORT-NAME>SPI_DMA14_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+               <BSW-MODULE-ENTRY UUID="8e71e8d5-d3d6-474a-8d28-3e0f57d0cf00">
+                <SHORT-NAME>SPI_DMA15_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="69dbcf58-184b-42db-8a49-2d6051d35933">
+                <SHORT-NAME>SPI_DMA15_CAT2_ISR</SHORT-NAME>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+              <BSW-MODULE-ENTRY UUID="ECUS:36dd38d6-6ea8-411a-9222-ebc64ce344e2">
+                <SHORT-NAME>Spi_Init</SHORT-NAME>
+                <SERVICE-ID>0</SERVICE-ID>
+                <IS-REENTRANT>false</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>REGULAR</CALL-TYPE>
+                <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+             </BSW-MODULE-ENTRY>
+             <BSW-MODULE-ENTRY UUID="ECUS:36dd38d6-6ea8-422a-9222-ebc64ce344e2">
+                <SHORT-NAME>Spi_DeInit</SHORT-NAME>
+                <SERVICE-ID>1</SERVICE-ID>
+                <IS-REENTRANT>false</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>REGULAR</CALL-TYPE>
+                <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+             </BSW-MODULE-ENTRY>
+             <BSW-MODULE-ENTRY UUID="ECUS:36dd38d6-6ea8-433a-9222-ebc64ce344e2">
+                <SHORT-NAME>Spi_WriteIB</SHORT-NAME>
+                <SERVICE-ID>2</SERVICE-ID>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>REGULAR</CALL-TYPE>
+                <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+             </BSW-MODULE-ENTRY>
+             <BSW-MODULE-ENTRY UUID="ECUS:36dd38d6-6ea8-444a-9222-ebc64ce344e2">
+                <SHORT-NAME>Spi_AsyncTransmit</SHORT-NAME>
+                <SERVICE-ID>3</SERVICE-ID>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>false</IS-SYNCHRONOUS>
+                <CALL-TYPE>REGULAR</CALL-TYPE>
+                <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+             </BSW-MODULE-ENTRY>
+             <BSW-MODULE-ENTRY UUID="ECUS:36dd38d6-6ea8-455a-9222-ebc64ce344e2">
+                <SHORT-NAME>Spi_ReadIB</SHORT-NAME>
+                <SERVICE-ID>4</SERVICE-ID>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>REGULAR</CALL-TYPE>
+                <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+             </BSW-MODULE-ENTRY>
+             <BSW-MODULE-ENTRY UUID="ECUS:36dd38d6-6ea8-466a-9222-ebc64ce344e2">
+                <SHORT-NAME>Spi_SetupEB</SHORT-NAME>
+                <SERVICE-ID>5</SERVICE-ID>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>REGULAR</CALL-TYPE>
+                <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+             </BSW-MODULE-ENTRY>
+             <BSW-MODULE-ENTRY UUID="ECUS:36dd38d6-6ea8-477a-9222-ebc64ce344e2">
+                <SHORT-NAME>Spi_GetStatus</SHORT-NAME>
+                <SERVICE-ID>6</SERVICE-ID>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>REGULAR</CALL-TYPE>
+                <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+             </BSW-MODULE-ENTRY>
+             <BSW-MODULE-ENTRY UUID="ECUS:36dd38d6-6ea8-488a-9222-ebc64ce344e2">
+                <SHORT-NAME>Spi_GetJobResult</SHORT-NAME>
+                <SERVICE-ID>7</SERVICE-ID>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>REGULAR</CALL-TYPE>
+                <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+             </BSW-MODULE-ENTRY>
+             <BSW-MODULE-ENTRY UUID="ECUS:36dd38d6-6ea8-499a-9222-ebc64ce344e2">
+                <SHORT-NAME>Spi_GetSequenceResult</SHORT-NAME>
+                <SERVICE-ID>8</SERVICE-ID>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>REGULAR</CALL-TYPE>
+                <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+             </BSW-MODULE-ENTRY>
+             <BSW-MODULE-ENTRY UUID="ECUS:36dd38d6-6ea8-4aaa-9222-ebc64ce344e2">
+                <SHORT-NAME>Spi_GetVersionInfo</SHORT-NAME>
+                <SERVICE-ID>9</SERVICE-ID>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>REGULAR</CALL-TYPE>
+                <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+             </BSW-MODULE-ENTRY>
+             <BSW-MODULE-ENTRY UUID="ECUS:36dd38d6-6ea8-4bba-9222-ebc64ce344e2">
+                <SHORT-NAME>Spi_SyncTransmit</SHORT-NAME>
+                <SERVICE-ID>10</SERVICE-ID>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>false</IS-SYNCHRONOUS>
+                <CALL-TYPE>REGULAR</CALL-TYPE>
+                <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+             </BSW-MODULE-ENTRY>
+             <BSW-MODULE-ENTRY UUID="ECUS:36dd38d6-6ea8-4cca-9222-ebc64ce344e2">
+                <SHORT-NAME>Spi_GetHWUnitStatus</SHORT-NAME>
+                <SERVICE-ID>11</SERVICE-ID>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>REGULAR</CALL-TYPE>
+                <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+             </BSW-MODULE-ENTRY>
+             <BSW-MODULE-ENTRY UUID="ECUS:36dd38d6-6ea8-4dda-9222-ebc64ce344e2">
+                <SHORT-NAME>Spi_Cancel</SHORT-NAME>
+                <SERVICE-ID>12</SERVICE-ID>
+                <IS-REENTRANT>true</IS-REENTRANT>
+                <IS-SYNCHRONOUS>false</IS-SYNCHRONOUS>
+                <CALL-TYPE>REGULAR</CALL-TYPE>
+                <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+             </BSW-MODULE-ENTRY>
+             <BSW-MODULE-ENTRY UUID="ECUS:36dd38d6-6ea8-4eea-9222-ebc64ce344e2">
+                <SHORT-NAME>Spi_SetAsyncMode</SHORT-NAME>
+                <SERVICE-ID>13</SERVICE-ID>
+                <IS-REENTRANT>false</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>REGULAR</CALL-TYPE>
+                <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+             </BSW-MODULE-ENTRY>
+             <BSW-MODULE-ENTRY UUID="ECUS:36dd38d6-ffff-4fef-9222-ebc64ce344e2">
+                <SHORT-NAME>Spi_SelfTest</SHORT-NAME>
+                <SERVICE-ID>17</SERVICE-ID>
+                <IS-REENTRANT>false</IS-REENTRANT>
+                <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                <CALL-TYPE>REGULAR</CALL-TYPE>
+                <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+             </BSW-MODULE-ENTRY>
+             <BSW-MODULE-ENTRY UUID="4f29cd30-3867-467f-95f0-bc2714e81b9a">
+                <SHORT-NAME>Spi_GetErrorInfo</SHORT-NAME>
+                <SERVICE-ID>18</SERVICE-ID>
+                <CALL-TYPE>REGULAR</CALL-TYPE>
+                <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+             <BSW-MODULE-ENTRY UUID="c74079e2-e89e-4c91-90ba-583be00f13be">
+                <SHORT-NAME>Spi_MainFunction_Handling</SHORT-NAME>
+                <SERVICE-ID>16</SERVICE-ID>
+                <CALL-TYPE>SCHEDULED</CALL-TYPE>
+                <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+                <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              </BSW-MODULE-ENTRY>
+            </ELEMENTS>
+          </AR-PACKAGE>
+        </AR-PACKAGES>
+      </AR-PACKAGE>
+    </AR-PACKAGES>
+</AUTOSAR>

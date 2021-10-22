@@ -1,0 +1,163 @@
+/**
+*  \file
+*
+*  \brief       BMW SWC StdDiag
+*
+*  This file is the configuration header file of the module StdDiag
+*  for usage in the BMW AUTOSAR Core.
+*
+*  \project     BMW Platform Software
+*
+*  \copyright   BMW AG 2015 - 2017
+*
+*  \version     5.3.0
+*
+*  \remarks     The StdDiag module is responsible for BMW specific session
+*               handling and handles a number of BMW specific diagnostic requests.
+*
+*/
+
+/*------------------------------------------------------------------------------
+*
+*  THIS FILE WAS GENERATED. DO NOT MODIFY!
+*
+*  GENERATOR       : %{= generation_tool() }% %{= generation_version_info() }%
+*
+*  GENERATION TIME : %{= generation_timestamp() }%
+*
+------------------------------------------------------------------------------*/
+
+
+#ifndef STDDIAG_CFG_H
+#define STDDIAG_CFG_H
+
+/*------------------------------------------------------------------------------
+                      Include Section
+-------------------------------------------------------------------------------*/
+
+#include "BUtil/PlatformTypes.h"
+#include "StdDiag_Version.h"
+
+/*------------------------------------------------------------------------------
+                      Macros
+-------------------------------------------------------------------------------*/
+
+/* check version of the module */
+#if (!StdDiag_CHECK_VERSION(5,3,0))
+   #error "Version of StdDiag_Cfg.h does not match the version of the module!"
+#endif
+
+
+%{#
+into(module("StdDiag"))
+with(container("StdDiagGeneral")):
+  StdDiagDetUsage = value(ref("StdDiagDevErrorDetect"))
+  StdDiagUserActiveSessionState = value(ref("StdDiagUserActiveSessionState"))
+  StdDiagUsrEstablishIntrinsicSafety = value(ref("StdDiagUserEstablishIntrinsicSafety"))
+
+StdDiagUsrProgPrecChk = exists(rel('StdDiagUserProgrammingPreconditionsCheck'))
+StdDiagNumberUsrProgPrecChk = 0
+if(StdDiagUsrProgPrecChk):
+  StdDiagNumberUsrProgPrecChk = value(ref('StdDiagUserProgrammingPreconditionsCheck/MaxNumberUserProgrammingPrecondition'))
+
+StdDiagIDRLSupport = exists(rel('StdDiagProvideIDRL'))
+}%\
+/**
+ * \brief development error detection
+ *
+ * This parameter determines whether development error tracing is
+ * enabled or disabled.
+ * STD_ON  : development error tracing is enabled
+ * STD_OFF : development error tracing is disabled
+ */
+#define STDDIAG_DEV_ERROR_DETECT          STD_%{? StdDiagDetUsage:ON:OFF}%
+
+/**
+ * \brief user establish intrinsic safety
+ *
+ * This parameter determines whether a user specific function for establishing
+ * intrinsic safety is used.
+ * STD_ON  : user specific function is used
+ * STD_OFF : no user specific function is used
+ */
+#define STDDIAG_USER_ESTABLISH_INTRINSIC_SAFETY      STD_%{? StdDiagUsrEstablishIntrinsicSafety:ON:OFF}%
+
+/**
+ * \brief user programming precondition check
+ *
+ * This parameter determines whether a user specific function for checking
+ * programming preconditions is used.
+ * STD_ON  : user specific function is used
+ * STD_OFF : no user specific function is used
+ */
+#define STDDIAG_USRPRECONDITIONCHECK      STD_%{? StdDiagUsrProgPrecChk:ON:OFF}%
+
+/**
+ * \brief the maximum number of checked preconditions
+ *
+ * This parameter determines the maximum number of checked programming preconditions.
+ * StdDiag always checks PWF state, further preconditions have to be provided
+ * by an application.
+ */
+#define STDDIAG_MAX_NUMBER_PRECOND %{= 1 + StdDiagNumberUsrProgPrecChk }%
+
+/**
+ * \brief active session state support
+ *
+ * This parameter determines whether the StdDiag module provides a callout to get the
+ * active session state for the UDS service 0x22 F1 00.
+ * STD_ON  : callout is provided
+ * STD_OFF : callout is not provided
+ */
+#define STDDIAG_USER_ACTIVE_SESSION_STATE  STD_%{? StdDiagUserActiveSessionState:ON:OFF}%
+
+/**
+ * \brief IDRL function (recovering the individual data) support
+ *
+ * This parameter determines whether the StdDiag module provides an implementation
+ * for IDRL function (recovering the individual data).
+ * STD_ON  : IDRL function is provided
+ * STD_OFF : IDRL function is not provided
+ */
+#define STDDIAG_IDRL_SUPPORT              STD_%{? StdDiagIDRLSupport:ON:OFF}%
+
+
+%{: if(StdDiagIDRLSupport) }%\
+
+%{#
+into(container("StdDiagProvideIDRL"))
+}%\
+/**
+ * \brief the format identifier of the individual DID table
+ *
+ * This parameter determines the format identifier of the individual DID table,
+ * if the IDRL is supported.
+ */
+#define STDDIAG_DID_TABLE_FORMAT_IDENTIFIER %{= ('0x{id:04X}u').format(id=value(ref('DIDTableFormatIdentifier'))) }%
+
+/**
+ * \brief the individual DID number
+ *
+ * This parameter determines the number of the configured DIDs,
+ * if the IDRL is supported.
+ */
+#define STDDIAG_INDIV_DID_NUMBER %{= count(ref('IndivData')) }%u
+
+%{# leave() }%\
+
+/*------------------------------------------------------------------------------
+                      Extern Constants
+-------------------------------------------------------------------------------*/
+
+#if( STDDIAG_IDRL_SUPPORT == STD_ON )
+#if (STDDIAG_INDIV_DID_NUMBER > 0)
+
+extern const uint16 StdDiag_DIDArray[STDDIAG_INDIV_DID_NUMBER];
+
+#endif /* (STDDIAG_INDIV_DID_NUMBER > 0) */
+#endif /* (STDDIAG_IDRL_SUPPORT == STD_ON) */
+
+%{:}%\
+%{# leave() }%\
+
+#endif /* STDDIAG_CFG_H */

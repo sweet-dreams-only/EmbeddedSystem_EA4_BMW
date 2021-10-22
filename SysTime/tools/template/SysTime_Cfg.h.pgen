@@ -1,0 +1,82 @@
+/**
+*  \file
+*
+*  \brief       BMW SWC SysTime
+*
+*  This file is the configuration header file of the module SysTime
+*  for usage in the BMW AUTOSAR Core.
+*
+*  \project     BMW Platform Software
+*
+*  \copyright   BMW AG 2015 - 2017
+*
+*  \version     5.0.3
+*
+*/
+
+/*------------------------------------------------------------------------------
+*
+*  THIS FILE WAS GENERATED. DO NOT MODIFY!
+*
+*  GENERATOR       : %{= generation_tool() }% %{= generation_version_info() }%
+*
+*  GENERATION TIME : %{= generation_timestamp() }%
+*
+------------------------------------------------------------------------------*/
+
+
+#ifndef SYSTIME_CFG_H
+#define SYSTIME_CFG_H
+
+/*------------------------------------------------------------------------------
+                      Include Section
+-------------------------------------------------------------------------------*/
+
+#include "BUtil/PlatformTypes.h"
+#include "SysTime_Version.h"
+
+/*------------------------------------------------------------------------------
+                      Macros
+-------------------------------------------------------------------------------*/
+
+/* check version of the module */
+#if (!SysTime_CHECK_VERSION(5,0,3))
+   #error "Version of SysTime_Cfg.h does not match the version of the module!"
+#endif
+
+
+%{#
+into(module("SysTime"))
+with(container("SysTimeGeneral")):
+  SysTimeDetUsage = value(ref("SysTimeDevErrorDetect"))
+  SysTimeMainTaskCycleInSeconds = value(ref("SysTimeMainTaskCycle"))
+  SysTimeInitialTimeoutInSeconds = value(ref("SysTimeInitialTimeout"))
+
+}%\
+/**
+ * \brief development error detection
+ *
+ * This parameter determines whether development error tracing is
+ * enabled or disabled.
+ * STD_ON  : development error tracing is enabled
+ * STD_OFF : development error tracing is disabled
+ */
+#define SYSTIME_DEV_ERROR_DETECT          STD_%{? SysTimeDetUsage:ON:OFF}%
+
+/**
+ * \brief task cycle of the main function
+ *
+ * This parameter determines the cycle rate in milliseconds, in which the
+ * SysTime_MainFunction() is triggered.
+ */
+#define SYSTIME_MAINTASKCYCLE    %{= int(round(SysTimeMainTaskCycleInSeconds * 1000)) }%u
+
+/**
+ * \brief initial timeout value
+ *
+ * This parameter determines the initial timeout value milliseconds, after which the
+ * system time is set to 0xFFFFFFFF.
+ */
+#define SYSTIME_INITIALTIMEOUT   %{= round(SysTimeInitialTimeoutInSeconds * 1000) }%u
+
+#endif /* SYSTIME_CFG_H */

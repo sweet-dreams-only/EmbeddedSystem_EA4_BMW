@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-0-3.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://autosar.org/schema/r4.0">
+    <AR-PACKAGES>
+        <AR-PACKAGE UUID="1a558d5f-22b4-4518-b46b-79a97233bf1f">
+            <SHORT-NAME>Nxtr</SHORT-NAME>
+            <ELEMENTS>
+                <ECUC-MODULE-DEF UUID="e394ce6b-b9e6-407b-925f-8ffdc04bd789">
+                    <SHORT-NAME>BattRtnCurr</SHORT-NAME>
+                    <DESC>
+                        <L-2 L="EN">Configuration of the BattRtnCurr.</L-2>
+                    </DESC>
+                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                    <SUPPORTED-CONFIG-VARIANTS>
+                        <SUPPORTED-CONFIG-VARIANT>VARIANT-PRE-COMPILE</SUPPORTED-CONFIG-VARIANT>
+                    </SUPPORTED-CONFIG-VARIANTS>
+                    <CONTAINERS>
+                        <!-- Parameter Container Definition: BattRtnCurrGeneral -->
+                        <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:6ca017f1-d32b-49c2-9624-9c1a628401c2">
+                            <SHORT-NAME>BattRtnCurrGeneral</SHORT-NAME>
+                            <DESC>
+                                <L-2 L="EN">This container contains the configuration (parameters) of the BattRtnCurr.</L-2>
+                            </DESC>
+                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                            <MULTIPLE-CONFIGURATION-CONTAINER>false</MULTIPLE-CONFIGURATION-CONTAINER>
+                            <PARAMETERS>
+                                <!-- PARAMETER DEFINITION: CURRESTIMDIFTHD -->
+                                <ECUC-FLOAT-PARAM-DEF UUID="ECUC:1c68a547-f24e-4a4e-9540-67fbd266ec89">
+                                    <SHORT-NAME>CURRESTIMDIFTHD</SHORT-NAME>
+                                    <DESC>
+                                        <L-2 L="EN">Maximum allowed difference between estimated current (obtained from D and Q currents calculation) and measured battery return current</L-2>
+                                    </DESC>
+                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                    <IMPLEMENTATION-CONFIG-CLASSES>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                    </IMPLEMENTATION-CONFIG-CLASSES>
+                                    <ORIGIN>NXTR</ORIGIN>
+                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                    <DEFAULT-VALUE>10</DEFAULT-VALUE>
+                                    <MAX>20</MAX>
+                                    <MIN>0</MIN>
+                                </ECUC-FLOAT-PARAM-DEF>
+                                <!-- PARAMETER DEFINITION: FAILSTEP -->
+                                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:1c68a547-f24e-4a4e-9540-69fbd466ec89">
+                                    <SHORT-NAME>FAILSTEP</SHORT-NAME>
+                                    <DESC>
+                                        <L-2 L="EN">Increments the error accumulator. Time to fail assert.</L-2>
+                                    </DESC>
+                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                    <IMPLEMENTATION-CONFIG-CLASSES>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                    </IMPLEMENTATION-CONFIG-CLASSES>
+                                    <ORIGIN>NXTR</ORIGIN>
+                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                    <DEFAULT-VALUE>3276</DEFAULT-VALUE>
+                                    <MAX>65535</MAX>
+                                    <MIN>0</MIN>
+                                </ECUC-INTEGER-PARAM-DEF>
+                                <!-- PARAMETER DEFINITION: PASSSTEP -->
+                                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:1c68a547-f24e-4a4e-9540-69fbd366ec89">
+                                    <SHORT-NAME>PASSSTEP</SHORT-NAME>
+                                    <DESC>
+                                        <L-2 L="EN">Decrements the error accumulator. Time to pass assert.</L-2>
+                                    </DESC>
+                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                    <IMPLEMENTATION-CONFIG-CLASSES>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                    </IMPLEMENTATION-CONFIG-CLASSES>
+                                    <ORIGIN>NXTR</ORIGIN>
+                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                    <DEFAULT-VALUE>1638</DEFAULT-VALUE>
+                                    <MAX>65535</MAX>
+                                    <MIN>0</MIN>
+                                </ECUC-INTEGER-PARAM-DEF>
+                                <!-- PARAMETER DEFINITION: FASTLOOPPROC -->
+                                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:1c68a547-f24e-4a4e-9540-69fbd466ac89">
+                                    <SHORT-NAME>FASTLOOPPROC</SHORT-NAME>
+                                    <DESC>
+                                        <L-2 L="EN">Controls the conditional code compilation according to the chosen execution case- inside motor ISR or inside 2ms periodic</L-2>
+                                    </DESC>
+                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                    <IMPLEMENTATION-CONFIG-CLASSES>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                    </IMPLEMENTATION-CONFIG-CLASSES>
+                                    <ORIGIN>NXTR</ORIGIN>
+                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                    <DEFAULT-VALUE>true</DEFAULT-VALUE>
+                                </ECUC-BOOLEAN-PARAM-DEF>
+                                <!-- PARAMETER DEFINITION: FILCUTFREQ -->
+                                <ECUC-FLOAT-PARAM-DEF UUID="ECUC:1c68a547-f24e-4a4e-9540-67fbd466ec49">
+                                    <SHORT-NAME>FILCUTFREQ</SHORT-NAME>
+                                    <DESC>
+                                        <L-2 L="EN">Filter cutoff frequency when filtering the difference between measured current and provided estimation</L-2>
+                                    </DESC>
+                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                    <IMPLEMENTATION-CONFIG-CLASSES>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                    </IMPLEMENTATION-CONFIG-CLASSES>
+                                    <ORIGIN>NXTR</ORIGIN>
+                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                    <DEFAULT-VALUE>10</DEFAULT-VALUE>
+                                    <MAX>100</MAX>
+                                    <MIN>0</MIN>
+                                </ECUC-FLOAT-PARAM-DEF>
+                                <!-- PARAMETER DEFINITION: GAIN -->
+                                <ECUC-FLOAT-PARAM-DEF UUID="ECUC:1c68a547-f24e-4a4e-9540-67fbd466ec89">
+                                    <SHORT-NAME>GAIN</SHORT-NAME>
+                                    <DESC>
+                                        <L-2 L="EN">Used during input conversion</L-2>
+                                    </DESC>
+                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                    <IMPLEMENTATION-CONFIG-CLASSES>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                    </IMPLEMENTATION-CONFIG-CLASSES>
+                                    <ORIGIN>NXTR</ORIGIN>
+                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                    <DEFAULT-VALUE>100</DEFAULT-VALUE>
+                                    <MAX>1000</MAX>
+                                    <MIN>0</MIN>
+                                </ECUC-FLOAT-PARAM-DEF>
+                                <!-- PARAMETER DEFINITION: LOWRTHD-->
+                                <ECUC-FLOAT-PARAM-DEF UUID="ECUC:1c68a547-f24e-4a4e-9540-69fbd456ec89">
+                                    <SHORT-NAME>LOWRTHD</SHORT-NAME>
+                                    <DESC>
+                                        <L-2 L="EN">Used after sample conversion to amps for range check</L-2>
+                                    </DESC>
+                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                    <IMPLEMENTATION-CONFIG-CLASSES>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                    </IMPLEMENTATION-CONFIG-CLASSES>
+                                    <ORIGIN>NXTR</ORIGIN>
+                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                    <DEFAULT-VALUE>-200</DEFAULT-VALUE>
+                                    <MAX>5000</MAX>
+                                    <MIN>-5000</MIN>
+                                </ECUC-FLOAT-PARAM-DEF>
+                                <!-- PARAMETER DEFINITION: OFFSET-->
+                                <ECUC-FLOAT-PARAM-DEF UUID="ECUC:1c68a547-f24e-4a4e-9540-61fbd466ec89">
+                                    <SHORT-NAME>OFFSET</SHORT-NAME>
+                                    <DESC>
+                                        <L-2 L="EN">Used during input conversion</L-2>
+                                    </DESC>
+                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                    <IMPLEMENTATION-CONFIG-CLASSES>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                    </IMPLEMENTATION-CONFIG-CLASSES>
+                                    <ORIGIN>NXTR</ORIGIN>
+                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                    <DEFAULT-VALUE>2.5</DEFAULT-VALUE>
+                                    <MAX>5</MAX>
+                                    <MIN>0</MIN>
+                                </ECUC-FLOAT-PARAM-DEF>
+                                <!-- PARAMETER DEFINITION: OUTPMAX-->
+                                <ECUC-FLOAT-PARAM-DEF UUID="ECUC:1c68a547-f24e-4a4e-9540-69fbd460ec89">
+                                    <SHORT-NAME>OUTPMAX</SHORT-NAME>
+                                    <DESC>
+                                        <L-2 L="EN">Used for output signal saturation</L-2>
+                                    </DESC>
+                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                    <IMPLEMENTATION-CONFIG-CLASSES>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                    </IMPLEMENTATION-CONFIG-CLASSES>
+                                    <ORIGIN>NXTR</ORIGIN>
+                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                    <DEFAULT-VALUE>200</DEFAULT-VALUE>
+                                    <MAX>300</MAX>
+                                    <MIN>0</MIN>
+                                </ECUC-FLOAT-PARAM-DEF>
+                                <!-- PARAMETER DEFINITION: OUTPMIN-->
+                                <ECUC-FLOAT-PARAM-DEF UUID="ECUC:1c68a547-f24e-4a4e-9540-69fbc466ec89">
+                                    <SHORT-NAME>OUTPMIN</SHORT-NAME>
+                                    <DESC>
+                                        <L-2 L="EN">Used for output signal saturation</L-2>
+                                    </DESC>
+                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                    <IMPLEMENTATION-CONFIG-CLASSES>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                    </IMPLEMENTATION-CONFIG-CLASSES>
+                                    <ORIGIN>NXTR</ORIGIN>
+                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                    <DEFAULT-VALUE>-200</DEFAULT-VALUE>
+                                    <MAX>0</MAX>
+                                    <MIN>-300</MIN>
+                                </ECUC-FLOAT-PARAM-DEF>
+                                <!-- PARAMETER DEFINITION: UPPRTHD-->
+                                <ECUC-FLOAT-PARAM-DEF UUID="ECUC:1c68a547-f24e-4a4e-9540-69fbd486ec89">
+                                    <SHORT-NAME>UPPRTHD</SHORT-NAME>
+                                    <DESC>
+                                        <L-2 L="EN">Used after sample conversion to amps for range check</L-2>
+                                    </DESC>
+                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                    <IMPLEMENTATION-CONFIG-CLASSES>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                    </IMPLEMENTATION-CONFIG-CLASSES>
+                                    <ORIGIN>NXTR</ORIGIN>
+                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                    <DEFAULT-VALUE>200</DEFAULT-VALUE>
+                                    <MAX>5000</MAX>
+                                    <MIN>-5000</MIN>
+                                </ECUC-FLOAT-PARAM-DEF>
+                            </PARAMETERS>
+                        </ECUC-PARAM-CONF-CONTAINER-DEF>
+                    </CONTAINERS>
+                </ECUC-MODULE-DEF>
+            </ELEMENTS>
+        </AR-PACKAGE>
+    </AR-PACKAGES>
+</AUTOSAR>

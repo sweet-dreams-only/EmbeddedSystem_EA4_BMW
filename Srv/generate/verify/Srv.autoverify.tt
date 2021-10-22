@@ -1,0 +1,223 @@
+<#@ AutosarXml processor="ArDirectiveProcessor" requires="arPrefix='ar';arNamespace='http://autosar.org/schema/r4.0'" #>
+<#@ template inherits="AutosarDirectiveProcessor.ArGtcBase" debug="false" #>
+<#@ output extension="" #>
+<#@ include file="Logger.tt" #>
+<#@ include file="Helper.tt" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#
+
+if ( !ReportIfModuleNotExists( "Error", "Srv_VERIFY_Srv_EXISTS", "BMW_DEF/Srv" ) )
+{
+   ChangeContext( Xp.ModuleConfAtDefRefTo( "BMW_DEF/Srv" ) );
+
+   uint upperMultiplicity = 0;
+
+   /* check if container 'General' exists */
+
+   upperMultiplicity = 1;
+
+   if ( !ReportIfContainerOutOfRange(
+         "Error",
+         "Srv/General",
+         "Srv/General",
+         "General",
+         1,
+         upperMultiplicity ))
+   {
+#>
+<# !LOOP( "./ar:CONTAINERS/ar:ECUC-CONTAINER-VALUE" + Xp.ContainerAtDefRefTo( "General" ).Substring(2) )#>
+<#
+
+   if (!ReportIfValueIsEmpty(
+         "Error",
+         "Srv/General/HandleEccRam",
+         "/HandleEccRam",
+         "HandleEccRam"))
+   
+   {
+      if (!ReportIfBooleanValueNotValid(
+            "Error",
+            "Srv/General/HandleEccRam",
+            "/HandleEccRam",
+            "HandleEccRam"))
+      {
+      }
+   }
+   
+   if (!ReportIfValueIsEmpty(
+         "Error",
+         "Srv/General/HandleEccRom",
+         "/HandleEccRom",
+         "HandleEccRom"))
+   
+   {
+      if (!ReportIfBooleanValueNotValid(
+            "Error",
+            "Srv/General/HandleEccRom",
+            "/HandleEccRom",
+            "HandleEccRom"))
+      {
+      }
+   }
+   
+   if (!ReportIfValueIsEmpty(
+         "Error",
+         "Srv/General/MultiCpuEnable",
+         "/MultiCpuEnable",
+         "MultiCpuEnable"))
+   
+   {
+      if (!ReportIfBooleanValueNotValid(
+            "Error",
+            "Srv/General/MultiCpuEnable",
+            "/MultiCpuEnable",
+            "MultiCpuEnable"))
+      {
+      }
+   }
+   
+#>
+<# !ENDLOOP #>
+<#
+   }
+
+   /* check if container 'CommonPublishedInformation' exists */
+
+   upperMultiplicity = 1;
+
+   if ( !ReportIfContainerOutOfRange(
+         "Error",
+         "Srv/CommonPublishedInformation",
+         "Srv/CommonPublishedInformation",
+         "CommonPublishedInformation",
+         1,
+         upperMultiplicity ))
+   {
+#>
+<# !LOOP( "./ar:CONTAINERS/ar:ECUC-CONTAINER-VALUE" + Xp.ContainerAtDefRefTo( "CommonPublishedInformation" ).Substring(2) )#>
+<#
+
+   if (!ReportIfValueIsEmpty(
+         "Error",
+         "Srv/CommonPublishedInformation/SwMajorVersion",
+         "/SwMajorVersion",
+         "SwMajorVersion"))
+   {
+      const double minVal = Double.NegativeInfinity;
+      const double maxVal = Double.PositiveInfinity;
+
+      if (!ReportIfValueOutOfRange(
+            "Error",
+            "Srv/CommonPublishedInformation/SwMajorVersion",
+            "/SwMajorVersion",
+            minVal,
+            maxVal))
+      {
+      }
+   }
+
+   if (!ReportIfValueIsEmpty(
+         "Error",
+         "Srv/CommonPublishedInformation/SwMinorVersion",
+         "/SwMinorVersion",
+         "SwMinorVersion"))
+   {
+      const double minVal = Double.NegativeInfinity;
+      const double maxVal = Double.PositiveInfinity;
+
+      if (!ReportIfValueOutOfRange(
+            "Error",
+            "Srv/CommonPublishedInformation/SwMinorVersion",
+            "/SwMinorVersion",
+            minVal,
+            maxVal))
+      {
+      }
+   }
+
+   if (!ReportIfValueIsEmpty(
+         "Error",
+         "Srv/CommonPublishedInformation/SwPatchVersion",
+         "/SwPatchVersion",
+         "SwPatchVersion"))
+   {
+      const double minVal = Double.NegativeInfinity;
+      const double maxVal = Double.PositiveInfinity;
+
+      if (!ReportIfValueOutOfRange(
+            "Error",
+            "Srv/CommonPublishedInformation/SwPatchVersion",
+            "/SwPatchVersion",
+            minVal,
+            maxVal))
+      {
+      }
+   }
+
+#>
+<# !ENDLOOP #>
+<#
+   }
+
+   /* check if container 'Features' exists */
+
+   upperMultiplicity = 1;
+
+   if ( !ReportIfContainerOutOfRange(
+         "Error",
+         "Srv/Features",
+         "Srv/Features",
+         "Features",
+         1,
+         upperMultiplicity ))
+   {
+#>
+<# !LOOP( "./ar:CONTAINERS/ar:ECUC-CONTAINER-VALUE" + Xp.ContainerAtDefRefTo( "Features" ).Substring(2) )#>
+<#
+
+   if (!ReportIfValueIsEmpty(
+         "Error",
+         "Srv/Features/BootMode",
+         "/BootMode",
+         "BootMode"))
+   {
+      Dictionary<string,uint> literals = new Dictionary<string,uint>();
+      literals.Add("SRV_BM_DISABLED",0);
+      literals.Add("SRV_BM_ENABLED",0);
+      literals.Add("SRV_BM_ENABLED_DCM",0);
+
+      string valueString = ValueOf( Xp.ValueAtDefRefTo( "BootMode" ) );
+      if (!literals.ContainsKey(valueString))
+      {
+         Report(
+               "Error",
+               "Srv/Features/BootMode",
+               "/BootMode",
+               "Value '"+valueString+"' is not allowed here");
+      }
+   }
+   
+#>
+<# !ENDLOOP #>
+<#
+   }
+
+}
+/* write report */
+int e_status = WriteReport();
+
+if (e_status != 0)
+{
+   /* exit program with error */
+   throw new Exception ("An error occurred during Srv verification. See output log in Srv.autoverify!");
+}
+
+#><#+
+
+/*******************************************************************************
+**                      Member Data                                           **
+*******************************************************************************/
+
+
+/*** End of file **************************************************************/#>

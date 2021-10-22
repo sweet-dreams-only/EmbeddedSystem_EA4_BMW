@@ -1,0 +1,2230 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ODX MODEL-VERSION="2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="odx.xsd">
+<!--created by CANdelaStudio::ODXExport220.dll 8.5.100 on 2018-05-11T14:48:38-04:00-->
+  <?CANdelaTemplateManufacturer 7?>
+  <?CANdelaTemplateName UDS DiagnosticsOnCAN?>
+  <?CANdelaTemplateVersion 5.5.101?>
+  <?CANdelaProtocolStandard UDS?>
+  <?ASAMOdxExport220.dll 8.5.100?>
+  <DIAG-LAYER-CONTAINER ID="_54">
+    <SHORT-NAME>EPS</SHORT-NAME>
+    <LONG-NAME>EPS</LONG-NAME>
+    <DESC>
+      <p>This CANdela Document Template excample provides the user with the possibility to test the features of CANdelaStudio. It does not claim to be complete. </p>
+      <p>
+        <br/>
+        This CANdela Document Template is based on the standards: 
+      </p>
+      <p>
+        <br/>
+      </p>
+      <ul>
+        <li>Unified Diagnostic Services (ISO 14229-1:2006)</li>
+        <li>Diagnostics on CAN (ISO 15765-3)</li>
+      </ul>
+      <p></p>
+    </DESC>
+    <ADMIN-DATA>
+      <LANGUAGE>en-US</LANGUAGE>
+      <DOC-REVISIONS>
+        <DOC-REVISION>
+          <TEAM-MEMBER-REF ID-REF="_56"/>
+          <REVISION-LABEL>1</REVISION-LABEL>
+          <STATE>release</STATE>
+          <DATE>2018-03-28T08:14:53-04:00</DATE>
+          <TOOL>CANdelaStudio 8.5 Release Standard</TOOL>
+          <MODIFICATIONS>
+            <MODIFICATION>
+              <CHANGE>Created for BMW using only FED0 for tuning variant selection.</CHANGE>
+              <REASON>Inital creation.</REASON>
+            </MODIFICATION>
+          </MODIFICATIONS>
+        </DOC-REVISION>
+        <DOC-REVISION>
+          <TEAM-MEMBER-REF ID-REF="_56"/>
+          <REVISION-LABEL>2</REVISION-LABEL>
+          <STATE>release</STATE>
+          <DATE>2018-05-11T14:48:28-04:00</DATE>
+          <TOOL>CANdelaStudio 8.5 Release Standard</TOOL>
+          <MODIFICATIONS>
+            <MODIFICATION>
+              <CHANGE>Added new service 0xFED1 to support reading and writing motor variant.</CHANGE>
+              <REASON>Supporting version 3.0.0 of CF081A.</REASON>
+            </MODIFICATION>
+          </MODIFICATIONS>
+        </DOC-REVISION>
+      </DOC-REVISIONS>
+    </ADMIN-DATA>
+    <COMPANY-DATAS>
+      <COMPANY-DATA ID="_55">
+        <SHORT-NAME>Nxtr_Automotive</SHORT-NAME>
+        <LONG-NAME>Nxtr Automotive</LONG-NAME>
+        <TEAM-MEMBERS>
+          <TEAM-MEMBER ID="_56">
+            <SHORT-NAME>JJ</SHORT-NAME>
+            <LONG-NAME>Jared Julien</LONG-NAME>
+            <DEPARTMENT>ESG</DEPARTMENT>
+            <EMAIL>jared.julien@nexteer.com</EMAIL>
+          </TEAM-MEMBER>
+        </TEAM-MEMBERS>
+      </COMPANY-DATA>
+    </COMPANY-DATAS>
+    <PROTOCOLS>
+      <PROTOCOL ID="_67">
+        <SHORT-NAME>Diag_CAN</SHORT-NAME>
+        <LONG-NAME>Diagnose CAN</LONG-NAME>
+        <COMPARAM-SPEC-REF ID-REF="ISO_15765_3_on_ISO_15765_2" DOCREF="ISO_15765_3_on_ISO_15765_2" DOCTYPE="COMPARAM-SPEC"/>
+        <PROT-STACK-SNREF SHORT-NAME="ISO_15765_3_on_ISO_15765_2_on_ISO_11898_2_DWCAN"/>
+      </PROTOCOL>
+    </PROTOCOLS>
+    <BASE-VARIANTS>
+      <BASE-VARIANT ID="EPS">
+        <SHORT-NAME>EPS</SHORT-NAME>
+        <LONG-NAME>EPS</LONG-NAME>
+        <DESC>
+          <p>Base model which all variants of the ECU must support.</p>
+        </DESC>
+        <FUNCT-CLASSS>
+          <FUNCT-CLASS ID="_63">
+            <SHORT-NAME>Sessions</SHORT-NAME>
+            <LONG-NAME>Sessions</LONG-NAME>
+            <DESC>
+              <p>This Diagnostic Class is describing the use case of the Session Management. </p>
+            </DESC>
+          </FUNCT-CLASS>
+          <FUNCT-CLASS ID="_64">
+            <SHORT-NAME>StoredData</SHORT-NAME>
+            <LONG-NAME>Stored Data</LONG-NAME>
+          </FUNCT-CLASS>
+          <FUNCT-CLASS ID="_65">
+            <SHORT-NAME>TesterPresent</SHORT-NAME>
+            <LONG-NAME>Tester Present</LONG-NAME>
+          </FUNCT-CLASS>
+        </FUNCT-CLASSS>
+        <DIAG-DATA-DICTIONARY-SPEC>
+          <DATA-OBJECT-PROPS>
+            <DATA-OBJECT-PROP ID="_1">
+              <SHORT-NAME>HexDump_1Byte</SHORT-NAME>
+              <LONG-NAME>HexDump (1 Byte)</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>8</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UINT32" DISPLAY-RADIX="HEX"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_2">
+              <SHORT-NAME>HexDump_2Byte</SHORT-NAME>
+              <LONG-NAME>HexDump (2 Byte)</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>16</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UINT32" DISPLAY-RADIX="HEX"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_3">
+              <SHORT-NAME>HexDump_3Byte</SHORT-NAME>
+              <LONG-NAME>HexDump (3 Byte)</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>24</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UINT32" DISPLAY-RADIX="HEX"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_4">
+              <SHORT-NAME>HexDump_4Byte</SHORT-NAME>
+              <LONG-NAME>HexDump (4 Byte)</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>32</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UINT32" DISPLAY-RADIX="HEX"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_5">
+              <SHORT-NAME>DtcStatusbyte</SHORT-NAME>
+              <LONG-NAME>DTC Statusbyte</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>8</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UINT32" DISPLAY-RADIX="HEX"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_6">
+              <SHORT-NAME>TestFailed</SHORT-NAME>
+              <LONG-NAME>Test failed</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>TEXTTABLE</CATEGORY>
+                <COMPU-INTERNAL-TO-PHYS>
+                  <COMPU-SCALES>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>0</LOWER-LIMIT>
+                      <UPPER-LIMIT>0</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>false</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>1</LOWER-LIMIT>
+                      <UPPER-LIMIT>1</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>true</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                  </COMPU-SCALES>
+                </COMPU-INTERNAL-TO-PHYS>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>1</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UNICODE2STRING"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_7">
+              <SHORT-NAME>TestFailedThisMonitoringCycle</SHORT-NAME>
+              <LONG-NAME>Test failed this monitoring cycle</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>TEXTTABLE</CATEGORY>
+                <COMPU-INTERNAL-TO-PHYS>
+                  <COMPU-SCALES>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>0</LOWER-LIMIT>
+                      <UPPER-LIMIT>0</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>false</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>1</LOWER-LIMIT>
+                      <UPPER-LIMIT>1</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>true</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                  </COMPU-SCALES>
+                </COMPU-INTERNAL-TO-PHYS>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>1</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UNICODE2STRING"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_8">
+              <SHORT-NAME>PendingDtc</SHORT-NAME>
+              <LONG-NAME>Pending DTC</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>TEXTTABLE</CATEGORY>
+                <COMPU-INTERNAL-TO-PHYS>
+                  <COMPU-SCALES>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>0</LOWER-LIMIT>
+                      <UPPER-LIMIT>0</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>false</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>1</LOWER-LIMIT>
+                      <UPPER-LIMIT>1</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>true</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                  </COMPU-SCALES>
+                </COMPU-INTERNAL-TO-PHYS>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>1</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UNICODE2STRING"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_9">
+              <SHORT-NAME>ConfirmedDtc</SHORT-NAME>
+              <LONG-NAME>Confirmed DTC</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>TEXTTABLE</CATEGORY>
+                <COMPU-INTERNAL-TO-PHYS>
+                  <COMPU-SCALES>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>0</LOWER-LIMIT>
+                      <UPPER-LIMIT>0</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>false</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>1</LOWER-LIMIT>
+                      <UPPER-LIMIT>1</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>true</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                  </COMPU-SCALES>
+                </COMPU-INTERNAL-TO-PHYS>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>1</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UNICODE2STRING"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_10">
+              <SHORT-NAME>TestNotCompletedSinceLastClear</SHORT-NAME>
+              <LONG-NAME>Test not completed since last clear</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>TEXTTABLE</CATEGORY>
+                <COMPU-INTERNAL-TO-PHYS>
+                  <COMPU-SCALES>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>0</LOWER-LIMIT>
+                      <UPPER-LIMIT>0</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>false</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>1</LOWER-LIMIT>
+                      <UPPER-LIMIT>1</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>true</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                  </COMPU-SCALES>
+                </COMPU-INTERNAL-TO-PHYS>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>1</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UNICODE2STRING"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_11">
+              <SHORT-NAME>TestFailedSinceLastClear</SHORT-NAME>
+              <LONG-NAME>Test failed since last clear</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>TEXTTABLE</CATEGORY>
+                <COMPU-INTERNAL-TO-PHYS>
+                  <COMPU-SCALES>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>0</LOWER-LIMIT>
+                      <UPPER-LIMIT>0</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>false</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>1</LOWER-LIMIT>
+                      <UPPER-LIMIT>1</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>true</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                  </COMPU-SCALES>
+                </COMPU-INTERNAL-TO-PHYS>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>1</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UNICODE2STRING"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_12">
+              <SHORT-NAME>TestNotCompletedThisMonitoringCycle</SHORT-NAME>
+              <LONG-NAME>Test not completed this monitoring cycle</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>TEXTTABLE</CATEGORY>
+                <COMPU-INTERNAL-TO-PHYS>
+                  <COMPU-SCALES>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>0</LOWER-LIMIT>
+                      <UPPER-LIMIT>0</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>false</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>1</LOWER-LIMIT>
+                      <UPPER-LIMIT>1</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>true</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                  </COMPU-SCALES>
+                </COMPU-INTERNAL-TO-PHYS>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>1</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UNICODE2STRING"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_13">
+              <SHORT-NAME>WarningIndicatorRequested</SHORT-NAME>
+              <LONG-NAME>Warning indicator requested</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>TEXTTABLE</CATEGORY>
+                <COMPU-INTERNAL-TO-PHYS>
+                  <COMPU-SCALES>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>0</LOWER-LIMIT>
+                      <UPPER-LIMIT>0</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>false</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>1</LOWER-LIMIT>
+                      <UPPER-LIMIT>1</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>true</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                  </COMPU-SCALES>
+                </COMPU-INTERNAL-TO-PHYS>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>1</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UNICODE2STRING"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_14">
+              <SHORT-NAME>DtcGroups</SHORT-NAME>
+              <LONG-NAME>DTC Groups</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>TEXTTABLE</CATEGORY>
+                <COMPU-INTERNAL-TO-PHYS>
+                  <COMPU-SCALES>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>0</LOWER-LIMIT>
+                      <UPPER-LIMIT>0</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>Emission-related systems</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>1048576</LOWER-LIMIT>
+                      <UPPER-LIMIT>1048576</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>Powertrain group</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>4194304</LOWER-LIMIT>
+                      <UPPER-LIMIT>4194304</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>Chassis group</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>8388608</LOWER-LIMIT>
+                      <UPPER-LIMIT>8388608</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>Body group</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>12582912</LOWER-LIMIT>
+                      <UPPER-LIMIT>12582912</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>Network communication group</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>16777215</LOWER-LIMIT>
+                      <UPPER-LIMIT>16777215</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>All groups</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                  </COMPU-SCALES>
+                </COMPU-INTERNAL-TO-PHYS>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>24</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UNICODE2STRING"/>
+              <INTERNAL-CONSTR>
+                <SCALE-CONSTRS>
+                  <SCALE-CONSTR VALIDITY="NOT-DEFINED">
+                    <LOWER-LIMIT>1</LOWER-LIMIT>
+                    <UPPER-LIMIT>1048575</UPPER-LIMIT>
+                  </SCALE-CONSTR>
+                  <SCALE-CONSTR VALIDITY="NOT-DEFINED">
+                    <LOWER-LIMIT>1048577</LOWER-LIMIT>
+                    <UPPER-LIMIT>4194303</UPPER-LIMIT>
+                  </SCALE-CONSTR>
+                  <SCALE-CONSTR VALIDITY="NOT-DEFINED">
+                    <LOWER-LIMIT>4194305</LOWER-LIMIT>
+                    <UPPER-LIMIT>8388607</UPPER-LIMIT>
+                  </SCALE-CONSTR>
+                  <SCALE-CONSTR VALIDITY="NOT-DEFINED">
+                    <LOWER-LIMIT>8388609</LOWER-LIMIT>
+                    <UPPER-LIMIT>12582911</UPPER-LIMIT>
+                  </SCALE-CONSTR>
+                  <SCALE-CONSTR VALIDITY="NOT-DEFINED">
+                    <LOWER-LIMIT>12582913</LOWER-LIMIT>
+                    <UPPER-LIMIT>16777214</UPPER-LIMIT>
+                  </SCALE-CONSTR>
+                </SCALE-CONSTRS>
+              </INTERNAL-CONSTR>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_15">
+              <SHORT-NAME>Unsigned_4Bit</SHORT-NAME>
+              <LONG-NAME>Unsigned (4 Bit)</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>4</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UINT32" DISPLAY-RADIX="DEC"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_16">
+              <SHORT-NAME>Unsigned_1Byte</SHORT-NAME>
+              <LONG-NAME>Unsigned (1 Byte)</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>8</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UINT32" DISPLAY-RADIX="DEC"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_17">
+              <SHORT-NAME>Unsigned_2Byte</SHORT-NAME>
+              <LONG-NAME>Unsigned (2 Byte)</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>16</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UINT32" DISPLAY-RADIX="DEC"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_18">
+              <SHORT-NAME>Unsigned_3Byte</SHORT-NAME>
+              <LONG-NAME>Unsigned (3 Byte)</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>24</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UINT32" DISPLAY-RADIX="DEC"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_19">
+              <SHORT-NAME>Unsigned_4Byte</SHORT-NAME>
+              <LONG-NAME>Unsigned (4 Byte)</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>32</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UINT32" DISPLAY-RADIX="DEC"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_20">
+              <SHORT-NAME>Unsigned_1Bit</SHORT-NAME>
+              <LONG-NAME>Unsigned (1 Bit)</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>1</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UINT32" DISPLAY-RADIX="DEC"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_21">
+              <SHORT-NAME>Unsigned_2Bit</SHORT-NAME>
+              <LONG-NAME>Unsigned (2 Bit)</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>2</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UINT32" DISPLAY-RADIX="DEC"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_22">
+              <SHORT-NAME>Unsigned_5Bit</SHORT-NAME>
+              <LONG-NAME>Unsigned (5 Bit)</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>5</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UINT32" DISPLAY-RADIX="DEC"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_23">
+              <SHORT-NAME>Unsigned_6Bit</SHORT-NAME>
+              <LONG-NAME>Unsigned (6 Bit)</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>6</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UINT32" DISPLAY-RADIX="DEC"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_24">
+              <SHORT-NAME>Unsigned_7Bit</SHORT-NAME>
+              <LONG-NAME>Unsigned (7 Bit)</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>7</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UINT32" DISPLAY-RADIX="DEC"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_25">
+              <SHORT-NAME>inactiveActive_1Byte</SHORT-NAME>
+              <LONG-NAME>inactive/active (1 Byte)</LONG-NAME>
+              <DESC>
+                <p>0=inactive; !0=active</p>
+              </DESC>
+              <COMPU-METHOD>
+                <CATEGORY>TEXTTABLE</CATEGORY>
+                <COMPU-INTERNAL-TO-PHYS>
+                  <COMPU-SCALES>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>0</LOWER-LIMIT>
+                      <UPPER-LIMIT>0</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>inactive</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>1</LOWER-LIMIT>
+                      <UPPER-LIMIT>255</UPPER-LIMIT>
+                      <COMPU-INVERSE-VALUE>
+                        <V>1</V>
+                      </COMPU-INVERSE-VALUE>
+                      <COMPU-CONST>
+                        <VT>active</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                  </COMPU-SCALES>
+                </COMPU-INTERNAL-TO-PHYS>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>8</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UNICODE2STRING"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_26">
+              <SHORT-NAME>Bcd_1Byte</SHORT-NAME>
+              <LONG-NAME>Bcd (1 Byte)</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="BCD-P" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>8</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UINT32"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_27">
+              <SHORT-NAME>Bcd_2_Byte</SHORT-NAME>
+              <LONG-NAME>Bcd (2 Byte)</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="BCD-P" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>16</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UINT32"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_28">
+              <SHORT-NAME>Bcd_3Byte</SHORT-NAME>
+              <LONG-NAME>Bcd (3 Byte)</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="BCD-P" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>24</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UINT32"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_29">
+              <SHORT-NAME>Bcd_4Byte</SHORT-NAME>
+              <LONG-NAME>Bcd (4 Byte)</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="BCD-P" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>32</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UINT32"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_30">
+              <SHORT-NAME>Reserved_5Bit</SHORT-NAME>
+              <LONG-NAME>reserved (5 Bit)</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>5</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UINT32" DISPLAY-RADIX="DEC"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_31">
+              <SHORT-NAME>P2</SHORT-NAME>
+              <LONG-NAME>P3</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>16</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UINT32" DISPLAY-RADIX="DEC"/>
+              <UNIT-REF ID-REF="_68"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_32">
+              <SHORT-NAME>P2Ex</SHORT-NAME>
+              <LONG-NAME>P3Ex</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>LINEAR</CATEGORY>
+                <COMPU-INTERNAL-TO-PHYS>
+                  <COMPU-SCALES>
+                    <COMPU-SCALE>
+                      <COMPU-RATIONAL-COEFFS>
+                        <COMPU-NUMERATOR>
+                          <V>0</V>
+                          <V>10</V>
+                        </COMPU-NUMERATOR>
+                      </COMPU-RATIONAL-COEFFS>
+                    </COMPU-SCALE>
+                  </COMPU-SCALES>
+                </COMPU-INTERNAL-TO-PHYS>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>16</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UINT32"/>
+              <UNIT-REF ID-REF="_68"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_33">
+              <SHORT-NAME>SID_RQ_NR</SHORT-NAME>
+              <LONG-NAME>SID-RQ-NR</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>TEXTTABLE</CATEGORY>
+                <COMPU-INTERNAL-TO-PHYS>
+                  <COMPU-SCALES>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>0</LOWER-LIMIT>
+                      <UPPER-LIMIT>255</UPPER-LIMIT>
+                      <COMPU-INVERSE-VALUE>
+                        <V>0</V>
+                      </COMPU-INVERSE-VALUE>
+                      <COMPU-CONST>
+                        <VT/>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                  </COMPU-SCALES>
+                </COMPU-INTERNAL-TO-PHYS>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>8</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UNICODE2STRING"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_34">
+              <SHORT-NAME>RecordDataIdentifier</SHORT-NAME>
+              <LONG-NAME>Identifier</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>TEXTTABLE</CATEGORY>
+                <COMPU-INTERNAL-TO-PHYS>
+                  <COMPU-SCALES>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>0</LOWER-LIMIT>
+                      <UPPER-LIMIT>65535</UPPER-LIMIT>
+                      <COMPU-INVERSE-VALUE>
+                        <V>0</V>
+                      </COMPU-INVERSE-VALUE>
+                      <COMPU-CONST>
+                        <VT/>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                  </COMPU-SCALES>
+                </COMPU-INTERNAL-TO-PHYS>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>16</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UNICODE2STRING"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_35">
+              <SHORT-NAME>HexDump_5_Byte</SHORT-NAME>
+              <LONG-NAME>HexDump (5 Byte)</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_BYTEFIELD" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>40</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_BYTEFIELD"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_36">
+              <SHORT-NAME>ASCII_02</SHORT-NAME>
+              <LONG-NAME>ASCII [02]</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="ISO-8859-1" BASE-DATA-TYPE="A_ASCIISTRING" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>16</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UNICODE2STRING"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_37">
+              <SHORT-NAME>HexDump_8_byte</SHORT-NAME>
+              <LONG-NAME>HexDump (8 byte)</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_BYTEFIELD" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>64</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_BYTEFIELD"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_38">
+              <SHORT-NAME>inactive_active_1_Bit</SHORT-NAME>
+              <LONG-NAME>inactive/active (1 Bit)</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>TEXTTABLE</CATEGORY>
+                <COMPU-INTERNAL-TO-PHYS>
+                  <COMPU-SCALES>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>0</LOWER-LIMIT>
+                      <UPPER-LIMIT>0</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>inactive</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>1</LOWER-LIMIT>
+                      <UPPER-LIMIT>1</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>active</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                  </COMPU-SCALES>
+                </COMPU-INTERNAL-TO-PHYS>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>1</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UNICODE2STRING"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_39">
+              <SHORT-NAME>disabled_enabled_1_bit</SHORT-NAME>
+              <LONG-NAME>disabled/enabled (1 bit)</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>TEXTTABLE</CATEGORY>
+                <COMPU-INTERNAL-TO-PHYS>
+                  <COMPU-SCALES>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>0</LOWER-LIMIT>
+                      <UPPER-LIMIT>0</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>disabled</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>1</LOWER-LIMIT>
+                      <UPPER-LIMIT>1</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>enabled</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                  </COMPU-SCALES>
+                </COMPU-INTERNAL-TO-PHYS>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>1</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UNICODE2STRING"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_40">
+              <SHORT-NAME>HexDump_16_Byte</SHORT-NAME>
+              <LONG-NAME>HexDump (16 Byte)</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_BYTEFIELD" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>128</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_BYTEFIELD"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_41">
+              <SHORT-NAME>untrimmed_trimmed</SHORT-NAME>
+              <LONG-NAME>untrimmed/trimmed</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>TEXTTABLE</CATEGORY>
+                <COMPU-INTERNAL-TO-PHYS>
+                  <COMPU-SCALES>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>0</LOWER-LIMIT>
+                      <UPPER-LIMIT>0</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>untrimmed</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>1</LOWER-LIMIT>
+                      <UPPER-LIMIT>1</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>trimmed</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                  </COMPU-SCALES>
+                </COMPU-INTERNAL-TO-PHYS>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>8</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UNICODE2STRING"/>
+              <INTERNAL-CONSTR>
+                <SCALE-CONSTRS>
+                  <SCALE-CONSTR VALIDITY="NOT-DEFINED">
+                    <LOWER-LIMIT>2</LOWER-LIMIT>
+                    <UPPER-LIMIT>255</UPPER-LIMIT>
+                  </SCALE-CONSTR>
+                </SCALE-CONSTRS>
+              </INTERNAL-CONSTR>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_42">
+              <SHORT-NAME>HexDump_256_Byte</SHORT-NAME>
+              <LONG-NAME>HexDump (256 Byte)</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_BYTEFIELD" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>2048</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_BYTEFIELD"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_43">
+              <SHORT-NAME>ASCII_20</SHORT-NAME>
+              <LONG-NAME>ASCII [20]</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="ISO-8859-1" BASE-DATA-TYPE="A_ASCIISTRING" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>160</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UNICODE2STRING"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_44">
+              <SHORT-NAME>ASCII_01</SHORT-NAME>
+              <LONG-NAME>ASCII [01]</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="ISO-8859-1" BASE-DATA-TYPE="A_ASCIISTRING" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>8</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UNICODE2STRING"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_45">
+              <SHORT-NAME>ASCII_09</SHORT-NAME>
+              <LONG-NAME>ASCII [09]</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="ISO-8859-1" BASE-DATA-TYPE="A_ASCIISTRING" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>72</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UNICODE2STRING"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_46">
+              <SHORT-NAME>ASCII_10</SHORT-NAME>
+              <LONG-NAME>ASCII [10]</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="ISO-8859-1" BASE-DATA-TYPE="A_ASCIISTRING" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>80</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UNICODE2STRING"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_47">
+              <SHORT-NAME>ASCII_17</SHORT-NAME>
+              <LONG-NAME>ASCII [17]</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="ISO-8859-1" BASE-DATA-TYPE="A_ASCIISTRING" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>136</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UNICODE2STRING"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_48">
+              <SHORT-NAME>HexDump_822_byte</SHORT-NAME>
+              <LONG-NAME>HexDump (822 byte)</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="NONE" BASE-DATA-TYPE="A_BYTEFIELD" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>6576</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_BYTEFIELD"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_49">
+              <SHORT-NAME>ASCII_03</SHORT-NAME>
+              <LONG-NAME>ASCII [03]</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-TYPE-ENCODING="ISO-8859-1" BASE-DATA-TYPE="A_ASCIISTRING" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>24</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UNICODE2STRING"/>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_50">
+              <SHORT-NAME>Start_NR_DOP</SHORT-NAME>
+              <LONG-NAME>Start NR_DOP</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>TEXTTABLE</CATEGORY>
+                <COMPU-INTERNAL-TO-PHYS>
+                  <COMPU-SCALES>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>34</LOWER-LIMIT>
+                      <UPPER-LIMIT>34</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>Conditions not correct</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                  </COMPU-SCALES>
+                </COMPU-INTERNAL-TO-PHYS>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>8</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UNICODE2STRING"/>
+              <INTERNAL-CONSTR>
+                <SCALE-CONSTRS>
+                  <SCALE-CONSTR VALIDITY="NOT-DEFINED">
+                    <LOWER-LIMIT>0</LOWER-LIMIT>
+                    <UPPER-LIMIT>33</UPPER-LIMIT>
+                  </SCALE-CONSTR>
+                  <SCALE-CONSTR VALIDITY="NOT-DEFINED">
+                    <LOWER-LIMIT>35</LOWER-LIMIT>
+                    <UPPER-LIMIT>255</UPPER-LIMIT>
+                  </SCALE-CONSTR>
+                </SCALE-CONSTRS>
+              </INTERNAL-CONSTR>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_51">
+              <SHORT-NAME>Read_NR_DOP</SHORT-NAME>
+              <LONG-NAME>Read NR_DOP</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>TEXTTABLE</CATEGORY>
+                <COMPU-INTERNAL-TO-PHYS>
+                  <COMPU-SCALES>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>19</LOWER-LIMIT>
+                      <UPPER-LIMIT>19</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>Incorrect message length or invalid format</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>127</LOWER-LIMIT>
+                      <UPPER-LIMIT>127</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>Service not supported in active session</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                  </COMPU-SCALES>
+                </COMPU-INTERNAL-TO-PHYS>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>8</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UNICODE2STRING"/>
+              <INTERNAL-CONSTR>
+                <SCALE-CONSTRS>
+                  <SCALE-CONSTR VALIDITY="NOT-DEFINED">
+                    <LOWER-LIMIT>0</LOWER-LIMIT>
+                    <UPPER-LIMIT>18</UPPER-LIMIT>
+                  </SCALE-CONSTR>
+                  <SCALE-CONSTR VALIDITY="NOT-DEFINED">
+                    <LOWER-LIMIT>20</LOWER-LIMIT>
+                    <UPPER-LIMIT>126</UPPER-LIMIT>
+                  </SCALE-CONSTR>
+                  <SCALE-CONSTR VALIDITY="NOT-DEFINED">
+                    <LOWER-LIMIT>128</LOWER-LIMIT>
+                    <UPPER-LIMIT>255</UPPER-LIMIT>
+                  </SCALE-CONSTR>
+                </SCALE-CONSTRS>
+              </INTERNAL-CONSTR>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_52">
+              <SHORT-NAME>Write_NR_DOP</SHORT-NAME>
+              <LONG-NAME>Write NR_DOP</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>TEXTTABLE</CATEGORY>
+                <COMPU-INTERNAL-TO-PHYS>
+                  <COMPU-SCALES>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>19</LOWER-LIMIT>
+                      <UPPER-LIMIT>19</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>Incorrect message length or invalid format</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>51</LOWER-LIMIT>
+                      <UPPER-LIMIT>51</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>Security access denied</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>127</LOWER-LIMIT>
+                      <UPPER-LIMIT>127</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>Service not supported in active session</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                  </COMPU-SCALES>
+                </COMPU-INTERNAL-TO-PHYS>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>8</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UNICODE2STRING"/>
+              <INTERNAL-CONSTR>
+                <SCALE-CONSTRS>
+                  <SCALE-CONSTR VALIDITY="NOT-DEFINED">
+                    <LOWER-LIMIT>0</LOWER-LIMIT>
+                    <UPPER-LIMIT>18</UPPER-LIMIT>
+                  </SCALE-CONSTR>
+                  <SCALE-CONSTR VALIDITY="NOT-DEFINED">
+                    <LOWER-LIMIT>20</LOWER-LIMIT>
+                    <UPPER-LIMIT>50</UPPER-LIMIT>
+                  </SCALE-CONSTR>
+                  <SCALE-CONSTR VALIDITY="NOT-DEFINED">
+                    <LOWER-LIMIT>52</LOWER-LIMIT>
+                    <UPPER-LIMIT>126</UPPER-LIMIT>
+                  </SCALE-CONSTR>
+                  <SCALE-CONSTR VALIDITY="NOT-DEFINED">
+                    <LOWER-LIMIT>128</LOWER-LIMIT>
+                    <UPPER-LIMIT>255</UPPER-LIMIT>
+                  </SCALE-CONSTR>
+                </SCALE-CONSTRS>
+              </INTERNAL-CONSTR>
+            </DATA-OBJECT-PROP>
+            <DATA-OBJECT-PROP ID="_53">
+              <SHORT-NAME>NRC_DOP</SHORT-NAME>
+              <LONG-NAME>NEGATIVE RESPONSE CODES_DOP</LONG-NAME>
+              <COMPU-METHOD>
+                <CATEGORY>TEXTTABLE</CATEGORY>
+                <COMPU-INTERNAL-TO-PHYS>
+                  <COMPU-SCALES>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>17</LOWER-LIMIT>
+                      <UPPER-LIMIT>17</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>Service not supported</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                    <COMPU-SCALE>
+                      <LOWER-LIMIT>18</LOWER-LIMIT>
+                      <UPPER-LIMIT>18</UPPER-LIMIT>
+                      <COMPU-CONST>
+                        <VT>Subfunction not supported</VT>
+                      </COMPU-CONST>
+                    </COMPU-SCALE>
+                  </COMPU-SCALES>
+                </COMPU-INTERNAL-TO-PHYS>
+              </COMPU-METHOD>
+              <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>8</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UNICODE2STRING"/>
+              <INTERNAL-CONSTR>
+                <SCALE-CONSTRS>
+                  <SCALE-CONSTR VALIDITY="NOT-DEFINED">
+                    <LOWER-LIMIT>0</LOWER-LIMIT>
+                    <UPPER-LIMIT>16</UPPER-LIMIT>
+                  </SCALE-CONSTR>
+                  <SCALE-CONSTR VALIDITY="NOT-DEFINED">
+                    <LOWER-LIMIT>19</LOWER-LIMIT>
+                    <UPPER-LIMIT>255</UPPER-LIMIT>
+                  </SCALE-CONSTR>
+                </SCALE-CONSTRS>
+              </INTERNAL-CONSTR>
+            </DATA-OBJECT-PROP>
+          </DATA-OBJECT-PROPS>
+          <UNIT-SPEC>
+            <UNITS>
+              <UNIT ID="_68">
+                <SHORT-NAME>ms</SHORT-NAME>
+                <DISPLAY-NAME>ms</DISPLAY-NAME>
+              </UNIT>
+            </UNITS>
+          </UNIT-SPEC>
+        </DIAG-DATA-DICTIONARY-SPEC>
+        <DIAG-COMMS>
+          <DIAG-SERVICE ID="_74" SEMANTIC="SESSION">
+            <SHORT-NAME>DefaultSession_Start</SHORT-NAME>
+            <LONG-NAME>Default Session Start</LONG-NAME>
+            <SDGS>
+              <SDG>
+                <SDG-CAPTION ID="_75">
+                  <SHORT-NAME>CANdelaServiceInformation</SHORT-NAME>
+                </SDG-CAPTION>
+                <SD SI="DiagInstanceQualifier">DefaultSession</SD>
+                <SD SI="DiagInstanceName">Default Session</SD>
+                <SD SI="ServiceQualifier">Start</SD>
+                <SD SI="ServiceName">Start</SD>
+                <SD SI="PositiveResponseSuppressed">no</SD>
+              </SDG>
+            </SDGS>
+            <FUNCT-CLASS-REFS>
+              <FUNCT-CLASS-REF ID-REF="_63"/>
+            </FUNCT-CLASS-REFS>
+            <AUDIENCE IS-SUPPLIER="false" IS-AFTERMARKET="false"/>
+            <STATE-TRANSITION-REFS>
+              <STATE-TRANSITION-REF ID-REF="_76"/>
+              <STATE-TRANSITION-REF ID-REF="_77"/>
+            </STATE-TRANSITION-REFS>
+            <REQUEST-REF ID-REF="_70"/>
+            <POS-RESPONSE-REFS>
+              <POS-RESPONSE-REF ID-REF="_72"/>
+            </POS-RESPONSE-REFS>
+            <NEG-RESPONSE-REFS>
+              <NEG-RESPONSE-REF ID-REF="_73"/>
+            </NEG-RESPONSE-REFS>
+          </DIAG-SERVICE>
+          <DIAG-SERVICE ID="_78" SEMANTIC="SESSION" TRANSMISSION-MODE="SEND-ONLY">
+            <SHORT-NAME>DefaultSession_Start_NoResponse</SHORT-NAME>
+            <LONG-NAME>Default Session Start_NoResponse</LONG-NAME>
+            <SDGS>
+              <SDG>
+                <SDG-CAPTION ID="_79">
+                  <SHORT-NAME>CANdelaServiceInformation</SHORT-NAME>
+                </SDG-CAPTION>
+                <SD SI="DiagInstanceQualifier">DefaultSession</SD>
+                <SD SI="DiagInstanceName">Default Session</SD>
+                <SD SI="ServiceQualifier">Start</SD>
+                <SD SI="ServiceName">Start</SD>
+                <SD SI="PositiveResponseSuppressed">yes</SD>
+              </SDG>
+            </SDGS>
+            <FUNCT-CLASS-REFS>
+              <FUNCT-CLASS-REF ID-REF="_63"/>
+            </FUNCT-CLASS-REFS>
+            <AUDIENCE IS-SUPPLIER="false" IS-AFTERMARKET="false"/>
+            <STATE-TRANSITION-REFS>
+              <STATE-TRANSITION-REF ID-REF="_76"/>
+              <STATE-TRANSITION-REF ID-REF="_77"/>
+            </STATE-TRANSITION-REFS>
+            <REQUEST-REF ID-REF="_71"/>
+            <NEG-RESPONSE-REFS>
+              <NEG-RESPONSE-REF ID-REF="_73"/>
+            </NEG-RESPONSE-REFS>
+          </DIAG-SERVICE>
+          <DIAG-SERVICE ID="_83" SEMANTIC="Program Specific">
+            <SHORT-NAME>_0xFDE0_Base_Model_Part_Number_Read_1</SHORT-NAME>
+            <LONG-NAME>0xFED0: Tuning Variant Read</LONG-NAME>
+            <DESC>
+              <p>Returns the selected BMW tuning variant.</p>
+            </DESC>
+            <SDGS>
+              <SDG>
+                <SDG-CAPTION ID="_84">
+                  <SHORT-NAME>CANdelaServiceInformation</SHORT-NAME>
+                </SDG-CAPTION>
+                <SD SI="DiagInstanceQualifier">_0xFED0_Tuning_Variant</SD>
+                <SD SI="DiagInstanceName">0xFED0: Tuning Variant</SD>
+                <SD SI="ServiceQualifier">Read</SD>
+                <SD SI="ServiceName">Read</SD>
+                <SD SI="PositiveResponseSuppressed">no</SD>
+              </SDG>
+            </SDGS>
+            <FUNCT-CLASS-REFS>
+              <FUNCT-CLASS-REF ID-REF="_64"/>
+            </FUNCT-CLASS-REFS>
+            <AUDIENCE IS-SUPPLIER="false" IS-AFTERMARKET="false"/>
+            <PRE-CONDITION-STATE-REFS>
+              <PRE-CONDITION-STATE-REF ID-REF="_59"/>
+            </PRE-CONDITION-STATE-REFS>
+            <REQUEST-REF ID-REF="_80"/>
+            <POS-RESPONSE-REFS>
+              <POS-RESPONSE-REF ID-REF="_81"/>
+            </POS-RESPONSE-REFS>
+            <NEG-RESPONSE-REFS>
+              <NEG-RESPONSE-REF ID-REF="_82"/>
+            </NEG-RESPONSE-REFS>
+          </DIAG-SERVICE>
+          <DIAG-SERVICE ID="_88" SEMANTIC="Program Specific">
+            <SHORT-NAME>_0xFED0_Tuning_Variant_Write</SHORT-NAME>
+            <LONG-NAME>0xFED0: Tuning Variant Write</LONG-NAME>
+            <DESC>
+              <p>Gets the currently selected BMW tuning variant.</p>
+            </DESC>
+            <SDGS>
+              <SDG>
+                <SDG-CAPTION ID="_89">
+                  <SHORT-NAME>CANdelaServiceInformation</SHORT-NAME>
+                </SDG-CAPTION>
+                <SD SI="DiagInstanceQualifier">_0xFED0_Tuning_Variant</SD>
+                <SD SI="DiagInstanceName">0xFED0: Tuning Variant</SD>
+                <SD SI="ServiceQualifier">Write</SD>
+                <SD SI="ServiceName">Write</SD>
+                <SD SI="PositiveResponseSuppressed">no</SD>
+              </SDG>
+            </SDGS>
+            <FUNCT-CLASS-REFS>
+              <FUNCT-CLASS-REF ID-REF="_64"/>
+            </FUNCT-CLASS-REFS>
+            <AUDIENCE IS-SUPPLIER="false" IS-AFTERMARKET="false"/>
+            <PRE-CONDITION-STATE-REFS>
+              <PRE-CONDITION-STATE-REF ID-REF="_59"/>
+              <PRE-CONDITION-STATE-REF ID-REF="_62"/>
+            </PRE-CONDITION-STATE-REFS>
+            <REQUEST-REF ID-REF="_85"/>
+            <POS-RESPONSE-REFS>
+              <POS-RESPONSE-REF ID-REF="_86"/>
+            </POS-RESPONSE-REFS>
+            <NEG-RESPONSE-REFS>
+              <NEG-RESPONSE-REF ID-REF="_87"/>
+            </NEG-RESPONSE-REFS>
+          </DIAG-SERVICE>
+          <DIAG-SERVICE ID="_93" SEMANTIC="Program Specific">
+            <SHORT-NAME>_0xFED1_Motor_Variant_Read</SHORT-NAME>
+            <LONG-NAME>0xFED1: Motor Variant Read</LONG-NAME>
+            <DESC>
+              <p>Returns the BMW selected motor variant.</p>
+            </DESC>
+            <SDGS>
+              <SDG>
+                <SDG-CAPTION ID="_94">
+                  <SHORT-NAME>CANdelaServiceInformation</SHORT-NAME>
+                </SDG-CAPTION>
+                <SD SI="DiagInstanceQualifier">_0xFED1_Motor_Variant</SD>
+                <SD SI="DiagInstanceName">0xFED1: Motor Variant</SD>
+                <SD SI="ServiceQualifier">Read</SD>
+                <SD SI="ServiceName">Read</SD>
+                <SD SI="PositiveResponseSuppressed">no</SD>
+              </SDG>
+            </SDGS>
+            <FUNCT-CLASS-REFS>
+              <FUNCT-CLASS-REF ID-REF="_64"/>
+            </FUNCT-CLASS-REFS>
+            <AUDIENCE IS-SUPPLIER="false" IS-AFTERMARKET="false"/>
+            <PRE-CONDITION-STATE-REFS>
+              <PRE-CONDITION-STATE-REF ID-REF="_59"/>
+            </PRE-CONDITION-STATE-REFS>
+            <REQUEST-REF ID-REF="_90"/>
+            <POS-RESPONSE-REFS>
+              <POS-RESPONSE-REF ID-REF="_91"/>
+            </POS-RESPONSE-REFS>
+            <NEG-RESPONSE-REFS>
+              <NEG-RESPONSE-REF ID-REF="_92"/>
+            </NEG-RESPONSE-REFS>
+          </DIAG-SERVICE>
+          <DIAG-SERVICE ID="_98" SEMANTIC="Program Specific">
+            <SHORT-NAME>_0xFED1_Motor_Variant_Write</SHORT-NAME>
+            <LONG-NAME>0xFED1: Motor Variant Write</LONG-NAME>
+            <DESC>
+              <p>Sets the selected BMW motor variant.</p>
+            </DESC>
+            <SDGS>
+              <SDG>
+                <SDG-CAPTION ID="_99">
+                  <SHORT-NAME>CANdelaServiceInformation</SHORT-NAME>
+                </SDG-CAPTION>
+                <SD SI="DiagInstanceQualifier">_0xFED1_Motor_Variant</SD>
+                <SD SI="DiagInstanceName">0xFED1: Motor Variant</SD>
+                <SD SI="ServiceQualifier">Write</SD>
+                <SD SI="ServiceName">Write</SD>
+                <SD SI="PositiveResponseSuppressed">no</SD>
+              </SDG>
+            </SDGS>
+            <FUNCT-CLASS-REFS>
+              <FUNCT-CLASS-REF ID-REF="_64"/>
+            </FUNCT-CLASS-REFS>
+            <AUDIENCE IS-SUPPLIER="false" IS-AFTERMARKET="false"/>
+            <PRE-CONDITION-STATE-REFS>
+              <PRE-CONDITION-STATE-REF ID-REF="_59"/>
+              <PRE-CONDITION-STATE-REF ID-REF="_62"/>
+            </PRE-CONDITION-STATE-REFS>
+            <REQUEST-REF ID-REF="_95"/>
+            <POS-RESPONSE-REFS>
+              <POS-RESPONSE-REF ID-REF="_96"/>
+            </POS-RESPONSE-REFS>
+            <NEG-RESPONSE-REFS>
+              <NEG-RESPONSE-REF ID-REF="_97"/>
+            </NEG-RESPONSE-REFS>
+          </DIAG-SERVICE>
+          <DIAG-SERVICE ID="_104" SEMANTIC="TESTERPRESENT">
+            <SHORT-NAME>TesterPresent_Send</SHORT-NAME>
+            <LONG-NAME>Tester Present Send</LONG-NAME>
+            <SDGS>
+              <SDG>
+                <SDG-CAPTION ID="_105">
+                  <SHORT-NAME>CANdelaServiceInformation</SHORT-NAME>
+                </SDG-CAPTION>
+                <SD SI="DiagInstanceQualifier">TesterPresent</SD>
+                <SD SI="DiagInstanceName">Tester Present</SD>
+                <SD SI="ServiceQualifier">Send</SD>
+                <SD SI="ServiceName">Send</SD>
+                <SD SI="PositiveResponseSuppressed">no</SD>
+              </SDG>
+            </SDGS>
+            <FUNCT-CLASS-REFS>
+              <FUNCT-CLASS-REF ID-REF="_65"/>
+            </FUNCT-CLASS-REFS>
+            <AUDIENCE IS-SUPPLIER="false" IS-AFTERMARKET="false"/>
+            <REQUEST-REF ID-REF="_100"/>
+            <POS-RESPONSE-REFS>
+              <POS-RESPONSE-REF ID-REF="_102"/>
+            </POS-RESPONSE-REFS>
+            <NEG-RESPONSE-REFS>
+              <NEG-RESPONSE-REF ID-REF="_103"/>
+            </NEG-RESPONSE-REFS>
+          </DIAG-SERVICE>
+          <DIAG-SERVICE ID="_106" SEMANTIC="TESTERPRESENT" TRANSMISSION-MODE="SEND-ONLY">
+            <SHORT-NAME>TesterPresent_Send_NoResponse</SHORT-NAME>
+            <LONG-NAME>Tester Present Send_NoResponse</LONG-NAME>
+            <SDGS>
+              <SDG>
+                <SDG-CAPTION ID="_107">
+                  <SHORT-NAME>CANdelaServiceInformation</SHORT-NAME>
+                </SDG-CAPTION>
+                <SD SI="DiagInstanceQualifier">TesterPresent</SD>
+                <SD SI="DiagInstanceName">Tester Present</SD>
+                <SD SI="ServiceQualifier">Send</SD>
+                <SD SI="ServiceName">Send</SD>
+                <SD SI="PositiveResponseSuppressed">yes</SD>
+              </SDG>
+            </SDGS>
+            <FUNCT-CLASS-REFS>
+              <FUNCT-CLASS-REF ID-REF="_65"/>
+            </FUNCT-CLASS-REFS>
+            <AUDIENCE IS-SUPPLIER="false" IS-AFTERMARKET="false"/>
+            <REQUEST-REF ID-REF="_101"/>
+            <NEG-RESPONSE-REFS>
+              <NEG-RESPONSE-REF ID-REF="_103"/>
+            </NEG-RESPONSE-REFS>
+          </DIAG-SERVICE>
+        </DIAG-COMMS>
+        <REQUESTS>
+          <REQUEST ID="_70">
+            <SHORT-NAME>RQ_DefaultSession_Start</SHORT-NAME>
+            <LONG-NAME>RQ Default Session Start</LONG-NAME>
+            <PARAMS>
+              <PARAM SEMANTIC="SERVICE-ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>SID_RQ</SHORT-NAME>
+                <LONG-NAME>SID-RQ</LONG-NAME>
+                <BYTE-POSITION>0</BYTE-POSITION>
+                <CODED-VALUE>16</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="SUBFUNCTION" xsi:type="CODED-CONST">
+                <SHORT-NAME>DiagSessionType</SHORT-NAME>
+                <LONG-NAME>Type</LONG-NAME>
+                <BYTE-POSITION>1</BYTE-POSITION>
+                <CODED-VALUE>1</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+            </PARAMS>
+          </REQUEST>
+          <REQUEST ID="_71">
+            <SHORT-NAME>RQ_DefaultSession_Start_NoResponse</SHORT-NAME>
+            <LONG-NAME>RQ Default Session Start_NoResponse</LONG-NAME>
+            <PARAMS>
+              <PARAM SEMANTIC="SERVICE-ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>SID_RQ</SHORT-NAME>
+                <LONG-NAME>SID-RQ</LONG-NAME>
+                <BYTE-POSITION>0</BYTE-POSITION>
+                <CODED-VALUE>16</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="SUBFUNCTION" xsi:type="CODED-CONST">
+                <SHORT-NAME>DiagSessionType</SHORT-NAME>
+                <LONG-NAME>Type</LONG-NAME>
+                <BYTE-POSITION>1</BYTE-POSITION>
+                <CODED-VALUE>129</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+            </PARAMS>
+          </REQUEST>
+          <REQUEST ID="_80">
+            <SHORT-NAME>RQ_0xFDE0_Base_Model_Part_Number_Read_1</SHORT-NAME>
+            <LONG-NAME>RQ 0xFED0: Tuning Variant Read</LONG-NAME>
+            <PARAMS>
+              <PARAM SEMANTIC="SERVICE-ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>SID_RQ</SHORT-NAME>
+                <LONG-NAME>SID-RQ</LONG-NAME>
+                <BYTE-POSITION>0</BYTE-POSITION>
+                <CODED-VALUE>34</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>RecordDataIdentifier</SHORT-NAME>
+                <LONG-NAME>Identifier</LONG-NAME>
+                <BYTE-POSITION>1</BYTE-POSITION>
+                <CODED-VALUE>65232</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>16</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+            </PARAMS>
+          </REQUEST>
+          <REQUEST ID="_85">
+            <SHORT-NAME>RQ_0xFED0_Tuning_Variant_Write</SHORT-NAME>
+            <LONG-NAME>RQ 0xFED0: Tuning Variant Write</LONG-NAME>
+            <PARAMS>
+              <PARAM SEMANTIC="SERVICE-ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>SID_RQ</SHORT-NAME>
+                <LONG-NAME>SID-RQ</LONG-NAME>
+                <BYTE-POSITION>0</BYTE-POSITION>
+                <CODED-VALUE>46</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>RecordDataIdentifier</SHORT-NAME>
+                <LONG-NAME>Identifier</LONG-NAME>
+                <BYTE-POSITION>1</BYTE-POSITION>
+                <CODED-VALUE>65232</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>16</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="DATA" xsi:type="VALUE">
+                <SHORT-NAME>BmwDesIninIdx</SHORT-NAME>
+                <LONG-NAME>BmwDesIninIdx</LONG-NAME>
+                <BYTE-POSITION>3</BYTE-POSITION>
+                <DOP-REF ID-REF="_16"/>
+              </PARAM>
+            </PARAMS>
+          </REQUEST>
+          <REQUEST ID="_90">
+            <SHORT-NAME>RQ_0xFED1_Motor_Variant_Read</SHORT-NAME>
+            <LONG-NAME>RQ 0xFED1: Motor Variant Read</LONG-NAME>
+            <PARAMS>
+              <PARAM SEMANTIC="SERVICE-ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>SID_RQ</SHORT-NAME>
+                <LONG-NAME>SID-RQ</LONG-NAME>
+                <BYTE-POSITION>0</BYTE-POSITION>
+                <CODED-VALUE>34</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>RecordDataIdentifier</SHORT-NAME>
+                <LONG-NAME>Identifier</LONG-NAME>
+                <BYTE-POSITION>1</BYTE-POSITION>
+                <CODED-VALUE>65233</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>16</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+            </PARAMS>
+          </REQUEST>
+          <REQUEST ID="_95">
+            <SHORT-NAME>RQ_0xFED1_Motor_Variant_Write</SHORT-NAME>
+            <LONG-NAME>RQ 0xFED1: Motor Variant Write</LONG-NAME>
+            <PARAMS>
+              <PARAM SEMANTIC="SERVICE-ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>SID_RQ</SHORT-NAME>
+                <LONG-NAME>SID-RQ</LONG-NAME>
+                <BYTE-POSITION>0</BYTE-POSITION>
+                <CODED-VALUE>46</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>RecordDataIdentifier</SHORT-NAME>
+                <LONG-NAME>Identifier</LONG-NAME>
+                <BYTE-POSITION>1</BYTE-POSITION>
+                <CODED-VALUE>65233</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>16</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="DATA" xsi:type="VALUE">
+                <SHORT-NAME>BmwDesIninOptSetAIdx</SHORT-NAME>
+                <LONG-NAME>BmwDesIninOptSetAIdx</LONG-NAME>
+                <BYTE-POSITION>3</BYTE-POSITION>
+                <DOP-REF ID-REF="_16"/>
+              </PARAM>
+            </PARAMS>
+          </REQUEST>
+          <REQUEST ID="_100">
+            <SHORT-NAME>RQ_TesterPresent_Send</SHORT-NAME>
+            <LONG-NAME>RQ Tester Present Send</LONG-NAME>
+            <PARAMS>
+              <PARAM SEMANTIC="SERVICE-ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>SID_RQ</SHORT-NAME>
+                <LONG-NAME>SID-RQ</LONG-NAME>
+                <BYTE-POSITION>0</BYTE-POSITION>
+                <CODED-VALUE>62</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="SUBFUNCTION" xsi:type="CODED-CONST">
+                <SHORT-NAME>ZeroSubfunction</SHORT-NAME>
+                <LONG-NAME>ZeroSubfunction</LONG-NAME>
+                <BYTE-POSITION>1</BYTE-POSITION>
+                <CODED-VALUE>0</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+            </PARAMS>
+          </REQUEST>
+          <REQUEST ID="_101">
+            <SHORT-NAME>RQ_TesterPresent_Send_NoResponse</SHORT-NAME>
+            <LONG-NAME>RQ Tester Present Send_NoResponse</LONG-NAME>
+            <PARAMS>
+              <PARAM SEMANTIC="SERVICE-ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>SID_RQ</SHORT-NAME>
+                <LONG-NAME>SID-RQ</LONG-NAME>
+                <BYTE-POSITION>0</BYTE-POSITION>
+                <CODED-VALUE>62</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="SUBFUNCTION" xsi:type="CODED-CONST">
+                <SHORT-NAME>ZeroSubfunction</SHORT-NAME>
+                <LONG-NAME>ZeroSubfunction</LONG-NAME>
+                <BYTE-POSITION>1</BYTE-POSITION>
+                <CODED-VALUE>128</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+            </PARAMS>
+          </REQUEST>
+        </REQUESTS>
+        <POS-RESPONSES>
+          <POS-RESPONSE ID="_72">
+            <SHORT-NAME>PR_DefaultSession_Start</SHORT-NAME>
+            <LONG-NAME>PR Default Session Start</LONG-NAME>
+            <PARAMS>
+              <PARAM SEMANTIC="SERVICE-ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>SID_PR</SHORT-NAME>
+                <LONG-NAME>SID-PR</LONG-NAME>
+                <BYTE-POSITION>0</BYTE-POSITION>
+                <CODED-VALUE>80</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="SUBFUNCTION" xsi:type="CODED-CONST">
+                <SHORT-NAME>DiagSessionType</SHORT-NAME>
+                <LONG-NAME>Type</LONG-NAME>
+                <BYTE-POSITION>1</BYTE-POSITION>
+                <CODED-VALUE>1</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+            </PARAMS>
+          </POS-RESPONSE>
+          <POS-RESPONSE ID="_81">
+            <SHORT-NAME>PR_0xFDE0_Base_Model_Part_Number_Read_1</SHORT-NAME>
+            <LONG-NAME>PR 0xFED0: Tuning Variant Read</LONG-NAME>
+            <PARAMS>
+              <PARAM SEMANTIC="SERVICE-ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>SID_PR</SHORT-NAME>
+                <LONG-NAME>SID-PR</LONG-NAME>
+                <BYTE-POSITION>0</BYTE-POSITION>
+                <CODED-VALUE>98</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>RecordDataIdentifier</SHORT-NAME>
+                <LONG-NAME>Identifier</LONG-NAME>
+                <BYTE-POSITION>1</BYTE-POSITION>
+                <CODED-VALUE>65232</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>16</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="DATA" xsi:type="VALUE">
+                <SHORT-NAME>BmwDesIninIdx</SHORT-NAME>
+                <LONG-NAME>BmwDesIninIdx</LONG-NAME>
+                <BYTE-POSITION>3</BYTE-POSITION>
+                <DOP-REF ID-REF="_16"/>
+              </PARAM>
+            </PARAMS>
+          </POS-RESPONSE>
+          <POS-RESPONSE ID="_86">
+            <SHORT-NAME>PR_0xFED0_Tuning_Variant_Write</SHORT-NAME>
+            <LONG-NAME>PR 0xFED0: Tuning Variant Write</LONG-NAME>
+            <PARAMS>
+              <PARAM SEMANTIC="SERVICE-ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>SID_PR</SHORT-NAME>
+                <LONG-NAME>SID-PR</LONG-NAME>
+                <BYTE-POSITION>0</BYTE-POSITION>
+                <CODED-VALUE>110</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>RecordDataIdentifier</SHORT-NAME>
+                <LONG-NAME>Identifier</LONG-NAME>
+                <BYTE-POSITION>1</BYTE-POSITION>
+                <CODED-VALUE>65232</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>16</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+            </PARAMS>
+          </POS-RESPONSE>
+          <POS-RESPONSE ID="_91">
+            <SHORT-NAME>PR_0xFED1_Motor_Variant_Read</SHORT-NAME>
+            <LONG-NAME>PR 0xFED1: Motor Variant Read</LONG-NAME>
+            <PARAMS>
+              <PARAM SEMANTIC="SERVICE-ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>SID_PR</SHORT-NAME>
+                <LONG-NAME>SID-PR</LONG-NAME>
+                <BYTE-POSITION>0</BYTE-POSITION>
+                <CODED-VALUE>98</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>RecordDataIdentifier</SHORT-NAME>
+                <LONG-NAME>Identifier</LONG-NAME>
+                <BYTE-POSITION>1</BYTE-POSITION>
+                <CODED-VALUE>65233</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>16</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="DATA" xsi:type="VALUE">
+                <SHORT-NAME>BmwDesIninOptSetAIdx</SHORT-NAME>
+                <LONG-NAME>BmwDesIninOptSetAIdx</LONG-NAME>
+                <BYTE-POSITION>3</BYTE-POSITION>
+                <DOP-REF ID-REF="_16"/>
+              </PARAM>
+            </PARAMS>
+          </POS-RESPONSE>
+          <POS-RESPONSE ID="_96">
+            <SHORT-NAME>PR_0xFED1_Motor_Variant_Write</SHORT-NAME>
+            <LONG-NAME>PR 0xFED1: Motor Variant Write</LONG-NAME>
+            <PARAMS>
+              <PARAM SEMANTIC="SERVICE-ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>SID_PR</SHORT-NAME>
+                <LONG-NAME>SID-PR</LONG-NAME>
+                <BYTE-POSITION>0</BYTE-POSITION>
+                <CODED-VALUE>110</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>RecordDataIdentifier</SHORT-NAME>
+                <LONG-NAME>Identifier</LONG-NAME>
+                <BYTE-POSITION>1</BYTE-POSITION>
+                <CODED-VALUE>65233</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>16</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+            </PARAMS>
+          </POS-RESPONSE>
+          <POS-RESPONSE ID="_102">
+            <SHORT-NAME>PR_TesterPresent_Send</SHORT-NAME>
+            <LONG-NAME>PR Tester Present Send</LONG-NAME>
+            <PARAMS>
+              <PARAM SEMANTIC="SERVICE-ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>SID_PR</SHORT-NAME>
+                <LONG-NAME>SID-PR</LONG-NAME>
+                <BYTE-POSITION>0</BYTE-POSITION>
+                <CODED-VALUE>126</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="SUBFUNCTION" xsi:type="CODED-CONST">
+                <SHORT-NAME>ZeroSubfunction</SHORT-NAME>
+                <LONG-NAME>ZeroSubfunction</LONG-NAME>
+                <BYTE-POSITION>1</BYTE-POSITION>
+                <CODED-VALUE>0</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+            </PARAMS>
+          </POS-RESPONSE>
+        </POS-RESPONSES>
+        <NEG-RESPONSES>
+          <NEG-RESPONSE ID="_73">
+            <SHORT-NAME>NR_DefaultSession_Start</SHORT-NAME>
+            <LONG-NAME>NR Default Session Start</LONG-NAME>
+            <PARAMS>
+              <PARAM SEMANTIC="SERVICE-ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>SID_NR</SHORT-NAME>
+                <LONG-NAME>SID-NR</LONG-NAME>
+                <BYTE-POSITION>0</BYTE-POSITION>
+                <CODED-VALUE>127</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="SERVICEIDRQ" xsi:type="CODED-CONST">
+                <SHORT-NAME>SIDRQ_NR</SHORT-NAME>
+                <LONG-NAME>SIDRQ-NR</LONG-NAME>
+                <BYTE-POSITION>1</BYTE-POSITION>
+                <CODED-VALUE>16</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="DATA" xsi:type="VALUE">
+                <SHORT-NAME>Start_NR</SHORT-NAME>
+                <LONG-NAME>Start NR</LONG-NAME>
+                <BYTE-POSITION>2</BYTE-POSITION>
+                <DOP-REF ID-REF="_50"/>
+              </PARAM>
+              <PARAM SEMANTIC="DATA" xsi:type="NRC-CONST">
+                <SHORT-NAME>NRCConst_Start_NR</SHORT-NAME>
+                <LONG-NAME>Start NR</LONG-NAME>
+                <BYTE-POSITION>2</BYTE-POSITION>
+                <CODED-VALUES>
+                  <CODED-VALUE>34</CODED-VALUE>
+                </CODED-VALUES>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+            </PARAMS>
+          </NEG-RESPONSE>
+          <NEG-RESPONSE ID="_82">
+            <SHORT-NAME>NR_0xFDE0_Base_Model_Part_Number_Read_1</SHORT-NAME>
+            <LONG-NAME>NR 0xFED0: Tuning Variant Read</LONG-NAME>
+            <PARAMS>
+              <PARAM SEMANTIC="SERVICE-ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>SID_NR</SHORT-NAME>
+                <LONG-NAME>SID-NR</LONG-NAME>
+                <BYTE-POSITION>0</BYTE-POSITION>
+                <CODED-VALUE>127</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="SERVICEIDRQ" xsi:type="CODED-CONST">
+                <SHORT-NAME>SIDRQ_NR</SHORT-NAME>
+                <LONG-NAME>SIDRQ-NR</LONG-NAME>
+                <BYTE-POSITION>1</BYTE-POSITION>
+                <CODED-VALUE>34</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="DATA" xsi:type="VALUE">
+                <SHORT-NAME>Read_NR</SHORT-NAME>
+                <LONG-NAME>Read NR</LONG-NAME>
+                <BYTE-POSITION>2</BYTE-POSITION>
+                <DOP-REF ID-REF="_51"/>
+              </PARAM>
+              <PARAM SEMANTIC="DATA" xsi:type="NRC-CONST">
+                <SHORT-NAME>NRCConst_Read_NR</SHORT-NAME>
+                <LONG-NAME>Read NR</LONG-NAME>
+                <BYTE-POSITION>2</BYTE-POSITION>
+                <CODED-VALUES>
+                  <CODED-VALUE>19</CODED-VALUE>
+                  <CODED-VALUE>127</CODED-VALUE>
+                </CODED-VALUES>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+            </PARAMS>
+          </NEG-RESPONSE>
+          <NEG-RESPONSE ID="_87">
+            <SHORT-NAME>NR_0xFED0_Tuning_Variant_Write</SHORT-NAME>
+            <LONG-NAME>NR 0xFED0: Tuning Variant Write</LONG-NAME>
+            <PARAMS>
+              <PARAM SEMANTIC="SERVICE-ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>SID_NR</SHORT-NAME>
+                <LONG-NAME>SID-NR</LONG-NAME>
+                <BYTE-POSITION>0</BYTE-POSITION>
+                <CODED-VALUE>127</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="SERVICEIDRQ" xsi:type="CODED-CONST">
+                <SHORT-NAME>SIDRQ_NR</SHORT-NAME>
+                <LONG-NAME>SIDRQ-NR</LONG-NAME>
+                <BYTE-POSITION>1</BYTE-POSITION>
+                <CODED-VALUE>46</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="DATA" xsi:type="VALUE">
+                <SHORT-NAME>Write_NR</SHORT-NAME>
+                <LONG-NAME>Write NR</LONG-NAME>
+                <BYTE-POSITION>2</BYTE-POSITION>
+                <DOP-REF ID-REF="_52"/>
+              </PARAM>
+              <PARAM SEMANTIC="DATA" xsi:type="NRC-CONST">
+                <SHORT-NAME>NRCConst_Write_NR</SHORT-NAME>
+                <LONG-NAME>Write NR</LONG-NAME>
+                <BYTE-POSITION>2</BYTE-POSITION>
+                <CODED-VALUES>
+                  <CODED-VALUE>19</CODED-VALUE>
+                  <CODED-VALUE>51</CODED-VALUE>
+                  <CODED-VALUE>127</CODED-VALUE>
+                </CODED-VALUES>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+            </PARAMS>
+          </NEG-RESPONSE>
+          <NEG-RESPONSE ID="_92">
+            <SHORT-NAME>NR_0xFED1_Motor_Variant_Read</SHORT-NAME>
+            <LONG-NAME>NR 0xFED1: Motor Variant Read</LONG-NAME>
+            <PARAMS>
+              <PARAM SEMANTIC="SERVICE-ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>SID_NR</SHORT-NAME>
+                <LONG-NAME>SID-NR</LONG-NAME>
+                <BYTE-POSITION>0</BYTE-POSITION>
+                <CODED-VALUE>127</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="SERVICEIDRQ" xsi:type="CODED-CONST">
+                <SHORT-NAME>SIDRQ_NR</SHORT-NAME>
+                <LONG-NAME>SIDRQ-NR</LONG-NAME>
+                <BYTE-POSITION>1</BYTE-POSITION>
+                <CODED-VALUE>34</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="DATA" xsi:type="VALUE">
+                <SHORT-NAME>Read_NR</SHORT-NAME>
+                <LONG-NAME>Read NR</LONG-NAME>
+                <BYTE-POSITION>2</BYTE-POSITION>
+                <DOP-REF ID-REF="_51"/>
+              </PARAM>
+              <PARAM SEMANTIC="DATA" xsi:type="NRC-CONST">
+                <SHORT-NAME>NRCConst_Read_NR</SHORT-NAME>
+                <LONG-NAME>Read NR</LONG-NAME>
+                <BYTE-POSITION>2</BYTE-POSITION>
+                <CODED-VALUES>
+                  <CODED-VALUE>19</CODED-VALUE>
+                  <CODED-VALUE>127</CODED-VALUE>
+                </CODED-VALUES>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+            </PARAMS>
+          </NEG-RESPONSE>
+          <NEG-RESPONSE ID="_97">
+            <SHORT-NAME>NR_0xFED1_Motor_Variant_Write</SHORT-NAME>
+            <LONG-NAME>NR 0xFED1: Motor Variant Write</LONG-NAME>
+            <PARAMS>
+              <PARAM SEMANTIC="SERVICE-ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>SID_NR</SHORT-NAME>
+                <LONG-NAME>SID-NR</LONG-NAME>
+                <BYTE-POSITION>0</BYTE-POSITION>
+                <CODED-VALUE>127</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="SERVICEIDRQ" xsi:type="CODED-CONST">
+                <SHORT-NAME>SIDRQ_NR</SHORT-NAME>
+                <LONG-NAME>SIDRQ-NR</LONG-NAME>
+                <BYTE-POSITION>1</BYTE-POSITION>
+                <CODED-VALUE>46</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="DATA" xsi:type="VALUE">
+                <SHORT-NAME>Write_NR</SHORT-NAME>
+                <LONG-NAME>Write NR</LONG-NAME>
+                <BYTE-POSITION>2</BYTE-POSITION>
+                <DOP-REF ID-REF="_52"/>
+              </PARAM>
+              <PARAM SEMANTIC="DATA" xsi:type="NRC-CONST">
+                <SHORT-NAME>NRCConst_Write_NR</SHORT-NAME>
+                <LONG-NAME>Write NR</LONG-NAME>
+                <BYTE-POSITION>2</BYTE-POSITION>
+                <CODED-VALUES>
+                  <CODED-VALUE>19</CODED-VALUE>
+                  <CODED-VALUE>51</CODED-VALUE>
+                  <CODED-VALUE>127</CODED-VALUE>
+                </CODED-VALUES>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+            </PARAMS>
+          </NEG-RESPONSE>
+          <NEG-RESPONSE ID="_103">
+            <SHORT-NAME>NR_TesterPresent_Send</SHORT-NAME>
+            <LONG-NAME>NR Tester Present Send</LONG-NAME>
+            <PARAMS>
+              <PARAM SEMANTIC="SERVICE-ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>SID_NR</SHORT-NAME>
+                <LONG-NAME>SID-NR</LONG-NAME>
+                <BYTE-POSITION>0</BYTE-POSITION>
+                <CODED-VALUE>127</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM SEMANTIC="SERVICEIDRQ" xsi:type="CODED-CONST">
+                <SHORT-NAME>SIDRQ_NR</SHORT-NAME>
+                <LONG-NAME>SIDRQ-NR</LONG-NAME>
+                <BYTE-POSITION>1</BYTE-POSITION>
+                <CODED-VALUE>62</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM xsi:type="RESERVED">
+                <SHORT-NAME>Send</SHORT-NAME>
+                <LONG-NAME>Send</LONG-NAME>
+                <BYTE-POSITION>2</BYTE-POSITION>
+                <BIT-LENGTH>8</BIT-LENGTH>
+              </PARAM>
+            </PARAMS>
+          </NEG-RESPONSE>
+        </NEG-RESPONSES>
+        <GLOBAL-NEG-RESPONSES>
+          <GLOBAL-NEG-RESPONSE ID="_69">
+            <SHORT-NAME>UNSUPPORTED_SERVICE_NR</SHORT-NAME>
+            <LONG-NAME>Negative Response Codes for unsupported services</LONG-NAME>
+            <PARAMS>
+              <PARAM SEMANTIC="SERVICE-ID" xsi:type="CODED-CONST">
+                <SHORT-NAME>SID_NR</SHORT-NAME>
+                <LONG-NAME>SID-NR</LONG-NAME>
+                <BYTE-POSITION>0</BYTE-POSITION>
+                <CODED-VALUE>127</CODED-VALUE>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+              <PARAM xsi:type="RESERVED">
+                <SHORT-NAME>SID_RQ_NR</SHORT-NAME>
+                <LONG-NAME>SID-RQ-NR</LONG-NAME>
+                <BYTE-POSITION>1</BYTE-POSITION>
+                <BIT-LENGTH>8</BIT-LENGTH>
+              </PARAM>
+              <PARAM SEMANTIC="DATA" xsi:type="VALUE">
+                <SHORT-NAME>NRC</SHORT-NAME>
+                <LONG-NAME>NEGATIVE RESPONSE CODES</LONG-NAME>
+                <BYTE-POSITION>2</BYTE-POSITION>
+                <DOP-REF ID-REF="_53"/>
+              </PARAM>
+              <PARAM SEMANTIC="DATA" xsi:type="NRC-CONST">
+                <SHORT-NAME>NRCConst_NRC</SHORT-NAME>
+                <LONG-NAME>NEGATIVE RESPONSE CODES</LONG-NAME>
+                <BYTE-POSITION>2</BYTE-POSITION>
+                <CODED-VALUES>
+                  <CODED-VALUE>17</CODED-VALUE>
+                  <CODED-VALUE>18</CODED-VALUE>
+                </CODED-VALUES>
+                <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                  <BIT-LENGTH>8</BIT-LENGTH>
+                </DIAG-CODED-TYPE>
+              </PARAM>
+            </PARAMS>
+          </GLOBAL-NEG-RESPONSE>
+        </GLOBAL-NEG-RESPONSES>
+        <STATE-CHARTS>
+          <STATE-CHART ID="_57">
+            <SHORT-NAME>Session</SHORT-NAME>
+            <LONG-NAME>Session</LONG-NAME>
+            <SEMANTIC>SESSION</SEMANTIC>
+            <STATE-TRANSITIONS>
+              <STATE-TRANSITION ID="_76">
+                <SHORT-NAME>Default_Default</SHORT-NAME>
+                <LONG-NAME>Default Default</LONG-NAME>
+                <SOURCE-SNREF SHORT-NAME="Default"/>
+                <TARGET-SNREF SHORT-NAME="Default"/>
+              </STATE-TRANSITION>
+              <STATE-TRANSITION ID="_77">
+                <SHORT-NAME>Nxtr_Default</SHORT-NAME>
+                <LONG-NAME>Nxtr Default</LONG-NAME>
+                <SOURCE-SNREF SHORT-NAME="Nxtr"/>
+                <TARGET-SNREF SHORT-NAME="Default"/>
+              </STATE-TRANSITION>
+            </STATE-TRANSITIONS>
+            <START-STATE-SNREF SHORT-NAME="Default"/>
+            <STATES>
+              <STATE ID="_58">
+                <SHORT-NAME>Default</SHORT-NAME>
+                <LONG-NAME>Default</LONG-NAME>
+              </STATE>
+              <STATE ID="_59">
+                <SHORT-NAME>Nxtr</SHORT-NAME>
+                <LONG-NAME>Nxtr</LONG-NAME>
+              </STATE>
+            </STATES>
+          </STATE-CHART>
+          <STATE-CHART ID="_60">
+            <SHORT-NAME>SecurityAccess</SHORT-NAME>
+            <LONG-NAME>SecurityAccess</LONG-NAME>
+            <SEMANTIC>SECURITY</SEMANTIC>
+            <START-STATE-SNREF SHORT-NAME="Locked"/>
+            <STATES>
+              <STATE ID="_61">
+                <SHORT-NAME>Locked</SHORT-NAME>
+                <LONG-NAME>Locked</LONG-NAME>
+              </STATE>
+              <STATE ID="_62">
+                <SHORT-NAME>Unlocked</SHORT-NAME>
+                <LONG-NAME>Unlocked</LONG-NAME>
+              </STATE>
+            </STATES>
+          </STATE-CHART>
+        </STATE-CHARTS>
+        <COMPARAM-REFS>
+          <COMPARAM-REF ID-REF="ISO_15765_3.CP_P2Max" DOCREF="ISO_15765_3" DOCTYPE="COMPARAM-SUBSET">
+            <SIMPLE-VALUE>150000</SIMPLE-VALUE>
+            <DESC>
+              <p>Timeout for the client to wait after the successful transmission of a request message for the start of incoming response messages. In UDS this is the timeout for the default session.</p>
+            </DESC>
+            <PROTOCOL-SNREF SHORT-NAME="Diag_CAN"/>
+          </COMPARAM-REF>
+          <COMPARAM-REF ID-REF="ISO_15765_3.CP_P2Star" DOCREF="ISO_15765_3" DOCTYPE="COMPARAM-SUBSET">
+            <SIMPLE-VALUE>2000000</SIMPLE-VALUE>
+            <DESC>
+              <p>Enhanced timeout for the client to wait after the reception of a negative response message with response code 78 hex for the start of incoming response messages. In UDS this is the timeout for the default session.</p>
+            </DESC>
+            <PROTOCOL-SNREF SHORT-NAME="Diag_CAN"/>
+          </COMPARAM-REF>
+          <COMPARAM-REF ID-REF="ISO_15765_3.CP_TesterPresentTime" DOCREF="ISO_15765_3" DOCTYPE="COMPARAM-SUBSET">
+            <SIMPLE-VALUE>4000000</SIMPLE-VALUE>
+            <DESC>
+              <p>Time between functionally addressed Tester Present request messages transmitted by the client to keep a diagnostic session other than the defaultSession active in multiple servers (functional communication) or maximum time between physically transmitted request messages to a single server (physical communication).</p>
+            </DESC>
+            <PROTOCOL-SNREF SHORT-NAME="Diag_CAN"/>
+          </COMPARAM-REF>
+          <COMPARAM-REF ID-REF="ISO_15765_3.CP_P3Phys" DOCREF="ISO_15765_3" DOCTYPE="COMPARAM-SUBSET">
+            <SIMPLE-VALUE>100000</SIMPLE-VALUE>
+            <DESC>
+              <p>Minimum time for the client to wait after the successful transmission of a physically addressed request message (indicated via N_USData.con) with no response required before it can transmit the next physically addressed request message.
+Minimum value = P2Server</p>
+            </DESC>
+            <PROTOCOL-SNREF SHORT-NAME="Diag_CAN"/>
+          </COMPARAM-REF>
+          <COMPARAM-REF ID-REF="ISO_15765_2.CP_StMin" DOCREF="ISO_15765_2" DOCTYPE="COMPARAM-SUBSET">
+            <SIMPLE-VALUE>10000</SIMPLE-VALUE>
+            <DESC>
+              <p>(Separation Time) defines the minimum time gap between consecutive frames.Values from 0x00 to 0x7F (0 – 127) are absolute milliseconds.Values from 0xF1 to 0xF9 are even 100 micro seconds.Every other value range is reserved and should not be used.</p>
+            </DESC>
+            <PROTOCOL-SNREF SHORT-NAME="Diag_CAN"/>
+          </COMPARAM-REF>
+          <COMPARAM-REF ID-REF="ISO_15765_2.CP_BlockSize" DOCREF="ISO_15765_2" DOCTYPE="COMPARAM-SUBSET">
+            <SIMPLE-VALUE>0</SIMPLE-VALUE>
+            <DESC>
+              <p>The Blocksize parameter indicates, how many consecutive frames shall be sent in a transmission before a flow control frame is sent. The number 0 tells the sender, that no more flow controls should disrupt the sending of the remaining flow controls</p>
+            </DESC>
+            <PROTOCOL-SNREF SHORT-NAME="Diag_CAN"/>
+          </COMPARAM-REF>
+          <COMPARAM-REF ID-REF="ISO_15765_2.CP_As" DOCREF="ISO_15765_2" DOCTYPE="COMPARAM-SUBSET">
+            <SIMPLE-VALUE>1000000</SIMPLE-VALUE>
+            <DESC>
+              <p>Time for transmission of frame, sender side</p>
+            </DESC>
+            <PROTOCOL-SNREF SHORT-NAME="Diag_CAN"/>
+          </COMPARAM-REF>
+          <COMPARAM-REF ID-REF="ISO_15765_2.CP_Ar" DOCREF="ISO_15765_2" DOCTYPE="COMPARAM-SUBSET">
+            <SIMPLE-VALUE>1000000</SIMPLE-VALUE>
+            <DESC>
+              <p>Time for transmission of frame, receiver side</p>
+            </DESC>
+            <PROTOCOL-SNREF SHORT-NAME="Diag_CAN"/>
+          </COMPARAM-REF>
+          <COMPARAM-REF ID-REF="ISO_15765_2.CP_Bs" DOCREF="ISO_15765_2" DOCTYPE="COMPARAM-SUBSET">
+            <SIMPLE-VALUE>1000000</SIMPLE-VALUE>
+            <DESC>
+              <p>Time until reception of next flow control</p>
+            </DESC>
+            <PROTOCOL-SNREF SHORT-NAME="Diag_CAN"/>
+          </COMPARAM-REF>
+          <COMPARAM-REF ID-REF="ISO_15765_2.CP_Br" DOCREF="ISO_15765_2" DOCTYPE="COMPARAM-SUBSET">
+            <SIMPLE-VALUE>1000000</SIMPLE-VALUE>
+            <DESC>
+              <p>Time for next transmission of flow control</p>
+            </DESC>
+            <PROTOCOL-SNREF SHORT-NAME="Diag_CAN"/>
+          </COMPARAM-REF>
+          <COMPARAM-REF ID-REF="ISO_15765_2.CP_Cs" DOCREF="ISO_15765_2" DOCTYPE="COMPARAM-SUBSET">
+            <SIMPLE-VALUE>1000000</SIMPLE-VALUE>
+            <DESC>
+              <p>Time until next transmission of consecutive frame</p>
+            </DESC>
+            <PROTOCOL-SNREF SHORT-NAME="Diag_CAN"/>
+          </COMPARAM-REF>
+          <COMPARAM-REF ID-REF="ISO_15765_2.CP_Cr" DOCREF="ISO_15765_2" DOCTYPE="COMPARAM-SUBSET">
+            <SIMPLE-VALUE>1000000</SIMPLE-VALUE>
+            <DESC>
+              <p>Time until reception of next consecutive frame</p>
+            </DESC>
+            <PROTOCOL-SNREF SHORT-NAME="Diag_CAN"/>
+          </COMPARAM-REF>
+          <COMPARAM-REF ID-REF="ISO_11898_2_DWCAN.CP_Baudrate" DOCREF="ISO_11898_2_DWCAN" DOCTYPE="COMPARAM-SUBSET">
+            <SIMPLE-VALUE>500000</SIMPLE-VALUE>
+            <DESC>
+              <p>Bus Speed of the used transport media. Caution, the Bus Speed has to be set identical in all ECUs connected to one subnet.</p>
+            </DESC>
+            <PROTOCOL-SNREF SHORT-NAME="Diag_CAN"/>
+          </COMPARAM-REF>
+          <COMPARAM-REF ID-REF="ISO_15765_2.CP_UniqueRespIdTable" DOCREF="ISO_15765_2" DOCTYPE="COMPARAM-SUBSET">
+            <COMPLEX-VALUE>
+              <SIMPLE-VALUE>0</SIMPLE-VALUE>
+              <SIMPLE-VALUE>normal segmented 11-bit transmit with FC</SIMPLE-VALUE>
+              <SIMPLE-VALUE>1810</SIMPLE-VALUE>
+              <SIMPLE-VALUE>0</SIMPLE-VALUE>
+              <SIMPLE-VALUE>normal segmented 11-bit receive with FC</SIMPLE-VALUE>
+              <SIMPLE-VALUE>1808</SIMPLE-VALUE>
+              <SIMPLE-VALUE>0</SIMPLE-VALUE>
+              <SIMPLE-VALUE>normal unsegmented 11-bit receive</SIMPLE-VALUE>
+              <SIMPLE-VALUE>4294967295</SIMPLE-VALUE>
+              <SIMPLE-VALUE>EPS</SIMPLE-VALUE>
+            </COMPLEX-VALUE>
+            <PROTOCOL-SNREF SHORT-NAME="Diag_CAN"/>
+          </COMPARAM-REF>
+        </COMPARAM-REFS>
+        <PARENT-REFS>
+          <PARENT-REF ID-REF="_67" xsi:type="PROTOCOL-REF"/>
+        </PARENT-REFS>
+      </BASE-VARIANT>
+    </BASE-VARIANTS>
+  </DIAG-LAYER-CONTAINER>
+</ODX>

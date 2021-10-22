@@ -1,0 +1,39 @@
+/* Contract file for CM102A */
+#include <v800_ghs.h> /* for SYNCM intrinsic */  
+#include <string.h>
+
+#define MCUDIAGCERRINJ		STD_OFF
+
+extern void ClrErrInjReg_Oper(void);
+extern void ReadErrInjReg_Oper(uint32* ErrId);
+
+#if (MCUDIAGCERRINJ == STD_ON)
+extern VAR(uint32, AUTOMATIC) McuDiagcTestVar1_G;
+extern VAR(uint32, AUTOMATIC) McuDiagcTestAry_G[8U];
+extern VAR(uint32, AUTOMATIC) DmaWrDataVar_G;
+#endif
+
+#if(MCUDIAGCERRINJ == STD_ON)
+
+#define MCUERRINJ_NTC0002BIT00CASE01_CNT_U32		(0x00020101U)
+#define MCUERRINJ_NTC0002BIT00CASE02_CNT_U32		(0x00020102U)
+#define MCUERRINJ_NTC0003BIT00CASE01_CNT_U32		(0x00030101U)
+#define MCUERRINJ_NTC0003BIT00CASE02_CNT_U32		(0x00030102U)
+#define MCUERRINJ_NTC0003BIT01CASE01_CNT_U32		(0x00030201U)
+#define MCUERRINJ_NTC0003BIT01CASE02_CNT_U32		(0x00030202U)
+#define MCUERRINJ_NTC0003BIT01CASE03_CNT_U32		(0x00030203U)
+#define MCUERRINJ_NTC0003BIT01CASE04_CNT_U32		(0x00030204U)
+#define MCUERRINJ_NTC0003BIT02CASE01_CNT_U32		(0x00030401U)
+
+#define MCUERRINJ_CPU1PEID_CNT_U32 				((uint32)0x01U)
+#define MCUERRINJ_PRPHLTOLCLRAMSPID_CNT_U32		((uint32)0x03U)  /* Peripheral to Local RAM SPID = 3U - Not used*/
+#define MCUERRINJ_LCLRAMTOPRPHLSPID_CNT_U32		((uint32)0x02U)  /* Local RAM to Peripheral SPID = 2U - Not used */
+#define MCUERRINJ_LCLRAMTOLCLRAMSPID_CNT_U32	((uint32)0x00U)  /* Local RAM to Local RAM SPID = 0U */
+#define MCUERRINJ_USRMODENA_CNT_U32				((uint32)0x1U)   /* User Mode Bit : 1: User Mode Access Allowed - Not used*/
+#define MCUERRINJ_USRMODDI_CNT_U32				((uint32)0x0U)   /* User Mode Bit : 0: Supervisor Mode access only */
+
+#define MCUERRINJ_SNGBITECCERRADR1_CNT_U32		((uint32)0x0100A000U)
+#define MCUERRINJ_SNGBITECCERRADR2_CNT_U32		((uint32)0x0100A010U)
+#define MCUERRINJ_DBLBITECCERRADR_CNT_U32		((uint32)0x0100A8B0U)
+#endif
+

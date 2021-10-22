@@ -1,0 +1,35 @@
+#
+# CMakeLists.txt for generic part of BAC Module StdDiag
+#
+
+cmake_minimum_required(VERSION 3.1)
+SET(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
+LIST(INSERT CMAKE_MODULE_PATH 0 "$ENV{BPS_CMAKE_MODULE_PATH}")
+
+project(StdDiag.generic C CXX)
+include (BAC)
+
+bps_module(
+   StdDiag
+
+   SRC
+      StdDiag.c
+      StdDiag_ProgPreparation.c
+      StdDiag_ActiveSessionState.c
+      StdDiag_CheckProgPrecondition.c
+      StdDiag_IDRL.c
+   INCLUDE
+      StdDiag.h
+      StdDiag_UDSAdapter.h
+   GENERATE/VERIFY
+   GENERATE/INCLUDE
+      StdDiag_Version.h.pgen
+      StdDiag_Cfg.h.pgen
+   GENERATE/SRC
+      StdDiag_Cfg.c.pgen
+   GENERATE/INPUT
+      StdDiag
+   CFGDESC
+      StdDiag_paramdef.arxml
+)
+

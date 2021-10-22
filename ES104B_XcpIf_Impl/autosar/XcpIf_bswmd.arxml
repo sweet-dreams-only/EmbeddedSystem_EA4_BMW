@@ -1,0 +1,1191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-0-3.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://autosar.org/schema/r4.0">
+    <AR-PACKAGES>
+        <AR-PACKAGE UUID="9c5cf824-7831-4a06-877a-49e2b3d79a3b">
+            <SHORT-NAME>Nxtr</SHORT-NAME>
+            <AR-PACKAGES>
+                <AR-PACKAGE UUID="">
+                    <SHORT-NAME>EcucDefs_XcpIf</SHORT-NAME>
+                    <ELEMENTS>
+                        <ECUC-DEFINITION-COLLECTION UUID="ECUS:627c9111-ec39-446b-a5a8-48bdb7d3bcc8">
+                            <SHORT-NAME>NxtrParameterDefinition_XcpIf</SHORT-NAME>
+                            <MODULE-REFS>
+                                <MODULE-REF DEST="ECUC-MODULE-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf</MODULE-REF>
+                            </MODULE-REFS>
+                        </ECUC-DEFINITION-COLLECTION>
+                        <ECUC-MODULE-DEF UUID="">
+                            <SHORT-NAME>XcpIf</SHORT-NAME>
+                            <DESC>
+                                <L-2 L="EN">Settings for the XCP Interface component</L-2>
+                            </DESC>
+                            <CATEGORY>VENDOR_SPECIFIC_MODULE_DEFINITION</CATEGORY>
+                            <ADMIN-DATA>
+                                <DOC-REVISIONS>
+                                    <DOC-REVISION>
+                                        <REVISION-LABEL>1.0.0</REVISION-LABEL>
+                                        <STATE>released</STATE>
+                                        <ISSUED-BY>Nxtr</ISSUED-BY>
+                                        <DATE>2017-06-14</DATE>
+                                        <MODIFICATIONS>
+                                            <MODIFICATION>
+                                                <CHANGE>
+                                                    <L-2 L="EN">Initial Release</L-2>
+                                                </CHANGE>
+                                                <REASON>
+                                                    <L-2 L="EN"></L-2>
+                                                </REASON>
+                                            </MODIFICATION>
+                                        </MODIFICATIONS>
+                                    </DOC-REVISION>
+                                </DOC-REVISIONS>
+                            </ADMIN-DATA>
+                            <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                            <REFINED-MODULE-DEF-REF DEST="ECUC-MODULE-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf</REFINED-MODULE-DEF-REF>
+                            <SUPPORTED-CONFIG-VARIANTS>
+                                <SUPPORTED-CONFIG-VARIANT>VARIANT-PRE-COMPILE</SUPPORTED-CONFIG-VARIANT>
+                            </SUPPORTED-CONFIG-VARIANTS>
+                            <CONTAINERS>
+                                <!-- CONTAINER DEFINITION: XcpDriverAbstratction -->
+                                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="">
+                                    <SHORT-NAME>XcpDriverAbstratction</SHORT-NAME>
+                                    <DESC>
+                                        <L-2 L="EN">Container that maps XCP driver errors to the XcpIf component. Default values match that of the 1.0.0 version of the XCP driver for AR4.0.3.</L-2>
+                                    </DESC>
+                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                    <POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+                                    <MULTIPLE-CONFIGURATION-CONTAINER>false</MULTIPLE-CONFIGURATION-CONTAINER>
+                                    <PARAMETERS>
+                                        <!-- PARAMETER DEFINITION: XcpIf: Includes -->
+                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                            <SHORT-NAME>XcpIfIncludes</SHORT-NAME>
+                                            <DESC>
+                                                <L-2 L="EN">List of header files to be included.</L-2>
+                                            </DESC>
+                                            <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                            <UPPER-MULTIPLICITY>65535</UPPER-MULTIPLICITY>
+                                            <ORIGIN>Nxtr</ORIGIN>
+                                        </ECUC-STRING-PARAM-DEF>
+                                    </PARAMETERS>
+                                    <REFERENCES>
+                                        <!-- REFERENCE DEFINITION: NvMOsApplicationRef -->
+                                        <ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="">
+                                            <SHORT-NAME>XcpOsApplicationRef</SHORT-NAME>
+                                            <LONG-NAME>Xcp Os Application</LONG-NAME>
+                                            <DESC>
+                                                <L-2 L="EN">This defines the application in which the Vector Xcp driver is integrated.</L-2>
+                                            </DESC>
+                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                            <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                                            <DESTINATION-REF DEST="PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/Os/OsApplication</DESTINATION-REF>
+                                        </ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
+                                    </REFERENCES>
+                                    <SUB-CONTAINERS>
+                                        <!-- SUB-CONTAINER DEFINITION: XCP Constants -->
+                                        <ECUC-PARAM-CONF-CONTAINER-DEF UUID="">
+                                            <SHORT-NAME>Constants</SHORT-NAME>
+                                            <DESC>
+                                                <L-2 L="EN">Abstraction for XCP driver constants.</L-2>
+                                            </DESC>
+                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                            <POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+                                            <MULTIPLE-CONFIGURATION-CONTAINER>false</MULTIPLE-CONFIGURATION-CONTAINER>
+                                            <PARAMETERS>
+                                            </PARAMETERS>
+                                            <REFERENCES>
+                                            </REFERENCES>
+                                            <SUB-CONTAINERS>
+                                                <!-- SUB-CONTAINER DEFINITION: XCP Constants: Command Error Codes -->
+                                                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="">
+                                                    <SHORT-NAME>CommandErrorCodes</SHORT-NAME>
+                                                    <DESC>
+                                                        <L-2 L="EN">Mapping for XCP command error codes.</L-2>
+                                                    </DESC>
+                                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+                                                    <MULTIPLE-CONFIGURATION-CONTAINER>false</MULTIPLE-CONFIGURATION-CONTAINER>
+                                                    <PARAMETERS>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_ERRCMDSYNC_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_ERRCMDSYNC_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_ERR_CMD_SYNCH</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_ERRCMDBUSY_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_ERRCMDBUSY_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_ERR_CMD_BUSY</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_ERRDAQACTV_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_ERRDAQACTV_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_ERR_DAQ_ACTIVE</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_ERRPRMACTV_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_ERRPRMACTV_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_ERR_PRM_ACTIVE</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_ERRCMDUKWN_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_ERRCMDUKWN_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_ERR_CMD_UNKNOWN</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_ERRCMDSYNTAX_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_ERRCMDSYNTAX_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_ERR_CMD_SYNTAX</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_ERROUTOFRNG_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_ERROUTOFRNG_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_ERR_OUT_OF_RANGE</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_ERRWRPROTD_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_ERRWRPROTD_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_ERR_WRITE_PROTECTED</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_ERRACSDENIED_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_ERRACSDENIED_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_ERR_ACCESS_DENIED</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_ERRACSLOCKD_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_ERRACSLOCKD_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_ERR_ACCESS_LOCKED</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_ERRPAGENOTVLD_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_ERRPAGENOTVLD_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_ERR_PAGE_NOT_VALID</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_ERRPAGEMODNOTVLD_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_ERRPAGEMODNOTVLD_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_ERR_PAGE_MODE_NOT_VALID</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_ERRSEGNOTVLD_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_ERRSEGNOTVLD_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_ERR_SEGMENT_NOT_VALID</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_ERRSEQ_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_ERRSEQ_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_ERR_SEQUENCE</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_ERRDATAACQNCFG_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_ERRDATAACQNCFG_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_ERR_DAQ_CONFIG</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_ERRMEMOVF_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_ERRMEMOVF_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_ERR_MEMORY_OVERFLOW</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_ERRGEN_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_ERRGEN_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_ERR_GENERIC</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_ERRVRFY_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_ERRVRFY_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_ERR_VERIFY</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_ERRRSRCTMPNOTAVL_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_ERRRSRCTMPNOTAVL_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_ERR_RESOURCE_TEMP_NOT_ACCESSIBLE</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                    </PARAMETERS>
+                                                    <REFERENCES>
+                                                    </REFERENCES>
+                                                </ECUC-PARAM-CONF-CONTAINER-DEF>
+                                                <!-- SUB-CONTAINER DEFINITION: XCP Constants: Command Return Codes -->
+                                                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="">
+                                                    <SHORT-NAME>CommandReturnCodes</SHORT-NAME>
+                                                    <DESC>
+                                                        <L-2 L="EN">Mapping for XCP command return codes.</L-2>
+                                                    </DESC>
+                                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+                                                    <MULTIPLE-CONFIGURATION-CONTAINER>false</MULTIPLE-CONFIGURATION-CONTAINER>
+                                                    <PARAMETERS>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_RTNCMDSYNC_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_RTNCMDSYNC_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CRC_CMD_SYNCH</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_RTNCMDBUSY_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_RTNCMDBUSY_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CRC_CMD_BUSY</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_RTNDAQACTV_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_RTNDAQACTV_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CRC_DAQ_ACTIVE</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_RTNPRMACTV_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_RTNPRMACTV_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CRC_PRM_ACTIVE</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_RTNCMDUKWN_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_RTNCMDUKWN_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CRC_CMD_UNKNOWN</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_RTNCMDSYNTAX_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_RTNCMDSYNTAX_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CRC_CMD_SYNTAX</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_RTNOUTOFRNG_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_RTNOUTOFRNG_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CRC_OUT_OF_RANGE</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_RTNWRPROTD_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_RTNWRPROTD_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CRC_WRITE_PROTECTED</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_RTNACSDENIED_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_RTNACSDENIED_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CRC_ACCESS_DENIED</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_RTNACSLOCKD_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_RTNACSLOCKD_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CRC_ACCESS_LOCKED</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_RTNPAGENOTVLD_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_RTNPAGENOTVLD_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CRC_PAGE_NOT_VALID</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_RTNPAGEMODNOTVLD_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_RTNPAGEMODNOTVLD_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CRC_PAGE_MODE_NOT_VALID</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_RTNSEGNOTVLD_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_RTNSEGNOTVLD_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CRC_SEGMENT_NOT_VALID</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_RTNSEQ_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_RTNSEQ_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CRC_SEQUENCE</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_RTNDATAACQNCFG_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_RTNDATAACQNCFG_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CRC_DAQ_CONFIG</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_RTNMEMOVF_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_RTNMEMOVF_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CRC_MEMORY_OVERFLOW</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_RTNGEN_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_RTNGEN_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CRC_GENERIC</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_RTNVRFY_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_RTNVRFY_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CRC_VERIFY</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_RTNRSRCTMPNOTAVL_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_RTNRSRCTMPNOTAVL_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CRC_RESOURCE_TEMP_NOT_ACCESSIBLE</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                    </PARAMETERS>
+                                                    <REFERENCES>
+                                                    </REFERENCES>
+                                                </ECUC-PARAM-CONF-CONTAINER-DEF>
+                                                <!-- SUB-CONTAINER DEFINITION: XCP Constants: Return Values -->
+                                                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="">
+                                                    <SHORT-NAME>ReturnValues</SHORT-NAME>
+                                                    <DESC>
+                                                        <L-2 L="EN">Mapping for XCP return values.</L-2>
+                                                    </DESC>
+                                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+                                                    <MULTIPLE-CONFIGURATION-CONTAINER>false</MULTIPLE-CONFIGURATION-CONTAINER>
+                                                    <PARAMETERS>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_CMDOK_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_CMDOK_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CMD_OK</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_CMDPND_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_CMDPND_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CMD_PENDING</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_CMDBUSY_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_CMDBUSY_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CMD_BUSY</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_CMDUKWN_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_CMDUKWN_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CMD_UNKNOWN</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_CMDSYNTAX_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_CMDSYNTAX_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CMD_SYNTAX</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_CMDOUTOFRNG_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_CMDOUTOFRNG_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CMD_OUT_OF_RANGE</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_CMDPROTD_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_CMDPROTD_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CMD_PROTECTED</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_CMDDENIED_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_CMDDENIED_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CMD_DENIED</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_CMDERR_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_CMDERR_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_CMD_ERROR</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                    </PARAMETERS>
+                                                    <REFERENCES>
+                                                    </REFERENCES>
+                                                </ECUC-PARAM-CONF-CONTAINER-DEF>
+                                            </SUB-CONTAINERS>
+                                        </ECUC-PARAM-CONF-CONTAINER-DEF>
+                                        <!-- SUB-CONTAINER DEFINITION: XCP Configurations -->
+                                        <ECUC-PARAM-CONF-CONTAINER-DEF UUID="">
+                                            <SHORT-NAME>Configurations</SHORT-NAME>
+                                            <DESC>
+                                                <L-2 L="EN">Abstraction for XCP driver configuration values.</L-2>
+                                            </DESC>
+                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                            <POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+                                            <MULTIPLE-CONFIGURATION-CONTAINER>false</MULTIPLE-CONFIGURATION-CONTAINER>
+                                            <PARAMETERS>
+                                            </PARAMETERS>
+                                            <REFERENCES>
+                                            </REFERENCES>
+                                            <SUB-CONTAINERS>
+                                                <!-- SUB-CONTAINER DEFINITION: XCP Config: Data Acquisition -->
+                                                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="">
+                                                    <SHORT-NAME>DataAcquisition</SHORT-NAME>
+                                                    <DESC>
+                                                        <L-2 L="EN">Configuration settings for data acquisition.</L-2>
+                                                    </DESC>
+                                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+                                                    <MULTIPLE-CONFIGURATION-CONTAINER>false</MULTIPLE-CONFIGURATION-CONTAINER>
+                                                    <PARAMETERS>
+                                                        <!-- PARAMETER DEFINITION: XCP Config: Data Acquisition - XcpEventFunction -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XcpEventFunctionName</SHORT-NAME>
+                                                            <DESC>
+                                                                <L-2 L="EN">Creates a macro definition of XCPIF_XCPEVE(x) [XcpEventFunctionName](x)</L-2>
+                                                            </DESC>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>Xcp_Event</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                    </PARAMETERS>
+                                                    <REFERENCES>
+                                                    </REFERENCES>
+                                                    <SUB-CONTAINERS>
+                                                    </SUB-CONTAINERS>
+                                                </ECUC-PARAM-CONF-CONTAINER-DEF>
+                                                <!-- SUB-CONTAINER DEFINITION: XCP Config: XCP User Function -->
+                                                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="">
+                                                    <SHORT-NAME>XcpUserFunction</SHORT-NAME>
+                                                    <DESC>
+                                                        <L-2 L="EN">Configuration settings for XCP user functions.</L-2>
+                                                    </DESC>
+                                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+                                                    <MULTIPLE-CONFIGURATION-CONTAINER>false</MULTIPLE-CONFIGURATION-CONTAINER>
+                                                    <PARAMETERS>
+                                                        <!-- PARAMETER DEFINITION: XCP Config: XCP User Function - Response Buffer -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>ResponseBuffer</SHORT-NAME>
+                                                            <DESC>
+                                                                <L-2 L="EN">Creates a macro definition for XCPIF_RESPBUF_CNT_U08.</L-2>
+                                                            </DESC>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>Xcp_ChannelInfo[0].ResponseFrame.b</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: XCP Config: XCP User Function - Response Buffer Length-->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>ResponseBufferLength</SHORT-NAME>
+                                                            <DESC>
+                                                                <L-2 L="EN">Creates a macro definition for XCPIF_RESPBUFLEN_CNT_U08.</L-2>
+                                                            </DESC>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>Xcp_ChannelInfo[0].ResponseFrameLength</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                    </PARAMETERS>
+                                                    <REFERENCES>
+                                                    </REFERENCES>
+                                                    <SUB-CONTAINERS>
+                                                    </SUB-CONTAINERS>
+                                                </ECUC-PARAM-CONF-CONTAINER-DEF>
+                                                <!-- SUB-CONTAINER DEFINITION: XCP Config: Online Calibration -->
+                                                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="">
+                                                    <SHORT-NAME>OnlineCalibration</SHORT-NAME>
+                                                    <DESC>
+                                                        <L-2 L="EN">Configuration settings for XCP online calibration functions.</L-2>
+                                                    </DESC>
+                                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+                                                    <MULTIPLE-CONFIGURATION-CONTAINER>false</MULTIPLE-CONFIGURATION-CONTAINER>
+                                                    <PARAMETERS>
+                                                        <!-- PARAMETER DEFINITION: XCP Configuration: XCPIF_MAXCALSEG_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_MAXCALSEG_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_MAX_SEGMENT</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: XCP Configuration: XCPIF_MAXCALPAGE_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_MAXCALPAGE_CNT_U08</SHORT-NAME>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_MAX_PAGES</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: XCP Configuration: XCPIF_FLSPAGE_CNT_U08 -->
+                                                        <ECUC-INTEGER-PARAM-DEF UUID="7e06e0fc-f057-4691-b9eb-a96179f25157">
+                                                            <SHORT-NAME>XCPIF_FLSPAGE_CNT_U08</SHORT-NAME>
+                                                            <DESC>
+                                                                <L-2 L="EN">This index is for the flash page. Typically this is a value of 0.</L-2>
+                                                            </DESC>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <DEFAULT-VALUE>0</DEFAULT-VALUE>
+                                                            <MAX>1</MAX>
+                                                            <MIN>0</MIN>
+                                                        </ECUC-INTEGER-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: XCP Configuration: XCPIF_RAMPAGE_CNT_U08 -->
+                                                        <ECUC-INTEGER-PARAM-DEF UUID="7e06e0fc-f057-4691-b9eb-a96179f25157">
+                                                            <SHORT-NAME>XCPIF_RAMPAGE_CNT_U08</SHORT-NAME>
+                                                            <DESC>
+                                                                <L-2 L="EN">This index is for the RAM page. Typically this is a value of 1.</L-2>
+                                                            </DESC>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <DEFAULT-VALUE>1</DEFAULT-VALUE>
+                                                            <MAX>1</MAX>
+                                                            <MIN>0</MIN>
+                                                        </ECUC-INTEGER-PARAM-DEF>
+                                                    </PARAMETERS>
+                                                    <REFERENCES>
+                                                    </REFERENCES>
+                                                    <SUB-CONTAINERS>
+                                                        <!-- SUB-CONTAINER DEFINITION: XCP Constants: XCP Access Modes -->
+                                                        <ECUC-PARAM-CONF-CONTAINER-DEF UUID="">
+                                                            <SHORT-NAME>XcpAccessModes</SHORT-NAME>
+                                                            <DESC>
+                                                                <L-2 L="EN">Mapping for XCP and ECU access modes.</L-2>
+                                                            </DESC>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+                                                            <MULTIPLE-CONFIGURATION-CONTAINER>false</MULTIPLE-CONFIGURATION-CONTAINER>
+                                                            <PARAMETERS>
+                                                                <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_ONLINECALNOACS_CNT_U08 -->
+                                                                <ECUC-INTEGER-PARAM-DEF UUID="7e06e0fc-f057-4691-b9eb-a96179f25157">
+                                                                    <SHORT-NAME>XCPIF_ONLINECALNOACS_CNT_U08</SHORT-NAME>
+                                                                    <DESC>
+                                                                        <L-2 L="EN">Removes XCP and ECU access from the page.</L-2>
+                                                                    </DESC>
+                                                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                                    <IMPLEMENTATION-CONFIG-CLASSES />
+                                                                    <ORIGIN>NXTR</ORIGIN>
+                                                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                                    <DEFAULT-VALUE>0</DEFAULT-VALUE>
+                                                                    <MAX>0</MAX>
+                                                                    <MIN>0</MIN>
+                                                                </ECUC-INTEGER-PARAM-DEF>
+                                                                <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_ONLINECALECUACS_CNT_U08 -->
+                                                                <ECUC-INTEGER-PARAM-DEF UUID="7e06e0fc-f057-4691-b9eb-a96179f25157">
+                                                                    <SHORT-NAME>XCPIF_ONLINECALECUACS_CNT_U08</SHORT-NAME>
+                                                                    <DESC>
+                                                                        <L-2 L="EN">Grants ECU access to the page.</L-2>
+                                                                    </DESC>
+                                                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                                    <IMPLEMENTATION-CONFIG-CLASSES />
+                                                                    <ORIGIN>NXTR</ORIGIN>
+                                                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                                    <DEFAULT-VALUE>1</DEFAULT-VALUE>
+                                                                    <MAX>1</MAX>
+                                                                    <MIN>1</MIN>
+                                                                </ECUC-INTEGER-PARAM-DEF>
+                                                                <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_ONLINECALXCPACS_CNT_U08 -->
+                                                                <ECUC-INTEGER-PARAM-DEF UUID="7e06e0fc-f057-4691-b9eb-a96179f25157">
+                                                                    <SHORT-NAME>XCPIF_ONLINECALXCPACS_CNT_U08</SHORT-NAME>
+                                                                    <DESC>
+                                                                        <L-2 L="EN">Grants XCP access to the page.</L-2>
+                                                                    </DESC>
+                                                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                                    <IMPLEMENTATION-CONFIG-CLASSES />
+                                                                    <ORIGIN>NXTR</ORIGIN>
+                                                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                                    <DEFAULT-VALUE>2</DEFAULT-VALUE>
+                                                                    <MAX>2</MAX>
+                                                                    <MIN>2</MIN>
+                                                                </ECUC-INTEGER-PARAM-DEF>
+                                                                <!-- PARAMETER DEFINITION: CommandErrorCodes: XCPIF_ONLINECALXCPANDECUACS_CNT_U08 -->
+                                                                <ECUC-INTEGER-PARAM-DEF UUID="7e06e0fc-f057-4691-b9eb-a96179f25157">
+                                                                    <SHORT-NAME>XCPIF_ONLINECALXCPANDECUACS_CNT_U08</SHORT-NAME>
+                                                                    <DESC>
+                                                                        <L-2 L="EN">Grants XCP access to the page.</L-2>
+                                                                    </DESC>
+                                                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                                    <IMPLEMENTATION-CONFIG-CLASSES />
+                                                                    <ORIGIN>NXTR</ORIGIN>
+                                                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                                    <DEFAULT-VALUE>3</DEFAULT-VALUE>
+                                                                    <MAX>3</MAX>
+                                                                    <MIN>3</MIN>
+                                                                </ECUC-INTEGER-PARAM-DEF>
+                                                            </PARAMETERS>
+                                                            <REFERENCES>
+                                                            </REFERENCES>
+                                                        </ECUC-PARAM-CONF-CONTAINER-DEF>
+                                                    </SUB-CONTAINERS>
+                                                </ECUC-PARAM-CONF-CONTAINER-DEF>
+                                                <!-- SUB-CONTAINER DEFINITION: XCP Config: XCP Flash Access -->
+                                                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="">
+                                                    <SHORT-NAME>XcpFlashAccess</SHORT-NAME>
+                                                    <DESC>
+                                                        <L-2 L="EN">Configuration settings for XCP flash access.</L-2>
+                                                    </DESC>
+                                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+                                                    <MULTIPLE-CONFIGURATION-CONTAINER>false</MULTIPLE-CONFIGURATION-CONTAINER>
+                                                    <PARAMETERS>
+                                                        <!-- PARAMETER DEFINITION: XCP Config: XCPIF_MAXFLSADR_CNT_U32 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_MAXFLSADR_CNT_U32</SHORT-NAME>
+                                                            <DESC>
+                                                                <L-2 L="EN">Symbol or value for the max flash address size. If using a value, place the appropiate suffix at the end such "UL" or "U".</L-2>
+                                                            </DESC>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>#error Define XCPIF_MAXFLSADR_CNT_U32</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                    </PARAMETERS>
+                                                    <REFERENCES>
+                                                    </REFERENCES>
+                                                    <SUB-CONTAINERS>
+                                                    </SUB-CONTAINERS>
+                                                </ECUC-PARAM-CONF-CONTAINER-DEF>
+                                                <!-- SUB-CONTAINER DEFINITION: XCP Config: XCP Control -->
+                                                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="">
+                                                    <SHORT-NAME>XcpControl</SHORT-NAME>
+                                                    <DESC>
+                                                        <L-2 L="EN">Configuration settings for XCP control.</L-2>
+                                                    </DESC>
+                                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+                                                    <MULTIPLE-CONFIGURATION-CONTAINER>false</MULTIPLE-CONFIGURATION-CONTAINER>
+                                                    <PARAMETERS>
+                                                        <!-- PARAMETER DEFINITION: XCP Config: XCPIF_XCPCTRLDI_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_XCPCTRLDI_CNT_U08</SHORT-NAME>
+                                                            <DESC>
+                                                                <L-2 L="EN">Symbol for XCP disable value.</L-2>
+                                                            </DESC>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>kXcp_Control_Disable</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: XCP Config: XCPIF_XCPCTRLENA_CNT_U08 -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XCPIF_XCPCTRLENA_CNT_U08</SHORT-NAME>
+                                                            <DESC>
+                                                                <L-2 L="EN">Symbol for XCP enable value.</L-2>
+                                                            </DESC>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>kXcp_Control_Enable</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: XCP Config: XCPIF_XCPCNTRLDI -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XcpDisableMacro</SHORT-NAME>
+                                                            <DESC>
+                                                                <L-2 L="EN">XCP Control disable macro. Defines XCPIF_XCPCNTRLDI() [XcpDisableMacro]() .</L-2>
+                                                            </DESC>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_DEACTIVATE</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                        <!-- PARAMETER DEFINITION: XCP Config: XCPIF_XCPCNTRLENA -->
+                                                        <ECUC-STRING-PARAM-DEF UUID="">
+                                                            <SHORT-NAME>XcpEnableMacro</SHORT-NAME>
+                                                            <DESC>
+                                                                <L-2 L="EN">XCP Control disable macro. Defines XCPIF_XCPCNTRLENA() [XcpDisableMacro]() .</L-2>
+                                                            </DESC>
+                                                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                            <IMPLEMENTATION-CONFIG-CLASSES />
+                                                            <ORIGIN>NXTR</ORIGIN>
+                                                            <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                                            <ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                                <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                                    <DEFAULT-VALUE>XCP_ACTIVATE</DEFAULT-VALUE>
+                                                                </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                                                            </ECUC-STRING-PARAM-DEF-VARIANTS>
+                                                        </ECUC-STRING-PARAM-DEF>
+                                                    </PARAMETERS>
+                                                    <REFERENCES>
+                                                    </REFERENCES>
+                                                    <SUB-CONTAINERS>
+                                                    </SUB-CONTAINERS>
+                                                </ECUC-PARAM-CONF-CONTAINER-DEF>
+                                            </SUB-CONTAINERS>
+                                        </ECUC-PARAM-CONF-CONTAINER-DEF>
+                                    </SUB-CONTAINERS>
+                                </ECUC-PARAM-CONF-CONTAINER-DEF>
+                            </CONTAINERS>
+                        </ECUC-MODULE-DEF>
+                        <BSW-IMPLEMENTATION UUID="">
+                            <SHORT-NAME>XcpIf_Impl</SHORT-NAME>
+                            <PROGRAMMING-LANGUAGE>C</PROGRAMMING-LANGUAGE>
+                            <AR-RELEASE-VERSION>4.0.3</AR-RELEASE-VERSION>
+                        </BSW-IMPLEMENTATION>
+                    </ELEMENTS>
+                </AR-PACKAGE>
+            </AR-PACKAGES>
+        </AR-PACKAGE>
+    </AR-PACKAGES>
+</AUTOSAR>

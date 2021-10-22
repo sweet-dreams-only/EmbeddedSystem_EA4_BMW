@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+*  \file
+*
+*  \brief       Srv parameter definition file
+*
+*  This file contains the parameter definitions of the Srv module
+*  for usage in the BMW AUTOSAR Core.
+*
+*  \project     BMW AUTOSAR Core
+*
+*  \par         To be changed by user:
+*               [no]
+*
+*  \copyright   BMW AG 2015
+*
+*  \version     3.1.0
+*
+*  \remarks     -
+*
+*/
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-2-2_STRICT_COMPACT.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>BMW_DEF</SHORT-NAME>
+      <ELEMENTS>
+        <ECUC-MODULE-DEF>
+          <SHORT-NAME>Srv</SHORT-NAME>
+          <DESC>
+            <L-2 L="EN">Configuration of the Srv module.</L-2>
+          </DESC>
+          <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+          <SUPPORTED-CONFIG-VARIANTS>
+          	<SUPPORTED-CONFIG-VARIANT>VARIANT-PRE-COMPILE</SUPPORTED-CONFIG-VARIANT></SUPPORTED-CONFIG-VARIANTS>
+          <CONTAINERS>
+            <ECUC-PARAM-CONF-CONTAINER-DEF>
+              <SHORT-NAME>General</SHORT-NAME>
+              <DESC>
+                <L-2 L="EN">General configuration parameters.</L-2>
+              </DESC>
+              <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+              <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+              <POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+              <MULTIPLE-CONFIGURATION-CONTAINER>false</MULTIPLE-CONFIGURATION-CONTAINER>
+              <PARAMETERS>
+                <ECUC-BOOLEAN-PARAM-DEF>
+                  <SHORT-NAME>HandleEccRam</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">Defines whether RAM ECC errors are handled</L-2>
+                  </DESC>
+                  <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                  <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                  	<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  		<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                  		<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                  	</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>BMW</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>false</DEFAULT-VALUE>
+                </ECUC-BOOLEAN-PARAM-DEF>
+                <ECUC-BOOLEAN-PARAM-DEF>
+                  <SHORT-NAME>HandleEccRom</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">Defines whether ROM ECC errors are handled</L-2>
+                  </DESC>
+                  <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                  <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                     <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                        <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                        <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                     </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>BMW</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>false</DEFAULT-VALUE>
+                </ECUC-BOOLEAN-PARAM-DEF>
+                <ECUC-BOOLEAN-PARAM-DEF>
+                  <SHORT-NAME>MultiCpuEnable</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">Selects, whether this ECU is a multi CPU ECU. If enabled, some modules like Dlog and Prog require additional user defined functions to handle communication with slave CPUs.</L-2>
+                  </DESC>
+                  <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                  <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                     <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                        <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                        <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                     </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>BMW</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>false</DEFAULT-VALUE>
+                </ECUC-BOOLEAN-PARAM-DEF>
+              </PARAMETERS>
+            </ECUC-PARAM-CONF-CONTAINER-DEF>
+            <ECUC-PARAM-CONF-CONTAINER-DEF>
+              <SHORT-NAME>CommonPublishedInformation</SHORT-NAME>
+              <DESC>
+                <L-2 L="EN">Common container, aggregated by all modules. It contains published information about vendor and versions.</L-2>
+              </DESC>
+              <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+              <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+              <POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+              <MULTIPLE-CONFIGURATION-CONTAINER>false</MULTIPLE-CONFIGURATION-CONTAINER>
+              <PARAMETERS>
+                <ECUC-INTEGER-PARAM-DEF>
+                  <SHORT-NAME>SwMajorVersion</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">Major version number of the vendor specific implementation of the module.</L-2>
+                  </DESC>
+                  <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                  <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                     <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                        <CONFIG-CLASS>PUBLISHED-INFORMATION</CONFIG-CLASS>
+                        <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                     </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>BMW</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>3</DEFAULT-VALUE>
+                </ECUC-INTEGER-PARAM-DEF>
+                <ECUC-INTEGER-PARAM-DEF>
+                  <SHORT-NAME>SwMinorVersion</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">Minor version number of the vendor specific implementation of the module.</L-2>
+                  </DESC>
+                  <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                  <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                     <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                        <CONFIG-CLASS>PUBLISHED-INFORMATION</CONFIG-CLASS>
+                        <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                     </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>BMW</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>1</DEFAULT-VALUE>
+                </ECUC-INTEGER-PARAM-DEF>
+                <ECUC-INTEGER-PARAM-DEF>
+                  <SHORT-NAME>SwPatchVersion</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">Patch version number of the vendor specific implementation of the module.</L-2>
+                  </DESC>
+                  <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                  <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                     <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                        <CONFIG-CLASS>PUBLISHED-INFORMATION</CONFIG-CLASS>
+                        <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                     </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>BMW</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>0</DEFAULT-VALUE>
+                </ECUC-INTEGER-PARAM-DEF>
+              </PARAMETERS>
+            </ECUC-PARAM-CONF-CONTAINER-DEF>
+            <ECUC-PARAM-CONF-CONTAINER-DEF T="2014-09-02T13:44:39+02:00" UUID="DCE:6d6e614b-66c0-6253-a108-c40c38a76dd9">
+              <SHORT-NAME>Features</SHORT-NAME>
+              <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+              <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+              <POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+              <MULTIPLE-CONFIGURATION-CONTAINER>false</MULTIPLE-CONFIGURATION-CONTAINER>
+              <PARAMETERS>
+                <ECUC-ENUMERATION-PARAM-DEF T="2014-09-02T14:02:16+02:00" UUID="DCE:8b35b331-3c0d-6d45-bc0c-8f77a7aeab85">
+                  <SHORT-NAME>BootMode</SHORT-NAME>
+                  <DESC T="2014-09-02T14:02:16+02:00">
+                    <L-2 L="EN">Defines, which features of BootMode shall be enabled.</L-2>
+                  </DESC>
+                  <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                  <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                     <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                        <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                        <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                     </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>BMW</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>SRV_BM_DISABLED</DEFAULT-VALUE>
+                  <LITERALS>
+                    <ECUC-ENUMERATION-LITERAL-DEF T="2014-09-02T13:48:44+02:00" UUID="DCE:e83df066-e538-6a3b-abe1-7882de855ca9">
+                      <SHORT-NAME>SRV_BM_DISABLED</SHORT-NAME>
+                      <DESC T="2014-09-02T13:48:44+02:00">
+                        <L-2 L="EN">BootMode featue completely disabled. Use this for Blu.</L-2>
+                      </DESC>
+                      <ORIGIN>BMW</ORIGIN>
+                    </ECUC-ENUMERATION-LITERAL-DEF>
+                    <ECUC-ENUMERATION-LITERAL-DEF T="2014-09-02T14:28:30+02:00" UUID="DCE:5790b5b4-b447-6c94-9c5d-b21a368b33ba">
+                      <SHORT-NAME>SRV_BM_ENABLED</SHORT-NAME>
+                      <DESC T="2014-09-02T13:49:13+02:00">
+                        <L-2 L="EN">BootMode feature is enabled. Use this for Bootmanager.</L-2>
+                      </DESC>
+                      <ORIGIN>BMW</ORIGIN>
+                    </ECUC-ENUMERATION-LITERAL-DEF>
+                    <ECUC-ENUMERATION-LITERAL-DEF T="2014-09-02T14:29:05+02:00" UUID="DCE:e0383ce4-633d-64f1-8092-0e87320bda57">
+                      <SHORT-NAME>SRV_BM_ENABLED_DCM</SHORT-NAME>
+                      <DESC T="2014-09-02T13:50:42+02:00">
+                        <L-2 L="EN">BootMode feature including DCM and PFM interface is enabled. Use this in Application and Bootloader.</L-2>
+                      </DESC>
+                      <ORIGIN>BMW</ORIGIN>
+                    </ECUC-ENUMERATION-LITERAL-DEF>
+                  </LITERALS>
+                </ECUC-ENUMERATION-PARAM-DEF>
+              </PARAMETERS>
+            </ECUC-PARAM-CONF-CONTAINER-DEF>
+          </CONTAINERS>
+        </ECUC-MODULE-DEF>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

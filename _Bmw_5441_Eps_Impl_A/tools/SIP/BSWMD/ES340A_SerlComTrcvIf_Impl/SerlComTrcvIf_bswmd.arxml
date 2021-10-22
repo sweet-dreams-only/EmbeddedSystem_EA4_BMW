@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-0-3.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://autosar.org/schema/r4.0">
+    <AR-PACKAGES>
+        <AR-PACKAGE UUID="f463d90c-458d-4e09-b0e0-268d68ac3ba9">
+            <SHORT-NAME>Nxtr</SHORT-NAME>
+            <ELEMENTS>
+                <ECUC-MODULE-DEF UUID="efbe306b-8b4b-49a5-b8e4-e483a468c7aa">
+                    <SHORT-NAME>SerlComTrcvIf</SHORT-NAME>
+                    <DESC>
+                        <L-2 L="EN">Configuration of the SerlComTrcvIf.</L-2>
+                    </DESC>
+                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                    <SUPPORTED-CONFIG-VARIANTS>
+                        <SUPPORTED-CONFIG-VARIANT>VARIANT-PRE-COMPILE</SUPPORTED-CONFIG-VARIANT>
+                    </SUPPORTED-CONFIG-VARIANTS>
+                    <CONTAINERS>
+                        <!-- Parameter Container Definition: SerlComTrcvIfGeneral -->
+                        <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:bf580d0b-6b15-413c-a385-adcc5d90252e">
+                            <SHORT-NAME>SerlComTrcvIfGeneral</SHORT-NAME>
+                            <DESC>
+                                <L-2 L="EN">This container contains the configuration (parameters) of the SerlComTrcvIf.</L-2>
+                            </DESC>
+                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                            <MULTIPLE-CONFIGURATION-CONTAINER>false</MULTIPLE-CONFIGURATION-CONTAINER>
+                            <PARAMETERS>
+                                <!-- PARAMETER DEFINITION: PASSSTEP -->
+                                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:78b74140-b27c-4a33-994c-f9692483f3b0">
+                                    <SHORT-NAME>PASSSTEP</SHORT-NAME>
+                                    <DESC>
+                                        <L-2 L="EN">Error accumulator pass step</L-2>
+                                    </DESC>
+                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                    <IMPLEMENTATION-CONFIG-CLASSES>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                    </IMPLEMENTATION-CONFIG-CLASSES>
+                                    <ORIGIN>NXTR</ORIGIN>
+                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                    <DEFAULT-VALUE>16384</DEFAULT-VALUE>
+                                    <MAX>65535</MAX>
+                                    <MIN>0</MIN>
+                                </ECUC-INTEGER-PARAM-DEF>
+                            </PARAMETERS>
+                        </ECUC-PARAM-CONF-CONTAINER-DEF>
+                    </CONTAINERS>
+                </ECUC-MODULE-DEF>
+            </ELEMENTS>
+        </AR-PACKAGE>
+    </AR-PACKAGES>
+</AUTOSAR>

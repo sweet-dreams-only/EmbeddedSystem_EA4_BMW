@@ -1,0 +1,1358 @@
+/**********************************************************************************************************************
+*  COPYRIGHT
+*  -------------------------------------------------------------------------------------------------------------------
+*  Copyright (c) 2017 by Vctr Informatik GmbH.                                                  All rights reserved.
+*
+*                This software is copyright protected and proprietary to Vctr Informatik GmbH.
+*                Vctr Informatik GmbH grants to you only those rights as set out in the license conditions.
+*                All other rights remain with Vctr Informatik GmbH.
+*  -------------------------------------------------------------------------------------------------------------------
+*  FILE DESCRIPTION
+*  -------------------------------------------------------------------------------------------------------------------
+*  File       :  Diag_Asr4Dcm.plugin
+*  Module     :  Elisa
+*
+*  Description:  Entry point of Elisa Core.
+*
+*  -------------------------------------------------------------------------------------------------------------------
+*  AUTHOR IDENTITY
+*  -------------------------------------------------------------------------------------------------------------------
+*  Name                          Initials      Company
+*  -------------------------------------------------------------------------------------------------------------------
+*  Mishel Shishmanyan             vissa         Vctr Informatik GmbH
+*  Steffen Koehler                visstk        Vctr Informatik GmbH
+*  Simon Wolf                     viswsi        Vctr Informatik GmbH
+*  Yves Grau                      visygr        Vctr Informatik GmbH
+*  Vitalij Krieger                visvkr        Vctr Informatik GmbH
+*  Ulrich Volkmer                 visuvo        Vctr Informatik GmbH
+*  -------------------------------------------------------------------------------------------------------------------
+*  REVISION HISTORY
+*  -------------------------------------------------------------------------------------------------------------------
+*  Version    Date          Author   Change Id        Description
+*  -------------------------------------------------------------------------------------------------------------------
+*  01.00.00   2016-09-12    vissa    -                Initial version
+*  05.03.00   2017-01-04    visstk   -                Implementation of MSSV tests
+*  08.00.00   2017-04-03    viswsi   -                Extension of MSSV tests to MSR4-R19
+*  08.01.00   2017-04-24    visygr  STORYC-637        SafeBSW for DCM - Full UDS - Other Services (0x27 - Extended)
+*  08.01.00   2017-05-08    visygr  STORYC-466        SafeBSW for DCM - Full UDS - ASR3 Interface
+*  08.02.00   2017-05-30    visvkr  -                 Missing MSSV tests added
+*  08.03.00   2017-07-04    visuvo  -                 Adaption of CheckQMFeatures (DCM_SVC_19_16_SUPPORT_ENABLED
+*                                                     and DCM_NET_UUDT_DELAYTIMER_ENABLED)
+*  08.04.00   2017-07-19    visuvo  -                 Minor version changed from 3 into 4
+*  08.04.00   2017-07-27    visuvo  -                 Obsolete switches for service 0x31 removed
+*  08.04.00   2017-07-28    visuvo  -                 SetVersion changed to 0x080400
+*  08.05.00   2017-08-08    viswsi  -                 Updated version
+*  08.06.00   2017-09-18    visuvo  -                 Updated version, Service 0x31 enabled (check for 
+*                                                     DCM_SVC_31_SUPPORT_ENABLED = STD_OFF removed)
+*  08.06.00   2017-09-22    viswsi  STORYC-2092       SafeBSW for DCM - Full UDS - RID Services (0x31) Finalize
+*  08.06.01   2017-11-07    viswsi  -                 Updated version
+*  08.06.01   2017-11-30    visuvo  ESCAN00097384     Switch DCM_DIDMGR_READ_VAR_SIZE_DATA_COPY_ENABLED added.
+*
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Mandatory Functions
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : RegisterPlugin
+* Return value : Reference to a structure which contains the registration information about the plugin
+* Description  : Elisa_core calls this function to query necessary information about the plugin.
+*                This function is mandatory.
+**********************************************************************************************************************/
+def RegisterPlugin()
+{
+  var reg = ModulePluginRegistration()
+
+  reg.SetVersion(0x080601)
+  reg.SetPackageName("Diag_Asr4Dcm")
+  reg.SetInputFiles(["Dcm_Lcfg.c", "Dcm_PBcfg.c"])
+
+  return reg
+}
+
+/**********************************************************************************************************************
+* Name         : CheckVersions
+* Return value : -
+* Description  : Elisa_core calls this function to allow the plugin a version check against the BSW sources.
+**********************************************************************************************************************/
+def CheckVersions()
+{
+  /* Silent version of DCM MSR4.R19 */
+  AssertDefineEquals("DCM_SW_MAJOR_VERSION", "8u")
+  AssertDefineEquals("DCM_SW_MINOR_VERSION", "6u")
+  AssertDefineEquals("DCM_SW_PATCH_VERSION", "1u")
+}
+
+/**********************************************************************************************************************
+* Name         : main
+* Parameter    : None
+* Return value : None
+* Description  : This is the entry point of the Elisa plugin. main calls all rule functions to check the configuration.
+*                This function is mandatory.
+* Requirements : -
+**********************************************************************************************************************/
+def main()
+{
+  // Static checks
+  InvokeRule("Check QM only features are deactivated",            CheckQMFeatures)
+  InvokeRule("Check features required for SafeBSW are activated", CheckSafeFeatures)
+
+  // Verification of generated initializers
+  InvokeRule("Check generated configurations", VerifyConfigurations)
+
+  // Verification of ROM array sizes
+  InvokeRule("CM_DCM_M_SIZEOF_BUFFERINFO",        Check_CM_DCM_M_SIZEOF_BUFFERINFO)        /* BufferInfo */
+  InvokeRule("CM_DCM_M_SIZEOF_MODEMGRRULES",      Check_CM_DCM_M_SIZEOF_MODEMGRRULES)      /* ModeMgrRules */
+  InvokeRule("CM_DCM_M_SIZEOF_SERVICEINFO",       Check_CM_DCM_M_SIZEOF_SERVICEINFO)       /* ServiceInfo */
+  InvokeRule("CM_DCM_M_SIZEOF_SVCPOSTPROCESSORS", Check_CM_DCM_M_SIZEOF_SVCPOSTPROCESSORS) /* PostProcessors */
+  InvokeRule("CM_DCM_M_SIZEOF_SVCUPDATERS",       Check_CM_DCM_M_SIZEOF_SVCUPDATERS)       /* Updaters */
+  InvokeRule("CM_DCM_M_SIZEOF_SVCCANCELLERS",     Check_CM_DCM_M_SIZEOF_SVCCANCELLERS)     /* Cancellers */
+  InvokeRule("CM_DCM_M_SIZEOF_SVC11SUBFUNC",      Check_CM_DCM_M_SIZEOF_SVC11SUBFUNC)      /* Service 0x11 SubSvcFunc */
+  InvokeRule("CM_DCM_M_SIZEOF_SVC19SUBFUNC",      Check_CM_DCM_M_SIZEOF_SVC19SUBFUNC)      /* Service 0x19 SubSvcFunc */
+  InvokeRule("CM_DCM_M_SIZEOF_SVC28SUBFUNC",      Check_CM_DCM_M_SIZEOF_SVC28SUBFUNC)      /* Service 0x28 SubSvcFunc */
+  InvokeRule("CM_DCM_M_SIZEOF_SVC27SUBFUNC",      Check_CM_DCM_M_SIZEOF_SVC27SUBFUNC)      /* Service 0x27 SubSvcFunc */
+  InvokeRule("CM_DCM_M_SIZEOF_SVC27SECLEVEL",     Check_CM_DCM_M_SIZEOF_SVC27SECLEVEL)     /* Service 0x27 SubSvcFunc */
+  InvokeRule("CM_DCM_M_SIZEOF_SVC31OPFUNC",       Check_CM_DCM_M_SIZEOF_SVC31OPFUNC)       /* Service 0x31 SubSvcFunc */
+  InvokeRule("CM_DCM_M_SIZEOF_SVC85SUBFUNC",      Check_CM_DCM_M_SIZEOF_SVC85SUBFUNC)      /* Service 0x85 SubSvcFunc */
+  
+  // Verification of RAM array sizes
+  InvokeRule("Check size of PeriodicTxObjects",   Check_PeriodicTxObjects)                 /* PeriodicTxObjects */
+  InvokeRule("CM_DCM_M_SIZEOF_COMMCONTEXT",       Check_CM_DCM_M_SIZEOF_COMMCONTEXT)       /* ComMContexts */
+  InvokeRule("CM_DCM_M_SIZEOF_TOBJHANDLE",        Check_CM_DCM_M_SIZEOF_TOBJHANDLE)        /* ConnId2TObjIdMap */
+  InvokeRule("CM_DCM_M_SIZEOF_TRANSPORTOBJECT",   Check_CM_DCM_M_SIZEOF_TRANSPORTOBJECT)   /* TranspObjects */
+  InvokeRule("CM_DCM_M_SIZEOF_BUFFERCONTEXT",     Check_CM_DCM_M_SIZEOF_BUFFERCONTEXT)     /* BufferContexts */
+  InvokeRule("CM_DCM_M_SIZEOF_COMCONTROLCHANNEL", Check_CM_DCM_M_SIZEOF_COMCONTROLCHANNEL) /* ComCtrlChannels */
+
+  // Verification of arrays that are delimited by null pointers
+  InvokeRule("CM_DCM_M_TERMINATED_LIST",          Check_CM_DCM_M_TERMINATED_LIST)
+}
+
+/**********************************************************************************************************************
+* Rules
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : CheckQMFeatures
+* Parameter    : None
+* Return value : None
+* Description  : Verify that all non-silent features are deactivated.
+* Requirements : -
+**********************************************************************************************************************/
+def CheckQMFeatures()
+{
+  //Check mandatory features
+  AssertDefineIsStdOn("DCM_SVC_10_SUPPORT_ENABLED")
+  AssertDefineIsStdOn("DCM_MODEMGR_SUPPORT_ENABLED")
+  AssertDefineIsStdOn("DCM_DIAG_FAST_POST_PROCESSING_ENABLED")
+  AssertDefineIsStdOn("DCM_DIAG_ANY_SERVICE_WITH_SF_ENABLED")
+
+  //Check OBD diagnostic processors
+  AssertDefineIsStdOff("DCM_SVC_01_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_02_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_03_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_04_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_06_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_07_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_08_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_09_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_0A_SUPPORT_ENABLED")
+
+  //Check UDS service processors
+  AssertDefineIsStdOff("DCM_SVC_22_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_23_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_24_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_2A_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_2C_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_2C_01_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_2C_02_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_2C_03_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_2E_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_2F_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_3D_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_86_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_86_00_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_86_01_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_86_04_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_86_05_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_86_06_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_86_40_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_86_41_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_86_43_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_86_45_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_86_46_SUPPORT_ENABLED")
+
+  //Check diagnostic service related features
+  Assert(!IsDefined("DCM_EXT_SVC19_PATCH_CONTEXT"))
+  AssertDefineIsStdOff("DCM_SVC_19_16_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_22_OBD_CALIBRATION_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_28_SUBNET_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_31_OBD_CALIBRATION_ENABLED")  
+  AssertDefineIsStdOff("DCM_SVC_86_TIMER_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_86_RST_ON_DSC_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_86_NVM_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_86_TX_END_IND_ENABLED")
+  
+  // Check network related features
+  AssertDefineIsStdOff("DCM_NET_PERIODIC_TX_ENABLED")
+  AssertDefineIsStdOff("DCM_NET_PERIODIC_MSG_PADDING_ENABLED")
+  AssertDefineIsStdOff("DCM_NET_UUDT_DELAYTIMER_ENABLED")
+  AssertDefineIsStdOff("DCM_NET_PERIODIC_TX_CONN_SPECIFIC_NUM_TX_OBJ_ENABLED")
+
+  //Check diagnostic interpreter core features
+  AssertDefineIsStdOff("DCM_DIAG_RST2DEF_ON_FUNC_OBD_REQ_ENABLED")
+  AssertDefineIsStdOff("DCM_DIAG_STATE_RECOVERY_ENABLED")
+
+  //Check diagnostic state features
+  AssertDefineIsStdOff("DCM_STATE_SEC_TIMER_1_ENABLED")
+  AssertDefineIsStdOff("DCM_STATE_MULTIPLE_SECURITYFIXEDBYTES_ENABLED")
+
+  //Check DID manager features
+  AssertDefineIsStdOff("DCM_DIDMGR_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_ASYNC_DID_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_STATIC_DID_ASYNC_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_STATIC_DID_OPTYPE_READ_LENGTH_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPTYPE_READ_CHECKCOND_ALL_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_EXTENDED_LOOKUP_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_RANGE_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_IO_MASKRECORD_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_ASYNC_IODID_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_IODID_READ_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_IODID_EXEC_PRECOND_LIMIT_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_IODID_NBYTE_EXT_CEMR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_SR_IO_CONTROL_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_SR_IO_RESET_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_SR_IO_SHORT_TERM_ADJUSTMENT_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_ASYNC_SCALINGDID_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_NONPERIODICDYNDID_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_PERIODICDYNDID_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_PERIODICIODID_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_PERIODICWRITEDID_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_PERIODICDID_CHK_COND_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_PERIODICDID_CHK_COND_ALL_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_PERIODICDID_CLR_ON_STATE_CHG_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OP_INFO_SCALING_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OP_INFO_IOCONTROL_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OP_INFO_DEFINE_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OP_INFO_COMBINED_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OP_INFO_ANY_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_DYNDID_VAR_NUM_ITEMS_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_DYNDID_SRCITEM_CHECK_COND_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_DYNDID_SRCITEM_CHECK_STATE_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_DYNDID_CLR_ON_STATE_CHG_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_DYNLEN_DID_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_MSIG_OPTYPE_READ_GAP_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_MULTISIGNAL_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_NVM_READ_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_NVM_WRITE_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_DID_F186_READ_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_IODID_DYNLEN_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_REPORT_NODIBYTE_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPTYPE_READ_LENGTH_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPTYPE_RANGE_ISAVAIL_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPTYPE_IO_RETCTRL2ECU_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPTYPE_IO_RST2DEFAULT_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPTYPE_IO_FRZCURSTATE_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPTYPE_IO_SHRTTERMADJ_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_MSIG_OPTYPE_READ_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_MSIG_OPTYPE_READ_CHKCOND_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_MSIG_OPTYPE_READ_LENGTH_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_MSIG_OPTYPE_WRITE_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_MSIG_OPTYPE_IO_SHRTTRMADJ_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_MSIG_OPTYPE_IO_RETCTRL2ECU_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_MSIG_OPTYPE_IO_RST2DEFAULT_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_MSIG_OPTYPE_IO_FRZCURSTATE_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_MSIG_OPTYPE_GETSCALINGINFO_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_WRITE_RANGE_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_WRITE_NLEN_ASYNC_NRES_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_WRITE_LEN_ASYNC_NRES_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_WRITE_NLEN_SYNC_NRES_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_WRITE_LEN_SYNC_NRES_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_WRITE_LEN_SYNC_RES_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_WRITE_NLEN_SYNC_NRES_NERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_READ_RANGE_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_READ_PAGED_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_READ_ASYNC_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_READ_SYNC_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_READ_SR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_READ_VID_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_READ_CHECKCOND_ASYNC_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_READ_CHECKCOND_SYNC_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_READ_LENGTH_RANGE_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_READ_LENGTH_ASYNC_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_READ_LENGTH_SYNC_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_NREQ_NLEN_SYNC_NRES_NCEMR_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_REQ_NLEN_SYNC_NRES_NCEMR_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_REQ_LEN_SYNC_NRES_NCEMR_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_NREQ_NLEN_ASYNC_NRES_NCEMR_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_REQ_NLEN_ASYNC_NRES_NCEMR_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_REQ_LEN_ASYNC_NRES_NCEMR_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_REQ_LEN_SYNC_RES_NCEMR_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_NREQ_NLEN_SYNC_NRES_CEMR8_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_REQ_NLEN_SYNC_NRES_CEMR8_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_REQ_LEN_SYNC_NRES_CEMR8_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_NREQ_NLEN_ASYNC_NRES_CEMR8_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_REQ_NLEN_ASYNC_NRES_CEMR8_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_REQ_LEN_ASYNC_NRES_CEMR8_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_NREQ_NLEN_SYNC_NRES_CEMR16_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_REQ_NLEN_SYNC_NRES_CEMR16_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_REQ_LEN_SYNC_NRES_CEMR16_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_NREQ_NLEN_ASYNC_NRES_CEMR16_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_REQ_NLEN_ASYNC_NRES_CEMR16_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_REQ_LEN_ASYNC_NRES_CEMR16_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_NREQ_NLEN_SYNC_NRES_CEMR32_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_REQ_NLEN_SYNC_NRES_CEMR32_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_REQ_LEN_SYNC_NRES_CEMR32_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_NREQ_NLEN_ASYNC_NRES_CEMR32_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_REQ_NLEN_ASYNC_NRES_CEMR32_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_REQ_LEN_ASYNC_NRES_CEMR32_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_NREQ_NLEN_SYNC_NRES_CEMRN_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_REQ_NLEN_SYNC_NRES_CEMRN_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_REQ_LEN_SYNC_NRES_CEMRN_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_NREQ_NLEN_ASYNC_NRES_CEMRN_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_REQ_NLEN_ASYNC_NRES_CEMRN_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_REQ_LEN_ASYNC_NRES_CEMRN_ERROR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_ANY_WITH_INT_CEMR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_IO_ANY_WITH_EXT_CEMR_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_GETSCALINGINFO_SYNC_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_OPCLS_GETSCALINGINFO_ASYNC_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_22_ACCESS_LOCK_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_2A_ACCESS_LOCK_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_2C_ACCESS_LOCK_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_2E_ACCESS_LOCK_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_2F_ACCESS_LOCK_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_XX_ACCESS_LOCK_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_RAM_CONTEXT_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_IO_CONTROL_SUPPORTEDDID_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_READ_SUPPORTEDDID_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_WRITE_SUPPORTEDDID_ENABLED")
+  AssertDefineIsStdOff("DCM_DIDMGR_READ_VAR_SIZE_DATA_COPY_ENABLED");
+
+  //Check RID manager features
+  AssertDefineIsStdOff("DCM_RIDMGR_START_SUPPORTEDRID_ENABLED")
+
+  //Check memory manager features
+  AssertDefineIsStdOff("DCM_MEMMGR_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_MEMMGR_ALFID_RESTRICTION_ENABLED")
+  AssertDefineIsStdOff("DCM_MEMMGR_MID_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_MEMMGR_MULTIMID_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_MEMMGR_ACCESS_LOCK_ENABLED")
+  AssertDefineIsStdOff("DCM_MEMMGR_RAM_CONTEXT_ENABLED")
+  
+  //Check mode management features
+  AssertDefineIsStdOff("DCM_MODE_ROE_ENABLED")
+
+  //Check provided internal core APIs
+  AssertDefineIsStdOff("DCM_EXT_NEED_API_UTINVMSWCDATAWRITE_ENABLED")
+  AssertDefineIsStdOff("DCM_EXT_NEED_API_UTINVMWRITE_ENABLED")
+  AssertDefineIsStdOff("DCM_EXT_NEED_API_UTINVMREAD_ENABLED")
+  AssertDefineIsStdOff("DCM_EXT_NEED_API_DEBUGISMODULEINITIALIZED_ENABLED")
+  AssertDefineIsStdOff("DCM_EXT_NEED_API_NETGETCOMSTATE_ENABLED")
+  AssertDefineIsStdOff("DCM_EXT_NEED_API_DIAGGETACTIVITYSTATE_ENABLED")
+  AssertDefineIsStdOff("DCM_EXT_NEED_API_VARMGRGETACTIVECOMVARIANT_ENABLED")
+  AssertDefineIsStdOff("DCM_REPEATER_EXT_CONTEXT_GETTER_ENABLED")
+
+  //Check OBD related features
+  AssertDefineIsStdOff("DCM_OBDUDSIDMGR_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_OBDUDSIDMGR_CALIBRATION_ENABLED")
+  AssertDefineIsStdOff("DCM_OBDUDSIDMGR_UDSMID_SUPPORT_BY_DEM_ENABLED")
+  AssertDefineIsStdOff("DCM_OBDUDSIDMGR_UDSMID_SUPPORT_BY_DCM_ENABLED")
+  AssertDefineIsStdOff("DCM_OBDIDMGR_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_OBDIDMGR_OBDMID_SUPPORT_BY_DEM_ENABLED")
+  AssertDefineIsStdOff("DCM_OBDIDMGR_OBDMID_SUPPORT_BY_DCM_ENABLED")
+  AssertDefineIsStdOff("DCM_OBDDTCMGR_SUPPORT_ENABLED")
+
+  //Check DEM related features
+  AssertDefineIsStdOff("DCM_DEM_API_403_ENABLED")
+
+  //Check variant manager features
+  AssertDefineIsStdOff("DCM_VARMGR_MULTI_SVC_INCLUSIVE_ENABLED")
+  
+  //Check other features
+  AssertDefineIsStdOff("DCM_DEV_RAM_SHREDDER_ENABLED")
+  
+  //Check not used features
+  AssertDefineIsStdOff("DCM_VARMGR_MODE_LINKTIME_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_34_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_35_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_36_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_37_SUPPORT_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_38_SUPPORT_ENABLED")
+}
+
+/**********************************************************************************************************************
+* Name         : CheckSafeFeatures
+* Parameter    : None
+* Return value : None
+* Description  : Verify that all features that guarantee safe runtime are activated.
+* Requirements : -
+**********************************************************************************************************************/
+def CheckSafeFeatures()
+{
+  AssertDefineIsStdOn("DCM_DEV_ERROR_DETECT")
+  AssertDefineIsStdOn("DCM_DEV_RUNTIME_CHECKS")
+}
+
+/**********************************************************************************************************************
+* Name         : VerifyConfigurations
+* Parameter    : None
+* Return value : None
+* Description  : Verify that there are no unexpected NULL_PTRs and that the symbols match the expectation
+* Requirements : -
+**********************************************************************************************************************/
+def VerifyConfigurations()
+{
+  if (IsStdOn("DCM_VARMGR_MODE_POSTBUILD_LOAD_ENABLED"))
+  {
+    VerifyRamConfig()
+    VerifyRomConfig()
+  }
+  VerifyVariantConfigs()
+}
+
+/**********************************************************************************************************************
+* Name         : VerifyRamConfig
+* Parameter    : None
+* Return value : None
+* Description  : Verify the RAM configuration
+* Requirements : -
+**********************************************************************************************************************/
+def VerifyRamConfig()
+{
+  var ramNetConfig = Struct("Dcm_CfgConfigExternRam").GetMemberAsStruct("NetworkRam")
+
+  if (IsStdOn("DCM_NET_PERIODIC_TX_ENABLED"))
+  {
+    VerifyElementNotNullAndSymbol(ramNetConfig, "PeriodicTxObjects", "Dcm_CfgNetPeriodicTxObjects")
+  }
+  VerifyElementNotNullAndSymbol(ramNetConfig, "ComMContexts", "Dcm_CfgNetComMContexts")
+  if(IsStdOff("DCM_NET_MONITOR_FOREIGN_N_TA_ENABLED"))
+  {
+    VerifyElementNotNullAndSymbol(ramNetConfig, "ConnId2TObjIdMap", "Dcm_CfgNetConnId2TObjMap")
+  }
+  VerifyElementNotNullAndSymbol(ramNetConfig, "TranspObjects", "Dcm_CfgNetTransportObjects")
+  VerifyElementNotNullAndSymbol(ramNetConfig, "BufferContexts", "Dcm_CfgNetBufferContexts")
+  if (IsStdOn("DCM_MODE_COMMCTRL_ENABLED"))
+  {
+    VerifyElementNotNullAndSymbol(ramNetConfig, "ComCtrlChannels", "Dcm_CfgComCtrlChannels")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : VerifyRomConfig
+* Parameter    : None
+* Return value : None
+* Description  : Verify the ROM configuration
+* Requirements : -
+**********************************************************************************************************************/
+def VerifyRomConfig()
+{
+  var romNetConfig = Struct("Dcm_CfgConfigExternRom").GetMemberAsStruct("NetworkRom")
+  VerifyElementNotNullAndSymbol(romNetConfig, "BufferInfo", "Dcm_CfgNetBufferInfo")
+}
+
+/**********************************************************************************************************************
+* Name         : VerifyVariantConfigs
+* Parameter    : None
+* Return value : None
+* Description  : Verify variant configurations
+* Requirements : -
+**********************************************************************************************************************/
+def VerifyVariantConfigs()
+{
+  // Iterate over all variants and check their configs
+  var networkVariantList := FindConstSymbol("Dcm_CfgNetConfig_.+")
+  for (var index = 0; index < networkVariantList.size(); ++index)
+  {
+    var networkVariant = Struct(networkVariantList[index].GetSymbolName())
+
+    VerifyElementNotNullAndSymbol(networkVariant, "RxPduIdTable", "Dcm_CfgNetRxPduInfo.*")
+    VerifyElementNotNullAndSymbol(networkVariant, "ConnectionTable", "Dcm_CfgNetConnectionInfo.*")
+    VerifyElementNotNullAndSymbol(networkVariant, "ProtocolTable", "Dcm_CfgNetProtocolInfo.*")
+    VerifyElementNotNullAndSymbol(networkVariant, "NetConnComMChannelMap", "Dcm_CfgNetConnComMChannelMap.*")
+    if (IsStdOn("DCM_BSW_ENV_ASR_VERSION_4_ANY_ENABLED"))
+    {
+      VerifyElementNotNullAndSymbol(networkVariant, "NetworkHandleLookUpTable", "Dcm_CfgNetNetworkHandleLookUpTable.*")
+    }
+    VerifyElementNotNullAndSymbol(networkVariant, "NetAllComMChannelMap", "Dcm_CfgNetAllComMChannelMap.*")
+    if (IsStdOn("DCM_NET_COMCTRL_ALLNET_SUPPORT_ENABLED"))
+    {
+      VerifyElementNotNullAndSymbol(networkVariant, "ComCtrlChannelListAll", "Dcm_CfgNetComCtrlChannelListAll.*")
+    }
+
+    VerifyElementNotNullAndSymbol(networkVariant, "TxPduIdMap", "Dcm_CfgNetTxPduInfo.*")
+    if (IsStdOn("DCM_NET_PERIODIC_TX_ENABLED"))
+    {
+      VerifyElementNotNullAndSymbol(networkVariant, "PerTxPduIdMap", "Dcm_CfgNetPeriodicTxPduInfo.*")
+      VerifyElementNotNullAndSymbol(networkVariant, "PerTxPduIdTable", "Dcm_CfgNetPeriodicTxPduIds.*")
+    }
+    else
+    {
+      VerifyElementIsNull(networkVariant, "PerTxPduIdMap")
+      VerifyElementIsNull(networkVariant, "PerTxPduIdTable")
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : VerifyElementNullOrSymbol
+* Parameter    : struct     - Name of the struct
+                 varName    - Name of the member within the struct
+                 symbolName - Expected name of the symbol
+* Return value : bool       - True if verification succeeded
+* Description  : Verify that a specific member of a struct is either null or matches the expected symbol name
+* Requirements : -
+**********************************************************************************************************************/
+def VerifyElementNullOrSymbol(struct, varName, symbolName)
+{
+  if (StructElementIsNull(struct, varName))
+  {
+    ReportNote("Variable '" + varName + "' of struct '" + struct.GetName() + "' is null")
+    return true
+  }
+  else
+  {
+    if (!VerifySymbolName(struct, varName, symbolName))
+    {
+      return false
+    }
+  }
+  return true
+}
+
+/**********************************************************************************************************************
+* Name         : VerifyElementNotNullAndSymbol
+* Parameter    : struct     - Name of the struct
+                 varName    - Name of the member within the struct
+                 symbolName - Expected name of the symbol
+* Return value : bool       - True if verification succeeded
+* Description  : Verify that a specific member of a struct is not null and matches the expected symbol name
+* Requirements : -
+**********************************************************************************************************************/
+def VerifyElementNotNullAndSymbol(struct, varName, symbolName)
+{
+  if (!VerifyElementNotNull(struct, varName))
+  {
+    return false
+  }
+  if (!VerifySymbolName(struct, varName, symbolName))
+  {
+    return false
+  }
+  return true
+}
+
+/**********************************************************************************************************************
+* Name         : VerifyElementNotNull
+* Parameter    : struct     - Name of the struct
+                 varName    - Name of the member within the struct
+* Return value : bool       - True if verification succeeded
+* Description  : Verify that a specific member of a struct is not null
+* Requirements : -
+**********************************************************************************************************************/
+def VerifyElementNotNull(struct, varName)
+{
+  if (StructElementIsNull(struct, varName))
+  {
+    ReportError("Variable '" + varName + "' of struct '" + struct.GetName() + "' is null")
+    return false
+  }
+  else
+  {
+    ReportNote("Variable '" + varName + "' of struct '" + struct.GetName() + "' is not null")
+    return true
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : VerifyElementIsNull
+* Parameter    : struct     - Name of the struct
+                 varName    - Name of the member within the struct
+* Return value : bool       - True if verification succeeded
+* Description  : Verify that a specific member of a struct is null
+* Requirements : -
+**********************************************************************************************************************/
+def VerifyElementIsNull(struct, varName)
+{
+  if (StructElementIsNull(struct, varName))
+  {
+    ReportNote("Variable '" + varName + "' of struct '" + struct.GetName() + "' is null")
+    return true
+  }
+  else
+  {
+    ReportError("Variable '" + varName + "' of struct '" + struct.GetName() + "' is not null")
+    return false
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : StructElementIsNull
+* Parameter    : struct     - Name of the struct
+                 varName    - Name of the member within the struct
+* Return value : bool       - True if member is null, false otherwise
+* Description  : Check if a struct member is null
+* Requirements : -
+**********************************************************************************************************************/
+def StructElementIsNull(struct, varName)
+{
+  var elem = struct.GetMemberAsString(varName)
+  return IsNull(elem)
+}
+
+/**********************************************************************************************************************
+* Name         : IsNull
+* Parameter    : variable   - Variable as string
+* Return value : bool       - True if variable is null, false otherwise
+* Description  : Check if a variable is null
+* Requirements : -
+**********************************************************************************************************************/
+def IsNull(variable)
+{
+  var nullPtrDefValue = Define("NULL_PTR").GetValueAsString()
+  return (variable == nullPtrDefValue)
+}
+
+/**********************************************************************************************************************
+* Name         : VerifySymbolName
+* Parameter    : struct     - Name of the struct
+                 varName    - Name of the member within the struct
+                 symbolName - Expected name of the symbol
+* Return value : None
+* Description  : Verify that the name of a specific member of a struct matches the expectation
+* Requirements : -
+**********************************************************************************************************************/
+def VerifySymbolName(struct, varName, symbolName)
+{
+  var elem = struct.GetMemberAsString(varName)
+
+  var symbolFound = false
+
+  var constSymbols := FindConstSymbol(symbolName)
+  for (var index = 0; index < constSymbols.size(); ++index)
+  {
+    if (elem == constSymbols[index].GetSymbolName())
+    {
+      symbolFound = true
+      break
+    }
+  }
+
+  if (!symbolFound)
+  {
+    var varSymbols := FindVariablesSymbol(symbolName)
+    for (var index = 0; index < varSymbols.size(); ++index)
+    {
+      if (elem == varSymbols[index].GetSymbolName())
+      {
+        symbolFound = true
+        break
+      }
+    }
+  }
+
+  if (!symbolFound)
+  {
+    ReportError("Variable '" + varName + "' of struct '" + struct.GetName() + "' does not match the expected symbol name '" + symbolName + "' (" + elem + ")")
+    return false
+  }
+  else
+  {
+    ReportNote("Variable '" + varName + "' of struct '" + struct.GetName() + "' matches the expected symbol name")
+    return true
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_BUFFERINFO
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the buffer infos have the expected size
+* Requirements : -
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_BUFFERINFO()
+{
+  // Get expected size
+  var expectedSizeLinkTime = Define("DCM_NET_NUM_BUFFERS")
+  var expectedSizePreComp = Define("DCM_NET_NUM_BUFFERS_CONST")
+
+  var expectedSizeGenerated = Define("DCM_CFGNETBUFFERINFO_SIZE")
+  var expectedSizeGeneratedConst = Define("DCM_CFGNETBUFFERINFO_SIZE_CONST")
+
+  //Check the two non-generated size definitions
+  Assert(expectedSizeLinkTime.GetValueAsNumber(), Equal, expectedSizePreComp.GetValueAsNumber())
+
+  //Check the two generated size definitions
+  Assert(expectedSizeGenerated.GetValueAsNumber(), Equal, expectedSizeGeneratedConst.GetValueAsNumber())
+
+  //Check if the generated and non-generated definitions are equal
+  Assert(expectedSizeLinkTime.GetValueAsNumber(), Equal, expectedSizeGenerated.GetValueAsNumber())
+
+  //Check configuration variant
+  if (IsStdOn("DCM_VARMGR_MODE_POSTBUILD_LOAD_ENABLED"))
+  {
+    //Any PBX variant is active
+    var sharedArray = Array("Dcm_CfgNetBufferInfo")
+
+    //Check shared array matches expected size
+    AssertArraySize(sharedArray, Equal, expectedSizeLinkTime)
+
+    //Iterate over all variants
+    var networkVariantList := FindConstSymbol("Dcm_CfgNetConfig_.+")
+    for (var index = 0; index < networkVariantList.size(); ++index)
+    {
+      var networkVariant = Struct(networkVariantList[index].GetSymbolName())
+
+      //Check each variant will fit the array size
+      AssertArraySize(sharedArray, GreaterEqual, networkVariant, "NumBuffers")
+    }
+  }
+  else
+  {
+    //Pre-compile variant is active
+    //Dcm_CfgNetBufferInfo is located in Dcm.c -> covered by code review.
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_PeriodicTxObjects
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the PeriodicTxObjects array has the expected size.
+* Requirements : -
+**********************************************************************************************************************/
+def Check_PeriodicTxObjects()
+{
+  if (IsStdOn("DCM_NET_PERIODIC_TX_ENABLED"))
+  {
+    // Get expected size
+    var expectedSizeLinkTime = Define("DCM_NET_MAX_NUM_PERIODIC_TX_OBJ")
+    var expectedSizePreComp = Define("DCM_NET_MAX_NUM_PERIODIC_TX_OBJ_CONST")
+
+    //Check both constants are equal
+    Assert(expectedSizeLinkTime.GetValueAsNumber(), Equal, expectedSizePreComp.GetValueAsNumber())
+
+    //Check configuration variant
+    if (IsStdOn("DCM_VARMGR_MODE_POSTBUILD_LOAD_ENABLED"))
+    {
+      //Any PBX variant is active
+      var sharedArray = Array("Dcm_CfgNetPeriodicTxObjects")
+
+      //Check shared array matches expected size
+      AssertArraySize(sharedArray, Equal, expectedSizeLinkTime)
+
+      //Iterate over all variants
+      var networkVariantList := FindConstSymbol("Dcm_CfgNetConfig_.+")
+      for (var index = 0; index < networkVariantList.size(); ++index)
+      {
+        var networkVariant = Struct(networkVariantList[index].GetSymbolName())
+
+        //Check each variant will fit the array size
+        AssertArraySize(sharedArray, GreaterEqual, networkVariant, "NumPerTxObjects")
+      }
+    }
+    else
+    {
+      //Pre-compile variant is active
+      //PeriodicTxObjects are located in Dcm.c -> covered by code review.
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_COMMCONTEXT
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the COMM context has the expected size.
+* Requirements : -
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_COMMCONTEXT()
+{
+  // Get expected size
+  var expectedSizeLinkTime = Define("DCM_NET_MAX_NUM_COMM_CHANNELS")
+  var expectedSizePreComp = Define("DCM_NET_MAX_NUM_COMM_CHANNELS_CONST")
+
+  //Check both constants are equal
+  Assert(expectedSizeLinkTime.GetValueAsNumber(), Equal, expectedSizePreComp.GetValueAsNumber())
+
+  //Check configuration variant
+  if (IsStdOn("DCM_VARMGR_MODE_POSTBUILD_LOAD_ENABLED"))
+  {
+    //Any PBX variant is active
+    var sharedArray = Array("Dcm_CfgNetComMContexts")
+
+    //Check shared array matches expected size
+    AssertArraySize(sharedArray, Equal, expectedSizeLinkTime)
+
+    //Iterate over all variants
+    var networkVariantList := FindConstSymbol("Dcm_CfgNetConfig_.+")
+    for (var index = 0; index < networkVariantList.size(); ++index)
+    {
+      var networkVariant = Struct(networkVariantList[index].GetSymbolName())
+
+      //Check each variant will fit the array size
+      AssertArraySize(sharedArray, GreaterEqual, networkVariant, "NumComMChannels")
+    }
+  }
+  else
+  {
+    //Pre-compile variant is active
+    //ComMContext is located in Dcm.c -> covered by code review.
+  }
+}
+
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_BUFFERCONTEXT
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Buffer context has the expected size.
+* Requirements : -
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_BUFFERCONTEXT()
+{
+  // Get expected size
+  var expectedSizeLinkTime = Define("DCM_NET_NUM_BUFFERS")
+  var expectedSizePreComp = Define("DCM_NET_NUM_BUFFERS_CONST")
+
+  //Check both constants are equal
+  Assert(expectedSizeLinkTime.GetValueAsNumber(), Equal, expectedSizePreComp.GetValueAsNumber())
+
+  //Check configuration variant
+  if (IsStdOn("DCM_VARMGR_MODE_POSTBUILD_LOAD_ENABLED"))
+  {
+    //Any PBX variant is active
+    var sharedArray = Array("Dcm_CfgNetBufferContexts")
+
+    //Check shared array matches expected size
+    AssertArraySize(sharedArray, Equal, expectedSizeLinkTime)
+
+    //Iterate over all variants
+    var networkVariantList := FindConstSymbol("Dcm_CfgNetConfig_.+")
+    for (var index = 0; index < networkVariantList.size(); ++index)
+    {
+      var networkVariant = Struct(networkVariantList[index].GetSymbolName())
+
+      //Check each variant will fit the array size
+      AssertArraySize(sharedArray, GreaterEqual, networkVariant, "NumBuffers")
+    }
+  }
+  else
+  {
+    //Pre-compile variant is active
+    //BufferContext is located in Dcm.c -> covered by code review.
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_MODEMGRRULES
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Mode Manager Rule has the expected size.
+* Requirements : -
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_MODEMGRRULES()
+{
+  //Check configuration variant
+  if (IsStdOn("DCM_MODEMGR_CHECK_SUPPORT_ENABLED"))
+  {
+    // Get expected size
+    var expectedSizeLinkTime = Define("DCM_CFGMODEMGRRULES_SIZE")
+    var expectedSizePreComp = Define("DCM_CFGMODEMGRRULES_SIZE_CONST")
+
+    //Check both constants are equal
+    Assert(expectedSizeLinkTime.GetValueAsNumber(), Equal, expectedSizePreComp.GetValueAsNumber())
+
+    //Any PBX variant is active
+    var sharedArray = Array("Dcm_CfgModeMgrRules")
+
+    //Check shared array matches expected size
+    AssertArraySize(sharedArray, Equal, expectedSizeLinkTime)
+  }
+  else
+  {
+    // Countermeasure not needed because the array is not used
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_TRANSPORTOBJECT
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the transport objects have the expected size.
+* Requirements : -
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_TRANSPORTOBJECT()
+{
+  // Get expected size
+  var expectedSizeLinkTime = Define("DCM_NET_MAX_NUM_TRANSP_OBJECTS")
+  var expectedSizePreComp = Define("DCM_NET_MAX_NUM_TRANSP_OBJECTS_CONST")
+
+  //Check both constants are equal
+  Assert(expectedSizeLinkTime.GetValueAsNumber(), Equal, expectedSizePreComp.GetValueAsNumber())
+
+  //Check configuration variant
+  if (IsStdOn("DCM_VARMGR_MODE_POSTBUILD_LOAD_ENABLED"))
+  {
+    //Any PBX variant is active
+    var sharedArray = Array("Dcm_CfgNetTransportObjects")
+
+    //Check shared array matches expected size
+    AssertArraySize(sharedArray, Equal, expectedSizeLinkTime)
+
+    //Iterate over all variants
+    var networkVariantList := FindConstSymbol("Dcm_CfgNetConfig_.+")
+    for (var index = 0; index < networkVariantList.size(); ++index)
+    {
+      var networkVariant = Struct(networkVariantList[index].GetSymbolName())
+
+      //Check each variant will fit the array size
+      AssertArraySize(sharedArray, GreaterEqual, networkVariant, "NumTranspObjects")
+    }
+  }
+  else
+  {
+    //Pre-compile variant is active
+    //TransportObject is located in Dcm.c -> covered by code review.
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_TIMERINFO
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Array of timer information is initialized with the correct size
+* Requirements : -
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_TIMERINFO()
+{
+  // Get expected size
+  var timerCount = Define("DCM_TMR_NUM_TIMERS")
+  var timerCountCasted = Define("DCM_TMR_NUM_TIMERS_CASTED")
+
+  //Check both constants are equal
+  Assert(timerCount.GetValueAsNumber(), Equal, timerCountCasted.GetValueAsNumber())
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SERVICEINFO
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgDiagServiceInfo array has the correct size
+* Requirements : -
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SERVICEINFO()
+{
+  // Get expected size
+  var expectedSizeLinkTime = Define("DCM_CFGDIAGSERVICEINFO_SIZE")
+  var expectedSizePreComp = Define("DCM_CFGDIAGSERVICEINFO_SIZE_CONST")
+
+  //Check both constants are equal
+  Assert(expectedSizeLinkTime.GetValueAsNumber(), Equal, expectedSizePreComp.GetValueAsNumber())
+
+  var array = Array("Dcm_CfgDiagServiceInfo")
+
+  //Check array has expected size
+  AssertArraySize(array, Equal, expectedSizeLinkTime)
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVCPOSTPROCESSORS
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgDiagSvcPostProcessors array has the correct size
+* Requirements : -
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVCPOSTPROCESSORS()
+{
+  // Get expected size
+  var expectedSizeLinkTime = Define("DCM_CFGDIAGSVCPOSTPROCESSORS_SIZE")
+  var expectedSizePreComp = Define("DCM_CFGDIAGSVCPOSTPROCESSORS_SIZE_CONST")
+
+  //Check both constants are equal
+  Assert(expectedSizeLinkTime.GetValueAsNumber(), Equal, expectedSizePreComp.GetValueAsNumber())
+
+  var array = Array("Dcm_CfgDiagSvcPostProcessors")
+
+  //Check array has expected size
+  AssertArraySize(array, Equal, expectedSizeLinkTime)
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVCUPDATERS
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgDiagSvcUpdaters array has the correct size
+* Requirements : -
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVCUPDATERS()
+{
+  // only available if paged buffer is active
+  if (IsStdOn("DCM_PAGED_BUFFER_ENABLED"))
+  {
+    // Get expected size
+    var expectedSizeLinkTime = Define("DCM_CFGDIAGSVCUPDATERS_SIZE")
+    var expectedSizePreComp = Define("DCM_CFGDIAGSVCUPDATERS_SIZE_CONST")
+
+    //Check both constants are equal
+    Assert(expectedSizeLinkTime.GetValueAsNumber(), Equal, expectedSizePreComp.GetValueAsNumber())
+
+    var array = Array("Dcm_CfgDiagSvcUpdaters")
+
+    //Check array has expected size
+    AssertArraySize(array, Equal, expectedSizeLinkTime)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVCCANCELLERS
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgDiagSvcCancellers array has the correct size
+* Requirements : -
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVCCANCELLERS()
+{
+  // only available if paged buffer is active and rcrrp limit is enabled
+  if (IsStdOn("DCM_PAGED_BUFFER_ENABLED") && IsStdOn("DCM_DIAG_RCRRP_LIMIT_ENABLED"))
+  {
+    // Get expected size
+    var expectedSizeLinkTime = Define("DCM_CFGDIAGSVCCANCELLERS_SIZE")
+    var expectedSizePreComp = Define("DCM_CFGDIAGSVCCANCELLERS_SIZE_CONST")
+
+    //Check both constants are equal
+    Assert(expectedSizeLinkTime.GetValueAsNumber(), Equal, expectedSizePreComp.GetValueAsNumber())
+
+    var array = Array("Dcm_CfgDiagSvcCancellers")
+
+    //Check array has expected size
+    AssertArraySize(array, Equal, expectedSizeLinkTime)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVC11SUBFUNC
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgSvc11SubFuncInfo array has the correct size
+* Requirements : Service 0x11 is enabled
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVC11SUBFUNC()
+{
+  /* Check configuration variant */
+  if (IsStdOn("DCM_SVC_11_SUPPORT_ENABLED"))
+  {
+    /* Get expected size */
+    var expectedSizeLinkTime = Define("DCM_CFGSVC11SUBFUNCINFO_SIZE")
+    var expectedSizePreComp = Define("DCM_CFGSVC11SUBFUNCINFO_SIZE_CONST")
+
+    /* Assert that both constants are equal */
+    Assert(expectedSizeLinkTime.GetValueAsNumber(), Equal, expectedSizePreComp.GetValueAsNumber())
+    var array = Array("Dcm_CfgSvc11SubFuncInfo")
+
+    /* Assert that array has expected size */
+    AssertArraySize(array, Equal, expectedSizeLinkTime)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVC19SUBFUNC
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgSvc19SubFuncInfo array has the correct size
+* Requirements : Service 0x19 is enabled
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVC19SUBFUNC()
+{
+  /* Check configuration variant */
+  if (IsStdOn("DCM_SVC_19_SUPPORT_ENABLED"))
+  {
+    /* Get expected size */
+    var expectedSizeLinkTime = Define("DCM_CFGSVC19SUBFUNCINFO_SIZE")
+    var expectedSizePreComp = Define("DCM_CFGSVC19SUBFUNCINFO_SIZE_CONST")
+
+    /* Assert that both constants are equal */
+    Assert(expectedSizeLinkTime.GetValueAsNumber(), Equal, expectedSizePreComp.GetValueAsNumber())
+    var array = Array("Dcm_CfgSvc19SubFuncInfo")
+
+    /* Assert that array has expected size */
+    AssertArraySize(array, Equal, expectedSizeLinkTime)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVC27SUBFUNC
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgSvc27SubFuncInfo array has the correct size
+* Requirements : Service 0x27 is enabled
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVC27SUBFUNC()
+{
+  /* Check configuration variant */
+  if (IsStdOn("DCM_SVC_27_SUPPORT_ENABLED"))
+  {
+    /* Get expected size */
+    var expectedSizeLinkTime = Define("DCM_CFGSVC27SUBFUNCINFO_SIZE")
+    var expectedSizePreComp = Define("DCM_CFGSVC27SUBFUNCINFO_SIZE_CONST")
+
+    /* Assert that both constants are equal */
+    Assert(expectedSizeLinkTime.GetValueAsNumber(), Equal, expectedSizePreComp.GetValueAsNumber())
+    var array = Array("Dcm_CfgSvc27SubFuncInfo")
+
+    /* Assert that array has expected size */
+    AssertArraySize(array, Equal, expectedSizeLinkTime)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVC27SECLEVEL
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgSvc27SecLevelInfo array has the correct size
+* Requirements : Service 0x27 is enabled
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVC27SECLEVEL()
+{
+  /* Check configuration variant */
+  if (IsStdOn("DCM_SVC_27_SUPPORT_ENABLED"))
+  {
+    /* Get expected size */
+    var expectedSizeLinkTime = Define("DCM_CFGSVC27SECLEVELINFO_SIZE")
+    var expectedSizePreComp = Define("DCM_CFGSVC27SECLEVELINFO_SIZE_CONST")
+
+    /* Assert that both constants are equal */
+    Assert(expectedSizeLinkTime.GetValueAsNumber(), Equal, expectedSizePreComp.GetValueAsNumber())
+    var array = Array("Dcm_CfgSvc27SecLevelInfo")
+
+    /* Assert that array has expected size */
+    AssertArraySize(array, Equal, expectedSizeLinkTime)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVC31OPFUNC
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgRidMgrOpInfo array has the correct size
+* Requirements : Service 0x31 is enabled
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVC31OPFUNC()
+{
+  /* Check configuration variant */
+  if (IsStdOn("DCM_SVC_31_SUPPORT_ENABLED"))
+  {
+    /* Get expected size */
+    var expectedSizeLinkTime = Define("DCM_CFGRIDMGROPINFO_SIZE")
+    var expectedSizePreComp = Define("DCM_CFGRIDMGROPINFO_SIZE_CONST")
+
+    /* Assert that both constants are equal */
+    Assert(expectedSizeLinkTime.GetValueAsNumber(), Equal, expectedSizePreComp.GetValueAsNumber())
+    var array = Array("Dcm_CfgRidMgrOpInfo")
+
+    /* Assert that array has expected size */
+    AssertArraySize(array, Equal, expectedSizeLinkTime)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVC28SUBFUNC
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgSvc28SubFuncInfo array has the correct size
+* Requirements : Service 0x28 is enabled
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVC28SUBFUNC()
+{
+  /* Check configuration variant */
+  if (IsStdOn("DCM_SVC_28_SUPPORT_ENABLED"))
+  {
+    /* Get expected size */
+    var expectedSizeLinkTime = Define("DCM_CFGSVC28SUBFUNCINFO_SIZE")
+    var expectedSizePreComp = Define("DCM_CFGSVC28SUBFUNCINFO_SIZE_CONST")
+
+    /* Assert that both constants are equal */
+    Assert(expectedSizeLinkTime.GetValueAsNumber(), Equal, expectedSizePreComp.GetValueAsNumber())
+    var array = Array("Dcm_CfgSvc28SubFuncInfo")
+
+    /* Assert that array has expected size */
+    AssertArraySize(array, Equal, expectedSizeLinkTime)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVC85SUBFUNC
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgSvc85SubFuncInfo array has the correct size
+* Requirements : Service 0x85 is enabled
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVC85SUBFUNC()
+{
+  /* Check configuration variant */
+  if (IsStdOn("DCM_SVC_85_SUPPORT_ENABLED"))
+  {
+    /* Get expected size */
+    var expectedSizeLinkTime = Define("DCM_CFGSVC85SUBFUNCINFO_SIZE")
+    var expectedSizePreComp = Define("DCM_CFGSVC85SUBFUNCINFO_SIZE_CONST")
+
+    /* Assert that both constants are equal */
+    Assert(expectedSizeLinkTime.GetValueAsNumber(), Equal, expectedSizePreComp.GetValueAsNumber())
+    var array = Array("Dcm_CfgSvc85SubFuncInfo")
+
+    /* Assert that array has expected size */
+    AssertArraySize(array, Equal, expectedSizeLinkTime)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_COMCONTROLCHANNEL
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the comm control channels have the expected size.
+* Requirements : -
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_COMCONTROLCHANNEL()
+{
+  // Get expected size
+  var expectedSizeLinkTime = Define("DCM_NET_MAX_NUM_ALL_COMM_CHANNELS")
+  var expectedSizePreComp = Define("DCM_NET_MAX_NUM_ALL_COMM_CHANNELS_CONST")
+
+  //Check both constants are equal
+  Assert(expectedSizeLinkTime.GetValueAsNumber(), Equal, expectedSizePreComp.GetValueAsNumber())
+
+  //Check configuration variant
+  if (IsStdOn("DCM_VARMGR_MODE_POSTBUILD_LOAD_ENABLED") && IsStdOn("DCM_MODE_COMMCTRL_ENABLED"))
+  {
+    //Any PBX variant is active
+    var sharedArray = Array("Dcm_CfgComCtrlChannels")
+
+    //Check shared array matches expected size
+    AssertArraySize(sharedArray, Equal, expectedSizeLinkTime)
+
+    //Iterate over all variants
+    var networkVariantList := FindConstSymbol("Dcm_CfgNetConfig_.+")
+    for (var index = 0; index < networkVariantList.size(); ++index)
+    {
+      var networkVariant = Struct(networkVariantList[index].GetSymbolName())
+
+      //Check each variant will fit the array size
+      AssertArraySize(sharedArray, GreaterEqual, networkVariant, "NumAllComMChannels")
+    }
+  }
+  else
+  {
+    //Pre-compile variant is active
+    //ComCtrlChannels is located in Dcm.c -> covered by code review.
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_TOBJHANDLE
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the connection id to object handle map has the expected size
+* Requirements : -
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_TOBJHANDLE()
+{
+  // Get expected size
+  var expectedSizeLinkTime = Define("DCM_NET_MAX_NUM_CONNECTIONS")
+  var expectedSizePreComp = Define("DCM_NET_MAX_NUM_CONNECTIONS_CONST")
+
+  //Check both constants are equal
+  Assert(expectedSizeLinkTime.GetValueAsNumber(), Equal, expectedSizePreComp.GetValueAsNumber())
+
+  //Check configuration variant
+  if (IsStdOn("DCM_VARMGR_MODE_POSTBUILD_LOAD_ENABLED"))
+  {
+    //Any PBX variant is active
+    var sharedArray = Array("Dcm_CfgNetConnId2TObjMap")
+
+    //Check shared array matches expected size
+    AssertArraySize(sharedArray, Equal, expectedSizeLinkTime)
+
+    //Iterate over all variants
+    var networkVariantList := FindConstSymbol("Dcm_CfgNetConfig_.+")
+    for (var index = 0; index < networkVariantList.size(); ++index)
+    {
+      var networkVariant = Struct(networkVariantList[index].GetSymbolName())
+
+      //Check each variant will fit the array size
+      AssertArraySize(sharedArray, GreaterEqual, networkVariant, "NumConnections")
+    }
+  }
+  else
+  {
+    //Pre-compile variant is active
+    //ConnId2TObjIdMap is located in Dcm.c -> covered by code review.
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_TERMINATED_LIST
+* Parameter    : None
+* Return value : None
+* Description  : Verify that any NULL terminated list ends with NULL_PTR
+* Requirements : -
+**********************************************************************************************************************/
+def Check_CM_DCM_M_TERMINATED_LIST()
+{
+  if (IsStdOn("DCM_NET_PROTOCOL_SWITCH_NOTIFICATION_ENABLED"))
+  {
+    var delimitedArray = Array("Dcm_CfgNetProtocolNotificationInfo")
+    var lastElement = delimitedArray.GetElemAsStruct(delimitedArray.GetSize() - 1)
+
+    var startFunc = lastElement.GetMemberAsString("StartFunc")
+    Assert(IsNull(startFunc), "Start function of last element in Dcm_CfgNetProtocolNotificationInfo", Equal, "NULL_PTR")
+  }
+
+  if (IsStdOn("DCM_DIAG_OEM_NOTIFICATION_ENABLED"))
+  {
+    var delimitedArray = Array("Dcm_CfgDiagOemNotificationInfo")
+    var lastElement = delimitedArray.GetElemAsStruct(delimitedArray.GetSize() - 1)
+
+    var indFunc = lastElement.GetMemberAsString("IndFunc")
+    Assert(IsNull(indFunc), "Indication function of last element in Dcm_CfgDiagOemNotificationInfo", Equal, "NULL_PTR")
+
+    var confFunc = lastElement.GetMemberAsString("ConfFunc")
+    Assert(IsNull(confFunc), "Confirmation function of last element in Dcm_CfgDiagOemNotificationInfo", Equal, "NULL_PTR")
+  }
+
+  if (IsStdOn("DCM_DIAG_SYS_NOTIFICATION_ENABLED"))
+  {
+    var delimitedArray = Array("Dcm_CfgDiagSysNotificationInfo")
+    var lastElement = delimitedArray.GetElemAsStruct(delimitedArray.GetSize() - 1)
+
+    var indFunc = lastElement.GetMemberAsString("IndFunc")
+    Assert(IsNull(indFunc), "Indication function of last element in Dcm_CfgDiagSysNotificationInfo", Equal, "NULL_PTR")
+
+    var confFunc = lastElement.GetMemberAsString("ConfFunc")
+    Assert(IsNull(confFunc), "Confirmation function of last element in Dcm_CfgDiagSysNotificationInfo", Equal, "NULL_PTR")
+  }
+
+  if (IsStdOn("DCM_STATE_SESSION_NOTIFICATION_ENABLED"))
+  {
+    var delimitedArray = Array("Dcm_CfgStateSessionNotificationInfo")
+    var lastElement = delimitedArray.GetElemAsStruct(delimitedArray.GetSize() - 1)
+
+    var onChgFunc = lastElement.GetMemberAsString("OnChgFunc")
+    Assert(IsNull(onChgFunc), "OnChange function of last element in Dcm_CfgStateSessionNotificationInfo", Equal, "NULL_PTR")
+  }
+
+  if (IsStdOn("DCM_STATE_SECURITY_NOTIFICATION_ENABLED"))
+  {
+    var delimitedArray = Array("Dcm_CfgStateSecurityNotificationInfo")
+    var lastElement = delimitedArray.GetElemAsStruct(delimitedArray.GetSize() - 1)
+
+    var onChgFunc = lastElement.GetMemberAsString("OnChgFunc")
+    Assert(IsNull(onChgFunc), "OnChange function of last element in Dcm_CfgStateSecurityNotificationInfo", Equal, "NULL_PTR")
+  }
+
+  if (IsStdOn("DCM_DIAG_SVC_INITIALIZERS_ENABLED"))
+  {
+    var delimitedArray = Array("Dcm_CfgDiagSvcInitializers")
+    var lastElement = delimitedArray.GetElemAsString(delimitedArray.GetSize() - 1)
+    Assert(IsNull(lastElement), "Last element in Dcm_CfgDiagSvcInitializers", Equal, "NULL_PTR")
+  }
+}

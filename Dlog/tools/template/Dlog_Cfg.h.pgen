@@ -1,0 +1,102 @@
+/**
+ * \file
+ *
+ * \brief       Configuration header file of module Dlog.
+ *
+ * \project     BMW Platform Software
+ *
+ * \copyright   BMW AG 2015 - 2017
+ *
+ * \version     5.1.1
+ *
+ */
+
+/*------------------------------------------------------------------------------
+*
+*  THIS FILE WAS GENERATED. DO NOT MODIFY!
+*
+*  GENERATOR       : %{= generation_tool() }% %{= generation_version_info() }%
+*
+*  GENERATION TIME : %{= generation_timestamp() }%
+*
+------------------------------------------------------------------------------*/
+
+
+#ifndef BPS_DLOG_CFG_H
+#define BPS_DLOG_CFG_H
+
+/*------------------------------------------------------------------------------
+                      Include Section
+-------------------------------------------------------------------------------*/
+
+#include "Dlog_Version.h"
+#include "BUtil/PlatformTypes.h"
+
+
+/*------------------------------------------------------------------------------
+                      Macros
+-------------------------------------------------------------------------------*/
+
+/* check version of the module */
+#if (!Dlog_CHECK_VERSION(5,1,1))
+#error "Version of Dlog_Cfg.h does not match the version of the module!"
+#endif
+
+%{#
+  reset();
+  into(container("Dlog/General"));
+
+  devErrorDetect = value(ref("DevErrorDetect"));
+}%
+#define DLOG_MAX_NUMBER_OF_SWE_GROUPS %{=value(ref("MaxNumberOfSweGroups"))}%u
+
+
+/**
+ * This parameter determines whether development error tracing is
+ * enabled or disabled.
+ * STD_ON  : development error tracing is enabled
+ * STD_OFF : development error tracing is disabled
+ */
+%{: if devErrorDetect == True }%
+#define DLOG_DEV_ERROR_DETECT           STD_ON
+%{: else }%
+#define DLOG_DEV_ERROR_DETECT           STD_OFF
+%{:}%
+
+%{#
+  reset();
+  into(container("Dlog/Features"));
+
+}%
+%{: if value( ref("EnableEcu") ) }%
+#define DLOG_ENABLE_ECU              STD_ON
+%{: else }%
+#define DLOG_ENABLE_ECU              STD_OFF
+%{:}%
+
+%{: if value( ref("EnableSvkCurrent") ) }%
+#define DLOG_ENABLE_SVK_CURRENT      STD_ON
+%{: else }%
+#define DLOG_ENABLE_SVK_CURRENT      STD_OFF
+%{:}%
+
+%{: if exists( rel("SvkHistory") ) }%
+%{#
+  into(container("SvkHistory"));
+
+  numberOfSvkBackups = value(ref("NumberOfSvkBackups"));
+  maxNumberOfSvkSgbmIds = value(ref("MaxNumberOfHistorySgbmIds"));
+}%
+
+#define DLOG_ENABLE_SVK_WRITE        STD_ON
+#define DLOG_ENABLE_SVK_HISTORY      STD_ON
+#define DLOG_NUMBEROFSVKBACKUPS      %{=numberOfSvkBackups}%u
+#define DLOG_MAXNUMBEROFSVKSGBMIDS   %{=maxNumberOfSvkSgbmIds}%u
+
+%{: else }%
+#define DLOG_ENABLE_SVK_WRITE        STD_OFF
+#define DLOG_ENABLE_SVK_HISTORY      STD_OFF
+%{:}%
+
+
+#endif /* BPS_DLOG_CFG_H */

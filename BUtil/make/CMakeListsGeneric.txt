@@ -1,0 +1,36 @@
+#
+# Example CMakeLists.txt for BAC Module
+#
+
+cmake_minimum_required(VERSION 3.1)
+SET(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
+LIST(INSERT CMAKE_MODULE_PATH 0 "$ENV{BPS_CMAKE_MODULE_PATH}")
+
+project(BUtil.generic C CXX)
+include (BAC)
+
+bps_module(
+    BUtil
+
+    SRC
+      BUtil_AddressFormat.c
+      BUtil_Math.c
+    INCLUDE
+      BUtil/GenericErrMemTypes.h
+      BUtil/GenericUDSTypes.h
+      BUtil/TimerTypes.h
+      BUtil_AddressFormat.h
+      BUtil_Algorithm.h
+      BUtil_Assert.h
+      BUtil_BitArray.h
+      BUtil_ByteMask.h
+      BUtil_Math.h
+      BUtil_Types.h
+      BUtil_Version.h
+    GENERATE/VERIFY
+    GENERATE/INCLUDE
+    CFGDESC
+    SWSCONFIG
+    SWS
+)
+

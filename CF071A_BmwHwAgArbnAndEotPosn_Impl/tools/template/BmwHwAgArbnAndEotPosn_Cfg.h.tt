@@ -1,0 +1,48 @@
+<#@ AutosarXml processor="ArDirectiveProcessor" requires="arPrefix='ar';arNamespace='http://autosar.org/4.0.3'" #>
+<#@ template inherits="AutosarDirectiveProcessor.ArGtcBase" debug="false" #>
+<#@ output extension="" #>
+<#@ include file="Helper.tt" #>/**********************************************************************************************************************
+ * Copyright 2017 Nxtr
+ * Nxtr Confidential
+ *
+ * Module File Name  : BmwHwAgArbnAndEotPosn_Cfg.h
+ * Module Description: Configuration Header file for CF071A
+ * Project           : CBD
+ * Author            : Krzysztof Byrski
+ * Generator         : <#= GeneratorName #> <#= GeneratorVersion #>
+ * Generation Time   : <#= DateTime.Now.ToString( "dd.MM.yyyy HH:mm:ss" ) #>
+ **********************************************************************************************************************
+ * Version Control:
+ * %version:          2 %
+ * %derived_by:       nz2796 %
+ *---------------------------------------------------------------------------------------------------------------------
+ * Date      Rev      Author    Change Description                                                             SCR #
+ * --------  -------  --------  ----------------------------------------------------------------------------  ---------
+ * 11/30/17  1        KByrski   Initial version                                                               EA4#17435
+ * 01/12/18  2        ML        Deleted multiple Config Params                                                EA4#19235
+ *********************************************************************************************************************/
+
+/******************************************* Multiple Include Protection *********************************************/
+#ifndef BMWHWAGARBNANDEOTPOSN_CFG_H
+#define BMWHWAGARBNANDEOTPOSN_CFG_H
+
+/************************************************ Include Statements *************************************************/
+#include "Rte_BmwHwAgArbnAndEotPosn.h"
+
+/****************************************************** Macros *******************************************************/
+<#
+ChangeContext( Xp.ModuleConfAtDefRefTo( "BmwHwAgArbnAndEotPosn" ) );
+
+string NTCHWAGSNSRNOTTRIM         = ValueOf( Xp.ValueAtDefRefTo( "BmwHwAgArbnAndEotPosnGeneral/NTCHWAGSNSRNOTTRIM" ) );
+string NTCLOSSOFPINIOINAGZEROSPD  = ValueOf( Xp.ValueAtDefRefTo( "BmwHwAgArbnAndEotPosnGeneral/NTCLOSSOFPINIOINAGZEROSPD" ) );
+string NTCLOSSOFPINIONAG          = ValueOf( Xp.ValueAtDefRefTo( "BmwHwAgArbnAndEotPosnGeneral/NTCLOSSOFPINIONAG" ) );
+#>
+/* Ntc Handwheel Angle Sensor Not Trim */
+#define BMWHWAGARBNANDEOTPOSN_NTCHWAGSNSRNOTTRIM_CNT_ENUM         (<#= NTCHWAGSNSRNOTTRIM #>)
+/* Ntc Loss of Pinion Angle Zero Speed */
+#define BMWHWAGARBNANDEOTPOSN_NTCLOSSOFPINIOINAGZEROSPD_CNT_ENUM  (<#= NTCLOSSOFPINIOINAGZEROSPD #>)
+/* Ntc Loss of Pinion Angle */
+#define BMWHWAGARBNANDEOTPOSN_NTCLOSSOFPINIONAG_CNT_ENUM          (<#= NTCLOSSOFPINIONAG #>)
+
+/**************************************** End Of Multiple Include Protection *****************************************/
+#endif /* BMWHWAGARBNANDEOTPOSN_CFG_H */

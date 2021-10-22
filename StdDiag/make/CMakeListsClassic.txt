@@ -1,0 +1,49 @@
+#
+# Example CMakeLists.txt for BAC Module
+#
+
+cmake_minimum_required(VERSION 3.1)
+SET(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
+LIST(INSERT CMAKE_MODULE_PATH 0 "$ENV{BPS_CMAKE_MODULE_PATH}")
+
+project(StdDiag.classic C CXX)
+include (BAC)
+
+bps_module_adapter(
+   StdDiag
+   classic
+
+   SRC
+      StdDiagClassic.c
+      StdDiag_UDSAdapter.c
+      StdDiag_OmcAdapter.c
+      StdDiag_DarhAdapter.c
+      StdDiag_ErrMemAdapter.c
+      StdDiag_AppAdapter.c
+      StdDiag_StmAdapter.c
+      StdDiag_MgmtAdapter.c
+      StdDiag_IDRLAdapter.c
+      StdDiag_Dlt.c
+      StdDiag_Adt.c
+      StdDiag_AdtUploadDownload.c
+   GENERATE/VERIFY
+   GENERATE/INCLUDE
+      StdDiagClassic_Version.h.pgen
+      StdDiagClassic_Cfg.h.pgen
+      StdDiagClassic_PBCfg.h.pgen
+   GENERATE/SRC
+      StdDiagClassic_Cfg.c.pgen
+      StdDiagClassic_PBCfg.c.pgen
+   GENERATE/META
+      StdDiag_ext_interfaces.arxml.pgen
+      StdDiag_internal.arxml.pgen
+      StdDiag_interfaces.arxml.pgen
+      StdDiag_bswmd.arxml.pgen
+   GENERATE/INPUT
+      StdDiag
+      StdDiagClassic
+   CFGDESC
+      StdDiagClassic_paramdef.arxml
+   DOC
+      intmanual
+)

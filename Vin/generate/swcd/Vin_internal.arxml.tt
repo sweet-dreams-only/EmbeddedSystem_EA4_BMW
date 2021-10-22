@@ -1,0 +1,1347 @@
+﻿<#@ AutosarXml processor="ArDirectiveProcessor" requires="arPrefix='ar';arNamespace='http://autosar.org/schema/r4.0'" #>
+<#@ template inherits="AutosarDirectiveProcessor.ArGtcBase" debug="false" #>
+<#@ output extension="" encoding="UTF-8" #>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+*  \file
+*
+*  \brief       BMW SWC Vin
+*
+*  This file contains the implementation of the BMW SWC Vin
+*  for usage in the BMW AUTOSAR Core.
+*
+*  \project     BMW AUTOSAR Core
+*
+*  \par         To be changed by user: no
+*
+*  \copyright   BMW AG 2015 - 2017
+*
+*  \version     3.5.0
+*
+*  \remarks     -
+*
+*/
+-->
+<#
+   bool enableSecureVin = Exists(Xp.ContainerAtDefRefTo("Vin/SecureVin"));
+
+   ChangeContext(Xp.ContainerAtDefRefTo("Vin/VinGeneral"));
+   bool enableSIAdapter = ValueOf(Xp.ValueAtDefRefTo("EnableSIAdapter"));
+
+   bool VinDetUsage = ValueOf(Xp.ValueAtDefRefTo("VinDevErrorDetect"));
+
+#>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-2-2_STRICT_COMPACT.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>BMW</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>Platform</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE>
+              <SHORT-NAME>Vin</SHORT-NAME>
+              <AR-PACKAGES>
+                <AR-PACKAGE>
+                  <SHORT-NAME>SwComponentTypes</SHORT-NAME>
+                  <ELEMENTS>
+                    <APPLICATION-SW-COMPONENT-TYPE>
+                      <SHORT-NAME>Vin</SHORT-NAME>
+                      <INTRODUCTION>
+                        <TRACE>
+                          <SHORT-NAME>SWS_Vin_0026</SHORT-NAME>
+                          <CATEGORY>SPECIFICATION_ITEM</CATEGORY>
+                        </TRACE>
+                      </INTRODUCTION>
+                      <PORTS>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>ComVin</SHORT-NAME>
+                          <REQUIRED-COM-SPECS>
+                            <NONQUEUED-RECEIVER-COM-SPEC>
+                              <DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/ComVin/ComVin</DATA-ELEMENT-REF>
+                              <HANDLE-OUT-OF-RANGE>NONE</HANDLE-OUT-OF-RANGE>
+                              <USES-END-TO-END-PROTECTION>0</USES-END-TO-END-PROTECTION>
+                              <ALIVE-TIMEOUT>0.0</ALIVE-TIMEOUT>
+                              <ENABLE-UPDATE>false</ENABLE-UPDATE>
+                              <HANDLE-NEVER-RECEIVED>false</HANDLE-NEVER-RECEIVED>
+                              <HANDLE-TIMEOUT-TYPE>NONE</HANDLE-TIMEOUT-TYPE>
+                              <INIT-VALUE>
+                                <RECORD-VALUE-SPECIFICATION>
+                                  <FIELDS>
+                                    <NUMERICAL-VALUE-SPECIFICATION>
+                                      <SHORT-LABEL>Vin1</SHORT-LABEL>
+                                      <VALUE>0</VALUE>
+                                    </NUMERICAL-VALUE-SPECIFICATION>
+                                    <NUMERICAL-VALUE-SPECIFICATION>
+                                      <SHORT-LABEL>Vin2</SHORT-LABEL>
+                                      <VALUE>0</VALUE>
+                                    </NUMERICAL-VALUE-SPECIFICATION>
+                                    <NUMERICAL-VALUE-SPECIFICATION>
+                                      <SHORT-LABEL>Vin3</SHORT-LABEL>
+                                      <VALUE>0</VALUE>
+                                    </NUMERICAL-VALUE-SPECIFICATION>
+                                    <NUMERICAL-VALUE-SPECIFICATION>
+                                      <SHORT-LABEL>Vin4</SHORT-LABEL>
+                                      <VALUE>0</VALUE>
+                                    </NUMERICAL-VALUE-SPECIFICATION>
+                                    <NUMERICAL-VALUE-SPECIFICATION>
+                                      <SHORT-LABEL>Vin5</SHORT-LABEL>
+                                      <VALUE>0</VALUE>
+                                    </NUMERICAL-VALUE-SPECIFICATION>
+                                    <NUMERICAL-VALUE-SPECIFICATION>
+                                      <SHORT-LABEL>Vin6</SHORT-LABEL>
+                                      <VALUE>0</VALUE>
+                                    </NUMERICAL-VALUE-SPECIFICATION>
+                                    <NUMERICAL-VALUE-SPECIFICATION>
+                                      <SHORT-LABEL>Vin7</SHORT-LABEL>
+                                      <VALUE>0</VALUE>
+                                    </NUMERICAL-VALUE-SPECIFICATION>
+                                  </FIELDS>
+                                </RECORD-VALUE-SPECIFICATION>
+                              </INIT-VALUE>
+                            </NONQUEUED-RECEIVER-COM-SPEC>
+                          </REQUIRED-COM-SPECS>
+                          <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/BMW/Platform/Vin/PortInterfaces/ComVin</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+<# if (VinDetUsage) { #>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>DETService_Vin</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Vin/Det/PortInterfaces/DETService</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+<# } #>
+<# if (enableSecureVin) { #>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>DiagnosticMonitor_FscsmErrorEvent</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Vin/Dem/PortInterfaces/Vin_DiagnosticMonitor</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+<# } #>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>DlogEcuInfo</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Vin/Dlog/PortInterfaces/EcuInfo</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+<# if (enableSecureVin) { #>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>FscsmCryptographicFunctions</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Vin/Fscsm/PortInterfaces/FscsmApplSwcInterface</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>FscsmVK_Established</SHORT-NAME>
+                          <REQUIRED-COM-SPECS>
+                            <NONQUEUED-RECEIVER-COM-SPEC>
+                              <DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/Fscsm/PortInterfaces/VK_Established/Flag</DATA-ELEMENT-REF>
+                              <HANDLE-OUT-OF-RANGE>NONE</HANDLE-OUT-OF-RANGE>
+                              <USES-END-TO-END-PROTECTION>0</USES-END-TO-END-PROTECTION>
+                              <ALIVE-TIMEOUT>0.0</ALIVE-TIMEOUT>
+                              <ENABLE-UPDATE>false</ENABLE-UPDATE>
+                              <HANDLE-NEVER-RECEIVED>false</HANDLE-NEVER-RECEIVED>
+                              <HANDLE-TIMEOUT-TYPE>NONE</HANDLE-TIMEOUT-TYPE>
+                              <INIT-VALUE>
+                                <NUMERICAL-VALUE-SPECIFICATION>
+                                  <VALUE>0</VALUE>
+                                </NUMERICAL-VALUE-SPECIFICATION>
+                              </INIT-VALUE>
+                            </NONQUEUED-RECEIVER-COM-SPEC>
+                          </REQUIRED-COM-SPECS>
+                          <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/BMW/Platform/Vin/Fscsm/PortInterfaces/VK_Established</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <PR-PORT-PROTOTYPE>
+                          <SHORT-NAME>InternalCheckVinTrigger</SHORT-NAME>
+                          <PROVIDED-COM-SPECS>
+                            <NONQUEUED-SENDER-COM-SPEC>
+                              <DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/Vin_InternalCheckVinTrigger/Trigger</DATA-ELEMENT-REF>
+                              <HANDLE-OUT-OF-RANGE>NONE</HANDLE-OUT-OF-RANGE>
+                              <USES-END-TO-END-PROTECTION>0</USES-END-TO-END-PROTECTION>
+                              <INIT-VALUE>
+                                <NUMERICAL-VALUE-SPECIFICATION>
+                                  <VALUE>0</VALUE>
+                                </NUMERICAL-VALUE-SPECIFICATION>
+                              </INIT-VALUE>
+                            </NONQUEUED-SENDER-COM-SPEC>
+                          </PROVIDED-COM-SPECS>
+                          <PROVIDED-REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/BMW/Platform/Vin/PortInterfaces/Vin_InternalCheckVinTrigger</PROVIDED-REQUIRED-INTERFACE-TREF>
+                        </PR-PORT-PROTOTYPE>
+<# } #>
+                        <PR-PORT-PROTOTYPE>
+                          <SHORT-NAME>LifeCycle</SHORT-NAME>
+                          <PROVIDED-COM-SPECS>
+                            <MODE-SWITCH-SENDER-COM-SPEC>
+                              <ENHANCED-MODE-API>true</ENHANCED-MODE-API>
+                              <MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/ILifeCycle/Mode</MODE-GROUP-REF>
+                              <QUEUE-LENGTH>2</QUEUE-LENGTH>
+                            </MODE-SWITCH-SENDER-COM-SPEC>
+                          </PROVIDED-COM-SPECS>
+                          <PROVIDED-REQUIRED-INTERFACE-TREF DEST="MODE-SWITCH-INTERFACE">/BMW/Platform/Vin/PortInterfaces/ILifeCycle</PROVIDED-REQUIRED-INTERFACE-TREF>
+                        </PR-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>LifeCycleRequest</SHORT-NAME>
+                          <REQUIRED-COM-SPECS>
+                            <NONQUEUED-RECEIVER-COM-SPEC>
+                              <DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/ILifeCycleRequest/requestMode</DATA-ELEMENT-REF>
+                              <HANDLE-OUT-OF-RANGE>NONE</HANDLE-OUT-OF-RANGE>
+                              <USES-END-TO-END-PROTECTION>false</USES-END-TO-END-PROTECTION>
+                              <ALIVE-TIMEOUT>0.0</ALIVE-TIMEOUT>
+                              <ENABLE-UPDATE>false</ENABLE-UPDATE>
+                              <HANDLE-NEVER-RECEIVED>false</HANDLE-NEVER-RECEIVED>
+                              <HANDLE-TIMEOUT-TYPE>NONE</HANDLE-TIMEOUT-TYPE>
+                              <INIT-VALUE>
+                                <NUMERICAL-VALUE-SPECIFICATION>
+                                  <VALUE>2</VALUE>
+                                </NUMERICAL-VALUE-SPECIFICATION>
+                              </INIT-VALUE>
+                            </NONQUEUED-RECEIVER-COM-SPEC>
+                          </REQUIRED-COM-SPECS>
+                          <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/BMW/Platform/Vin/PortInterfaces/ILifeCycleRequest</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>NvMNotifyJobFinished_Vin</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Vin/NvM/PortInterfaces/Vin_NvMNotifyJobFinished</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>NvMService_Vin</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Vin/NvM/PortInterfaces/Vin_NvMService</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+<# if (enableSecureVin) { #>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>RandomNumberGenerator</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Vin/Fscsm/PortInterfaces/RandomNumberGenerator</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>SSVChallengeToSSS</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/BMW/Platform/Vin/PortInterfaces/Challenge</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>SSVErrorCode</SHORT-NAME>
+                          <PROVIDED-COM-SPECS>
+                            <NONQUEUED-SENDER-COM-SPEC>
+                              <DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/SSVErrorCode/ErrorCode</DATA-ELEMENT-REF>
+                              <HANDLE-OUT-OF-RANGE>NONE</HANDLE-OUT-OF-RANGE>
+                              <USES-END-TO-END-PROTECTION>0</USES-END-TO-END-PROTECTION>
+                              <INIT-VALUE>
+                                <NUMERICAL-VALUE-SPECIFICATION>
+                                  <VALUE>0</VALUE>
+                                </NUMERICAL-VALUE-SPECIFICATION>
+                              </INIT-VALUE>
+                            </NONQUEUED-SENDER-COM-SPEC>
+                          </PROVIDED-COM-SPECS>
+                          <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/BMW/Platform/Vin/PortInterfaces/SSVErrorCode</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>SSVResponseFromSSS</SHORT-NAME>
+                          <REQUIRED-COM-SPECS>
+                            <NONQUEUED-RECEIVER-COM-SPEC>
+                              <DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/Response/Response</DATA-ELEMENT-REF>
+                              <HANDLE-OUT-OF-RANGE>NONE</HANDLE-OUT-OF-RANGE>
+                              <USES-END-TO-END-PROTECTION>0</USES-END-TO-END-PROTECTION>
+                              <ALIVE-TIMEOUT>0.0</ALIVE-TIMEOUT>
+                              <ENABLE-UPDATE>false</ENABLE-UPDATE>
+                              <HANDLE-NEVER-RECEIVED>false</HANDLE-NEVER-RECEIVED>
+                              <HANDLE-TIMEOUT-TYPE>NONE</HANDLE-TIMEOUT-TYPE>
+                              <INIT-VALUE>
+                                <RECORD-VALUE-SPECIFICATION>
+                                  <FIELDS>
+                                    <NUMERICAL-VALUE-SPECIFICATION>
+                                      <SHORT-LABEL>SsvId</SHORT-LABEL>
+                                      <VALUE>0</VALUE>
+                                    </NUMERICAL-VALUE-SPECIFICATION>
+                                    <NUMERICAL-VALUE-SPECIFICATION>
+                                      <SHORT-LABEL>CounterBase</SHORT-LABEL>
+                                      <VALUE>0</VALUE>
+                                    </NUMERICAL-VALUE-SPECIFICATION>
+                                    <NUMERICAL-VALUE-SPECIFICATION>
+                                      <SHORT-LABEL>Signature</SHORT-LABEL>
+                                      <VALUE>0</VALUE>
+                                    </NUMERICAL-VALUE-SPECIFICATION>
+                                  </FIELDS>
+                                </RECORD-VALUE-SPECIFICATION>
+                              </INIT-VALUE>
+                            </NONQUEUED-RECEIVER-COM-SPEC>
+                          </REQUIRED-COM-SPECS>
+                          <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/BMW/Platform/Vin/PortInterfaces/Response</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>SSVState</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Vin/PortInterfaces/SSVState</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>SSVVinMacFromSSS</SHORT-NAME>
+                          <REQUIRED-COM-SPECS>
+                            <NONQUEUED-RECEIVER-COM-SPEC>
+                              <DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/SSVVinMac/Mac</DATA-ELEMENT-REF>
+                              <HANDLE-OUT-OF-RANGE>NONE</HANDLE-OUT-OF-RANGE>
+                              <USES-END-TO-END-PROTECTION>0</USES-END-TO-END-PROTECTION>
+                              <ALIVE-TIMEOUT>0.0</ALIVE-TIMEOUT>
+                              <ENABLE-UPDATE>false</ENABLE-UPDATE>
+                              <HANDLE-NEVER-RECEIVED>false</HANDLE-NEVER-RECEIVED>
+                              <HANDLE-TIMEOUT-TYPE>NONE</HANDLE-TIMEOUT-TYPE>
+                              <INIT-VALUE>
+                                <RECORD-VALUE-SPECIFICATION>
+                                  <FIELDS>
+                                    <ARRAY-VALUE-SPECIFICATION>
+                                      <SHORT-LABEL>Mac</SHORT-LABEL>
+                                      <ELEMENTS>
+                                        <NUMERICAL-VALUE-SPECIFICATION>
+                                          <VALUE>0</VALUE>
+                                        </NUMERICAL-VALUE-SPECIFICATION>
+                                        <NUMERICAL-VALUE-SPECIFICATION>
+                                          <VALUE>0</VALUE>
+                                        </NUMERICAL-VALUE-SPECIFICATION>
+                                        <NUMERICAL-VALUE-SPECIFICATION>
+                                          <VALUE>0</VALUE>
+                                        </NUMERICAL-VALUE-SPECIFICATION>
+                                        <NUMERICAL-VALUE-SPECIFICATION>
+                                          <VALUE>0</VALUE>
+                                        </NUMERICAL-VALUE-SPECIFICATION>
+                                        <NUMERICAL-VALUE-SPECIFICATION>
+                                          <VALUE>0</VALUE>
+                                        </NUMERICAL-VALUE-SPECIFICATION>
+                                        <NUMERICAL-VALUE-SPECIFICATION>
+                                          <VALUE>0</VALUE>
+                                        </NUMERICAL-VALUE-SPECIFICATION>
+                                        <NUMERICAL-VALUE-SPECIFICATION>
+                                          <VALUE>0</VALUE>
+                                        </NUMERICAL-VALUE-SPECIFICATION>
+                                        <NUMERICAL-VALUE-SPECIFICATION>
+                                          <VALUE>0</VALUE>
+                                        </NUMERICAL-VALUE-SPECIFICATION>
+                                      </ELEMENTS>
+                                    </ARRAY-VALUE-SPECIFICATION>
+                                  </FIELDS>
+                                </RECORD-VALUE-SPECIFICATION>
+                              </INIT-VALUE>
+                            </NONQUEUED-RECEIVER-COM-SPEC>
+                          </REQUIRED-COM-SPECS>
+                          <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/BMW/Platform/Vin/PortInterfaces/SSVVinMac</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+<# } #>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>Vin</SHORT-NAME>
+                          <PROVIDED-COM-SPECS>
+                            <NONQUEUED-SENDER-COM-SPEC>
+                              <DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/Vin/Vin</DATA-ELEMENT-REF>
+                              <HANDLE-OUT-OF-RANGE>NONE</HANDLE-OUT-OF-RANGE>
+                              <USES-END-TO-END-PROTECTION>0</USES-END-TO-END-PROTECTION>
+                              <INIT-VALUE>
+                                <RECORD-VALUE-SPECIFICATION>
+                                  <SHORT-LABEL>InitValue_Vin</SHORT-LABEL>
+                                  <FIELDS>
+                                    <ARRAY-VALUE-SPECIFICATION>
+                                      <SHORT-LABEL>Vin</SHORT-LABEL>
+                                      <ELEMENTS>
+                                        <NUMERICAL-VALUE-SPECIFICATION>
+                                          <VALUE>0</VALUE>
+                                        </NUMERICAL-VALUE-SPECIFICATION>
+                                        <NUMERICAL-VALUE-SPECIFICATION>
+                                          <VALUE>0</VALUE>
+                                        </NUMERICAL-VALUE-SPECIFICATION>
+                                        <NUMERICAL-VALUE-SPECIFICATION>
+                                          <VALUE>0</VALUE>
+                                        </NUMERICAL-VALUE-SPECIFICATION>
+                                        <NUMERICAL-VALUE-SPECIFICATION>
+                                          <VALUE>0</VALUE>
+                                        </NUMERICAL-VALUE-SPECIFICATION>
+                                        <NUMERICAL-VALUE-SPECIFICATION>
+                                          <VALUE>0</VALUE>
+                                        </NUMERICAL-VALUE-SPECIFICATION>
+                                        <NUMERICAL-VALUE-SPECIFICATION>
+                                          <VALUE>0</VALUE>
+                                        </NUMERICAL-VALUE-SPECIFICATION>
+                                        <NUMERICAL-VALUE-SPECIFICATION>
+                                          <VALUE>0</VALUE>
+                                        </NUMERICAL-VALUE-SPECIFICATION>
+                                      </ELEMENTS>
+                                    </ARRAY-VALUE-SPECIFICATION>
+                                    <NUMERICAL-VALUE-SPECIFICATION>
+                                      <SHORT-LABEL>Qualifier</SHORT-LABEL>
+                                      <VALUE>0</VALUE>
+                                    </NUMERICAL-VALUE-SPECIFICATION>
+                                  </FIELDS>
+                                </RECORD-VALUE-SPECIFICATION>
+                              </INIT-VALUE>
+                            </NONQUEUED-SENDER-COM-SPEC>
+                          </PROVIDED-COM-SPECS>
+                          <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/BMW/Platform/Vin/PortInterfaces/Vin</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>VinChangeIndicator</SHORT-NAME>
+                          <PROVIDED-COM-SPECS>
+                            <MODE-SWITCH-SENDER-COM-SPEC>
+                              <MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/IVinChangeIndicator/ChangeIndicator</MODE-GROUP-REF>
+                              <MODE-SWITCHED-ACK>
+                                <TIMEOUT>0.0</TIMEOUT>
+                              </MODE-SWITCHED-ACK>
+                              <QUEUE-LENGTH>1</QUEUE-LENGTH>
+                            </MODE-SWITCH-SENDER-COM-SPEC>
+                          </PROVIDED-COM-SPECS>
+                          <PROVIDED-INTERFACE-TREF DEST="MODE-SWITCH-INTERFACE">/BMW/Platform/Vin/PortInterfaces/IVinChangeIndicator</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>VinCom</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="MODE-SWITCH-INTERFACE">/BMW/Platform/Vin/PortInterfaces/VinCom</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>VinRequest</SHORT-NAME>
+                          <PROVIDED-COM-SPECS>
+                            <QUEUED-SENDER-COM-SPEC>
+                              <DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/VinRequest/RequestMessageIdentifier</DATA-ELEMENT-REF>
+                              <HANDLE-OUT-OF-RANGE>NONE</HANDLE-OUT-OF-RANGE>
+                              <USES-END-TO-END-PROTECTION>0</USES-END-TO-END-PROTECTION>
+                            </QUEUED-SENDER-COM-SPEC>
+                          </PROVIDED-COM-SPECS>
+                          <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/BMW/Platform/Vin/PortInterfaces/VinRequest</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                      </PORTS>
+                      <INTERNAL-BEHAVIORS>
+                        <SWC-INTERNAL-BEHAVIOR>
+                          <SHORT-NAME>Vin_IB</SHORT-NAME>
+                          <INTRODUCTION>
+                            <TRACE>
+                              <SHORT-NAME>SWS_Vin_0027</SHORT-NAME>
+                              <CATEGORY>SPECIFICATION_ITEM</CATEGORY>
+                            </TRACE>
+                          </INTRODUCTION>
+                          <DATA-TYPE-MAPPING-REFS>
+                            <DATA-TYPE-MAPPING-REF DEST="DATA-TYPE-MAPPING-SET">/BMW/Platform/Vin/DataTypeMappingSets/dtms_VinLifeCycleMode</DATA-TYPE-MAPPING-REF>
+                          </DATA-TYPE-MAPPING-REFS>
+                          <EXCLUSIVE-AREAS>
+                            <EXCLUSIVE-AREA>
+                              <SHORT-NAME>VinState</SHORT-NAME>
+                            </EXCLUSIVE-AREA>
+                          </EXCLUSIVE-AREAS>
+                          <EVENTS>
+                            <DATA-RECEIVED-EVENT>
+                              <SHORT-NAME>LifeCycleRequest</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Vin/SwComponentTypes/Vin/Vin_IB/Vin_LifeCycleModeRequest</START-ON-EVENT-REF>
+                              <DATA-IREF>
+                                <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/LifeCycleRequest</CONTEXT-R-PORT-REF>
+                                <TARGET-DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/ILifeCycleRequest/requestMode</TARGET-DATA-ELEMENT-REF>
+                              </DATA-IREF>
+                            </DATA-RECEIVED-EVENT>
+                            <TIMING-EVENT>
+                              <SHORT-NAME>Main</SHORT-NAME>
+                              <DISABLED-MODE-IREFS>
+                                <DISABLED-MODE-IREF>
+                                  <CONTEXT-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/VinCom</CONTEXT-PORT-REF>
+                                  <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/VinCom/Mode</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                                  <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/BMW/Platform/Vin/ModeDeclarationGroups/Vin_VinComMode/VIN_VINCOMOFF</TARGET-MODE-DECLARATION-REF>
+                                </DISABLED-MODE-IREF>
+                                <DISABLED-MODE-IREF>
+                                  <CONTEXT-PORT-REF DEST="PR-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/LifeCycle</CONTEXT-PORT-REF>
+                                  <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/ILifeCycle/Mode</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                                  <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/BMW/Platform/Vin/ModeDeclarationGroups/Vin_LifeCycle/VIN_INITIALIZED</TARGET-MODE-DECLARATION-REF>
+                                </DISABLED-MODE-IREF>
+                                <DISABLED-MODE-IREF>
+                                  <CONTEXT-PORT-REF DEST="PR-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/LifeCycle</CONTEXT-PORT-REF>
+                                  <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/ILifeCycle/Mode</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                                  <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/BMW/Platform/Vin/ModeDeclarationGroups/Vin_LifeCycle/VIN_STOPPED</TARGET-MODE-DECLARATION-REF>
+                                </DISABLED-MODE-IREF>
+                              </DISABLED-MODE-IREFS>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Vin/SwComponentTypes/Vin/Vin_IB/Vin_Main</START-ON-EVENT-REF>
+                              <PERIOD>0.1</PERIOD>
+                            </TIMING-EVENT>
+<# if (enableSecureVin) { #>
+                            <DATA-RECEIVED-EVENT>
+                              <SHORT-NAME>dre_CheckVinTrigger</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Vin/SwComponentTypes/Vin/Vin_IB/Vin_SsvCheckVin</START-ON-EVENT-REF>
+                              <DATA-IREF>
+                                <CONTEXT-R-PORT-REF DEST="PR-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/InternalCheckVinTrigger</CONTEXT-R-PORT-REF>
+                                <TARGET-DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/Vin_InternalCheckVinTrigger/Trigger</TARGET-DATA-ELEMENT-REF>
+                              </DATA-IREF>
+                            </DATA-RECEIVED-EVENT>
+<# } #>
+                            <DATA-RECEIVED-EVENT>
+                              <SHORT-NAME>dre_ComVin</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Vin/SwComponentTypes/Vin/Vin_IB/Vin_ReceiveFromCom</START-ON-EVENT-REF>
+                              <DATA-IREF>
+                                <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/ComVin</CONTEXT-R-PORT-REF>
+                                <TARGET-DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/ComVin/ComVin</TARGET-DATA-ELEMENT-REF>
+                              </DATA-IREF>
+                            </DATA-RECEIVED-EVENT>
+<# if (enableSecureVin) { #>
+                            <DATA-RECEIVED-EVENT>
+                              <SHORT-NAME>dre_FscsmVK_Established</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Vin/SwComponentTypes/Vin/Vin_IB/Vin_SsvOnVkEstablished</START-ON-EVENT-REF>
+                              <DATA-IREF>
+                                <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/FscsmVK_Established</CONTEXT-R-PORT-REF>
+                                <TARGET-DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/Fscsm/PortInterfaces/VK_Established/Flag</TARGET-DATA-ELEMENT-REF>
+                              </DATA-IREF>
+                            </DATA-RECEIVED-EVENT>
+                            <DATA-RECEIVED-EVENT>
+                              <SHORT-NAME>dre_ResponseFromSSS</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Vin/SwComponentTypes/Vin/Vin_IB/Vin_SsvReceiveResponseFromSss</START-ON-EVENT-REF>
+                              <DATA-IREF>
+                                <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/SSVResponseFromSSS</CONTEXT-R-PORT-REF>
+                                <TARGET-DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/Response/Response</TARGET-DATA-ELEMENT-REF>
+                              </DATA-IREF>
+                            </DATA-RECEIVED-EVENT>
+                            <DATA-RECEIVED-EVENT>
+                              <SHORT-NAME>dre_SSVVinMac</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Vin/SwComponentTypes/Vin/Vin_IB/Vin_SsvReceiveMac</START-ON-EVENT-REF>
+                              <DATA-IREF>
+                                <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/SSVVinMacFromSSS</CONTEXT-R-PORT-REF>
+                                <TARGET-DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/SSVVinMac/Mac</TARGET-DATA-ELEMENT-REF>
+                              </DATA-IREF>
+                            </DATA-RECEIVED-EVENT>
+<# } #>
+                            <MODE-SWITCHED-ACK-EVENT>
+                              <SHORT-NAME>msae_VinChangeIndicator</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Vin/SwComponentTypes/Vin/Vin_IB/Vin_OnVinChangeIndicatorAck</START-ON-EVENT-REF>
+                              <EVENT-SOURCE-REF DEST="MODE-SWITCH-POINT">/BMW/Platform/Vin/SwComponentTypes/Vin/Vin_IB/Vin_OnVinChangeIndicatorAck/mspVinChangeIndicator</EVENT-SOURCE-REF>
+                            </MODE-SWITCHED-ACK-EVENT>
+                            <SWC-MODE-SWITCH-EVENT>
+                              <SHORT-NAME>mse_ComOff</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Vin/SwComponentTypes/Vin/Vin_IB/Vin_OnComOff</START-ON-EVENT-REF>
+                              <ACTIVATION>ON-TRANSITION</ACTIVATION>
+                              <MODE-IREFS>
+                                <MODE-IREF>
+                                  <CONTEXT-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/VinCom</CONTEXT-PORT-REF>
+                                  <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/VinCom/Mode</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                                  <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/BMW/Platform/Vin/ModeDeclarationGroups/Vin_VinComMode/VIN_VINCOMON</TARGET-MODE-DECLARATION-REF>
+                                </MODE-IREF>
+                                <MODE-IREF>
+                                  <CONTEXT-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/VinCom</CONTEXT-PORT-REF>
+                                  <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/VinCom/Mode</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                                  <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/BMW/Platform/Vin/ModeDeclarationGroups/Vin_VinComMode/VIN_VINCOMOFF</TARGET-MODE-DECLARATION-REF>
+                                </MODE-IREF>
+                              </MODE-IREFS>
+                            </SWC-MODE-SWITCH-EVENT>
+                            <SWC-MODE-SWITCH-EVENT>
+                              <SHORT-NAME>mse_ComOn</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Vin/SwComponentTypes/Vin/Vin_IB/Vin_OnComOn</START-ON-EVENT-REF>
+                              <ACTIVATION>ON-TRANSITION</ACTIVATION>
+                              <MODE-IREFS>
+                                <MODE-IREF>
+                                  <CONTEXT-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/VinCom</CONTEXT-PORT-REF>
+                                  <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/VinCom/Mode</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                                  <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/BMW/Platform/Vin/ModeDeclarationGroups/Vin_VinComMode/VIN_VINCOMOFF</TARGET-MODE-DECLARATION-REF>
+                                </MODE-IREF>
+                                <MODE-IREF>
+                                  <CONTEXT-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/VinCom</CONTEXT-PORT-REF>
+                                  <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/VinCom/Mode</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                                  <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/BMW/Platform/Vin/ModeDeclarationGroups/Vin_VinComMode/VIN_VINCOMON</TARGET-MODE-DECLARATION-REF>
+                                </MODE-IREF>
+                              </MODE-IREFS>
+                            </SWC-MODE-SWITCH-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>oie_NvMNotifyJobFinished_Vin_JobFinished</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Vin/SwComponentTypes/Vin/Vin_IB/Vin_NvmJobFinished</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/NvMNotifyJobFinished_Vin</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Vin/NvM/PortInterfaces/Vin_NvMNotifyJobFinished/JobFinished</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+<# if (enableSecureVin) { #>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>oie_SSVState_Get</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Vin/SwComponentTypes/Vin/Vin_IB/Vin_SsvStateGet</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/SSVState</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Vin/PortInterfaces/SSVState/Get</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+<# } #>
+                          </EVENTS>
+                          <HANDLE-TERMINATION-AND-RESTART>NO-SUPPORT</HANDLE-TERMINATION-AND-RESTART>
+                          <RUNNABLES>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>Vin_LifeCycleModeRequest</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <RUNS-INSIDE-EXCLUSIVE-AREA-REFS>
+                                <RUNS-INSIDE-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/BMW/Platform/Vin/SwComponentTypes/Vin/Vin_IB/VinState</RUNS-INSIDE-EXCLUSIVE-AREA-REF>
+                              </RUNS-INSIDE-EXCLUSIVE-AREA-REFS>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <DATA-READ-ACCESSS>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>dra_requestMode</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/LifeCycleRequest</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/ILifeCycleRequest/requestMode</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+                              </DATA-READ-ACCESSS>
+<# if (enableSecureVin) { #>
+                              <DATA-RECEIVE-POINT-BY-VALUES>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>drpval_Flag</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/FscsmVK_Established</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/Fscsm/PortInterfaces/VK_Established/Flag</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+                              </DATA-RECEIVE-POINT-BY-VALUES>
+<# } #>
+                              <MODE-ACCESS-POINTS>
+                                <MODE-ACCESS-POINT>
+                                  <MODE-GROUP-IREF>
+                                    <P-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                      <CONTEXT-P-PORT-REF DEST="PR-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/LifeCycle</CONTEXT-P-PORT-REF>
+                                      <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/ILifeCycle/Mode</TARGET-MODE-GROUP-REF>
+                                    </P-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-ACCESS-POINT>
+                              </MODE-ACCESS-POINTS>
+                              <MODE-SWITCH-POINTS>
+                                <MODE-SWITCH-POINT>
+                                  <SHORT-NAME>msp_LifeCycle</SHORT-NAME>
+                                  <MODE-GROUP-IREF>
+                                    <CONTEXT-P-PORT-REF DEST="PR-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/LifeCycle</CONTEXT-P-PORT-REF>
+                                    <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/ILifeCycle/Mode</TARGET-MODE-GROUP-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-SWITCH-POINT>
+                              </MODE-SWITCH-POINTS>
+                              <SYMBOL>Vin_LifeCycleModeRequest</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>Vin_Main</SHORT-NAME>
+                              <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                                <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/BMW/Platform/Vin/SwComponentTypes/Vin/Vin_IB/VinState</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                              </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <DATA-SEND-POINTS>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>dsp_RequestMessageIdentifier</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/VinRequest</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/VinRequest/RequestMessageIdentifier</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+<# if (enableSecureVin) { #>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>dsp_Challenge</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/SSVChallengeToSSS</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/Challenge/Challenge</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>dsp_ErrorCode</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/SSVErrorCode</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/SSVErrorCode/ErrorCode</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+<# } #>
+                              </DATA-SEND-POINTS>
+                              <SERVER-CALL-POINTS>
+<# if (enableSecureVin) { #>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>scp_SetEventStatus</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/DiagnosticMonitor_FscsmErrorEvent</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Vin/Dem/PortInterfaces/Vin_DiagnosticMonitor/SetEventStatus</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+<# } #>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>scp_GetErrorStatus</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/NvMService_Vin</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Vin/NvM/PortInterfaces/Vin_NvMService/GetErrorStatus</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>scp_ReadBlock</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/NvMService_Vin</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Vin/NvM/PortInterfaces/Vin_NvMService/ReadBlock</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+<# if (enableSecureVin) { #>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>scp_GenerateRandomNumber</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/RandomNumberGenerator</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Vin/Fscsm/PortInterfaces/RandomNumberGenerator/GenerateRandomNumber</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+<# } #>
+<# if (VinDetUsage) { #>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>scp_ReportError</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/DETService_Vin</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Vin/Det/PortInterfaces/DETService/ReportError</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>1.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+<# } #>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Vin_Main</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>Vin_NvmJobFinished</SHORT-NAME>
+                              <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                                <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/BMW/Platform/Vin/SwComponentTypes/Vin/Vin_IB/VinState</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                              </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <DATA-RECEIVE-POINT-BY-VALUES>
+<# if (enableSecureVin) { #>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>drpval_Flag</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/FscsmVK_Established</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/Fscsm/PortInterfaces/VK_Established/Flag</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+<# } #>
+                              </DATA-RECEIVE-POINT-BY-VALUES>
+                              <MODE-SWITCH-POINTS>
+                                <MODE-SWITCH-POINT>
+                                  <SHORT-NAME>msp_VinChangeIndicator</SHORT-NAME>
+                                  <MODE-GROUP-IREF>
+                                    <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/VinChangeIndicator</CONTEXT-P-PORT-REF>
+                                    <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/IVinChangeIndicator/ChangeIndicator</TARGET-MODE-GROUP-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-SWITCH-POINT>
+                              </MODE-SWITCH-POINTS>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>scp_WriteBlock</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/NvMService_Vin</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Vin/NvM/PortInterfaces/Vin_NvMService/WriteBlock</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Vin_NvmJobFinished</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>Vin_OnComOff</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SYMBOL>Vin_OnComOff</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>Vin_OnComOn</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <RUNS-INSIDE-EXCLUSIVE-AREA-REFS>
+                                <RUNS-INSIDE-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/BMW/Platform/Vin/SwComponentTypes/Vin/Vin_IB/VinState</RUNS-INSIDE-EXCLUSIVE-AREA-REF>
+                              </RUNS-INSIDE-EXCLUSIVE-AREA-REFS>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SYMBOL>Vin_OnComOn</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>Vin_OnVinChangeIndicatorAck</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <RUNS-INSIDE-EXCLUSIVE-AREA-REFS>
+                                <RUNS-INSIDE-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/BMW/Platform/Vin/SwComponentTypes/Vin/Vin_IB/VinState</RUNS-INSIDE-EXCLUSIVE-AREA-REF>
+                              </RUNS-INSIDE-EXCLUSIVE-AREA-REFS>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <MODE-ACCESS-POINTS>
+                                <MODE-ACCESS-POINT>
+                                  <MODE-GROUP-IREF>
+                                    <P-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                      <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/VinChangeIndicator</CONTEXT-P-PORT-REF>
+                                      <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/IVinChangeIndicator/ChangeIndicator</TARGET-MODE-GROUP-REF>
+                                    </P-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-ACCESS-POINT>
+                              </MODE-ACCESS-POINTS>
+                              <MODE-SWITCH-POINTS>
+                                <MODE-SWITCH-POINT>
+                                  <SHORT-NAME>mspVinChangeIndicator</SHORT-NAME>
+                                  <MODE-GROUP-IREF>
+                                    <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/VinChangeIndicator</CONTEXT-P-PORT-REF>
+                                    <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/IVinChangeIndicator/ChangeIndicator</TARGET-MODE-GROUP-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-SWITCH-POINT>
+                              </MODE-SWITCH-POINTS>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>scp_WriteBlock</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/NvMService_Vin</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Vin/NvM/PortInterfaces/Vin_NvMService/WriteBlock</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Vin_OnVinChangeIndicatorAck</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>Vin_ReceiveFromCom</SHORT-NAME>
+                              <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                                <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/BMW/Platform/Vin/SwComponentTypes/Vin/Vin_IB/VinState</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                              </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <DATA-READ-ACCESSS>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>dra_ComVin</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/ComVin</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/ComVin/ComVin</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+                              </DATA-READ-ACCESSS>
+                              <DATA-SEND-POINTS>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>dsp_Vin</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/Vin</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/Vin/Vin</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+<# if (enableSecureVin) { #>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>dsp_Trigger</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="PR-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/InternalCheckVinTrigger</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/Vin_InternalCheckVinTrigger/Trigger</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+<# } #>
+                              </DATA-SEND-POINTS>
+                              <MODE-SWITCH-POINTS>
+                                <MODE-SWITCH-POINT>
+                                  <SHORT-NAME>msp_VinChangeIndicator</SHORT-NAME>
+                                  <MODE-GROUP-IREF>
+                                    <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/VinChangeIndicator</CONTEXT-P-PORT-REF>
+                                    <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/IVinChangeIndicator/ChangeIndicator</TARGET-MODE-GROUP-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-SWITCH-POINT>
+                              </MODE-SWITCH-POINTS>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>scp_GetVin</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/DlogEcuInfo</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Vin/Dlog/PortInterfaces/EcuInfo/GetVin</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+<# if (enableSecureVin) { #>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>scp_VerifyMessage</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/FscsmCryptographicFunctions</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Vin/Fscsm/PortInterfaces/FscsmApplSwcInterface/VerifyMessage</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+<# } #>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>scp_WriteBlock</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/NvMService_Vin</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Vin/NvM/PortInterfaces/Vin_NvMService/WriteBlock</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Vin_ReceiveFromCom</SYMBOL>
+                            </RUNNABLE-ENTITY>
+<# if (enableSecureVin) { #>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>Vin_SsvCheckVin</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>scp_VerifyMessage</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/FscsmCryptographicFunctions</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Vin/Fscsm/PortInterfaces/FscsmApplSwcInterface/VerifyMessage</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Vin_SsvCheckVin</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>Vin_SsvOnVkEstablished</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <RUNS-INSIDE-EXCLUSIVE-AREA-REFS>
+                                <RUNS-INSIDE-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/BMW/Platform/Vin/SwComponentTypes/Vin/Vin_IB/VinState</RUNS-INSIDE-EXCLUSIVE-AREA-REF>
+                              </RUNS-INSIDE-EXCLUSIVE-AREA-REFS>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <DATA-READ-ACCESSS>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>dra_Flag</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/FscsmVK_Established</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/Fscsm/PortInterfaces/VK_Established/Flag</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+                              </DATA-READ-ACCESSS>
+                              <SYMBOL>Vin_SsvOnVkEstablished</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>Vin_SsvReceiveMac</SHORT-NAME>
+                              <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                                <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/BMW/Platform/Vin/SwComponentTypes/Vin/Vin_IB/VinState</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                              </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <DATA-READ-ACCESSS>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>dra_Mac</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/SSVVinMacFromSSS</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/SSVVinMac/Mac</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+                              </DATA-READ-ACCESSS>
+                              <DATA-SEND-POINTS>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>dsp_Vin</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/Vin</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/Vin/Vin</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+                              </DATA-SEND-POINTS>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>scp_WriteBlock</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/NvMService_Vin</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Vin/NvM/PortInterfaces/Vin_NvMService/WriteBlock</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Vin_SsvReceiveMac</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>Vin_SsvReceiveResponseFromSss</SHORT-NAME>
+                              <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                                <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/BMW/Platform/Vin/SwComponentTypes/Vin/Vin_IB/VinState</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                              </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <DATA-READ-ACCESSS>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>dra_Response</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/SSVResponseFromSSS</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/Response/Response</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+                              </DATA-READ-ACCESSS>
+                              <DATA-SEND-POINTS>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>dsp_Challenge</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/SSVChallengeToSSS</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/Challenge/Challenge</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+                              </DATA-SEND-POINTS>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>scp_VerifyMessage</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/FscsmCryptographicFunctions</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Vin/Fscsm/PortInterfaces/FscsmApplSwcInterface/VerifyMessage</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>scp_GenerateRandomNumber</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/RandomNumberGenerator</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Vin/Fscsm/PortInterfaces/RandomNumberGenerator/GenerateRandomNumber</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>scp_WriteBlock</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/Vin/NvMService_Vin</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Vin/NvM/PortInterfaces/Vin_NvMService/WriteBlock</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Vin_SsvReceiveResponseFromSss</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>Vin_SsvStateGet</SHORT-NAME>
+                              <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                                <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/BMW/Platform/Vin/SwComponentTypes/Vin/Vin_IB/VinState</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                              </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SYMBOL>Vin_SsvStateGet</SYMBOL>
+                            </RUNNABLE-ENTITY>
+<# } #>
+                          </RUNNABLES>
+                          <SUPPORTS-MULTIPLE-INSTANTIATION>false</SUPPORTS-MULTIPLE-INSTANTIATION>
+                        </SWC-INTERNAL-BEHAVIOR>
+                      </INTERNAL-BEHAVIORS>
+                    </APPLICATION-SW-COMPONENT-TYPE>
+<# if (enableSIAdapter) { #>
+                    <APPLICATION-SW-COMPONENT-TYPE>
+                      <SHORT-NAME>VinSIAdapter</SHORT-NAME>
+                      <INTRODUCTION>
+                        <TRACE>
+                          <SHORT-NAME>SWS_Vin_0113</SHORT-NAME>
+                          <CATEGORY>SPECIFICATION_ITEM</CATEGORY>
+                        </TRACE>
+                      </INTRODUCTION>
+                      <PORTS>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>Challenge</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/BMW/Platform/Vin/PortInterfaces/Challenge</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>ChassisNumber</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Vin/PortInterfaces/FieldGetterSetterChassisNumber</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>ChassisNumberAuthentication</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Vin/PortInterfaces/ChassisNumberAuthentication</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>ChassisNumberNotifier</SHORT-NAME>
+                          <REQUIRED-COM-SPECS>
+                            <NONQUEUED-RECEIVER-COM-SPEC>
+                              <DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/ComVin/ComVin</DATA-ELEMENT-REF>
+                              <HANDLE-OUT-OF-RANGE>NONE</HANDLE-OUT-OF-RANGE>
+                              <USES-END-TO-END-PROTECTION>0</USES-END-TO-END-PROTECTION>
+                              <ALIVE-TIMEOUT>0.0</ALIVE-TIMEOUT>
+                              <ENABLE-UPDATE>false</ENABLE-UPDATE>
+                              <HANDLE-NEVER-RECEIVED>false</HANDLE-NEVER-RECEIVED>
+                              <HANDLE-TIMEOUT-TYPE>NONE</HANDLE-TIMEOUT-TYPE>
+                              <INIT-VALUE>
+                                <RECORD-VALUE-SPECIFICATION>
+                                  <FIELDS>
+                                    <NUMERICAL-VALUE-SPECIFICATION>
+                                      <SHORT-LABEL>Vin1</SHORT-LABEL>
+                                      <VALUE>0</VALUE>
+                                    </NUMERICAL-VALUE-SPECIFICATION>
+                                    <NUMERICAL-VALUE-SPECIFICATION>
+                                      <SHORT-LABEL>Vin2</SHORT-LABEL>
+                                      <VALUE>0</VALUE>
+                                    </NUMERICAL-VALUE-SPECIFICATION>
+                                    <NUMERICAL-VALUE-SPECIFICATION>
+                                      <SHORT-LABEL>Vin3</SHORT-LABEL>
+                                      <VALUE>0</VALUE>
+                                    </NUMERICAL-VALUE-SPECIFICATION>
+                                    <NUMERICAL-VALUE-SPECIFICATION>
+                                      <SHORT-LABEL>Vin4</SHORT-LABEL>
+                                      <VALUE>0</VALUE>
+                                    </NUMERICAL-VALUE-SPECIFICATION>
+                                    <NUMERICAL-VALUE-SPECIFICATION>
+                                      <SHORT-LABEL>Vin5</SHORT-LABEL>
+                                      <VALUE>0</VALUE>
+                                    </NUMERICAL-VALUE-SPECIFICATION>
+                                    <NUMERICAL-VALUE-SPECIFICATION>
+                                      <SHORT-LABEL>Vin6</SHORT-LABEL>
+                                      <VALUE>0</VALUE>
+                                    </NUMERICAL-VALUE-SPECIFICATION>
+                                    <NUMERICAL-VALUE-SPECIFICATION>
+                                      <SHORT-LABEL>Vin7</SHORT-LABEL>
+                                      <VALUE>0</VALUE>
+                                    </NUMERICAL-VALUE-SPECIFICATION>
+                                  </FIELDS>
+                                </RECORD-VALUE-SPECIFICATION>
+                              </INIT-VALUE>
+                            </NONQUEUED-RECEIVER-COM-SPEC>
+                          </REQUIRED-COM-SPECS>
+                          <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/BMW/Platform/Vin/PortInterfaces/ComVin</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>ComVin</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/BMW/Platform/Vin/PortInterfaces/ComVin</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>SSVResponseFromSSS</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/BMW/Platform/Vin/PortInterfaces/Response</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>SSVVinMacFromSSS</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/BMW/Platform/Vin/PortInterfaces/SSVVinMac</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>VinRequest</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/BMW/Platform/Vin/PortInterfaces/VinRequest</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                      </PORTS>
+                      <INTERNAL-BEHAVIORS>
+                        <SWC-INTERNAL-BEHAVIOR>
+                          <SHORT-NAME>VinSIAdapter_IB</SHORT-NAME>
+                          <INTRODUCTION>
+                            <TRACE>
+                              <SHORT-NAME>SWS_Vin_0114</SHORT-NAME>
+                              <CATEGORY>SPECIFICATION_ITEM</CATEGORY>
+                            </TRACE>
+                          </INTRODUCTION>
+                          <EVENTS>
+                            <ASYNCHRONOUS-SERVER-CALL-RETURNS-EVENT>
+                              <SHORT-NAME>ascre_FieldGetterChassisNumber</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Vin/SwComponentTypes/VinSIAdapter/VinSIAdapter_IB/Vin_SIAGetterChassisNumberReturn</START-ON-EVENT-REF>
+                              <EVENT-SOURCE-REF DEST="ASYNCHRONOUS-SERVER-CALL-RESULT-POINT">/BMW/Platform/Vin/SwComponentTypes/VinSIAdapter/VinSIAdapter_IB/Vin_SIAGetterChassisNumberReturn/ascrp_FielGetterChassisNumber</EVENT-SOURCE-REF>
+                            </ASYNCHRONOUS-SERVER-CALL-RETURNS-EVENT>
+                            <ASYNCHRONOUS-SERVER-CALL-RETURNS-EVENT>
+                              <SHORT-NAME>ascre_generateAtuhenticationCode</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Vin/SwComponentTypes/VinSIAdapter/VinSIAdapter_IB/Vin_SIAGenAuthCodeReturn</START-ON-EVENT-REF>
+                              <EVENT-SOURCE-REF DEST="ASYNCHRONOUS-SERVER-CALL-RESULT-POINT">/BMW/Platform/Vin/SwComponentTypes/VinSIAdapter/VinSIAdapter_IB/Vin_SIAGenAuthCodeReturn/ascrp_generateAuthenticationCode</EVENT-SOURCE-REF>
+                            </ASYNCHRONOUS-SERVER-CALL-RETURNS-EVENT>
+                            <DATA-RECEIVED-EVENT>
+                              <SHORT-NAME>dre_Challenge</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Vin/SwComponentTypes/VinSIAdapter/VinSIAdapter_IB/Vin_SIAChallenge</START-ON-EVENT-REF>
+                              <DATA-IREF>
+                                <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/VinSIAdapter/Challenge</CONTEXT-R-PORT-REF>
+                                <TARGET-DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/Challenge/Challenge</TARGET-DATA-ELEMENT-REF>
+                              </DATA-IREF>
+                            </DATA-RECEIVED-EVENT>
+                            <DATA-RECEIVED-EVENT>
+                              <SHORT-NAME>dre_NotifyChassisNumber</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Vin/SwComponentTypes/VinSIAdapter/VinSIAdapter_IB/Vin_SIANotifyChassisNumber</START-ON-EVENT-REF>
+                              <DATA-IREF>
+                                <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/VinSIAdapter/ChassisNumberNotifier</CONTEXT-R-PORT-REF>
+                                <TARGET-DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/ComVin/ComVin</TARGET-DATA-ELEMENT-REF>
+                              </DATA-IREF>
+                            </DATA-RECEIVED-EVENT>
+                            <DATA-RECEIVED-EVENT>
+                              <SHORT-NAME>dre_VinRequest</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Vin/SwComponentTypes/VinSIAdapter/VinSIAdapter_IB/Vin_SIARequest</START-ON-EVENT-REF>
+                              <DATA-IREF>
+                                <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/VinSIAdapter/VinRequest</CONTEXT-R-PORT-REF>
+                                <TARGET-DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/VinRequest/RequestMessageIdentifier</TARGET-DATA-ELEMENT-REF>
+                              </DATA-IREF>
+                            </DATA-RECEIVED-EVENT>
+                          </EVENTS>
+                          <HANDLE-TERMINATION-AND-RESTART>NO-SUPPORT</HANDLE-TERMINATION-AND-RESTART>
+                          <RUNNABLES>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>Vin_SIAChallenge</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <DATA-RECEIVE-POINT-BY-ARGUMENTS>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>drparg_Challenge</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/VinSIAdapter/Challenge</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/Challenge/Challenge</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+                              </DATA-RECEIVE-POINT-BY-ARGUMENTS>
+                              <SERVER-CALL-POINTS>
+                                <ASYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>ascp_generateAuthenticationCo</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/VinSIAdapter/ChassisNumberAuthentication</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Vin/PortInterfaces/ChassisNumberAuthentication/generateAuthenticationCode</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </ASYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Vin_SIAChallenge</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>Vin_SIAGenAuthCodeReturn</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <ASYNCHRONOUS-SERVER-CALL-RESULT-POINTS>
+                                <ASYNCHRONOUS-SERVER-CALL-RESULT-POINT>
+                                  <SHORT-NAME>ascrp_generateAuthenticationCode</SHORT-NAME>
+                                  <ASYNCHRONOUS-SERVER-CALL-POINT-REF DEST="ASYNCHRONOUS-SERVER-CALL-POINT">/BMW/Platform/Vin/SwComponentTypes/VinSIAdapter/VinSIAdapter_IB/Vin_SIAChallenge/ascp_generateAuthenticationCo</ASYNCHRONOUS-SERVER-CALL-POINT-REF>
+                                </ASYNCHRONOUS-SERVER-CALL-RESULT-POINT>
+                              </ASYNCHRONOUS-SERVER-CALL-RESULT-POINTS>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <DATA-SEND-POINTS>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>dsp_Response</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/VinSIAdapter/SSVResponseFromSSS</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/Response/Response</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>dsp_Mac</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/VinSIAdapter/SSVVinMacFromSSS</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/SSVVinMac/Mac</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+                              </DATA-SEND-POINTS>
+                              <SYMBOL>Vin_SIAGenAuthCodeReturn</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>Vin_SIAGetterChassisNumberReturn</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <ASYNCHRONOUS-SERVER-CALL-RESULT-POINTS>
+                                <ASYNCHRONOUS-SERVER-CALL-RESULT-POINT>
+                                  <SHORT-NAME>ascrp_FielGetterChassisNumber</SHORT-NAME>
+                                  <ASYNCHRONOUS-SERVER-CALL-POINT-REF DEST="ASYNCHRONOUS-SERVER-CALL-POINT">/BMW/Platform/Vin/SwComponentTypes/VinSIAdapter/VinSIAdapter_IB/Vin_SIARequest/ascp_FieldGetterChassisNumber</ASYNCHRONOUS-SERVER-CALL-POINT-REF>
+                                </ASYNCHRONOUS-SERVER-CALL-RESULT-POINT>
+                              </ASYNCHRONOUS-SERVER-CALL-RESULT-POINTS>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SYMBOL>Vin_SIAGetterChassisNumberReturn</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>Vin_SIANotifyChassisNumber</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <DATA-READ-ACCESSS>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>dra_ComVin</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/VinSIAdapter/ChassisNumberNotifier</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/ComVin/ComVin</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+                              </DATA-READ-ACCESSS>
+                              <DATA-WRITE-ACCESSS>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>dwa_ComVin</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/VinSIAdapter/ComVin</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/ComVin/ComVin</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+                              </DATA-WRITE-ACCESSS>
+                              <SYMBOL>Vin_SIANotifyChassisNumber</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>Vin_SIARequest</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <DATA-RECEIVE-POINT-BY-ARGUMENTS>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>drparg_RequestMessageIdentif</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/VinSIAdapter/VinRequest</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/VinRequest/RequestMessageIdentifier</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+                              </DATA-RECEIVE-POINT-BY-ARGUMENTS>
+                              <DATA-SEND-POINTS>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>dsp_ComVin</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/VinSIAdapter/ComVin</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/ComVin/ComVin</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>dsp_Mac</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/VinSIAdapter/SSVVinMacFromSSS</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Vin/PortInterfaces/SSVVinMac/Mac</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+                              </DATA-SEND-POINTS>
+                              <SERVER-CALL-POINTS>
+                                <ASYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>ascp_FieldGetterChassisNumber</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Vin/SwComponentTypes/VinSIAdapter/ChassisNumber</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Vin/PortInterfaces/FieldGetterSetterChassisNumber/FieldGetterChassisNumber</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </ASYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Vin_SIARequest</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                          </RUNNABLES>
+                          <SUPPORTS-MULTIPLE-INSTANTIATION>false</SUPPORTS-MULTIPLE-INSTANTIATION>
+                        </SWC-INTERNAL-BEHAVIOR>
+                      </INTERNAL-BEHAVIORS>
+                    </APPLICATION-SW-COMPONENT-TYPE>
+                    <SWC-IMPLEMENTATION>
+                      <SHORT-NAME>VinSIAdapter_Impl</SHORT-NAME>
+                      <CODE-DESCRIPTORS>
+                        <CODE>
+                          <SHORT-NAME>VinSIAdapter_Impl_Code</SHORT-NAME>
+                          <ARTIFACT-DESCRIPTORS>
+                            <AUTOSAR-ENGINEERING-OBJECT>
+                              <SHORT-LABEL>VinSIAdapter_Impl_Code_CodeDesc</SHORT-LABEL>
+                              <CATEGORY>SWSRC</CATEGORY>
+                            </AUTOSAR-ENGINEERING-OBJECT>
+                          </ARTIFACT-DESCRIPTORS>
+                        </CODE>
+                      </CODE-DESCRIPTORS>
+                      <PROGRAMMING-LANGUAGE>C</PROGRAMMING-LANGUAGE>
+                      <RESOURCE-CONSUMPTION>
+                        <SHORT-NAME>VinSIAdapter_Impl_ResCons</SHORT-NAME>
+                      </RESOURCE-CONSUMPTION>
+                      <SW-VERSION>3.5.0</SW-VERSION>
+                      <VENDOR-ID>5</VENDOR-ID>
+                      <BEHAVIOR-REF DEST="SWC-INTERNAL-BEHAVIOR">/BMW/Platform/Vin/SwComponentTypes/VinSIAdapter/VinSIAdapter_IB</BEHAVIOR-REF>
+                    </SWC-IMPLEMENTATION>
+<# } #>
+                    <SWC-IMPLEMENTATION>
+                      <SHORT-NAME>Vin_Impl</SHORT-NAME>
+                      <CODE-DESCRIPTORS>
+                        <CODE>
+                          <SHORT-NAME>Vin_Impl_Code</SHORT-NAME>
+                          <ARTIFACT-DESCRIPTORS>
+                            <AUTOSAR-ENGINEERING-OBJECT>
+                              <SHORT-LABEL>Vin_Impl_Code_CodeDesc</SHORT-LABEL>
+                              <CATEGORY>SWSRC</CATEGORY>
+                            </AUTOSAR-ENGINEERING-OBJECT>
+                          </ARTIFACT-DESCRIPTORS>
+                        </CODE>
+                      </CODE-DESCRIPTORS>
+                      <PROGRAMMING-LANGUAGE>C</PROGRAMMING-LANGUAGE>
+                      <RESOURCE-CONSUMPTION>
+                        <SHORT-NAME>Vin_Impl_ResCons</SHORT-NAME>
+                      </RESOURCE-CONSUMPTION>
+                      <SW-VERSION>3.5.0</SW-VERSION>
+                      <VENDOR-ID>5</VENDOR-ID>
+                      <BEHAVIOR-REF DEST="SWC-INTERNAL-BEHAVIOR">/BMW/Platform/Vin/SwComponentTypes/Vin/Vin_IB</BEHAVIOR-REF>
+                    </SWC-IMPLEMENTATION>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+              </AR-PACKAGES>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

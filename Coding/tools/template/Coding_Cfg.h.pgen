@@ -1,0 +1,230 @@
+%{+ Coding_Functions }%
+%{#
+GetGeneralConfig()
+GetAreasConfig(True)
+}%
+/**
+ * \file
+ *
+ * \brief       Coding - This file is the configuration header file for the
+ *              Coding module.
+ *
+ * \project     BMW Platform Software
+ *
+ * \copyright   BMW AG 2016 - 2017
+ *
+ * \version     5.2.1
+ *
+ */
+
+/*------------------------------------------------------------------------------
+*
+*  THIS FILE WAS GENERATED. DO NOT MODIFY!
+*
+*  GENERATOR       : %{= generation_tool() }% %{= generation_version_info() }%
+*
+*  GENERATION TIME : %{= generation_timestamp() }%
+*
+------------------------------------------------------------------------------*/
+
+#ifndef CODING_CFG_H
+#define CODING_CFG_H
+
+/*------------------------------------------------------------------------------
+                      Include Section
+-------------------------------------------------------------------------------*/
+
+#include "BUtil/PlatformTypes.h"     /* BMW Platform Types          */
+#include "Coding_Version.h"          /* Include check version macro */
+
+/*------------------------------------------------------------------------------
+                      Macros
+-------------------------------------------------------------------------------*/
+
+/* check version of the module */
+#if (!Coding_CHECK_VERSION(5,2,1))
+   #error "Version of Coding_Cfg.h does not match the version of the module!"
+#endif
+
+/**
+ * \brief Coding condition check feature is %{? generalConfig.condition_check::not }%needed
+ *
+ * Coding condition check feature is %{? generalConfig.condition_check::not }%needed
+ *
+ * \remarks This macro depends on the configuration parameter CodingConditionCheck
+ *
+ */
+#define CODING_CONDITIONCHECK_SUPPORT            %{? generalConfig.condition_check:STD_ON:STD_OFF}%
+
+/**
+ * \brief Coding crypto support feature is %{? generalConfig.crypto_enable::not }%needed
+ *
+ * Coding crypto support feature is %{? generalConfig.crypto_enable::not }%needed
+ *
+ * \remarks This macro depends on the configuration parameter CodingCryptoEnable
+ *
+ */
+#define CODING_CRYPTO_SUPPORT                    %{? generalConfig.crypto_enable:STD_ON:STD_OFF}%
+
+/**
+ * \brief Coding data check feature is %{? generalConfig.data_check::not }%needed
+ *
+ * Coding data check feature is %{? generalConfig.data_check::not }%needed
+ *
+ * \remarks This macro depends on configuration parameter CodingDataCheck
+ *
+ */
+#define CODING_DATACHECK_SUPPORT                 %{? generalConfig.data_check:STD_ON:STD_OFF}%
+
+/**
+ * \brief Coding dev error detect %{? generalConfig.dev_error_detect:on:off}%
+ *
+ * Coding dev error detect %{? generalConfig.dev_error_detect:on:off}%
+ *
+ * \remarks This macro depends on configuration parameter CodingDevErrorDetect
+ *
+ */
+#define CODING_DEV_ERROR_DETECT                  %{? generalConfig.dev_error_detect:STD_ON:STD_OFF}%
+
+/**
+ * \brief Coding producton CEUD detection %{? generalConfig.prod_error_ceud_detection:on:off}%
+ *
+ * Coding producton CEUD detection %{? generalConfig.prod_error_ceud_detection:on:off}%
+ *
+ * \remarks This macro depends on configuration parameter CodingProdErrorCEUDDetection
+ *
+ */
+#define CODING_PROD_ERROR_CEUD_DETECTION         %{? generalConfig.prod_error_ceud_detection:STD_ON:STD_OFF}%
+
+/**
+ * \brief Coding CPS offset
+ *
+ * Coding CPS offset
+ * CodingUserBlockSize + 8(Caf id size) + CodingSignatureSize
+ *
+ * \remarks -
+ *
+ */
+#define CODING_CPS_OFFSET                        %{= codingConfig.config_size-(codingConfig.cps_size+codingConfig.prog_id_size) }%u
+
+/**
+ * \brief Coding ProgId offset
+ *
+ * Coding ProgId offset
+ * CodingUserBlockSize + 8(Caf id size) + CodingSignatureSize + 18 (Cps size)
+ *
+ * \remarks -
+ *
+ */
+#define CODING_PROGID_OFFSET                     %{= codingConfig.config_size-codingConfig.prog_id_size }%u
+
+/**
+ * \brief Number of areas
+ *
+ * Number of areas
+ *
+ * \remarks This macro depends on configuration parameter CodingArea
+ *
+ */
+#define CODING_NUMBER_OF_AREAS                   %{= len(codingConfig.coding_areas_list) }%u
+
+/**
+ * \brief Number of Caf Blocks
+ *
+ * Number of Caf Blocks.
+ * It can only be one Caf block per area.
+ *
+ * \remarks -
+ *
+ */
+#define CODING_NUMBER_OF_CAF                     %{= len(codingConfig.coding_areas_list) }%u
+
+/**
+ * \brief Coding signature block size.
+ *
+ * Coding signature block size.
+ *
+ * \lhref COD_092
+ *
+ * \remarks This macro depends on configuration parameter CodingSignatureSize
+ *
+ */
+#define CODING_SIGNATURE_BLOCK_SIZE              %{= generalConfig.signature_size }%u
+
+/**
+ * \brief Coding proof stamp size.
+ *
+ * Coding proof stamp size.
+ *
+ * \lhref COD_092, COD_186
+ *
+ * \remarks -
+ *
+ */
+#define CODING_CPS_SIZE                          %{= codingConfig.cps_size }%u
+
+/**
+ * \brief Total codig data size
+ *
+ * Total codig data size. Its calculated from
+ * CodingUserBlockSize + 8(Caf id size) + CodingSignatureSize + 18(Cps size) + 8(FirstStart size)
+ *
+ * \remarks This macro depends on configuration parameter CodingUserBlockSize and CodingSignatureSize
+ *
+ */
+#define CODING_DATA_SIZE                         %{= codingConfig.config_size }%u
+
+/**
+ * \brief Coding transport receive buffer size
+ *
+ * Coding transport receive buffer size
+ *
+ * \remarks This macro depends on configuration parameter CodingTransportReceiveBufferSize
+ *
+ */
+#define CODING_RX_BUFFER_SIZE                    %{= generalConfig.receive_buffer_size }%u
+
+/**
+ * \brief Coding transport send buffer size
+ *
+ * Coding transport send buffer size
+ *
+ * \remarks This macro depends on configuration parameter CodingTransportSendBufferSize
+ *
+ */
+#define CODING_TX_BUFFER_SIZE                    %{= generalConfig.send_buffer_size }%u
+
+/**
+ * \brief Size of the coding protocol data information.
+ *
+ * Its calculated from: 2 byte (size of receive buffer) + 2 byte (size of send buffer)
+ *                      + 1 byte (codingAreaCount) + 2 byte (ncdLength) per codingArea
+ */
+#define CODING_RDBIPROTOCOLDATA_SIZE             %{= 5 + ( len(codingConfig.coding_areas_list) * 2) }%u
+
+/*------------------------------------------------------------------------------
+                      Global Constants
+-------------------------------------------------------------------------------*/
+
+#define Coding_START_SEC_CONST_16
+#include "Coding_MemMap.h" /* PRQA S 5087 */
+
+/**
+ * \brief Extern CAF id offset table.
+ */
+extern const uint16 Coding_CafIdOffsetTable[CODING_NUMBER_OF_AREAS];
+
+/**
+ * \brief Extern area offset table.
+ */
+extern const uint16 Coding_AreaOffsetTable[CODING_NUMBER_OF_AREAS];
+
+/**
+ * \brief Extern area size table.
+ */
+extern const uint16 Coding_AreaSizeTable[CODING_NUMBER_OF_AREAS];
+
+#define Coding_STOP_SEC_CONST_16
+#include "Coding_MemMap.h" /* PRQA S 5087 */
+
+#endif /* CODING_CFG_H */

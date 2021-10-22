@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+*  \file
+*
+*  \brief       BMW SWC Rmh
+*
+*  This file contains the AUTOSAR internal behavior of the BMW SWC RmhClassic
+*  for usage in the BMW AUTOSAR Core.
+*
+*  \project     BMW Platform Software
+*
+*  \copyright   BMW AG 2015 - 2017
+*
+*  \version     5.0.0
+*
+*/
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-3-0_STRICT_COMPACT.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>BMW</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>Platform</SHORT-NAME>
+          <AR-PACKAGES>
+
+            <!-- Rmh -->
+            <AR-PACKAGE>
+              <SHORT-NAME>Rmh</SHORT-NAME>
+              <AR-PACKAGES>
+
+                <!-- Rmh SwComponentTypes -->
+                <AR-PACKAGE>
+                  <SHORT-NAME>SwComponentTypes</SHORT-NAME>
+                  <ELEMENTS>
+
+                    <APPLICATION-SW-COMPONENT-TYPE>
+                      <SHORT-NAME>Rmh</SHORT-NAME>
+
+                      <!-- Rmh ports -->
+                      <PORTS>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>RxRequestedMsgID</SHORT-NAME>
+                          <REQUIRED-COM-SPECS>
+                            <NONQUEUED-RECEIVER-COM-SPEC>
+                              <DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Rmh/PortInterfaces/Rmh_RequestIDInterface/requestedMsgID</DATA-ELEMENT-REF>
+                              <HANDLE-OUT-OF-RANGE>NONE</HANDLE-OUT-OF-RANGE>
+                              <USES-END-TO-END-PROTECTION>false</USES-END-TO-END-PROTECTION>
+                              <ALIVE-TIMEOUT>0</ALIVE-TIMEOUT>
+                              <ENABLE-UPDATE>false</ENABLE-UPDATE>
+                              <HANDLE-NEVER-RECEIVED>false</HANDLE-NEVER-RECEIVED>
+                              <HANDLE-TIMEOUT-TYPE>NONE</HANDLE-TIMEOUT-TYPE>
+                              <INIT-VALUE>
+                                <NUMERICAL-VALUE-SPECIFICATION>
+                                  <VALUE>0xFFFF</VALUE>
+                                </NUMERICAL-VALUE-SPECIFICATION>
+                              </INIT-VALUE>
+                            </NONQUEUED-RECEIVER-COM-SPEC>
+                          </REQUIRED-COM-SPECS>
+                          <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/BMW/Platform/Rmh/PortInterfaces/Rmh_RequestIDInterface</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>TriggerIPDUSend</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Rmh/PortInterfaces/Rmh_ComTriggerIPDUSendInterface</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                      </PORTS>
+
+                      <!-- Rmh InternalBehaviors -->
+                      <INTERNAL-BEHAVIORS>
+                        <SWC-INTERNAL-BEHAVIOR>
+                          <SHORT-NAME>InternalBehavior</SHORT-NAME>
+
+                          <!-- Rmh Events -->
+                          <EVENTS>
+                            <DATA-RECEIVED-EVENT>
+                              <SHORT-NAME>DataReceivedEvent</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Rmh/SwComponentTypes/Rmh/InternalBehavior/RxRequestMsg</START-ON-EVENT-REF>
+                              <DATA-IREF>
+                                <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Rmh/SwComponentTypes/Rmh/RxRequestedMsgID</CONTEXT-R-PORT-REF>
+                                <TARGET-DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Rmh/PortInterfaces/Rmh_RequestIDInterface/requestedMsgID</TARGET-DATA-ELEMENT-REF>
+                              </DATA-IREF>
+                            </DATA-RECEIVED-EVENT>
+                          </EVENTS>
+
+                          <HANDLE-TERMINATION-AND-RESTART>NO-SUPPORT</HANDLE-TERMINATION-AND-RESTART>
+
+                          <!-- Rmh PortApiOptions -->
+                          <PORT-API-OPTIONS>
+                            <PORT-API-OPTION>
+                              <ENABLE-TAKE-ADDRESS>false</ENABLE-TAKE-ADDRESS>
+                              <INDIRECT-API>false</INDIRECT-API>
+                              <PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Rmh/SwComponentTypes/Rmh/TriggerIPDUSend</PORT-REF>
+                            </PORT-API-OPTION>
+                            <PORT-API-OPTION>
+                              <ENABLE-TAKE-ADDRESS>false</ENABLE-TAKE-ADDRESS>
+                              <INDIRECT-API>false</INDIRECT-API>
+                              <PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Rmh/SwComponentTypes/Rmh/RxRequestedMsgID</PORT-REF>
+                            </PORT-API-OPTION>
+                          </PORT-API-OPTIONS>
+
+                          <!-- Rmh Runnables -->
+                          <RUNNABLES>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>RxRequestMsg</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <DATA-READ-ACCESSS/>
+                              <DATA-RECEIVE-POINT-BY-ARGUMENTS>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>dra_RxRequestedMsgID</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Rmh/SwComponentTypes/Rmh/RxRequestedMsgID</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Rmh/PortInterfaces/Rmh_RequestIDInterface/requestedMsgID</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+                              </DATA-RECEIVE-POINT-BY-ARGUMENTS>
+                              <DATA-SEND-POINTS />
+                              <DATA-WRITE-ACCESSS/>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_TriggerIPDUSend</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Rmh/SwComponentTypes/Rmh/TriggerIPDUSend</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Rmh/PortInterfaces/Rmh_ComTriggerIPDUSendInterface/Rmh_TriggerComIPDUSend</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Rmh_RxRequestMsg</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                          </RUNNABLES>
+                          <SUPPORTS-MULTIPLE-INSTANTIATION>false</SUPPORTS-MULTIPLE-INSTANTIATION>
+
+                        </SWC-INTERNAL-BEHAVIOR>
+                      </INTERNAL-BEHAVIORS>
+                    </APPLICATION-SW-COMPONENT-TYPE>
+
+                  </ELEMENTS>
+                </AR-PACKAGE>
+
+                <!-- Rmh SwcImplementations -->
+                <AR-PACKAGE>
+                  <SHORT-NAME>SwcImplementations</SHORT-NAME>
+                  <ELEMENTS>
+                    <SWC-IMPLEMENTATION>
+                      <SHORT-NAME>Rmh_Implementation</SHORT-NAME>
+                      <CODE-DESCRIPTORS>
+                        <CODE>
+                          <SHORT-NAME>CodeDescriptor</SHORT-NAME>
+                          <ARTIFACT-DESCRIPTORS>
+                            <AUTOSAR-ENGINEERING-OBJECT>
+                              <SHORT-LABEL>EngObject</SHORT-LABEL>
+                              <CATEGORY>SWSRC</CATEGORY>
+                            </AUTOSAR-ENGINEERING-OBJECT>
+                          </ARTIFACT-DESCRIPTORS>
+                        </CODE>
+                      </CODE-DESCRIPTORS>
+                      <PROGRAMMING-LANGUAGE>C</PROGRAMMING-LANGUAGE>
+                      <RESOURCE-CONSUMPTION>
+                        <SHORT-NAME>Ressource</SHORT-NAME>
+                      </RESOURCE-CONSUMPTION>
+                      <SW-VERSION>5.0.0</SW-VERSION>
+                      <VENDOR-ID>5</VENDOR-ID>
+                      <BEHAVIOR-REF DEST="SWC-INTERNAL-BEHAVIOR">/BMW/Platform/Rmh/SwComponentTypes/Rmh/InternalBehavior</BEHAVIOR-REF>
+                    </SWC-IMPLEMENTATION>
+                  </ELEMENTS>
+
+                </AR-PACKAGE>
+
+              </AR-PACKAGES>
+            </AR-PACKAGE>
+
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

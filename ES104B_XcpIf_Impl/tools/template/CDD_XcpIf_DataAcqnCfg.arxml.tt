@@ -1,0 +1,172 @@
+<#@ AutosarXml processor="ArDirectiveProcessor" requires="arPrefix='ar';arNamespace='http://autosar.org/4.0.3'" #>
+<#@ template inherits="AutosarDirectiveProcessor.ArGtcBase" debug="true" #>
+<#@ output extension="" #><#@ include file="Helper.tt" #><#@ include file="XcpEventTimeConv.tti" #><?xml version="1.0" encoding="utf-8"?>
+<AUTOSAR xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-0-3.xsd" xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<# /*-------------------------------------------------------------------------------------------------------------*/ #>
+<#
+/* Note: The comment section cannot be added to the generated file as it causes Configurator to consider the component 
+ * as improperly defined. Thus the change log was included within the C# of the template. */
+ 
+ /**********************************************************************************************************************
+ * Copyright 2017 Nxtr
+ * Nxtr Confidential
+ *
+ * Module File Name:   CDD_XcpIf_DataAcqnCfg.arxml
+ * Module Description: Contains the component descriptions for each of the XCP events as configured by the XCP driver.
+ * Project           : CBD
+ * Author            : Kevin Smith
+ ***********************************************************************************************************************
+ * Version Control:
+ * %version:          1 %
+ * %derived_by:       cz7lt6 %
+ *=====================================================================================================================
+ * Date      Rev     Author  Change Description                                                              SCR #
+ * ========  ======= ======= ===========================================================================     ==========
+ * 10/30/17  1       KJS     Initial version of the arxml template                                            EA4#<TBD>
+ **********************************************************************************************************************/
+#>
+<# /*-------------------------------------------------------------------------------------------------------------*/ #>
+<#
+    /* Loop through each XCP event channel to create a software component description */
+    ChangeContext( Xp.ModuleConfAtDefRefTo( "Xcp/XcpConfig" ) );
+#>
+<# /*-------------------------------------------------------------------------------------------------------------*/ #>
+    <AR-PACKAGES>
+        <AR-PACKAGE>
+            <SHORT-NAME>ComponentTypes</SHORT-NAME>
+                <ELEMENTS>
+<# /*-------------------------------------------------------------------------------------------------------------*/ #>
+<# !LOOP( Xp.ContainerAtDefRefTo( "XcpEventChannel" ) ) #>
+<#
+    /* SwcName is used throughout the ARXML file to create the periodics and also the component */
+    string EventName = ValueOf( "ar:SHORT-NAME" );
+    string SwcName = "CDD_XcpIf" + EventName; 
+#>
+<# /*-------------------------------------------------------------------------------------------------------------*/ #>
+                    <COMPLEX-DEVICE-DRIVER-SW-COMPONENT-TYPE UUID="">
+                        <SHORT-NAME><#= SwcName #></SHORT-NAME>
+                        <INTERNAL-BEHAVIORS>
+                            <SWC-INTERNAL-BEHAVIOR UUID="">
+                                <SHORT-NAME><#= SwcName #>_InternalBehavior</SHORT-NAME>
+                                <EVENTS>
+                                    <TIMING-EVENT UUID="">
+                                        <SHORT-NAME>TMT_<#= SwcName #>Per1</SHORT-NAME>
+                                        <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/ComponentTypes/<#= SwcName #>/<#= SwcName #>_InternalBehavior/<#= SwcName #>Per1</START-ON-EVENT-REF>
+<#
+    double Period = 0.0;
+    int TimeCycle;
+    string TimeUnit;
+
+    TimeCycle = ValueOf( Xp.ValueAtDefRefTo( "XcpEventChannelTimeCycle" ) );
+    TimeUnit = ValueOf( Xp.ValueAtDefRefTo( "XcpEventChannelTimeUnit" ) );
+    Period = XcpEventTimeConv( TimeUnit, TimeCycle );
+#>
+                                        <PERIOD><#= Period #></PERIOD>
+                                    </TIMING-EVENT>
+                                </EVENTS>
+                                <RUNNABLES>
+                                    <RUNNABLE-ENTITY UUID="">
+                                        <SHORT-NAME><#= SwcName #>Per1</SHORT-NAME>
+                                        <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                                        <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                                        <DATA-RECEIVE-POINT-BY-ARGUMENTS></DATA-RECEIVE-POINT-BY-ARGUMENTS>
+                                        <SYMBOL><#= SwcName #>Per1</SYMBOL>
+                                    </RUNNABLE-ENTITY>
+                                </RUNNABLES>
+                            </SWC-INTERNAL-BEHAVIOR>
+                        </INTERNAL-BEHAVIORS>
+                    </COMPLEX-DEVICE-DRIVER-SW-COMPONENT-TYPE>
+                    <SWC-IMPLEMENTATION UUID="">
+                        <SHORT-NAME><#= SwcName #>_Implementation</SHORT-NAME>
+                        <CODE-DESCRIPTORS>
+                            <CODE>
+                                <SHORT-NAME>Default</SHORT-NAME>
+                                <ARTIFACT-DESCRIPTORS>
+                                    <AUTOSAR-ENGINEERING-OBJECT>
+                                    <SHORT-LABEL>Default</SHORT-LABEL>
+                                    <CATEGORY>SWSRC</CATEGORY>
+                                    </AUTOSAR-ENGINEERING-OBJECT>
+                                </ARTIFACT-DESCRIPTORS>
+                            </CODE>
+                        </CODE-DESCRIPTORS>
+                        <BEHAVIOR-REF DEST="SWC-INTERNAL-BEHAVIOR">/ComponentTypes/<#= SwcName #>/<#= SwcName #>_InternalBehavior</BEHAVIOR-REF>
+                    </SWC-IMPLEMENTATION>
+<#
+    /* Generate the source file to pair with the SWC component that was just defined in the ARXML code. */
+    SwcSrcGen(EventName, SwcName);
+#>
+<# /*-------------------------------------------------------------------------------------------------------------*/ #>
+<# !ENDLOOP #>
+<# /*-------------------------------------------------------------------------------------------------------------*/ #>
+                </ELEMENTS>
+        </AR-PACKAGE>
+    </AR-PACKAGES>
+</AUTOSAR>
+<#+
+/* The following function generates a source file for each of the SWC that were defined in the above ARXML. */
+public void SwcSrcGen(string EventName, string SwcName)
+{
+    /* The output path is read from the batch file that called the ARTT exe. This will provide the proper output during 
+       execution in a component development and production enviroment. */
+    string OutputPath = System.Environment.GetEnvironmentVariable("GENDATA_FOLDER");
+    string FileName = SwcName + ".c";
+    string FilePath = System.IO.Path.Combine(OutputPath, FileName);
+    
+    using (System.IO.StreamWriter sw = System.IO.File.CreateText(FilePath))
+    {
+        /* The following source is contained in one long literal text string. Otherwise, each line could be 
+           broke down using sw.WriteLine */
+        sw.WriteLine( @"/**********************************************************************************************************************
+* Copyright 2017 Nxtr 
+* Nxtr Confidential
+*
+* Module File Name: " + SwcName + @".c
+* Module Description: XCP Event source code that is generated by XcpIf
+* Project           : BMW
+* Author            : Kevin Smith
+***********************************************************************************************************************
+* Version Control:
+* %version:          1 %
+* %derived_by:       cz7lt6 %
+*----------------------------------------------------------------------------------------------------------------------
+* Date      Rev      Author         Change Description                                                           SCR #
+* -------   -------  --------  ---------------------------------------------------------------------------     --------
+* 11/01/17  1        KJS       Initial version of this generation template.                                   EA4#<TBD>
+**********************************************************************************************************************/
+
+#include " + "\"Rte_" + SwcName + ".h\"" + @"
+#include " + "\"CDD_XcpIf_Cfg_private.h\"" + @"
+
+/******************************************** File Level Rule Deviations *********************************************/
+
+/******************************************* Module Specific Data Types **********************************************/
+
+typedef struct {
+    uint16 XcpEve_u16;
+} XcpEveRec;
+
+/******************************************** Module Specific Variables **********************************************/
+
+/******************************************** Local Function Prototypes **********************************************/
+
+/*********************************************** Function Definitions ************************************************/
+FUNC(void, " + SwcName + @"_CODE) " + SwcName + @"Per1(void)
+{
+    VAR(XcpEveRec, AUTOMATIC) Prm_Cnt_T_str;
+    if( XCPIF_XCPOSAPPL_CNT_U08 == GetApplicationID() )
+    {
+        Xcp_Event(XcpConf_XcpEventChannel_" + EventName + @");
+    }
+    else
+    {
+        Prm_Cnt_T_str.XcpEve_u16 = XcpConf_XcpEventChannel_" + EventName + @";
+        (void)Os_CallNonTrustedFunction((Os_NonTrustedFunctionIndexType)NtWrapS_Xcp_Event, &Prm_Cnt_T_str);
+    }
+    
+    return;
+}");
+    }
+    
+    return;
+}
+#>

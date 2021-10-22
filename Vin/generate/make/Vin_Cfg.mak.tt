@@ -1,0 +1,30 @@
+<#@ AutosarXml processor="ArDirectiveProcessor" requires="arPrefix='ar';arNamespace='http://autosar.org/schema/r4.0'" #>
+<#@ template inherits="AutosarDirectiveProcessor.ArGtcBase" debug="false" #>
+<#@ output extension="" #>
+################################################################################
+##
+## BMW Vin
+##
+## This makefile defines rules for the module Vin
+##
+## project      BMW AUTOSAR Core
+##
+## Copyright (C) BMW AG 2015 - 2016
+##
+## This is a generated file: DO NOT EDIT
+##
+## generator   <#= GeneratorName #> <#= GeneratorVersion #>
+## date        <#= DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss") #> !!!IGNORE-LINE!!!
+##
+################################################################################
+
+<#
+   bool enableSIAdapter = ValueOf(Xp.ValueAtDefRefTo("Vin/VinGeneral/EnableSIAdapter"));
+
+#>
+
+Vin_src_FILES       =
+
+<# if (enableSIAdapter) { #>
+Vin_src_FILES       += $(Vin_CORE_PATH)/src/Vin_SIAdapter.c
+<# } #>

@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+*  \file
+*
+*  \brief       Dlog interfaces
+*
+*  This file contains the software component description of the Dlog module
+*  for usage in the BMW AUTOSAR Core.
+*
+*  \project     BMW AUTOSAR Core
+*
+*  \par         To be changed by user:
+*               [no]
+*
+*  \copyright   BMW AG 2015 - 2016
+*
+*  \version     5.3.1
+*
+*  \remarks     -
+*
+*/
+
+/*
+*
+*  THIS FILE WAS GENERATED. DO NOT MODIFY!
+*
+*  GENERATOR       : BMW PAGe 1.1.0
+*
+*  GENERATION TIME : 2018-07-30 19:57:40.197108
+*
+*/
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-3-0_STRICT_COMPACT.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>BMW</SHORT-NAME>
+      <ELEMENTS />
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>Platform</SHORT-NAME>
+          <ELEMENTS />
+          <AR-PACKAGES>
+            <AR-PACKAGE>
+              <SHORT-NAME>Dlog</SHORT-NAME>
+              <AR-PACKAGES>
+                <AR-PACKAGE>
+                  <SHORT-NAME>CompuMethods</SHORT-NAME>
+                  <ELEMENTS>
+                    <COMPU-METHOD>
+                      <SHORT-NAME>CM_DlogHistoryType</SHORT-NAME>
+                      <CATEGORY>TEXTTABLE</CATEGORY>
+                      <INTRODUCTION>
+                        <TRACE>
+                          <SHORT-NAME>SWS_Dlog_0538</SHORT-NAME>
+                          <CATEGORY>SPECIFICATION_ITEM</CATEGORY>
+                        </TRACE>
+                      </INTRODUCTION>
+                      <COMPU-INTERNAL-TO-PHYS>
+                        <COMPU-SCALES>
+                          <COMPU-SCALE>
+                            <SHORT-LABEL>DLOG_HISTORY_SYSTEMSUPPLIER</SHORT-LABEL>
+                            <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0</LOWER-LIMIT>
+                            <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0</UPPER-LIMIT>
+                            <COMPU-CONST>
+                              <VT>DLOG_HISTORY_SYSTEMSUPPLIER</VT>
+                            </COMPU-CONST>
+                          </COMPU-SCALE>
+                          <COMPU-SCALE>
+                            <SHORT-LABEL>DLOG_HISTORY_PLANT</SHORT-LABEL>
+                            <LOWER-LIMIT INTERVAL-TYPE="CLOSED">1</LOWER-LIMIT>
+                            <UPPER-LIMIT INTERVAL-TYPE="CLOSED">1</UPPER-LIMIT>
+                            <COMPU-CONST>
+                              <VT>DLOG_HISTORY_PLANT</VT>
+                            </COMPU-CONST>
+                          </COMPU-SCALE>
+                        </COMPU-SCALES>
+                        <COMPU-DEFAULT-VALUE>
+                          <VT>DLOG_HISTORY_SYSTEMSUPPLIER</VT>
+                        </COMPU-DEFAULT-VALUE>
+                      </COMPU-INTERNAL-TO-PHYS>
+                    </COMPU-METHOD>
+                    <COMPU-METHOD>
+                      <SHORT-NAME>CM_LifeCycleRequest</SHORT-NAME>
+                      <CATEGORY>TEXTTABLE</CATEGORY>
+                      <INTRODUCTION>
+                        <TRACE>
+                          <SHORT-NAME>SWS_Dlog_0540</SHORT-NAME>
+                          <CATEGORY>SPECIFICATION_ITEM</CATEGORY>
+                        </TRACE>
+                      </INTRODUCTION>
+                      <COMPU-INTERNAL-TO-PHYS>
+                        <COMPU-SCALES>
+                          <COMPU-SCALE>
+                            <SHORT-LABEL>DLOG_INITIALIZED</SHORT-LABEL>
+                            <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0</LOWER-LIMIT>
+                            <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0</UPPER-LIMIT>
+                            <COMPU-CONST>
+                              <VT>DLOG_INITIALIZED</VT>
+                            </COMPU-CONST>
+                          </COMPU-SCALE>
+                          <COMPU-SCALE>
+                            <SHORT-LABEL>DLOG_RUNNING</SHORT-LABEL>
+                            <LOWER-LIMIT INTERVAL-TYPE="CLOSED">1</LOWER-LIMIT>
+                            <UPPER-LIMIT INTERVAL-TYPE="CLOSED">1</UPPER-LIMIT>
+                            <COMPU-CONST>
+                              <VT>DLOG_RUNNING</VT>
+                            </COMPU-CONST>
+                          </COMPU-SCALE>
+                          <COMPU-SCALE>
+                            <SHORT-LABEL>DLOG_STOPPED</SHORT-LABEL>
+                            <LOWER-LIMIT INTERVAL-TYPE="CLOSED">2</LOWER-LIMIT>
+                            <UPPER-LIMIT INTERVAL-TYPE="CLOSED">2</UPPER-LIMIT>
+                            <COMPU-CONST>
+                              <VT>DLOG_STOPPED</VT>
+                            </COMPU-CONST>
+                          </COMPU-SCALE>
+                        </COMPU-SCALES>
+                      </COMPU-INTERNAL-TO-PHYS>
+                    </COMPU-METHOD>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+                <AR-PACKAGE>
+                  <SHORT-NAME>DataTypeMappingSets</SHORT-NAME>
+                  <ELEMENTS>
+                    <DATA-TYPE-MAPPING-SET>
+                      <SHORT-NAME>DlogTypeMappings</SHORT-NAME>
+                      <MODE-REQUEST-TYPE-MAPS>
+                        <MODE-REQUEST-TYPE-MAP>
+                          <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Dlog/ImplementationDataTypes/Dlog_LifeCycleRequestType</IMPLEMENTATION-DATA-TYPE-REF>
+                          <MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP">/BMW/Platform/Dlog/ModeDeclarationGroups/Dlog_LifeCycle</MODE-GROUP-REF>
+                        </MODE-REQUEST-TYPE-MAP>
+                      </MODE-REQUEST-TYPE-MAPS>
+                    </DATA-TYPE-MAPPING-SET>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+                <AR-PACKAGE>
+                  <SHORT-NAME>ImplementationDataTypes</SHORT-NAME>
+                  <ELEMENTS>
+                    <IMPLEMENTATION-DATA-TYPE>
+                      <SHORT-NAME>Dlog_LifeCycleRequestType</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <INTRODUCTION>
+                        <TRACE>
+                          <SHORT-NAME>SWS_Dlog_0546</SHORT-NAME>
+                          <CATEGORY>SPECIFICATION_ITEM</CATEGORY>
+                        </TRACE>
+                      </INTRODUCTION>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <COMPU-METHOD-REF DEST="COMPU-METHOD">/BMW/Platform/Dlog/CompuMethods/CM_LifeCycleRequest</COMPU-METHOD-REF>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE>
+                    <IMPLEMENTATION-DATA-TYPE>
+                      <SHORT-NAME>Dlog_ProgIdArrayType</SHORT-NAME>
+                      <CATEGORY>ARRAY</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL></SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                      <SUB-ELEMENTS>
+                        <IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                          <SHORT-NAME>Dlog_ProgIdSubArrayType</SHORT-NAME>
+                          <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                          <ARRAY-SIZE>8</ARRAY-SIZE>
+                          <ARRAY-SIZE-SEMANTICS>FIXED-SIZE</ARRAY-SIZE-SEMANTICS>
+                          <SW-DATA-DEF-PROPS>
+                            <SW-DATA-DEF-PROPS-VARIANTS>
+                              <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                              </SW-DATA-DEF-PROPS-CONDITIONAL>
+                            </SW-DATA-DEF-PROPS-VARIANTS>
+                          </SW-DATA-DEF-PROPS>
+                        </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                      </SUB-ELEMENTS>
+                    </IMPLEMENTATION-DATA-TYPE>
+                    <IMPLEMENTATION-DATA-TYPE>
+                      <SHORT-NAME>Dlog_SgbmIdArrayType</SHORT-NAME>
+                      <CATEGORY>ARRAY</CATEGORY>
+                      <INTRODUCTION>
+                        <TRACE>
+                          <SHORT-NAME>SWS_Dlog_0548</SHORT-NAME>
+                          <CATEGORY>SPECIFICATION_ITEM</CATEGORY>
+                        </TRACE>
+                      </INTRODUCTION>
+                      <SUB-ELEMENTS>
+                        <IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                          <SHORT-NAME>SubSgbmIdType</SHORT-NAME>
+                          <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                          <ARRAY-SIZE>8</ARRAY-SIZE>
+                          <ARRAY-SIZE-SEMANTICS>FIXED-SIZE</ARRAY-SIZE-SEMANTICS>
+                          <SW-DATA-DEF-PROPS>
+                            <SW-DATA-DEF-PROPS-VARIANTS>
+                              <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                              </SW-DATA-DEF-PROPS-CONDITIONAL>
+                            </SW-DATA-DEF-PROPS-VARIANTS>
+                          </SW-DATA-DEF-PROPS>
+                        </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                      </SUB-ELEMENTS>
+                    </IMPLEMENTATION-DATA-TYPE>
+                    <IMPLEMENTATION-DATA-TYPE>
+                      <SHORT-NAME>Dlog_SignatureArrayType</SHORT-NAME>
+                      <CATEGORY>ARRAY</CATEGORY>
+                      <INTRODUCTION>
+                        <TRACE>
+                          <SHORT-NAME>SWS_Dlog_0550</SHORT-NAME>
+                          <CATEGORY>SPECIFICATION_ITEM</CATEGORY>
+                        </TRACE>
+                      </INTRODUCTION>
+                      <SUB-ELEMENTS>
+                        <IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                          <SHORT-NAME>SubSignatureArrayType</SHORT-NAME>
+                          <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                          <ARRAY-SIZE>260</ARRAY-SIZE>
+                          <ARRAY-SIZE-SEMANTICS>FIXED-SIZE</ARRAY-SIZE-SEMANTICS>
+                          <SW-DATA-DEF-PROPS>
+                            <SW-DATA-DEF-PROPS-VARIANTS>
+                              <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+                              </SW-DATA-DEF-PROPS-CONDITIONAL>
+                            </SW-DATA-DEF-PROPS-VARIANTS>
+                          </SW-DATA-DEF-PROPS>
+                        </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                      </SUB-ELEMENTS>
+                    </IMPLEMENTATION-DATA-TYPE>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+                <AR-PACKAGE>
+                  <SHORT-NAME>ModeDeclarationGroups</SHORT-NAME>
+                  <ELEMENTS>
+                    <MODE-DECLARATION-GROUP>
+                      <SHORT-NAME>Dlog_LifeCycle</SHORT-NAME>
+                      <CATEGORY>EXPLICIT_ORDER</CATEGORY>
+                      <INTRODUCTION>
+                        <TRACE>
+                          <SHORT-NAME>SWS_Dlog_0529</SHORT-NAME>
+                          <CATEGORY>SPECIFICATION_ITEM</CATEGORY>
+                        </TRACE>
+                      </INTRODUCTION>
+                      <INITIAL-MODE-REF DEST="MODE-DECLARATION">/BMW/Platform/Dlog/ModeDeclarationGroups/Dlog_LifeCycle/DLOG_STOPPED</INITIAL-MODE-REF>
+                      <MODE-DECLARATIONS>
+                        <MODE-DECLARATION>
+                          <SHORT-NAME>DLOG_INITIALIZED</SHORT-NAME>
+                          <VALUE>0</VALUE>
+                        </MODE-DECLARATION>
+                        <MODE-DECLARATION>
+                          <SHORT-NAME>DLOG_RUNNING</SHORT-NAME>
+                          <VALUE>1</VALUE>
+                        </MODE-DECLARATION>
+                        <MODE-DECLARATION>
+                          <SHORT-NAME>DLOG_STOPPED</SHORT-NAME>
+                          <VALUE>2</VALUE>
+                        </MODE-DECLARATION>
+                      </MODE-DECLARATIONS>
+                      <ON-TRANSITION-VALUE>3</ON-TRANSITION-VALUE>
+                    </MODE-DECLARATION-GROUP>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+                <AR-PACKAGE>
+                  <SHORT-NAME>PortInterfaces</SHORT-NAME>
+                  <ELEMENTS>
+                    <CLIENT-SERVER-INTERFACE>
+                      <SHORT-NAME>EcuInfo</SHORT-NAME>
+                      <INTRODUCTION>
+                        <TRACE>
+                          <SHORT-NAME>SWS_Dlog_0554</SHORT-NAME>
+                          <CATEGORY>SPECIFICATION_ITEM</CATEGORY>
+                        </TRACE>
+                      </INTRODUCTION>
+                      <IS-SERVICE>false</IS-SERVICE>
+                      <OPERATIONS>
+                        <CLIENT-SERVER-OPERATION>
+                          <SHORT-NAME>GetEcuId</SHORT-NAME>
+                          <ARGUMENTS>
+                            <ARGUMENT-DATA-PROTOTYPE>
+                              <SHORT-NAME>ecuId</SHORT-NAME>
+                              <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</TYPE-TREF>
+                              <DIRECTION>OUT</DIRECTION>
+                              <SERVER-ARGUMENT-IMPL-POLICY>USE-ARGUMENT-TYPE</SERVER-ARGUMENT-IMPL-POLICY>
+                            </ARGUMENT-DATA-PROTOTYPE>
+                          </ARGUMENTS>
+                          <POSSIBLE-ERROR-REFS>
+                            <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Dlog/PortInterfaces/EcuInfo/E_NOT_OK</POSSIBLE-ERROR-REF>
+                          </POSSIBLE-ERROR-REFS>
+                        </CLIENT-SERVER-OPERATION>
+                        <CLIENT-SERVER-OPERATION>
+                          <SHORT-NAME>GetVin</SHORT-NAME>
+                          <ARGUMENTS>
+                            <ARGUMENT-DATA-PROTOTYPE>
+                              <SHORT-NAME>Vin</SHORT-NAME>
+                              <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Dlog/Dcm/ImplementationDataTypes/Dlog_VinArrayType</TYPE-TREF>
+                              <DIRECTION>OUT</DIRECTION>
+                              <SERVER-ARGUMENT-IMPL-POLICY>USE-ARRAY-BASE-TYPE</SERVER-ARGUMENT-IMPL-POLICY>
+                            </ARGUMENT-DATA-PROTOTYPE>
+                          </ARGUMENTS>
+                          <POSSIBLE-ERROR-REFS>
+                            <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Dlog/PortInterfaces/EcuInfo/E_NOT_OK</POSSIBLE-ERROR-REF>
+                          </POSSIBLE-ERROR-REFS>
+                        </CLIENT-SERVER-OPERATION>
+                      </OPERATIONS>
+                      <POSSIBLE-ERRORS>
+                        <APPLICATION-ERROR>
+                          <SHORT-NAME>E_NOT_OK</SHORT-NAME>
+                          <ERROR-CODE>1</ERROR-CODE>
+                        </APPLICATION-ERROR>
+                      </POSSIBLE-ERRORS>
+                    </CLIENT-SERVER-INTERFACE>
+                    <MODE-SWITCH-INTERFACE>
+                      <SHORT-NAME>ILifeCycle</SHORT-NAME>
+                      <INTRODUCTION>
+                        <TRACE>
+                          <SHORT-NAME>SWS_Dlog_0555</SHORT-NAME>
+                          <CATEGORY>SPECIFICATION_ITEM</CATEGORY>
+                        </TRACE>
+                      </INTRODUCTION>
+                      <IS-SERVICE>false</IS-SERVICE>
+                      <MODE-GROUP>
+                        <SHORT-NAME>Mode</SHORT-NAME>
+                        <TYPE-TREF DEST="MODE-DECLARATION-GROUP">/BMW/Platform/Dlog/ModeDeclarationGroups/Dlog_LifeCycle</TYPE-TREF>
+                      </MODE-GROUP>
+                    </MODE-SWITCH-INTERFACE>
+                    <SENDER-RECEIVER-INTERFACE>
+                      <SHORT-NAME>ILifeCycleRequest</SHORT-NAME>
+                      <INTRODUCTION>
+                        <TRACE>
+                          <SHORT-NAME>SWS_Dlog_0556</SHORT-NAME>
+                          <CATEGORY>SPECIFICATION_ITEM</CATEGORY>
+                        </TRACE>
+                      </INTRODUCTION>
+                      <IS-SERVICE>true</IS-SERVICE>
+                      <DATA-ELEMENTS>
+                        <VARIABLE-DATA-PROTOTYPE>
+                          <SHORT-NAME>requestMode</SHORT-NAME>
+                          <SW-DATA-DEF-PROPS>
+                            <SW-DATA-DEF-PROPS-VARIANTS>
+                              <SW-DATA-DEF-PROPS-CONDITIONAL>
+                                <SW-IMPL-POLICY>STANDARD</SW-IMPL-POLICY>
+                              </SW-DATA-DEF-PROPS-CONDITIONAL>
+                            </SW-DATA-DEF-PROPS-VARIANTS>
+                          </SW-DATA-DEF-PROPS>
+                          <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Dlog/ImplementationDataTypes/Dlog_LifeCycleRequestType</TYPE-TREF>
+                        </VARIABLE-DATA-PROTOTYPE>
+                      </DATA-ELEMENTS>
+                    </SENDER-RECEIVER-INTERFACE>
+                    <SENDER-RECEIVER-INTERFACE>
+                      <SHORT-NAME>ProgId</SHORT-NAME>
+                      <IS-SERVICE>false</IS-SERVICE>
+                      <DATA-ELEMENTS>
+                        <VARIABLE-DATA-PROTOTYPE>
+                          <SHORT-NAME>progId</SHORT-NAME>
+                          <SW-DATA-DEF-PROPS>
+                            <SW-DATA-DEF-PROPS-VARIANTS>
+                              <SW-DATA-DEF-PROPS-CONDITIONAL></SW-DATA-DEF-PROPS-CONDITIONAL>
+                            </SW-DATA-DEF-PROPS-VARIANTS>
+                          </SW-DATA-DEF-PROPS>
+                          <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Dlog/ImplementationDataTypes/Dlog_ProgIdArrayType</TYPE-TREF>
+                        </VARIABLE-DATA-PROTOTYPE>
+                      </DATA-ELEMENTS>
+                    </SENDER-RECEIVER-INTERFACE>
+                    <CLIENT-SERVER-INTERFACE>
+                      <SHORT-NAME>SweSignatureAccess</SHORT-NAME>
+                      <INTRODUCTION>
+                        <TRACE>
+                          <SHORT-NAME>SWS_Dlog_0559</SHORT-NAME>
+                          <CATEGORY>SPECIFICATION_ITEM</CATEGORY>
+                        </TRACE>
+                      </INTRODUCTION>
+                      <IS-SERVICE>false</IS-SERVICE>
+                      <OPERATIONS>
+                        <CLIENT-SERVER-OPERATION>
+                          <SHORT-NAME>GetNumSig</SHORT-NAME>
+                          <ARGUMENTS>
+                            <ARGUMENT-DATA-PROTOTYPE>
+                              <SHORT-NAME>sweId</SHORT-NAME>
+                              <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</TYPE-TREF>
+                              <DIRECTION>IN</DIRECTION>
+                            </ARGUMENT-DATA-PROTOTYPE>
+                            <ARGUMENT-DATA-PROTOTYPE>
+                              <SHORT-NAME>numSig</SHORT-NAME>
+                              <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</TYPE-TREF>
+                              <DIRECTION>OUT</DIRECTION>
+                            </ARGUMENT-DATA-PROTOTYPE>
+                          </ARGUMENTS>
+                          <POSSIBLE-ERROR-REFS>
+                            <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Dlog/PortInterfaces/SweSignatureAccess/E_NOT_OK</POSSIBLE-ERROR-REF>
+                          </POSSIBLE-ERROR-REFS>
+                        </CLIENT-SERVER-OPERATION>
+                        <CLIENT-SERVER-OPERATION>
+                          <SHORT-NAME>GetSigStart</SHORT-NAME>
+                          <ARGUMENTS>
+                            <ARGUMENT-DATA-PROTOTYPE>
+                              <SHORT-NAME>sweId</SHORT-NAME>
+                              <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</TYPE-TREF>
+                              <DIRECTION>IN</DIRECTION>
+                            </ARGUMENT-DATA-PROTOTYPE>
+                            <ARGUMENT-DATA-PROTOTYPE>
+                              <SHORT-NAME>blkNum</SHORT-NAME>
+                              <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</TYPE-TREF>
+                              <DIRECTION>IN</DIRECTION>
+                            </ARGUMENT-DATA-PROTOTYPE>
+                            <ARGUMENT-DATA-PROTOTYPE>
+                              <SHORT-NAME>address</SHORT-NAME>
+                              <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint32</TYPE-TREF>
+                              <DIRECTION>OUT</DIRECTION>
+                            </ARGUMENT-DATA-PROTOTYPE>
+                          </ARGUMENTS>
+                          <POSSIBLE-ERROR-REFS>
+                            <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Dlog/PortInterfaces/SweSignatureAccess/E_NOT_OK</POSSIBLE-ERROR-REF>
+                          </POSSIBLE-ERROR-REFS>
+                        </CLIENT-SERVER-OPERATION>
+                        <CLIENT-SERVER-OPERATION>
+                          <SHORT-NAME>GetSigLength</SHORT-NAME>
+                          <ARGUMENTS>
+                            <ARGUMENT-DATA-PROTOTYPE>
+                              <SHORT-NAME>sweId</SHORT-NAME>
+                              <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</TYPE-TREF>
+                              <DIRECTION>IN</DIRECTION>
+                            </ARGUMENT-DATA-PROTOTYPE>
+                            <ARGUMENT-DATA-PROTOTYPE>
+                              <SHORT-NAME>blkNum</SHORT-NAME>
+                              <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</TYPE-TREF>
+                              <DIRECTION>IN</DIRECTION>
+                            </ARGUMENT-DATA-PROTOTYPE>
+                            <ARGUMENT-DATA-PROTOTYPE>
+                              <SHORT-NAME>length</SHORT-NAME>
+                              <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint32</TYPE-TREF>
+                              <DIRECTION>OUT</DIRECTION>
+                            </ARGUMENT-DATA-PROTOTYPE>
+                          </ARGUMENTS>
+                          <POSSIBLE-ERROR-REFS>
+                            <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Dlog/PortInterfaces/SweSignatureAccess/E_NOT_OK</POSSIBLE-ERROR-REF>
+                          </POSSIBLE-ERROR-REFS>
+                        </CLIENT-SERVER-OPERATION>
+                        <CLIENT-SERVER-OPERATION>
+                          <SHORT-NAME>GetSignature</SHORT-NAME>
+                          <ARGUMENTS>
+                            <ARGUMENT-DATA-PROTOTYPE>
+                              <SHORT-NAME>sweId</SHORT-NAME>
+                              <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</TYPE-TREF>
+                              <DIRECTION>IN</DIRECTION>
+                            </ARGUMENT-DATA-PROTOTYPE>
+                            <ARGUMENT-DATA-PROTOTYPE>
+                              <SHORT-NAME>signature</SHORT-NAME>
+                              <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Dlog/ImplementationDataTypes/Dlog_SignatureArrayType</TYPE-TREF>
+                              <DIRECTION>OUT</DIRECTION>
+                            </ARGUMENT-DATA-PROTOTYPE>
+                          </ARGUMENTS>
+                          <POSSIBLE-ERROR-REFS>
+                            <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Dlog/PortInterfaces/SweSignatureAccess/E_NOT_OK</POSSIBLE-ERROR-REF>
+                          </POSSIBLE-ERROR-REFS>
+                        </CLIENT-SERVER-OPERATION>
+                        <CLIENT-SERVER-OPERATION>
+                          <SHORT-NAME>GetNumSwe</SHORT-NAME>
+                          <ARGUMENTS>
+                            <ARGUMENT-DATA-PROTOTYPE>
+                              <SHORT-NAME>numSwe</SHORT-NAME>
+                              <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint8</TYPE-TREF>
+                              <DIRECTION>OUT</DIRECTION>
+                            </ARGUMENT-DATA-PROTOTYPE>
+                          </ARGUMENTS>
+                          <POSSIBLE-ERROR-REFS>
+                            <POSSIBLE-ERROR-REF DEST="APPLICATION-ERROR">/BMW/Platform/Dlog/PortInterfaces/SweSignatureAccess/E_NOT_OK</POSSIBLE-ERROR-REF>
+                          </POSSIBLE-ERROR-REFS>
+                        </CLIENT-SERVER-OPERATION>
+                      </OPERATIONS>
+                      <POSSIBLE-ERRORS>
+                        <APPLICATION-ERROR>
+                          <SHORT-NAME>E_NOT_OK</SHORT-NAME>
+                          <ERROR-CODE>1</ERROR-CODE>
+                        </APPLICATION-ERROR>
+                      </POSSIBLE-ERRORS>
+                    </CLIENT-SERVER-INTERFACE>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+              </AR-PACKAGES>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

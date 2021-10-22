@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Settings>
+	<Settings Name="com.vector.cfg.gui.core.generators.ExtGenSteps">
+		<Settings Name="Vin">
+			<Setting Name="Package" Value="/BMW_DEF"/>
+			<Setting Name="ModuleName" Value="Vin"/>
+			<Setting Name="GeneratorName" Value="Bmw Vin generator"/>
+			<Setting Name="GeneratorType" Value="BMW_ARTT"/>
+			<Setting Name="EcucFileAutosarSchemaVersion" Value="4.2.1"/>
+			<Setting Name="Active" Value="true"/>
+			<Setting Name="ExecutionType" Value="Parallel"/>
+			<Setting Name="SpecificAsVersionRequired" Value="false"/>			
+			<Setting Name="CommandLine" Value="Vin_Generate.bat"/>
+			<Setting Name="GenerationParameters" Value="Vin $(ProcessingEcuCFile) $(GenDataFolder)"/>
+			<Setting Name="SupportsStandAloneValidation" Value="true"/>
+			<Setting Name="ValidationParameters" Value="Vin $(ProcessingEcuCFile) $(GenDataFolder) validate"/>
+			<Setting Name="WorkingDir" Value="$(DpaProjectFolder)\..\..\Vin\generate"/>
+		</Settings>
+	</Settings>
+</Settings>

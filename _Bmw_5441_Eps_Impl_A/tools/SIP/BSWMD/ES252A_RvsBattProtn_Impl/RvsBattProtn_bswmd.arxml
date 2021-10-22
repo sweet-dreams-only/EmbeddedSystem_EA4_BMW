@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-0-3.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://autosar.org/schema/r4.0">
+    <AR-PACKAGES>
+        <AR-PACKAGE UUID="1a558d5f-22b4-4518-b46b-74a973335f7f">
+            <SHORT-NAME>Nxtr</SHORT-NAME>
+            <ELEMENTS>
+                <ECUC-MODULE-DEF UUID="e394ce6b-b9e6-407b-925f-82fd104b0789">
+                    <SHORT-NAME>RvsBattProtn</SHORT-NAME>
+                    <DESC>
+                        <L-2 L="EN">Configuration of the RvsBattProtn.</L-2>
+                    </DESC>
+                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                    <SUPPORTED-CONFIG-VARIANTS>
+                        <SUPPORTED-CONFIG-VARIANT>VARIANT-PRE-COMPILE</SUPPORTED-CONFIG-VARIANT>
+                    </SUPPORTED-CONFIG-VARIANTS>
+                    <CONTAINERS>
+                        <!-- Parameter Container Definition: RvsBattProtnGeneral -->
+                        <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:6ca017f1-d32b-49c2-9624-9c0a628401c1">
+                            <SHORT-NAME>RvsBattProtnGeneral</SHORT-NAME>
+                            <DESC>
+                                <L-2 L="EN">This container contains the configuration (parameters) of the RvsBattProtn.</L-2>
+                            </DESC>
+                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                            <MULTIPLE-CONFIGURATION-CONTAINER>false</MULTIPLE-CONFIGURATION-CONTAINER>
+                            <PARAMETERS>
+                                <!-- PARAMETER DEFINITION: FAILSTEP -->
+                                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:1c68a547-f24e-4a4e-9540-69fb3466e289">
+                                    <SHORT-NAME>FAILSTEP</SHORT-NAME>
+                                    <DESC>
+                                        <L-2 L="EN">Debounce NTC set strategy step towards FAIL status</L-2>
+                                    </DESC>
+                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                    <IMPLEMENTATION-CONFIG-CLASSES>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                    </IMPLEMENTATION-CONFIG-CLASSES>
+                                    <ORIGIN>NXTR</ORIGIN>
+                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                    <DEFAULT-VALUE>6552</DEFAULT-VALUE>
+                                    <MAX>65535</MAX>
+                                    <MIN>0</MIN>
+                                </ECUC-INTEGER-PARAM-DEF>
+                                <!-- PARAMETER DEFINITION: GNDMEASDVLTGHILIMN -->
+                                <ECUC-FLOAT-PARAM-DEF UUID="ECUC:1c68a547-f24e-4a4e-9540-671bd463ec49">
+                                    <SHORT-NAME>GNDMEASDVLTGHILIMN</SHORT-NAME>
+                                    <DESC>
+                                        <L-2 L="EN">Maximum allowed signal level for ground related measures</L-2>
+                                    </DESC>
+                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                    <IMPLEMENTATION-CONFIG-CLASSES>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                    </IMPLEMENTATION-CONFIG-CLASSES>
+                                    <ORIGIN>NXTR</ORIGIN>
+                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                    <DEFAULT-VALUE>1.5</DEFAULT-VALUE>
+                                    <MAX>5</MAX>
+                                    <MIN>0</MIN>
+                                </ECUC-FLOAT-PARAM-DEF>
+                                <!-- PARAMETER DEFINITION: GNDMEASDVLTGLOLIMN -->
+                                <ECUC-FLOAT-PARAM-DEF UUID="ECUC:1c68a547-f24e-4a4e-9540-67f5d466e789">
+                                    <SHORT-NAME>GNDMEASDVLTGLOLIMN</SHORT-NAME>
+                                    <DESC>
+                                        <L-2 L="EN">Minimum allowed signal level for ground related measures</L-2>
+                                    </DESC>
+                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                    <IMPLEMENTATION-CONFIG-CLASSES>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                    </IMPLEMENTATION-CONFIG-CLASSES>
+                                    <ORIGIN>NXTR</ORIGIN>
+                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                    <DEFAULT-VALUE>1.1</DEFAULT-VALUE>
+                                    <MAX>5</MAX>
+                                    <MIN>0</MIN>
+                                </ECUC-FLOAT-PARAM-DEF>
+                                <!-- PARAMETER DEFINITION: PASSSTEP -->
+                                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:1c68a547-f24e-4a4e-9540-69f5d466ec19">
+                                    <SHORT-NAME>PASSSTEP</SHORT-NAME>
+                                    <DESC>
+                                        <L-2 L="EN">Debounce NTC set strategy step towards PASS status</L-2>
+                                    </DESC>
+                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                    <IMPLEMENTATION-CONFIG-CLASSES>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                    </IMPLEMENTATION-CONFIG-CLASSES>
+                                    <ORIGIN>NXTR</ORIGIN>
+                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                    <DEFAULT-VALUE>3276</DEFAULT-VALUE>
+                                    <MAX>65535</MAX>
+                                    <MIN>0</MIN>
+                                </ECUC-INTEGER-PARAM-DEF>
+                                <!-- PARAMETER DEFINITION: RTNMEASDVLTGHILIMN -->
+                                <ECUC-FLOAT-PARAM-DEF UUID="ECUC:1c68a547-f24e-4a4e-9540-67f2d469ec89">
+                                    <SHORT-NAME>RTNMEASDVLTGHILIMN</SHORT-NAME>
+                                    <DESC>
+                                        <L-2 L="EN">Maximum allowed signal level for battery return related measures</L-2>
+                                    </DESC>
+                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                    <IMPLEMENTATION-CONFIG-CLASSES>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                    </IMPLEMENTATION-CONFIG-CLASSES>
+                                    <ORIGIN>NXTR</ORIGIN>
+                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                    <DEFAULT-VALUE>1.5</DEFAULT-VALUE>
+                                    <MAX>5</MAX>
+                                    <MIN>0</MIN>
+                                </ECUC-FLOAT-PARAM-DEF>
+                                <!-- PARAMETER DEFINITION: RTNMEASDVLTGLOLIMN -->
+                                <ECUC-FLOAT-PARAM-DEF UUID="ECUC:1c68a547-f24e-4a4e-9540-69fbd436ec89">
+                                    <SHORT-NAME>RTNMEASDVLTGLOLIMN</SHORT-NAME>
+                                    <DESC>
+                                        <L-2 L="EN">Minimum allowed signal level for battery return related measures</L-2>
+                                    </DESC>
+                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                    <IMPLEMENTATION-CONFIG-CLASSES>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                    </IMPLEMENTATION-CONFIG-CLASSES>
+                                    <ORIGIN>NXTR</ORIGIN>
+                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                    <DEFAULT-VALUE>0.12</DEFAULT-VALUE>
+                                    <MAX>5</MAX>
+                                    <MIN>0</MIN>
+                                </ECUC-FLOAT-PARAM-DEF>
+                                <!-- PARAMETER DEFINITION: RVSFLTTHD -->
+                                <ECUC-FLOAT-PARAM-DEF UUID="ECUC:1c68a547-f24e-4a4e-9540-47fbd4661c89">
+                                    <SHORT-NAME>RVSFLTTHD</SHORT-NAME>
+                                    <DESC>
+                                        <L-2 L="EN">Threshold level for detection of MOSFET malfunction</L-2>
+                                    </DESC>
+                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                    <IMPLEMENTATION-CONFIG-CLASSES>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                    </IMPLEMENTATION-CONFIG-CLASSES>
+                                    <ORIGIN>NXTR</ORIGIN>
+                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                    <DEFAULT-VALUE>0.4</DEFAULT-VALUE>
+                                    <MAX>5</MAX>
+                                    <MIN>0</MIN>
+                                </ECUC-FLOAT-PARAM-DEF>
+                            </PARAMETERS>
+                        </ECUC-PARAM-CONF-CONTAINER-DEF>
+                    </CONTAINERS>
+                </ECUC-MODULE-DEF>
+            </ELEMENTS>
+        </AR-PACKAGE>
+    </AR-PACKAGES>
+</AUTOSAR>

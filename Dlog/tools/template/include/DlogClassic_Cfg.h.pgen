@@ -1,0 +1,224 @@
+%{+ ../pageinclude/Dlog_Help.pgen }%
+/**
+*  \file
+*
+*  \brief       Configuration header file of module Dlog.
+*
+*  \project     BMW Platform Software
+*
+*  \copyright   BMW AG 2015 - 2017
+*
+*  \version     5.3.1
+*
+*/
+
+/*------------------------------------------------------------------------------
+*
+*  THIS FILE WAS GENERATED. DO NOT MODIFY!
+*
+*  GENERATOR       : %{= generation_tool() }% %{= generation_version_info() }%
+*
+*  GENERATION TIME : %{= generation_timestamp() }%
+*
+------------------------------------------------------------------------------*/
+
+#ifndef DLOGCLASSIC_CFG_H
+#define DLOGCLASSIC_CFG_H
+
+%{#
+  into(container("DlogShared/DlogSharedPlatform"));
+  DlogMultiCpuEnable = value(ref("MultiCpuEnable"));
+  DlogHandleEccRom = value(ref("HandleEccRom"));
+
+}%
+/*------------------------------------------------------------------------------
+                      Include Section
+------------------------------------------------------------------------------*/
+
+#include "Dlog_Cfg.h"
+#include "Dlog_CfgCommon.h"
+#include "DlogClassic_Version.h"
+#include "Std_Types.h"
+
+%{#
+
+reset();
+
+into(container("DlogClassic/Dlog_User"));
+raeh = value(ref("RomAccessExceptionHandler"));
+}%
+%{: if (exists(ref("RomAccessExceptionHandlerInclude")))  }%
+#include <%{=value(ref("RomAccessExceptionHandlerInclude"))}%> /* for Dlog_UserRomAccessExceptionHandler */
+%{:}%
+%{#
+  reset();
+  into(container("DlogClassic/Dlog_General"));
+}%
+%{: if (exists(ref("DlogWatchdogInclude"))) }%
+#include <%{=value(ref("DlogWatchdogInclude"))}%> /* for Dlog_WatchdogTrigger */
+%{:}%
+
+/*------------------------------------------------------------------------------
+                      Macros
+------------------------------------------------------------------------------*/
+
+/* check version of the module */
+#if (!DlogClassic_CHECK_VERSION(5,3,1))
+   #error "Version of DlogClassic_Cfg.h does not match the version of the module!"
+#endif
+
+
+/*------------------------------------------------------------------------------
+                        Configuration Section
+------------------------------------------------------------------------------*/
+
+/**
+ * The parameter disables or enables support for multi CPUs.
+ * STD_ON  : Enable the functionality for MultiCpu
+ * STD_OFF : Disable the functionality for MultiCpu
+ */
+%{: if DlogMultiCpuEnable == True }%
+#define DLOG_ENABLE_MULTI_CPU           STD_ON
+%{: else }%
+#define DLOG_ENABLE_MULTI_CPU           STD_OFF
+%{:}%
+
+%{: if value(ref("DlogUseCoding")) == True }%
+#define DLOG_USE_CODING                 STD_ON
+%{: else }%
+#define DLOG_USE_CODING                 STD_OFF
+%{:}%
+
+
+%{#
+  reset();
+  into(container("DlogClassic/Dlog_General"));
+}%
+
+
+/* -------------------------------------------------------------------------- */
+/*                          Data Logistic                                     */
+/* -------------------------------------------------------------------------- */
+
+
+/**
+ * Maximum length of the SWE development info field by LH FP
+ */
+#define DLOG_MAX_XWE_DEV_INFO_LENGTH  256u
+
+/* check user configurations                                                  */
+#if (DLOG_SWE_DEV_INFO_LENGTH >= DLOG_MAX_XWE_DEV_INFO_LENGTH)
+   #error "DlogClassic_Cfg.h: 'DLOG_SWE_DEV_INFO_LENGTH' too long. The maximum is 255 Byte"
+#endif
+
+#if (DLOG_HWEDEVELOPMENTINFOLENGTH >= DLOG_MAX_XWE_DEV_INFO_LENGTH)
+   #error "DlogClassic_Cfg.h: 'DLOG_HWEDEVELOPMENTINFOLENGTH' too long. The maximum is 255 Byte"
+#endif
+
+
+/* *******************  SWE configuration  ******************************* */
+
+%{#
+  reset();
+  into(container("DlogClassic/Dlog_General"));
+}%
+#define Dlog_WatchdogTrigger()                          %{=value( ref("DlogWatchdogTrigger") )}%
+
+%{#
+  reset();
+  into(container("DlogClassic/Dlog_User"));
+}%
+#define Dlog_UserRomAccessExceptionHandler(codeAddress, dataAddress) %{=raeh}%
+
+
+   /*
+    *  Features
+    */
+%{#
+  reset();
+  into(container("DlogClassic/Dlog_Features"));
+}%
+%{: if value( ref("EnableMemSegTableRead") ) }%
+#define DLOG_ENABLE_MEMSEGTABLE_READ STD_ON
+%{: else }%
+#define DLOG_ENABLE_MEMSEGTABLE_READ STD_OFF
+%{:}%
+
+%{: if value( ref("EnableEcuWriteVin") ) }%
+#define DLOG_ENABLE_ECU_WRITE_VIN    STD_ON
+%{: else }%
+#define DLOG_ENABLE_ECU_WRITE_VIN    STD_OFF
+%{:}%
+
+%{: if value( ref("EnableNvMemory") ) }%
+#define DLOG_NVM_INTERFACE_MEMIF     1
+#define DLOG_NVM_INTERFACE_NVM       2
+#define DLOG_NVM_INTERFACE           %{= value( ref("NvmInterface") ) }%
+
+%{: if value( ref("NvmInterface") ) == "DLOG_NVM_INTERFACE_MEMIF" }%
+#define DLOG_NVM_MEMIF_DEVICE_ID     %{=value( ref("MemIfDeviceId"))}%
+%{:}%
+%{:}%
+
+%{: if value( ref("EnableSweGet") ) }%
+#define DLOG_ENABLE_SWE_GET                    STD_ON
+%{: if value( ref("SweGetDirectBootAndAppl1Swe") ) }%
+#define DLOG_ENABLE_DIRECT_BOOT_APPL1_SWE      STD_ON
+%{: else }%
+#define DLOG_ENABLE_DIRECT_BOOT_APPL1_SWE      STD_OFF
+%{:}%
+%{: if value( ref("SweGetPerformErrorCheck") ) }%
+#define DLOG_ENABLE_SWE_PERFORM_ERROR_CHECK    STD_ON
+%{: else }%
+#define DLOG_ENABLE_SWE_PERFORM_ERROR_CHECK    STD_OFF
+%{:}%
+%{: if value( ref("SweGetValidFlagBlankCheck") ) }%
+#define DLOG_ENABLE_SWE_VALID_FLAG_BLANK_CHECK STD_ON
+%{: else }%
+#define DLOG_ENABLE_SWE_VALID_FLAG_BLANK_CHECK STD_OFF
+%{:}%
+%{: if value( ref("SweGetVerifyCrcChecksum") ) }%
+#define DLOG_VERIFY_SWE_CRC_CHKSUM             STD_ON
+%{: else }%
+#define DLOG_VERIFY_SWE_CRC_CHKSUM             STD_OFF
+%{:}%
+%{: else }%
+#define DLOG_ENABLE_SWE_GET                    STD_OFF
+#define DLOG_VERIFY_SWE_CRC_CHKSUM             STD_OFF
+%{:}%
+
+%{: if value( ref("EnableSweInit") ) }%
+#define DLOG_ENABLE_SWE_INIT                   STD_ON
+%{: else }%
+#define DLOG_ENABLE_SWE_INIT                   STD_OFF
+%{:}%
+
+%{: if DlogHandleEccRom }%
+#define DLOG_HANDLE_ECC_ROM                    STD_ON
+%{: if value( ref("ExceptionHandlerHandleSWEErrors") ) }%
+#define DLOG_HANDLE_ECC_SWE_ERRORS             STD_ON
+%{: else }%
+#define DLOG_HANDLE_ECC_SWE_ERRORS             STD_OFF
+%{:}%
+%{: else }%
+#define DLOG_HANDLE_ECC_ROM                    STD_OFF
+#define DLOG_HANDLE_ECC_SWE_ERRORS             STD_OFF
+%{:}%
+
+%{: if value( ref("EnableTimingParameters") ) }%
+#define DLOG_ENABLE_TIMINGPARAMETERS           STD_ON
+%{: else }%
+#define DLOG_ENABLE_TIMINGPARAMETERS           STD_OFF
+%{:}%
+
+%{: if value( ref("EnableRte") ) }%
+#define DLOG_ENABLE_RTE                        STD_ON
+%{: else }%
+#define DLOG_ENABLE_RTE                        STD_OFF
+%{:}%
+
+#endif /* DLOGCLASSIC_CFG_H */
+
+
+/*** End of file **************************************************************/
+

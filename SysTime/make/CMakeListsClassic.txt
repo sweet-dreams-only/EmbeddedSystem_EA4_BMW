@@ -1,0 +1,38 @@
+# 
+# CMakeLists.txt for generic part of BAC Module SysTime
+#
+
+cmake_minimum_required(VERSION 3.1)
+SET(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
+LIST(INSERT CMAKE_MODULE_PATH 0 "$ENV{BPS_CMAKE_MODULE_PATH}")
+
+project(SysTime.classic C CXX)
+include (BAC)
+
+bps_module_adapter(
+   SysTime
+   classic
+
+   SRC
+      SysTimeClassic.c
+      SysTime_TimerAdapter.c
+      SysTime_ConcAdapter.c
+   GENERATE/VERIFY
+   GENERATE/INCLUDE
+      SysTimeClassic_Version.h.pgen
+      SysTimeClassic_Cfg.h.pgen
+   GENERATE/SRC
+   GENERATE/META
+      SysTime_ext_interfaces.arxml.pgen
+      SysTime_internal.arxml.pgen
+      SysTime_interfaces.arxml.pgen
+   GENERATE/INPUT
+      SysTime
+      SysTimeClassic
+   CFGDESC
+      SysTimeClassic_paramdef.arxml
+   DOC
+      intmanual
+
+)
+

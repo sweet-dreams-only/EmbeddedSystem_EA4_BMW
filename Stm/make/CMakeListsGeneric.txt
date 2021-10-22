@@ -1,0 +1,20 @@
+#
+# CMakeLists.txt for Stm Generic Module
+#
+
+cmake_minimum_required(VERSION 3.1)
+SET(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
+LIST(INSERT CMAKE_MODULE_PATH 0 "$ENV{BPS_CMAKE_MODULE_PATH}")
+
+project(Stm.generic C CXX)
+include (BAC)
+
+bps_module(
+   Stm
+
+   SRC
+      Stm.c
+   GENERATE/INPUT
+      Stm
+)
+

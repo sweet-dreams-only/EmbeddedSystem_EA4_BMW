@@ -1,0 +1,90 @@
+%{+ Coding_Functions }%
+%{#
+GetGeneralConfig()
+GetAreasConfig(True)
+}%
+/**
+ * \file
+ *
+ * \brief       Coding Func Adapter
+ *
+ * \project     BMW Platform Software
+ *
+ * \copyright   BMW AG 2016 - 2017
+ *
+ * \version     5.2.1
+ *
+ */
+
+/*------------------------------------------------------------------------------
+*
+*  THIS FILE WAS GENERATED. DO NOT MODIFY!
+*
+*  GENERATOR       : %{= generation_tool() }% %{= generation_version_info() }%
+*
+*  GENERATION TIME : %{= generation_timestamp() }%
+*
+------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------
+                      MISRA-Deviations
+------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------
+                      Include Section
+------------------------------------------------------------------------------*/
+
+#include "Rte_Coding.h"
+#include "Coding.h"                  /* Coding_ReturnType */
+#include "Coding_Function.h"
+#include "CodingClassic_Version.h"   /* Coding Classic Adapter Version */
+
+
+/*------------------------------------------------------------------------------
+                      Macros
+------------------------------------------------------------------------------*/
+
+/**
+ * \brief check version of the module
+ */
+#if (!CodingClassic_CHECK_VERSION(5,2,1))
+  #error "Version of Coding_FuncAdapter.c does not match the Classic adapter version!"
+#endif
+
+
+/*------------------------------------------------------------------------------
+                      Global Functions
+------------------------------------------------------------------------------*/
+#define Coding_START_SEC_CODE
+#include "Coding_MemMap.h" /* PRQA S 5087 */
+
+%{@ area_context in codingConfig.coding_areas_list }%
+%{@   function_context in area_context.coding_functions_list }%
+
+/*----------------------------------------------------------------------------*/
+/**
+ * Service to get current Coding data value of '%{= function_context.function_name }%'
+ */
+/*----------------------------------------------------------------------------*/
+Std_ReturnType Coding_Func_Get%{= function_context.function_name }%(%{= function_context.type }% *Value)
+{
+   Coding_ReturnType ret = CODING_RC_E_NOT_OK;
+
+   ret = Coding_Get%{= function_context.function_name }%( Value );
+
+   /* convert return value */
+   if ( ret != CODING_RC_E_NOT_OK )
+   {
+      return ( E_OK );
+   }
+   else
+   {
+      return ( E_NOT_OK );
+   }
+   /* PRQA S 5207 1 *//* Multiple exit points to make the code more readable */
+}
+%{@}%
+%{@}%
+
+#define Coding_STOP_SEC_CODE
+#include "Coding_MemMap.h" /* PRQA S 5087 */

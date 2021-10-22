@@ -1,0 +1,31 @@
+/**********************************************************************************************************************
+* Copyright 2017 Nxtr 
+* Nxtr Confidential
+*
+* Module File Name:   BMW_5441_EPS.elf.rc
+* Module Description: Provides start up options for the MULTI debugger
+* Project           : BMW
+* Author            : Kevin Smith
+***********************************************************************************************************************
+* Version Control:
+* %version:          2 %
+* %derived_by:       cz7lt6 %
+*----------------------------------------------------------------------------------------------------------------------
+* Date      Rev      Author         Change Description                                                           SCR #
+* -------   -------  --------  ---------------------------------------------------------------------------     --------
+* 09/06/17   1       KJS       Initial Version                                                                 EA4#14844
+* 09/06/17   2       KJS       Changed reset command from rstrip to rst                                        EA4#14844
+***********************************************************************************************************************/
+
+/* Call python script */
+py -b -f BMW_5441_EPS.py
+
+/* Set breakpoint at the main function */
+b main
+b 0
+
+/* Enable Peripheral Break */
+target pb on
+
+/* Reset target */
+target rst

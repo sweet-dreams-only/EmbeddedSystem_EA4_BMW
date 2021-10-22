@@ -1,0 +1,929 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sect1>
+<?dbhtml filename="CodeProver-021.html"?>
+<title>Coding Rules Configuration</title>
+<table colsep="1" frame="all" pgwide="1" rowsep="1">
+    <title>MISRA Configuration</title>
+    <tgroup align="left" cols="5">
+        <colspec colname="1" colnum="1" colwidth="300*"/>
+        <colspec colname="2" colnum="2" colwidth="4440*"/>
+        <colspec colname="3" colnum="3" colwidth="300*"/>
+        <colspec colname="4" colnum="4" colwidth="300*"/>
+        <colspec colname="5" colnum="5" colwidth="1200*"/>
+        <thead>
+            <row bgcolor="#6A80BF">
+                <entry>Rule</entry>
+                <entry>Description</entry>
+                <entry>Mode</entry>
+                <entry>Status</entry>
+                <entry>Comment</entry><?dbfo bgcolor="#6A80BF"?>
+            </row>
+        </thead>
+        <tbody>
+            <row bgcolor="#F0F2F9">
+                <entry>1.1</entry>
+                <entry>All code shall conform to ISO 9899:1990 'Programming languages - C'</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>2.1</entry>
+                <entry>Assembly language shall be encapsulated and isolated</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>2.2</entry>
+                <entry>source code shall only use /* ... */ style comments</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>2.3</entry>
+                <entry>The character sequence /* shall not be used within a comment</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>3.4</entry>
+                <entry>All uses of the #pragma directive shall be documented and explained.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>4.1</entry>
+                <entry>Only those escape sequences which are defined in the ISO C standard shall be used.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>4.2</entry>
+                <entry>Trigraphs shall not be used.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>5.1</entry>
+                <entry>Identifiers (internal and external) shall not rely on the significance of more than 31 characters</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>5.2</entry>
+                <entry>Identifiers in an inner scope shall not use the same name as an identifier in an outer scope, and therefore hide that identifier.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>5.3</entry>
+                <entry>A typedef name shall be a unique identifier.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>5.4</entry>
+                <entry>A tag name shall be a unique identifier</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>5.5</entry>
+                <entry>No object or function identifier with static storage duration should be reused</entry>
+                <entry>advisory</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>5.6</entry>
+                <entry>No identifier in one name space should have the same spelling as an identifier in another name space, with the exception of structure and union member names</entry>
+                <entry>advisory</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>6.1</entry>
+                <entry>The type char shall be used only for storage and use of character values</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>6.2</entry>
+                <entry>Signed and unsigned char type shall be used only for the storage and use of numeric values</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>6.3</entry>
+                <entry>Typedefs that indicate size and signedness should be used in place of the basic types</entry>
+                <entry>advisory</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>6.4</entry>
+                <entry>Bit fields shall only be defined to be of type unsigned int or signed int.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>6.5</entry>
+                <entry>Bit fields of type signed int shall be at least 2 bits long.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>7.1</entry>
+                <entry>Octal constants (other than zero) and octal escape sequences shall not be used.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>8.1</entry>
+                <entry>Functions shall have prototype declarations and the prototype shall be visible at both the function definition and call.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>8.2</entry>
+                <entry>Whenever an object or function is declared or defined, its type shall be explicitly stated</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>8.3</entry>
+                <entry>For each function parameter the type given in the declaration and definition shall be identical, and the return types shall also be identical</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>8.4</entry>
+                <entry>If objects or functions are declared more than once their types shall be compatible.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>8.5</entry>
+                <entry>There shall be no definitions of objects or functions in a header file</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>8.6</entry>
+                <entry>Functions shall always be declared at file scope.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>8.7</entry>
+                <entry>Objects shall be defined at block scope if they are only accessed from within a single function</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>8.8</entry>
+                <entry>An external object or function shall be declared in one file and only one file</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>8.9</entry>
+                <entry>An identifier with external linkage shall have exactly one external definition.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>8.10</entry>
+                <entry>All declarations and definitions of objects or functions at file scope shall have internal linkage unless external linkage is required</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>8.11</entry>
+                <entry>The static storage class specifier shall be used in definitions and  declarations of objects and functions that have internal linkage</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>8.12</entry>
+                <entry>When an array is declared with external linkage, its size shall be stated explicitly or defined implicitly by initialization</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>9.1</entry>
+                <entry>All automatic variables shall have been assigned a value before being used.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>9.2</entry>
+                <entry>Braces shall be used to indicate and match the structure in the non-zero initialization of arrays and structures.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>9.3</entry>
+                <entry>In an enumerator list, the '=' construct shall not be used to explicitly initialise members other than the first, unless all items are explicitly initialised.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>10.1</entry>
+                <entry>The value of an expression of integer type shall not be implicitly converted to a different underlying type</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>10.2</entry>
+                <entry>The value of an expression of floating type shall not be implicitly converted to a different type</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>10.3</entry>
+                <entry>The value of a complex expression of integer type may only be cast to a type that is narrower and of the same signedness as the underlying type of the expression</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>10.4</entry>
+                <entry>The value of a complex expression of float type may only be cast to narrower floating type</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>10.5</entry>
+                <entry>If the bitwise operator ~ and &lt;&lt; are aplied to an operand of underlying type unsigned char or unsigned short, the result shall be immediatly cast to the underlying type of the operand</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>10.6</entry>
+                <entry>The 'U' suffix shall be applied to all constants of unsigned types</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>11.1</entry>
+                <entry>Conversion shall not be performed between a pointer to a function and any type other than an integral type</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>11.2</entry>
+                <entry>Conversion shall not be performed between a pointer to an object and any type other than an integral type, another pointer to object type or a pointer to void</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>11.3</entry>
+                <entry>A cast should not be performed between a pointer type and an integral type</entry>
+                <entry>advisory</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>11.4</entry>
+                <entry>A cast should not be performed between a pointer to object type and a different pointer to object type</entry>
+                <entry>advisory</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>11.5</entry>
+                <entry>A cast shall not be performed that removes any const or volatile qualification from the type addressed by a pointer</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>12.1</entry>
+                <entry>Limited dependence should be placed on C's operator precedence rules in expressions.</entry>
+                <entry>advisory</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>12.2</entry>
+                <entry>The value of an expression shall be the same under any order of evaluation that the standard permits.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>12.3</entry>
+                <entry>The sizeof operator should not be used on expressions that contain side effects.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>12.4</entry>
+                <entry>The right hand operand of a logical &amp;&amp; or || operator shall not contain side effects.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>12.5</entry>
+                <entry>The operands of a logical &amp;&amp; or || shall be primary-expressions.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>12.6</entry>
+                <entry>The operands of a logical operators (&amp;&amp;, || and !) should be effectively Boolean. Expressions that are effectively Boolean should not be used as operands to operators other than  (&amp;&amp;, || and !).</entry>
+                <entry>advisory</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>12.7</entry>
+                <entry>Bitwise operators shall not be applied to operands whose underlying type is signed</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>12.8</entry>
+                <entry>The right hand operand of a shift operator shall lie between zero and one less than the width in bits of the underlying type of the left hand operand.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>12.9</entry>
+                <entry>The unary minus operator shall not be applied to an expression whose underlying type is unsigned.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>12.10</entry>
+                <entry>The comma operator shall not be used.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>12.11</entry>
+                <entry>Evaluation of constant unsigned integer expressions should not lead to wrap-around.</entry>
+                <entry>advisory</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>12.12</entry>
+                <entry>The underlying bit representations of floating-point values shall not be used.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>12.13</entry>
+                <entry>The increment (++) and decrement (--) operators should not be mixed with other operators in an expression</entry>
+                <entry>advisory</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>13.1</entry>
+                <entry>Assignment operators shall not be used in expressions that yield a Boolean value.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>13.2</entry>
+                <entry>Tests of a value against zero should be made explicit, unless the operand is effectively Boolean</entry>
+                <entry>advisory</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>13.3</entry>
+                <entry>Floating-point expressions shall not be tested for equality or inequality.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>13.4</entry>
+                <entry>The controlling expression of a for statement shall not contain any objects of floating type</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>13.5</entry>
+                <entry>The three expressions of a for statement shall be concerned only with loop control</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>13.6</entry>
+                <entry>Numeric variables being used within a for loop for iteration counting should not be modified in the body of the loop.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>13.7</entry>
+                <entry>Boolean operations whose results are invariant shall not be permitted</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>14.1</entry>
+                <entry>There shall be no unreachable code.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>14.2</entry>
+                <entry>All non-null statements shall either have at least one side effect however executed or cause control flow to change</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>14.3</entry>
+                <entry>Before preprocessing, a null statement shall only occur on a line by itself; it may be followed by a comment provided that the first character following the null statement is white-space character</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>14.4</entry>
+                <entry>The goto statement shall not be used.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>14.5</entry>
+                <entry>The continue statement shall not be used.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>14.6</entry>
+                <entry>For any iteration statement there shall be at most one break statement used for loop termination</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>14.7</entry>
+                <entry>A function shall have a single point of exit at the end of the function</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>14.8</entry>
+                <entry>The statement forming the body of a switch, while, do ... while or for statement shall be a compound statement</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>14.9</entry>
+                <entry>An if (expression) construct shall be followed by a compound statement. The else keyword shall be followed by either a compound statement, or another if statement</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>14.10</entry>
+                <entry>All if ... else if constructs should contain a final else clause.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>15.0</entry>
+                <entry>A switch statement shall conform to MISRA-C syntax</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>15.1</entry>
+                <entry>A switch label shall only be used when the most closely-enclosing compound statement is the body of a switch statement</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>15.2</entry>
+                <entry>An unconditional break statement shall terminate every non-empty switch clause</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>15.3</entry>
+                <entry>The final clause of a switch statement shall be the default clause</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>15.4</entry>
+                <entry>A switch expression should not represent a value that is effectively Boolean</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>15.5</entry>
+                <entry>Every switch statement shall have at least one case clause</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>16.1</entry>
+                <entry>Functions shall not be defined with variable numbers of arguments.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>16.2</entry>
+                <entry>Functions shall not call themselves, either directly or indirectly.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>16.3</entry>
+                <entry>Identifiers shall be given for all of the parameters in a function prototype declaration.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>16.4</entry>
+                <entry>The identifiers used in the declaration and definition of a function shall be identical.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>16.5</entry>
+                <entry>Functions with no parameters shall be declared with parameter type void.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>16.6</entry>
+                <entry>The number of arguments passed to a function shall match the number of parameters.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>16.7</entry>
+                <entry>A pointer parameter in a function prototype should be declared as pointer to const if the pointer is not used to modify the addressed object.</entry>
+                <entry>advisory</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>16.8</entry>
+                <entry>All exit paths from a function with non-void return type shall have an explicit return statement with an expression.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>16.9</entry>
+                <entry>A function identifier shall only be used with either a preceding &amp;, or with a parenthesised parameter list, which may be empty.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>16.10</entry>
+                <entry>If a function returns error information, then that error information should be tested.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>17.1</entry>
+                <entry>Pointer arithmetic shall only be applied to pointers that address an array or array element.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>17.2</entry>
+                <entry>Pointer subtraction shall only be applied to pointers that address elements of the same array.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>17.3</entry>
+                <entry>&gt;, &gt;=, &lt;, &lt;= shall not be applied to pointer types except where they point to the same array.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>17.4</entry>
+                <entry>Array indexing shall be the only allowed form of pointer arithmetic.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>17.5</entry>
+                <entry>The declaration of objects should contain no more than 2 levels of pointer indirection.</entry>
+                <entry>advisory</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>17.6</entry>
+                <entry>The address of an object with automatic storage shall not be assigned to an object that may persist after the object has ceased to exist.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>18.1</entry>
+                <entry>All structure or union types shall be complete at the end of a translation unit.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>18.4</entry>
+                <entry>Unions shall not be use</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>19.1</entry>
+                <entry>#include statements in a file shall only be preceded by other pre-processor directives or comments.</entry>
+                <entry>advisory</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>19.2</entry>
+                <entry>Non-standard characters should not occur in header file names in #include directives.</entry>
+                <entry>advisory</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>19.3</entry>
+                <entry>The #include directive shall be followed by either a &lt;filename&gt; or "filename" sequence.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>19.4</entry>
+                <entry>C macros shall only expand to a braced initialiser, a constant, a parenthesised expression,a type qualifier, a storage class specifier, or a do-while-zero construct.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>19.5</entry>
+                <entry>Macros shall not be #define'd and #undef'd within a block.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>19.6</entry>
+                <entry>#undef shall not be used.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>19.7</entry>
+                <entry>A function should be used in preference to a macro.</entry>
+                <entry>advisory</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>19.8</entry>
+                <entry>A function-like macro shall not be invoked without all of its arguments</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>19.9</entry>
+                <entry>Arguments to a function-like macro shall not contain tokens that look like pre-processing directives.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>19.10</entry>
+                <entry>In the definition of a function-like macro each instance of a parameter shall be enclosed in parentheses unless it is used as the operand of # or ##.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>19.11</entry>
+                <entry>All macro identifiers in preprocessor directives shall be defined before use, except in #ifdef and #ifndef preprocessor directives and the defined() operator.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>19.12</entry>
+                <entry>There shall be at most one occurrence of the # or ## pre-processor operators in a single macro definition.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>19.13</entry>
+                <entry>The # and ## preprocessor operators should not be used.</entry>
+                <entry>advisory</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>19.14</entry>
+                <entry>The defined pre-processor operator shall only be used in one of the two standard forms.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>19.15</entry>
+                <entry>Precautions shall be taken in order to prevent the contents of a header file being included twice.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>19.16</entry>
+                <entry>Preprocessing directives shall be syntactically meaningful even when excluded by the preprocessor.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>19.17</entry>
+                <entry>All #else, #elif and #endif preprocessor directives shall reside in the same file as the #if or #ifdef directive to which they are related.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>20.1</entry>
+                <entry>Reserved identifiers, macros and functions in the standard library, shall not be defined, redefined or undefined.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>20.2</entry>
+                <entry>The names of standard library macros, objects and functions shall not be reused.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>20.3</entry>
+                <entry>The validity of values passed to library functions shall be checked.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>20.4</entry>
+                <entry>Dynamic heap memory allocation shall not be used.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>20.5</entry>
+                <entry>The error indicator errno shall not be used.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>20.6</entry>
+                <entry>The macro offsetof, in library &lt;stddef.h&gt;, shall not be used.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>20.7</entry>
+                <entry>The setjmp macro and the longjmp function shall not be used.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>20.8</entry>
+                <entry>The signal handling facilities of &lt;signal.h&gt; shall not be used.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>20.9</entry>
+                <entry>The input/output library &lt;stdio.h&gt; shall not be used in production code.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>20.10</entry>
+                <entry>The library functions atof, atoi and atol from library &lt;stdlib.h&gt; shall not be used.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>20.11</entry>
+                <entry>The library functions abort, exit, getenv and system from library &lt;stdlib.h&gt; shall not be used.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+            <row bgcolor="#FAFBFE">
+                <entry>20.12</entry>
+                <entry>The time handling functions of library &lt;time.h&gt; shall not be used.</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#FAFBFE"?>
+            </row>
+            <row bgcolor="#F0F2F9">
+                <entry>21.1</entry>
+                <entry>Minimisation of run-time failures shall be ensured by the use of at least one tool/technique</entry>
+                <entry>required</entry>
+                <entry>warning</entry>
+                <entry>-</entry><?dbfo bgcolor="#F0F2F9"?>
+            </row>
+        </tbody>
+    </tgroup>
+</table>
+</sect1>

@@ -1,0 +1,205 @@
+%{#\
+into(module("StdDiagClassic"))
+StdDiagADTSupport = exists(rel('StdDiagApplicationDataTransfer'))
+leave()
+}%\
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+*  \file
+*
+*  \brief       BMW SWC StdDiag
+*
+*  This file is the basic software module description part of the module StdDiag
+*  for usage in the BMW AUTOSAR Core.
+*
+*  \project     BMW Platform Software
+*
+*  \copyright   BMW AG 2015 - 2017
+*
+*  \version     5.4.0
+*
+*/
+
+/*
+*
+*  THIS FILE WAS GENERATED. DO NOT MODIFY!
+*
+*  GENERATOR       : %{= generation_tool() }% %{= generation_version_info() }%
+*
+*  GENERATION TIME : %{= generation_timestamp() }%
+*
+*/
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-3-0_STRICT_COMPACT.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>BMW</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>Platform</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE>
+              <SHORT-NAME>StdDiag</SHORT-NAME>
+              <AR-PACKAGES>
+%{: if(StdDiagADTSupport) }%\
+                <AR-PACKAGE>
+                  <SHORT-NAME>BswModuleDescriptions</SHORT-NAME>
+                  <ELEMENTS>
+                    <BSW-MODULE-DESCRIPTION>
+                      <SHORT-NAME>StdDiag_bswmd</SHORT-NAME>
+                      <IMPLEMENTED-ENTRYS>
+                        <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                          <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/BMW/Platform/StdDiag/BswModuleEntrys/StdDiag_RequestDownload</BSW-MODULE-ENTRY-REF>
+                        </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                        <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                          <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/BMW/Platform/StdDiag/BswModuleEntrys/StdDiag_RequestUpload</BSW-MODULE-ENTRY-REF>
+                        </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                        <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                          <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/BMW/Platform/StdDiag/BswModuleEntrys/StdDiag_TransferData</BSW-MODULE-ENTRY-REF>
+                        </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                        <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                          <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/BMW/Platform/StdDiag/BswModuleEntrys/StdDiag_RequestTransferExit</BSW-MODULE-ENTRY-REF>
+                        </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                      </IMPLEMENTED-ENTRYS>
+                      <MODULE-ID>255</MODULE-ID>
+                      <INTERNAL-BEHAVIORS>
+                        <BSW-INTERNAL-BEHAVIOR>
+                          <SHORT-NAME>BswInternalBehavior</SHORT-NAME>
+                          <ENTITYS>
+                            <BSW-CALLED-ENTITY>
+                              <SHORT-NAME>StdDiag_RequestDownload_CalledEntity</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                              <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/BMW/Platform/StdDiag/BswModuleEntrys/StdDiag_RequestDownload</IMPLEMENTED-ENTRY-REF>
+                            </BSW-CALLED-ENTITY>
+                            <BSW-CALLED-ENTITY>
+                              <SHORT-NAME>StdDiag_RequestUpload_CalledEntity</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                              <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/BMW/Platform/StdDiag/BswModuleEntrys/StdDiag_RequestUpload</IMPLEMENTED-ENTRY-REF>
+                            </BSW-CALLED-ENTITY>
+                            <BSW-CALLED-ENTITY>
+                              <SHORT-NAME>StdDiag_TransferData_CalledEntity</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                              <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/BMW/Platform/StdDiag/BswModuleEntrys/StdDiag_TransferData</IMPLEMENTED-ENTRY-REF>
+                            </BSW-CALLED-ENTITY>
+                            <BSW-CALLED-ENTITY>
+                              <SHORT-NAME>StdDiag_RequestTransferExit_CalledEntity</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                              <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/BMW/Platform/StdDiag/BswModuleEntrys/StdDiag_RequestTransferExit</IMPLEMENTED-ENTRY-REF>
+                            </BSW-CALLED-ENTITY>
+                          </ENTITYS>
+                        </BSW-INTERNAL-BEHAVIOR>
+                      </INTERNAL-BEHAVIORS>
+                    </BSW-MODULE-DESCRIPTION>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+                <AR-PACKAGE>
+                  <SHORT-NAME>BswImplementations</SHORT-NAME>
+                  <ELEMENTS>
+                    <BSW-IMPLEMENTATION>
+                      <SHORT-NAME>Impl_StdDiag_Bsw</SHORT-NAME>
+                      <CODE-DESCRIPTORS>
+                        <CODE>
+                          <SHORT-NAME>SourceCode</SHORT-NAME>
+                          <ARTIFACT-DESCRIPTORS>
+                            <AUTOSAR-ENGINEERING-OBJECT>
+                              <SHORT-LABEL>Object1</SHORT-LABEL>
+                              <CATEGORY>SWSRC</CATEGORY>
+                            </AUTOSAR-ENGINEERING-OBJECT>
+                          </ARTIFACT-DESCRIPTORS>
+                        </CODE>
+                      </CODE-DESCRIPTORS>
+                      <PROGRAMMING-LANGUAGE>C</PROGRAMMING-LANGUAGE>
+                      <RESOURCE-CONSUMPTION>
+                        <SHORT-NAME>ResourceConsumption</SHORT-NAME>
+                      </RESOURCE-CONSUMPTION>
+                      <SW-VERSION>5.4.0</SW-VERSION>
+                      <SWC-BSW-MAPPING-REF DEST="SWC-BSW-MAPPING">/BMW/Platform/StdDiag/SwcBswMappings/StdDiagSwcBswMapping</SWC-BSW-MAPPING-REF>
+                      <VENDOR-ID>5</VENDOR-ID>
+                      <AR-RELEASE-VERSION>4.3.0</AR-RELEASE-VERSION>
+                      <BEHAVIOR-REF DEST="BSW-INTERNAL-BEHAVIOR">/BMW/Platform/StdDiag/BswModuleDescriptions/StdDiag_bswmd/BswInternalBehavior</BEHAVIOR-REF>
+                    </BSW-IMPLEMENTATION>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+                <AR-PACKAGE>
+                  <SHORT-NAME>BswModuleEntrys</SHORT-NAME>
+                  <ELEMENTS>
+                    <BSW-MODULE-ENTRY>
+                      <SHORT-NAME>StdDiag_RequestDownload</SHORT-NAME>
+                      <SERVICE-ID>1</SERVICE-ID>
+                      <IS-REENTRANT>false</IS-REENTRANT>
+                      <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                      <CALL-TYPE>CALLBACK</CALL-TYPE>
+                      <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+                      <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                    </BSW-MODULE-ENTRY>
+                    <BSW-MODULE-ENTRY>
+                      <SHORT-NAME>StdDiag_RequestUpload</SHORT-NAME>
+                      <SERVICE-ID>2</SERVICE-ID>
+                      <IS-REENTRANT>false</IS-REENTRANT>
+                      <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                      <CALL-TYPE>CALLBACK</CALL-TYPE>
+                      <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+                      <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                    </BSW-MODULE-ENTRY>
+                    <BSW-MODULE-ENTRY>
+                      <SHORT-NAME>StdDiag_TransferData</SHORT-NAME>
+                      <SERVICE-ID>3</SERVICE-ID>
+                      <IS-REENTRANT>false</IS-REENTRANT>
+                      <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                      <CALL-TYPE>CALLBACK</CALL-TYPE>
+                      <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+                      <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                    </BSW-MODULE-ENTRY>
+                    <BSW-MODULE-ENTRY>
+                      <SHORT-NAME>StdDiag_RequestTransferExit</SHORT-NAME>
+                      <SERVICE-ID>4</SERVICE-ID>
+                      <IS-REENTRANT>false</IS-REENTRANT>
+                      <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                      <CALL-TYPE>CALLBACK</CALL-TYPE>
+                      <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+                      <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                    </BSW-MODULE-ENTRY>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+                <AR-PACKAGE>
+                  <SHORT-NAME>SwcBswMappings</SHORT-NAME>
+                  <ELEMENTS>
+                    <SWC-BSW-MAPPING>
+                      <SHORT-NAME>StdDiagSwcBswMapping</SHORT-NAME>
+                      <BSW-BEHAVIOR-REF DEST="BSW-INTERNAL-BEHAVIOR">/BMW/Platform/StdDiag/BswModuleDescriptions/StdDiag_bswmd/BswInternalBehavior</BSW-BEHAVIOR-REF>
+                      <RUNNABLE-MAPPINGS>
+                        <SWC-BSW-RUNNABLE-MAPPING>
+                          <BSW-ENTITY-REF DEST="BSW-CALLED-ENTITY">/BMW/Platform/StdDiag/BswModuleDescriptions/StdDiag_bswmd/BswInternalBehavior/StdDiag_RequestDownload_CalledEntity</BSW-ENTITY-REF>
+                          <SWC-RUNNABLE-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/RequestDownload</SWC-RUNNABLE-REF>
+                        </SWC-BSW-RUNNABLE-MAPPING>
+                        <SWC-BSW-RUNNABLE-MAPPING>
+                          <BSW-ENTITY-REF DEST="BSW-CALLED-ENTITY">/BMW/Platform/StdDiag/BswModuleDescriptions/StdDiag_bswmd/BswInternalBehavior/StdDiag_RequestUpload_CalledEntity</BSW-ENTITY-REF>
+                          <SWC-RUNNABLE-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/RequestUpload</SWC-RUNNABLE-REF>
+                        </SWC-BSW-RUNNABLE-MAPPING>
+                        <SWC-BSW-RUNNABLE-MAPPING>
+                          <BSW-ENTITY-REF DEST="BSW-CALLED-ENTITY">/BMW/Platform/StdDiag/BswModuleDescriptions/StdDiag_bswmd/BswInternalBehavior/StdDiag_TransferData_CalledEntity</BSW-ENTITY-REF>
+                          <SWC-RUNNABLE-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/TransferData</SWC-RUNNABLE-REF>
+                        </SWC-BSW-RUNNABLE-MAPPING>
+                        <SWC-BSW-RUNNABLE-MAPPING>
+                          <BSW-ENTITY-REF DEST="BSW-CALLED-ENTITY">/BMW/Platform/StdDiag/BswModuleDescriptions/StdDiag_bswmd/BswInternalBehavior/StdDiag_RequestTransferExit_CalledEntity</BSW-ENTITY-REF>
+                          <SWC-RUNNABLE-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/RequestTransferExit</SWC-RUNNABLE-REF>
+                        </SWC-BSW-RUNNABLE-MAPPING>
+                      </RUNNABLE-MAPPINGS>
+                      <SWC-BEHAVIOR-REF DEST="SWC-INTERNAL-BEHAVIOR">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag</SWC-BEHAVIOR-REF>
+                    </SWC-BSW-MAPPING>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+%{:}%\
+              </AR-PACKAGES>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

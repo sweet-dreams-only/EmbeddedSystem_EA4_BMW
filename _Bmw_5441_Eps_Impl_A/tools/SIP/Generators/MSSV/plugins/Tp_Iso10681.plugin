@@ -1,0 +1,1168 @@
+/**********************************************************************************************************************
+*  COPYRIGHT
+*  -------------------------------------------------------------------------------------------------------------------
+*  Copyright (c) 2017 by Vctr Informatik GmbH.                                                  All rights reserved.
+*
+*                This software is copyright protected and proprietary to Vctr Informatik GmbH.
+*                Vctr Informatik GmbH grants to you only those rights as set out in the license conditions.
+*                All other rights remain with Vctr Informatik GmbH.
+*  -------------------------------------------------------------------------------------------------------------------
+*  FILE DESCRIPTION
+*  -------------------------------------------------------------------------------------------------------------------
+*  File       :  Tp_Iso10681.plugin
+*  Module     :  Elisa
+*  Description:  Checking rule for Tp_Iso10681
+*  -------------------------------------------------------------------------------------------------------------------
+*  AUTHOR IDENTITY
+*  -------------------------------------------------------------------------------------------------------------------
+*  Name                          Initials      Company
+*  -------------------------------------------------------------------------------------------------------------------
+*  Knut Winkelbach                viswnk       Vctr Informatik GmbH
+*  -------------------------------------------------------------------------------------------------------------------
+*  REVISION HISTORY
+*  -------------------------------------------------------------------------------------------------------------------
+*  Version    Date          Author   Change Id        Description
+*  -------------------------------------------------------------------------------------------------------------------
+*  01.00.00   2016-03-10    viswnk   -                Initial version
+*  02.00.00   2016-06-08    viswnk   ESCAN00089391    FEAT-1734: SafeBSW Step 5
+*  02.00.01   2016-08-26    viswnk   -                Updated version info for SafeBSW Release of MSR4-R16+
+*  02.00.02   2016-09-08    viswnk   -                No change in content - updated version because new TAG is
+*                                                     required due to changes in content conditions
+*  02.00.03   2016-11-15    viswnk   ESCAN00092813    Remove superflous checks from plugin.
+*             2017-03-09    viswnk   ESCAN00094317    MSSV-plugin issues error for use case "multi identity" / selectable
+*  02.00.04   2017-10-19    viswnk   -                Fixed FRTP_COMMON_VERSION checks, updated version
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Mandatory Functions
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : RegisterPlugin
+* Return value : Reference to a structure which contains the registration information about the plugin
+* Description  : Elisa_core calls this function to query necessary information about the plugin.
+*                This function is mandatory.
+**********************************************************************************************************************/
+def RegisterPlugin()
+{
+  var reg = ModulePluginRegistration()
+  reg.SetVersion(0x020004) /* version number of the plugin */
+  reg.SetPackageName("Tp_Iso10681") /* package name of the module (as in ALM). */
+  reg.SetInputFiles(["FrTp_PBcfg.c", "FrTp_Lcfg.c"])/* list of all C-files to be checked */
+  return reg 
+}
+
+/**********************************************************************************************************************
+* Name         : CheckVersions
+* Return value : -
+* Description  : Elisa_core calls this function to allow the plugin a version check against the BSW sources.
+*                Check against the major and minor version of the source code.
+*                Note: The version check is not necessary if only rule CheckQMDefines is implemented in this plugin.
+**********************************************************************************************************************/
+def CheckVersions()
+{
+  AssertDefineEquals("FRTP_COMMON_SW_MAJOR_VERSION", "(2u)")
+  AssertDefineEquals("FRTP_COMMON_SW_MINOR_VERSION", "(4u)")
+}
+
+/**********************************************************************************************************************
+* Name         : main
+* Parameter    : None
+* Return value : None
+* Description  : This is the entry point of the Elisa plugin. main calls all rule functions to check the configuration.
+*                This function is mandatory.
+* Requirements : ADAPT: Enter here the references to the corresponding requirements
+**********************************************************************************************************************/
+def main()
+{
+  var numRootStructs = 1  
+  var currRootStructIdx = 1
+  var configVariant = Define("FRTP_CONFIGURATION_VARIANT")
+  var variantSupport = Define("FRTP_POSTBUILD_VARIANT_SUPPORT")
+  var devErrorDetect = Define("FRTP_DEV_ERROR_DETECT")    
+  var useRootStructs = (configVariant.GetValueAsString() == "FRTP_CONFIGURATION_VARIANT_POSTBUILD_LOADABLE") || variantSupport.IsStdOn()
+  
+  add_global(configVariant, "gConfigVariant")
+  add_global(variantSupport, "gVariantSupport")
+  add_global(devErrorDetect, "gDevErrorDetect")
+  add_global(useRootStructs, "gUseRootStructs")
+  add_global(numRootStructs, "gNumRootStructs")
+  add_global(currRootStructIdx, "gCurrRootStructIdx")
+
+  ReportNoteVerbose("gUseRootStructs is " + gUseRootStructs.to_string())
+  if (gUseRootStructs)
+  {
+    var rootStructs = FindConstSymbol("FrTp_Config")
+    gNumRootStructs = rootStructs.size
+    
+    add_global(rootStructs, "gRootStructs")
+  }
+  
+  ReportNoteVerbose("Found " + gNumRootStructs.to_string() + " config-structs")
+  for(var i = 0; i < gNumRootStructs; i = i + 1)
+  {
+    gCurrRootStructIdx = i
+    /* Call the rule functions by means of InvokeRule() */
+    InvokeRule("Check QM inactive", CheckQMDefines)
+    InvokeRule("Check size of generated array FrTp_ConnCfg[].", RuleCheckFrTpConnCfg)
+    InvokeRule("Check values of members ConnIdx, ConnCtrlPtr, FrTpSduRxId, FrTpSduTxId, TxPduPoolOffset of all initializer structs in array FrTp_ConnCfg to be valid.", RuleCheckFrTpConnCfgValues)
+    InvokeRule("Check size of generated array FrTp_ConnStates[]", RuleCheckFrTp_ConnState)
+    InvokeRule("Check size of generated array FrTp_RxPduPools[]", RuleCheckFrTp_RxPduPools)
+    InvokeRule("Check size of generated array FrTp_TxPduPools[]", RuleCheckFrTp_TxPduPools)
+    InvokeRule("Check size of generated array FrTp_PoolData[]", RuleCheckFrTp_PoolData)
+    InvokeRule("Check size of generated array FrTp_DecoupPduAdminData[]", RuleCheckFrTp_DecoupPduAdminData)
+    InvokeRule("Check size of generated array FrTp_RxFrIfPending[], FrTp_TxFrIfPending[]s", RuleCheckPendingArrays)
+    InvokeRule("Check size of generated array FrTp_TxPduPoolOffsets[] for each of the configured Tx-Pdu-Pools", RuleCheckFrTp_TxPduPoolOffsetsArraySize)
+    InvokeRule("Check size of generated array FrTp_RxState[]", RuleCheckFrTp_RxState)
+    InvokeRule("Check size of generated array FrTp_TxState[]", RuleCheckFrTp_TxState)
+    InvokeRule("Check size of generated array FrTp_RxBuf[idx]_[paramSet]", RuleCheckFrTp_RxBuf)
+    InvokeRule("Check size of generated array FrTp_TxBuf[idx]_[paramSet]", RuleCheckFrTp_TxBuf)
+    InvokeRule("Check size of generated array FrTp_RxBuf_ChannelIdx[]", RuleCheckFrTp_RxBuf_ChannelIdx)
+    InvokeRule("Check size of generated array FrTp_TxBuf_ChannelIdx[]", RuleCheckFrTp_TxBuf_ChannelIdx)
+    InvokeRule("Check values of generated array FrTp_RxPduPools[]", RuleCheckFrTpRxPduPoolsValues)
+    InvokeRule("Check values of generated array FrTp_TxPduPools[]", RuleCheckFrTpTxPduPoolsValues)
+    InvokeRule("Check whether the generated array FrTp_TxPduPool<PoolIdx>[] elements are valid", RuleCheckFrTp_TxPduPoolOffsetsValues)
+    InvokeRule("Check size of generated array FrTp_FrIfTxBuf[]", RuleCheckFrTp_FrIfTxBuf)
+    InvokeRule("Check size of generated array FrTp_PoolsOfTxPdus[]", RuleCheckFrTp_PoolsOfTxPdusSize)
+    InvokeRule("Check size of generated array FrTp_FrIfRxPdus[]", RuleCheckFrTp_FrIfRxPdusSize)
+    InvokeRule("Check size of generated array FrTp_FrIfTxPdus[]", RuleCheckFrTp_FrIfTxPdusSize)
+    InvokeRule("Check values of generated array FrTp_FrIfRxPdus[]", RuleCheckFrTpFrIfRxPduValues)
+    InvokeRule("Check values of generated array FrTp_FrIfTxPdus[]", RuleCheckFrTpFrIfTxPduValues)    
+    InvokeRule("Check whether the generated array FrTp_PoolsOfTxPdus[] elements are valid", RuleCheckFrTpPoolsOfTxPdusValues)
+    
+    if (gDevErrorDetect.IsStdOn()) {
+      InvokeRule("Check size of generated array FrTp_RxPduSnv2RxPduIdx[] to be equal to FrTp_MaxFrIfRxPduId", RuleCheckFrTp_RxPduSnv2RxPduIdx)
+      InvokeRule("Check size of generated array FrTp_TxPduSnv2TxPduIdx[] to be equal to FrTp_MaxFrIfTxPduId", RuleCheckFrTp_TxPduSnv2TxPduIdx)
+      InvokeRule("Check size of generated array FrTp_RxSduSnv2ConnIdx[] to be equal to FrTp_MaxRxSduId", RuleCheckFrTp_RxSduSnv2ConnIdx)
+      InvokeRule("Check size of generated array FrTp_TxSduSnv2ConnIdx[] to be equal to FrTp_MaxTxSduId", RuleCheckFrTp_TxSduSnv2ConnIdx)      
+    }
+    
+    InvokeRule("Check values of generated array FrTp_RxPduSnv2RxPduIdx[] to be valid", RuleCheckFrTp_RxPduSnv2RxPduIdxValues)
+    InvokeRule("Check values of generated array FrTp_TxPduSnv2TxPduIdx[] to be valid", RuleCheckFrTp_TxPduSnv2TxPduIdxValues)    
+    InvokeRule("Check values of generated array FrTp_RxSduSnv2ConnIdx[] to be valid", RuleCheckFrTp_RxSduSnv2ConnIdxValues)
+    InvokeRule("Check values of generated array FrTp_TxSduSnv2ConnIdx[] to be valid", RuleCheckFrTp_TxSduSnv2ConnIdxValues)
+    
+    InvokeRule("Check max. numbers of configuration items", RuleCheckMaxNumConfigItems)
+    InvokeRule("Check size of the byte arrays to store PCI data (FrTp_TPCIMaxLength) to be larger than the constants (FrTp_FmtOffsetBc, [FrTp_Util_ByteOffsetDl1 + FrTp_Util_FmtOffsetDl1], [FrTp_Util_ByteOffsetDl2 + FrTp_Util_FmtOffsetDl1], FrTp_FmtOffsetFrameType) used to access these arrays.", RuleCheckTpciArraySizeAndAccessIndexValues)
+  }
+}
+
+/**********************************************************************************************************************
+* Helper Functions
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : ReportNoteVerbose
+* Parameter    : Text for debugging purposes
+* Return value : None
+* Description  : ReportNoteVerbose can use ReportNote for issueing messages for debugging purposes
+**********************************************************************************************************************/
+def ReportNoteVerbose(txt)
+{
+  ReportNote(txt)
+}
+
+/**********************************************************************************************************************
+* Name         : isPrecompile
+* Parameter    : None
+* Return value : true in case the configuration is precompile, false otherwise
+* Description  : returns whether the configuration is precompile
+**********************************************************************************************************************/
+def isPrecompile()
+{
+  return gConfigVariant.GetValueAsString() == "FRTP_CONFIGURATION_VARIANT_PRECOMPILE"
+}
+
+/**********************************************************************************************************************
+* Name         : isLinktime
+* Parameter    : None
+* Return value : true in case the configuration is linktime, false otherwise
+* Description  : returns whether the configuration is linktime
+**********************************************************************************************************************/
+def isLinktime()
+{
+  return gConfigVariant.GetValueAsString() == "FRTP_CONFIGURATION_VARIANT_LINKTIME"
+}
+
+/**********************************************************************************************************************
+* Name         : isPostbuild
+* Parameter    : None
+* Return value : true in case the configuration is postbuild, false otherwise
+* Description  : returns whether the configuration is postbuild
+**********************************************************************************************************************/
+def isPostbuild()
+{
+  return gConfigVariant.GetValueAsString() == "FRTP_CONFIGURATION_VARIANT_POSTBUILD_LOADABLE"
+}
+
+/**********************************************************************************************************************
+* Name         : getInvalidSnvDefine
+* Parameter    : None
+* Return value : Returns the Define() that is used as define for invalid symbolic name values in the FrTps' generated data.
+* Description  : Returns the Define() that is used as define for invalid symbolic name values in the FrTps' generated data.
+**********************************************************************************************************************/
+def getInvalidSnvDefine()
+{
+  return Define("FRTP_INVALID_SNV")
+}
+
+/**********************************************************************************************************************
+* Name         : getInvalidSnvDefineNumber
+* Parameter    : None
+* Return value : Returns the string that is used as define for invalid symbolic name values in the FrTps' generated data.
+* Description  : Returns the string that is used as define for invalid symbolic name values in the FrTps' generated data.
+**********************************************************************************************************************/
+def getInvalidSnvDefineNumber()
+{
+  return getInvalidSnvDefine().GetValueAsNumber()
+}
+
+/**********************************************************************************************************************
+* Name         : getCfgValueAsArray
+* Parameter    : paramname: name of the parameter that shall be returned as either define or constant
+* Return value : Returns the array from the config named as the given parameter depending on the config variant found
+* Description  : Returns the array from the config named as the given parameter depending on the config variant found
+**********************************************************************************************************************/
+def getCfgValueAsArray(constparamname, isFlexRam)
+{
+  var retval
+  var paramname = constparamname
+  if (isFlexRam && isPostbuild())
+  {
+    if(gVariantSupport.IsStdOff())
+    {
+      paramname = paramname + "Ptr"
+    }
+    ReportNoteVerbose("paramname now: " + paramname)
+  }
+  if (gVariantSupport.IsStdOn())
+  {
+    if (isFlexRam)
+    {
+      retval = Array(paramname)
+    }
+    else
+    {
+      var FrTp_Config = Struct(gRootStructs[gCurrRootStructIdx].GetSymbolName())
+      retval = FrTp_Config.GetMemberAsArray(paramname)
+    }
+  }
+  else
+  {
+    /* CFG5 does not generate a config-struct for non-selectable linktime and non-selectable precompile */
+    if (isLinktime())
+    {
+      ReportNoteVerbose("getCfgValueAsArray - isLinktime")
+      retval = Array(paramname)
+    }
+    else if (isPrecompile())
+    {
+      ReportNoteVerbose("getCfgValueAsArray - isPrecompile - paramname:" + paramname)
+      retval = Array(paramname)
+    }
+    /* CFG5 generates a config-struct for postbuild */
+    else if (isPostbuild())
+    {
+      var FrTp_Config = Struct(gRootStructs[gCurrRootStructIdx].GetSymbolName())
+      ReportNoteVerbose("getCfgValueAsArray - isPostbuild.loadable")
+      retval = FrTp_Config.GetMemberAsArray(paramname)
+    }
+    else
+    {
+      retVal = 0
+    }
+  }
+  return retval
+} /* getCfgValueAsArray */
+
+
+/**********************************************************************************************************************
+* Name         : getFrTpCfgValueAsNumber
+* Parameter    : paramname: name of the parameter that shall be returned as either define or constant
+* Return value : Returns the define or constant value of the given parameter depending on the config variant found
+* Description  : Returns the define or constant value of the given parameter depending on the config variant found
+**********************************************************************************************************************/
+def getFrTpCfgValueAsNumber(paramname)
+{
+  var retval
+  
+  if (gVariantSupport.IsStdOn())
+  {
+    var FrTp_Config = Struct(gRootStructs[gCurrRootStructIdx].GetSymbolName())
+    ReportNoteVerbose("getFrTpCfgValueAsNumber - isPostbuild.selectable")
+    retval = FrTp_Config.GetMemberAsNumber(paramname)
+  }
+  else
+  {
+    if (isLinktime())
+    {
+      ReportNoteVerbose("getFrTpCfgValueAsNumber - isLinktime")
+      retval = Constant(paramname).GetValueAsNumber()
+    }
+    else if (isPrecompile())
+    {
+      ReportNoteVerbose("getFrTpCfgValueAsNumber - isPrecompile")
+      retval = Define(paramname).GetValueAsNumber()
+    }
+    else if (isPostbuild())
+    {
+      var FrTp_Config = Struct(gRootStructs[gCurrRootStructIdx].GetSymbolName())
+      ReportNoteVerbose("getFrTpCfgValueAsNumber - isPostbuild.loadable")
+      retval = FrTp_Config.GetMemberAsNumber(paramname)
+    }
+  }
+  return retval
+} /* getFrTpCfgValueAsNumber */
+
+/**********************************************************************************************************************
+* Name         : getMaxFormatOffset
+* Parameter    : none
+* Return value : maximum element value of the FrTp_FormatOffset[]
+* Description  : returns maximum value of the FrTp_FormatOffset[] elements
+**********************************************************************************************************************/
+def getMaxFormatOffset()
+{
+  ReportNoteVerbose("getMaxFormatOffset")
+  var FrTp_FormatOffset = Array("FrTp_FormatOffset")
+  var retval = 0
+  for (var i = 0; i < FrTp_FormatOffset.GetSize(); ++i)
+  {
+    if (FrTp_FormatOffset.GetElemAsNumber(i) > retval)
+    {
+        retval = FrTp_FormatOffset.GetElemAsNumber(i)
+    }
+  }
+  return retval
+} /* getMaxFormatOffset */
+
+/**********************************************************************************************************************
+* Rules
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTpConnCfg
+* Parameter    : None
+* Return value : None
+* Description  : Size of generated array FrTp_ConnCfg[] has to be valid.
+* Requirements : CM_FRTP_CONN_CFG_SIZE
+**********************************************************************************************************************/
+def RuleCheckFrTpConnCfg()
+{
+  ReportNoteVerbose("RuleCheckFrTpConnCfg")
+  var FrTp_ConnCfg = getCfgValueAsArray("FrTp_ConnCfg", false)
+  ReportNoteVerbose("FrTp_NumConn: " + int(getFrTpCfgValueAsNumber("FrTp_NumConn")).to_string())
+  ReportNoteVerbose("FrTp_ConnCfg.Size(): " + int(FrTp_ConnCfg.GetSize()).to_string())
+  AssertArraySize(FrTp_ConnCfg, Equal, getFrTpCfgValueAsNumber("FrTp_NumConn"))
+}
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTpConnCfgValues
+* Parameter    : None
+* Return value : None
+* Description  : Values of members ConnIdx, ConnCtrlPtr, FrTpSduRxId, FrTpSduTxId, TxPduPoolOffset of all initializer structs in generated array FrTp_ConnCfg[] have to be valid.
+* Requirements : CM_FRTP_CONN_CFG_VALUES
+**********************************************************************************************************************/
+def RuleCheckFrTpConnCfgValues()
+{
+  ReportNoteVerbose("RuleCheckFrTpConnCfgValues")
+  var FrTp_ConnCfgs = getCfgValueAsArray("FrTp_ConnCfg", false)
+  var FrTp_NumConn = getFrTpCfgValueAsNumber("FrTp_NumConn")
+
+  for (var i = 0; i < FrTp_ConnCfgs.GetSize(); ++i)
+  {
+    /* Ensure that ConnIdx is valid */
+    var FrTp_ConnCfg = FrTp_ConnCfgs.GetElemAsStruct(i)
+    Assert(FrTp_ConnCfg.GetMemberAsNumber("ConnIdx"), LessThan, FrTp_ConnCfgs.GetSize())
+    Assert(FrTp_ConnCfg.GetMemberAsNumber("ConnIdx"), LessThan, FrTp_NumConn)
+    
+    /* Ensure that there is a Connection Control configured and (its values are) accessible */
+    var FrTp_ConnCtrl = FrTp_ConnCfg.GetMemberAsStruct("ConnCtrlPtr")
+    var TimeoutAs = FrTp_ConnCtrl.GetMemberAsNumber("TimeoutAs")
+    Assert(TimeoutAs, GreaterThan, 0)
+
+    /* Each connection has to have AT LEAST ONE VALID Sdu */
+    var FrTpSduRxId = FrTp_ConnCfg.GetMemberAsNumber("FrTpSduRxId")
+    var FrTpSduTxId = FrTp_ConnCfg.GetMemberAsNumber("FrTpSduTxId")
+    ReportNoteVerbose("FrTpSduRxId: " + int(FrTpSduRxId).to_string())
+    ReportNoteVerbose("FrTpSduTxId: " + int(FrTpSduTxId).to_string())
+    var FRTP_INVALID_SNV = Define("FRTP_INVALID_SNV")
+    ReportNoteVerbose("FRTP_INVALID_SNV: " + FRTP_INVALID_SNV.GetValueAsNumber().to_string())
+    if ((FrTpSduRxId == FRTP_INVALID_SNV.GetValueAsNumber()) && (FrTpSduTxId == FRTP_INVALID_SNV.GetValueAsNumber()))
+    {
+      ReportNote("It is forbidden that FrTpSduRxId and FrTpSduTxId are BOTH EQUAL FRTP_INVALID_SNV !!!")
+      Assert(4711, Equal, 815)
+    }
+    
+    var numOfCfgrdPools = 0
+    
+    var RxPduPoolOffset = FrTp_ConnCfg.GetMemberAsNumber("RxPduPoolOffset")
+    var FrTp_RxPduPools = getCfgValueAsArray("FrTp_RxPduPools", false)
+    AssertArraySize(FrTp_RxPduPools, GreaterEqual, FrTp_ConnCfg.GetMemberAsNumber("RxPduPoolOffset"))
+    var FrTp_NumRxPools = getFrTpCfgValueAsNumber("FrTp_NumRxPools")
+    Assert(RxPduPoolOffset, LessEqual, FrTp_NumRxPools)
+    if(RxPduPoolOffset < FrTp_NumRxPools)
+    {
+      numOfCfgrdPools = numOfCfgrdPools + 1
+    }
+    
+    var TxPduPoolOffset = FrTp_ConnCfg.GetMemberAsNumber("TxPduPoolOffset")
+    var FrTp_TxPduPools = getCfgValueAsArray("FrTp_TxPduPools", false)
+    AssertArraySize(FrTp_TxPduPools, GreaterEqual, FrTp_ConnCfg.GetMemberAsNumber("TxPduPoolOffset"))
+    var FrTp_NumTxPools = getFrTpCfgValueAsNumber("FrTp_NumTxPools")
+    Assert(TxPduPoolOffset, LessEqual, FrTp_NumTxPools)
+    if(TxPduPoolOffset < FrTp_NumTxPools)
+    {
+      numOfCfgrdPools = numOfCfgrdPools + 1
+    }
+    
+    var MultRec = FrTp_ConnCfg.GetMemberAsNumber("MultRec")
+    ReportNoteVerbose("MultRec: " + int(MultRec).to_string())
+    if(int(MultRec) > 0)
+    {
+      Assert(numOfCfgrdPools, GreaterEqual, 1)
+    }
+    else
+    {
+      /* viswnk at 2016-06-14: Usually no OEM uses configures "only one" of the two (possible) pools for non-broadcast-connections. But for testing PES1.6 does --> Removed: Assert(numOfCfgrdPools, Equal, 2), Added: */
+      Assert(numOfCfgrdPools, GreaterEqual, 1)
+    }
+  }
+} /* RuleCheckFrTpConnCfgValues */
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTp_ConnState
+* Parameter    : None
+* Return value : None
+* Description  : Size of generated array FrTp_ConnState[] has to be valid.
+* Requirements : CM_FRTP_CONN_STATE_SIZE
+**********************************************************************************************************************/
+def RuleCheckFrTp_ConnState()
+{
+  ReportNoteVerbose("RuleCheckFrTp_ConnState")
+  var FrTp_NumConn = getFrTpCfgValueAsNumber("FrTp_NumConn")
+  var FrTp_ConnState = getCfgValueAsArray("FrTp_ConnState", true)
+  
+  AssertArraySize(FrTp_ConnState, Equal, FrTp_NumConn)
+}
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTp_RxPduPools
+* Parameter    : None
+* Return value : None
+* Description  : Size of generated array FrTp_RxPduPools[] has to be valid.
+* Requirements : CM_FRTP_RXTX_PDU_POOLS_SIZE
+**********************************************************************************************************************/
+def RuleCheckFrTp_RxPduPools()
+{
+  ReportNoteVerbose("RuleCheckFrTp_RxPduPools")
+  var FrTp_NumRxPools = getFrTpCfgValueAsNumber("FrTp_NumRxPools")
+  var FrTp_RxPduPools = getCfgValueAsArray("FrTp_RxPduPools", false)
+  
+  AssertArraySize(FrTp_RxPduPools, Equal, FrTp_NumRxPools)
+}
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTp_TxPduPools
+* Parameter    : None
+* Return value : None
+* Description  : Size of generated array FrTp_TxPduPools[] has to be valid.
+* Requirements : CM_FRTP_RXTX_PDU_POOLS_SIZE
+**********************************************************************************************************************/
+def RuleCheckFrTp_TxPduPools()
+{
+  ReportNoteVerbose("RuleCheckFrTp_TxPduPools")
+  var FrTp_NumTxPools = getFrTpCfgValueAsNumber("FrTp_NumTxPools")
+  var FrTp_TxPduPools = getCfgValueAsArray("FrTp_TxPduPools", false)
+  
+  AssertArraySize(FrTp_TxPduPools, Equal, FrTp_NumTxPools)
+}
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTp_PoolData
+* Parameter    : None
+* Return value : None
+* Requirements : CM_FRTP_POOL_DATA_SIZE
+**********************************************************************************************************************/
+def RuleCheckFrTp_PoolData()
+{
+  ReportNoteVerbose("RuleCheckFrTp_PoolData")
+  var FrTp_NumTxPools = getFrTpCfgValueAsNumber("FrTp_NumTxPools")
+  var FrTp_PoolData = getCfgValueAsArray("FrTp_PoolData", true)
+  
+  AssertArraySize(FrTp_PoolData, Equal, FrTp_NumTxPools)
+}
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTp_DecoupPduAdminData
+* Parameter    : None
+* Return value : None
+* Description  : Size of generated array FrTp_DecoupPduAdminData[] has to be valid.
+* Requirements : CM_FRTP_DECOUP_PDU_ADMIN_DATA_SIZE
+**********************************************************************************************************************/
+def RuleCheckFrTp_DecoupPduAdminData()
+{
+  ReportNoteVerbose("RuleCheckFrTp_DecoupPduAdminData")
+  var FrTp_NumDecoupPdus = getFrTpCfgValueAsNumber("FrTp_NumDecoupPdus")
+  var FrTp_NumFrIfTxPdus = getFrTpCfgValueAsNumber("FrTp_NumFrIfTxPdus")
+  var FrTp_DecoupPduAdminData = getCfgValueAsArray("FrTp_DecoupPduAdminData", true)
+
+  AssertArraySize(FrTp_DecoupPduAdminData, GreaterEqual, FrTp_NumDecoupPdus)
+  AssertArraySize(FrTp_DecoupPduAdminData, LessEqual, FrTp_NumFrIfTxPdus)
+}
+
+/**********************************************************************************************************************
+* Name         : RuleCheckPendingArrays
+* Parameter    : None
+* Return value : None
+* Description  : Sizes of generated arrays FrTp_RxFrIfPending[], FrTp_TxFrIfPending[] have to be valid.
+* Requirements : CM_FRTP_RXTX_FRIF_PENDING_SIZE
+**********************************************************************************************************************/
+def RuleCheckPendingArrays()
+{
+  ReportNoteVerbose("RuleCheckPendingArrays")
+  var FrTp_NumFrIfTxPdus = getFrTpCfgValueAsNumber("FrTp_NumFrIfTxPdus")
+  var FrTp_RxFrIfPending = getCfgValueAsArray("FrTp_RxFrIfPending", true)
+  var FrTp_TxFrIfPending = getCfgValueAsArray("FrTp_TxFrIfPending", true)
+
+  /* IMPORTANT: Here BOTH arrays are checked to fit FrTp_NumFrIfTxPdus because both arrays are to track the tx-confirmations of tx-pdus */
+  AssertArraySize(FrTp_RxFrIfPending, Equal, FrTp_NumFrIfTxPdus)
+  AssertArraySize(FrTp_TxFrIfPending, Equal, FrTp_NumFrIfTxPdus)
+} /* RuleCheckPendingArrays */
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTp_TxPduPoolOffsetsArraySize
+* Parameter    : None
+* Return value : None
+* Description  : Size of generated array FrTp_TxPduPoolOffsets[] for each of the configured Tx-Pdu-Pools.
+* Requirements : CM_FRTP_TX_PDU_POOL_OFFSETS_SIZE
+**********************************************************************************************************************/
+def RuleCheckFrTp_TxPduPoolOffsetsArraySize()
+{
+  ReportNoteVerbose("RuleCheckFrTp_TxPduPoolOffsetsArraySize")
+  var FrTp_NumFrIfTxPdus = getFrTpCfgValueAsNumber("FrTp_NumFrIfTxPdus")
+  var FrTp_TxPduPools = getCfgValueAsArray("FrTp_TxPduPools", false)
+  
+  for (var i = 0; i < FrTp_TxPduPools.GetSize(); ++i)
+  {
+    var FrTp_TxPduPool = FrTp_TxPduPools.GetElemAsStruct(i)
+    var NumPdus = FrTp_TxPduPool.GetMemberAsNumber("NumPdus")
+    var PduOffsetsPtrArray = FrTp_TxPduPool.GetMemberAsArray("PduOffsetsPtr")
+    
+    AssertArraySize(PduOffsetsPtrArray, Equal, NumPdus)
+    AssertArraySize(PduOffsetsPtrArray, LessEqual, FrTp_NumFrIfTxPdus)
+  }
+} /* RuleCheckFrTp_TxPduPoolOffsetsArraySize */
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTp_RxState
+* Parameter    : None
+* Return value : None
+* Description  : Size of generated array FrTp_RxState[] has to be valid.
+* Requirements : CM_FRTP_RX_STATE_SIZE
+**********************************************************************************************************************/
+def RuleCheckFrTp_RxState()
+{
+  ReportNoteVerbose("RuleCheckFrTp_RxState")
+  var FrTp_NumRxChan = getFrTpCfgValueAsNumber("FrTp_NumRxChan")
+  var FrTp_RxState = getCfgValueAsArray("FrTp_RxState", true)
+  
+  AssertArraySize(FrTp_RxState, Equal, FrTp_NumRxChan)
+}
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTp_TxState
+* Parameter    : None
+* Return value : None
+* Description  : Size of generated array FrTp_TxState[] has to be valid.
+* Requirements : CM_FRTP_TX_STATE_SIZE
+**********************************************************************************************************************/
+def RuleCheckFrTp_TxState()
+{
+  ReportNoteVerbose("RuleCheckFrTp_TxState")
+  var FrTp_NumTxChan = getFrTpCfgValueAsNumber("FrTp_NumTxChan")
+  var FrTp_TxState = getCfgValueAsArray("FrTp_TxState", true)
+  
+  AssertArraySize(FrTp_TxState, Equal, FrTp_NumTxChan)
+}
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTp_RxBuf
+* Parameter    : None
+* Return value : None
+* Description  : Size of generated array FrTp_RxBuf[] has to be valid.
+* Requirements : CM_FRTP_RX_BUF_SIZE
+**********************************************************************************************************************/
+def RuleCheckFrTp_RxBuf()
+{
+  ReportNoteVerbose("RuleCheckFrTp_RxBuf")
+  var FrTp_RxBuf = getCfgValueAsArray("FrTp_RxBuf", true)
+  var FrTp_NumRxChan = getFrTpCfgValueAsNumber("FrTp_NumRxChan")
+
+  AssertArraySize(FrTp_RxBuf, Equal, FrTp_NumRxChan)
+}
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTp_TxBuf
+* Parameter    : None
+* Return value : None
+* Description  : Size of generated array FrTp_TxBuf[] has to be valid.
+* Requirements : CM_FRTP_TX_BUF_SIZE
+**********************************************************************************************************************/
+def RuleCheckFrTp_TxBuf()
+{
+  ReportNoteVerbose("RuleCheckFrTp_TxBuf")
+  var FrTp_TxBuf = getCfgValueAsArray("FrTp_TxBuf", true)
+  var FrTp_NumTxChan = getFrTpCfgValueAsNumber("FrTp_NumTxChan")
+
+  AssertArraySize(FrTp_TxBuf, Equal, FrTp_NumTxChan)
+}
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTp_RxBuf_ChannelIdx
+* Parameter    : None
+* Return value : None
+* Description  : Size of generated array FrTp_RxBuf_Channel<Idx>[] has to be valid.
+* Requirements : CM_FRTP_RX_BUF_CHANNEL_SIZE
+**********************************************************************************************************************/
+def RuleCheckFrTp_RxBuf_ChannelIdx()
+{
+  ReportNoteVerbose("RuleCheckFrTp_RxBuf_ChannelIdx")
+  #var FrTp_RxPduPools = getCfgValueAsArray("FrTp_RxPduPools", false)
+  #var MaxFormatOffset = getMaxFormatOffset()
+  var FrTp_NumRxChan = getFrTpCfgValueAsNumber("FrTp_NumRxChan")
+  var FrTp_RxBuf = getCfgValueAsArray("FrTp_RxBuf", true)
+
+  for (var idx = 0; idx < FrTp_NumRxChan; ++idx)
+  {
+    var FrTp_RxBuf_ChannelIdxUnionName = ""
+    if (!isPostbuild())
+    {
+      FrTp_RxBuf_ChannelIdxUnionName = FrTp_RxBuf.GetElemAsString(idx)
+    }
+    else
+    {
+      FrTp_RxBuf_ChannelIdxUnionName = "FrTp_RxBuf_Channel" + idx.to_string()
+    }
+    ReportNote("RuleCheckFrTp_RxBuf_ChannelIdx - 1st FrTp_RxBuf_ChannelIdxUnionName: " + FrTp_RxBuf_ChannelIdxUnionName)
+    var pointPos = FrTp_RxBuf_ChannelIdxUnionName.find_first_of(".")
+    FrTp_RxBuf_ChannelIdxUnionName = FrTp_RxBuf_ChannelIdxUnionName.substr(0, pointPos)
+    ReportNote("RuleCheckFrTp_RxBuf_ChannelIdx - 2nd FrTp_RxBuf_ChannelIdxUnionName: " + FrTp_RxBuf_ChannelIdxUnionName)
+    {
+      var FrTp_RxBuf_ChannelIdxUnion = Struct(FrTp_RxBuf_ChannelIdxUnionName)
+      /* The 32-bit value was introduced only in order to achieve an 32-bit alignment */
+      /* The 32-bit part of the union will always be defined in a way to be ONE LESS than expected in order to */
+      /* NOT MAKE THE UNION BIGGER THAN REQUIRED: Size of the union is defined assuming 16-bit-granularity! */
+      AssertArraySize(FrTp_RxBuf_ChannelIdxUnion.GetMemberAsArray("w32"), GreaterEqual, (((getFrTpCfgValueAsNumber("FrTp_MaxLengthRxPdus") + 1) / 4) - 1))
+      /* However the 32-bit part's length may not be zero: */
+      AssertArraySize(FrTp_RxBuf_ChannelIdxUnion.GetMemberAsArray("w32"), GreaterEqual, 0)
+      AssertArraySize(FrTp_RxBuf_ChannelIdxUnion.GetMemberAsArray("w16"), GreaterEqual, ((getFrTpCfgValueAsNumber("FrTp_MaxLengthRxPdus") + 1) / 2))
+      AssertArraySize(FrTp_RxBuf_ChannelIdxUnion.GetMemberAsArray("b8"), GreaterEqual, (getFrTpCfgValueAsNumber("FrTp_MaxLengthRxPdus"))) 
+    }
+  }
+} /* RuleCheckFrTp_RxBuf_ChannelIdx */
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTp_TxBuf_ChannelIdx
+* Parameter    : None
+* Return value : None
+* Description  : Size of generated array FrTp_TxBuf_Channel<Idx>[] has to be valid.
+* Requirements : CM_FRTP_TX_BUF_CHANNEL_SIZE
+**********************************************************************************************************************/
+def RuleCheckFrTp_TxBuf_ChannelIdx()
+{
+  ReportNoteVerbose("RuleCheckFrTp_TxBuf_ChannelIdx")
+  #var FrTp_TxPduPools =getCfgValueAsArray("FrTp_TxPduPools", false)
+  #var MaxFormatOffset = getMaxFormatOffset()
+  #var FrTp_DLMaskSFISO = Define("FrTp_DLMaskSFISO")
+  #var FrTp_DLMaskFFISO = Define("FrTp_DLMaskFFISO")
+  var FrTp_NumTxChan = getFrTpCfgValueAsNumber("FrTp_NumTxChan")
+  var FrTp_TxBuf = getCfgValueAsArray("FrTp_TxBuf", true)
+
+  for (var idx = 0; idx < FrTp_NumTxChan; ++idx)
+  {
+    var FrTp_TxBuf_ChannelIdxUnionName = ""
+    if (!isPostbuild())
+    {
+      FrTp_TxBuf_ChannelIdxUnionName = FrTp_TxBuf.GetElemAsString(idx)
+    }
+    else
+    {
+      FrTp_TxBuf_ChannelIdxUnionName = "FrTp_TxBuf_Channel" + idx.to_string()
+    }
+    ReportNote("RuleCheckFrTp_TxBuf_ChannelIdx - 1st FrTp_TxBuf_ChannelIdxUnionName: " + FrTp_TxBuf_ChannelIdxUnionName)
+    var pointPos = FrTp_TxBuf_ChannelIdxUnionName.find_first_of(".")
+    FrTp_TxBuf_ChannelIdxUnionName = FrTp_TxBuf_ChannelIdxUnionName.substr(0, pointPos)
+    ReportNote("RuleCheckFrTp_TxBuf_ChannelIdx - 2nd FrTp_TxBuf_ChannelIdxUnionName: " + FrTp_TxBuf_ChannelIdxUnionName)
+    {
+      var FrTp_TxBuf_ChannelIdxUnion = Struct(FrTp_TxBuf_ChannelIdxUnionName)
+      /* The 32-bit value was introduced only in order to achieve an 32-bit alignment */
+      /* The 32-bit part of the union will always be defined in a way to be ONE LESS than expected in order to */
+      /* NOT MAKE THE UNION BIGGER THAN REQUIRED: Size of the union is defined assuming 16-bit-granularity! */
+      AssertArraySize(FrTp_TxBuf_ChannelIdxUnion.GetMemberAsArray("w32"), GreaterEqual, (((getFrTpCfgValueAsNumber("FrTp_MaxLengthTxPdus") + 1) / 4) - 1))
+      /* However the 32-bit part's length may not be zero: */
+      AssertArraySize(FrTp_TxBuf_ChannelIdxUnion.GetMemberAsArray("w32"), GreaterEqual, 0)
+      AssertArraySize(FrTp_TxBuf_ChannelIdxUnion.GetMemberAsArray("w16"), GreaterEqual, ((getFrTpCfgValueAsNumber("FrTp_MaxLengthTxPdus") + 1) / 2))
+      AssertArraySize(FrTp_TxBuf_ChannelIdxUnion.GetMemberAsArray("b8"), GreaterEqual, (getFrTpCfgValueAsNumber("FrTp_MaxLengthTxPdus"))) 
+    }
+  }
+} /* RuleCheckFrTp_TxBuf_ChannelIdx */
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTpRxPduPoolsValues
+* Parameter    : None
+* Return value : None
+* Description  : Value of members 'MinPduLen' of generated array FrTp_RxPduPools[] has to be valid.
+* Requirements : CM_FRTP_RXTX_PDU_POOLS_MINPDULEN
+**********************************************************************************************************************/
+def RuleCheckFrTpRxPduPoolsValues()
+{
+  ReportNoteVerbose("RuleCheckFrTpRxPduPoolsValues")
+  var FrTp_RxPduPools = getCfgValueAsArray("FrTp_RxPduPools", false)
+  
+  for (var i = 0; i < FrTp_RxPduPools.GetSize(); ++i)
+  {
+    /* Check the particular pool at 'i' */
+    var FrTp_RxPduPool = FrTp_RxPduPools.GetElemAsStruct(i)
+    Assert(FrTp_RxPduPool.GetMemberAsNumber("MinPduLen"), LessEqual, getFrTpCfgValueAsNumber("FrTp_MaxLengthRxPdus"))
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTpTxPduPoolsValues
+* Parameter    : None
+* Return value : None
+* Description  : Value of members 'MinPduLen' of generated array FrTp_TxPduPools[] has to be valid.
+* Requirements : CM_FRTP_RXTX_PDU_POOLS_MINPDULEN
+**********************************************************************************************************************/
+def RuleCheckFrTpTxPduPoolsValues()
+{
+  ReportNoteVerbose("RuleCheckFrTpTxPduPoolsValues")
+  var FrTp_TxPduPools = getCfgValueAsArray("FrTp_TxPduPools", false)
+  
+  for (var i = 0; i < FrTp_TxPduPools.GetSize(); ++i)
+  {
+    /* Check the particular pool at 'i' */
+    var FrTp_TxPduPool = FrTp_TxPduPools.GetElemAsStruct(i)
+    Assert(FrTp_TxPduPool.GetMemberAsNumber("MinPduLen"), LessEqual, getFrTpCfgValueAsNumber("FrTp_MaxLengthTxPdus"))
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTp_TxPduPoolOffsetsValues
+* Parameter    : None
+* Return value : None
+* Description  : Values of members of generated array FrTp_TxPduPool<PoolIdx>[] have to be valid.
+* Requirements : CM_FRTP_TX_PDU_POOLS_PDUOFFSETSPTR
+**********************************************************************************************************************/
+def RuleCheckFrTp_TxPduPoolOffsetsValues()
+{
+  ReportNoteVerbose("RuleCheckFrTp_TxPduPoolOffsetsValues")
+  var FrTp_NumFrIfTxPdus = getFrTpCfgValueAsNumber("FrTp_NumFrIfTxPdus")
+  var FrTp_TxPduPools = getCfgValueAsArray("FrTp_TxPduPools", false)
+  
+  for (var i = 0; i < FrTp_TxPduPools.GetSize(); ++i)
+  {
+    var FrTp_TxPduPool = FrTp_TxPduPools.GetElemAsStruct(i)
+    var PduOffsetsPtr = FrTp_TxPduPool.GetMemberAsArray("PduOffsetsPtr")
+    for (var j = 0; j < PduOffsetsPtr.GetSize(); ++j)
+    {
+        Assert(PduOffsetsPtr.GetElemAsNumber(j), LessThan, FrTp_NumFrIfTxPdus)
+    }
+  }    
+} /* RuleCheckFrTp_TxPduPoolOffsetsValues */
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTp_FrIfTxBuf
+* Parameter    : None
+* Return value : None
+* Description  : Size of generated array FrTp_FrIfTxBuf[] has to be valid and fitting to all FrIf-Tx-Pdus used by FrTp.
+* Requirements : CM_FRTP_FRIF_TX_BUF_SIZE
+**********************************************************************************************************************/
+def RuleCheckFrTp_FrIfTxBuf()
+{
+  ReportNoteVerbose("RuleCheckFrTp_FrIfTxBuf")
+  var FrTp_FrIfTxBuf
+  var FrTp_FrIfTxPdus = getCfgValueAsArray("FrTp_FrIfTxPdus", false)
+  var FrTp_NumFrIfTxPdus = getFrTpCfgValueAsNumber("FrTp_NumFrIfTxPdus")
+  var pduLengthToArrayLengthDivisor
+  /* Default is for uint16 arrays */
+  pduLengthToArrayLengthDivisor = 2 
+
+  /* In case of postbuild loadable (AND selectable!) a union is generated, just like for the rx- and tx-statemachine-wise buffers: */
+  if (isPostbuild())
+  {
+    var FrTp_FrIfTxBufUnion = Struct("FrTp_FrIfTxBuf")
+    /* The member w16 is taken into account here, because the w32-member is only for alignment, i.e. */
+    /* in case the length of w16 is odd, w32 might be smaller then w16. However w16 is always large enough ... */
+    FrTp_FrIfTxBuf = FrTp_FrIfTxBufUnion.GetMemberAsArray("w16")
+  }
+  else
+  {
+    /* wnk at 2015-05-20: Due to FEAT-1379 (ESCAN00082592) the array is now uint32 instead of uint16: */
+    pduLengthToArrayLengthDivisor = 4
+    FrTp_FrIfTxBuf = getCfgValueAsArray("FrTp_FrIfTxBuf", true)
+  }
+  
+  for (var i = 0; i < FrTp_FrIfTxPdus.GetSize(); ++i)
+  {
+    var FrTp_FrIfTxPdu = FrTp_FrIfTxPdus.GetElemAsStruct(i)
+    AssertArraySize(FrTp_FrIfTxBuf, GreaterEqual, (FrTp_FrIfTxPdu.GetMemberAsNumber("Length") / pduLengthToArrayLengthDivisor))
+  }
+} /* RuleCheckFrTp_FrIfTxBuf */
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTp_PoolsOfTxPdusSize
+* Parameter    : None
+* Return value : None
+* Description  : Size of generated array FrTp_PoolsOfTxPdus[] has to be valid.
+* Requirements : CM_FRTP_POOLS_OF_TX_PDUS_SIZE
+**********************************************************************************************************************/
+def RuleCheckFrTp_PoolsOfTxPdusSize()
+{
+  ReportNoteVerbose("RuleCheckFrTp_PoolsOfTxPdusSize")
+  
+  var FrTp_FrIfTxPdus = getCfgValueAsArray("FrTp_FrIfTxPdus", false)
+  for (var i = 0; i < FrTp_FrIfTxPdus.GetSize(); ++i)
+  {
+    var FrTp_FrIfTxPdu = FrTp_FrIfTxPdus.GetElemAsStruct(i)
+    var PoolOffsetsPtr = FrTp_FrIfTxPdu.GetMemberAsArray("PoolOffsetsPtr")
+    AssertArraySize(PoolOffsetsPtr, Equal, FrTp_FrIfTxPdu.GetMemberAsNumber("NumPools"))
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTp_FrIfTxPdusSize
+* Parameter    : None
+* Return value : None
+* Description  : Size of generated array FrTp_FrIfTxPdus[] has to be valid.
+* Requirements : CM_FRTP_FRIF_TX_PDUS_SIZE
+**********************************************************************************************************************/
+def RuleCheckFrTp_FrIfTxPdusSize()
+{
+  ReportNoteVerbose("RuleCheckFrTp_FrIfTxPdusSize")
+  
+  var FrTp_FrIfTxPdus = getCfgValueAsArray("FrTp_FrIfTxPdus", false)
+  AssertArraySize(FrTp_FrIfTxPdus, Equal, getFrTpCfgValueAsNumber("FrTp_NumFrIfTxPdus"))
+}
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTp_FrIfRxPdusSize
+* Parameter    : None
+* Return value : None
+* Description  : Size of generated array FrTp_FrIfRxPdus[] has to be valid.
+* Requirements : CM_FRTP_FRIF_RX_PDUS_SIZE
+**********************************************************************************************************************/
+def RuleCheckFrTp_FrIfRxPdusSize()
+{
+  ReportNoteVerbose("RuleCheckFrTp_FrIfRxPdusSize")
+  
+  var FrTp_FrIfRxPdus = getCfgValueAsArray("FrTp_FrIfRxPdus", false)
+  AssertArraySize(FrTp_FrIfRxPdus, Equal, getFrTpCfgValueAsNumber("FrTp_NumFrIfRxPdus"))
+}
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTpFrIfRxPduValues
+* Parameter    : None
+* Return value : None
+* Description  : Values of member Length, NumConns and ConnOffsetsPtr of generated array FrTp_FrIfRxPdus[] have to be valid.
+* Requirements : CM_FRTP_FRIF_RX_PDUS_VALUES
+**********************************************************************************************************************/
+def RuleCheckFrTpFrIfRxPduValues()
+{
+  ReportNoteVerbose("RuleCheckFrTpFrIfRxPduValues")
+
+  var FrTp_DecoupPduAdminData = getCfgValueAsArray("FrTp_DecoupPduAdminData", true)
+  var FrTp_FrIfRxPdus = getCfgValueAsArray("FrTp_FrIfRxPdus", false)
+  for (var i = 0; i < FrTp_FrIfRxPdus.GetSize(); ++i)
+  {
+    var FrTp_FrIfRxPdu = FrTp_FrIfRxPdus.GetElemAsStruct(i)
+    Assert(FrTp_FrIfRxPdu.GetMemberAsNumber("Length"), LessEqual, getFrTpCfgValueAsNumber("FrTp_MaxLengthRxPdus"))
+    Assert(FrTp_FrIfRxPdu.GetMemberAsNumber("NumConns"), LessEqual, getFrTpCfgValueAsNumber("FrTp_NumConn"))
+    var connOffsetsPtr = FrTp_FrIfRxPdu.GetMemberAsArray("ConnOffsetsPtr")
+    AssertArraySize(connOffsetsPtr, Equal, FrTp_FrIfRxPdu.GetMemberAsNumber("NumConns"))
+    /* Check the values of the array, too: */
+    for (var u = 0; u < connOffsetsPtr.GetSize(); ++u)
+    {
+      Assert(connOffsetsPtr.GetElemAsNumber(u), LessThan, getFrTpCfgValueAsNumber("FrTp_NumConn"))
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTpFrIfTxPduValues
+* Parameter    : None
+* Return value : None
+* Description  : Values of member DecoupPduAdminDataOffset of generated array FrTp_FrIfTxPdus[] have to be valid.
+* Requirements : CM_FRTP_FRIF_TX_PDUS_VALUES
+**********************************************************************************************************************/
+def RuleCheckFrTpFrIfTxPduValues()
+{
+  ReportNoteVerbose("RuleCheckFrTpFrIfTxPduValues")
+
+  var FrTp_DecoupPduAdminData = getCfgValueAsArray("FrTp_DecoupPduAdminData", true)
+  var FrTp_FrIfTxPdus = getCfgValueAsArray("FrTp_FrIfTxPdus", false)
+  for (var i = 0; i < FrTp_FrIfTxPdus.GetSize(); ++i)
+  {
+    var FrTp_FrIfTxPdu = FrTp_FrIfTxPdus.GetElemAsStruct(i)
+    /* The 'DecoupPduAdminDataOffset' value may be equal because the "equal-case" is used by the FrTp to determine whether a Pdu is not decoupled (i.e. immediate) */
+    AssertArraySize(FrTp_DecoupPduAdminData, GreaterEqual, FrTp_FrIfTxPdu.GetMemberAsNumber("DecoupPduAdminDataOffset"))
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTpPoolsOfTxPdusValues
+* Parameter    : None
+* Return value : None
+* Description  : Values of members of generated array FrTp_PoolsOfTxPdus[] have to be valid.
+* Requirements : CM_FRTP_POOLS_OF_TX_PDUS_VALUES
+**********************************************************************************************************************/
+def RuleCheckFrTpPoolsOfTxPdusValues()
+{
+  ReportNoteVerbose("RuleCheckFrTpPoolsOfTxPdusValues")
+  var FrTp_NumTxPools = getFrTpCfgValueAsNumber("FrTp_NumTxPools")
+  
+  var FrTp_FrIfTxPdus = getCfgValueAsArray("FrTp_FrIfTxPdus", false)
+  for (var i = 0; i < FrTp_FrIfTxPdus.GetSize(); ++i)
+  {
+    var FrTp_TxPduPools = getCfgValueAsArray("FrTp_TxPduPools", false)
+    var FrTp_FrIfTxPdu = FrTp_FrIfTxPdus.GetElemAsStruct(i)
+    var PoolOffsetsPtr = FrTp_FrIfTxPdu.GetMemberAsArray("PoolOffsetsPtr")
+    for(var u = 0; u < PoolOffsetsPtr.GetSize(); ++u)
+    {
+      AssertArraySize(FrTp_TxPduPools, GreaterEqual, PoolOffsetsPtr.GetElemAsNumber(u))
+      Assert(PoolOffsetsPtr.GetElemAsNumber(u), LessThan, FrTp_NumTxPools)
+    }
+  }
+} /* RuleCheckFrTpPoolsOfTxPdusValues */
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTp_RxPduSnv2RxPduIdx
+* Parameter    : None
+* Return value : None
+* Description  : Size of generated array FrTp_RxPduSnv2RxPduIdx have to be equal to FrTp_MaxFrIfRxPduId.
+* Requirements : CM_FRTP_RX_PDU_SNV_TO_PDU_IDX_SIZE
+**********************************************************************************************************************/
+def RuleCheckFrTp_RxPduSnv2RxPduIdx()
+{
+  ReportNoteVerbose("RuleCheckFrTp_RxPduSnv2RxPduIdx")
+  var FrTp_MaxFrIfRxPduId = getFrTpCfgValueAsNumber("FrTp_MaxFrIfRxPduId")
+  var FrTp_RxPduSnv2RxPduIdx = getCfgValueAsArray("FrTp_RxPduSnv2RxPduIdx", false)
+  
+  AssertArraySize(FrTp_RxPduSnv2RxPduIdx, Equal, FrTp_MaxFrIfRxPduId)
+}
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTp_TxPduSnv2TxPduIdx
+* Parameter    : None
+* Return value : None
+* Description  : Size of generated array FrTp_TxPduSnv2TxPduIdx have to be equal to FrTp_MaxFrIfTxPduId.
+* Requirements : CM_FRTP_TX_PDU_SNV_TO_PDU_IDX_SIZE
+**********************************************************************************************************************/
+def RuleCheckFrTp_TxPduSnv2TxPduIdx()
+{
+  ReportNoteVerbose("RuleCheckFrTp_TxPduSnv2TxPduIdx")
+  var FrTp_MaxFrIfTxPduId = getFrTpCfgValueAsNumber("FrTp_MaxFrIfTxPduId")
+  var FrTp_TxPduSnv2TxPduIdx = getCfgValueAsArray("FrTp_TxPduSnv2TxPduIdx", false)
+  
+  AssertArraySize(FrTp_TxPduSnv2TxPduIdx, Equal, FrTp_MaxFrIfTxPduId)
+}
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTp_RxSduSnv2ConnIdx
+* Parameter    : None
+* Return value : None
+* Description  : Size of generated array FrTp_RxSduSnv2ConnIdx has to be equal to FrTp_MaxRxSduId.
+* Requirements : CM_FRTP_RX_SDU_SNV_TO_CONN_IDX_SIZE
+**********************************************************************************************************************/
+def RuleCheckFrTp_RxSduSnv2ConnIdx()
+{
+  ReportNoteVerbose("RuleCheckFrTp_RxSduSnv2ConnIdx")
+  var FrTp_MaxRxSduId = getFrTpCfgValueAsNumber("FrTp_MaxRxSduId")
+  var FrTp_RxSduSnv2ConnIdx = getCfgValueAsArray("FrTp_RxSduSnv2ConnIdx", false)
+  
+  AssertArraySize(FrTp_RxSduSnv2ConnIdx, Equal, FrTp_MaxRxSduId)
+}
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTp_TxSduSnv2ConnIdx
+* Parameter    : None
+* Return value : None
+* Description  : Size of generated array FrTp_TxSduSnv2ConnIdx have to be equal to FrTp_MaxTxSduId.
+* Requirements : CM_FRTP_TX_SDU_SNV_TO_CONN_IDX_SIZE
+**********************************************************************************************************************/
+def RuleCheckFrTp_TxSduSnv2ConnIdx()
+{
+  ReportNoteVerbose("RuleCheckFrTp_TxSduSnv2ConnIdx")
+  var FrTp_MaxTxSduId = getFrTpCfgValueAsNumber("FrTp_MaxTxSduId")
+  var FrTp_TxSduSnv2ConnIdx = getCfgValueAsArray("FrTp_TxSduSnv2ConnIdx", false)
+  
+  AssertArraySize(FrTp_TxSduSnv2ConnIdx, Equal, FrTp_MaxTxSduId)  
+}
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTp_RxPduSnv2RxPduIdxValues
+* Parameter    : None
+* Return value : None
+* Description  : Values of generated array FrTp_RxPduSnv2RxPduIdx[] have to be valid.
+* Requirements : CM_FRTP_RX_PDU_SNV_TO_PDU_IDX_VALUES
+**********************************************************************************************************************/
+def RuleCheckFrTp_RxPduSnv2RxPduIdxValues()
+{
+  ReportNoteVerbose("RuleCheckFrTp_RxPduSnv2RxPduIdxValues")
+  var FrTp_RxPduSnv2RxPduIdx = getCfgValueAsArray("FrTp_RxPduSnv2RxPduIdx", false)
+  for (var i = 0; i < FrTp_RxPduSnv2RxPduIdx.GetSize(); ++i)
+  {
+    ReportNoteVerbose(FrTp_RxPduSnv2RxPduIdx.GetElemAsString(i))
+    ReportNoteVerbose(getInvalidSnvDefineNumber().to_string())
+    if (FrTp_RxPduSnv2RxPduIdx.GetElemAsNumber(i) != getInvalidSnvDefineNumber())
+    {
+      var lookedUpIdx = FrTp_RxPduSnv2RxPduIdx.GetElemAsNumber(i)
+      Assert(lookedUpIdx, LessThan, getFrTpCfgValueAsNumber("FrTp_NumFrIfRxPdus"))
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTp_TxPduSnv2TxPduIdxValues
+* Parameter    : None
+* Return value : None
+* Description  : Values of generated array FrTp_TxPduSnv2TxPduIdx[] have to be valid.
+* Requirements : CM_FRTP_TX_PDU_SNV_TO_PDU_IDX_VALUES
+**********************************************************************************************************************/
+def RuleCheckFrTp_TxPduSnv2TxPduIdxValues()
+{
+  ReportNoteVerbose("RuleCheckFrTp_TxPduSnv2TxPduIdxValues")
+  var FrTp_TxPduSnv2TxPduIdx = getCfgValueAsArray("FrTp_TxPduSnv2TxPduIdx", false)
+  for (var i = 0; i < FrTp_TxPduSnv2TxPduIdx.GetSize(); ++i)
+  {
+    if (FrTp_TxPduSnv2TxPduIdx.GetElemAsNumber(i) != getInvalidSnvDefineNumber())
+    {
+      var lookedUpIdx = FrTp_TxPduSnv2TxPduIdx.GetElemAsNumber(i)
+      Assert(lookedUpIdx, LessThan, getFrTpCfgValueAsNumber("FrTp_NumFrIfTxPdus"))
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTp_RxSduSnv2ConnIdxValues
+* Parameter    : None
+* Return value : None
+* Description  : Values of generated array FrTp_RxSduSnv2ConnIdx[] have to be valid.
+* Requirements : CM_FRTP_RX_SDU_SNV_TO_CONN_IDX_VALUES
+**********************************************************************************************************************/
+def RuleCheckFrTp_RxSduSnv2ConnIdxValues()
+{
+  ReportNoteVerbose("RuleCheckFrTp_RxSduSnv2ConnIdxValues")
+  var FrTp_RxSduSnv2ConnIdx = getCfgValueAsArray("FrTp_RxSduSnv2ConnIdx", false)
+  for (var i = 0; i < FrTp_RxSduSnv2ConnIdx.GetSize(); ++i)
+  {
+    if (FrTp_RxSduSnv2ConnIdx.GetElemAsNumber(i) != getInvalidSnvDefineNumber())
+    {
+      var lookedUpIdx = FrTp_RxSduSnv2ConnIdx.GetElemAsNumber(i)
+      Assert(lookedUpIdx, LessThan, getFrTpCfgValueAsNumber("FrTp_NumConn"))
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : RuleCheckFrTp_TxSduSnv2ConnIdxValues
+* Parameter    : None
+* Return value : None
+* Description  : Values of generated array FrTp_TxSduSnv2ConnIdx[] have to be valid.
+* Requirements : CM_FRTP_TX_SDU_SNV_TO_CONN_IDX_VALUES
+**********************************************************************************************************************/
+def RuleCheckFrTp_TxSduSnv2ConnIdxValues()
+{
+  ReportNoteVerbose("RuleCheckFrTp_TxSduSnv2ConnIdxValues")
+  var FrTp_TxSduSnv2ConnIdx = getCfgValueAsArray("FrTp_TxSduSnv2ConnIdx", false)
+  for (var i = 0; i < FrTp_TxSduSnv2ConnIdx.GetSize(); ++i)
+  {
+    if (FrTp_TxSduSnv2ConnIdx.GetElemAsNumber(i) != getInvalidSnvDefineNumber())
+    {
+      var lookedUpIdx = FrTp_TxSduSnv2ConnIdx.GetElemAsNumber(i)
+      Assert(lookedUpIdx, LessThan, getFrTpCfgValueAsNumber("FrTp_NumConn"))
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : RuleCheckMaxNumConfigItems
+* Parameter    : None
+* Return value : None
+* Description  : Values of generated struct FrTp_Config have to be valid.
+* Requirements : CM_FRTP_CONFIG_VALUES
+**********************************************************************************************************************/
+def RuleCheckMaxNumConfigItems()
+{
+  ReportNoteVerbose("RuleCheckMaxNumConfigItems")
+  var FrTp_NumRxChan = getFrTpCfgValueAsNumber("FrTp_NumRxChan")
+  var FrTp_NumTxChan = getFrTpCfgValueAsNumber("FrTp_NumTxChan")
+  var FrTp_NumFrIfTxPdus = getFrTpCfgValueAsNumber("FrTp_NumFrIfTxPdus")
+  var FrTp_NumFrIfRxPdus = getFrTpCfgValueAsNumber("FrTp_NumFrIfRxPdus")
+  var FrTp_NumDecoupPdus = getFrTpCfgValueAsNumber("FrTp_NumDecoupPdus")
+  var FrTp_NumRxPools = getFrTpCfgValueAsNumber("FrTp_NumRxPools")
+  var FrTp_NumTxPools = getFrTpCfgValueAsNumber("FrTp_NumTxPools")
+  
+  var FRTP_INVALID_SNV = getInvalidSnvDefine()
+  
+  Assert(FrTp_NumRxChan, LessEqual, 254)
+  Assert(FrTp_NumTxChan, LessEqual, 254)
+  Assert(FrTp_NumFrIfTxPdus, LessEqual, 254)
+  Assert(FrTp_NumFrIfRxPdus, LessEqual, 254)
+  Assert(FrTp_NumDecoupPdus, LessEqual, 254)
+  Assert(FrTp_NumRxPools, LessEqual, 254)
+  Assert(FrTp_NumTxPools, LessEqual, 254)
+  
+  if (gDevErrorDetect.IsStdOn()) {
+    var FrTp_MaxRxSduId = getFrTpCfgValueAsNumber("FrTp_MaxRxSduId")
+    var FrTp_MaxTxSduId = getFrTpCfgValueAsNumber("FrTp_MaxTxSduId")
+    var FrTp_MaxFrIfRxPduId = getFrTpCfgValueAsNumber("FrTp_MaxFrIfRxPduId")
+    var FrTp_MaxFrIfTxPduId = getFrTpCfgValueAsNumber("FrTp_MaxFrIfTxPduId")
+    
+    Assert(FrTp_MaxRxSduId, LessEqual, FRTP_INVALID_SNV)
+    Assert(FrTp_MaxTxSduId, LessEqual, FRTP_INVALID_SNV)
+    Assert(FrTp_MaxFrIfRxPduId, LessEqual, FRTP_INVALID_SNV)
+    Assert(FrTp_MaxFrIfTxPduId, LessEqual, FRTP_INVALID_SNV)
+  }
+} /* RuleCheckMaxNumConfigItems */
+
+/**********************************************************************************************************************
+* Name         : RuleCheckTpciArraySizeAndAccessIndexValues
+* Parameter    : None
+* Return value : None
+* Description  : Size of the byte arrays to store PCI data (FrTp_TPCIMaxLength) has to be larger than the constants FrTp_FmtOffsetBc, FrTp_FmtOffsetFPL, FrTp_FmtOffsetFrameType, FrTp_Iso_MlLowByteOffset, FrTp_Iso_MlHighByteOffset used to access these arrays.
+* Requirements : CM_FRTP_TPCI_MAX_LENGTH
+**********************************************************************************************************************/
+def RuleCheckTpciArraySizeAndAccessIndexValues()
+{
+  ReportNoteVerbose("RuleCheckTpciArraySizeAndAccessIndexValues")
+  var FrTp_FmtOffsetBc = Define("FrTp_FmtOffsetBc").GetValueAsNumber()
+  var FrTp_FmtOffsetFPL = Define("FrTp_FmtOffsetFPL").GetValueAsNumber()
+  var FrTp_FmtOffsetFrameType = Define("FrTp_FmtOffsetFrameType").GetValueAsNumber()
+  var FrTp_Iso_MlLowByteOffset = Define("FrTp_Iso_MlLowByteOffset").GetValueAsNumber()
+  var FrTp_Iso_MlHighByteOffset = Define("FrTp_Iso_MlHighByteOffset").GetValueAsNumber()
+  
+  var FrTp_TPCIMaxLength = Define("FrTp_TPCIMaxLength").GetValueAsNumber()
+
+  Assert(FrTp_TPCIMaxLength, GreaterThan, FrTp_FmtOffsetBc)
+  Assert(FrTp_TPCIMaxLength, GreaterThan, FrTp_FmtOffsetFPL)
+  Assert(FrTp_TPCIMaxLength, GreaterThan, FrTp_FmtOffsetFrameType)
+  Assert(FrTp_TPCIMaxLength, GreaterThan, FrTp_Iso_MlLowByteOffset)
+  Assert(FrTp_TPCIMaxLength, GreaterThan, FrTp_Iso_MlHighByteOffset)
+}
+
+/**********************************************************************************************************************
+* Name         : CheckQMDefines
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks the setting of QM-related preprocessor defines.
+*                Typically it checks that QM features are inactive in safety context.
+* Requirements : CM_FRTP_QMDEFINES
+**********************************************************************************************************************/
+def CheckQMDefines()
+{
+  AssertDefineIsStdOn("FRTP_DEV_ERROR_DETECT")
+  AssertDefineIsStdOff("FRTP_FULL_AR421")
+  AssertDefineIsStdOff("FRTP_RUNTIME_MEASUREMENT_SUPPORT")
+}
+

@@ -1,0 +1,48 @@
+/**
+ * \file
+ *
+ * \brief       Configuration file for Coding Classic Adapter
+ *
+ * \project     BMW Platform Software
+ *
+ * \copyright   BMW AG 2016 - 2017
+ *
+ * \version     5.2.1
+ *
+ */
+
+/*------------------------------------------------------------------------------
+*
+*  THIS FILE WAS GENERATED. DO NOT MODIFY!
+*
+*  GENERATOR       : %{= generation_tool() }% %{= generation_version_info() }%
+*
+*  GENERATION TIME : %{= generation_timestamp() }%
+*
+------------------------------------------------------------------------------*/
+
+#ifndef CODINGADAPTER_CFG_H
+#define CODINGADAPTER_CFG_H
+
+/*------------------------------------------------------------------------------
+                      Include Section
+-------------------------------------------------------------------------------*/
+
+#include "BUtil/PlatformTypes.h"     /* BMW Platform Types             */
+#include "CodingClassic_Version.h"   /* Coding Classic Adapter Version */
+
+/*------------------------------------------------------------------------------
+                      Macros
+-------------------------------------------------------------------------------*/
+
+/* check version of the module */
+#if (!CodingClassic_CHECK_VERSION(5,2,1))
+   #error "Version of CodingClassic_Cfg.h does not match the Classic adapter version!"
+#endif
+
+%{# into(container("CodingClassic/CodingClassicGeneral")); }%
+/* in Hz */
+#define CODING_TIMER_FREQ                        %{= int(1.0/(round(value(ref( "CodingClassicGeneral/CodingCycleTime" )),3))) }%u
+
+
+#endif /* CODINGADAPTER_CFG_H */

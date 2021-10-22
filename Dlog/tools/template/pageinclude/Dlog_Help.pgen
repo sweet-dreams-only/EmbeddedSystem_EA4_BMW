@@ -1,0 +1,194 @@
+%{#
+
+def GetHiHiByte(data):
+  return (data>>24)
+
+def GetHiLoByte(data):
+  return ((data>>16) & 0xff)
+
+def GetLoHiByte(data):
+  return ((data>>8) & 0xff)
+
+def GetLoLoByte(data):
+  return (data & 0xff)
+
+def GetUint8ArrayString(s):
+  sl = len(s);
+  ret = "(uint8)" + str(sl) + "u";
+  for i in range(0, sl):
+    ret = ret + ",'" + s[i] + "'";
+  return ret;
+
+def GetUint8Array(s):
+  sl = len(s);
+  ret = "";
+  for i in range(0, sl):
+    ret = ret + "'" + s[i] + "'";
+    if (i+1 < sl):
+      ret = ret + ",";
+  return ret;
+
+
+class MemSegTable:
+  def __init__(self, path):
+    self.numberOfSegments = 0
+
+    self.entries = []
+
+    for p in get_xpaths(path):
+      with element_path(p):
+        entry = {"start": value(ref("StartAddress")), "size": value(ref("SegmentSize")), "numSegs": value(ref("NumberOfSegments"))}
+        self.numberOfSegments += entry["numSegs"]
+        self.entries.append(entry)
+
+    #print(self.entries)
+    #print(self.numberOfSegments)
+    #sfu = lambda x: x["start"]
+    #print(sfu(self.entries[1]))
+    #self.entries.sort()
+    #print(self.entries)
+
+  @property
+  def Entries(self):
+    return self.entries
+
+  @property
+  def NumberOfEntries(self):
+    return len(self.entries)
+
+  @property
+  def NumberOfSegments(self):
+    return self.numberOfSegments
+
+  def getIndexForAddress(self, address):
+    index = 0;
+    for entry in self.entries:
+      if (entry["start"] <= address and entry["start"] + entry["size"]*entry["numSegs"] > address):
+        return index + ((address - entry["start"]) // entry["size"]);
+      index += entry["numSegs"];
+
+    raise ValueError("address not within memory segmentation");
+    return index
+
+
+class SweGroupTable:
+  def __init__(self, path):
+    self.hasOptional = False
+
+    self.entries = []
+
+    for p in get_xpaths(path):
+      with element_path(p):
+        entry = {"name": shortname(), "groupType": value(ref("GroupType"))}
+        if entry["groupType"] != "ALLOBLIGATORY":
+          self.hasOptional = True
+        self.entries.append(entry)
+
+
+  @property
+  def NumberOfEntries(self):
+    return len(self.entries)
+
+  @property
+  def HasOptional(self):
+    return self.hasOptional
+
+  def find(self, name):
+    for i in range(0, len(self.entries)):
+      if (self.entries[i]["name"] == name):
+        return i
+    raise ValueError("Swe Group '" + name + "' not found!")
+
+
+class SweEntry:
+  def __init__(self):
+    pass
+
+  def initFromPath(self, path, groupTable):
+    with element_path(path):
+      self.sweId = value(ref("SweId"))
+      self.descriptionTableAddress = value(ref("SweDescriptionTableAddress"))
+      self.signatureAddress        = value(ref("SweSignatureAddress"))
+      groupPath = value(ref("SweGroup"))
+      self.groupId  = groupTable.find(groupPath[groupPath.rfind('/')+1:])
+      self.logisticData = {
+        "devInfo": value(ref("LogisticData/DevelopmentInfo")),
+        "procClass": value(ref("LogisticData/ProcessClass"))}
+
+      self.signatureBlocks = []
+      for sb in get_xpaths(container("SignatureBlock")):
+        with element_path(sb):
+          entry = {"start": value(ref("StartAddress")), "size": value(ref("Size"))}
+          self.signatureBlocks.append(entry)
+
+      self.sweBlocks = []
+      for sb in get_xpaths(container("SweBlock")):
+        with element_path(sb):
+          entry = {"start": value(ref("BlockStartAddress")), "size": value(ref("BlockSize"))}
+          self.sweBlocks.append(entry)
+
+  @property
+  def IsBootSwe(self):
+    return self.logisticData["procClass"] == "DLOG_PROCESSCLASS_BTLD"
+
+  @property
+  def IsSwfk(self):
+    return self.logisticData["procClass"] == "DLOG_PROCESSCLASS_SWFK"
+
+
+class SweTable:
+  def __init__(self, path, groupTable):
+    self.entries = []
+    self.numberOfEntries = count(path)
+    self.numberOfBootSwe = 0
+    self.hasSwfk = False
+    for p in get_xpaths(path):
+      entry = SweEntry()
+      entry.initFromPath(p, groupTable)
+      if entry.IsBootSwe:
+        self.numberOfBootSwe += 1
+      elif entry.IsSwfk:
+        self.hasSwfk = True
+      self.entries.append(entry)
+
+    nextSweId = self.numberOfEntries
+    self.entries = sorted(self.entries, key=lambda swe: swe.sweId)
+
+  @property
+  def HasSwfk(self):
+    return self.hasSwfk
+
+  @property
+  def NumberOfEntries(self):
+    return self.numberOfEntries
+
+  @property
+  def NumberOfBootSwe(self):
+    return self.numberOfBootSwe
+
+  @property
+  def NumberOfApplSwe(self):
+    return self.numberOfEntries - self.numberOfBootSwe
+
+  @property
+  def Entries(self):
+    return self.entries
+
+class HweConfigSetTable:
+  def __init__(self, path):
+    self.numberOfEntries = count(path);
+    self.entries = [];
+
+    cnt = 0;
+    for p in get_xpaths(path):
+      with element_path(p):
+        entry = shortname()
+        self.entries.append(entry)
+        cnt += 1
+
+    self.entries.sort();
+
+  def getIndexOfConfigSet(self, name):
+    return self.entries.index(name);
+
+}%

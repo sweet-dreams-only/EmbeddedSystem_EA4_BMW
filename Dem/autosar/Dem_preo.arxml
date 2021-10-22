@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-0-3.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://autosar.org/schema/r4.0">
+	<AR-PACKAGES>
+		<AR-PACKAGE UUID="f3031cc8-f367-42cb-b2b2-331e67ef4724">
+			<SHORT-NAME>MICROSAR</SHORT-NAME>
+			<ELEMENTS>
+				<ECUC-MODULE-CONFIGURATION-VALUES UUID="9485547c-9682-4889-b8ac-4a6fbe6242b8">
+					<SHORT-NAME>Dem_Pre</SHORT-NAME>
+					<!--SREQ00026990-->
+					<!-- visbch: parameter /MICROSAR/Dem/DemGeneral/DemClearDTCBehavior already preconfigured within Dem_Pre.arxml to DEM_CLRRESP_NONVOLATILE_FINISH provided by Dem module itself.
+					Requested by Mr Rohr from BMW via Email "DEM Parameter DemClearDTCBehavior" at 2013-11-07 -->
+					<DEFINITION-REF DEST="ECUC-MODULE-DEF">/MICROSAR/Dem</DEFINITION-REF>
+					<CONTAINERS>
+						<!--						<ECUC-CONTAINER-VALUE UUID="eb9d793f-ab53-434c-98df-f1ae537f43a7">
+							<SHORT-NAME>DemGeneral</SHORT-NAME>
+							<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Dem/DemGeneral</DEFINITION-REF>
+							<PARAMETER-VALUES>
+								<ECUC-TEXTUAL-PARAM-VALUE>
+									<DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/MICROSAR/Dem/DemGeneral/DemClearDTCBehavior</DEFINITION-REF>
+									<VALUE>DEM_CLRRESP_NONVOLATILE_FINISH</VALUE>
+								</ECUC-TEXTUAL-PARAM-VALUE>
+							</PARAMETER-VALUES>
+						</ECUC-CONTAINER-VALUE>-->
+					</CONTAINERS>
+				</ECUC-MODULE-CONFIGURATION-VALUES>
+				<ECUC-MODULE-CONFIGURATION-VALUES UUID="db12198e-f190-4b21-9058-803c8e7759f7">
+					<SHORT-NAME>Dem_Rec</SHORT-NAME>
+					<DEFINITION-REF DEST="ECUC-MODULE-DEF">/MICROSAR/Dem</DEFINITION-REF>
+					<CONTAINERS />
+				</ECUC-MODULE-CONFIGURATION-VALUES>
+			</ELEMENTS>
+		</AR-PACKAGE>
+	</AR-PACKAGES>
+</AUTOSAR>

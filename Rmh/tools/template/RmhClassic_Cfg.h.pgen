@@ -1,0 +1,181 @@
+/**
+*  \file
+*
+*  \brief
+*
+*  Configuration for RmhClassic Module
+*
+*  \project     BMW Platform Software
+*
+*  \copyright   BMW AG 2017
+*
+*  \version     5.0.0
+*
+*  \remarks     File is generated with PAGe
+*
+*/
+
+/*------------------------------------------------------------------------------
+*
+*  THIS FILE WAS GENERATED. DO NOT MODIFY!
+*
+*  GENERATOR       : %{= generation_tool() }% %{= generation_version_info() }%
+*
+*  GENERATION TIME : %{= generation_timestamp() }%
+*
+------------------------------------------------------------------------------*/
+
+#ifndef RMH_CLASSIC_CFG_H
+#define RMH_CLASSIC_CFG_H
+
+%{#
+  triggerMode = "";
+  into(container("RmhClassic/RmhGeneral"));
+
+  RmhDetUsage = value(ref("RmhDevErrorDetect"))
+
+  isModeIpduSend = exists(ref('RmhPduTriggerMode/RMH_MODE_TRIGGER_IPDU_SEND'))
+  isModeZeroLengthSignal = exists(ref('RmhPduTriggerMode/RMH_MODE_ZERO_LENGTH_TRIGGER_SIGNAL'))
+  if ( (isModeIpduSend == True) and (isModeZeroLengthSignal == True) ):
+    logger.error('RMH_MODE_TRIGGER_IPDU_SEND and RMH_MODE_ZERO_LENGTH_TRIGGER_SIGNAL are BOTH configured')
+
+  if ( (isModeIpduSend == False) and (isModeZeroLengthSignal == False) ):
+    logger.error('Neither RMH_MODE_TRIGGER_IPDU_SEND nor RMH_MODE_ZERO_LENGTH_TRIGGER_SIGNAL are configured')
+  if (isModeIpduSend == True):
+    cddInfix = "Cdd_"
+    triggerMode = "RMH_MODE_TRIGGER_IPDU_SEND"
+  else:
+    cddInfix = ""
+    triggerMode = "RMH_MODE_ZERO_LENGTH_TRIGGER_SIGNAL"
+}%
+/*------------------------------------------------------------------------------
+                      Include Section
+------------------------------------------------------------------------------*/
+
+#include <RmhClassic_Version.h>             /* Own version header file */
+%{: if (isModeIpduSend == True)}%
+#include <ComStack_Types.h>
+%{: else}%
+#include <Std_Types.h>               /* AUTOSAR standard types */
+%{:}%
+
+/*------------------------------------------------------------------------------
+                      Macros
+------------------------------------------------------------------------------*/
+
+/* check version of the module */
+#if (!RmhClassic_CHECK_VERSION(5,0,0))
+#error "Version of RmhClassic_Cfg.h does not match the version of the module!"
+#endif
+
+#if (defined RMH_MODE_TRIGGER_IPDU_SEND) /* to prevent double declaration */
+#error "RmhClassic_Cfg.h: RMH_MODE_TRIGGER_IPDU_SEND already defined"
+#endif
+
+
+/**
+ * \brief Macro definition of mode RMH_MODE_TRIGGER_IPDU_SEND
+ */
+#define RMH_MODE_TRIGGER_IPDU_SEND               0U
+
+#if (defined RMH_MODE_ZERO_LENGTH_TRIGGER_SIGNAL)
+#error "RmhClassic_Cfg.h: RMH_MODE_ZERO_LENGTH_TRIGGER_SIGNAL already defined"
+#endif
+
+/**
+ * \brief Macro definition of mode RMH_MODE_ZERO_LENGTH_TRIGGER_SIGNAL
+ */
+#define RMH_MODE_ZERO_LENGTH_TRIGGER_SIGNAL      1U
+
+#if (defined RMH_DEV_ERROR_DETECT)
+#error "RmhClassic_Cfg.h: RMH_DEV_ERROR_DETECT already defined"
+#endif
+
+
+/**
+ * \brief Det reporting switch
+ *
+ * Switch, indicating if development error detection is activated for Rmh
+ *
+ * \remarks This macro depends on configuration parameter RmhDevErrorDetect
+ *
+ */
+#define RMH_DEV_ERROR_DETECT          STD_%{? RmhDetUsage:ON:OFF}%
+
+
+#if (defined RMH_PDU_TRIGGER_MODE)
+#error "RmhClassic_Cfg.h: RMH_PDU_TRIGGER_MODE already defined"
+#endif
+
+/**
+ *  \brief RMH_PDU_TRIGGER_MODE
+ *
+ * Switch, indicating the configured trigger mode. (TIS or ZLTS)
+ *
+ * \remarks This macro depends on configuration parameter RmhPduTriggerMode
+ *
+ */
+#define RMH_PDU_TRIGGER_MODE  %{= triggerMode}%
+
+%{#
+mappingElementCount = count(ref("RmhPduTriggerMode/"+triggerMode+"/RmhRequestPduMapping"))
+}%
+#if (defined RMH_MAPPED_ELEM_COUNT)
+#error "RmhClassic_Cfg.h: RMH_MAPPED_ELEM_COUNT already defined"
+#endif
+
+/**
+ * \brief RMH_MAPPED_ELEM_COUNT
+ *
+ * Macro definition with count of all mapped elements in Rmh configuration.
+ *
+ * \remarks This macro depends on configuration parameter RmhRequestPduMapping
+ *
+ */
+#define RMH_MAPPED_ELEM_COUNT     %{= mappingElementCount}%U
+
+/*------------------------------------------------------------------------------
+                      Data Types
+------------------------------------------------------------------------------*/
+/**
+ * \brief struct Rmh_RMComIPduMappingType
+ *
+ *  Note: The member comPduId is only available in TIS mode. If ZLTS mode is
+ *        used the member dummyTriggerFuncPtr is used.
+ *
+ * This structure contains the mapping between a request message id and his
+ * corresponding Com I-PDU(RMH_MODE_TRIGGER_IPDU_SEND) respectively S/R provide
+ * port (RMH_MODE_ZERO_LENGTH_TRIGGER_SIGNAL)
+ *
+ */
+typedef struct
+{
+%{: if (triggerMode == "RMH_MODE_TRIGGER_IPDU_SEND") }%
+  /** member stores the corresponding Com I-PDU */
+  PduIdType comPduId;
+%{: else }%
+  /**< member stores the corresponding trigger function */
+  P2FUNC(Std_ReturnType, TYPEDEF, dummyTriggerFuncPtr) (uint8 data);
+%{:}%
+  /** member stores the requestable message Id */
+  uint16 requestedMsgId;
+} Rmh_RMComIPduMappingType;
+
+/*------------------------------------------------------------------------------
+                      Global Variables
+------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------
+                      Global Constants
+------------------------------------------------------------------------------*/
+#define Rmh_%{= cddInfix}%START_SEC_CONST_UNSPECIFIED
+#include "RmhClassic_%{= cddInfix }%MemMap.h"
+
+extern CONST(Rmh_RMComIPduMappingType, Rmh_%{= cddInfix }%CONST) Rmh_RMComIPduMapping[RMH_MAPPED_ELEM_COUNT];
+
+#define Rmh_%{= cddInfix}%STOP_SEC_CONST_UNSPECIFIED
+#include "RmhClassic_%{= cddInfix }%MemMap.h"
+
+#endif /* RMH_CLASSIC_CFG_H */
+
+/*--- End of file ------------------------------------------------------------*/

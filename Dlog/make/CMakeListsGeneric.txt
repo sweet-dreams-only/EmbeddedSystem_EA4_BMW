@@ -1,0 +1,32 @@
+#
+# Example CMakeLists.txt for BAC Module
+#
+
+cmake_minimum_required(VERSION 3.1)
+SET(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
+LIST(INSERT CMAKE_MODULE_PATH 0 "$ENV{BPS_CMAKE_MODULE_PATH}")
+
+project(Dlog.generic C CXX)
+include (BAC)
+
+bps_module(
+    Dlog
+
+    SRC
+      Dlog_SvkGen.c
+      Dlog_SweGen.c
+    GENERATE/VERIFY
+      Dlog.autoverify.pgen
+      Dlog.verify.pgen
+    GENERATE/INCLUDE
+      Dlog_Cfg.h.pgen
+      Dlog_Version.h.pgen
+    GENERATE/INPUT
+      Dlog
+    CFGDESC
+      Dlog_paramdef.arxml
+    DOC
+    SWSCONFIG
+      SWS
+)
+

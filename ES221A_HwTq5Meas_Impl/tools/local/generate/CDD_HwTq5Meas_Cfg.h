@@ -1,0 +1,12 @@
+/* Header file for contract folder of ES221A */
+
+#ifndef CDD_HWTQ5MEAS_CFG_H	/* Multiple include preventer */
+#define CDD_HWTQ5MEAS_CFG_H
+
+#include "Rte_CDD_HwTq5Meas.h"
+
+#define HWTQ5MEAS_HWTQ5TRIMNOTPRFMMFGNTCNR_CNT_ENUM			NTCNR_0X1E0
+#define HWTQ5MEAS_HWTQ5SCANOTPRFMMFGNTCNR_CNT_ENUM			NTCNR_0X1E0 
+#define HWTQ5MEAS_HWTQ5RNGCHKPRTCLNTCNR_CNT_ENUM			NTCNR_0X073 
+
+#endif

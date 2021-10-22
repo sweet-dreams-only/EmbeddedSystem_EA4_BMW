@@ -1,0 +1,32 @@
+#
+# Example CMakeLists.txt for BAC Module
+#
+
+cmake_minimum_required(VERSION 3.1)
+SET(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
+LIST(INSERT CMAKE_MODULE_PATH 0 "$ENV{BPS_CMAKE_MODULE_PATH}")
+
+project(Crypto.classic C CXX)
+include (BAC)
+
+bps_module_adapter(
+    Crypto
+      classic
+      SRC
+
+      GENERATE/INCLUDE
+        Crypto_JumpTable.h.pgen
+        CryptoClassic_Version.h.pgen
+        Crypto_CertificateManagement.h.pgen
+      GENERATE/INPUT
+        Crypto
+        CryptoClassic
+      GENERATE/SRC
+        Crypto_JumpTable.c.pgen
+        Crypto_CertificateManagement.c.pgen
+
+      DOC
+        intmanual
+      CFGDESC
+        CryptoClassic_paramdef.arxml
+)

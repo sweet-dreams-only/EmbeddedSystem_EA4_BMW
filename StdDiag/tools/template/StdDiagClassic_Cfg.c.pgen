@@ -1,0 +1,216 @@
+/**
+*  \file
+*
+*  \brief       BMW SWC StdDiag
+*
+*  This file is the configuration source file of the module StdDiag
+*  for usage in the BMW AUTOSAR Core.
+*
+*  \project     BMW Platform Software
+*
+*  \copyright   BMW AG 2015 - 2017
+*
+*  \version     5.4.0
+*
+*  \remarks     The StdDiag module is responsible for BMW specific session
+*               handling and handles a number of BMW specific diagnostic requests.
+*
+*/
+
+/*------------------------------------------------------------------------------
+*
+*  THIS FILE WAS GENERATED. DO NOT MODIFY!
+*
+*  GENERATOR       : %{= generation_tool() }% %{= generation_version_info() }%
+*
+*  GENERATION TIME : %{= generation_timestamp() }%
+*
+------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------
+                      MISRA-Deviations
+------------------------------------------------------------------------------*/
+/*
+   MISRA-C:2004 Rule 19.1: including StdDiag_MemMap.h is necessary throughout
+   the file according to memory abstraction. See PRQA 5087.
+*/
+
+/*------------------------------------------------------------------------------
+                      Include Section
+------------------------------------------------------------------------------*/
+
+#include "StdDiag_IDRLAdapter.h"
+#include "StdDiag_AdtTypes.h"
+#include "StdDiagClassic_Cfg.h"
+#include "StdDiagClassic_Version.h"
+#include "StdDiag.h"
+#include "Rte_StdDiag.h"
+
+/*------------------------------------------------------------------------------
+                      Macros
+-------------------------------------------------------------------------------*/
+
+/* check version of the module */
+#if (!StdDiagClassic_CHECK_VERSION(5,4,0))
+   #error "Version of StdDiagClassic_Cfg.c does not match the version of the module!"
+#endif
+
+%{#
+into(module("StdDiag"))
+StdDiagIDRLSupport = exists(rel('StdDiagProvideIDRL'))
+logger.info("StdDiagIDRLSupport: {0} ".format(StdDiagIDRLSupport))
+leave()
+}%\
+%{: if(StdDiagIDRLSupport) }%\
+%{#
+# dictionary( key = DIDValue, value = dictionary( key = DIDName, value = IDRLClient))
+IDRLTable = {}
+# list of IDRLClients
+IDRLClients = []
+}%\
+%{@ ref("IDRLClient") }%\
+%{#
+clientName = shortname()
+IDRLClients.append(clientName)
+}%\
+%{@ ref("IndivData") }%\
+%{#
+IDRLTable[value(ref("DIDValue"))] = {}
+IDRLTable[value(ref("DIDValue"))][shortname()] = clientName
+}%\
+%{@}%
+%{@}%
+%{#
+
+foundDIDs = IDRLTable.keys()
+numberDIDs = len(IDRLTable)
+numberClients = len(IDRLClients)
+
+logger.info("Found IDRL DIDs:")
+logger.info("Number of IDRL DIDs: {0}".format(numberDIDs))
+logger.info("Number of IDRL Clients: {0}".format(numberClients))
+for thisDIDValue in foundDIDs:
+  foundDIDNames = IDRLTable[thisDIDValue].keys()
+  for thisDIDName in foundDIDNames:
+    logger.info("DIDValue: 0x{0:X}, DIDName: {1}, IDRLClient: {2} ".format(thisDIDValue, thisDIDName, IDRLTable[thisDIDValue][thisDIDName]))
+
+}%\
+%{:}%\
+
+%{#
+into(module("StdDiagClassic"))
+StdDiagADTSupport = exists(rel("StdDiagApplicationDataTransfer"))
+leave()
+}%\
+%{: if(StdDiagADTSupport) }%\
+%{+ StdDiag_GetAdtConfig.pgen }%\
+%{:}%\
+
+/*------------------------------------------------------------------------------
+                      Constants
+------------------------------------------------------------------------------*/
+/* PRQA S 5087 2 */
+#define StdDiag_START_SEC_CONST_UNSPECIFIED
+#include "StdDiag_MemMap.h"
+
+%{: if(StdDiagADTSupport) }%\
+const StdDiag_MemObjIdType StdDiag_MemoryObjectIdArray[STDDIAG_NUMBER_MEMORY_OBJECT_IDENTIFIER] = {
+%{#
+countObj = 0
+countByte = 0
+}%\
+%{@ object in ADTList }%\
+%{# countObj = countObj + 1}%\
+    /* %{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}% */
+    { %{=('0x{obj:04X}').format(obj=object[0])}%, %{=('0x{obj:04X}').format(obj=object[2])}%, %{=('0x{obj:X}').format(obj=object[5])}%,
+      { %{#}%\
+%{@ byte in object[6] }%\
+%{# countByte = countByte + 1}%\
+%{= ('0x{obj:02X}').format(obj=byte)}%%{? (countByte != object[5]):, : }\n}%\
+%{@}%
+%{# countByte = 0}%
+    }%{? (countObj != numberMemObjIDs):,:}%
+%{@}%\
+};
+
+const StdDiag_AdtFctPtrListType StdDiag_AdtFctPtrArray[STDDIAG_NUMBER_MEMORY_OBJECT_IDENTIFIER] = {
+%{#
+countObj = 0
+}%\
+%{@ object in ADTList }%\
+%{# countObj = countObj + 1}%\
+    {
+        Rte_Call_Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%_CancelOperation,
+        Rte_Call_Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%_UploadPreprocess,
+        Rte_Call_Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%_UploadPostprocess,
+        Rte_Call_Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%_DownloadPreprocess,
+        Rte_Call_Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%_DownloadPostprocess,
+        Rte_Call_Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%_Upload,
+        Rte_Call_Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%_Download,
+        Rte_Call_Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%_RequestUpload,
+        Rte_Call_Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%_RequestDownload,
+        Rte_Call_Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%_RequestUploadExit,
+        Rte_Call_Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%_RequestDownloadExit
+    }%{? (countObj != numberMemObjIDs):,:}%
+%{@}%\
+};
+
+%{:}%\
+
+%{: if(StdDiagIDRLSupport) }%\
+
+#if( STDDIAG_IDRL_SUPPORT == STD_ON )
+#if (STDDIAG_INDIV_DID_NUMBER > 0)
+/**
+ * \brief the table of the function pointers for reading the individual data
+ */
+const StdDiag_ReadIndivDataType StdDiag_ReadIndivDataAccess[STDDIAG_INDIV_DID_NUMBER] =
+{
+%{# counter = 1 }%\
+%{@ thisDIDValue in foundDIDs }%\
+%{# foundDIDNames = IDRLTable[thisDIDValue].keys() }%\
+%{@ thisDIDName in foundDIDNames }%\
+%{# thisClient = IDRLTable[thisDIDValue][thisDIDName] }%\
+   {%{="0x{0:X}".format(thisDIDValue)}%u, &Rte_Call_IdrlDataSwc%{= thisClient }%%{= thisDIDName }%_ReadIndivData, &Rte_Result_IdrlDataSwc%{= thisClient }%%{= thisDIDName }%_ReadIndivData}%{?(counter == numberDIDs): :,}%
+%{# counter += 1 }%\
+%{@}%
+%{@}%
+};
+
+/**
+ * \brief the table of the function pointers for writing the individual data
+ */
+const StdDiag_WriteIndivDataType StdDiag_WriteIndivDataAccess[STDDIAG_INDIV_DID_NUMBER] =
+{
+%{# counter = 1 }%\
+%{@ thisDIDValue in foundDIDs }%\
+%{# foundDIDNames = IDRLTable[thisDIDValue].keys() }%\
+%{@ thisDIDName in foundDIDNames }%\
+%{# thisClient = IDRLTable[thisDIDValue][thisDIDName] }%\
+   {%{="0x{0:X}".format(thisDIDValue)}%u, &Rte_Call_IdrlDataSwc%{= thisClient }%%{= thisDIDName }%_WriteIndivData, &Rte_Result_IdrlDataSwc%{= thisClient }%%{= thisDIDName }%_WriteIndivData}%{?(counter == numberDIDs): :,}%
+%{# counter += 1 }%\
+%{@}%
+%{@}%
+};
+#endif /* STDDIAG_INDIV_DID_NUMBER > 0 */
+
+#if (STDDIAG_IDRL_CLIENT_NUMBER > 0)
+/**
+ * \brief the table of the function pointers for resetting the individual data
+ */
+const StdDiag_ResetIndivDataType StdDiag_ResetIndivDataAccess[STDDIAG_IDRL_CLIENT_NUMBER] =
+{
+%{# counter = 1 }%\
+%{@ thisClient in IDRLClients }%\
+   {&Rte_Call_ResetIdrlData%{= thisClient }%_ResetIndivData, &Rte_Result_ResetIdrlData%{= thisClient }%_ResetIndivData}%{?(counter == numberClients): :,}%
+%{# counter += 1 }%\
+%{@}%
+};
+#endif /* STDDIAG_IDRL_CLIENT_NUMBER > 0 */
+#endif /* STDDIAG_IDRL_SUPPORT == STD_ON */
+%{:}%\
+
+/* PRQA S 5087 2 */
+#define StdDiag_STOP_SEC_CONST_UNSPECIFIED
+#include "StdDiag_MemMap.h"
+

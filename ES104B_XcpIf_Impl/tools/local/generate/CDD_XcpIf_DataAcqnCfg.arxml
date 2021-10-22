@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AUTOSAR xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-0-3.xsd" xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <AR-PACKAGES>
+        <AR-PACKAGE>
+            <SHORT-NAME>ComponentTypes</SHORT-NAME>
+                <ELEMENTS>
+                    <COMPLEX-DEVICE-DRIVER-SW-COMPONENT-TYPE UUID="">
+                        <SHORT-NAME>CDD_XcpIfXcpEveCh2MilliSec</SHORT-NAME>
+                        <INTERNAL-BEHAVIORS>
+                            <SWC-INTERNAL-BEHAVIOR UUID="">
+                                <SHORT-NAME>CDD_XcpIfXcpEveCh2MilliSec_InternalBehavior</SHORT-NAME>
+                                <EVENTS>
+                                    <TIMING-EVENT UUID="">
+                                        <SHORT-NAME>TMT_CDD_XcpIfXcpEveCh2MilliSecPer1</SHORT-NAME>
+                                        <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/ComponentTypes/CDD_XcpIfXcpEveCh2MilliSec/CDD_XcpIfXcpEveCh2MilliSec_InternalBehavior/CDD_XcpIfXcpEveCh2MilliSecPer1</START-ON-EVENT-REF>
+                                        <PERIOD>0.002</PERIOD>
+                                    </TIMING-EVENT>
+                                </EVENTS>
+                                <RUNNABLES>
+                                    <RUNNABLE-ENTITY UUID="">
+                                        <SHORT-NAME>CDD_XcpIfXcpEveCh2MilliSecPer1</SHORT-NAME>
+                                        <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                                        <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                                        <DATA-RECEIVE-POINT-BY-ARGUMENTS></DATA-RECEIVE-POINT-BY-ARGUMENTS>
+                                        <SYMBOL>CDD_XcpIfXcpEveCh2MilliSecPer1</SYMBOL>
+                                    </RUNNABLE-ENTITY>
+                                </RUNNABLES>
+                            </SWC-INTERNAL-BEHAVIOR>
+                        </INTERNAL-BEHAVIORS>
+                    </COMPLEX-DEVICE-DRIVER-SW-COMPONENT-TYPE>
+                    <SWC-IMPLEMENTATION UUID="">
+                        <SHORT-NAME>CDD_XcpIfXcpEveCh2MilliSec_Implementation</SHORT-NAME>
+                        <CODE-DESCRIPTORS>
+                            <CODE>
+                                <SHORT-NAME>Default</SHORT-NAME>
+                                <ARTIFACT-DESCRIPTORS>
+                                    <AUTOSAR-ENGINEERING-OBJECT>
+                                    <SHORT-LABEL>Default</SHORT-LABEL>
+                                    <CATEGORY>SWSRC</CATEGORY>
+                                    </AUTOSAR-ENGINEERING-OBJECT>
+                                </ARTIFACT-DESCRIPTORS>
+                            </CODE>
+                        </CODE-DESCRIPTORS>
+                        <BEHAVIOR-REF DEST="SWC-INTERNAL-BEHAVIOR">/ComponentTypes/CDD_XcpIfXcpEveCh2MilliSec/CDD_XcpIfXcpEveCh2MilliSec_InternalBehavior</BEHAVIOR-REF>
+                    </SWC-IMPLEMENTATION>
+                </ELEMENTS>
+        </AR-PACKAGE>
+    </AR-PACKAGES>
+</AUTOSAR>

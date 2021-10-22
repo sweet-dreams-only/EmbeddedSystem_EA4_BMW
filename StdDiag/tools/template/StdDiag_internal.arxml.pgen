@@ -1,0 +1,1813 @@
+%{#\
+into(module("StdDiagClassic"))
+with(container("StdDiagGeneral")):
+  StdDiagClearSecErrorMemorySupport = value(ref("StdDiagClearSecondaryErrorMemory"))
+
+StdDiagDLTSupport = exists(rel('StdDiagProvideDLTSupport'))
+StdDiagADTSupport = exists(rel('StdDiagApplicationDataTransfer'))
+leave()
+
+into(module("StdDiag"))
+with(container("StdDiagGeneral")):
+  StdDiagUserActiveSessionState = value(ref("StdDiagUserActiveSessionState"))
+  StdDiagUsrEstablishIntrinsicSafety = value(ref("StdDiagUserEstablishIntrinsicSafety"))
+  StdDiagDetUsage = value(ref("StdDiagDevErrorDetect"))
+
+StdDiagUsrProgPrecChk = exists(rel('StdDiagUserProgrammingPreconditionsCheck'))
+StdDiagIDRLSupport = exists(rel('StdDiagProvideIDRL'))
+leave()
+}%\
+%{: if(StdDiagIDRLSupport) }%\
+%{+ StdDiag_GetIdrlConfig.pgen }%\
+%{:}%\
+%{: if(StdDiagADTSupport) }%\
+%{+ StdDiag_GetAdtConfig.pgen }%\
+%{:}%\
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+*  \file
+*
+*  \brief       BMW SWC StdDiag
+*
+*  This file is the internal part of the software component description of the module StdDiag
+*  for usage in the BMW AUTOSAR Core.
+*
+*  \project     BMW Platform Software
+*
+*  \copyright   BMW AG 2015 - 2017
+*
+*  \version     5.4.0
+*
+*/
+
+/*
+*
+*  THIS FILE WAS GENERATED. DO NOT MODIFY!
+*
+*  GENERATOR       : %{= generation_tool() }% %{= generation_version_info() }%
+*
+*  GENERATION TIME : %{= generation_timestamp() }%
+*
+*/
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-3-0_STRICT_COMPACT.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>BMW</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>Platform</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE>
+              <SHORT-NAME>StdDiag</SHORT-NAME>
+              <AR-PACKAGES>
+                <AR-PACKAGE>
+                  <SHORT-NAME>SwcImplementations</SHORT-NAME>
+                  <ELEMENTS>
+                    <SWC-IMPLEMENTATION>
+                      <SHORT-NAME>Impl_StdDiag</SHORT-NAME>
+                      <CODE-DESCRIPTORS>
+                        <CODE>
+                          <SHORT-NAME>Code1</SHORT-NAME>
+                          <ARTIFACT-DESCRIPTORS>
+                            <AUTOSAR-ENGINEERING-OBJECT>
+                              <SHORT-LABEL>-</SHORT-LABEL>
+                              <CATEGORY>-</CATEGORY>
+                            </AUTOSAR-ENGINEERING-OBJECT>
+                          </ARTIFACT-DESCRIPTORS>
+                        </CODE>
+                      </CODE-DESCRIPTORS>
+                      <PROGRAMMING-LANGUAGE>C</PROGRAMMING-LANGUAGE>
+                      <RESOURCE-CONSUMPTION>
+                        <SHORT-NAME>ResConsumption1</SHORT-NAME>
+                      </RESOURCE-CONSUMPTION>
+                      <SW-VERSION>5.4.0</SW-VERSION>
+                      <SWC-BSW-MAPPING-REF DEST="SWC-BSW-MAPPING">/BMW/Platform/StdDiag/SwcBswMappings/StdDiagSwcBswMapping</SWC-BSW-MAPPING-REF>
+                      <VENDOR-ID>5</VENDOR-ID>
+                      <BEHAVIOR-REF DEST="SWC-INTERNAL-BEHAVIOR">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag</BEHAVIOR-REF>
+                    </SWC-IMPLEMENTATION>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+                <AR-PACKAGE>
+                  <SHORT-NAME>SwComponentTypes</SHORT-NAME>
+                  <ELEMENTS>
+                    <APPLICATION-SW-COMPONENT-TYPE>
+                      <SHORT-NAME>StdDiag</SHORT-NAME>
+                      <PORTS>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>ActiveSessionState</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Dcm/PortInterfaces/DataServices_ActiveSessionState</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>SgbdIndex</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Dcm/PortInterfaces/DataServices_SgbdIndex</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>DiagCommLoopback</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Dcm/PortInterfaces/RoutineServices_DiagCommLoopback</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>CheckProgrammingPreconditions</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Dcm/PortInterfaces/RoutineServices_CheckProgrammingPreconditions</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>ServiceRequestManufacturerNotificationPort</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Dcm/PortInterfaces/ServiceRequestNotification</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+%{: if(StdDiagADTSupport) }%\
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>UpDownloadPrePostProcessingPort</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Dcm/PortInterfaces/RoutineServices_UpDownloadPrePostProcessing</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+%{@ object in ADTList }%\
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/PortInterfaces/ApplicationDataTransfer</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%_Cbk</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/PortInterfaces/ApplicationDataTransferCbk</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+%{@}%\
+%{:}%\
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>AllowOpModeChangePort</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Omc/PortInterfaces/OmcModesCallouts</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>AllowOpModeChangeCbkPort</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Omc/PortInterfaces/OmcModesCalloutsResult</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+%{: if(StdDiagClearSecErrorMemorySupport) }%\
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>ClearSecondaryErrorMemory</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Dcm/PortInterfaces/RoutineServices_ClearDTCSecondaryErrorMemory</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+%{:}%\
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>ComControlModeRequestPort</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/BMW/Platform/StdDiag/PortInterfaces/ComControlModeRequestInterface</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>LifeCycle</SHORT-NAME>
+                          <PROVIDED-COM-SPECS>
+                             <MODE-SWITCH-SENDER-COM-SPEC>
+                                <ENHANCED-MODE-API>true</ENHANCED-MODE-API>
+                                <MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/StdDiag/PortInterfaces/ILifeCycle/Mode</MODE-GROUP-REF>
+                                <QUEUE-LENGTH>2</QUEUE-LENGTH>
+                             </MODE-SWITCH-SENDER-COM-SPEC>
+                          </PROVIDED-COM-SPECS>
+                          <PROVIDED-INTERFACE-TREF DEST="MODE-SWITCH-INTERFACE">/BMW/Platform/StdDiag/PortInterfaces/ILifeCycle</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+%{: if(StdDiagIDRLSupport) }%\
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>IdrlDidTable</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Dcm/PortInterfaces/DataServices_DIDTable</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+%{@ ref("IDRLClient/IndivData") }%\
+%{# thisDID = shortname('.') }%\
+%{# thisClient = shortname('..') }%\
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>IdrlData%{= thisClient }%%{= thisDID }%</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Dcm/PortInterfaces/DataServices_IndivData%{= thisDID }%</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+%{@}%\
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>ResetIdrlData</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Dcm/PortInterfaces/RoutineServices_ResetIndivData</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+%{:}%\
+%{: if(StdDiagDLTSupport) }%\
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>DltReadLogChannelNames</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Dcm/PortInterfaces/DataServices_DltReadLogChannelNames</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>DltSetLoglevel</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Dcm/PortInterfaces/RoutineServices_DltSetLoglevel</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>DltResetToDefault</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Dcm/PortInterfaces/RoutineServices_DltResetToDefault</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>DltSetMessagefilteringstate</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Dcm/PortInterfaces/RoutineServices_DltSetMessagefilteringstate</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>DltSetLogchannelThreshold</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Dcm/PortInterfaces/RoutineServices_DltSetLogchannelThreshold</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>DltStoreConfiguration</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Dcm/PortInterfaces/RoutineServices_DltStoreConfiguration</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>DltSetTracestate</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Dcm/PortInterfaces/RoutineServices_DltSetTracestate</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>DltSetDefaultLoglevel</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Dcm/PortInterfaces/RoutineServices_DltSetDefaultLoglevel</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>DltSetDefaultTracestate</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Dcm/PortInterfaces/RoutineServices_DltSetDefaultTracestate</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>DLTServices</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Dlt/PortInterfaces/DLTService</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+%{:}%\
+
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>DCMServicesPort</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Dcm/PortInterfaces/StdDiagDCMServices</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>EnableConditionPort</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Dem/PortInterfaces/EnableCondition</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>RoeStatePort</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Darh/PortInterfaces/RoeStateInterface</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+%{: if(StdDiagDetUsage) }%\
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>ReportErrorPort</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Det/PortInterfaces/DETService</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+%{:}%\
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>LifeCycleRequest</SHORT-NAME>
+                          <REQUIRED-COM-SPECS>
+                            <NONQUEUED-RECEIVER-COM-SPEC>
+                              <DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/StdDiag/PortInterfaces/ILifeCycleRequest/requestMode</DATA-ELEMENT-REF>
+                              <HANDLE-OUT-OF-RANGE>NONE</HANDLE-OUT-OF-RANGE>
+                              <USES-END-TO-END-PROTECTION>false</USES-END-TO-END-PROTECTION>
+                              <ALIVE-TIMEOUT>0.0</ALIVE-TIMEOUT>
+                              <ENABLE-UPDATE>false</ENABLE-UPDATE>
+                              <HANDLE-NEVER-RECEIVED>false</HANDLE-NEVER-RECEIVED>
+                              <HANDLE-TIMEOUT-TYPE>NONE</HANDLE-TIMEOUT-TYPE>
+                              <INIT-VALUE>
+                                <NUMERICAL-VALUE-SPECIFICATION>
+                                  <SHORT-LABEL>StdDiag_requestModeInitialValue</SHORT-LABEL>
+                                  <VALUE>2</VALUE>
+                                </NUMERICAL-VALUE-SPECIFICATION>
+                              </INIT-VALUE>
+                            </NONQUEUED-RECEIVER-COM-SPEC>
+                          </REQUIRED-COM-SPECS>
+                          <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/BMW/Platform/StdDiag/PortInterfaces/ILifeCycleRequest</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>SessionChangeIndicationPort</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="MODE-SWITCH-INTERFACE">/BMW/Platform/StdDiag/PortInterfaces/SessionChangeIndicationInterface</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>OperatingModeControlPort</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="MODE-SWITCH-INTERFACE">/BMW/Platform/StdDiag/Omc/PortInterfaces/OperatingModeNotification</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>ExtendedOperatingModeControlPort</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="MODE-SWITCH-INTERFACE">/BMW/Platform/StdDiag/Omc/PortInterfaces/ExtendedOperatingModeNotification</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>VehicleStatePort</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="MODE-SWITCH-INTERFACE">/BMW/Platform/StdDiag/Stm/PortInterfaces/VehicleStateModeInterface</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>ComControlNormalModeAccessPort</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="MODE-SWITCH-INTERFACE">/BMW/Platform/StdDiag/PortInterfaces/ComControlNormalNotificationInterface</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+%{: if(StdDiagUsrEstablishIntrinsicSafety) }%\
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>UserEstablishIntrinsicSafetyPort</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/PortInterfaces/UserEstablishIntrinsicSafety</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>UserEstablishIntrinsicSafetyCbkPort</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/PortInterfaces/UserEstablishIntrinsicSafetyCbk</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+%{:}%\
+%{: if(StdDiagUsrProgPrecChk) }%\
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>UserProgrammingPreconditionsCheckPort</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/PortInterfaces/UserProgrammingPreconditionsCheck</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+%{:}%\
+%{: if(StdDiagUserActiveSessionState) }%\
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>UserActiveSessionStatePort</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/PortInterfaces/UserActiveSessionState</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+%{:}%\
+%{: if(StdDiagClearSecErrorMemorySupport) }%\
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>ClearDTCPort</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/Dem/PortInterfaces/CddIf</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+%{:}%\
+
+%{: if(StdDiagIDRLSupport) }%\
+%{@ ref("IDRLClient/IndivData") }%\
+%{# thisDID = shortname('.') }%\
+%{# thisClient = shortname('..') }%\
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>IdrlDataSwc%{= thisClient }%%{= thisDID }%</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/PortInterfaces/OperateIndivData%{= thisDID }%</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+%{@}%\
+%{@ ref("IDRLClient") }%\
+%{# thisClient = shortname('.') }%\
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>ResetIdrlData%{= thisClient }%</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/StdDiag/PortInterfaces/ResetIndivData</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+%{@}%\
+%{:}%\
+
+                      </PORTS>
+                      <INTERNAL-BEHAVIORS>
+                        <SWC-INTERNAL-BEHAVIOR>
+                          <SHORT-NAME>IntBhv_StdDiag</SHORT-NAME>
+                          <DATA-TYPE-MAPPING-REFS>
+                            <DATA-TYPE-MAPPING-REF DEST="DATA-TYPE-MAPPING-SET">/BMW/Platform/StdDiag/DataTypeMappingSets/StdDiag_DataTypeMappingSet</DATA-TYPE-MAPPING-REF>
+                            <DATA-TYPE-MAPPING-REF DEST="DATA-TYPE-MAPPING-SET">/BMW/Platform/StdDiag/Omc/DataTypeMappingSets/Omc_DataTypeMappingSets</DATA-TYPE-MAPPING-REF>
+                            <DATA-TYPE-MAPPING-REF DEST="DATA-TYPE-MAPPING-SET">/BMW/Platform/StdDiag/Stm/DataTypeMappingSets/Stm_VehicleStatModeRequestTypeMap</DATA-TYPE-MAPPING-REF>
+                          </DATA-TYPE-MAPPING-REFS>
+                          <EVENTS>
+                            <SWC-MODE-SWITCH-EVENT>
+                              <SHORT-NAME>Event_SessionChange_DefaultSession</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/SessionChange_DefaultSession</START-ON-EVENT-REF>
+                              <ACTIVATION>ON-ENTRY</ACTIVATION>
+                              <MODE-IREFS>
+                                <MODE-IREF>
+                                  <CONTEXT-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/SessionChangeIndicationPort</CONTEXT-PORT-REF>
+                                  <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/StdDiag/PortInterfaces/SessionChangeIndicationInterface/SessionModeDeclarationGroup</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                                  <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/BMW/Platform/StdDiag/ModeDeclarationGroups/StdDiag_SessionModeGroup/STDDIAG_DEFAULT_SESSION</TARGET-MODE-DECLARATION-REF>
+                                </MODE-IREF>
+                              </MODE-IREFS>
+                            </SWC-MODE-SWITCH-EVENT>
+                            <SWC-MODE-SWITCH-EVENT>
+                              <SHORT-NAME>Event_SessionChange_OtherSession</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/SessionChange_OtherSession</START-ON-EVENT-REF>
+                              <ACTIVATION>ON-ENTRY</ACTIVATION>
+                              <MODE-IREFS>
+                                <MODE-IREF>
+                                  <CONTEXT-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/SessionChangeIndicationPort</CONTEXT-PORT-REF>
+                                  <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/StdDiag/PortInterfaces/SessionChangeIndicationInterface/SessionModeDeclarationGroup</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                                  <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/BMW/Platform/StdDiag/ModeDeclarationGroups/StdDiag_SessionModeGroup/STDDIAG_OTHER_SESSION</TARGET-MODE-DECLARATION-REF>
+                                </MODE-IREF>
+                              </MODE-IREFS>
+                            </SWC-MODE-SWITCH-EVENT>
+                            <DATA-RECEIVED-EVENT>
+                              <SHORT-NAME>LifeCycleRequest</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/LifeCycleHandler</START-ON-EVENT-REF>
+                              <DATA-IREF>
+                                <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/LifeCycleRequest</CONTEXT-R-PORT-REF>
+                                <TARGET-DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/StdDiag/PortInterfaces/ILifeCycleRequest/requestMode</TARGET-DATA-ELEMENT-REF>
+                              </DATA-IREF>
+                            </DATA-RECEIVED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_ManufacturerIndication</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/ManufacturerIndication</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ServiceRequestManufacturerNotificationPort</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dcm/PortInterfaces/ServiceRequestNotification/Indication</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_ManufacturerConfirmation</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/ManufacturerConfirmation</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ServiceRequestManufacturerNotificationPort</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dcm/PortInterfaces/ServiceRequestNotification/Confirmation</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_AllowOpModeChange</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/AllowOpModeChange</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/AllowOpModeChangePort</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Omc/PortInterfaces/OmcModesCallouts/AllowOpModeSwitch</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_OpModeChangeCancelled</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/OpModeChangeCancelled</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/AllowOpModeChangePort</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Omc/PortInterfaces/OmcModesCallouts/OpModeSwitchCancelled</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+%{: if(StdDiagUsrEstablishIntrinsicSafety) }%\
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_UserEstablishIntrinsicSafetyCbk</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/UserEstablishIntrinsicSafetyCbk</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/UserEstablishIntrinsicSafetyCbkPort</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/PortInterfaces/UserEstablishIntrinsicSafetyCbk/EstablishIntrinsicSafetyResult</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_UserEstablishIntrinsicSafetyCancelledAck</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/UserEstablishIntrinsicSafetyCancelledAck</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/UserEstablishIntrinsicSafetyCbkPort</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/PortInterfaces/UserEstablishIntrinsicSafetyCbk/EstablishIntrinsicSafetyCancelledAck</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+%{:}%\
+%{: if(StdDiagIDRLSupport) }%\
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_ReadDataDIDTable</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/ReadDataDIDTable</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IdrlDidTable</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dcm/PortInterfaces/DataServices_DIDTable/ReadData</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+
+%{@ ref("IDRLClient/IndivData") }%\
+%{# thisDID = shortname('.') }%\
+%{# thisClient = shortname('..') }%\
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_ConditionCheckIndivData%{= thisDID }%</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/ConditionCheckIndivData</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IdrlData%{= thisClient }%%{= thisDID }%</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dcm/PortInterfaces/DataServices_IndivData%{= thisDID }%/ConditionCheckRead</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_ReadDataIndivData%{= thisDID }%</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/ReadDataIndivData</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IdrlData%{= thisClient }%%{= thisDID }%</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dcm/PortInterfaces/DataServices_IndivData%{= thisDID }%/ReadData</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_ReadLengthIndivData%{= thisDID }%</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/ReadLengthIndivData</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IdrlData%{= thisClient }%%{= thisDID }%</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dcm/PortInterfaces/DataServices_IndivData%{= thisDID }%/ReadDataLength</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_WriteDataIndivData%{= thisDID }%</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/WriteDataIndivData</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IdrlData%{= thisClient }%%{= thisDID }%</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dcm/PortInterfaces/DataServices_IndivData%{= thisDID }%/WriteData</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+%{@}%\
+
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_RoutineControlStartResetIndivData</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/RoutineControlStartResetIndivData</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ResetIdrlData</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dcm/PortInterfaces/RoutineServices_ResetIndivData/Start</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+
+%{@ ref("IDRLClient/IndivData") }%\
+%{# thisDID = shortname('.') }%\
+                            <ASYNCHRONOUS-SERVER-CALL-RETURNS-EVENT>
+                              <SHORT-NAME>ASCRE_ConditionCheckIndivData%{= thisDID }%</SHORT-NAME>
+                              <EVENT-SOURCE-REF DEST="ASYNCHRONOUS-SERVER-CALL-RESULT-POINT">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/ConditionCheckIndivData/ASCRP_ReadIndivData%{= thisDID }%</EVENT-SOURCE-REF>
+                            </ASYNCHRONOUS-SERVER-CALL-RETURNS-EVENT>
+                            <ASYNCHRONOUS-SERVER-CALL-RETURNS-EVENT>
+                              <SHORT-NAME>ASCRE_WriteIndivData%{= thisDID }%</SHORT-NAME>
+                              <EVENT-SOURCE-REF DEST="ASYNCHRONOUS-SERVER-CALL-RESULT-POINT">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/WriteDataIndivData/ASCRP_WriteIndivData%{= thisDID }%</EVENT-SOURCE-REF>
+                            </ASYNCHRONOUS-SERVER-CALL-RETURNS-EVENT>
+%{@}%\
+
+%{@ ref("IDRLClient") }%\
+%{# thisClient = shortname('.') }%\
+                            <ASYNCHRONOUS-SERVER-CALL-RETURNS-EVENT>
+                              <SHORT-NAME>ASCRE_RoutineControlStartResetIndivData%{=thisClient}%</SHORT-NAME>
+                              <EVENT-SOURCE-REF DEST="ASYNCHRONOUS-SERVER-CALL-RESULT-POINT">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/RoutineControlStartResetIndivData/ASCRP_ResetIndivData%{=thisClient}%</EVENT-SOURCE-REF>
+                            </ASYNCHRONOUS-SERVER-CALL-RETURNS-EVENT>
+%{@}%\
+%{:}%\
+
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_ConditionCheckActiveSessionState</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/ConditionCheckActiveSessionState</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ActiveSessionState</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dcm/PortInterfaces/DataServices_ActiveSessionState/ConditionCheckRead</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_ReadDataActiveSessionState</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/ReadDataActiveSessionState</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ActiveSessionState</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dcm/PortInterfaces/DataServices_ActiveSessionState/ReadData</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_ReadDataSgbdIndex</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/ReadDataSgbdIndex</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/SgbdIndex</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dcm/PortInterfaces/DataServices_SgbdIndex/ReadData</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_RoutineControlStartDiagCommLoopback</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/RoutineControlStartDiagCommLoopback</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/DiagCommLoopback</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dcm/PortInterfaces/RoutineServices_DiagCommLoopback/Start</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_RoutineControlStartCheckProgrammingPreconditions</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/RoutineControlStartCheckProgrammingPreconditions</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/CheckProgrammingPreconditions</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dcm/PortInterfaces/RoutineServices_CheckProgrammingPreconditions/Start</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+%{: if(StdDiagADTSupport) }%\
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_RoutineControlStartUpDownloadPrePostProcessing</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/RoutineControlStartUpDownloadPrePostProcessing</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/UpDownloadPrePostProcessingPort</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dcm/PortInterfaces/RoutineServices_UpDownloadPrePostProcessing/Start</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+%{@ object in ADTList }%\
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%_Cbk</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/ApplicationDataTransferCbk</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%_Cbk</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/PortInterfaces/ApplicationDataTransferCbk/OperationFinished</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+%{@}%\
+%{:}%\
+%{: if(StdDiagClearSecErrorMemorySupport) }%\
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_RoutineControlStartClearDTCSecondaryErrorMemory</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/RoutineControlStartClearDTCSecondaryErrorMemory</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ClearSecondaryErrorMemory</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dcm/PortInterfaces/RoutineServices_ClearDTCSecondaryErrorMemory/Start</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+%{:}%\
+%{: if(StdDiagUsrProgPrecChk) }%\
+                            <ASYNCHRONOUS-SERVER-CALL-RETURNS-EVENT>
+                              <SHORT-NAME>ascre_UserCheckProgrammingPreconditions</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/UserProgrammingPreconditionsCheckCbk</START-ON-EVENT-REF>
+                              <EVENT-SOURCE-REF DEST="ASYNCHRONOUS-SERVER-CALL-RESULT-POINT">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/UserProgrammingPreconditionsCheckCbk/ascrp_UserCheckProgrammingPreconditions</EVENT-SOURCE-REF>
+                            </ASYNCHRONOUS-SERVER-CALL-RETURNS-EVENT>
+%{:}%\
+%{: if(StdDiagDLTSupport) }%\
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_ReadDataDltReadLogChannelNames</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/ReadDataDltReadLogChannelNames</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/DltReadLogChannelNames</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dcm/PortInterfaces/DataServices_DltReadLogChannelNames/ReadData</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_RoutineControlStartDltSetLoglevel</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/RoutineControlStartDltSetLoglevel</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/DltSetLoglevel</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dcm/PortInterfaces/RoutineServices_DltSetLoglevel/Start</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_RoutineControlStartDltResetToDefault</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/RoutineControlStartDltResetToDefault</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/DltResetToDefault</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dcm/PortInterfaces/RoutineServices_DltResetToDefault/Start</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_RoutineControlStartDltSetMessagefilteringstate</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/RoutineControlStartDltSetMessagefilteringstate</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/DltSetMessagefilteringstate</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dcm/PortInterfaces/RoutineServices_DltSetMessagefilteringstate/Start</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_RoutineControlStartDltSetLogchannelThreshold</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/RoutineControlStartDltSetLogchannelThreshold</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/DltSetLogchannelThreshold</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dcm/PortInterfaces/RoutineServices_DltSetLogchannelThreshold/Start</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_RoutineControlStartDltStoreConfiguration</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/RoutineControlStartDltStoreConfiguration</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/DltStoreConfiguration</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dcm/PortInterfaces/RoutineServices_DltStoreConfiguration/Start</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_RoutineControlStartDltSetTracestate</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/RoutineControlStartDltSetTracestate</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/DltSetTracestate</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dcm/PortInterfaces/RoutineServices_DltSetTracestate/Start</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_RoutineControlStartDltSetDefaultLoglevel</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/RoutineControlStartDltSetDefaultLoglevel</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/DltSetDefaultLoglevel</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dcm/PortInterfaces/RoutineServices_DltSetDefaultLoglevel/Start</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>Event_RoutineControlStartDltSetDefaultTracestate</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/RoutineControlStartDltSetDefaultTracestate</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/DltSetDefaultTracestate</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dcm/PortInterfaces/RoutineServices_DltSetDefaultTracestate/Start</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+%{:}%\
+                          </EVENTS>
+                          <HANDLE-TERMINATION-AND-RESTART>NO-SUPPORT</HANDLE-TERMINATION-AND-RESTART>
+%{: if(StdDiagIDRLSupport or StdDiagADTSupport) }%\
+                          <PORT-API-OPTIONS>
+%{: if(StdDiagIDRLSupport) }%\
+%{@ ref("IDRLClient/IndivData") }%\
+%{# thisDID = shortname('.') }%\
+%{# thisClient = shortname('..') }%\
+                            <PORT-API-OPTION>
+                              <ENABLE-TAKE-ADDRESS>false</ENABLE-TAKE-ADDRESS>
+                              <INDIRECT-API>false</INDIRECT-API>
+                              <PORT-ARG-VALUES>
+                                <PORT-DEFINED-ARGUMENT-VALUE>
+                                  <VALUE>
+                                    <NUMERICAL-VALUE-SPECIFICATION>
+                                      <VALUE>%{= value(ref("DIDValue")) }%</VALUE>
+                                    </NUMERICAL-VALUE-SPECIFICATION>
+                                  </VALUE>
+                                  <VALUE-TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AUTOSAR_Platform/ImplementationDataTypes/uint16</VALUE-TYPE-TREF>
+                                </PORT-DEFINED-ARGUMENT-VALUE>
+                              </PORT-ARG-VALUES>
+                              <PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IdrlData%{= thisClient }%%{= thisDID }%</PORT-REF>
+                            </PORT-API-OPTION>
+                            <PORT-API-OPTION>
+                              <ENABLE-TAKE-ADDRESS>true</ENABLE-TAKE-ADDRESS>
+                              <INDIRECT-API>false</INDIRECT-API>
+                              <PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IdrlDataSwc%{= thisClient }%%{= thisDID }%</PORT-REF>
+                            </PORT-API-OPTION>
+%{@}%\
+%{@ ref("IDRLClient") }%\
+%{# thisClient = shortname('.') }%\
+                            <PORT-API-OPTION>
+                              <ENABLE-TAKE-ADDRESS>true</ENABLE-TAKE-ADDRESS>
+                              <INDIRECT-API>false</INDIRECT-API>
+                              <PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ResetIdrlData%{= thisClient }%</PORT-REF>
+                            </PORT-API-OPTION>
+%{@}%\
+%{:}%\
+%{: if(StdDiagADTSupport) }%\
+%{@ object in ADTList }%\
+                            <PORT-API-OPTION>
+                              <ENABLE-TAKE-ADDRESS>true</ENABLE-TAKE-ADDRESS>
+                              <INDIRECT-API>false</INDIRECT-API>
+                              <PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%</PORT-REF>
+                            </PORT-API-OPTION>
+%{@}%\
+%{:}%\
+                          </PORT-API-OPTIONS>
+%{:}%\
+
+                          <RUNNABLES>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>LifeCycleHandler</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <DATA-READ-ACCESSS>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>requestedMode</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/LifeCycleRequest</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/StdDiag/PortInterfaces/ILifeCycleRequest/requestMode</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+                              </DATA-READ-ACCESSS>
+                              <DATA-SEND-POINTS>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>VariableAccess_requestComMode</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ComControlModeRequestPort</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/StdDiag/PortInterfaces/ComControlModeRequestInterface/requestedMode</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+                              </DATA-SEND-POINTS>
+                              <MODE-ACCESS-POINTS>
+                                <MODE-ACCESS-POINT>
+                                  <MODE-GROUP-IREF>
+                                    <P-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                      <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/LifeCycle</CONTEXT-P-PORT-REF>
+                                      <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/StdDiag/PortInterfaces/ILifeCycle/Mode</TARGET-MODE-GROUP-REF>
+                                    </P-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-ACCESS-POINT>
+                                <MODE-ACCESS-POINT>
+                                  <MODE-GROUP-IREF>
+                                    <R-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                      <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/OperatingModeControlPort</CONTEXT-R-PORT-REF>
+                                      <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/StdDiag/Omc/PortInterfaces/OperatingModeNotification/currentOperatingMode</TARGET-MODE-GROUP-REF>
+                                    </R-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-ACCESS-POINT>
+                                <MODE-ACCESS-POINT>
+                                  <MODE-GROUP-IREF>
+                                    <R-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                      <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ExtendedOperatingModeControlPort</CONTEXT-R-PORT-REF>
+                                      <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/StdDiag/Omc/PortInterfaces/ExtendedOperatingModeNotification/currentExtendedOperatingMode</TARGET-MODE-GROUP-REF>
+                                    </R-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-ACCESS-POINT>
+                              </MODE-ACCESS-POINTS>
+                              <MODE-SWITCH-POINTS>
+                                <MODE-SWITCH-POINT>
+                                  <SHORT-NAME>LifeCycle</SHORT-NAME>
+                                  <MODE-GROUP-IREF>
+                                    <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/LifeCycle</CONTEXT-P-PORT-REF>
+                                    <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/StdDiag/PortInterfaces/ILifeCycle/Mode</TARGET-MODE-GROUP-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-SWITCH-POINT>
+                              </MODE-SWITCH-POINTS>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_EnableCondition</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/EnableConditionPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dem/PortInterfaces/EnableCondition/SetEnableCondition</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_SetRoeSuspended</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/RoeStatePort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Darh/PortInterfaces/RoeStateInterface/GetRoeState</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{: if(StdDiagDetUsage) }%\
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_DetError</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ReportErrorPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Det/PortInterfaces/DETService/ReportError</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{:}%\
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_DcmGetSesCtrlType</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/DCMServicesPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dcm/PortInterfaces/StdDiagDCMServices/GetSesCtrlType</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>StdDiag_LifeCycleHandler</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>ManufacturerIndication</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <MODE-ACCESS-POINTS>
+                                <MODE-ACCESS-POINT>
+                                  <MODE-GROUP-IREF>
+                                    <R-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                      <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/OperatingModeControlPort</CONTEXT-R-PORT-REF>
+                                      <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/StdDiag/Omc/PortInterfaces/OperatingModeNotification/currentOperatingMode</TARGET-MODE-GROUP-REF>
+                                    </R-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-ACCESS-POINT>
+                              </MODE-ACCESS-POINTS>
+                              <SERVER-CALL-POINTS>
+%{: if(StdDiagDetUsage) }%\
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_DetError</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ReportErrorPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Det/PortInterfaces/DETService/ReportError</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{:}%\
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>StdDiag_ManufacturerIndication</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>ManufacturerConfirmation</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <DATA-SEND-POINTS>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>VariableAccess_requestComMode</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ComControlModeRequestPort</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/StdDiag/PortInterfaces/ComControlModeRequestInterface/requestedMode</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+                              </DATA-SEND-POINTS>
+                              <MODE-ACCESS-POINTS>
+                                <MODE-ACCESS-POINT>
+                                  <MODE-GROUP-IREF>
+                                    <R-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                      <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/OperatingModeControlPort</CONTEXT-R-PORT-REF>
+                                      <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/StdDiag/Omc/PortInterfaces/OperatingModeNotification/currentOperatingMode</TARGET-MODE-GROUP-REF>
+                                    </R-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-ACCESS-POINT>
+                                <MODE-ACCESS-POINT>
+                                  <MODE-GROUP-IREF>
+                                    <R-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                      <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ExtendedOperatingModeControlPort</CONTEXT-R-PORT-REF>
+                                      <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/StdDiag/Omc/PortInterfaces/ExtendedOperatingModeNotification/currentExtendedOperatingMode</TARGET-MODE-GROUP-REF>
+                                    </R-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-ACCESS-POINT>
+                                <MODE-ACCESS-POINT>
+                                  <MODE-GROUP-IREF>
+                                    <R-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                      <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ComControlNormalModeAccessPort</CONTEXT-R-PORT-REF>
+                                      <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/StdDiag/PortInterfaces/ComControlNormalNotificationInterface/CommunicationModeDeclarationGroup</TARGET-MODE-GROUP-REF>
+                                    </R-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-ACCESS-POINT>
+                              </MODE-ACCESS-POINTS>
+                              <SERVER-CALL-POINTS>
+%{: if(StdDiagDetUsage) }%\
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_DetError</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ReportErrorPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Det/PortInterfaces/DETService/ReportError</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{:}%\
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_EnableCondition</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/EnableConditionPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dem/PortInterfaces/EnableCondition/SetEnableCondition</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_SetRoeSuspended</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/RoeStatePort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Darh/PortInterfaces/RoeStateInterface/GetRoeState</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>StdDiag_ManufacturerConfirmation</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>AllowOpModeChange</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <MODE-ACCESS-POINTS>
+                                <MODE-ACCESS-POINT>
+                                  <MODE-GROUP-IREF>
+                                    <R-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                      <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/VehicleStatePort</CONTEXT-R-PORT-REF>
+                                      <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/StdDiag/Stm/PortInterfaces/VehicleStateModeInterface/currentVehicleStateMode</TARGET-MODE-GROUP-REF>
+                                    </R-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-ACCESS-POINT>
+                              </MODE-ACCESS-POINTS>
+%{: if(StdDiagUsrEstablishIntrinsicSafety) }%\
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_UserEstablishIntrinsicSafety</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/UserEstablishIntrinsicSafetyPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/PortInterfaces/UserEstablishIntrinsicSafety/EstablishIntrinsicSafety</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+%{:}%\
+                              <SYMBOL>StdDiag_AllowOpModeChange</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>OpModeChangeCancelled</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+%{: if(StdDiagUsrEstablishIntrinsicSafety) }%\
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_UserEstablishIntrinsicSafety</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/UserEstablishIntrinsicSafetyPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/PortInterfaces/UserEstablishIntrinsicSafety/EstablishIntrinsicSafetyCancelled</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+%{:}%\
+                              <SYMBOL>StdDiag_OpModeChangeCancelled</SYMBOL>
+                            </RUNNABLE-ENTITY>
+%{: if(StdDiagUsrEstablishIntrinsicSafety) }%\
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>UserEstablishIntrinsicSafetyCbk</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_OpModeSwitchAllowedResult</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/AllowOpModeChangeCbkPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Omc/PortInterfaces/OmcModesCalloutsResult/OpModeSwitchAllowedResult</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>StdDiag_App_EstablishIntrinsicSafetyCbk</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>UserEstablishIntrinsicSafetyCancelledAck</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_OpModeSwitchCancelledAck</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/AllowOpModeChangeCbkPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Omc/PortInterfaces/OmcModesCalloutsResult/OpModeSwitchCancelledAck</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>StdDiag_App_EstablishIntrinsicSafetyCancelledAck</SYMBOL>
+                            </RUNNABLE-ENTITY>
+
+%{:}%\
+%{: if(StdDiagIDRLSupport) }%\
+
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>ReadDataDIDTable</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SYMBOL>StdDiag_ReadDataDIDTable</SYMBOL>
+                            </RUNNABLE-ENTITY>
+
+%{# counterIndivDIDs = count(ref("IDRLClient/IndivData")) }%
+%{: if(counterIndivDIDs > 0) }%\
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>ConditionCheckIndivData</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <ARGUMENTS>
+                                <RUNNABLE-ENTITY-ARGUMENT>
+                                  <SYMBOL>DID</SYMBOL>
+                                </RUNNABLE-ENTITY-ARGUMENT>
+                                <RUNNABLE-ENTITY-ARGUMENT>
+                                  <SYMBOL>OpStatus</SYMBOL>
+                                </RUNNABLE-ENTITY-ARGUMENT>
+                                <RUNNABLE-ENTITY-ARGUMENT>
+                                  <SYMBOL>ErrorCode</SYMBOL>
+                                </RUNNABLE-ENTITY-ARGUMENT>
+                              </ARGUMENTS>
+                              <ASYNCHRONOUS-SERVER-CALL-RESULT-POINTS>
+%{@ ref("IDRLClient/IndivData") }%\
+%{# thisDID = shortname('.') }%\
+                                <ASYNCHRONOUS-SERVER-CALL-RESULT-POINT>
+                                  <SHORT-NAME>ASCRP_ReadIndivData%{= thisDID }%</SHORT-NAME>
+                                  <ASYNCHRONOUS-SERVER-CALL-POINT-REF DEST="ASYNCHRONOUS-SERVER-CALL-POINT">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/ConditionCheckIndivData/ascp_ReadIndivData%{= thisDID }%</ASYNCHRONOUS-SERVER-CALL-POINT-REF>
+                                </ASYNCHRONOUS-SERVER-CALL-RESULT-POINT>
+%{@}%\
+                              </ASYNCHRONOUS-SERVER-CALL-RESULT-POINTS>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+%{@ ref("IDRLClient/IndivData") }%\
+%{# thisDID = shortname('.') }%\
+%{# thisClient = shortname('..') }%\
+                               <ASYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>ascp_ReadIndivData%{= thisDID }%</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IdrlDataSwc%{= thisClient }%%{= thisDID }%</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/PortInterfaces/OperateIndivData%{= thisDID }%/ReadIndivData</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </ASYNCHRONOUS-SERVER-CALL-POINT>
+%{@}%\
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>StdDiag_ConditionCheckIndivData</SYMBOL>
+                            </RUNNABLE-ENTITY>
+
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>ReadDataIndivData</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <ARGUMENTS>
+                                <RUNNABLE-ENTITY-ARGUMENT>
+                                  <SYMBOL>DID</SYMBOL>
+                                </RUNNABLE-ENTITY-ARGUMENT>
+                                <RUNNABLE-ENTITY-ARGUMENT>
+                                  <SYMBOL>OpStatus</SYMBOL>
+                                </RUNNABLE-ENTITY-ARGUMENT>
+                                <RUNNABLE-ENTITY-ARGUMENT>
+                                  <SYMBOL>Data</SYMBOL>
+                                </RUNNABLE-ENTITY-ARGUMENT>
+                              </ARGUMENTS>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SYMBOL>StdDiag_ReadDataIndivData</SYMBOL>
+                            </RUNNABLE-ENTITY>
+
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>ReadLengthIndivData</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <ARGUMENTS>
+                                <RUNNABLE-ENTITY-ARGUMENT>
+                                  <SYMBOL>DID</SYMBOL>
+                                </RUNNABLE-ENTITY-ARGUMENT>
+                                <RUNNABLE-ENTITY-ARGUMENT>
+                                  <SYMBOL>OpStatus</SYMBOL>
+                                </RUNNABLE-ENTITY-ARGUMENT>
+                                <RUNNABLE-ENTITY-ARGUMENT>
+                                  <SYMBOL>DataLength</SYMBOL>
+                                </RUNNABLE-ENTITY-ARGUMENT>
+                              </ARGUMENTS>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SYMBOL>StdDiag_ReadLengthIndivData</SYMBOL>
+                            </RUNNABLE-ENTITY>
+
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>WriteDataIndivData</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <ARGUMENTS>
+                                <RUNNABLE-ENTITY-ARGUMENT>
+                                  <SYMBOL>DID</SYMBOL>
+                                </RUNNABLE-ENTITY-ARGUMENT>
+                                <RUNNABLE-ENTITY-ARGUMENT>
+                                  <SYMBOL>Data</SYMBOL>
+                                </RUNNABLE-ENTITY-ARGUMENT>
+                                <RUNNABLE-ENTITY-ARGUMENT>
+                                  <SYMBOL>DataLength</SYMBOL>
+                                </RUNNABLE-ENTITY-ARGUMENT>
+                                <RUNNABLE-ENTITY-ARGUMENT>
+                                  <SYMBOL>OpStatus</SYMBOL>
+                                </RUNNABLE-ENTITY-ARGUMENT>
+                                <RUNNABLE-ENTITY-ARGUMENT>
+                                  <SYMBOL>ErrorCode</SYMBOL>
+                                </RUNNABLE-ENTITY-ARGUMENT>
+                              </ARGUMENTS>
+                              <ASYNCHRONOUS-SERVER-CALL-RESULT-POINTS>
+%{@ ref("IDRLClient/IndivData") }%\
+%{# thisDID = shortname('.') }%\
+                                <ASYNCHRONOUS-SERVER-CALL-RESULT-POINT>
+                                  <SHORT-NAME>ASCRP_WriteIndivData%{= thisDID }%</SHORT-NAME>
+                                  <ASYNCHRONOUS-SERVER-CALL-POINT-REF DEST="ASYNCHRONOUS-SERVER-CALL-POINT">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/WriteDataIndivData/ascp_WriteIndivData%{= thisDID }%</ASYNCHRONOUS-SERVER-CALL-POINT-REF>
+                                </ASYNCHRONOUS-SERVER-CALL-RESULT-POINT>
+%{@}%\
+                              </ASYNCHRONOUS-SERVER-CALL-RESULT-POINTS>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+%{@ ref("IDRLClient/IndivData") }%\
+%{# thisDID = shortname('.') }%\
+%{# thisClient = shortname('..') }%\
+                               <ASYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>ascp_WriteIndivData%{= thisDID }%</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IdrlDataSwc%{= thisClient }%%{= thisDID }%</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/PortInterfaces/OperateIndivData%{= thisDID }%/WriteIndivData</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </ASYNCHRONOUS-SERVER-CALL-POINT>
+%{@}%\
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>StdDiag_WriteDataIndivData</SYMBOL>
+                            </RUNNABLE-ENTITY>
+%{:}%\
+
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>RoutineControlStartResetIndivData</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <ASYNCHRONOUS-SERVER-CALL-RESULT-POINTS>
+%{@ ref("IDRLClient") }%\
+%{# thisClient = shortname('.') }%\
+                                <ASYNCHRONOUS-SERVER-CALL-RESULT-POINT>
+                                  <SHORT-NAME>ASCRP_ResetIndivData%{=thisClient}%</SHORT-NAME>
+                                  <ASYNCHRONOUS-SERVER-CALL-POINT-REF DEST="ASYNCHRONOUS-SERVER-CALL-POINT">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/RoutineControlStartResetIndivData/ascp_ResetIndivData%{=thisClient}%</ASYNCHRONOUS-SERVER-CALL-POINT-REF>
+                                </ASYNCHRONOUS-SERVER-CALL-RESULT-POINT>
+%{@}%\
+                              </ASYNCHRONOUS-SERVER-CALL-RESULT-POINTS>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+%{@ ref("IDRLClient") }%\
+%{# thisClient = shortname('.') }%\
+                               <ASYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>ascp_ResetIndivData%{=thisClient}%</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ResetIdrlData%{=thisClient}%</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/PortInterfaces/ResetIndivData/ResetIndivData</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </ASYNCHRONOUS-SERVER-CALL-POINT>
+%{@}%\
+                             </SERVER-CALL-POINTS>
+                              <SYMBOL>StdDiag_RoutineControlStartResetIndivData</SYMBOL>
+                            </RUNNABLE-ENTITY>
+%{:}%\
+
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>ReadDataSgbdIndex</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SYMBOL>StdDiag_ReadSgbdIndex</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>ReadDataActiveSessionState</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SYMBOL>StdDiag_ReadActiveSessionState</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>ConditionCheckActiveSessionState</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_DcmGetSesCtrlType</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/DCMServicesPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dcm/PortInterfaces/StdDiagDCMServices/GetSesCtrlType</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{: if(StdDiagUserActiveSessionState) }%\
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_activeSessionStateHddUpdate</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/UserActiveSessionStatePort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/PortInterfaces/UserActiveSessionState/GetActiveSessionState</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{:}%\
+%{: if(StdDiagDetUsage) }%\
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_DetError</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ReportErrorPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Det/PortInterfaces/DETService/ReportError</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{:}%\
+                             </SERVER-CALL-POINTS>
+                              <SYMBOL>StdDiag_ConditionCheckActiveSessionState</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>RoutineControlStartDiagCommLoopback</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SYMBOL>StdDiag_RoutineControlStartDiagCommLoopback</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>RoutineControlStartCheckProgrammingPreconditions</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+%{: if(StdDiagUsrProgPrecChk) }%\
+                                <ASYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>ascp_UserCheckProgrammingPreconditions</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/UserProgrammingPreconditionsCheckPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/PortInterfaces/UserProgrammingPreconditionsCheck/UserCheckProgrammingPreconditions</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </ASYNCHRONOUS-SERVER-CALL-POINT>
+%{:}%\
+                             </SERVER-CALL-POINTS>
+                              <SYMBOL>StdDiag_RoutineControlStartCheckProgrammingPreconditions</SYMBOL>
+                            </RUNNABLE-ENTITY>
+%{: if(StdDiagADTSupport) }%\
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>RequestDownload</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+%{@ object in ADTList }%\
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_RequestDownload_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/PortInterfaces/ApplicationDataTransfer/RequestDownload</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{@}%\
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>StdDiag_RequestDownloadDummy</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>RequestUpload</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+%{@ object in ADTList }%\
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_RequestUpload_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/PortInterfaces/ApplicationDataTransfer/RequestUpload</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{@}%\
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>StdDiag_RequestUploadDummy</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>TransferData</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+%{@ object in ADTList }%\
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_Upload_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/PortInterfaces/ApplicationDataTransfer/Upload</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_Download_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/PortInterfaces/ApplicationDataTransfer/Download</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{@}%\
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>StdDiag_TransferDataDummy</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>RequestTransferExit</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+%{@ object in ADTList }%\
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_RequestDownloadExit_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/PortInterfaces/ApplicationDataTransfer/RequestDownloadExit</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_RequestUploadExit_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/PortInterfaces/ApplicationDataTransfer/RequestUploadExit</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{@}%\
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>StdDiag_RequestTransferExitDummy</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>RoutineControlStartUpDownloadPrePostProcessing</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+%{@ object in ADTList }%\
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_CancelOperation_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/PortInterfaces/ApplicationDataTransfer/CancelOperation</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_UploadPreprocess_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/PortInterfaces/ApplicationDataTransfer/UploadPreprocess</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_UploadPostprocess_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/PortInterfaces/ApplicationDataTransfer/UploadPostprocess</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_DownloadPreprocess_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/PortInterfaces/ApplicationDataTransfer/DownloadPreprocess</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_DownloadPostprocess_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/Adt_%{=object[1]}%%{=object[3]}%_CtrlID_%{=('0x{obj:X}').format(obj=object[4])}%</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/PortInterfaces/ApplicationDataTransfer/DownloadPostprocess</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{@}%\
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>StdDiag_RoutineControlStartUpDownloadPrePostProcessing</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>ApplicationDataTransferCbk</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SYMBOL>StdDiag_ApplicationDataTransferCbk</SYMBOL>
+                            </RUNNABLE-ENTITY>
+%{:}%\
+%{: if(StdDiagUsrProgPrecChk) }%\
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>UserProgrammingPreconditionsCheckCbk</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <ASYNCHRONOUS-SERVER-CALL-RESULT-POINTS>
+                                <ASYNCHRONOUS-SERVER-CALL-RESULT-POINT>
+                                  <SHORT-NAME>ascrp_UserCheckProgrammingPreconditions</SHORT-NAME>
+                                  <ASYNCHRONOUS-SERVER-CALL-POINT-REF DEST="ASYNCHRONOUS-SERVER-CALL-POINT">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IntBhv_StdDiag/RoutineControlStartCheckProgrammingPreconditions/ascp_UserCheckProgrammingPreconditions</ASYNCHRONOUS-SERVER-CALL-POINT-REF>
+                                </ASYNCHRONOUS-SERVER-CALL-RESULT-POINT>
+                              </ASYNCHRONOUS-SERVER-CALL-RESULT-POINTS>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SYMBOL>StdDiag_UserProgrammingPreconditionsCheckCbk</SYMBOL>
+                            </RUNNABLE-ENTITY>
+%{:}%\
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>SessionChange_DefaultSession</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <DATA-SEND-POINTS>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>VariableAccess_requestComMode</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ComControlModeRequestPort</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/StdDiag/PortInterfaces/ComControlModeRequestInterface/requestedMode</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+                              </DATA-SEND-POINTS>
+                              <MODE-ACCESS-POINTS>
+                                <MODE-ACCESS-POINT>
+                                  <MODE-GROUP-IREF>
+                                    <R-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                      <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/OperatingModeControlPort</CONTEXT-R-PORT-REF>
+                                      <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/StdDiag/Omc/PortInterfaces/OperatingModeNotification/currentOperatingMode</TARGET-MODE-GROUP-REF>
+                                    </R-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-ACCESS-POINT>
+                                <MODE-ACCESS-POINT>
+                                  <MODE-GROUP-IREF>
+                                    <R-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                      <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ExtendedOperatingModeControlPort</CONTEXT-R-PORT-REF>
+                                      <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/StdDiag/Omc/PortInterfaces/ExtendedOperatingModeNotification/currentExtendedOperatingMode</TARGET-MODE-GROUP-REF>
+                                    </R-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-ACCESS-POINT>
+                                <MODE-ACCESS-POINT>
+                                  <MODE-GROUP-IREF>
+                                    <R-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                      <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ComControlNormalModeAccessPort</CONTEXT-R-PORT-REF>
+                                      <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/StdDiag/PortInterfaces/ComControlNormalNotificationInterface/CommunicationModeDeclarationGroup</TARGET-MODE-GROUP-REF>
+                                    </R-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-ACCESS-POINT>
+                              </MODE-ACCESS-POINTS>
+                              <SERVER-CALL-POINTS>
+%{: if(StdDiagDetUsage) }%\
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_DetError</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ReportErrorPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Det/PortInterfaces/DETService/ReportError</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{:}%\
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_EnableCondition</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/EnableConditionPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dem/PortInterfaces/EnableCondition/SetEnableCondition</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_SetRoeSuspended</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/RoeStatePort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Darh/PortInterfaces/RoeStateInterface/GetRoeState</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>StdDiag_SesChgIndication_DefaultSession</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>SessionChange_OtherSession</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SYMBOL>StdDiag_SesChgIndication_OtherSession</SYMBOL>
+                            </RUNNABLE-ENTITY>
+%{: if(StdDiagClearSecErrorMemorySupport) }%\
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>RoutineControlStartClearDTCSecondaryErrorMemory</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_ClearDTC</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ClearDTCPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dem/PortInterfaces/CddIf/ClearDTC</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>StdDiag_RoutineControlStartClearDTCSecondaryErrorMemory</SYMBOL>
+                            </RUNNABLE-ENTITY>
+%{:}%\
+%{: if(StdDiagDLTSupport) }%\
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>ReadDataDltReadLogChannelNames</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_DltGetLogChannelNames</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/DLTServices</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dlt/PortInterfaces/DLTService/GetLogChannelNames</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{: if(StdDiagDetUsage) }%\
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_DetError</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ReportErrorPort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Det/PortInterfaces/DETService/ReportError</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{:}%\
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>StdDiag_DltReadLogChannelNames</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>RoutineControlStartDltSetLoglevel</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_DltSetLogLevel</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/DLTServices</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dlt/PortInterfaces/DLTService/SetLogLevel</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>StdDiag_DltSetLoglevel</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>RoutineControlStartDltResetToDefault</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_DltResetToFactoryDefault</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/DLTServices</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dlt/PortInterfaces/DLTService/ResetToFactoryDefault</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>StdDiag_DltResetToDefault</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>RoutineControlStartDltSetMessagefilteringstate</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_DltSetMessageFilteringStatus</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/DLTServices</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dlt/PortInterfaces/DLTService/SetMessageFilteringStatus</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>StdDiag_DltSetMessageFilteringState</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>RoutineControlStartDltSetLogchannelThreshold</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_DltSetLogChannelThreshold</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/DLTServices</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dlt/PortInterfaces/DLTService/SetLogChannelThreshold</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>StdDiag_DltSetLogChannelThreshold</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>RoutineControlStartDltStoreConfiguration</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_DltStoreConfiguration</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/DLTServices</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dlt/PortInterfaces/DLTService/StoreConfiguration</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>StdDiag_DltStoreConfiguration</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>RoutineControlStartDltSetTracestate</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_DltSetTraceStatus</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/DLTServices</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dlt/PortInterfaces/DLTService/SetTraceStatus</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>StdDiag_DltSetTraceState</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>RoutineControlStartDltSetDefaultLoglevel</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_DltSetDefaultLogLevel</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/DLTServices</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dlt/PortInterfaces/DLTService/SetDefaultLogLevel</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>StdDiag_DltSetDefaultLoglevel</SYMBOL>
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>RoutineControlStartDltSetDefaultTracestate</SHORT-NAME>
+                              <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>sscp_DltSetDefaultTraceStatus</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/DLTServices</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/StdDiag/Dlt/PortInterfaces/DLTService/SetDefaultTraceStatus</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>StdDiag_DltSetDefaultTraceState</SYMBOL>
+                            </RUNNABLE-ENTITY>
+%{:}%\
+                          </RUNNABLES>
+                          <SERVICE-DEPENDENCYS>
+%{: if(StdDiagIDRLSupport) }%\
+                            <SWC-SERVICE-DEPENDENCY>
+                              <SHORT-NAME>StdDiag_DiagnosticValueServiceNeeds_DIDTable</SHORT-NAME>
+                              <ASSIGNED-PORTS>
+                                <ROLE-BASED-PORT-ASSIGNMENT>
+                                  <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IdrlDidTable</PORT-PROTOTYPE-REF>
+                                  <ROLE>DataServices</ROLE>
+                                </ROLE-BASED-PORT-ASSIGNMENT>
+                              </ASSIGNED-PORTS>
+                              <SERVICE-NEEDS>
+                                <DIAGNOSTIC-VALUE-NEEDS>
+                                  <SHORT-NAME>sn_StdDiag_DiagnosticValueServiceNeeds_DIDTable</SHORT-NAME>
+%{# counter = count(ref("IDRLClient/IndivData/DIDValue")) }%
+                                  <DATA-LENGTH>%{=((counter * 2) +2) }%</DATA-LENGTH>
+                                  <DIAGNOSTIC-VALUE-ACCESS>READ-ONLY</DIAGNOSTIC-VALUE-ACCESS>
+                                  <DID-NUMBER>5940</DID-NUMBER>
+                                </DIAGNOSTIC-VALUE-NEEDS>
+                              </SERVICE-NEEDS>
+                            </SWC-SERVICE-DEPENDENCY>
+
+%{@ ref("IDRLClient/IndivData") }%\
+%{# thisDIDValue = value(ref("DIDValue")) }%\
+%{# thisDID = shortname('.') }%\
+%{# thisClient = shortname('..') }%\
+                            <SWC-SERVICE-DEPENDENCY>
+                              <SHORT-NAME>StdDiag_DiagnosticValueServiceNeeds_IndivData%{= thisDID }%</SHORT-NAME>
+                              <ASSIGNED-PORTS>
+                                <ROLE-BASED-PORT-ASSIGNMENT>
+                                  <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/IdrlData%{= thisClient }%%{= thisDID }%</PORT-PROTOTYPE-REF>
+                                  <ROLE>DataServices</ROLE>
+                                </ROLE-BASED-PORT-ASSIGNMENT>
+                              </ASSIGNED-PORTS>
+                              <SERVICE-NEEDS>
+                                <DIAGNOSTIC-VALUE-NEEDS>
+                                  <SHORT-NAME>sn_StdDiag_DiagnosticValueServiceNeeds_IndivData%{= thisDID }%</SHORT-NAME>
+                                  <DIAGNOSTIC-VALUE-ACCESS>READ-ONLY</DIAGNOSTIC-VALUE-ACCESS>
+                                  <DID-NUMBER>%{= thisDIDValue }%</DID-NUMBER>
+                                </DIAGNOSTIC-VALUE-NEEDS>
+                              </SERVICE-NEEDS>
+                            </SWC-SERVICE-DEPENDENCY>
+%{@}%\
+
+                            <SWC-SERVICE-DEPENDENCY>
+                              <SHORT-NAME>StdDiag_DiagnosticRoutineServiceNeeds_ResetIndivData</SHORT-NAME>
+                              <ASSIGNED-PORTS>
+                                <ROLE-BASED-PORT-ASSIGNMENT>
+                                  <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ResetIdrlData</PORT-PROTOTYPE-REF>
+                                  <ROLE>RoutineServices</ROLE>
+                                </ROLE-BASED-PORT-ASSIGNMENT>
+                              </ASSIGNED-PORTS>
+                              <SERVICE-NEEDS>
+                                <DIAGNOSTIC-ROUTINE-NEEDS>
+                                  <SHORT-NAME>sn_StdDiag_DiagnosticRoutingServiceNeeds_RoutineServices_ResetIndivData</SHORT-NAME>
+                                  <DIAG-ROUTINE-TYPE>ASYNCHRONOUS</DIAG-ROUTINE-TYPE>
+                                  <RID-NUMBER>4122</RID-NUMBER>
+                                </DIAGNOSTIC-ROUTINE-NEEDS>
+                              </SERVICE-NEEDS>
+                            </SWC-SERVICE-DEPENDENCY>
+%{:}%\
+                            <SWC-SERVICE-DEPENDENCY>
+                              <SHORT-NAME>StdDiag_DiagnosticValueServiceNeeds_ActiveSessionState</SHORT-NAME>
+                              <ASSIGNED-PORTS>
+                                <ROLE-BASED-PORT-ASSIGNMENT>
+                                  <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ActiveSessionState</PORT-PROTOTYPE-REF>
+                                  <ROLE>DataServices</ROLE>
+                                </ROLE-BASED-PORT-ASSIGNMENT>
+                              </ASSIGNED-PORTS>
+                              <SERVICE-NEEDS>
+                                <DIAGNOSTIC-VALUE-NEEDS>
+                                  <SHORT-NAME>sn_StdDiag_DiagnosticValueServiceNeeds_ActiveSessionState</SHORT-NAME>
+                                  <DATA-LENGTH>1</DATA-LENGTH>
+                                  <DIAGNOSTIC-VALUE-ACCESS>READ-ONLY</DIAGNOSTIC-VALUE-ACCESS>
+                                  <DID-NUMBER>61696</DID-NUMBER>
+                                </DIAGNOSTIC-VALUE-NEEDS>
+                              </SERVICE-NEEDS>
+                            </SWC-SERVICE-DEPENDENCY>
+                            <SWC-SERVICE-DEPENDENCY>
+                              <SHORT-NAME>StdDiag_DiagnosticCommunicationManagerServiceNeeds_ServiceRequestNotification</SHORT-NAME>
+                              <ASSIGNED-PORTS>
+                                <ROLE-BASED-PORT-ASSIGNMENT>
+                                  <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ServiceRequestManufacturerNotificationPort</PORT-PROTOTYPE-REF>
+                                  <ROLE>ServiceRequestNotification</ROLE>
+                                </ROLE-BASED-PORT-ASSIGNMENT>
+                              </ASSIGNED-PORTS>
+                              <SERVICE-NEEDS>
+                                <DIAGNOSTIC-COMMUNICATION-MANAGER-NEEDS>
+                                  <SHORT-NAME>sn_StdDiag_DiagnosticCommunicationManagerServiceNeeds</SHORT-NAME>
+                                </DIAGNOSTIC-COMMUNICATION-MANAGER-NEEDS>
+                              </SERVICE-NEEDS>
+                            </SWC-SERVICE-DEPENDENCY>
+                            <SWC-SERVICE-DEPENDENCY>
+                              <SHORT-NAME>StdDiag_DiagnosticRoutineServiceNeeds_CheckProgrammingPreconditions</SHORT-NAME>
+                              <ASSIGNED-PORTS>
+                                <ROLE-BASED-PORT-ASSIGNMENT>
+                                  <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/CheckProgrammingPreconditions</PORT-PROTOTYPE-REF>
+                                  <ROLE>RoutineServices</ROLE>
+                                </ROLE-BASED-PORT-ASSIGNMENT>
+                              </ASSIGNED-PORTS>
+                              <SERVICE-NEEDS>
+                                <DIAGNOSTIC-ROUTINE-NEEDS>
+                                  <SHORT-NAME>sn_StdDiag_DiagnosticRoutingServiceNeeds_CheckProgrammingPreconditions</SHORT-NAME>
+                                  <DIAG-ROUTINE-TYPE>SYNCHRONOUS</DIAG-ROUTINE-TYPE>
+                                  <RID-NUMBER>515</RID-NUMBER>
+                                </DIAGNOSTIC-ROUTINE-NEEDS>
+                              </SERVICE-NEEDS>
+                            </SWC-SERVICE-DEPENDENCY>
+                            <SWC-SERVICE-DEPENDENCY>
+                              <SHORT-NAME>StdDiag_DiagnosticRoutineServiceNeeds_DiagCommLoopBack</SHORT-NAME>
+                              <ASSIGNED-PORTS>
+                                <ROLE-BASED-PORT-ASSIGNMENT>
+                                  <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/DiagCommLoopback</PORT-PROTOTYPE-REF>
+                                  <ROLE>RoutineServices</ROLE>
+                                </ROLE-BASED-PORT-ASSIGNMENT>
+                              </ASSIGNED-PORTS>
+                              <SERVICE-NEEDS>
+                                <DIAGNOSTIC-ROUTINE-NEEDS>
+                                  <SHORT-NAME>sn_StdDiag_DiagnosticRoutingServiceNeeds_DiagCommLoopBack</SHORT-NAME>
+                                  <DIAG-ROUTINE-TYPE>SYNCHRONOUS</DIAG-ROUTINE-TYPE>
+                                  <RID-NUMBER>771</RID-NUMBER>
+                                </DIAGNOSTIC-ROUTINE-NEEDS>
+                              </SERVICE-NEEDS>
+                            </SWC-SERVICE-DEPENDENCY>
+%{: if(StdDiagClearSecErrorMemorySupport) }%\
+                            <SWC-SERVICE-DEPENDENCY>
+                              <SHORT-NAME>StdDiag_DiagnosticRoutineServiceNeeds_ClearDTCSecondaryErrorMemory</SHORT-NAME>
+                              <ASSIGNED-PORTS>
+                                <ROLE-BASED-PORT-ASSIGNMENT>
+                                  <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/ClearSecondaryErrorMemory</PORT-PROTOTYPE-REF>
+                                  <ROLE>RoutineServices</ROLE>
+                                </ROLE-BASED-PORT-ASSIGNMENT>
+                              </ASSIGNED-PORTS>
+                              <SERVICE-NEEDS>
+                                <DIAGNOSTIC-ROUTINE-NEEDS>
+                                  <SHORT-NAME>sn_StdDiag_DiagnosticRoutineServiceNeeds_ClearDTCSecondaryErrorMemory</SHORT-NAME>
+                                  <DIAG-ROUTINE-TYPE>ASYNCHRONOUS</DIAG-ROUTINE-TYPE>
+                                  <RID-NUMBER>3846</RID-NUMBER>
+                                </DIAGNOSTIC-ROUTINE-NEEDS>
+                              </SERVICE-NEEDS>
+                            </SWC-SERVICE-DEPENDENCY>
+%{:}%\
+                            <SWC-SERVICE-DEPENDENCY>
+                              <SHORT-NAME>StdDiag_DiagnosticCommunicationManagerServiceNeeds_DCMServices</SHORT-NAME>
+                              <ASSIGNED-PORTS>
+                                <ROLE-BASED-PORT-ASSIGNMENT>
+                                  <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/DCMServicesPort</PORT-PROTOTYPE-REF>
+                                  <ROLE>DCMServices</ROLE>
+                                </ROLE-BASED-PORT-ASSIGNMENT>
+                              </ASSIGNED-PORTS>
+                              <SERVICE-NEEDS>
+                                <DIAGNOSTIC-COMMUNICATION-MANAGER-NEEDS>
+                                  <SHORT-NAME>sn_StdDiag_DiagnosticCommunicationManagerServiceNeeds_DCMServices</SHORT-NAME>
+                                </DIAGNOSTIC-COMMUNICATION-MANAGER-NEEDS>
+                              </SERVICE-NEEDS>
+                            </SWC-SERVICE-DEPENDENCY>
+                            <SWC-SERVICE-DEPENDENCY>
+                              <SHORT-NAME>StdDiag_DiagnosticEventManagerServiceNeeds_EnableCondition</SHORT-NAME>
+                              <ASSIGNED-PORTS>
+                                <ROLE-BASED-PORT-ASSIGNMENT>
+                                  <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/StdDiag/SwComponentTypes/StdDiag/EnableConditionPort</PORT-PROTOTYPE-REF>
+                                  <ROLE>EnableCondition</ROLE>
+                                </ROLE-BASED-PORT-ASSIGNMENT>
+                              </ASSIGNED-PORTS>
+                              <SERVICE-NEEDS>
+                                <DIAGNOSTIC-EVENT-MANAGER-NEEDS>
+                                  <SHORT-NAME>sn_StdDiag_DiagnosticEventManagerServiceNeeds_EnableCondition</SHORT-NAME>
+                                </DIAGNOSTIC-EVENT-MANAGER-NEEDS>
+                              </SERVICE-NEEDS>
+                            </SWC-SERVICE-DEPENDENCY>
+                          </SERVICE-DEPENDENCYS>
+                          <SUPPORTS-MULTIPLE-INSTANTIATION>false</SUPPORTS-MULTIPLE-INSTANTIATION>
+                        </SWC-INTERNAL-BEHAVIOR>
+                      </INTERNAL-BEHAVIORS>
+                    </APPLICATION-SW-COMPONENT-TYPE>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+              </AR-PACKAGES>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

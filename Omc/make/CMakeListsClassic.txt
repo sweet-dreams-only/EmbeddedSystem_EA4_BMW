@@ -1,0 +1,33 @@
+# 
+# Example CMakeLists.txt for BAC Module
+#
+
+cmake_minimum_required(VERSION 3.1)
+SET(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
+LIST(INSERT CMAKE_MODULE_PATH 0 "$ENV{BPS_CMAKE_MODULE_PATH}")
+
+project(Omc.classic C CXX)
+include (BAC)
+
+bps_module_adapter(
+   Omc
+   classic
+
+   SRC
+      Omc_ApplAdapter.c
+      Omc_StdDiagAdapter.c
+      Omc_MgmtAdapter.c
+      Omc_NvMAdapter.c
+      Omc_UDSAdapter.c
+      Omc_ErrMemAdapter.c
+      Omc_ConcAdapter.c
+   GENERATE/META
+      Omc_ext_interfaces.arxml.pgen
+      Omc_interfaces.arxml.pgen
+      Omc_internal.arxml.pgen
+   GENERATE/INPUT
+      Omc
+   DOC
+      usrmanual
+      intmanual
+)

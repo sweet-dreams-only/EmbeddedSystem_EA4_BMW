@@ -1,0 +1,31 @@
+#
+# Darh CMakeLists.txt
+#
+# Version 5.0.0
+
+cmake_minimum_required(VERSION 3.1)
+SET(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
+LIST(INSERT CMAKE_MODULE_PATH 0 "$ENV{BPS_CMAKE_MODULE_PATH}")
+
+project(Darh.generic C CXX)
+include (BAC)
+
+bps_module(
+    Darh
+
+    SRC
+        Darh.c
+        Darh_QueueHandler.c
+        Darh_RoutineControl.c
+        Darh_ReadActivelyReportedDTCs.c
+    GENERATE/VERIFY
+        Darh.autoverify.pgen
+        Darh.verify.pgen
+    GENERATE/INCLUDE
+        Darh_Version.h.pgen
+        Darh_Cfg.h.pgen
+    CFGDESC
+        Darh_paramdef.arxml
+   GENERATE/INPUT
+      Darh
+)

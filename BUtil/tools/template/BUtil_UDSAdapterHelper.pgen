@@ -1,0 +1,166 @@
+%{#
+"""
+Contains BUtilUDSAdapterGenerator to help generating the UDS adapter
+
+"""
+
+__copyright__ = "BMW AG 2016 - 2017"
+__version__   = "5.0.0"
+
+class BUtilUDSAdapterGenerator:
+  """
+  Used to generate (parts of) the UDS adapter
+
+  """
+
+  def __init__(self, modulePrefix, contextName):
+    """
+    Initializes the UDS Adapter Generator.
+
+    modulePrefix: prefix to be used for all generated global names
+    contextName:  name of the context without prefix
+    """
+    self.modulePrefix = modulePrefix
+    self.contextName = contextName
+
+  def defineContext(self, capacity):
+    """
+    Defines the UDS context.
+
+    Note: Memory Sections are generated
+    """
+    return """
+#define {prefix}_START_SEC_VAR_NO_INIT_8
+#include "{prefix}_MemMap.h"  /* PRQA S 5087 */
+
+static uint8 {prefix}_{cname}Buffer[{capacity}];
+
+#define {prefix}_STOP_SEC_VAR_NO_INIT_8
+#include "{prefix}_MemMap.h"  /* PRQA S 5087 */
+
+#define {prefix}_START_SEC_VAR_INIT_UNSPECIFIED
+#include "{prefix}_MemMap.h"  /* PRQA S 5087 */
+
+static BUtil_UDS_ContextType {prefix}_{cname} = {{{prefix}_{cname}Buffer, {capacity}, BUTIL_UDS_IDLE, 0, 0, 0, 0}};
+
+#define {prefix}_STOP_SEC_VAR_INIT_UNSPECIFIED
+#include "{prefix}_MemMap.h"  /* PRQA S 5087 */
+""".format(prefix = self.modulePrefix, cname = self.contextName, capacity = str(capacity))
+
+  def defineRoutineControl(self, adapterName, genericName):
+    return """
+Std_ReturnType {prefix}_{an}(
+    const uint8* DataIn,
+    Dcm_OpStatusType OpStatus,
+    uint8* DataOut,
+    uint16* CurrentDataLength,
+    Dcm_NegativeResponseCodeType* ErrorCode) {{
+  return BUtil_UDS_RoutineControlStart(&{prefix}_{cname}, {prefix}_{gname}, DataIn, OpStatus, DataOut, CurrentDataLength, ErrorCode);
+}}
+
+void {prefix}_UDS_{gname}_ResultOk(uint8* responseData, size_t resDataLength) {{
+  BUtil_UDS_ResultOk(&{prefix}_{cname}, responseData, resDataLength);
+}}
+void {prefix}_UDS_{gname}_ResultError(UDS_ErrorCodeType errorCode) {{
+  BUtil_UDS_ResultError(&{prefix}_{cname}, errorCode);
+}}
+""".format(prefix = self.modulePrefix, cname = self.contextName, an = adapterName, gname = genericName)
+
+  def defineRoutineControlIn(self, adapterName, genericName):
+    return """
+static UDS_ReturnType {prefix}_{gname}_In(const uint8* requestData, size_t reqDataLength,
+    uint8* responseData, size_t* resDataLength, UDS_ErrorCodeType* errorCode) {{
+  *resDataLength = 0;
+  (void)responseData;
+  return {prefix}_{gname}(requestData, reqDataLength, errorCode);
+}}
+
+Std_ReturnType {prefix}_{an}(
+    const uint8* DataIn,
+    Dcm_OpStatusType OpStatus,
+    uint16 CurrentDataLength,
+    Dcm_NegativeResponseCodeType* ErrorCode) {{
+  return BUtil_UDS_RoutineControlStart(&{prefix}_{cname}, {prefix}_{gname}_In, DataIn, OpStatus, NULL, &CurrentDataLength, ErrorCode);
+}}
+
+void {prefix}_UDS_{gname}_ResultOk(void) {{
+  BUtil_UDS_ResultOk(&{prefix}_{cname}, NULL, 0);
+}}
+void {prefix}_UDS_{gname}_ResultError(UDS_ErrorCodeType errorCode) {{
+  BUtil_UDS_ResultError(&{prefix}_{cname}, errorCode);
+}}
+""".format(prefix = self.modulePrefix, cname = self.contextName, an = adapterName, gname = genericName)
+
+  def defineRoutineControlOut(self, adapterName, genericName):
+    return """
+static UDS_ReturnType {prefix}_{gname}_Out(const uint8* requestData, size_t reqDataLength,
+    uint8* responseData, size_t* resDataLength, UDS_ErrorCodeType* errorCode) {{
+  (void)requestData;
+  (void)reqDataLength;
+  return {prefix}_{gname}(responseData, resDataLength, errorCode);
+}}
+
+Std_ReturnType {prefix}_{an}(
+    Dcm_OpStatusType OpStatus,
+    uint8* DataOut,
+    uint16* CurrentDataLength,
+    Dcm_NegativeResponseCodeType* ErrorCode) {{
+  return BUtil_UDS_RoutineControlStart(&{prefix}_{cname}, {prefix}_{gname}_Out, NULL, OpStatus, DataOut, CurrentDataLength, ErrorCode);
+}}
+
+void {prefix}_UDS_{gname}_ResultOk(uint8* responseData, size_t resDataLength) {{
+  BUtil_UDS_ResultOk(&{prefix}_{cname}, responseData, resDataLength);
+}}
+void {prefix}_UDS_{gname}_ResultError(UDS_ErrorCodeType errorCode) {{
+  BUtil_UDS_ResultError(&{prefix}_{cname}, errorCode);
+}}
+""".format(prefix = self.modulePrefix, cname = self.contextName, an = adapterName, gname = genericName)
+
+  def defineReadData(self, adapterName, genericName):
+    return """
+Std_ReturnType {prefix}_UDSConditionCheckRead{an}(
+    Dcm_OpStatusType OpStatus,
+    Dcm_NegativeResponseCodeType* ErrorCode) {{
+  return BUtil_UDS_ConditionCheckRead(&{prefix}_{cname}, {prefix}_{gname}, OpStatus, ErrorCode);
+}}
+
+Std_ReturnType {prefix}_UDSReadDataLength{an}(
+    Dcm_OpStatusType OpStatus,
+    uint16* DataLength) {{
+  return BUtil_UDS_ReadDataLength(&{prefix}_{cname}, OpStatus, DataLength);
+}}
+
+Std_ReturnType {prefix}_UDSReadDataByIdentifier{an}(
+    Dcm_OpStatusType OpStatus,
+    uint8* DataOut) {{
+  return BUtil_UDS_ReadData(&{prefix}_{cname}, OpStatus, DataOut);
+}}
+
+void {prefix}_UDS_{gname}_ResultOk(uint8* responseData, size_t resDataLength) {{
+  BUtil_UDS_ResultOk(&{prefix}_{cname}, responseData, resDataLength);
+}}
+void {prefix}_UDS_{gname}_ResultError(UDS_ErrorCodeType errorCode) {{
+  BUtil_UDS_ResultError(&{prefix}_{cname}, errorCode);
+}}
+""".format(prefix = self.modulePrefix, cname = self.contextName, an = adapterName, gname = genericName)
+
+  def defineWriteData(self, adapterName, genericName):
+    return """
+
+Std_ReturnType {prefix}_UDSWriteDataByIdentifier{an}(
+    const uint8* Data,
+    uint16 DataLength,
+    Dcm_OpStatusType OpStatus,
+    Dcm_NegativeResponseCodeType* ErrorCode) {{
+  return BUtil_UDS_WriteData(&{prefix}_{cname}, {prefix}_{gname}, Data, DataLength, OpStatus, ErrorCode);
+}}
+
+void {prefix}_UDS_{gname}_ResultOk(void) {{
+  BUtil_UDS_ResultOk(&{prefix}_{cname}, NULL, 0);
+}}
+void {prefix}_UDS_{gname}_ResultError(UDS_ErrorCodeType errorCode) {{
+  BUtil_UDS_ResultError(&{prefix}_{cname}, errorCode);
+}}
+""".format(prefix = self.modulePrefix, cname = self.contextName, an = adapterName, gname = genericName)
+
+}%

@@ -1,0 +1,16 @@
+<#@ AutosarXml processor="ArDirectiveProcessor" requires="arPrefix='ar';arNamespace='http://autosar.org/schema/r4.0'" #>
+<#@ template inherits="AutosarDirectiveProcessor.ArGtcBase" debug="false" #>
+<#@ output extension="" #>
+<#@ include file="Logger.tt" #>
+<#
+
+
+/* write report */
+int e_status = WriteReport();
+
+if (e_status != 0)
+{
+   /* exit program with error */
+   throw new Exception ("Verification of Vin configuration failed!");
+}
+#>

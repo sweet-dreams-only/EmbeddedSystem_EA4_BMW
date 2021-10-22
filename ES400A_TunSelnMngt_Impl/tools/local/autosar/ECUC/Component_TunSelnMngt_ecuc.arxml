@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-0-3.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="B7EDD042-4044-414C-9970-1C2313A88AC7">
+      <SHORT-NAME>ActiveEcuC</SHORT-NAME>
+      <ELEMENTS>
+        <ECUC-MODULE-CONFIGURATION-VALUES>
+          <SHORT-NAME>TunSelnMngt</SHORT-NAME>
+          <DEFINITION-REF DEST="ECUC-MODULE-DEF">/Nxtr/EcucDefs_TunSelnMngt/TunSelnMngt</DEFINITION-REF>
+          <IMPLEMENTATION-CONFIG-VARIANT>VARIANT-PRE-COMPILE</IMPLEMENTATION-CONFIG-VARIANT>
+          <CONTAINERS>
+            <ECUC-CONTAINER-VALUE UUID="062aed14-9e3f-417e-a016-7b86ca00cfbb">
+              <SHORT-NAME>TunSelnMngtCommon</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_TunSelnMngt/TunSelnMngt/TunSelnMngtCommon</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-NUMERICAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-INTEGER-PARAM-DEF">/Nxtr/EcucDefs_TunSelnMngt/TunSelnMngt/TunSelnMngtCommon/OnlineCalibrationRamSize</DEFINITION-REF>
+                  <VALUE>4096</VALUE>
+                </ECUC-NUMERICAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="c582b4e0-44f5-4617-b2e8-61f841e70d50">
+              <SHORT-NAME>CalibrationConfiguration</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_TunSelnMngt/TunSelnMngt/CalibrationConfiguration</DEFINITION-REF>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="7bbc6b7f-9cbf-4640-8e7c-e52fdeb7253c">
+              <SHORT-NAME>CalRegn01</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_TunSelnMngt/TunSelnMngt/CalRegions</DEFINITION-REF>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="24b99f5e-6c52-496b-bbf8-e0be21853dbf">
+              <SHORT-NAME>XcpWriteAccess</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_TunSelnMngt/TunSelnMngt/XcpWriteAccess</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_TunSelnMngt/TunSelnMngt/XcpWriteAccess/EnableDevelopmentMode</DEFINITION-REF>
+                  <VALUE>STD_OFF</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+            </ECUC-CONTAINER-VALUE>
+          </CONTAINERS>
+        </ECUC-MODULE-CONFIGURATION-VALUES>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

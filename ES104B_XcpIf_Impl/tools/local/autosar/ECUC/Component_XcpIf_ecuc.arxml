@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-0-3.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="B7EDD042-4044-414C-9970-1C2313A88AC7">
+      <SHORT-NAME>ActiveEcuC</SHORT-NAME>
+      <ELEMENTS>
+        <ECUC-MODULE-CONFIGURATION-VALUES UUID="b06df0c1-9778-412a-b9cd-3c0bcc6bc451">
+          <SHORT-NAME>XcpIf</SHORT-NAME>
+          <DEFINITION-REF DEST="ECUC-MODULE-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf</DEFINITION-REF>
+          <IMPLEMENTATION-CONFIG-VARIANT>VARIANT-PRE-COMPILE</IMPLEMENTATION-CONFIG-VARIANT>
+          <CONTAINERS>
+            <ECUC-CONTAINER-VALUE UUID="ce2c78d4-cb0d-45f7-b8aa-e275a7db088a">
+              <SHORT-NAME>XcpDriverAbstratction</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction</DEFINITION-REF>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/XcpOsApplicationRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/Os/Appl10</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+              <SUB-CONTAINERS>
+                <ECUC-CONTAINER-VALUE UUID="018645a8-1bc1-46f6-9edd-409c42c98735">
+                  <SHORT-NAME>Constants</SHORT-NAME>
+                  <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants</DEFINITION-REF>
+                  <SUB-CONTAINERS>
+                    <ECUC-CONTAINER-VALUE UUID="f595dc35-8748-4a2d-a7d2-02dbc000569a">
+                      <SHORT-NAME>CommandErrorCodes</SHORT-NAME>
+                      <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandErrorCodes</DEFINITION-REF>
+                      <PARAMETER-VALUES>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandErrorCodes/XCPIF_ERRCMDSYNC_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_ERR_CMD_SYNCH</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandErrorCodes/XCPIF_ERRCMDBUSY_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_ERR_CMD_BUSY</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandErrorCodes/XCPIF_ERRDAQACTV_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_ERR_DAQ_ACTIVE</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandErrorCodes/XCPIF_ERRPRMACTV_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_ERR_PRM_ACTIVE</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandErrorCodes/XCPIF_ERRCMDUKWN_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_ERR_CMD_UNKNOWN</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandErrorCodes/XCPIF_ERRCMDSYNTAX_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_ERR_CMD_SYNTAX</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandErrorCodes/XCPIF_ERROUTOFRNG_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_ERR_OUT_OF_RANGE</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandErrorCodes/XCPIF_ERRWRPROTD_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_ERR_WRITE_PROTECTED</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandErrorCodes/XCPIF_ERRACSDENIED_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_ERR_ACCESS_DENIED</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandErrorCodes/XCPIF_ERRACSLOCKD_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_ERR_ACCESS_LOCKED</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandErrorCodes/XCPIF_ERRPAGENOTVLD_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_ERR_PAGE_NOT_VALID</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandErrorCodes/XCPIF_ERRPAGEMODNOTVLD_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_ERR_PAGE_MODE_NOT_VALID</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandErrorCodes/XCPIF_ERRSEGNOTVLD_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_ERR_SEGMENT_NOT_VALID</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandErrorCodes/XCPIF_ERRSEQ_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_ERR_SEQUENCE</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandErrorCodes/XCPIF_ERRDATAACQNCFG_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_ERR_DAQ_CONFIG</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandErrorCodes/XCPIF_ERRMEMOVF_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_ERR_MEMORY_OVERFLOW</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandErrorCodes/XCPIF_ERRGEN_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_ERR_GENERIC</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandErrorCodes/XCPIF_ERRVRFY_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_ERR_VERIFY</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandErrorCodes/XCPIF_ERRRSRCTMPNOTAVL_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_ERR_RESOURCE_TEMP_NOT_ACCESSIBLE</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                      </PARAMETER-VALUES>
+                    </ECUC-CONTAINER-VALUE>
+                    <ECUC-CONTAINER-VALUE UUID="5531e054-b80c-4cf8-b950-233b56b1232a">
+                      <SHORT-NAME>CommandReturnCodes</SHORT-NAME>
+                      <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandReturnCodes</DEFINITION-REF>
+                      <PARAMETER-VALUES>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandReturnCodes/XCPIF_RTNCMDSYNC_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CRC_CMD_SYNCH</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandReturnCodes/XCPIF_RTNCMDBUSY_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CRC_CMD_BUSY</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandReturnCodes/XCPIF_RTNDAQACTV_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CRC_DAQ_ACTIVE</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandReturnCodes/XCPIF_RTNPRMACTV_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CRC_PRM_ACTIVE</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandReturnCodes/XCPIF_RTNCMDUKWN_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CRC_CMD_UNKNOWN</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandReturnCodes/XCPIF_RTNCMDSYNTAX_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CRC_CMD_SYNTAX</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandReturnCodes/XCPIF_RTNOUTOFRNG_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CRC_OUT_OF_RANGE</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandReturnCodes/XCPIF_RTNWRPROTD_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CRC_WRITE_PROTECTED</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandReturnCodes/XCPIF_RTNACSDENIED_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CRC_ACCESS_DENIED</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandReturnCodes/XCPIF_RTNACSLOCKD_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CRC_ACCESS_LOCKED</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandReturnCodes/XCPIF_RTNPAGENOTVLD_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CRC_PAGE_NOT_VALID</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandReturnCodes/XCPIF_RTNPAGEMODNOTVLD_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CRC_PAGE_MODE_NOT_VALID</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandReturnCodes/XCPIF_RTNSEGNOTVLD_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CRC_SEGMENT_NOT_VALID</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandReturnCodes/XCPIF_RTNSEQ_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CRC_SEQUENCE</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandReturnCodes/XCPIF_RTNDATAACQNCFG_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CRC_DAQ_CONFIG</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandReturnCodes/XCPIF_RTNMEMOVF_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CRC_MEMORY_OVERFLOW</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandReturnCodes/XCPIF_RTNGEN_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CRC_GENERIC</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandReturnCodes/XCPIF_RTNVRFY_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CRC_VERIFY</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/CommandReturnCodes/XCPIF_RTNRSRCTMPNOTAVL_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CRC_RESOURCE_TEMP_NOT_ACCESSIBLE</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                      </PARAMETER-VALUES>
+                    </ECUC-CONTAINER-VALUE>
+                    <ECUC-CONTAINER-VALUE UUID="345e3a63-a708-4580-ba0b-e9136ef30fc2">
+                      <SHORT-NAME>ReturnValues</SHORT-NAME>
+                      <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/ReturnValues</DEFINITION-REF>
+                      <PARAMETER-VALUES>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/ReturnValues/XCPIF_CMDOK_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CMD_OK</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/ReturnValues/XCPIF_CMDPND_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CMD_PENDING</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/ReturnValues/XCPIF_CMDBUSY_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CMD_BUSY</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/ReturnValues/XCPIF_CMDUKWN_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CMD_UNKNOWN</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/ReturnValues/XCPIF_CMDSYNTAX_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CMD_SYNTAX</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/ReturnValues/XCPIF_CMDOUTOFRNG_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CMD_OUT_OF_RANGE</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/ReturnValues/XCPIF_CMDPROTD_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CMD_PROTECTED</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/ReturnValues/XCPIF_CMDDENIED_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CMD_DENIED</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Constants/ReturnValues/XCPIF_CMDERR_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_CMD_ERROR</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                      </PARAMETER-VALUES>
+                    </ECUC-CONTAINER-VALUE>
+                  </SUB-CONTAINERS>
+                </ECUC-CONTAINER-VALUE>
+                <ECUC-CONTAINER-VALUE UUID="28585550-e5cb-4cb6-9bb9-9e9af24cd647">
+                  <SHORT-NAME>Configurations</SHORT-NAME>
+                  <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Configurations</DEFINITION-REF>
+                  <SUB-CONTAINERS>
+                    <ECUC-CONTAINER-VALUE UUID="64868489-3019-4ef0-a4c6-266d0516a388">
+                      <SHORT-NAME>DataAcquisition</SHORT-NAME>
+                      <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Configurations/DataAcquisition</DEFINITION-REF>
+                      <PARAMETER-VALUES>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Configurations/DataAcquisition/XcpEventFunctionName</DEFINITION-REF>
+                          <VALUE>Xcp_Event</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                      </PARAMETER-VALUES>
+                    </ECUC-CONTAINER-VALUE>
+                    <ECUC-CONTAINER-VALUE UUID="fbb699c0-3fff-476f-8123-09f299526266">
+                      <SHORT-NAME>XcpUserFunction</SHORT-NAME>
+                      <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Configurations/XcpUserFunction</DEFINITION-REF>
+                      <PARAMETER-VALUES>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Configurations/XcpUserFunction/ResponseBuffer</DEFINITION-REF>
+                          <VALUE>Xcp_ChannelInfo[XCP_CHANNEL_IDX].ResponseFrame.b</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Configurations/XcpUserFunction/ResponseBufferLength</DEFINITION-REF>
+                          <VALUE>Xcp_ChannelInfo[XCP_CHANNEL_IDX].ResponseFrameLength</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                      </PARAMETER-VALUES>
+                    </ECUC-CONTAINER-VALUE>
+                    <ECUC-CONTAINER-VALUE UUID="872b61ad-8fa5-4c36-a0b4-e23a6cebbd41">
+                      <SHORT-NAME>OnlineCalibration</SHORT-NAME>
+                      <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Configurations/OnlineCalibration</DEFINITION-REF>
+                      <PARAMETER-VALUES>
+                        <ECUC-NUMERICAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-INTEGER-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Configurations/OnlineCalibration/XCPIF_FLSPAGE_CNT_U08</DEFINITION-REF>
+                          <VALUE>0</VALUE>
+                        </ECUC-NUMERICAL-PARAM-VALUE>
+                        <ECUC-NUMERICAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-INTEGER-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Configurations/OnlineCalibration/XCPIF_RAMPAGE_CNT_U08</DEFINITION-REF>
+                          <VALUE>1</VALUE>
+                        </ECUC-NUMERICAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Configurations/OnlineCalibration/XCPIF_MAXCALSEG_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_MAX_SEGMENT</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Configurations/OnlineCalibration/XCPIF_MAXCALPAGE_CNT_U08</DEFINITION-REF>
+                          <VALUE>XCP_MAX_PAGES</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                      </PARAMETER-VALUES>
+                      <SUB-CONTAINERS>
+                        <ECUC-CONTAINER-VALUE UUID="841dbf92-53b0-4fdd-a1ed-de95ab12a6e8">
+                          <SHORT-NAME>XcpAccessModes</SHORT-NAME>
+                          <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Configurations/OnlineCalibration/XcpAccessModes</DEFINITION-REF>
+                          <PARAMETER-VALUES>
+                            <ECUC-NUMERICAL-PARAM-VALUE>
+                              <DEFINITION-REF DEST="ECUC-INTEGER-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Configurations/OnlineCalibration/XcpAccessModes/XCPIF_ONLINECALNOACS_CNT_U08</DEFINITION-REF>
+                              <VALUE>0</VALUE>
+                            </ECUC-NUMERICAL-PARAM-VALUE>
+                            <ECUC-NUMERICAL-PARAM-VALUE>
+                              <DEFINITION-REF DEST="ECUC-INTEGER-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Configurations/OnlineCalibration/XcpAccessModes/XCPIF_ONLINECALECUACS_CNT_U08</DEFINITION-REF>
+                              <VALUE>1</VALUE>
+                            </ECUC-NUMERICAL-PARAM-VALUE>
+                            <ECUC-NUMERICAL-PARAM-VALUE>
+                              <DEFINITION-REF DEST="ECUC-INTEGER-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Configurations/OnlineCalibration/XcpAccessModes/XCPIF_ONLINECALXCPACS_CNT_U08</DEFINITION-REF>
+                              <VALUE>2</VALUE>
+                            </ECUC-NUMERICAL-PARAM-VALUE>
+                            <ECUC-NUMERICAL-PARAM-VALUE>
+                              <DEFINITION-REF DEST="ECUC-INTEGER-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Configurations/OnlineCalibration/XcpAccessModes/XCPIF_ONLINECALXCPANDECUACS_CNT_U08</DEFINITION-REF>
+                              <VALUE>3</VALUE>
+                            </ECUC-NUMERICAL-PARAM-VALUE>
+                          </PARAMETER-VALUES>
+                        </ECUC-CONTAINER-VALUE>
+                      </SUB-CONTAINERS>
+                    </ECUC-CONTAINER-VALUE>
+                    <ECUC-CONTAINER-VALUE UUID="ed3f5285-2def-4953-b61d-990814c26bd8">
+                      <SHORT-NAME>XcpFlashAccess</SHORT-NAME>
+                      <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Configurations/XcpFlashAccess</DEFINITION-REF>
+                      <PARAMETER-VALUES>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Configurations/XcpFlashAccess/XCPIF_MAXFLSADR_CNT_U32</DEFINITION-REF>
+                          <VALUE>0x1FFFF</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                      </PARAMETER-VALUES>
+                    </ECUC-CONTAINER-VALUE>
+                    <ECUC-CONTAINER-VALUE UUID="ba0ed927-f530-4928-91e3-ab7623373289">
+                      <SHORT-NAME>XcpControl</SHORT-NAME>
+                      <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Configurations/XcpControl</DEFINITION-REF>
+                      <PARAMETER-VALUES>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Configurations/XcpControl/XCPIF_XCPCTRLDI_CNT_U08</DEFINITION-REF>
+                          <VALUE>kXcp_Control_Disable</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Configurations/XcpControl/XCPIF_XCPCTRLENA_CNT_U08</DEFINITION-REF>
+                          <VALUE>kXcp_Control_Enable</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Configurations/XcpControl/XcpDisableMacro</DEFINITION-REF>
+                          <VALUE>XCP_DEACTIVATE</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                        <ECUC-TEXTUAL-PARAM-VALUE>
+                          <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_XcpIf/XcpIf/XcpDriverAbstratction/Configurations/XcpControl/XcpEnableMacro</DEFINITION-REF>
+                          <VALUE>XCP_ACTIVATE</VALUE>
+                        </ECUC-TEXTUAL-PARAM-VALUE>
+                      </PARAMETER-VALUES>
+                    </ECUC-CONTAINER-VALUE>
+                  </SUB-CONTAINERS>
+                </ECUC-CONTAINER-VALUE>
+              </SUB-CONTAINERS>
+            </ECUC-CONTAINER-VALUE>
+          </CONTAINERS>
+        </ECUC-MODULE-CONFIGURATION-VALUES>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

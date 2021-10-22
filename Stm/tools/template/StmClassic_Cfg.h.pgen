@@ -1,0 +1,162 @@
+/**
+*  \file
+*
+*  \brief       BMW SWC StmClassic_Cfg
+*
+*  Configuration file for Stm
+*
+*  \project     BMW Platform Software
+*
+*  \copyright   BMW AG 2017
+*
+*  \version     5.2.0
+*
+*  \remarks     File is generated with PAGe
+*
+*/
+
+/*------------------------------------------------------------------------------
+*
+*  THIS FILE WAS GENERATED. DO NOT MODIFY!
+*
+*  GENERATOR       : %{= generation_tool() }% %{= generation_version_info() }%
+*
+*  GENERATION TIME : %{= generation_timestamp() }%
+*
+------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+
+#ifndef STMCLASSIC_CFG_H
+#define STMCLASSIC_CFG_H
+
+/*------------------------------------------------------------------------------
+                      Include Section
+------------------------------------------------------------------------------*/
+
+#include "StmClassic_Version.h"        /* Stm Version */
+#include "BUtil/PlatformTypes.h"       /* BMW standard types */
+
+/*------------------------------------------------------------------------------
+                      Macros
+------------------------------------------------------------------------------*/
+
+/**
+ * \brief check version of the module
+ */
+#if (!StmClassic_CHECK_VERSION(5,2,0))
+   #error "Version of StmClassic_Cfg.h does not match the Classic adapter version!"
+#endif
+
+%{#
+stmEnergyStateEnabled = False
+stmVehicleStateEnabled = False
+stmCentralErrorLockEnabled = False
+}%
+%{@ ref("StmClassic/StmFeatureActivation") }%
+%{#
+   stmEnergyStateEnabled |= value(ref("StmEnergyStateEnabled"))
+   stmVehicleStateEnabled |= value(ref("StmVehicleStateEnabled"))
+   stmCentralErrorLockEnabled |= value(ref("StmCentralErrorLockEnabled"))
+}%\
+%{@}%
+
+%{: if stmEnergyStateEnabled }%\
+#define STM_ENERGY_STATE_ENABLED          ( STD_ON )
+%{: else }%\
+#define STM_ENERGY_STATE_ENABLED          ( STD_OFF )
+%{:}%\
+
+%{: if stmVehicleStateEnabled }%\
+#define STM_VEHICLE_STATE_ENABLED  ( STD_ON )
+%{: else }%\
+#define STM_VEHICLE_STATE_ENABLED  ( STD_OFF )
+%{:}%\
+
+%{#
+stmComVariant = value(ref("StmClassic/StmGeneral/StmComVariant"))
+}%\
+
+%{: if stmComVariant == "STM_COM_FIELDS" }%\
+/**
+ * \brief Distinguish between Ethernet and Can/Flexray for different timeout handling
+ */
+#define STM_COM_VARIANT_FIELDS STD_ON
+%{: else }%\
+/**
+ * \brief Distinguish between Ethernet and Can/Flexray for different timeout handling
+ */
+#define STM_COM_VARIANT_FIELDS STD_OFF
+%{:}%\
+
+
+%{: if ((stmCentralErrorLockEnabled) and (stmComVariant == "STM_COM_FIELDS")) }%\
+%{#
+into(container("StmClassic/StmEventSupervision"))
+stmEventSupervisionCycle = int(value(ref("StmEventSupervisionCycle"))*1000.0)
+stmEventFieldGetResponseTime = int(value(ref("StmEventFieldGetResponseTime"))*1000.0)
+leave()
+into(container("StmClassic/StmGeneral"))
+stmInitialCentralErrorLockTimeout = int(value(ref("StmInitialCentralErrorLockTimeout"))*1000.0)
+stmCentralErrorLockTimeout = int(value(ref("StmCentralErrorLockTimeout"))*1000.0)
+leave()
+}%\
+
+/**
+ * \brief Cycle time in ms for Stm main function
+ */
+#define STM_CYCLE_TIME  %{= stmEventSupervisionCycle }%u
+
+/**
+ * \brief This is the maximum runtime/timespan in ms the STM module waits for a return of a remote field-getter C/S call to return the value.
+ */
+#define STM_MAX_WAIT_FOR_C_S_RESPONSE_TIME  %{= stmEventFieldGetResponseTime }%u
+%{:}%\
+
+
+%{: if stmCentralErrorLockEnabled }%\
+%{#
+into(container("StmClassic/StmGeneral"))
+stmInitialCentralErrorLockTimeout = int(value(ref("StmInitialCentralErrorLockTimeout"))*1000.0)
+stmCentralErrorLockTimeout = int(value(ref("StmCentralErrorLockTimeout"))*1000.0)
+leave()
+}%\
+
+/**
+ * \brief Timeout time for CEL level 1 timeout in ms
+ * \lhref  DMA_PA_8466
+ */
+#define STM_CEL_LVL_1_TIMEOUT_TIME  %{= stmInitialCentralErrorLockTimeout }%u
+
+/**
+ * \brief Timeout time for CEL level 2 timeout in ms
+ *  \lhref  DMA_PA_8466
+ */
+#define STM_CEL_LVL_2_TIMEOUT_TIME  %{= stmCentralErrorLockTimeout }%u
+%{:}%\
+
+%{#
+stmConfigSets = count(ref("StmClassic/StmFeatureActivation"))
+}%
+
+%{: if stmConfigSets > 1 }%\
+/**
+ * \brief Post Build Option active
+ */
+#define STM_MULTIPLE_CONFIG_SETS_EXIST  ( STD_ON )
+%{:}%\
+
+%{: if stmConfigSets == 1 }%\
+/**
+ * \brief Post Build Option active
+ */
+#define STM_MULTIPLE_CONFIG_SETS_EXIST    ( STD_OFF )
+%{:}%\
+
+/**
+ * \brief Option to activate Code in PostBuild File
+ */
+#define STM_PBCFG_ENABLED STM_MULTIPLE_CONFIG_SETS_EXIST
+
+#endif /* STMCLASSIC_CFG_H */
+
+/*--- End of file ------------------------------------------------------------*/

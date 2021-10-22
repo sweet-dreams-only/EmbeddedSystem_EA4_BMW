@@ -1,0 +1,141 @@
+<#@ AutosarXml processor="ArDirectiveProcessor" requires="arPrefix='ar';arNamespace='http://autosar.org/schema/r4.0'" #>
+<#@ template inherits="AutosarDirectiveProcessor.ArGtcBase" debug="false" #>
+<#@ output extension="" #>
+<#
+   bool enableSecureVin = Exists(Xp.ContainerAtDefRefTo("Vin/SecureVin"));
+   if (enableSecureVin) {
+
+#>
+/*----------------------------------------------------------------------------*/
+/**
+ * \file
+ *
+*  \brief       BMW SWC Vin
+*
+*  This file contains the postbuild configuration of Vin.
+*
+ * \project     BMW AUTOSAR Core
+ *
+ * \par         To be changed by user:
+ *              [no]
+ *
+ * \copyright   BMW AG 2015 - 2017
+ *
+ *  \version     3.5.0
+ *
+ */
+/*----------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------
+                      Include Section
+-------------------------------------------------------------------------------*/
+
+#include "Vin_PBCfg.h"
+
+
+/*------------------------------------------------------------------------------
+                      MISRA-Deviations
+------------------------------------------------------------------------------*/
+
+/* Violation of MISRA rule 19.1, Reason: Including Vin_MemMap.h is necessary throughout
+   the file according to memory abstraction, see PRQA: 5087 */
+
+
+/*------------------------------------------------------------------------------
+                        Local Macros
+-------------------------------------------------------------------------------*/
+
+/* check version of the module */
+#if (!Vin_CHECK_VERSION(3,5,0))
+   #error "Version of Vin_PBCfg.c does not match the version of the module!"
+#endif
+
+
+/*------------------------------------------------------------------------------
+                      Global Constants
+------------------------------------------------------------------------------*/
+
+#define Vin_START_SEC_CONST_UNSPECIFIED
+#include "Vin_MemMap.h"  /* PRQA S 5087 */
+<#
+
+   ChangeContext(null);
+   ChangeContext(Xp.ModuleConfAtDefRefTo("Vin"));
+   int numberOfMultiConfigs = Count(Xp.ContainerAtDefRefTo("MultiConfig"));
+
+   string firstConfigSet = "";
+
+#>
+<# !LOOP(Xp.ContainerAtDefRefTo("MultiConfig")) #>
+<# if ("" == firstConfigSet) firstConfigSet = ValueOf("ar:SHORT-NAME"); #>
+
+CONST(Vin_PBConfigType, Vin_CONST) <#=ValueOf("ar:SHORT-NAME") #> = {
+   <#=ValueOf(Xp.ValueAtDefRefTo("SSVId")) #>
+};
+
+<# !ENDLOOP #>
+#define Vin_STOP_SEC_CONST_UNSPECIFIED
+#include "Vin_MemMap.h"  /* PRQA S 5087 */
+
+
+/*------------------------------------------------------------------------------
+                      Global Variables
+-------------------------------------------------------------------------------*/
+
+#define Vin_START_SEC_VAR_INIT_UNSPECIFIED
+#include "Vin_MemMap.h"  /* PRQA S 5087 */
+
+P2CONST(Vin_PBConfigType, Vin_VAR, Vin_APPL_CONST) Vin_PBConfigSetPtr = &<#=firstConfigSet #>;
+
+#define Vin_STOP_SEC_VAR_INIT_UNSPECIFIED
+#include "Vin_MemMap.h"  /* PRQA S 5087 */
+
+/*------------------------------------------------------------------------------
+                      Local Constants
+------------------------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------------------
+                      Local Functions Prototypes
+-------------------------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------------------
+                      Local Functions
+-------------------------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------------------
+                      Global Functions
+-------------------------------------------------------------------------------*/
+
+#define Vin_START_SEC_CODE
+#include "Vin_MemMap.h"  /* PRQA S 5087 */
+
+<#   if (numberOfMultiConfigs > 1) { #>
+/**
+ * \brief Function to select Post Build configuration
+ */
+extern FUNC(void, Vin_CODE) Vin_SetConfiguration
+(
+    P2CONST(Vin_PBConfigType, AUTOMATIC, Vin_APPL_CONST) selectedConfig
+)
+{
+   Vin_PBConfigSetPtr = selectedConfig;
+}
+
+<#   } #>
+
+#define Vin_STOP_SEC_CODE
+#include "Vin_MemMap.h"  /* PRQA S 5087 */
+
+<# } /* if (ValueOf( Xp.ValueAtDefRefTo("EnableEcu") )) */
+   else
+   {
+#>
+/*----------------------------------------------------------------------------*/
+/* This File is not used for this configuration                               */
+/*----------------------------------------------------------------------------*/
+typedef char dummy;
+
+<# } /* if (ValueOf( Xp.ValueAtDefRefTo("EnableEcu") )) */ #>

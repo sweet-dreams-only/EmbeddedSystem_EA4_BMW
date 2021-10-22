@@ -1,0 +1,40 @@
+#
+# CMakeLists.txt for Stm Classic Module
+#
+
+cmake_minimum_required(VERSION 3.1)
+SET(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
+LIST(INSERT CMAKE_MODULE_PATH 0 "$ENV{BPS_CMAKE_MODULE_PATH}")
+
+project(Stm.classic C CXX)
+include (BAC)
+
+bps_module_adapter(
+   Stm
+   classic
+
+   SRC
+      Stm_ComAdapter.c
+      Stm_ErrMemAdapter.c
+      Stm_MgmtAdapter.c
+      Stm_TimerAdapter.c
+   GENERATE/INCLUDE
+      Stm_Cfg.h.pgen
+      StmClassic_Cfg.h.pgen
+      StmClassic_PBCfg.h.pgen
+      StmClassic_Version.h.pgen
+   GENERATE/META
+      Stm_interfaces.arxml.pgen
+      Stm_internal.arxml.pgen
+   GENERATE/SRC
+      StmClassic_PBCfg.c.pgen
+   META
+      Stm_ext_interfaces.arxml
+   CFGDESC
+      StmClassic_paramdef.arxml
+   GENERATE/INPUT
+      StmClassic
+   DOC
+      intmanual
+)
+

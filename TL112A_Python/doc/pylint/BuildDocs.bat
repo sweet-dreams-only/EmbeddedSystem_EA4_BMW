@@ -1,0 +1,1 @@
+ronn --html --manual="Python Script Verification Tool" --organization="Nxtr Automotive" pylint.1.ronn

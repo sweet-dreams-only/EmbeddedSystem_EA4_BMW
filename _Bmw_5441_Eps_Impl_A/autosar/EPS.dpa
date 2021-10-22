@@ -1,0 +1,889 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProjectAssistant Version="5.15.22 SP3">
+    <General>
+        <Name>EPS</Name>
+        <Version>1.0</Version>
+        <Author>cz7lt6</Author>
+        <Description>EA4 BMW FAAR_WE EPS Project</Description>
+    </General>
+    <Environment>
+        <Platform>Canoeemu</Platform>
+        <Derivative UUID="6F3C9D81-1C9D-46C0-A1DF-77F670B6F866">RH850_1363</Derivative>
+        <Compiler UUID="BBC47DF5-C78B-4E8E-8F86-0EF503FD3198">GreenHills</Compiler>
+        <PinLayout></PinLayout>
+        <SipIds>
+            <SipId>CBD1700369_D04</SipId>
+        </SipIds>
+        <TargetType>Real Target</TargetType>
+        <PostBuildLoadableSupport>false</PostBuildLoadableSupport>
+        <PostBuildSelectableSupport>false</PostBuildSelectableSupport>
+    </Environment>
+    <Folders>
+        <ECUC>.\Config\ECUC</ECUC>
+        <GenData>../generate</GenData>
+        <GenDataVtt>.\Appl\GenDataVtt</GenDataVtt>
+        <Source>../src</Source>
+        <ServiceComponents>../generate/ServiceComponents</ServiceComponents>
+        <Logs>../doc/log</Logs>
+        <SIP>.\..\tools\SIP</SIP>
+        <StartMenu></StartMenu>
+        <ApplicationComponentFolders>
+            <ApplicationComponentFolder>../generate/ApplicationComponents</ApplicationComponentFolder>
+        </ApplicationComponentFolders>
+        <BswInternalBehaviour>.\Config\InternalBehavior</BswInternalBehaviour>
+        <McData>../generate/McData</McData>
+        <DefinitionRestriction>.\DefRestrict</DefinitionRestriction>
+        <AUTOSAR>../generate/AUTOSAR</AUTOSAR>
+    </Folders>
+    <Tools>
+        <DEV>C:\Component\FAAR_WE_Synergy\TL102A_Davinci\tools\Developer\Bin\DaVinciDEV.exe</DEV>
+        <VTT UseLatest="true"></VTT>
+    </Tools>
+    <Input>
+        <ECUEX>Config\System\MergedSystemDescriptionExtract.arxml</ECUEX>
+        <Options>
+            <IgnoreUuidsSystemDescriptionFiles>false</IgnoreUuidsSystemDescriptionFiles>
+            <IgnoreUuidsStandardConfigurationFiles>false</IgnoreUuidsStandardConfigurationFiles>
+        </Options>
+    </Input>
+    <References>
+        <DVWorkspace>.\Config\Developer\EPS.dcf</DVWorkspace>
+        <FlatMap>Config\System\FlatMap.arxml</FlatMap>
+        <FlatECUEX>Config\System\FlatExtract.arxml</FlatECUEX>
+        <OEMCommunicationExtract>Config\System\MergedSystemDescriptionExtract_Communication.arxml</OEMCommunicationExtract>
+        <EcucFileReferences/>
+    </References>
+    <EcucSplitter>
+        <Configuration>.\Config\ECUC\EPS.ecuc.arxml</Configuration>
+        <Splitter File=".\Config\ECUC\EPS_BswM_ecuc.arxml">
+            <Module Name="BswM"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_Det_ecuc.arxml">
+            <Module Name="Det"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_EcuM_ecuc.arxml">
+            <Module Name="EcuM"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_Mcu_ecuc.arxml">
+            <Module Name="Mcu"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_Fls_ecuc.arxml">
+            <Module Name="Fls"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_Wdg_ecuc.arxml">
+            <Module Name="Wdg"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_Crc_ecuc.arxml">
+            <Module Name="Crc"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_Fee_ecuc.arxml">
+            <Module Name="Fee"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_MemIf_ecuc.arxml">
+            <Module Name="MemIf"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_NvM_ecuc.arxml">
+            <Module Name="NvM"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_WdgIf_ecuc.arxml">
+            <Module Name="WdgIf"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_WdgM_ecuc.arxml">
+            <Module Name="WdgM"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_ExcpnHndlg_ecuc.arxml">
+            <Module Name="ExcpnHndlg"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_ElecGlbPrm_ecuc.arxml">
+            <Module Name="ElecGlbPrm"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_IoHwAb_ecuc.arxml">
+            <Module Name="IoHwAb"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_SyncCrc_ecuc.arxml">
+            <Module Name="SyncCrc"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_Adc0CfgAndUse_ecuc.arxml">
+            <Module Name="Adc0CfgAndUse"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_Adc1CfgAndUse_ecuc.arxml">
+            <Module Name="Adc1CfgAndUse"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_FlsMem_ecuc.arxml">
+            <Module Name="FlsMem"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_ChkPt_ecuc.arxml">
+            <Module Name="ChkPt"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_Com_ecuc.arxml">
+            <Module Name="Com"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_EcuC_ecuc.arxml">
+            <Module Name="EcuC"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_FrIf_ecuc.arxml">
+            <Module Name="FrIf"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_FrSM_ecuc.arxml">
+            <Module Name="FrSM"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_FrTp_ecuc.arxml">
+            <Module Name="FrTp"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_FrTrcv_ecuc.arxml">
+            <Module Name="FrTrcv"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_Fr_ecuc.arxml">
+            <Module Name="Fr"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_IpduM_ecuc.arxml">
+            <Module Name="IpduM"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_PduR_ecuc.arxml">
+            <Module Name="PduR"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_Srv_ecuc.arxml">
+            <Module Name="Srv"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_Vin_ecuc.arxml">
+            <Module Name="Vin"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_GateDrv0Ctrl_ecuc.arxml">
+            <Module Name="GateDrv0Ctrl"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_Spi_ecuc.arxml">
+            <Module Name="Spi"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_Dio_ecuc.arxml">
+            <Module Name="Dio"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_MotCtrlMgr_ecuc.arxml">
+            <Module Name="MotCtrlMgr"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_NvMProxy_ecuc.arxml">
+            <Module Name="NvMProxy"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_NxtrSwIds_ecuc.arxml">
+            <Module Name="NxtrSwIds"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_ComM_ecuc.arxml">
+            <Module Name="ComM"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_NxtrMfgSrv_ecuc.arxml">
+            <Module Name="NxtrMfgSrv"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_E2EPW_ecuc.arxml">
+            <Module Name="E2EPW"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_Rte_ecuc.arxml">
+            <Module Name="Rte"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_Xcp_ecuc.arxml">
+            <Module Name="Xcp"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_MotAg0Meas_ecuc.arxml">
+            <Module Name="MotAg0Meas"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_BmwHwAgArbnAndEotPosn_ecuc.arxml">
+            <Module Name="BmwHwAgArbnAndEotPosn"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_VrfyCritReg_ecuc.arxml">
+            <Module Name="VrfyCritReg"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_DiagcMgr_ecuc.arxml">
+            <Module Name="DiagcMgr"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_XcpIf_ecuc.arxml">
+            <Module Name="XcpIf"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_RvsBattProtn_ecuc.arxml">
+            <Module Name="RvsBattProtn"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_BattRtnCurr_ecuc.arxml">
+            <Module Name="BattRtnCurr"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_DlogClassic_ecuc.arxml">
+            <Module Name="DlogClassic"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_Dlog_ecuc.arxml">
+            <Module Name="Dlog"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_StdDiagClassic_ecuc.arxml">
+            <Module Name="StdDiagClassic"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_StdDiag_ecuc.arxml">
+            <Module Name="StdDiag"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_Omc_ecuc.arxml">
+            <Module Name="Omc"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_Darh_ecuc.arxml">
+            <Module Name="Darh"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_DarhClassic_ecuc.arxml">
+            <Module Name="DarhClassic"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_StmClassic_ecuc.arxml">
+            <Module Name="StmClassic"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_RmhClassic_ecuc.arxml">
+            <Module Name="RmhClassic"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_SysTime_ecuc.arxml">
+            <Module Name="SysTime"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_SysTimeClassic_ecuc.arxml">
+            <Module Name="SysTimeClassic"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_Crypto_ecuc.arxml">
+            <Module Name="Crypto"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_CryptoClassic_ecuc.arxml">
+            <Module Name="CryptoClassic"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_BmwTunSetHndlr_ecuc.arxml">
+            <Module Name="BmwTunSetHndlr"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_CodingClassic_ecuc.arxml">
+            <Module Name="CodingClassic"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_Os_ecuc.arxml">
+            <Module Name="Os"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_MotAg3Meas_ecuc.arxml">
+            <Module Name="MotAg3Meas"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_MotAg4Meas_ecuc.arxml">
+            <Module Name="MotAg4Meas"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_SerlComTrcvIf_ecuc.arxml">
+            <Module Name="SerlComTrcvIf"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_MotAg1Meas_ecuc.arxml">
+            <Module Name="MotAg1Meas"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_TunSelnMngt_ecuc.arxml">
+            <Module Name="TunSelnMngt"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_Dcm_ecuc.arxml">
+            <Module Name="Dcm"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_Dem_ecuc.arxml">
+            <Module Name="Dem"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_Port_ecuc.arxml">
+            <Module Name="Port"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_EcuTMeas_ecuc.arxml">
+            <Module Name="EcuTMeas"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_Coding_ecuc.arxml">
+            <Module Name="Coding"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\EPS_DlogShared_ecuc.arxml">
+            <Module Name="DlogShared"/>
+        </Splitter>
+        <OwnFolderForEachSplitter>false</OwnFolderForEachSplitter>
+    </EcucSplitter>
+    <Display>
+        <FileSet Id="" ecuInstance="EPS" CS="939adac7" ecuInstanceDiagnostic="EPS">
+            <File Order="0" Hash="4ab87c63d77c96bd6fc93689de184bb0">$(DpaProjectFolder)\Config\System\BNE_EPS_Boardnet.arxml</File>
+            <File Order="1" Hash="43b9aa55671aef395b8598bbdeb35e12">$(DpaProjectFolder)\Config\System\System_EPS.arxml</File>
+            <File Order="2" Hash="ba0cdb52266278089ac569b93b65d4fe">$(DpaProjectFolder)\Config\System\Units_EPS.arxml</File>
+            <File Order="3" Hash="b2fcb72464009144f260bef012b4e849">$(DpaProjectFolder)\Config\System\Diagnostics_EPS.arxml</File>
+            <Psc Order="0" Hash="8b12c7de11bcfcd38691c13bfd931ab9">$(DpaProjectFolder)\Config\BMW\Darh_paramconf.arxml</Psc>
+            <Psc Order="1" Hash="54f0834223fd0167f239a130cffa5d87">$(DpaProjectFolder)\Config\BMW\DarhClassic_paramconf.arxml</Psc>
+            <Psc Order="2" Hash="fcc6934c1390a37a6fc0b58edc030147">$(DpaProjectFolder)\Config\BMW\StdDiag_paramconf.arxml</Psc>
+            <Psc Order="3" Hash="98b478ee25a1055aaa626564b5a3b0b">$(DpaProjectFolder)\Config\BMW\StdDiagClassic_paramconf.arxml</Psc>
+            <Psc Order="4" Hash="79cbaf91aa5e22fd3808714818a51f09">$(DpaProjectFolder)\Config\BMW\Stm_paramconf.arxml</Psc>
+            <Psc Order="5" Hash="eabcc2f691beef9b086fc60c58169d8f">$(DpaProjectFolder)\Config\BMW\SysTime_paramconf.arxml</Psc>
+            <Psc Order="6" Hash="5c153d3a417720e79ae8947a3e91dcc7">$(DpaProjectFolder)\Config\BMW\SysTimeClassic_paramconf.arxml</Psc>
+        </FileSet>
+        <Merge>
+            <Path Id="COMPOSITION-SW-COMPONENT-TYPE" ARPath="/BMW/SystemComposition/SystemComponent"/>
+            <Path Id="ECU-INSTANCE" ARPath="/BMW/Boardnet/Ecus/EcuInstances/EPS"/>
+            <Path Id="ROOT-SW-COMPOSITION-PROTOTYPE" ARPath="/Systems/EPS/SystemComponentPrototype"/>
+            <Path Id="SYSTEM" ARPath="/Systems/EPS"/>
+        </Merge>
+    </Display>
+    <ECUC>
+        <Active RootPackageName="/ActiveEcuC/ActiveEcuC">Config\ECUC\EPS.ecuc.arxml</Active>
+        <Derived RootPackageName="/InitialEcuC/InitialEcuC">Config\ECUC\EPS.ecuc.Initial.arxml</Derived>
+    </ECUC>
+    <PostBuildLoadable RTEDataFreezeChecksum="" CurrentConfigurationPhase="PRE_COMPILE"/>
+    <DEVSettings>
+        <SelectiveImport>All</SelectiveImport>
+        <ObjectLocking>false</ObjectLocking>
+        <ImportModePreset>true</ImportModePreset>
+    </DEVSettings>
+    <ToolSettings>
+        <Generators>
+            <Settings Name="com.vector.cfg.gui.core.generators.ExtGenStepOrder">
+                <Setting Value="INTERNAL_GENERATION|BUtil|Coding|Crypto|Dlog|DlogShared|Darh|Omc|Rmh|Srv|StdDiag|Stm|SysTime|Vin|Dio|Fls|Mcu|Port|Spi|Wdg|Adc0CfgAndUse|Adc1CfgAndUse|BattRtnCurr|BmwTunSetHndlr|BmwHwAgArbnAndEotPosn|CmnMfgSrvIf|DiagcMgr|EcuTMeas|ElecGlbPrm|ExcpnHndlg|FlsMem|GateDrv0Ctrl|MotAg0Meas|MotAg1Meas|MotAg3Meas|MotAg4Meas|MotCtrlMgr|NxtrMfgSrv|NvMProxy|NxtrSwIds|RvsBattProtn|SerlComTrcvIf|SyncCrc|TunSelnMngt|VrfyCritReg|XcpIf" Name="Order"/>
+            </Settings>
+            <Settings Name="com.vector.cfg.gui.core.generators.ExtGenSteps">
+                <Settings Name="Adc0CfgAndUse">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="Adc1CfgAndUse">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="BUtil">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="BattRtnCurr">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="BmwHwAgArbnAndEotPosn">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="BmwTunSetHndlr">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="CmnMfgSrvIf">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="Coding">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="Crypto">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="Darh">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="DiagcMgr">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="Dio">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="Dlog">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="DlogShared">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="EcuTMeas">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="ElecGlbPrm">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="ExcpnHndlg">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="Fls">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="FlsMem">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="GateDrv0Ctrl">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="Mcu">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="MotAg0Meas">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="MotAg1Meas">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="MotAg3Meas">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="MotAg4Meas">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="MotCtrlMgr">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="NvMProxy">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="NxtrMfgSrv">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="NxtrSwIds">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="Omc">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="Port">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="Rmh">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="RvsBattProtn">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="SerlComTrcvIf">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="Spi">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="Srv">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="StdDiag">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="Stm">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="SyncCrc">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="SysTime">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="TunSelnMngt">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="Vin">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="VrfyCritReg">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="Wdg">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+                <Settings Name="XcpIf">
+                    <Setting Value="false" Name="Active"/>
+                </Settings>
+            </Settings>
+            <Settings Name="com.vector.cfg.gui.core.generators.GeneratedModules">
+                <Setting Value="false" Name="BswM"/>
+                <Setting Value="false" Name="Com"/>
+                <Setting Value="false" Name="ComM"/>
+                <Setting Value="false" Name="Crc"/>
+                <Setting Value="false" Name="Dcm"/>
+                <Setting Value="false" Name="Dem"/>
+                <Setting Value="false" Name="Det"/>
+                <Setting Value="false" Name="DlogShared"/>
+                <Setting Value="false" Name="EcuC"/>
+                <Setting Value="false" Name="EcuM"/>
+                <Setting Value="false" Name="Fee"/>
+                <Setting Value="false" Name="Fr"/>
+                <Setting Value="false" Name="FrIf"/>
+                <Setting Value="false" Name="FrSM"/>
+                <Setting Value="false" Name="FrTp"/>
+                <Setting Value="false" Name="FrTrcv"/>
+                <Setting Value="false" Name="IoHwAb"/>
+                <Setting Value="false" Name="IpduM"/>
+                <Setting Value="false" Name="MemIf"/>
+                <Setting Value="false" Name="NvM"/>
+                <Setting Value="false" Name="Os"/>
+                <Setting Value="false" Name="PduR"/>
+                <Setting Value="false" Name="Rte"/>
+                <Setting Value="false" Name="WdgIf"/>
+                <Setting Value="false" Name="WdgM"/>
+                <Setting Value="false" Name="Xcp"/>
+            </Settings>
+            <Settings Name="com.vector.cfg.gui.core.generators.GenerationTarget">
+                <Setting Value="Real Target" Name="TargetType"/>
+            </Settings>
+            <Settings Name="com.vector.cfg.gui.core.generators.GeneratorsWithoutModuleDef">
+                <Setting Value="false" Name="/MICROSAR/E2EPW"/>
+                <Setting Value="false" Name="/MICROSAR/McDataConv"/>
+            </Settings>
+        </Generators>
+        <Misc>
+            <Settings Name="com.vector.cfg.gen.core.bswmdmigration.internal.service.BswImplVersionPersistor">
+                <Settings Name="|MICROSAR|BswM">
+                    <Setting Value="9.2.0" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|MICROSAR|Cal">
+                    <Setting Value="2.1.2" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|MICROSAR|Com">
+                    <Setting Value="13.3.2" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|MICROSAR|ComM">
+                    <Setting Value="8.1.1" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|MICROSAR|Crc">
+                    <Setting Value="5.4.1" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|MICROSAR|Dcm">
+                    <Setting Value="8.6.1" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|MICROSAR|Dem">
+                    <Setting Value="13.6.2" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|MICROSAR|Det">
+                    <Setting Value="10.0.0" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|MICROSAR|E2EPW">
+                    <Setting Value="1.0.0" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|MICROSAR|EcuC">
+                    <Setting Value="1.0.0" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|MICROSAR|EcuM">
+                    <Setting Value="8.0.2" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|MICROSAR|Fee_30_SmallSector|Fee">
+                    <Setting Value="2.0.0" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|MICROSAR|FrIf">
+                    <Setting Value="5.1.2" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|MICROSAR|FrSM">
+                    <Setting Value="2.2.1" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|MICROSAR|FrTp">
+                    <Setting Value="2.4.3" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|MICROSAR|FrTrcv_30_Tja1082|FrTrcv">
+                    <Setting Value="1.0.2" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|MICROSAR|Fr_V85xEray|Fr">
+                    <Setting Value="5.0.1" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|MICROSAR|IoHwAb">
+                    <Setting Value="3.0.0" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|MICROSAR|IpduM">
+                    <Setting Value="6.6.4" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|MICROSAR|MemIf">
+                    <Setting Value="3.3.1" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|MICROSAR|NvM">
+                    <Setting Value="5.7.0" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|MICROSAR|Os">
+                    <Setting Value="2.13.0" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|MICROSAR|PduR">
+                    <Setting Value="10.0.0" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|MICROSAR|Rte">
+                    <Setting Value="4.16.0" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|MICROSAR|WdgIf">
+                    <Setting Value="5.2.0" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|MICROSAR|WdgM">
+                    <Setting Value="5.2.1" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|MICROSAR|Xcp">
+                    <Setting Value="4.0.0" Name="BswImplSwVersion"/>
+                </Settings>
+                <Settings Name="|Nxtr|EcucDefs_SyncCrc|SyncCrc">
+                    <Setting Value="5.0.0" Name="BswImplSwVersion"/>
+                </Settings>
+            </Settings>
+            <Settings Name="com.vector.cfg.gen.core.gencore.internal.aov.AutomaticOnDemandValidationConfigurationService">
+                <Setting Value="rO0ABXNyAGpjb20udmVjdG9yLmNmZy5nZW4uY29yZS5nZW5jb3JlLmludGVybmFsLmFvdi5BdXRv&#xA;bWF0aWNPbkRlbWFuZFZhbGlkYXRpb25Db25maWd1cmF0aW9uU2VydmljZSRQZXJzaXN0ZWREYXRh&#xA;pcjrmQ6cuakCAAJaAAlhY3RpdmF0ZWRMABJkZWFjdGl2YXRlZE1vZHVsZXN0ABZMamF2YS91dGls&#xA;L0NvbGxlY3Rpb247eHABc3IANmNvbS5nb29nbGUuY29tbW9uLmNvbGxlY3QuSW1tdXRhYmxlTGlz&#xA;dCRTZXJpYWxpemVkRm9ybQAAAAAAAAAAAgABWwAIZWxlbWVudHN0ABNbTGphdmEvbGFuZy9PYmpl&#xA;Y3Q7eHB1cgATW0xqYXZhLmxhbmcuT2JqZWN0O5DOWJ8QcylsAgAAeHAAAAAKc3IANWNvbS52ZWN0&#xA;b3IuY2ZnLm1vZGVsLmFjY2Vzcy5EZWZSZWYkU2VyaWFsaXphdGlvblByb3h5NnUB4bS2W7ACAAJM&#xA;AB5kZWZSZWZTdHJpbmdXaXRob3V0UGFja2FnZVBhcnR0ABJMamF2YS9sYW5nL1N0cmluZztMABlw&#xA;YWNrYWdlUGFydE9mRGVmUmVmU3RyaW5ncQB+AAl4cHQAA0ZlZXQAHC9NSUNST1NBUi9GZWVfMzBf&#xA;U21hbGxTZWN0b3JzcQB+AAh0AARFY3VDdAAJL01JQ1JPU0FSc3EAfgAIdAAFTWVtSWZxAH4AD3Nx&#xA;AH4ACHQAA0NyY3EAfgAPc3EAfgAIdAAFV2RnSWZxAH4AD3NxAH4ACHQABUUyRVBXcQB+AA9zcQB+&#xA;AAh0AARXZGdNcQB+AA9zcQB+AAh0AANEY21xAH4AD3NxAH4ACHQABkZyVHJjdnQAGy9NSUNST1NB&#xA;Ui9GclRyY3ZfMzBfVGphMTA4MnNxAH4ACHQABklvSHdBYnEAfgAP" Name="Data"/>
+            </Settings>
+            <Settings Name="com.vector.cfg.gui.pse.pages.generators">
+                <Settings Name="BuildVipProject"/>
+                <Settings Name="CustomWorkflowExecution"/>
+            </Settings>
+            <Settings Name="com.vector.cfg.persistency.internal.folder">
+                <Settings Name="TargetFolderManager"/>
+            </Settings>
+            <Settings Name="com.vector.cfg.workflow.project.model">
+                <Settings Name="DiagnosticsDataModifier">
+                    <Setting Value="5.16.35 SP2" Name="Version"/>
+                </Settings>
+                <Settings Name="LegacyConverter">
+                    <Setting Value="1.8.19" Name="Version"/>
+                </Settings>
+            </Settings>
+        </Misc>
+    </ToolSettings>
+    <TopDownServiceConfiguration>
+        <NvM>false</NvM>
+    </TopDownServiceConfiguration>
+    <Miscellaneous>
+        <AmdGenerateDebugData>false</AmdGenerateDebugData>
+        <AutomaticSyncSystemDescription>false</AutomaticSyncSystemDescription>
+    </Miscellaneous>
+    <SwctGeneration>
+        <Component Name="McalErrHndlg" GenerationEnabled="false"/>
+        <Component Name="CDD_NxtrTi" GenerationEnabled="false"/>
+        <Component Name="NxtrMath" GenerationEnabled="false"/>
+        <Component Name="McuErrInj" GenerationEnabled="false"/>
+        <Component Name="CDD_ExcpnHndlg" GenerationEnabled="false"/>
+        <Component Name="DiagcMgr" GenerationEnabled="false"/>
+        <Component Name="DiagcMgrProxyAppl10" GenerationEnabled="false"/>
+        <Component Name="DiagcMgrStub" GenerationEnabled="false"/>
+        <Component Name="SysStMod" GenerationEnabled="false"/>
+        <Component Name="CDD_NvMProxy" GenerationEnabled="false"/>
+        <Component Name="CDD_EcmOutpAndDiagc" GenerationEnabled="false"/>
+        <Component Name="CDD_GuardCfgAndDiagc" GenerationEnabled="false"/>
+        <Component Name="CDD_SyncCrc" GenerationEnabled="false"/>
+        <Component Name="FltInj" GenerationEnabled="false"/>
+        <Component Name="CDD_Adc0CfgAndUse" GenerationEnabled="false"/>
+        <Component Name="CDD_Adc1CfgAndUse" GenerationEnabled="false"/>
+        <Component Name="CDD_AdcDiagc" GenerationEnabled="false"/>
+        <Component Name="CDD_DmaCfgAndUse" GenerationEnabled="false"/>
+        <Component Name="CDD_MotAg0Meas" GenerationEnabled="false"/>
+        <Component Name="CDD_MotAg1Meas" GenerationEnabled="false"/>
+        <Component Name="CDD_Tauj0CfgAndUse" GenerationEnabled="false"/>
+        <Component Name="CDD_TSG31CfgAndUse" GenerationEnabled="false"/>
+        <Component Name="CDD_MotCtrlMgr" GenerationEnabled="false"/>
+        <Component Name="IoHwAb" GenerationEnabled="false"/>
+        <Component Name="CDD_CurrMeas" GenerationEnabled="false"/>
+        <Component Name="CDD_MotAgArbn" GenerationEnabled="false"/>
+        <Component Name="MotAgCorrln" GenerationEnabled="false"/>
+        <Component Name="CDD_Bmw5441McuCfg" GenerationEnabled="false"/>
+        <Component Name="BattVltg" GenerationEnabled="false"/>
+        <Component Name="BattVltgCorrln" GenerationEnabled="false"/>
+        <Component Name="EcuTMeas" GenerationEnabled="false"/>
+        <Component Name="CDD_FlsMem" GenerationEnabled="false"/>
+        <Component Name="CDD_RamMem" GenerationEnabled="false"/>
+        <Component Name="CDD_ChkPtAppl10" GenerationEnabled="false"/>
+        <Component Name="Darh" GenerationEnabled="false"/>
+        <Component Name="Dlog" GenerationEnabled="false"/>
+        <Component Name="Omc" GenerationEnabled="false"/>
+        <Component Name="Rmh" GenerationEnabled="false"/>
+        <Component Name="Rmh_Cdd" GenerationEnabled="false"/>
+        <Component Name="StdDiag" GenerationEnabled="false"/>
+        <Component Name="Stm" GenerationEnabled="false"/>
+        <Component Name="Vin" GenerationEnabled="false"/>
+        <Component Name="SysTime" GenerationEnabled="false"/>
+        <Component Name="CmnMfgSrv" GenerationEnabled="false"/>
+        <Component Name="NxtrSwIds" GenerationEnabled="false"/>
+        <Component Name="XcpAppl" GenerationEnabled="true"/>
+        <Component Name="XcpApplSwe" GenerationEnabled="false"/>
+        <Component Name="CDD_MotAgCmp" GenerationEnabled="false"/>
+        <Component Name="CDD_SinVltgGenn" GenerationEnabled="false"/>
+        <Component Name="GateDrv0Ctrl" GenerationEnabled="false"/>
+        <Component Name="PolarityCfg" GenerationEnabled="false"/>
+        <Component Name="PwrDiscnct" GenerationEnabled="false"/>
+        <Component Name="PwrSply" GenerationEnabled="false"/>
+        <Component Name="PwrUpSeq" GenerationEnabled="false"/>
+        <Component Name="ShtdwnMech" GenerationEnabled="false"/>
+        <Component Name="TmplMonr" GenerationEnabled="false"/>
+        <Component Name="CDD_HwTq4Meas" GenerationEnabled="false"/>
+        <Component Name="CDD_HwTq5Meas" GenerationEnabled="false"/>
+        <Component Name="HwTqArbn" GenerationEnabled="false"/>
+        <Component Name="HwTqCorrln" GenerationEnabled="false"/>
+        <Component Name="CDD_MotCurrRegVltgLimr" GenerationEnabled="false"/>
+        <Component Name="CDD_MotVel" GenerationEnabled="false"/>
+        <Component Name="DutyCycThermProtn" GenerationEnabled="false"/>
+        <Component Name="ElecPwrCns" GenerationEnabled="false"/>
+        <Component Name="HiLoadStallLimr" GenerationEnabled="false"/>
+        <Component Name="MotCtrlPrmEstimn" GenerationEnabled="false"/>
+        <Component Name="MotCurrPeakEstimn" GenerationEnabled="false"/>
+        <Component Name="MotCurrRegCfg" GenerationEnabled="false"/>
+        <Component Name="MotQuadDetn" GenerationEnabled="false"/>
+        <Component Name="MotRefMdl" GenerationEnabled="false"/>
+        <Component Name="PwrLimr" GenerationEnabled="false"/>
+        <Component Name="TEstimn" GenerationEnabled="false"/>
+        <Component Name="CmnMfgSrvIf" GenerationEnabled="false"/>
+        <Component Name="MotTqCmdSca" GenerationEnabled="false"/>
+        <Component Name="AssiSumLim" GenerationEnabled="false" TargetFolder="..\src"/>
+        <Component Name="MotTqTranlDampg" GenerationEnabled="false"/>
+        <Component Name="Swp" GenerationEnabled="false"/>
+        <Component Name="BacComIf" GenerationEnabled="false"/>
+        <Component Name="CDD_ChkPtAppl6" GenerationEnabled="false"/>
+        <Component Name="CDD_ChkPtAppl7" GenerationEnabled="false"/>
+        <Component Name="CDD_ChkPtAppl8" GenerationEnabled="false"/>
+        <Component Name="CDD_ChkPtAppl9" GenerationEnabled="false"/>
+        <Component Name="Assi" GenerationEnabled="false"/>
+        <Component Name="AssiHiFrq" GenerationEnabled="false"/>
+        <Component Name="AssiPahFwl" GenerationEnabled="false"/>
+        <Component Name="HysCmp" GenerationEnabled="false"/>
+        <Component Name="StabyCmp" GenerationEnabled="false"/>
+        <Component Name="Dampg" GenerationEnabled="false"/>
+        <Component Name="DampgPahFwl" GenerationEnabled="false"/>
+        <Component Name="InertiaCmpVel" GenerationEnabled="false"/>
+        <Component Name="RtnPahFwl" GenerationEnabled="false"/>
+        <Component Name="EotProtn" GenerationEnabled="false"/>
+        <Component Name="PosnTrakgServo" GenerationEnabled="false"/>
+        <Component Name="StOutpCtrl" GenerationEnabled="false"/>
+        <Component Name="SysFricLrng" GenerationEnabled="false"/>
+        <Component Name="VehSpdLimr" GenerationEnabled="false"/>
+        <Component Name="DiagcMgrProxyAppl6" GenerationEnabled="true"/>
+        <Component Name="DiagcMgrProxyAppl7" GenerationEnabled="false"/>
+        <Component Name="DiagcMgrProxyAppl8" GenerationEnabled="false"/>
+        <Component Name="DiagcMgrProxyAppl9" GenerationEnabled="false"/>
+        <Component Name="VehSigCdng" GenerationEnabled="false"/>
+        <Component Name="CmplncErr" GenerationEnabled="false"/>
+        <Component Name="CurrReasbnDiagc" GenerationEnabled="false"/>
+        <Component Name="DrvrTqEstimn" GenerationEnabled="false"/>
+        <Component Name="EotProtnFwl" GenerationEnabled="false"/>
+        <Component Name="HwAgSysArbn" GenerationEnabled="false"/>
+        <Component Name="LimrCdng" GenerationEnabled="false"/>
+        <Component Name="SysPrfmncSts" GenerationEnabled="false"/>
+        <Component Name="TunSelnAuthy" GenerationEnabled="false"/>
+        <Component Name="TunSelnMngt" GenerationEnabled="false"/>
+        <Component Name="CDD_CurrMeasArbn" GenerationEnabled="false"/>
+        <Component Name="CurrMeasCorrln" GenerationEnabled="false"/>
+        <Component Name="TurnCntrArbn" GenerationEnabled="false"/>
+        <Component Name="TurnCntrCorrln" GenerationEnabled="false"/>
+        <Component Name="CDD_McuDiagc" GenerationEnabled="false"/>
+        <Component Name="MotVelCtrl" GenerationEnabled="false"/>
+        <Component Name="CDD_CoreVltgMonr" GenerationEnabled="false"/>
+        <Component Name="CDD_McuCoreCfgAndDiagc" GenerationEnabled="false"/>
+        <Component Name="CDD_VrfyCritReg" GenerationEnabled="false"/>
+        <Component Name="CDD_DataAndAdrPar" GenerationEnabled="false"/>
+        <Component Name="BmwMsgSlot107Bas0Repn1BusFrChA" GenerationEnabled="false"/>
+        <Component Name="BmwMsgSlot121Bas1Repn2BusFrChA" GenerationEnabled="false"/>
+        <Component Name="BmwMsgSlot55Bas3Repn4BusFrChA" GenerationEnabled="false"/>
+        <Component Name="BmwHwAgArbnAndEotPosn" GenerationEnabled="false"/>
+        <Component Name="LrndRackCentr" GenerationEnabled="false"/>
+        <Component Name="LrnPinionCentr" GenerationEnabled="false"/>
+        <Component Name="BmwMsgSlot274Bas2Repn4BusFrChA" GenerationEnabled="false"/>
+        <Component Name="BmwMsgSlot275Bas1Repn8BusFrChA" GenerationEnabled="false"/>
+        <Component Name="BmwMsgSlot276Bas2Repn8BusFrChA" GenerationEnabled="false"/>
+        <Component Name="BmwMsgSlot51Bas0Repn2BusFrChA" GenerationEnabled="false"/>
+        <Component Name="BmwFltHndlg" GenerationEnabled="false"/>
+        <Component Name="BmwStReqMgr" GenerationEnabled="false"/>
+        <Component Name="CtrldVelRtn" GenerationEnabled="false"/>
+        <Component Name="BmwDiagcSrvHndlg" GenerationEnabled="true"/>
+        <Component Name="SysKineEff" GenerationEnabled="false"/>
+        <Component Name="CDD_XcpIf" GenerationEnabled="false"/>
+        <Component Name="CDD_XcpIfXcpEve2MilliSecDataAcqn" GenerationEnabled="false"/>
+        <Component Name="PhaDiscnct" GenerationEnabled="false"/>
+        <Component Name="RvsBattProtn" GenerationEnabled="false"/>
+        <Component Name="LoaMgr" GenerationEnabled="false"/>
+        <Component Name="CDD_BattRtnCurr" GenerationEnabled="false"/>
+        <Component Name="BmwVehSpd" GenerationEnabled="false"/>
+        <Component Name="Coding" GenerationEnabled="false"/>
+        <Component Name="DemWrapper" GenerationEnabled="false"/>
+        <Component Name="BmwTunSetHndlr" GenerationEnabled="false"/>
+        <Component Name="ProgMfgSrv" GenerationEnabled="false"/>
+        <Component Name="AAACalRegn01Rt00GroupA_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Rt00_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Rt02_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Rt02GroupA_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Rt03_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Rt03GroupA_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Rt01GroupA_Dummy" GenerationEnabled="false"/>
+        <Component Name="AAACalRegn01Rt01_Dummy" GenerationEnabled="false"/>
+        <Component Name="CDD_MotAg3Meas" GenerationEnabled="false"/>
+        <Component Name="CDD_MotAg4Meas" GenerationEnabled="false"/>
+        <Component Name="ClsdLoopDampg" GenerationEnabled="false"/>
+        <Component Name="Effort" GenerationEnabled="false"/>
+        <Component Name="HwRefTqSum" GenerationEnabled="false"/>
+        <Component Name="HwTqTrakgCtrl" GenerationEnabled="false"/>
+        <Component Name="MotTqCalcd" GenerationEnabled="false"/>
+        <Component Name="SerlComTrcvIf" GenerationEnabled="false"/>
+        <Component Name="SysKineAndEff" GenerationEnabled="false"/>
+        <Component Name="TqOscn" GenerationEnabled="false"/>
+        <Component Name="EpsStEstimn" GenerationEnabled="false"/>
+        <Component Name="BmwMsgSlot234Bas1Repn2BusFrChA" GenerationEnabled="false"/>
+        <Component Name="BmwMsgSlot274Bas0Repn8BusFrChA" GenerationEnabled="false"/>
+        <Component Name="BmwMsgSlot276Bas4Repn8BusFrChA" GenerationEnabled="false"/>
+        <Component Name="BmwMsgSlot53Bas3Repn8BusFrChA" GenerationEnabled="false"/>
+        <Component Name="BmwMsgSlot55Bas0Repn2BusFrChA" GenerationEnabled="false"/>
+        <Component Name="BmwMsgSlot56Bas0Repn2BusFrChA" GenerationEnabled="false"/>
+        <Component Name="BmwMsgSlot68Bas0Repn2BusFrChA" GenerationEnabled="false"/>
+        <Component Name="BmwMsgSlot108Bas0Repn2BusFrChA" GenerationEnabled="false"/>
+        <Component Name="GlbLimr" GenerationEnabled="false"/>
+        <Component Name="BmwMsgSlot269Bas2Repn4BusFrChA" GenerationEnabled="false"/>
+        <Component Name="BmwMsgSlot49Bas1Repn2BusFrChA" GenerationEnabled="false"/>
+        <Component Name="BmwMsgSlot68Bas1Repn2BusFrChA" GenerationEnabled="false"/>
+        <Component Name="BmwDrvgDynStMac" GenerationEnabled="false"/>
+        <Component Name="BmwHwTqOvrlArbn" GenerationEnabled="false"/>
+        <Component Name="BmwMotTqOvrlArbn" GenerationEnabled="false"/>
+        <Component Name="BmwMsgSlot117Bas0Repn2BusFrChA" GenerationEnabled="false"/>
+        <Component Name="BmwMsgSlot49Bas0Repn2BusFrChA" GenerationEnabled="false"/>
+        <Component Name="BmwTqOvrlCdngAndDrvgDynFac" GenerationEnabled="false"/>
+        <Component Name="BmwTrfcJamAssiDampg" GenerationEnabled="false"/>
+        <Component Name="FalbckAssi" GenerationEnabled="false"/>
+        <Component Name="SteerCmdArbnAndLim" GenerationEnabled="false"/>
+        <Component Name="ClsdLoopHys" GenerationEnabled="false"/>
+        <Component Name="AAACalRegn01Inin00GroupA_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin00GroupC_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin00GroupD_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin00_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01IninOptSetA00_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn02Rt00GroupA_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn02Rt00GroupC_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn02Rt00GroupD_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn02Rt00_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin02_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin02GroupA_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin02GroupC_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin02GroupD_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin03_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin03GroupA_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin03GroupC_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin03GroupD_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin04_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin04GroupA_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin04GroupC_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin04GroupD_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin05_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin05GroupA_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin05GroupC_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin05GroupD_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin06_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin06GroupA_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin06GroupC_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin06GroupD_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01IninOptSetA02_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01IninOptSetA03_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn02Rt02_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn02Rt02GroupA_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn02Rt02GroupC_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn02Rt02GroupD_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn02Rt03_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn02Rt03GroupA_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn02Rt03GroupC_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn02Rt03GroupD_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin00GroupA_Dummy" GenerationEnabled="false"/>
+        <Component Name="AAACalRegn01Inin00GroupC_Dummy" GenerationEnabled="false"/>
+        <Component Name="AAACalRegn01Inin00GroupD_Dummy" GenerationEnabled="false"/>
+        <Component Name="AAACalRegn01Inin00_Dummy" GenerationEnabled="false"/>
+        <Component Name="AAACalRegn01IninOptSetA01_Dummy" GenerationEnabled="false"/>
+        <Component Name="AAACalRegn02Rt01GroupA_Dummy" GenerationEnabled="false"/>
+        <Component Name="AAACalRegn02Rt01GroupC_Dummy" GenerationEnabled="false"/>
+        <Component Name="AAACalRegn02Rt00GroupD_Dummy" GenerationEnabled="false"/>
+        <Component Name="AAACalRegn02Rt01_Dummy" GenerationEnabled="false"/>
+        <Component Name="BmwMsgSlot315Bas0Repn1BusFrChA" GenerationEnabled="false"/>
+        <Component Name="BmwHaptcFb" GenerationEnabled="false"/>
+        <Component Name="BmwSplyCurrLim" GenerationEnabled="false"/>
+        <Component Name="NxtrCalIds" GenerationEnabled="false"/>
+        <Component Name="AAACalRegn01Inin00GroupB_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin02GroupB_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin03GroupB_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin04GroupB_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin05GroupB_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin06GroupB_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin01GroupB_Dummy" GenerationEnabled="true"/>
+        <Component Name="BmwPwrPrkgDampg" GenerationEnabled="true"/>
+        <Component Name="PullCmpActv" GenerationEnabled="true"/>
+        <Component Name="BmwSwFctDi" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin02_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin02GroupA_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin02GroupC_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin02GroupD_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin03_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin03GroupA_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin03GroupC_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin03GroupD_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin04_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin04GroupA_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin04GroupC_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin04GroupD_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin05_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin05GroupA_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin05GroupC_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin05GroupD_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin06_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin06GroupA_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin06GroupC_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin06GroupD_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn02Rt02GroupD_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn02Rt03GroupD_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin01GroupA_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin01GroupC_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin01GroupD_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn01Inin01_Dummy" GenerationEnabled="true"/>
+        <Component Name="AAACalRegn02Rt01GroupD_Dummy" GenerationEnabled="true"/>
+    </SwctGeneration>
+</ProjectAssistant>

@@ -1,0 +1,12 @@
+/* Header file for contract folder of ES220A */
+
+#ifndef CDD_HWTQ4MEAS_CFG_H	/* Multiple include preventer */
+#define CDD_HWTQ4MEAS_CFG_H
+
+#include "Rte_CDD_HwTq4Meas.h"
+
+#define HWTQ4MEAS_HWTQ4TRIMNOTPRFMMFGNTCNR_CNT_ENUM			NTCNR_0X1E1
+#define HWTQ4MEAS_HWTQ4SCANOTPRFMMFGNTCNR_CNT_ENUM			NTCNR_0X1E0 
+#define HWTQ4MEAS_HWTQ4RNGCHKPRTCLNTCNR_CNT_ENUM			NTCNR_0X073 
+
+#endif

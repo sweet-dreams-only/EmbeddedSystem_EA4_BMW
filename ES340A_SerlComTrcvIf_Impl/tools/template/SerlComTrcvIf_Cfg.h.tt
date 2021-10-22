@@ -1,0 +1,41 @@
+<#@ AutosarXml processor="ArDirectiveProcessor" requires="arPrefix='ar';arNamespace='http://autosar.org/4.0.3'" #>
+<#@ template inherits="AutosarDirectiveProcessor.ArGtcBase" debug="false" #>
+<#@ output extension="" #>
+<#@ include file="Helper.tt" #>/**********************************************************************************************************************
+ * Copyright 2018 Nxtr
+ * Nxtr Confidential
+ *
+ * Module File Name  : SerlComTrcvIf_Cfg.h
+ * Module Description: Configuration Header file for ES340A
+ * Project           : CBD
+ * Author            : Krzysztof Byrski
+ * Generator         : <#= GeneratorName #> <#= GeneratorVersion #>
+ * Generation Time   : <#= DateTime.Now.ToString( "dd.MM.yyyy HH:mm:ss" ) #>
+ **********************************************************************************************************************
+ * Version Control:
+ * %version:          1 %
+ * %derived_by:       nz2999 %
+ *---------------------------------------------------------------------------------------------------------------------
+ * Date      Rev      Author    Change Description                                                             SCR #
+ * --------  -------  --------  ----------------------------------------------------------------------------  ---------
+ * 01/26/18  1        KByrski   Initial version                                                               EA4#2868
+ *********************************************************************************************************************/
+
+/******************************************* Multiple Include Protection *********************************************/
+#ifndef SERLCOMTRCVIF_CFG_H
+#define SERLCOMTRCVIF_CFG_H
+
+/************************************************ Include Statements *************************************************/
+#include "Std_Types.h"
+
+/****************************************************** Macros *******************************************************/
+<#
+ChangeContext( Xp.ModuleConfAtDefRefTo( "SerlComTrcvIf" ) );
+
+string PASSSTEP           = ValueOf( Xp.ValueAtDefRefTo( "SerlComTrcvIfGeneral/PASSSTEP" ) ) + "U";
+#>
+/* Serial Communication Transceiver Interface Pass Step */
+#define SERLCOMTRCVIF_PASSSTEP_CNT_U16              (<#= PASSSTEP #>)
+
+/**************************************** End Of Multiple Include Protection *****************************************/
+#endif /* SERLCOMTRCVIF_CFG_H */

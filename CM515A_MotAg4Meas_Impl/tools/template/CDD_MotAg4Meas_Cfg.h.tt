@@ -1,0 +1,46 @@
+<#@ AutosarXml processor="ArDirectiveProcessor" requires="arPrefix='ar';arNamespace='http://autosar.org/4.0.3'" #>
+<#@ template inherits="AutosarDirectiveProcessor.ArGtcBase" debug="true" #>
+<#@ output extension="" #>
+<#@ include file="Helper.tt" #>
+/**********************************************************************************************************************
+* Copyright 2018 Nxtr
+* Nxtr Confidential
+*
+* Module File Name:   CDD_MotAg4Meas_Cfg.h
+* Module Description: Configuration Header file for MotAg4Meas
+* Project           : CBD
+* Author            : Shishir Holenarasipura
+* Generator         : <#= GeneratorName #> <#= GeneratorVersion #>
+* Generation Time   : <#= DateTime.Now.ToString( "dd.MM.yyyy HH:mm:ss" ) #>
+***********************************************************************************************************************
+* Version Control:
+* %version:          1 %
+* %derived_by:       nz5334 %
+*---------------------------------------------------------------------------------------------------------------------
+* Date      Rev     Author  Change Description                                                              SCR #
+* --------  ------- ------- ---------------------------------------------------------------------------     ----------
+* 03/27/18  1       SNH      Initial version of the MotAg4Meas header template                                EA4#17179
+**********************************************************************************************************************/
+
+/******************************************* Multiple Include Protection *********************************************/
+#ifndef CDD_MOTAG4MEAS_CFG_H	/* Multiple include preventer */
+#define CDD_MOTAG4MEAS_CFG_H
+
+/************************************************ Include Statements *************************************************/
+#include "Std_Types.h"
+#include "Rte_CDD_MotAg4Meas.h"
+/******************************************** File Level Rule Deviations *********************************************/
+
+/****************************************************** Macros *******************************************************/
+<# ChangeContext( Xp.ModuleConfAtDefRefTo( "MotAg4Meas" ) ); #>
+
+<# string Param_SnsrRlvBitWidthExp = ValueOf( Xp.ValueAtDefRefTo( "MotAg4MeasCfg/MotAg4SnsrRlvBitWidthExp" ) ); #>
+
+#define MOTAG4_SNSRRLVBITWIDTHEXP_CNT_U08                   <#=Param_SnsrRlvBitWidthExp#>
+
+
+/*********************************************** Exported Declarations ***********************************************/
+
+/**************************************** End Of Multiple Include Protection *****************************************/
+#endif /* CDD_MOTAG4MEAS_CFG_H */
+

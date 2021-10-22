@@ -1,0 +1,968 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-3-0.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>ActiveEcuC</SHORT-NAME>
+      <ELEMENTS>
+        <ECUC-MODULE-CONFIGURATION-VALUES UUID="a4f08b57-6be4-4497-b3ff-b41da0f3d108">
+          <SHORT-NAME>NvMProxy</SHORT-NAME>
+          <DEFINITION-REF DEST="ECUC-MODULE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy</DEFINITION-REF>
+          <IMPLEMENTATION-CONFIG-VARIANT>VARIANT-PRE-COMPILE</IMPLEMENTATION-CONFIG-VARIANT>
+          <MODULE-DESCRIPTION-REF DEST="BSW-IMPLEMENTATION">/Nxtr/EcucDefs_NvMProxy/NvMProxy_Impl</MODULE-DESCRIPTION-REF>
+          <CONTAINERS>
+            <ECUC-CONTAINER-VALUE UUID="d5bfbf8b-5dd5-43f9-983f-0dedbcd12659">
+              <SHORT-NAME>NvMProxyCommon</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyCommon</DEFINITION-REF>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyCommon/NvMOsApplicationRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/Os/Appl10</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="f34d68a7-9bab-4eb9-8db5-78ab20f52295">
+              <SHORT-NAME>Rte_NvmBlock_CDD_NvMProxy_ShtdwnClsChk</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>None</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_CDD_NvMProxy_ShtdwnClsChk</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="d2f08c0e-7b7e-4dfd-8a2a-a0544300a689">
+              <SHORT-NAME>Rte_NvmBlock_DiagcMgr_DiagcMgrApplCrc</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x06</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_DiagcMgr_DiagcMgrApplCrc</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="0df060f4-a67d-4fe1-a5d7-7ec86b7f7da2">
+              <SHORT-NAME>Rte_NvmBlock_DiagcMgr_DiagcMgrLtchCntrAry</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x06</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_DiagcMgr_DiagcMgrLtchCntrAry</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="e20265e6-9d41-4022-924c-7bffadd2ad4e">
+              <SHORT-NAME>Rte_NvmBlock_DiagcMgr_DiagcMgrNtcFltAry</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x06</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_DiagcMgr_DiagcMgrNtcFltAry</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="352c1b2e-d604-46ee-a886-8f5db8113ff1">
+              <SHORT-NAME>Rte_NvmBlock_PolarityCfg_PolarityCfgSaved</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x0A</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_PolarityCfg_PolarityCfgSaved</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="11351b4e-1cc9-4bd7-8646-6fa2072bade5">
+              <SHORT-NAME>Rte_NvmBlock_CDD_MotAgCmp_MotAgCmpMotAgBackEmf</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x0A</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_CDD_MotAgCmp_MotAgCmpMotAgBackEmf</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="00b0e968-fce0-4ecd-947e-6392d4314d62">
+              <SHORT-NAME>Rte_NvmBlock_HwTqCorrln_HwTqChACmnModCmpLpFilSt</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x06</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_HwTqCorrln_HwTqChACmnModCmpLpFilSt</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="52a99aae-d4fa-4884-a508-01bb6d9de5ac">
+              <SHORT-NAME>Rte_NvmBlock_MotTqCmdSca_MotTqScaFac</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x06</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_MotTqCmdSca_MotTqScaFac</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="3edb35a8-df09-4bfc-89f2-b372c19921e9">
+              <SHORT-NAME>Rte_NvmBlock_MotCtrlPrmEstimn_MotPrmNom</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x06</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_MotCtrlPrmEstimn_MotPrmNom</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="200a0aa5-c722-4105-9e9f-25c87bfd089e">
+              <SHORT-NAME>Rte_NvmBlock_CDD_CurrMeas_CurrMeasEolGainCalSetABC</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x06</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_CDD_CurrMeas_CurrMeasEolGainCalSetABC</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="5e0dc7b1-3d41-4abf-83fc-763e61a1ef5b">
+              <SHORT-NAME>Rte_NvmBlock_CDD_CurrMeas_CurrMeasEolOffsCalSetABC</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x06</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_CDD_CurrMeas_CurrMeasEolOffsCalSetABC</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="e5b8b882-2491-4350-a30a-234fb4f1cfcb">
+              <SHORT-NAME>Rte_NvmBlock_CDD_HwTq4Meas_HwTq4Offs_MirrorBlock</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x0A</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_CDD_HwTq4Meas_HwTq4Offs_MirrorBlock</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="4ba700c3-c502-4a98-a341-59325b8f8e0d">
+              <SHORT-NAME>Rte_NvmBlock_CDD_HwTq4Meas_HwTq4Sca_MirrorBlock</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x0A</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_CDD_HwTq4Meas_HwTq4Sca_MirrorBlock</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="52950bc9-b1f8-4cb6-b2b4-e2a039a56785">
+              <SHORT-NAME>Rte_NvmBlock_CDD_HwTq5Meas_HwTq5Offs_MirrorBlock</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x0A</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_CDD_HwTq5Meas_HwTq5Offs_MirrorBlock</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="23a595d0-2fb4-4781-9fe0-261dd6a707fa">
+              <SHORT-NAME>Rte_NvmBlock_CDD_HwTq5Meas_HwTq5Sca_MirrorBlock</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x0A</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_CDD_HwTq5Meas_HwTq5Sca_MirrorBlock</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="0c461ab3-e1cd-4f92-9c4b-1017c6a24b98">
+              <SHORT-NAME>Rte_NvmBlock_CDD_MotAg0Meas_MotAg0CoeffTbl</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x08</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_CDD_MotAg0Meas_MotAg0CoeffTbl</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="0da47b27-5930-449a-9651-ac9a22c13a91">
+              <SHORT-NAME>Rte_NvmBlock_CDD_MotAg1Meas_MotAg1CoeffTbl</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x08</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_CDD_MotAg1Meas_MotAg1CoeffTbl</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="add6232e-d9e0-41c8-a741-0399efb36eb1">
+              <SHORT-NAME>Rte_NvmBlock_CmnMfgSrv_CcaHwPartNr</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x06</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_CmnMfgSrv_CcaHwPartNr</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="ff12a24e-687e-47c5-8410-ff7ef22bd0c7">
+              <SHORT-NAME>Rte_NvmBlock_CmnMfgSrv_CcaSerlNr</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x06</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_CmnMfgSrv_CcaSerlNr</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="011d0eb1-53c4-4533-9493-00a40f10c794">
+              <SHORT-NAME>Rte_NvmBlock_CmnMfgSrv_DiRestore</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x06</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_CmnMfgSrv_DiRestore</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="f9bda907-86dd-47d6-a07b-7d8ed146a6e2">
+              <SHORT-NAME>Rte_NvmBlock_CmnMfgSrv_EpsSysSerlNr</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x06</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_CmnMfgSrv_EpsSysSerlNr</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="05a091b5-a075-418f-80e6-656b1c07fa47">
+              <SHORT-NAME>Rte_NvmBlock_CmnMfgSrv_IgnCntr</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x06</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_CmnMfgSrv_IgnCntr</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="c78f044c-fed2-49a0-b1b9-c59fe75a329c">
+              <SHORT-NAME>Rte_NvmBlock_CmnMfgSrv_MfgTmpBuf0</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x06</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_CmnMfgSrv_MfgTmpBuf0</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="baf79774-5b71-48b6-a10c-6aeaaab4c947">
+              <SHORT-NAME>Rte_NvmBlock_CmnMfgSrv_MfgTmpBuf1</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x06</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_CmnMfgSrv_MfgTmpBuf1</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="24b62387-f53d-40c3-9deb-3bb10d6267f5">
+              <SHORT-NAME>Rte_NvmBlock_CmnMfgSrv_MfgTmpBuf2</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x06</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_CmnMfgSrv_MfgTmpBuf2</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="f47eb849-b2e9-498d-bfbc-eeeb0016ff4c">
+              <SHORT-NAME>Rte_NvmBlock_CmnMfgSrv_MfgTmpBuf3</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x06</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_CmnMfgSrv_MfgTmpBuf3</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="7ea16001-3e94-4046-86a0-4f8c4d5d3a50">
+              <SHORT-NAME>Rte_NvmBlock_CmnMfgSrv_MfgTmpBuf4</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x06</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_CmnMfgSrv_MfgTmpBuf4</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="78dacf80-a5f5-4492-a835-405a35faa105">
+              <SHORT-NAME>Rte_NvmBlock_CmnMfgSrv_NxtrMfgEnaCntr</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x06</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_CmnMfgSrv_NxtrMfgEnaCntr</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="c0430d7e-9ee8-4027-bdef-1c3bd7797531">
+              <SHORT-NAME>Rte_NvmBlock_CmnMfgSrv_SeedKey</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x06</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_CmnMfgSrv_SeedKey</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="9562807a-7253-4c66-802b-08a12ae7a162">
+              <SHORT-NAME>Rte_NvmBlock_DutyCycThermProtn_FilStVal</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x08</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_DutyCycThermProtn_FilStVal</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="a9166383-54db-4ff2-8000-7267c285aa91">
+              <SHORT-NAME>Rte_NvmBlock_CDD_VrfyCritReg_MCalReadVrfyCritRegFltInfo</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>None</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_CDD_VrfyCritReg_MCalReadVrfyCritRegFltInfo</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="0cee2c62-9c61-4d7a-9b59-b2e9aa555349">
+              <SHORT-NAME>Rte_NvmBlock_BmwHwAgArbnAndEotPosn_BmwVehCentrOffs</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x06</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_BmwHwAgArbnAndEotPosn_BmwVehCentrOffs</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="7582ba0c-ce56-4fb5-a524-5555583e53eb">
+              <SHORT-NAME>Rte_NvmBlock_LrndRackCentr_LrndRackCentr</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x07</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_LrndRackCentr_LrndRackCentr</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="18e6ee42-1cd1-4274-80b0-5b869b7e318d">
+              <SHORT-NAME>Rte_NvmBlock_ExcpnHndlg_McuDiagcData</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x06</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_ExcpnHndlg_McuDiagcData</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="34637438-6274-4a98-85e3-59a599a07e65">
+              <SHORT-NAME>Rte_NvmBlock_TEstimn_TFilStVal</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x08</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_TEstimn_TFilStVal</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="690afa81-07a3-45fa-a7fb-a7633f84172a">
+              <SHORT-NAME>NVM_BLOCK_DLOG_SVK_ENTRY</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>None</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/NVM_BLOCK_DLOG_SVK_ENTRY</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="f956eb66-37e2-4c69-89f1-fb8d4291794c">
+              <SHORT-NAME>Rte_NvmBlock_Darh_DiagnoseMasterEnable</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>None</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_Darh_DiagnoseMasterEnable</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="9183a21a-134d-4ef8-870d-c139e18a0981">
+              <SHORT-NAME>Rte_NvmBlock_Coding_CodingData</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>None</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_Coding_CodingData</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="c92d84e4-b146-440a-b948-a88d813c675e">
+              <SHORT-NAME>Rte_NvmBlock_BmwTunSetHndlr_BmwDesIninIdx</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x06</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_BmwTunSetHndlr_BmwDesIninIdx</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="62ff15c2-2f34-4fa3-bfb8-1f30edacbe2a">
+              <SHORT-NAME>Rte_NvmBlock_BmwTunSetHndlr_NvmBmwDesIninOptSetAIdx</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x06</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_BmwTunSetHndlr_NvmBmwDesIninOptSetAIdx</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="5b9afa36-99c9-4d08-9d39-f7a8af4560ff">
+              <SHORT-NAME>Rte_NvmBlock_BmwDiagcSrvHndlg_MilesKmEeprom</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>None</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_BmwDiagcSrvHndlg_MilesKmEeprom</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="2c559010-8849-442d-a404-e80ddf0e00e3">
+              <SHORT-NAME>Rte_NvmBlock_BmwDiagcSrvHndlg_ProgCntr</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>None</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_BmwDiagcSrvHndlg_ProgCntr</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="97024d36-992f-461b-b064-7f1c30ba4fee">
+              <SHORT-NAME>Rte_NvmBlock_BmwDiagcSrvHndlg_ProgCntrMaxVal</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>None</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_BmwDiagcSrvHndlg_ProgCntrMaxVal</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="8d0da083-b8a6-486f-8e7a-deec639c12b8">
+              <SHORT-NAME>Rte_NvmBlock_BmwDiagcSrvHndlg_TestStamp</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>None</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_BmwDiagcSrvHndlg_TestStamp</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="31206ea5-2ff5-4ba5-b826-b14e54863106">
+              <SHORT-NAME>Rte_NvmBlock_SysFricLrng_FricNonLrngData</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x06</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_SysFricLrng_FricNonLrngData</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="ada65607-4ccd-4d97-996c-ee4ff2c20cbf">
+              <SHORT-NAME>Rte_NvmBlock_SysFricLrng_FricLrngData</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>NTC_0x06</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_SysFricLrng_FricLrngData</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+            <ECUC-CONTAINER-VALUE UUID="bf482051-9c42-4af7-9495-f4a94c643a00">
+              <SHORT-NAME>Rte_NvmBlock_PullCmpActv_PullCmpLongTerm</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkFlt</DEFINITION-REF>
+                  <VALUE>None</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMProxyApplCallCbk</DEFINITION-REF>
+                  <VALUE>NULL_PTR</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-SYMBOLIC-NAME-REFERENCE-DEF">/Nxtr/EcucDefs_NvMProxy/NvMProxy/NvMProxyBlkSet/NvMBlkRef</DEFINITION-REF>
+                  <VALUE-REF DEST="ECUC-CONTAINER-VALUE">/ActiveEcuC/NvM/Rte_NvmBlock_PullCmpActv_PullCmpLongTerm</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+          </CONTAINERS>
+        </ECUC-MODULE-CONFIGURATION-VALUES>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

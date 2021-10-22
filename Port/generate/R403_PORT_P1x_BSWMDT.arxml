@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+********************************************************************************
+** Project      = AUTOSAR Renesas R4.0.3 P1x MCAL Components                  **
+** Module       = R403_PORT_P1x_BSWMDT.arxml                                  **
+********************************************************************************
+**                                  COPYRIGHT                                 **
+********************************************************************************
+** Copyright(c) 2013-2017 Renesas Electronics Corporation                     **
+********************************************************************************
+** Purpose:                                                                   **
+** Provides the BSW module description of PORT Driver Component for AUTOSAR   **
+** release 4.0.3                                                              **
+**                                                                            **
+********************************************************************************
+**                                                                            **
+** Unless otherwise agreed upon in writing between your company and           **
+** Renesas Electronics Corporation the following shall apply!                 **
+**                                                                            **
+** Warranty Disclaimer                                                        **
+**                                                                            **
+** There is no warranty of any kind whatsoever granted by Renesas. Any        **
+** warranty is expressly disclaimed and excluded by Renesas, either expressed **
+** or implied,including but not limited to those for non-infringement of      **
+** intellectual property, merchantability and/or fitness for the              **
+** particular purpose.                                                        **
+**                                                                            **
+** Renesas shall not have any obligation to maintain, service or provide bug  **
+** fixes for the supplied Product(s) and/or the Application.                  **
+**                                                                            **
+** Each User is solely responsible for determining the appropriateness of     **
+** using the Product(s) and assumes all risks associated with its exercise    **
+** of rights under this Agreement, including, but not limited to the risks    **
+** and costs of program errors, compliance with applicable laws, damage to    **
+** or loss of data, programs or equipment, and unavailability or              **
+** interruption of operations.                                                **
+**                                                                            **
+** Limitation of Liability                                                    **
+**                                                                            **
+** In no event shall Renesas be liable to the User for any incidental,        **
+** consequential, indirect, or punitive damage (including but not limited     **
+** to lost profits) regardless of whether such liability is based on breach   **
+** of contract, tort, strict liability, breach of warranties, failure of      **
+** essential purpose or otherwise and even if advised of the possibility of   **
+** such damages. Renesas shall not be liable for any services or products     **
+** provided by third party vendors, developers or consultants identified or   **
+** referred to the User by Renesas in connection with the Product(s) and/or   **
+** the Application.                                                           **
+**                                                                            **
+********************************************************************************
+** Environment:                                                               **
+**             Devices: RH850/P1x: R7F701310, R7F701311, R7F701312, R7F701314 **
+**                                 R7F701315 ,R7F701304, R7F701305, R7F701313 **
+**                                 R7F701318 ,R7F701319, R7F701320, R7F701321 **
+**                                 R7F701322 ,R7F701323                       **
+********************************************************************************
+**                      Revision Control History                              **
+********************************************************************************
+** V1.0.0:  12-Sep-2013, Initial Version                                      **
+**                                                                            **
+** V1.0.1:  17-Jan-2014, As per mantis #18116 following changes are made:     **
+**                       1. Environment section is updated to add P1x devices **
+**                       2. VENDOR-SPECIFIC-MODULE-DEF-REFS is added          **
+**                       3. SW-VERSION is updated                             **
+**                       4. Copyright information is updated                  **
+**                                                                            **
+** V1.0.2:  03-Sep-2014, As per mantis #19850 following changes are made:     **
+**                       1. SW-VERSION is updated                             **
+**                       2. Exclusive areas added                             **
+**                       3. Environment section is updated to remove unwanted **
+**                          P1x devices                                       **
+** V1.0.3:  14-Apr-2015, As per mantis #27419 following changes are made:     **
+**                       1. Environment section is updated to add P1x devices **
+**                       2. Copyright information is updated.                 **
+** V1.0.4:  18-Mar-2016, Following changes are made:                          **
+**                       1. SW-VERSION is updated                             **
+**                       2. Copyright information is updated.                 **
+** V1.0.5:  28-Apr-2016, Following changes are done as part of V4.01.01       **
+**                       release                                              **
+**                       1. SW-VERSION is updated                             **
+**                       2. BSW-CALLED-ENTITY and BSW-MODULE-ENTRY is added   **
+**                       3. As per Jira ARDAAAE-1909, Warranty Disclaimer is  **
+**                          updated.                                          **
+** V1.0.6:  2-Sep-2016,  SW-VERSION is updated                                **
+** V1.0.7:  23-Jan-2017, Following changes are done:                          **
+**                       1. SW-VERSION is updated                             **
+**                       2. Copyright information is updated.                 **
+********************************************************************************
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-0-3.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <AR-PACKAGES>
+       <AR-PACKAGE UUID="cbd8f6ce-8a27-4821-8157-20c476311418">
+      <SHORT-NAME>Renesas</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE UUID="cbd8f6ce-8a27-4821-8157-20c476311417">
+        <SHORT-NAME>EcucDefs_Port</SHORT-NAME>
+        <ELEMENTS>
+          <BSW-IMPLEMENTATION UUID="6bed233a-ad82-4e63-9214-3dc9c30c03f8">
+            <SHORT-NAME>Port_Impl</SHORT-NAME>
+            <PROGRAMMING-LANGUAGE>C</PROGRAMMING-LANGUAGE>
+            <SW-VERSION>1.5.4</SW-VERSION>
+            <VENDOR-ID>59</VENDOR-ID>
+            <AR-RELEASE-VERSION>4.0.3</AR-RELEASE-VERSION>
+            <BEHAVIOR-REF DEST="BSW-INTERNAL-BEHAVIOR">/Renesas/EcucDefs_Port/Port/BswInternalBehavior_0</BEHAVIOR-REF>
+            <VENDOR-API-INFIX>Renesas</VENDOR-API-INFIX>
+              <VENDOR-SPECIFIC-MODULE-DEF-REFS>
+                <VENDOR-SPECIFIC-MODULE-DEF-REF DEST="ECUC-MODULE-DEF">/Renesas/EcucDefs_Port/Port</VENDOR-SPECIFIC-MODULE-DEF-REF>
+              </VENDOR-SPECIFIC-MODULE-DEF-REFS>
+          </BSW-IMPLEMENTATION>
+          <BSW-MODULE-DESCRIPTION UUID="f72e02c2-9348-471e-afb0-fdd649e55098">
+            <SHORT-NAME>Port</SHORT-NAME>
+            <MODULE-ID>124</MODULE-ID>
+            <INTERNAL-BEHAVIORS>
+              <BSW-INTERNAL-BEHAVIOR UUID="ade6b1b7-2b95-4c18-beab-1e9e3fc62ec6">
+                <SHORT-NAME>BswInternalBehavior_0</SHORT-NAME>
+                <EXCLUSIVE-AREAS>
+                  <EXCLUSIVE-AREA UUID="3d3e5958-858b-40d7-a824-4679884bea82">
+                    <SHORT-NAME>PORT_SET_PIN_MODE_PROTECTION</SHORT-NAME>
+                  </EXCLUSIVE-AREA>
+                  <EXCLUSIVE-AREA UUID="3d3e5958-858b-40d7-a824-4679884bea83">
+                    <SHORT-NAME>PORT_SET_PIN_DIR_PROTECTION</SHORT-NAME>
+                  </EXCLUSIVE-AREA>
+                  <EXCLUSIVE-AREA UUID="3d3e5958-858b-40d7-a824-4679884bea84">
+                    <SHORT-NAME>PORT_SET_TO_DIO_ALT_PROTECTION</SHORT-NAME>
+                  </EXCLUSIVE-AREA>
+                  <EXCLUSIVE-AREA UUID="3d3e5958-858b-40d7-a824-4679884bea85">
+                    <SHORT-NAME>PORT_INIT_CONFIG_PROTECTION</SHORT-NAME>
+                  </EXCLUSIVE-AREA>
+                  <EXCLUSIVE-AREA UUID="3d3e5958-858b-40d7-a824-4679884bea86">
+                    <SHORT-NAME>PORT_REFRESHPORT_INTERNAL_PROTECTION</SHORT-NAME>
+                  </EXCLUSIVE-AREA>
+                  <EXCLUSIVE-AREA UUID="3d3e5958-858b-40d7-a824-4679884bea87">
+                    <SHORT-NAME>PORT_SET_PIN_DEFAULT_MODE_PROTECTION</SHORT-NAME>
+                  </EXCLUSIVE-AREA>
+                  <EXCLUSIVE-AREA UUID="3d3e5958-858b-40d7-a824-4679884bea88">
+                    <SHORT-NAME>PORT_SET_PIN_DEFAULT_DIR_PROTECTION</SHORT-NAME>
+                  </EXCLUSIVE-AREA>
+                </EXCLUSIVE-AREAS>
+                <ENTITYS>
+                   <BSW-CALLED-ENTITY UUID="ECUS:9b933fde-9d34-4dd0-863b-3c6c057abcfc">
+                     <SHORT-NAME>BswCalledEntity_0</SHORT-NAME>
+                     <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                       <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Port/Port/BswInternalBehavior_0/PORT_INIT_CONFIG_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                     </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                     <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Port/Port_Init</IMPLEMENTED-ENTRY-REF>
+                   </BSW-CALLED-ENTITY>
+                   <BSW-CALLED-ENTITY UUID="ECUS:9b933fde-9d39-5dd0-863b-3c6c058abcfc">
+                     <SHORT-NAME>BswCalledEntity_1</SHORT-NAME>
+                     <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                       <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Port/Port/BswInternalBehavior_0/PORT_SET_PIN_DIR_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                     </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                     <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Port/Port_SetPinDirection</IMPLEMENTED-ENTRY-REF>
+                   </BSW-CALLED-ENTITY>
+                   <BSW-CALLED-ENTITY UUID="ECUS:8b933fde-9d36-5dd0-863b-3c6c059abcfc">
+                     <SHORT-NAME>BswCalledEntity_2</SHORT-NAME>
+                     <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                       <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Port/Port/BswInternalBehavior_0/PORT_REFRESHPORT_INTERNAL_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                     </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                     <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Port/Port_RefreshPortDirection</IMPLEMENTED-ENTRY-REF>
+                   </BSW-CALLED-ENTITY>
+                   <BSW-CALLED-ENTITY UUID="ECUS:7b993fde-5d34-5dd0-863b-3c6c058abcfc">
+                     <SHORT-NAME>BswCalledEntity_3</SHORT-NAME>
+                     <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                       <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Port/Port/BswInternalBehavior_0/PORT_SET_PIN_MODE_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                     </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                     <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Port/Port_SetPinMode</IMPLEMENTED-ENTRY-REF>
+                   </BSW-CALLED-ENTITY>
+                   <BSW-CALLED-ENTITY UUID="ECUS:8b934fde-5d34-5dd0-893b-3c6c058abcfc">
+                     <SHORT-NAME>BswCalledEntity_4</SHORT-NAME>
+                     <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                       <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Port/Port/BswInternalBehavior_0/PORT_SET_TO_DIO_ALT_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                     </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                     <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Port/Port_SetToDioMode</IMPLEMENTED-ENTRY-REF>
+                   </BSW-CALLED-ENTITY>
+                   <BSW-CALLED-ENTITY UUID="ECUS:6b933fde-9d34-5dd0-863b-3c6c058abcfc">
+                     <SHORT-NAME>BswCalledEntity_5</SHORT-NAME>
+                     <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                       <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Port/Port/BswInternalBehavior_0/PORT_SET_TO_DIO_ALT_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                     </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                     <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Port/Port_SetToAlternateMode</IMPLEMENTED-ENTRY-REF>
+                   </BSW-CALLED-ENTITY>
+                   <BSW-CALLED-ENTITY UUID="ECUS:5b933fde-5d34-5dd0-863b-3c7c058abcfc">
+                     <SHORT-NAME>BswCalledEntity_6</SHORT-NAME>
+                     <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                       <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Port/Port/BswInternalBehavior_0/PORT_SET_PIN_DEFAULT_MODE_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                     </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                     <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Port/Port_SetPinDefaultMode</IMPLEMENTED-ENTRY-REF>
+                   </BSW-CALLED-ENTITY>
+                   <BSW-CALLED-ENTITY UUID="ECUS:4b933fde-5d34-5dd0-863b-3c6c059abcfc">
+                     <SHORT-NAME>BswCalledEntity_7</SHORT-NAME>
+                     <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                       <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Renesas/EcucDefs_Port/Port/BswInternalBehavior_0/PORT_SET_PIN_DEFAULT_DIR_PROTECTION</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                     </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                     <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Port/Port_SetPinDefaultDirection</IMPLEMENTED-ENTRY-REF>
+                   </BSW-CALLED-ENTITY>
+                   <BSW-CALLED-ENTITY UUID="ECUS:3b933fde-3d34-5dd0-863b-5c6c058abcfc">
+                     <SHORT-NAME>BswCalledEntity_8</SHORT-NAME>
+                     <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Renesas/EcucDefs_Port/Port_GetVersionInfo</IMPLEMENTED-ENTRY-REF>
+                   </BSW-CALLED-ENTITY>
+                </ENTITYS>
+              </BSW-INTERNAL-BEHAVIOR>
+            </INTERNAL-BEHAVIORS>
+          </BSW-MODULE-DESCRIPTION>
+            <BSW-MODULE-ENTRY UUID="ECUS:63394175-e3e3-491b-ac3a-98c057c9ee21">
+              <SHORT-NAME>Port_Init</SHORT-NAME>
+              <SERVICE-ID>0</SERVICE-ID>
+              <IS-REENTRANT>false</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>REGULAR</CALL-TYPE>
+              <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY UUID="ECUS:68394185-e3e3-491b-ac3a-99c057c9ee21">
+              <SHORT-NAME>Port_SetPinDirection</SHORT-NAME>
+              <SERVICE-ID>1</SERVICE-ID>
+              <IS-REENTRANT>true</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>REGULAR</CALL-TYPE>
+              <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY UUID="ECUS:58394185-e8e3-421b-ac3a-99c057c9ee25">
+              <SHORT-NAME>Port_RefreshPortDirection</SHORT-NAME>
+              <SERVICE-ID>2</SERVICE-ID>
+              <IS-REENTRANT>false</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>REGULAR</CALL-TYPE>
+              <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY UUID="ECUS:68594185-e8e3-421b-ac3a-99c057c9ee25">
+              <SHORT-NAME>Port_GetVersionInfo</SHORT-NAME>
+              <SERVICE-ID>3</SERVICE-ID>
+              <IS-REENTRANT>false</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>REGULAR</CALL-TYPE>
+              <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY UUID="ECUS:57394185-e8e3-421b-ac3a-99c057c9ee25">
+              <SHORT-NAME>Port_SetPinMode</SHORT-NAME>
+              <SERVICE-ID>4</SERVICE-ID>
+              <IS-REENTRANT>true</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>REGULAR</CALL-TYPE>
+              <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY UUID="ECUS:58394185-e8e3-421b-ac3a-29c057c9ee25">
+              <SHORT-NAME>Port_SetToDioMode</SHORT-NAME>
+              <SERVICE-ID>5</SERVICE-ID>
+              <IS-REENTRANT>true</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>REGULAR</CALL-TYPE>
+              <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY UUID="ECUS:48394186-e8e3-421b-ac3a-29c057c9ee25">
+              <SHORT-NAME>Port_SetToAlternateMode</SHORT-NAME>
+              <SERVICE-ID>6</SERVICE-ID>
+              <IS-REENTRANT>true</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>REGULAR</CALL-TYPE>
+              <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY UUID="ECUS:42394186-e9e3-421b-ac3a-29c057c9ee25">
+              <SHORT-NAME>Port_SetPinDefaultMode</SHORT-NAME>
+              <SERVICE-ID>7</SERVICE-ID>
+              <IS-REENTRANT>true</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>REGULAR</CALL-TYPE>
+              <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY UUID="ECUS:24394186-e9e9-481b-ac3a-29c057c9ee25">
+              <SHORT-NAME>Port_SetPinDefaultDirection</SHORT-NAME>
+              <SERVICE-ID>8</SERVICE-ID>
+              <IS-REENTRANT>true</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>REGULAR</CALL-TYPE>
+              <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+            </BSW-MODULE-ENTRY>
+        </ELEMENTS>
+      </AR-PACKAGE>
+    </AR-PACKAGES>
+   </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

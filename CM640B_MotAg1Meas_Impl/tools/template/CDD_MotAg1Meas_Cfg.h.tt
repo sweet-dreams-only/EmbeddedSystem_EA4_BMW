@@ -1,0 +1,44 @@
+<#@ AutosarXml processor="ArDirectiveProcessor" requires="arPrefix='ar';arNamespace='http://autosar.org/4.0.3'" #>
+<#@ template inherits="AutosarDirectiveProcessor.ArGtcBase" debug="false" #>
+<#@ output extension="" #>
+<#@ include file="Helper.tt" #>/**********************************************************************************************************************
+ * Copyright 2017-2018 Nxtr
+ * Nxtr Confidential
+ *
+ * Module File Name  : CDD_MotAg1Meas_Cfg.h
+ * Module Description: Configuration Header file for CM640A
+ * Project           : CBD
+ * Author            : Krzysztof Byrski
+ * Generator         : <#= GeneratorName #> <#= GeneratorVersion #>
+ * Generation Time   : <#= DateTime.Now.ToString( "dd.MM.yyyy HH:mm:ss" ) #>
+ **********************************************************************************************************************
+ * Version Control:
+ * %version:          1 %
+ * %derived_by:       nz2999 %
+ *---------------------------------------------------------------------------------------------------------------------
+ * Date      Rev      Author    Change Description                                                             SCR #
+ * --------  -------  --------  ----------------------------------------------------------------------------  ---------
+ * 04/25/18  1        KByrski   Initial version                                                               EA4#17185,EA4#18362,EA4#22024
+ *********************************************************************************************************************/
+
+/******************************************* Multiple Include Protection *********************************************/
+#ifndef CDD_MOTAG1MEAS_CFG_H
+#define CDD_MOTAG1MEAS_CFG_H
+
+/************************************************ Include Statements *************************************************/
+#include "Rte_CDD_MotAg1Meas.h"
+
+/****************************************************** Macros *******************************************************/
+<#
+ChangeContext( Xp.ModuleConfAtDefRefTo( "MotAg1Meas" ) );
+
+string DIQEPIF = ValueOf( Xp.ValueAtDefRefTo( "MotAg1MeasGeneral/DIQEPIF" ) ) ? "TRUE" : "FALSE";
+string MOTAG1PRTCLFLTNTCNR = ValueOf( Xp.ValueAtDefRefTo( "MotAg1MeasGeneral/MOTAG1PRTCLFLTNTCNR" ) );
+#>
+/* Disables usage of QEP readings. Motor position readings switch to SPI interface */
+#define MOTAG1MEAS_DIQEPIF_CNT_LOGL             (<#= DIQEPIF #>)
+/* Motor Angle 1 Protocol Fault NTC Number */
+#define MOTAG1MEAS_MOTAG1PRTCLFLTNTCNR_CNT_ENUM (<#= MOTAG1PRTCLFLTNTCNR #>)
+
+/**************************************** End Of Multiple Include Protection *****************************************/
+#endif /* CDD_MOTAG1MEAS_CFG_H */

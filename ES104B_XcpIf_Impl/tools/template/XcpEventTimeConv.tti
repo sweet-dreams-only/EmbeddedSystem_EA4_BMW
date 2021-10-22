@@ -1,0 +1,58 @@
+<#+
+/* This function takes the time unit and the cycle from the XCP settings and converts it into 
+   the execution period in seconds. This function is used by CDD_XcpIf_DataAcqnCfg.m.tt and CDD_XcpIf_DataAcqnCfg.arxml.tt*/
+double XcpEventTimeConv(string TimeUnit, int TimeCycle)
+{
+    double Period = 0.0;
+
+    switch(TimeUnit)
+    {
+        /* Sec Scaling */
+        case "TIMESTAMP_UNIT_1S":
+            Period = TimeCycle * 1.0;
+        break;
+        /* ms Scaling */
+        case "TIMESTAMP_UNIT_100MS":
+            Period = TimeCycle * 0.1;
+        break;
+        case "TIMESTAMP_UNIT_10MS":
+            Period = TimeCycle * 0.01;
+        break;
+        case "TIMESTAMP_UNIT_1MS":
+            Period = TimeCycle * 0.001;
+        break;
+        /* us Scaling */
+        case "TIMESTAMP_UNIT_100US":
+            Period = TimeCycle * 0.0001;
+        break;
+        case "TIMESTAMP_UNIT_10US":
+            Period = TimeCycle * 0.00001;
+        break;
+        case "TIMESTAMP_UNIT_1US":
+            Period = TimeCycle * 0.000001;
+        break;
+        /* ns Scaling */
+        case "TIMESTAMP_UNIT_100NS":
+            Period = TimeCycle * 0.0000001;
+        break;
+        case "TIMESTAMP_UNIT_10NS":
+            Period = TimeCycle * 0.00000001;
+        break;
+        case "TIMESTAMP_UNIT_1NS":
+            Period = TimeCycle * 0.000000001;
+        break;
+        /* ps Scaling */
+        case "TIMESTAMP_UNIT_100PS":
+            Period = TimeCycle * 0.0000000001;
+        break;
+        case "TIMESTAMP_UNIT_10PS":
+            Period = TimeCycle * 0.00000000001;
+        break;
+        case "TIMESTAMP_UNIT_1PS":
+            Period = TimeCycle * 0.000000000001;
+        break;
+    }
+
+    return Period;
+}
+#>

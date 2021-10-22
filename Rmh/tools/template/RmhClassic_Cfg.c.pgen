@@ -1,0 +1,168 @@
+/**
+*  \file
+*
+*  \brief
+*
+*  Configuration for RmhClassic Module
+*
+*  \project     BMW Platform Software
+*
+*  \copyright   BMW AG 2017
+*
+*  \version     5.0.0
+*
+*  \remarks     File is generated with PAGe
+*
+*/
+
+/*------------------------------------------------------------------------------
+*
+*  THIS FILE WAS GENERATED. DO NOT MODIFY!
+*
+*  GENERATOR       : %{= generation_tool() }% %{= generation_version_info() }%
+*
+*  GENERATION TIME : %{= generation_timestamp() }%
+*
+------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------
+                      MISRA-Deviations
+------------------------------------------------------------------------------*/
+/*
+   MISRA-C:2004 Deviation List:
+
+   MISRA-0) Deviated Rule: 19.1 (required)
+   #include statements in a file should only be preceded by other preprocessor
+   directives or comments.
+
+   Reason:
+   AUTOSAR compiler abstraction; see EB_MISRAC2004_Compliance_Autosar.pdf v1.0.1
+*/
+
+%{#
+  triggerMode = "";
+  dict = {};
+  into(container("RmhClassic/RmhGeneral"));
+
+  RmhDetUsage = value(ref("RmhDevErrorDetect"))
+
+  isModeIpduSend = exists(ref('RmhPduTriggerMode/RMH_MODE_TRIGGER_IPDU_SEND'))
+  isModeZeroLengthSignal = exists(ref('RmhPduTriggerMode/RMH_MODE_ZERO_LENGTH_TRIGGER_SIGNAL'))
+  if ( (isModeIpduSend == True) and (isModeZeroLengthSignal == True) ):
+    logger.error('RMH_MODE_TRIGGER_IPDU_SEND and RMH_MODE_ZERO_LENGTH_TRIGGER_SIGNAL are BOTH configured')
+
+  if ( (isModeIpduSend == False) and (isModeZeroLengthSignal == False) ):
+    logger.error('Neither RMH_MODE_TRIGGER_IPDU_SEND nor RMH_MODE_ZERO_LENGTH_TRIGGER_SIGNAL are configured')
+  if (isModeIpduSend == True):
+    cddInfix = "Cdd_"
+    triggerMode = "RMH_MODE_TRIGGER_IPDU_SEND"
+  else:
+    cddInfix = ""
+    triggerMode = "RMH_MODE_ZERO_LENGTH_TRIGGER_SIGNAL"
+}%
+
+%{#
+## We looping over the RequestMsgId mappings and fill a dictionary ...
+}%
+%{: if (isModeIpduSend == True)}%
+%{@ ref('RmhPduTriggerMode/RMH_MODE_TRIGGER_IPDU_SEND/RmhRequestPduMapping') }%
+%{#
+  dictkey = value(ref('RmhRequestedMsgId'))
+  fullValue = value(ref('RmhRequestedComTxPdu'))
+  index = fullValue.rindex('/')
+  dictvalue = fullValue[index+1 : len(fullValue)]
+  dict[dictkey] = dictvalue
+}%
+%{@}%
+%{: else}%
+%{@ ref('RmhPduTriggerMode/RMH_MODE_ZERO_LENGTH_TRIGGER_SIGNAL/RmhRequestPduMapping') }%
+%{#
+  dictkey = value(ref('RmhRequestedMsgId'))
+  dictvalue = value(ref('RmhTriggerSignalPPortIdentifier'))
+  dict[dictkey] = dictvalue
+}%
+%{@}%
+%{:}%
+/*------------------------------------------------------------------------------
+                      Include Section
+------------------------------------------------------------------------------*/
+#include "RmhClassic_Cfg.h"                 /* Rmh configuration header file */
+%{: if (isModeIpduSend == True)}%
+#include <Com.h>                            /* Com header file for symbolic name values of ComPduIds */
+%{: else}%
+#include <Rte_Rmh.h>                        /* Rte generated interface for Rmh */
+%{:}%
+/*------------------------------------------------------------------------------
+                      Macros
+------------------------------------------------------------------------------*/
+
+/* check version of the module */
+#if (!RmhClassic_CHECK_VERSION(5,0,0))
+   #error "Version of RmhClassic_Cfg.c does not match the version of the module!"
+#endif
+
+/*------------------------------------------------------------------------------
+                      Global Variables
+------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------
+                      Global Constants
+------------------------------------------------------------------------------*/
+
+/* Deviation MISRA-0 */ /* PRQA S 5087 MISRA_MEMMAP_BEGIN_SEC_CONST_UNSPECIFIED */
+#define Rmh_%{= cddInfix}%START_SEC_CONST_UNSPECIFIED
+#include "RmhClassic_%{= cddInfix }%MemMap.h"
+/* PRQA L:MISRA_MEMMAP_BEGIN_SEC_CONST_UNSPECIFIED */
+
+/**
+* \brief constant Rmh_RMComIPduMapping
+*
+* Constant contains the configured requestMsgId <--> Com I-PDU mapping
+* (RMH_MODE_TRIGGER_IPDU_SEND) or requestMsgId <--> S/R provide port
+* (RMH_MODE_ZERO_LENGTH_TRIGGER_SIGNAL) mapping
+*
+*/
+%{#
+  mappings = ""
+  for key in sorted(dict.keys()):
+    if (isModeIpduSend == True):
+      mappings = mappings + ("  { (PduIdType)ComConf_ComIPdu_" + dict[key] + ", " + str(key) + "U },\n")
+    else :
+      mappings = mappings + ("  { &Rte_Write_Trigger_" + dict[key] + "_dummySignal, " + str(key) + "U },\n")
+
+  mappings = mappings.rstrip(',\n')
+}%
+CONST(Rmh_RMComIPduMappingType, Rmh_%{= cddInfix}%CONST) Rmh_RMComIPduMapping[RMH_MAPPED_ELEM_COUNT] =
+{
+%{= mappings }%
+};
+#define Rmh_%{= cddInfix}%STOP_SEC_CONST_UNSPECIFIED
+#include "RmhClassic_%{= cddInfix }%MemMap.h"
+
+
+
+/*------------------------------------------------------------------------------
+                      Local Data Types
+------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------
+                      Local Variables
+------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------
+                      Local Constants
+------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------
+                      Local Functions Prototypes
+------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------
+                      Local Functions
+------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------
+                      Global Functions
+------------------------------------------------------------------------------*/
+
+/*--- End of file ------------------------------------------------------------*/

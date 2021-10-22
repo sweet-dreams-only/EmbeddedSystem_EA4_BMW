@@ -1,0 +1,54 @@
+/*----------------------------------------------------------------------------*/
+/**
+*  \file
+*
+*  \brief       Darh Classic Configuration
+*
+*  Configuration for Darh Classic Module
+*
+*  \project     BMW Platfrom Software
+*
+*  \copyright   BMW AG 2015 - 2016
+*
+*  \version     5.1.0
+*
+*  \remarks     -
+*
+*/
+/*----------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------
+*
+*  THIS FILE WAS GENERATED. DO NOT MODIFY!
+*
+*  GENERATOR       : %{= generation_tool() }% %{= generation_version_info() }%
+*
+*  GENERATION TIME : %{= generation_timestamp() }%
+*
+------------------------------------------------------------------------------*/
+#ifndef DARHCLASSIC_CFG_H
+#define DARHCLASSIC_CFG_H
+
+#include "BUtil/GenericErrMemTypes.h"
+#include "BUtil/PlatformTypes.h"
+/*------------------------------------------------------------------------------
+                      Macros
+------------------------------------------------------------------------------*/
+
+%{ : if (value(ref("DarhActiveReportListType")) != "DARH_REPORT_DYNAMICALLY") }%
+/** \brief Count of events to be reported */
+#define DARH_ACTIVE_REPORTED_EVENTS_NUMBER %{= count(ref("DarhActiveReportedEvent")) }%
+
+%{# eventIds = list() }%
+%{@ container("DarhActiveReportedEvent") }%
+%{# into(value(ref("DarhDemEvent"))) }%
+%{# eventIds.append(str(value(ref("DemEventId")))) }%
+%{# leave() }%
+%{@ }%
+
+/** \brief List of events to be reported */
+#define DARH_ACTIVE_REPORTED_EVENTS %{= ", ".join(eventIds) }%
+
+%{ : }%
+
+#endif /* DARHCLASSIC_CFG_H */

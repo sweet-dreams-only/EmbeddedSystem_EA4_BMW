@@ -1,0 +1,77 @@
+%{#
+class GeneralConfig:
+  """Stores general Coding configuration"""
+  def __init__(self):
+    self.dev_error_detect          = False
+    self.signature_size            = 0
+    self.crypto_enable             = False
+    self.prod_error_ceud_detection = False
+    self.condition_check           = False
+    self.data_check                = False
+    self.receive_buffer_size       = 0
+    self.send_buffer_size          = 0
+
+class CryptoConfig:
+  """Stores crypto Coding configuration"""
+  def __init__(self):
+    self.crypto_lib                 = False
+    self.csm                        = False
+    self.csm_hash_size              = 0
+
+class CodingConfig:
+  """Stores Coding data configuration"""
+  def __init__(self):
+    self.caf_id_size                = 8
+    self.signature_size             = 0
+    self.cps_size                   = 18
+    self.prog_id_size               = 8
+    self.config_size                = 0
+    self.max_size_of_user_functions = 0
+    self.coding_areas_list          = []
+
+class CodingArea:
+  """Stores Coding data area configuration"""
+  def __init__(self):
+    self.area_name             = ""
+    self.area_def_val          = 0
+    self.area_size             = 0
+    self.area_offset           = 0
+    self.area_memory_string    = ""
+    self.area_memory_data_list = []
+    self.coding_functions_list = []
+
+class CodingFunction:
+  """Stores Coding data function configuration"""
+  def __init__(self):
+    self.function_name                = ""
+    self.function_start_byte          = 0
+    self.function_end_byte            = 0
+    self.function_mask                = 0
+    self.function_mask_shift          = 0
+    self.function_default_value       = ""
+    self.function_appl_type           = ""
+    self.function_nvram_type          = ""
+    self.function_transformation_rule = ""
+    self.function_lower_limit         = ""
+    self.function_upper_limit         = ""
+    self.function_data_check          = False
+
+  @property
+  def type(self):
+    if self.function_appl_type == "bytearray":
+      return "uint8"
+    else:
+      return "{0}".format(self.function_appl_type)
+  @property
+  def checktype(self):
+    if self.function_appl_type == "bytearray":
+      return "const uint8*"
+    else:
+      return "{0}".format(self.function_appl_type)
+
+class CodingDefaultByte:
+  """Stores temporarily calculated Coding data function information"""
+  def __init__(self):
+    self.total_function_mask  = 0
+    self.total_function_value = 0
+}%

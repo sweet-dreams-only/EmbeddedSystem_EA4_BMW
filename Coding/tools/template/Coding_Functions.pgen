@@ -1,0 +1,838 @@
+%{+ Coding_Function_Types }%
+%{#
+import re
+import struct
+
+#Stores complete general Coding configuration
+generalConfig = GeneralConfig()
+
+#Stores complete crypto Coding configuration
+cryptoConfig = CryptoConfig()
+
+#Stores complete Coding data configuration
+codingConfig = CodingConfig()
+
+#Stores Coding implementation data type configuration
+coding_data_types = {}
+
+#Stores Autosar implementation data type configuration
+asr_types = {}
+
+#Look up table for Autosar implementation data types
+asr_typesizes = {
+  'boolean' : 1,
+  'uint8'   : 1,
+  'sint8'   : 1,
+  'uint16'  : 2,
+  'sint16'  : 2,
+  'uint32'  : 4,
+  'sint32'  : 4,
+  'uint64'  : 8,
+  'sint64'  : 8,
+  'float32' : 4,
+  'float64' : 8
+}
+
+#Look up table for adaptive platform types
+ap_types = {
+  'bytearray' : 'bytearray',
+  'boolean'   : 'bool',
+  'uint8'     : 'uint8_t',
+  'sint8'     : 'int8_t',
+  'uint16'    : 'uint16_t',
+  'sint16'    : 'int16_t',
+  'uint32'    : 'uint32_t',
+  'sint32'    : 'int32_t',
+  'uint64'    : 'uint64_t',
+  'sint64'    : 'int64_t',
+  'float32'   : 'float',
+  'float64'   : 'double'
+}
+
+#Look up table for ara implementation data types
+ara_types = {
+  'bytearray' : 'ByteArray',
+  'boolean'   : 'Boolean',
+  'uint8'     : 'Uint8',
+  'sint8'     : 'Int8',
+  'uint16'    : 'Uint16',
+  'sint16'    : 'Int16',
+  'uint32'    : 'Uint32',
+  'sint32'    : 'Int32',
+  'uint64'    : 'Uint64',
+  'sint64'    : 'Int64',
+  'float32'   : 'Float',
+  'float64'   : 'Double'
+}
+
+#Look up table for internal types
+internal_types = {
+  'Bytearray' : 'bytearray',
+  'Bool'      : 'boolean',
+  'Uint8'     : 'uint8',
+  'Sint8'     : 'sint8',
+  'Uint16'    : 'uint16',
+  'Sint16'    : 'sint16',
+  'Uint32'    : 'uint32',
+  'Sint32'    : 'sint32',
+  'Uint64'    : 'uint64',
+  'Sint64'    : 'sint64',
+  'Float32'   : 'float32',
+  'Float64'   : 'float64'
+}
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : GetDataTypes                                               **
+#**                                                                            **
+#** DESCRIPTION   : Calculate and store necessary, unique coding data (used    **
+#**                 for byte arrays) and unique autosar implementation data    **
+#**                 types                                                      **
+#**                                                                            **
+#** PARAMETER     : -                                                          **
+#**                                                                            **
+#** RETURN        : -                                                          **
+#**                                                                            **
+#** REMARKS       : This is a sub function to GetGeneralConfig()               **
+#**                                                                            **
+#*******************************************************************************/
+def GetDataTypes():
+  #Determine necessary, unique coding function or autosar implementation data types
+  for area_context in codingConfig.coding_areas_list:
+    for function_context in area_context.coding_functions_list:
+      if function_context.function_nvram_type == "bytearray":
+        data_type_size = function_context.function_end_byte - function_context.function_start_byte +1
+        if not data_type_size in coding_data_types:
+          coding_data_type_name = "Coding_Data{0}ByteType".format(data_type_size)
+          coding_data_types[data_type_size] = coding_data_type_name
+      if function_context.function_appl_type != "bytearray":
+        if not function_context.function_appl_type in asr_types:
+          asr_types[function_context.function_appl_type] = asr_typesizes[function_context.function_appl_type]
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : GetSignatureSize                                           **
+#**                                                                            **
+#** DESCRIPTION   : Returns configured signature size in bytes                 **
+#**                                                                            **
+#** PARAMETER     : -                                                          **
+#**                                                                            **
+#** RETURN        : signature size in bytes                                    **
+#**                                                                            **
+#** REMARKS       : This is a sub function to GetGeneralConfig()               **
+#**                                                                            **
+#*******************************************************************************/
+def GetSignatureSize():
+  signature_size_enum = value(ref("CodingGeneral/CodingSignatureSize"))
+  signature_sizes = {"SIGNATURE_RSA_256_BYTE_2048_BIT":256,
+                     "SIGNATURE_RSA_384_BYTE_3072_BIT":384,
+                     "SIGNATURE_RSA_512_BYTE_4096_BIT":512,
+                     "SIGNATURE_ECC_64_BYTE_P_256_BIT":64,
+                     "SIGNATURE_ECC_96_BYTE_P_384_BIT":96,
+                     "SIGNATURE_ECC_132_BYTE_P_521_BIT":132}
+  return signature_sizes[signature_size_enum]
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : GetHashSize                                                **
+#**                                                                            **
+#** DESCRIPTION   : Returns configured hash size in bytes                      **
+#**                                                                            **
+#** PARAMETER     : -                                                          **
+#**                                                                            **
+#** RETURN        : hash size in bytes                                         **
+#**                                                                            **
+#** REMARKS       : This is a sub function to GetGeneralConfig()               **
+#**                                                                            **
+#*******************************************************************************/
+def GetHashSize():
+  hash_size_enum = value(ref("CodingCrypto/Csm/CodingHashSize"))
+  hash_sizes = {"HASH_SHA_256_32_BYTE":32,
+                "HASH_SHA_384_43_BYTE":43,
+                "HASH_SHA_512_64_BYTE":64}
+  return hash_sizes[hash_size_enum]
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : GetAreaDefaultValue                                        **
+#**                                                                            **
+#** DESCRIPTION   : Returns configured general default value                   **
+#**                                                                            **
+#** PARAMETER     : area_default_value_enum: General area default value        **
+#**                                                                            **
+#** RETURN        : possible value 0 or 255                                    **
+#**                                                                            **
+#** REMARKS       : This is a sub function to GetGeneralConfig()               **
+#**                                                                            **
+#*******************************************************************************/
+def GetAreaDefaultValue(area_default_value_enum):
+  area_default_values = {"AllBitsZero":0,
+                         "AllBitsOne":255}
+  return area_default_values[area_default_value_enum]
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : AreaDefaultLayout                                          **
+#**                                                                            **
+#** DESCRIPTION   : Calculates Coding data function values                     **
+#**                 This is a sub function to GetAreasConfig()                 **
+#**                                                                            **
+#** PARAMETER     : function_context: Function configuration parameters        **
+#**                 defaultBytes:     Array to store calculated function and   **
+#**                                   mask values for every byte of a area     **
+#**                                                                            **
+#** RETURN        : -                                                          **
+#**                                                                            **
+#** REMARKS       : Function PrepareDefaultBytes() must be called before       **
+#**                                                                            **
+#*******************************************************************************/
+def AreaDefaultLayout(function_context,defaultBytes):
+  #Compact coding means that a coding function needs only one byte or less (some bits)
+  compact_coding = True if function_context.function_end_byte == function_context.function_start_byte else False
+
+  #The regexp is matched
+  default_value_regex = re.compile("(?:0x)?([0-9a-f]{1,2})(?:;|:|,|$){1}",re.IGNORECASE)
+  default_value_matches = default_value_regex.findall(function_context.function_default_value)
+
+  #We need to iterate over the found groups of the regexp
+  bytePosition = function_context.function_start_byte
+  for current_value in default_value_matches:
+    current_value = int(current_value,base=16)
+    if compact_coding:
+      #Only a part of the byte is used by the function, we need to mask some bits out
+      #We will shift the mask "right" until the masks lowest bit reaches bit 0
+      #That way we will find out how many bits the functions default value needs to be shifted left later on
+      for i in range(0,8):
+        if function_context.function_mask & 2**i != 0:
+          function_context.function_mask_shift = i
+          shifted_function_mask = function_context.function_mask >> i
+          break
+
+      #temp_value is the function default value masked out using the shifted function mask
+      temp_value = current_value & shifted_function_mask
+
+      #Now, we will store the (shifted) default value and the functions Mask together with
+      #the values and masks of the other functions
+      defaultBytes[bytePosition].total_function_value |= temp_value << function_context.function_mask_shift
+      defaultBytes[bytePosition].total_function_mask |= function_context.function_mask
+    else:
+      #The complete byte is filled by the function
+      defaultBytes[bytePosition].total_function_value = current_value
+      defaultBytes[bytePosition].total_function_mask = 255 #All bits used
+    bytePosition+=1
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : AreaMemoryLayout                                           **
+#**                                                                            **
+#** DESCRIPTION   : Calculates Coding data memory layout                       **
+#**                 This is a sub function to GetAreasConfig()                 **
+#**                                                                            **
+#** PARAMETER     : area_context:  Area configuration parameters               **
+#**                 defaultBytes:  Array containing calculated function values **
+#**                                                                            **
+#** RETURN        : -                                                          **
+#**                                                                            **
+#** REMARKS       : Function AreaDefaultLayout() must be called before         **
+#**                                                                            **
+#*******************************************************************************/
+def AreaBlockMemoryLayout(area_context,defaultBytes):
+  #Now the default value bytes string is generated from the default values, the area default mask and the function masks
+  for i in range(0,len(defaultBytes)):
+    #We will take the area default value and mask those bits zero that are used by a function
+    area_def_val = area_context.area_def_val & (~defaultBytes[i].total_function_mask)
+
+    #Now the functions value is or'd into the remaining default value
+    val = defaultBytes[i].total_function_value | area_def_val
+
+    #Adding the current value to the list of values
+    area_context.area_memory_data_list.append(IntToHex(val,"02X"))
+
+  #Adding all values as a comma separate string
+  area_context.area_memory_string = ",".join(area_context.area_memory_data_list)
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : PrepareDefaultBytes                                        **
+#**                                                                            **
+#** DESCRIPTION   : Creates initial Coding data memory layout                  **
+#**                 This is a sub function to GetAreasConfig()                 **
+#**                                                                            **
+#** PARAMETER     : area_context: Area configuration parameters                **
+#**                                                                            **
+#** RETURN        : -                                                          **
+#**                                                                            **
+#** REMARKS       : Function must be called before AreaDefaultLayout()         **
+#**                                                                            **
+#*******************************************************************************/
+def PrepareDefaultBytes(area_context):
+   #This array will store the default values and function masks for every byte of the area
+   #A mask bit of "1" means that this bit is used by a coding function. If a mask bit is "0"
+   #the bit of the area default value will be used for generating the default bytes
+   #later on.
+   defaultBytes = [CodingDefaultByte() for i in range(0,area_context.area_size)]
+   return defaultBytes;
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : SortAreasConfig                                            **
+#**                                                                            **
+#** DESCRIPTION   : Sorts Coding configuration                                 **
+#**                 Areas (key: AreadId) and all Coding functions              **
+#**                 within an Area (key: FunctionStartByte) ascending          **
+#**                                                                            **
+#** PARAMETER     : -                                                          **
+#**                                                                            **
+#** RETURN        : -                                                          **
+#**                                                                            **
+#** REMARKS       : Function GetAreasConfig() must be called before            **
+#**                                                                            **
+#*******************************************************************************/
+def SortAreasConfig():
+  codingConfig.coding_areas_list.sort(key = lambda coding_area: coding_area.area_name)
+  for area_context in codingConfig.coding_areas_list:
+    area_context.coding_functions_list.sort(key = lambda coding_function: coding_function.function_start_byte << 8 | coding_function.function_mask)
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : GetNvramType                                               **
+#**                                                                            **
+#** DESCRIPTION   : Determine configured function nvram type                   **
+#**                                                                            **
+#** PARAMETER     : function_context: Function configuration parameters        **
+#**                                                                            **
+#** RETURN        : -                                                          **
+#**                                                                            **
+#** REMARKS       : This is a sub function to GetAreasConfig()                 **
+#**                                                                            **
+#*******************************************************************************/
+def GetNvramType(function_context):
+   #The function nvram type is implemented as a choice container
+   into(container("CodingFunctionNvramType"))
+   if exists(container("Uint8")):
+     function_context.function_nvram_type = "uint8"
+   elif exists(container("Uint16")):
+     function_context.function_nvram_type = "uint16"
+   elif exists(container("Uint32")):
+     function_context.function_nvram_type = "uint32"
+   elif exists(container("Uint64")):
+     function_context.function_nvram_type = "uint64"
+   elif exists(container("Sint8")):
+     function_context.function_nvram_type = "sint8"
+   elif exists(container("Sint16")):
+     function_context.function_nvram_type = "sint16"
+   elif exists(container("Sint32")):
+     function_context.function_nvram_type = "sint32"
+   elif exists(container("Sint64")):
+     function_context.function_nvram_type = "sint64"
+   elif exists(container("Bool")):
+     function_context.function_nvram_type = "boolean"
+   elif exists(container("Bytearray")):
+     function_context.function_nvram_type = "bytearray"
+   elif exists(container("Float32")):
+     function_context.function_nvram_type = "float32"
+   elif exists(container("Float64")):
+     function_context.function_nvram_type = "float64"
+   #leave container CodingFunctionNvramType
+   leave()
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : AreaDefaultValueToHex                                      **
+#**                                                                            **
+#** DESCRIPTION   : Use area default value as function default value           **
+#**                                                                            **
+#** PARAMETER     : area_context: Area configuration parameters                **
+#**                 function_context: Function configuration parameters        **
+#**                                                                            **
+#** RETURN        : -                                                          **
+#**                                                                            **
+#** REMARKS       : This is a sub function to GetDefaultValue()                **
+#**                 Function GetNvramType() must be called before              **
+#**                                                                            **
+#*******************************************************************************/
+def AreaDefaultValueToHex(area_context,function_context):
+  #the function default value for the coding function is not explicitly configured
+  #we have to use the area_context.area_def_val instead
+  #if nvram type is boolean use/mask lowest bit 0 only
+  bool_mask = 0xFF if function_context.function_nvram_type != "boolean" else 0x01
+  #determine byte length of nvram type
+  byte_length = asr_typesizes[function_context.function_nvram_type] if function_context.function_nvram_type != "bytearray" else function_context.function_end_byte-function_context.function_start_byte+1
+  #convert int to hex without leading '0x' (only 1 byte)
+  function_context.function_default_value = ('{0:02x}'.format(area_context.area_def_val & bool_mask)).upper()
+  #create list with 2 byte chunks
+  function_default_value_list = []
+  for i in range(0,byte_length):
+    function_item = function_context.function_default_value[0] + function_context.function_default_value[1]
+    function_default_value_list.append(function_item)
+  #calculate function default value
+  function_context.function_default_value = "0x" + ":0x".join(function_default_value_list)
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : DefaultValueToHex                                          **
+#**                                                                            **
+#** DESCRIPTION   : Determine configured function default value                **
+#**                                                                            **
+#** PARAMETER     : area_context: Area configuration parameters                **
+#**                 function_context: Function configuration parameters        **
+#**                                                                            **
+#** RETURN        : -                                                          **
+#**                                                                            **
+#** REMARKS       : This is a sub function to GetDefaultValue()                **
+#**                 Function GetNvramType() must be called before              **
+#**                                                                            **
+#*******************************************************************************/
+def DefaultValueToHex(area_context,function_context):
+  #determine byte length of nvram type
+  byte_length = asr_typesizes[function_context.function_nvram_type] if function_context.function_nvram_type != "bytearray" else function_context.function_end_byte-function_context.function_start_byte+1
+  if function_context.function_nvram_type in ['uint8','uint16','uint32','uint64','sint8','sint16','sint32','sint64','boolean']:
+    #convert default value to hex without leading '0x', right-aligned within 'byte_length*2' space - use '0' as fill char
+    function_context.function_default_value = hex(value(ref("CodingFunctionDefaultValue")) & (2**(byte_length*8)-1)).upper()[2:].zfill(byte_length*2)
+  if function_context.function_nvram_type in ['float32','float64']:
+    #determine function name, depends on nvram type
+    float_typesizes = {4: FloatToHex, 8: DoubleToHex}
+    #convert default value to hex without leading '0x', right-aligned within 'byte_length' space - use '0' as fill char
+    function_context.function_default_value = '{0:0>{width}}'.format(float_typesizes[byte_length](value(ref("CodingFunctionDefaultValue"))).upper()[2:],width=byte_length)
+  if function_context.function_nvram_type in ['bytearray']:
+    #default value is already a string of bytes with correct length without separators
+    function_context.function_default_value = value(ref("CodingFunctionDefaultValue"))
+  #split hex number into 2 byte chunks
+  function_default_value_list = []
+  for i in range(0,(len(function_context.function_default_value)//2)):
+    function_item = function_context.function_default_value[2*i] + function_context.function_default_value[2*i+1]
+    function_default_value_list.append(function_item)
+  #calculate function default value
+  function_context.function_default_value = "0x" + ":0x".join(function_default_value_list)
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : GetDefaultValue                                            **
+#**                                                                            **
+#** DESCRIPTION   : Determine configured function default value                **
+#**                                                                            **
+#** PARAMETER     : area_context: Area configuration parameters                **
+#**                 function_context: Function configuration parameters        **
+#**                                                                            **
+#** RETURN        : -                                                          **
+#**                                                                            **
+#** REMARKS       : This is a sub function to GetAreasConfig()                 **
+#**                                                                            **
+#*******************************************************************************/
+def GetDefaultValue(area_context,function_context):
+  #The function default value is the initial value for the coding function
+  #if it is different from area_context.area_def_val
+  into(container("CodingFunctionNvramType"))
+  for value_type in ['Uint8', 'Uint16', 'Uint32', 'Uint64', 'Sint8', 'Sint16', 'Sint32', 'Sint64', 'Bool', 'Bytearray', 'Float32', 'Float64']:
+    if exists(container(value_type)):
+      into(container(value_type))
+      if exists(ref("CodingFunctionDefaultValue")):
+        DefaultValueToHex(area_context,function_context)
+      else:
+        AreaDefaultValueToHex(area_context,function_context)
+      leave()
+      break
+  #leave container CodingFunctionNvramType
+  leave()
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : GetAreasConfig                                             **
+#**                                                                            **
+#** DESCRIPTION   : Read, calculate and store complete Coding data             **
+#**                 configuration, sorts and checks Coding data configuration  **
+#**                                                                            **
+#** PARAMETER     : sort: Coding data configuration shall be sorted or not     **
+#**                                                                            **
+#** RETURN        : -                                                          **
+#**                                                                            **
+#** REMARKS       : Function GetGeneralConfig() must be called before          **
+#**                                                                            **
+#*******************************************************************************/
+def GetAreasConfig(sort):
+  codingConfig.signature_size = generalConfig.signature_size
+  for area_context in get_xpaths(container("CodingArea")):
+    with element_path(area_context):
+      codingArea = CodingArea()
+      codingArea.area_name = current_shortname().split("/")[-1]
+      codingArea.area_def_val = GetAreaDefaultValue(value(ref("CodingAreaDefVal")))
+      codingConfig.coding_areas_list.append(codingArea)
+      for function_context in get_xpaths(container("CodingFunction")):
+        with element_path(function_context):
+          codingFunction = CodingFunction()
+          codingFunction.function_name = current_shortname().split("/")[-1]
+          codingFunction.function_start_byte = value(ref("CodingFunctionStartByte"))
+          codingFunction.function_end_byte = value(ref("CodingFunctionEndByte"))
+          codingFunction.function_mask = value(ref("CodingFunctionMask"))
+          codingFunction.function_appl_type = GetInternalType(value(ref("CodingFunctionApplType")))
+          codingFunction.function_data_check = value(ref("CodingFunctionDataCheck"))
+          if exists (ref("CodingFunctionTransformationRule")):
+            codingFunction.function_transformation_rule = value(ref("CodingFunctionTransformationRule"))
+          if exists (ref("CodingFunctionLowerLimit")):
+            codingFunction.function_lower_limit = value(ref("CodingFunctionLowerLimit"))
+          if exists (ref("CodingFunctionUpperLimit")):
+            codingFunction.function_upper_limit = value(ref("CodingFunctionUpperLimit"))
+          #get content of choice container
+          GetNvramType(codingFunction)
+          GetDefaultValue(codingArea,codingFunction)
+          if codingConfig.max_size_of_user_functions < (codingFunction.function_end_byte-codingFunction.function_start_byte+1):
+            codingConfig.max_size_of_user_functions = (codingFunction.function_end_byte-codingFunction.function_start_byte+1)
+          if codingArea.area_size < (codingFunction.function_end_byte+1):
+            codingArea.area_size = (codingFunction.function_end_byte+1)
+          codingArea.coding_functions_list.append(codingFunction)
+      codingArea.area_size += (codingConfig.signature_size+codingConfig.caf_id_size)
+      codingConfig.config_size += codingArea.area_size
+      codingArea.area_offset = (codingConfig.config_size - codingArea.area_size)
+  codingConfig.config_size += codingConfig.cps_size
+  codingConfig.config_size += codingConfig.prog_id_size
+
+  #Creates Coding data memory layout
+  for area_context in codingConfig.coding_areas_list:
+    defaultBytes = PrepareDefaultBytes(area_context);
+    for function_context in area_context.coding_functions_list:
+      AreaDefaultLayout(function_context,defaultBytes)
+    AreaBlockMemoryLayout(area_context,defaultBytes )
+
+  for area_context in codingConfig.coding_areas_list:
+    for function_context in area_context.coding_functions_list:
+      if True == function_context.function_data_check:
+        generalConfig.data_check = True
+
+  #Sort Coding area config
+  if sort:
+    SortAreasConfig()
+
+  if codingConfig.max_size_of_user_functions < codingConfig.caf_id_size:
+    codingConfig.max_size_of_user_functions = codingConfig.caf_id_size
+
+  #Identifies unique coding and autosar implementation data types
+  GetDataTypes()
+
+  #Check Coding area config
+  CheckAreasConfig()
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : GetApType                                                  **
+#**                                                                            **
+#** DESCRIPTION   : Convert classic platform to adaptive platform type         **
+#**                                                                            **
+#** PARAMETER     : cp_type: classic platform type                             **
+#**                                                                            **
+#** RETURN        : adaptive platform type                                     **
+#**                                                                            **
+#** REMARKS       : -                                                          **
+#**                                                                            **
+#*******************************************************************************/
+def GetApType(cp_type):
+  return(ap_types[cp_type])
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : GetAraType                                                 **
+#**                                                                            **
+#** DESCRIPTION   : Convert classic platform to ara implementation data type   **
+#**                                                                            **
+#** PARAMETER     : cp_type: classic platform type                             **
+#**                                                                            **
+#** RETURN        : ara implementation data type                               **
+#**                                                                            **
+#** REMARKS       : -                                                          **
+#**                                                                            **
+#*******************************************************************************/
+def GetAraType(cp_type):
+  return(ara_types[cp_type])
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : GetInternalType                                            **
+#**                                                                            **
+#** DESCRIPTION   : Convert symphonie to local implementation data type        **
+#**                                                                            **
+#** PARAMETER     : cp_type: symphonie data type                               **
+#**                                                                            **
+#** RETURN        : internal implementation data type                          **
+#**                                                                            **
+#** REMARKS       : -                                                          **
+#**                                                                            **
+#*******************************************************************************/
+def GetInternalType(cp_type):
+  return(internal_types[cp_type])
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : CheckAreasConfig                                           **
+#**                                                                            **
+#** DESCRIPTION   : Coding configuration plausibility check(s)                 **
+#**                                                                            **
+#** PARAMETER     : -                                                          **
+#**                                                                            **
+#** RETURN        : -                                                          **
+#**                                                                            **
+#** REMARKS       : Function GetGeneralConfig() must be called before          **
+#**                                                                            **
+#*******************************************************************************/
+def CheckAreasConfig():
+  function_name_list = []
+  for area_context in codingConfig.coding_areas_list:
+    for function_context in area_context.coding_functions_list:
+      #Check unique function name
+      if not function_context.function_name in function_name_list:
+        function_name_list.append(function_context.function_name)
+      else:
+        logger.error("The function name: {0} is not unique in the Coding configuration.".format(function_context.function_name))
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : PrintAreaConfig                                            **
+#**                                                                            **
+#** DESCRIPTION   : Print complete Coding data configuration                   **
+#**                                                                            **
+#** PARAMETER     : level: [0-3]                                               **
+#**                 [0]: skip printing                                         **
+#**                 [1]: print only general Coding data information            **
+#**                 [2]: print addionally Coding area informations             **
+#**                 [3]: print addionally Coding function informations         **
+#**                                                                            **
+#** RETURN        : -                                                          **
+#**                                                                            **
+#** REMARKS       : Function GetAreasConfig() must be called before            **
+#**                                                                            **
+#*******************************************************************************/
+def PrintAreaConfig(level):
+  if level > 0:
+    print("********************************************************************************")
+    print("GetAreaConfig(): class CodingConfig contains all CodingArea configuration parameters.")
+    print(" - CafIdSize.............: {0:4} bytes".format(codingConfig.caf_id_size))
+    print(" - SignatureSize.........: {0:4} bytes".format(codingConfig.signature_size))
+    print(" - CPSSize...............: {0:4} bytes".format(codingConfig.cps_size))
+    print(" - ProgIdSize............: {0:4} bytes".format(codingConfig.prog_id_size))
+    print(" - ConfigSize............: {0:4} bytes".format(codingConfig.config_size))
+    print(" - MaxSizeOfUserFunctions: {0:4} bytes".format(codingConfig.max_size_of_user_functions))
+    print("")
+    for area_context in codingConfig.coding_areas_list:
+      if level > 1:
+        print("   - AreaName....................: ",area_context.area_name)
+        print("   - AreaDefVal..................: {0:4}".format(area_context.area_def_val))
+        print("   - SizeOfArea..................: {0:4}".format(area_context.area_size))
+        print("   - AreaOffset..................: {0:4}".format(area_context.area_offset))
+        print("   - AreaMemoryData[]............: ")
+        for memory_data in area_context.area_memory_data_list:
+          print(memory_data, end= " ")
+        print("")
+        print("   - AreaMemoryString............: \n",area_context.area_memory_string);
+        print("")
+        print("")
+        for function_context in area_context.coding_functions_list:
+          if level > 2:
+            print("     - FunctionName..............: ", function_context.function_name)
+            print("     - FunctionStartByte.........: ", function_context.function_start_byte)
+            print("     - FunctionEndByte...........: ", function_context.function_end_byte)
+            print("     - FunctionMask..............: ", IntToHex(function_context.function_mask,"02X"))
+            print("     - FunctionMaskShift.........: ", IntToHex(function_context.function_mask_shift,"02X"))
+            print("     - FunctionDefaultValue......: ", function_context.function_default_value)
+            print("     - FunctionApplType..........: ", function_context.function_appl_type)
+            print("     - FunctionNvramType.........: ", function_context.function_nvram_type)
+            print("     - FunctionTransformationRule: ", function_context.function_transformation_rule)
+            print("     - FunctionLowerLimit........: ", function_context.function_lower_limit)
+            print("     - FunctionUpperLimit........: ", function_context.function_upper_limit)
+            print("     - FunctionDataCheck.........: ", function_context.function_data_check)
+            print("");
+    print("********************************************************************************")
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : GetGeneralConfig                                           **
+#**                                                                            **
+#** DESCRIPTION   : Read and store complete general Coding configuration       **
+#**                                                                            **
+#** PARAMETER     : -                                                          **
+#**                                                                            **
+#** RETURN        : -                                                          **
+#**                                                                            **
+#** REMARKS       : -                                                          **
+#**                                                                            **
+#*******************************************************************************/
+def GetGeneralConfig():
+  generalConfig.dev_error_detect = value(ref("CodingGeneral/CodingDevErrorDetect"))
+  generalConfig.signature_size = GetSignatureSize()
+  generalConfig.crypto_enable = value(ref("CodingGeneral/CodingCryptoEnable"))
+  generalConfig.prod_error_ceud_detection = value(ref("CodingGeneral/CodingProdErrorCEUDDetection"))
+  generalConfig.condition_check = value(ref("CodingGeneral/CodingConditionCheck"))
+  generalConfig.receive_buffer_size = value(ref("CodingGeneral/CodingReceiveBufferSize"))
+  generalConfig.send_buffer_size = value(ref("CodingGeneral/CodingSendBufferSize"))
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : GetCryptoConfig                                            **
+#**                                                                            **
+#** DESCRIPTION   : Read and store complete crypto Coding configuration        **
+#**                                                                            **
+#** PARAMETER     : -                                                          **
+#**                                                                            **
+#** RETURN        : -                                                          **
+#**                                                                            **
+#** REMARKS       : -                                                          **
+#**                                                                            **
+#*******************************************************************************/
+def GetCryptoConfig():
+  cryptoConfig.crypto_lib = exists(container("CodingCrypto/CryptoLib"))
+  cryptoConfig.csm = exists(container("CodingCrypto/Csm"))
+  if exists (ref("CodingCrypto/Csm/CodingHashSize")):
+    cryptoConfig.csm_hash_size = GetHashSize()
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : PrintGeneralConfig                                         **
+#**                                                                            **
+#** DESCRIPTION   : Print complete general Coding configuration                **
+#**                                                                            **
+#** PARAMETER     : level: [0-1]                                               **
+#**                 [0]: skip printing                                         **
+#**                 [1]: print complete general Coding configuration           **
+#**                                                                            **
+#** RETURN        : -                                                          **
+#**                                                                            **
+#** REMARKS       : Function GetAreasConfig() must be called before            **
+#**                                                                            **
+#*******************************************************************************/
+def PrintGeneralConfig(level):
+  if level > 0:
+    print("********************************************************************************")
+    print("GetGeneralConfig(): class GeneralConfig contains all CodingGeneral configuration parameters.")
+    print(" - CodingDevErrorDetect....: ",generalConfig.dev_error_detect)
+    print(" - SignatureSize...........: ",generalConfig.signature_size)
+    print(" - CryptoEnable............: ",generalConfig.crypto_enable)
+    print(" - ProdErrorCEUDDetection..: ",generalConfig.prod_error_ceud_detection)
+    print(" - ConditionCheck..........: ",generalConfig.condition_check)
+    print(" - DataCheck...............: ",generalConfig.data_check)
+    print(" - ReceiveBufferSize.......: ",generalConfig.receive_buffer_size)
+    print(" - SendBufferSize..........: ",generalConfig.send_buffer_size)
+    print("********************************************************************************")
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : PrintCryptoConfig                                          **
+#**                                                                            **
+#** DESCRIPTION   : Print complete crypto Coding configuration                 **
+#**                                                                            **
+#** PARAMETER     : level: [0-1]                                               **
+#**                 [0]: skip printing                                         **
+#**                 [1]: print complete crypto Coding configuration            **
+#**                                                                            **
+#** RETURN        : -                                                          **
+#**                                                                            **
+#** REMARKS       : Function GetAreasConfig() must be called before            **
+#**                                                                            **
+#*******************************************************************************/
+def PrintCryptoConfig(level):
+  if level > 0:
+    print("********************************************************************************")
+    print("GetCryptoConfig(): class CryptoConfig contains all CodingCrypto configuration parameters.")
+    print(" - CryptoLib................: ",cryptoConfig.crypto_lib)
+    print(" - Csm......................: ",cryptoConfig.csm)
+    if exists (ref("CodingCrypto/Csm/CodingHashSize")):
+      print(" - HashSize.................: ",cryptoConfig.csm_hash_size)
+    print("********************************************************************************")
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : PrintDataTypes                                             **
+#**                                                                            **
+#** DESCRIPTION   : Print calculated implementation data types                 **
+#**                                                                            **
+#** PARAMETER     : level: [0-1]                                               **
+#**                 [0]: skip printing                                         **
+#**                 [1]: print calculated implementation data types            **
+#**                                                                            **
+#** RETURN        : -                                                          **
+#**                                                                            **
+#** REMARKS       : Function GetAreasConfig() must be called before            **
+#**                                                                            **
+#*******************************************************************************/
+def PrintDataTypes(level):
+  if level > 0:
+    print("********************************************************************************")
+    print("GetDataTypes(): coding_data_types conatins all coding data implementation data types.")
+    for data_size in sorted(coding_data_types):
+      print(" - Name....: ",coding_data_types[data_size])
+      print(" - Size....: ",data_size)
+    print("********************************************************************************")
+    print("GetDataTypes(): asr_types contains all autosar implementation data types.")
+    for asr_type in sorted(asr_types):
+      print(" - Name....: ",asr_type)
+      print(" - Size....: ",asr_types[asr_type])
+    print("********************************************************************************")
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : IntToHex                                                   **
+#**                                                                            **
+#** DESCRIPTION   : Returns a hex string of the given value of the format      **
+#**                                                                            **
+#** PARAMETER     : value: Integer value that shall be converted to hex        **
+#**               : style: Format of the hex string                            **
+#**                                                                            **
+#** RETURN        : A hex string of the given value                            **
+#**                                                                            **
+#** REMARKS       : -                                                          **
+#**                                                                            **
+#*******************************************************************************/
+def IntToHex(value, style):
+  hexFormat = "0x{value:{style}}".format(value=value,style=style)
+  return hexFormat
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : IntToBin                                                   **
+#**                                                                            **
+#** DESCRIPTION   : Returns a bin string of the given value                    **
+#**                                                                            **
+#** PARAMETER     : value:     Integer value that shall be converted to bin    **
+#**               : offset:    Number of left (neg.) / right (pos) shifts      **
+#**               : width:     Number of chars in the result string            **
+#**                                                                            **
+#** RETURN        : A bin string of the given value                            **
+#**                                                                            **
+#** REMARKS       : -                                                          **
+#**                                                                            **
+#*******************************************************************************/
+def IntToBin(value, offset, width):
+  value = value << offset
+  return "0b{0:0{width}{style}}".format(value, width=width, style='b')
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : FloatToHex                                                 **
+#**                                                                            **
+#** DESCRIPTION   : Returns a bin string of the given value                    **
+#**                                                                            **
+#** PARAMETER     : value: Float value that shall be converted to hex          **
+#**                                                                            **
+#** RETURN        : A hex string of the given value                            **
+#**                                                                            **
+#** REMARKS       : -                                                          **
+#**                                                                            **
+#*******************************************************************************/
+def FloatToHex(value):
+  hexFormat = hex(struct.unpack('<I', struct.pack('<f', value))[0])
+  return hexFormat
+
+#/*******************************************************************************
+#**                                                                            **
+#** FUNC-NAME     : DoubleToHex                                                **
+#**                                                                            **
+#** DESCRIPTION   : Returns a bin string of the given value                    **
+#**                                                                            **
+#** PARAMETER     : value: Double value that shall be converted to hex         **
+#**                                                                            **
+#** RETURN        : A hex string of the given value                            **
+#**                                                                            **
+#** REMARKS       : -                                                          **
+#**                                                                            **
+#*******************************************************************************/
+def DoubleToHex(value):
+  hexFormat = hex(struct.unpack('<Q', struct.pack('<d', value))[0])
+  return hexFormat
+
+#}%

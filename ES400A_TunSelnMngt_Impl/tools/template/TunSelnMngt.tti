@@ -1,0 +1,146 @@
+<#+
+    /***********************************************************************************************
+     * Class: CalListClass
+     * Notes: This class holds the calibration component name, the base component name (if it is a 
+     * duplicate of an existing component (ie, Rt00 and Rt01 components) and if it is base 
+     * calibration component (in which case BaseCalCmpName will be NULL.
+     **********************************************************************************************/
+    public class CalListClass
+    {
+        public string CalCmpName;
+        public string BaseCalCmpName;
+        public bool BaseCmp;
+    }
+
+    /***********************************************************************************************
+     * Class: ContainerLoopClass
+     * Notes: This class is used to hold containers and sub containers from the CalRegion section of 
+     * Configurator's configuration. 
+     **********************************************************************************************/
+    public class ContainerLoopClass
+    {
+        public ContainerLoopClass(string container, string subcontainer)
+        {
+            this.Container = container;
+            this.SubContainer = subcontainer;
+        }
+        public string Container;
+        public string SubContainer;
+    }
+
+    /***********************************************************************************************
+     * Class: TblGenClass
+     * Notes: This class is used for the configuration for each of the calibraiton tables generated 
+     * by the text template. 
+     **********************************************************************************************/
+    public class TblGenClass
+    {
+        public TblGenClass(int looplimit, int loopcounter, string containerpath, string tblname, string tblsize, string datatype, string cfgidx)
+        {
+            this.LoopLimit = looplimit;
+            this.LoopCounter = loopcounter;
+            this.ContainerPath = containerpath;
+            this.TblName = tblname;
+            this.TblSize = tblsize; 
+            this.DataType = datatype;
+            this.CfgIdx = cfgidx;
+        }
+        public int LoopLimit;
+        public int LoopCounter;
+        public string ContainerPath;
+        public string TblName;
+        public string TblSize;
+        public string DataType;
+        public string CfgIdx;
+    }
+    
+    /***********************************************************************************************
+     * Class: WriteRegionClass
+     * Notes: This class is used to generate the XCP write settings configurations.
+     **********************************************************************************************/
+    public class WriteRegionClass
+    {
+        public string Name;
+        public string StartAddrSym;
+        public uint StartAddr;
+        public string EndAddrSym;
+        public uint EndAddr;
+        public bool UseSym;
+        public bool ProdEna;
+    }
+    
+    /***********************************************************************************************
+     * Function: CalCmpTypesList_Setup
+     * Input: CalCmpTypesList - List of strings that is passed as a reference for the calibration 
+     *                          component names
+     * Output: None
+     * Notes: The list contians the basic types of calibration components. If another type is 
+     * added another item needs to be added to this list. The main script loops through the 
+     * list for each of these calibration types. 
+     **********************************************************************************************/
+    void CalCmpTypesList_Setup(List<string> CalCmpTypesList)
+    {
+        /* Assign the component types to the list */
+        CalCmpTypesList.Add("CommonComponentReference");
+        CalCmpTypesList.Add("InitializationComponentReference");
+        CalCmpTypesList.Add("InitializationOptionalSetAComponentReference");
+        CalCmpTypesList.Add("RuntimeComponentReference");
+        return;
+    }
+    
+    /***********************************************************************************************
+     * Function: CalCmpMainContainerList_Setup
+     * Input: CalCmpMainContainerList - List of containers and their references to gather the 
+     *                                  calibration components defined in the configuration.
+     * Output: None
+     * Notes: If a new calibration type is added, this list will need to be updated. 
+     **********************************************************************************************/
+    void CalCmpMainContainerList_Setup(List<ContainerLoopClass> CalCmpMainContainerList)
+    {
+        /* Assign the component containers to the list */
+        CalCmpMainContainerList.Add(new ContainerLoopClass("CalRegions/CommonComponent","CommonComponentReference"));
+        CalCmpMainContainerList.Add(new ContainerLoopClass("CalRegions/InitializationComponent","InitializationComponentReference"));
+        CalCmpMainContainerList.Add(new ContainerLoopClass("CalRegions/InitializationOptionalSetAComponent", "InitializationOptionalSetAComponentReference"));
+        CalCmpMainContainerList.Add(new ContainerLoopClass("CalRegions/RuntimeComponent","RuntimeComponentReference"));
+        return;
+    }
+    
+    /***********************************************************************************************
+     * Function: TblGenList_Setup
+     * Input: TblGenList - Contains the list of tables to set up for calibration management. 
+     * Output: None
+     * Notes: If a new calibration type is added, this list will need to be updated. 
+     **********************************************************************************************/
+    void TblGenList_Setup(List<TblGenClass> TblGenList)
+    {
+        TblGenList.Add( new TblGenClass( 0, 0,
+                                         "CalibrationConfiguration/InitializationSelectableCalibrationConfiguration",
+                                         "ININCALCFGTBL_REC",
+                                         "MAXININIDXCNT_CNT_U08",
+                                         "TunSelnIdxTblRec1",
+                                         "InitializationIndex" ) );
+
+        TblGenList.Add( new TblGenClass( 0, 0,
+                                         "CalibrationConfiguration/InitializationOptionalSetASelectableCalibrationConfiguration",
+                                         "ININOPTSETACALCFGTBL_REC",
+                                         "MAXININOPTSETAIDXCNT_CNT_U08",
+                                         "TunSelnIdxTblRec1",
+                                         "InitializationOptionalSetAIndex" ) );
+
+        TblGenList.Add( new TblGenClass( 0, 0,
+                                         "CalibrationConfiguration/RuntimeSelectableCalibrationConfiguration",
+                                         "RTCALCFGTBL_REC",
+                                         "MAXRTIDXCNT_CNT_U08",
+                                         "TunSelnIdxTblRec1",
+                                         "RuntimeIndex" ) );
+    
+        TblGenList.Add( new TblGenClass( 0, 0,
+                                         "OnlineCalibrationGroup",
+                                         "ONLINECALCFGTBL_REC",
+                                         "MAXONLINECALCFGCNT_CNT_U08",
+                                         "TunSelnOnlineCalIdxTblRec1",
+                                         "GroupIndex" ) );
+
+        return;
+    }
+#>

@@ -1,0 +1,89 @@
+/**
+*  \file
+*
+*  \brief       BMW SWC StdDiag
+*
+*  This file is the configuration source file of the module StdDiag
+*  for usage in the BMW AUTOSAR Core.
+*
+*  \project     BMW Platform Software
+*
+*  \copyright   BMW AG 2015 - 2017
+*
+*  \version     5.3.0
+*
+*  \remarks     --
+*
+*/
+
+/*------------------------------------------------------------------------------
+*
+*  THIS FILE WAS GENERATED. DO NOT MODIFY!
+*
+*  GENERATOR       : %{= generation_tool() }% %{= generation_version_info() }%
+*
+*  GENERATION TIME : %{= generation_timestamp() }%
+*
+------------------------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------------------
+                      MISRA-Deviations
+------------------------------------------------------------------------------*/
+/*
+   MISRA-C:2004 Rule 19.1: including StdDiag_MemMap.h is necessary throughout
+   the file according to memory abstraction. See PRQA 5087.
+*/
+
+/*------------------------------------------------------------------------------
+                      Include Section
+------------------------------------------------------------------------------*/
+
+#include "BUtil/PlatformTypes.h"
+#include "StdDiag_Version.h"
+#include "StdDiag_Cfg.h"
+
+/*------------------------------------------------------------------------------
+                      Macros
+------------------------------------------------------------------------------*/
+
+/* check version of the module */
+#if (!StdDiag_CHECK_VERSION(5,3,0))
+   #error "Version of StdDiag_Cfg.c does not match the version of the module!"
+#endif
+
+%{#
+into(module("StdDiag"))
+StdDiagIDRLSupport = exists(rel('StdDiagProvideIDRL'))
+}%\
+%{: if StdDiagIDRLSupport }%\
+/*------------------------------------------------------------------------------
+                      Constants
+------------------------------------------------------------------------------*/
+#define StdDiag_START_SEC_CONST_UNSPECIFIED
+#include "StdDiag_MemMap.h"
+
+#if (STDDIAG_INDIV_DID_NUMBER > 0)
+/**
+ * \brief StdDiag_DIDArray holds the DIDs identifying the individual data.
+ */
+const uint16 StdDiag_DIDArray[STDDIAG_INDIV_DID_NUMBER] =
+{
+%{#
+into(container("StdDiagProvideIDRL"))
+DIDList = []
+}%\
+%{@ ref('IDRLClient/IndivData') }%\
+%{# DIDList.append('  0x{didval:04X}u /* {client}, {did} */'.format(did=shortname('.'), client=shortname('..'), didval=value(ref('DIDValue')))) }%\
+%{@}%\
+%{= ',\n'.join(DIDList) }%
+%{# leave() }%\
+};
+
+#endif /* (STDDIAG_INDIV_DID_NUMBER > 0) */
+
+#define StdDiag_STOP_SEC_CONST_UNSPECIFIED
+#include "StdDiag_MemMap.h"
+
+%{:}%\
+%{# leave() }%\

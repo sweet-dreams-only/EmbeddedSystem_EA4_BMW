@@ -1,0 +1,65 @@
+/*----------------------------------------------------------------------------*/
+/**
+*  \file
+*
+*  \brief       Dlog Version Information
+*
+*  This file is a generated version header file
+*  for usage in the BMW AUTOSAR Core.
+*
+*  \project     BMW AUTOSAR Core
+*
+*  \par         To be changed by user:
+*               [yes/no]
+*
+*  \copyright   BMW AG 2015 - 2016
+*
+*  \version     5.1.1
+*
+*  \remarks     ---
+*
+*/
+/*----------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------
+*
+*  THIS FILE WAS GENERATED. DO NOT MODIFY!
+*
+*  GENERATOR       : %{= generation_tool() }% %{= generation_version_info() }%
+*
+*  GENERATION TIME : %{= generation_timestamp() }%
+*
+------------------------------------------------------------------------------*/
+
+#ifndef DLOG_VERSION_H
+#define DLOG_VERSION_H
+
+%{# into(container("Dlog/CommonPublishedInformation")); }%
+/*------------------------------------------------------------------------------
+                      Macros
+------------------------------------------------------------------------------*/
+
+/**
+ * \brief Dlog header major version
+ */
+#define Dlog_MAJOR_VERSION        (%{= value(ref("SwMajorVersion")) }%u)
+
+/**
+ * \brief Dlog header minor version
+ */
+#define Dlog_MINOR_VERSION        (%{= value(ref("SwMinorVersion")) }%u)
+
+/**
+ * \brief Dlog header patch version
+ */
+#define Dlog_PATCH_VERSION        (%{= value(ref("SwPatchVersion")) }%u)
+
+
+/* PRQA S 3453 2 */ /* Macro used for precompile version check */
+#define Dlog_CHECK_VERSION(major,minor,patch) \
+ (((major) == Dlog_MAJOR_VERSION) && ((minor) == Dlog_MINOR_VERSION) && ((patch) == Dlog_PATCH_VERSION))
+
+
+#endif /* DLOG_VERSION_H */
+
+/*--- End of file ------------------------------------------------------------*/

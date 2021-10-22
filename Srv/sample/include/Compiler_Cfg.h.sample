@@ -1,0 +1,102 @@
+/*----------------------------------------------------------------------------*/
+/**
+*  \file
+*
+*  This file is a sample for the compiler abstraction of the BMW AUTOSAR Core
+*  module "Srv".
+*
+*  \project BMW AUTOSAR Core
+*
+*  \par To be changed by user:
+*  yes
+*
+*  \copyright BMW AG 2012 - 2015
+*
+*  \remarks This file shall contain all compiler abstraction macros of the
+*           module "Srv".
+*
+*  \remarks The content of this file only serves as an example. If this file
+*           is platform dependent, this shall be mentioned here.
+*
+*/
+/*----------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------
+|  DISCLAIMER:                                                                 |
+|  As the program is not fully tested and qualified for series production      |
+|  use, the user shall not be entitled to use the program in connection        |
+|  with any series production. BMW provides the user with the program only     |
+|  as sample application (for testing purposes).                               |
+|                                                                              |
+-------------------------------------------------------------------------------*/
+
+#ifndef COMPILER_CFG_H
+#define COMPILER_CFG_H
+
+#error "The following defines must be integrated/adapted in the central Compiler_Cfg.h. \
+        Please refer to the integration manual."
+
+/**
+ * \brief To be used for code.
+ */
+#define Srv_CODE
+
+/**
+ * \brief To be used for global or static constants
+ */
+#define Srv_CONST
+
+/**
+ * \brief To be used for references on application data (expected to be in RAM or ROM)
+ * passed via API
+ */
+#define Srv_APPL_DATA
+
+/**
+ * \brief To be used for references on application constants (excpected to be certainly
+ * in ROM, for instance pointer of Init-function) passed via API
+ */
+#define Srv_APPL_CONST
+
+/**
+ * \brief To be used for references on application functions. (e.g. call back
+ * function pointers)
+ */
+#define Srv_APPL_CODE
+
+/**
+ * \brief To be used for references on application functions. (e.g. callout
+ * function pointers)
+ */
+#define Srv_CALLOUT_CODE
+
+/**
+ * \brief To be used for global or static constants that are shared between
+ *        bootmanager, bootloader and application
+ */
+#define Srv_SHARED_CONST
+
+/**
+ * \brief To be used for all global or static variables that are never initialized
+ */
+#define Srv_VAR_NOINIT
+
+/**
+ * \brief To be used for all global or static variables that are initialized only after
+ * power on reset
+ */
+#define Srv_VAR_POWER_ON_INIT
+
+/**
+ * \brief To be used for all global or static variables that have at least one of the
+ * following properties: accessed bitwise, frequently used, or high number of accesses in source code
+ */
+#define Srv_VAR_FAST
+
+/**
+ * \brief To be used for global or static variables that are initialized after every
+ * reset.
+ */
+#define Srv_VAR
+
+#endif /* COMPILER_CFG_H */

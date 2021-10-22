@@ -1,0 +1,148 @@
+<#@ AutosarXml processor="ArDirectiveProcessor" requires="arPrefix='ar';arNamespace='http://autosar.org/4.0.3'" #>
+<#@ template inherits="AutosarDirectiveProcessor.ArGtcBase" debug="true" #>
+<#@ output extension="" #>
+<#@ include file="Helper.tt" #>/**********************************************************************************************************************
+* Copyright 2018 Nxtr
+* Nxtr Confidential
+*
+* Module File Name:   CDD_XcpIf_Cfg.h
+* Module Description: Configuration header file for ES104B XCP Interface.
+* Project           : CBD
+* Author            : Kevin Smith
+***********************************************************************************************************************
+* Version Control:
+* %version:          1 %
+* %derived_by:       cz7lt6 %
+*---------------------------------------------------------------------------------------------------------------------
+* Date      Rev     Author  Change Description                                                              SCR #
+* --------  ------- ------- ---------------------------------------------------------------------------     ----------
+* 05/05/18  1       KJS     Initial version of the configuration header template                             EA4#23861
+**********************************************************************************************************************/
+
+/******************************************* Multiple Include Protection *********************************************/
+#ifndef CDD_XCPIF_CFG_H
+#define CDD_XCPIF_CFG_H
+<# /*-------------------------------------------------------------------------------------------------------------*/ #>
+<#
+    ChangeContext( Xp.ModuleConfAtDefRefTo( "XcpIf/XcpDriverAbstratction" ) );
+#>
+<# /*-------------------------------------------------------------------------------------------------------------*/ #>
+
+/************************************************ Include Statements *************************************************/
+#include "Std_Types.h"
+
+/* Include required headers */
+#include "Xcp.h"
+#include "XcpAppl.h"
+#include "Os.h"
+
+/* Headers defined in Configurator */
+<#
+    int HeaderIncCnt = Count( Xp.ValueAtDefRefTo( "XcpIfIncludes") );
+    if (HeaderIncCnt > 0)
+    {
+#><# !LOOP( Xp.ValueAtDefRefTo( "XcpIfIncludes" ) ) #>
+#include "<#= ValueOf( "." ) #>"
+<# !ENDLOOP #>
+<#
+    }
+    else
+    {
+#>
+/* --- None Defined --- */
+<#
+    }
+#>
+
+/******************************************** File Level Rule Deviations *********************************************/
+
+/**************************************************** Type defs ******************************************************/
+
+/************************************************ Embedded Constants *************************************************/
+/* XCP Command Error Codes */
+<# /*-------------------------------------------------------------------------------------------------------------*/ #>
+#define XCPIF_ERRCMDSYNC_CNT_U08        <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandErrorCodes/XCPIF_ERRCMDSYNC_CNT_U08" ) ) #>
+#define XCPIF_ERRCMDBUSY_CNT_U08        <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandErrorCodes/XCPIF_ERRCMDBUSY_CNT_U08" ) ) #>
+#define XCPIF_ERRDAQACTV_CNT_U08        <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandErrorCodes/XCPIF_ERRDAQACTV_CNT_U08" ) ) #>
+#define XCPIF_ERRPRMACTV_CNT_U08        <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandErrorCodes/XCPIF_ERRPRMACTV_CNT_U08" ) ) #>
+#define XCPIF_ERRCMDUKWN_CNT_U08        <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandErrorCodes/XCPIF_ERRCMDUKWN_CNT_U08" ) ) #>
+#define XCPIF_ERRCMDSYNTAX_CNT_U08      <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandErrorCodes/XCPIF_ERRCMDSYNTAX_CNT_U08" ) ) #>
+#define XCPIF_ERROUTOFRNG_CNT_U08       <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandErrorCodes/XCPIF_ERROUTOFRNG_CNT_U08" ) ) #>
+#define XCPIF_ERRWRPROTD_CNT_U08        <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandErrorCodes/XCPIF_ERRWRPROTD_CNT_U08" ) ) #>
+#define XCPIF_ERRACSDENIED_CNT_U08      <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandErrorCodes/XCPIF_ERRACSDENIED_CNT_U08" ) ) #>
+#define XCPIF_ERRACSLOCKD_CNT_U08       <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandErrorCodes/XCPIF_ERRACSLOCKD_CNT_U08" ) ) #>
+#define XCPIF_ERRPAGENOTVLD_CNT_U08     <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandErrorCodes/XCPIF_ERRPAGENOTVLD_CNT_U08" ) ) #>
+#define XCPIF_ERRPAGEMODNOTVLD_CNT_U08  <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandErrorCodes/XCPIF_ERRPAGEMODNOTVLD_CNT_U08" ) ) #>
+#define XCPIF_ERRSEGNOTVLD_CNT_U08      <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandErrorCodes/XCPIF_ERRSEGNOTVLD_CNT_U08" ) ) #>
+#define XCPIF_ERRSEQ_CNT_U08            <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandErrorCodes/XCPIF_ERRSEQ_CNT_U08" ) ) #>
+#define XCPIF_ERRDATAACQNCFG_CNT_U08    <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandErrorCodes/XCPIF_ERRDATAACQNCFG_CNT_U08" ) ) #>
+#define XCPIF_ERRMEMOVF_CNT_U08         <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandErrorCodes/XCPIF_ERRMEMOVF_CNT_U08" ) ) #>
+#define XCPIF_ERRGEN_CNT_U08            <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandErrorCodes/XCPIF_ERRGEN_CNT_U08" ) ) #>
+#define XCPIF_ERRVRFY_CNT_U08           <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandErrorCodes/XCPIF_ERRVRFY_CNT_U08" ) ) #>
+#define XCPIF_ERRRSRCTMPNOTAVL_CNT_U08  <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandErrorCodes/XCPIF_ERRRSRCTMPNOTAVL_CNT_U08" ) ) #>
+<# /*-------------------------------------------------------------------------------------------------------------*/ #>
+
+/* XCP Command Return Codes */
+<# /*-------------------------------------------------------------------------------------------------------------*/ #>
+#define XCPIF_RTNCMDSYNC_CNT_U08        <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandReturnCodes/XCPIF_RTNCMDSYNC_CNT_U08" ) ) #>
+#define XCPIF_RTNCMDBUSY_CNT_U08        <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandReturnCodes/XCPIF_RTNCMDBUSY_CNT_U08" ) ) #>
+#define XCPIF_RTNDAQACTV_CNT_U08        <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandReturnCodes/XCPIF_RTNDAQACTV_CNT_U08" ) ) #>
+#define XCPIF_RTNPRMACTV_CNT_U08        <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandReturnCodes/XCPIF_RTNPRMACTV_CNT_U08" ) ) #>
+#define XCPIF_RTNCMDUKWN_CNT_U08        <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandReturnCodes/XCPIF_RTNCMDUKWN_CNT_U08" ) ) #>
+#define XCPIF_RTNCMDSYNTAX_CNT_U08      <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandReturnCodes/XCPIF_RTNCMDSYNTAX_CNT_U08" ) ) #>
+#define XCPIF_RTNOUTOFRNG_CNT_U08       <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandReturnCodes/XCPIF_RTNOUTOFRNG_CNT_U08" ) ) #>
+#define XCPIF_RTNWRPROTD_CNT_U08        <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandReturnCodes/XCPIF_RTNWRPROTD_CNT_U08" ) ) #>
+#define XCPIF_RTNACSDENIED_CNT_U08      <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandReturnCodes/XCPIF_RTNACSDENIED_CNT_U08" ) ) #>
+#define XCPIF_RTNACSLOCKD_CNT_U08       <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandReturnCodes/XCPIF_RTNACSLOCKD_CNT_U08" ) ) #>
+#define XCPIF_RTNPAGENOTVLD_CNT_U08     <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandReturnCodes/XCPIF_RTNPAGENOTVLD_CNT_U08" ) ) #>
+#define XCPIF_RTNPAGEMODNOTVLD_CNT_U08  <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandReturnCodes/XCPIF_RTNPAGEMODNOTVLD_CNT_U08" ) ) #>
+#define XCPIF_RTNSEGNOTVLD_CNT_U08      <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandReturnCodes/XCPIF_RTNSEGNOTVLD_CNT_U08" ) ) #>
+#define XCPIF_RTNSEQ_CNT_U08            <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandReturnCodes/XCPIF_RTNSEQ_CNT_U08" ) ) #>
+#define XCPIF_RTNDATAACQNCFG_CNT_U08    <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandReturnCodes/XCPIF_RTNDATAACQNCFG_CNT_U08" ) ) #>
+#define XCPIF_RTNMEMOVF_CNT_U08         <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandReturnCodes/XCPIF_RTNMEMOVF_CNT_U08" ) ) #>
+#define XCPIF_RTNGEN_CNT_U08            <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandReturnCodes/XCPIF_RTNGEN_CNT_U08" ) ) #>
+#define XCPIF_RTNVRFY_CNT_U08           <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandReturnCodes/XCPIF_RTNVRFY_CNT_U08" ) ) #>
+#define XCPIF_RTNRSRCTMPNOTAVL_CNT_U08  <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/CommandReturnCodes/XCPIF_RTNRSRCTMPNOTAVL_CNT_U08" ) ) #>
+<# /*-------------------------------------------------------------------------------------------------------------*/ #>
+
+/* XCP Command Return Values */
+<# /*-------------------------------------------------------------------------------------------------------------*/ #>
+#define XCPIF_CMDOK_CNT_U08         <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/ReturnValues/XCPIF_CMDOK_CNT_U08" ) ) #>
+#define XCPIF_CMDPND_CNT_U08        <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/ReturnValues/XCPIF_CMDPND_CNT_U08" ) ) #>
+#define XCPIF_CMDBUSY_CNT_U08       <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/ReturnValues/XCPIF_CMDBUSY_CNT_U08" ) ) #>
+#define XCPIF_CMDUKWN_CNT_U08       <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/ReturnValues/XCPIF_CMDUKWN_CNT_U08" ) ) #>
+#define XCPIF_CMDSYNTAX_CNT_U08     <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/ReturnValues/XCPIF_CMDSYNTAX_CNT_U08" ) ) #>
+#define XCPIF_CMDOUTOFRNG_CNT_U08   <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/ReturnValues/XCPIF_CMDOUTOFRNG_CNT_U08" ) ) #>
+#define XCPIF_CMDPROTD_CNT_U08      <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/ReturnValues/XCPIF_CMDPROTD_CNT_U08" ) ) #>
+#define XCPIF_CMDDENIED_CNT_U08     <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/ReturnValues/XCPIF_CMDDENIED_CNT_U08" ) ) #>
+#define XCPIF_CMDERR_CNT_U08        <#= ValueOf( Xp.ValueAtDefRefTo( "Constants/ReturnValues/XCPIF_CMDERR_CNT_U08" ) ) #>
+<# /*-------------------------------------------------------------------------------------------------------------*/ #>
+
+/* Online Calibrations */
+<# /*-------------------------------------------------------------------------------------------------------------*/ #>
+#define XCPIF_FLSPAGE_CNT_U08   <#= ValueOf( Xp.ValueAtDefRefTo( "Configurations/OnlineCalibration/XCPIF_FLSPAGE_CNT_U08" ) ) #>U
+#define XCPIF_RAMPAGE_CNT_U08   <#= ValueOf( Xp.ValueAtDefRefTo( "Configurations/OnlineCalibration/XCPIF_RAMPAGE_CNT_U08" ) ) #>U
+#define XCPIF_MAXCALSEG_CNT_U08    <#= ValueOf( Xp.ValueAtDefRefTo( "Configurations/OnlineCalibration/XCPIF_MAXCALSEG_CNT_U08" ) ) #>
+#define XCPIF_MAXCALPAGE_CNT_U08   <#= ValueOf( Xp.ValueAtDefRefTo( "Configurations/OnlineCalibration/XCPIF_MAXCALPAGE_CNT_U08" ) ) #>
+<# /*-------------------------------------------------------------------------------------------------------------*/ #>
+
+/* XCP Access Modes */
+<# /*-------------------------------------------------------------------------------------------------------------*/ #>
+#define XCPIF_ONLINECALNOACS_CNT_U08            <#= ValueOf( Xp.ValueAtDefRefTo( "Configurations/OnlineCalibration/XcpAccessModes/XCPIF_ONLINECALNOACS_CNT_U08" ) ) #>U
+#define XCPIF_ONLINECALECUACS_CNT_U08           <#= ValueOf( Xp.ValueAtDefRefTo( "Configurations/OnlineCalibration/XcpAccessModes/XCPIF_ONLINECALECUACS_CNT_U08" ) ) #>U
+#define XCPIF_ONLINECALXCPACS_CNT_U08           <#= ValueOf( Xp.ValueAtDefRefTo( "Configurations/OnlineCalibration/XcpAccessModes/XCPIF_ONLINECALXCPACS_CNT_U08" ) ) #>U
+#define XCPIF_ONLINECALXCPANDECUACS_CNT_U08     <#= ValueOf( Xp.ValueAtDefRefTo( "Configurations/OnlineCalibration/XcpAccessModes/XCPIF_ONLINECALXCPANDECUACS_CNT_U08" ) ) #>U
+#define XCPIF_ONLINECALALLACS_CNT_U08           0x80U /* Not used by the XCP driver, but included to match the XCP protocol spec. */
+<# /*-------------------------------------------------------------------------------------------------------------*/ #>
+
+/* XCP Flash Access */
+<# /*-------------------------------------------------------------------------------------------------------------*/ #>
+#define XCPIF_MAXFLSADR_CNT_U32     <#= ValueOf( Xp.ValueAtDefRefTo( "Configurations/XcpFlashAccess/XCPIF_MAXFLSADR_CNT_U32" ) ) #>
+<# /*-------------------------------------------------------------------------------------------------------------*/ #>
+
+/****************************************************** Macros *******************************************************/
+
+/*********************************************** Exported Declarations ***********************************************/
+
+/**************************************** End Of Multiple Include Protection *****************************************/
+#endif /* CDD_XCPIF_CFG_H */

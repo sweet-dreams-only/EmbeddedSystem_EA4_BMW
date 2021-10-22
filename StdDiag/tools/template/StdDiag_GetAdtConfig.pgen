@@ -1,0 +1,87 @@
+%{#\
+into(module("StdDiagClassic"))
+StdDiagADTSupport = exists(rel('StdDiagApplicationDataTransfer'))
+leave()
+}%\
+%{: if StdDiagADTSupport }%\
+%{#
+
+logger.info("===== Checking Application Data Transfer configuration... =====")
+
+# ADTList contains a list of tuples. Each tuple holds:
+# 0: RoutineIdentifier
+# 1: RoutineIdentifierName
+# 2: SubrRoutineIdentifier
+# 3: SubrRoutineIdentifierName
+# 4: controlID
+# 5: ctrlIDLength
+# 6: ctrlIDArray
+ADTList = []
+ctrlIDArray = []
+
+into(module("StdDiagClassic"))
+into(container("StdDiagApplicationDataTransfer"))
+
+# loop all Routine Identifier}%\
+%{@ container("ApplicationRoutineControlIdentifier") }%\
+%{#
+RID = value(ref("./RoutineIdentifierValue"))
+RIDName = shortname('.')
+logger.info("Found RID 0x{0:X} ({1})".format(RID,RIDName))
+
+
+# loop all Sub Routine Identifier for current RID}%\
+%{@ container("ApplicationSubRoutineControlIdentifier") }%\
+%{#
+SubRID = value(ref("./SubRoutineIdentifierValue"))
+if(SubRID == 0):
+  SubRIDName = ""
+else :
+  SubRIDName = "_" + shortname('.')
+logger.info("Found SubRID 0x{0:X} ({1})".format(SubRID,SubRIDName))
+
+
+# loop all control IDs for current SubRID}%\
+%{@ ref("controlIDs") }%\
+%{#
+ctrlID = value(".")
+if(ctrlID == 0):
+  ctrlIDArray = ctrlID.to_bytes(1, 'big')
+else:
+  ctrlIDArray = ctrlID.to_bytes((((ctrlID.bit_length()-1)//8)+1), 'big')
+ctrlIDLength = len(ctrlIDArray)
+logger.info("Found controlID 0x{0:X}".format(ctrlID))
+logger.info("Found controlIDLength in Bytes: {0}".format(ctrlIDLength))
+logger.info("Found ctrlIDArray: {0}".format(ctrlIDArray))
+
+# create tuple and add to list
+t = RID, RIDName, SubRID, SubRIDName, ctrlID, ctrlIDLength, ctrlIDArray
+ADTList.append(t)
+#ctrlIDArray.clear()
+}%\
+%{@}%\
+%{@}%\
+%{#
+}%\
+%{@}%\
+
+%{#
+numberMemObjIDs = len(ADTList)
+
+logger.info("===== Summary for Application Data Transfer configuration: =====")
+logger.info("")
+for object in ADTList:
+  logger.info("RoutineID: 0x{0:X} ".format(object[0]))
+  logger.info("RID Name: {0} ".format(object[1]))
+  logger.info("SubRoutineID: 0x{0:X} ".format(object[2]))
+  logger.info("Sub RID Name: {0} ".format(object[3]))
+  logger.info("controlID: 0x{0:X} ".format(object[4]))
+  logger.info("controlIDLength: {0} ".format(object[5]))
+  logger.info("controlIDArray: {0} ".format(object[6]))
+  logger.info("")
+logger.info("Total Number of entries: {0}".format(numberMemObjIDs))
+logger.info("")
+leave()
+leave()
+}%\
+%{:}%

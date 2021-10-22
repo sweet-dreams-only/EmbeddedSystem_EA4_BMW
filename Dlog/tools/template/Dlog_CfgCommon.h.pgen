@@ -1,0 +1,543 @@
+%{+ ../pageinclude/Dlog_Help.pgen }%
+/**
+*  \file
+*
+*  \brief       Common configuration header file of module Dlog.
+*
+*  This file contains configuration parameters that are commonly used by
+*  Application, Bootloader and Bootmanager
+*
+*  \project     BMW Platform Software
+*
+*  \copyright   BMW AG 2015 - 2017
+*
+*  \version     5.3.1
+*
+*/
+
+/*------------------------------------------------------------------------------
+*
+*  THIS FILE WAS GENERATED. DO NOT MODIFY!
+*
+*  GENERATOR       : %{= generation_tool() }% %{= generation_version_info() }%
+*
+*  GENERATION TIME : %{= generation_timestamp() }%
+*
+------------------------------------------------------------------------------*/
+
+#ifndef DLOG_CFG_COMMON_H
+#define DLOG_CFG_COMMON_H
+
+/*------------------------------------------------------------------------------
+                      Include Section
+------------------------------------------------------------------------------*/
+
+#include "DlogClassic_Version.h"
+#include "BUtil_ByteMask.h"
+#include <stddef.h>
+
+
+/*------------------------------------------------------------------------------
+                      MISRA-Deviations
+------------------------------------------------------------------------------*/
+
+/* Violation of MISRA rule 19.7, Reason: C90 does not support inline
+ * functions, see PRQA 3453
+ */
+
+
+/*------------------------------------------------------------------------------
+                      Macros
+------------------------------------------------------------------------------*/
+
+/* check version of the module */
+#if (!DlogClassic_CHECK_VERSION(5,3,1))
+   #error "Version of Dlog_CfgCommon.h does not match the version of the module!"
+#endif
+
+%{#
+  reset();
+  into(container("DlogShared/DlogSharedGeneral/Swe"));
+
+  sweGroupTable = SweGroupTable(container("SweGroupConfiguration"))
+  sweTable = SweTable(container( "SweConfiguration" ), sweGroupTable)
+  sweEntries = sweTable.Entries;
+
+  numApplSwes         = sweTable.NumberOfApplSwe;
+  numSwes             = sweTable.NumberOfEntries;
+  numBootSwes         = numSwes - numApplSwes;
+
+  numPhysApplSwes     = numApplSwes;
+
+  reset();
+  into(container("DlogShared/DlogSharedGeneral/TimingParameter"));
+}%
+
+/**
+ * fingerprint bit mask and length format identifier:
+ */
+#define DLOG_FINGERPRINT_LENGTH_MASK                                       0xF0u
+#define DLOG_FINGERPRINT_TESTER_SERVICE_ID_MASK                            0x0Fu
+#define DLOG_FINGERPRINT_SHORT                                             0x00u
+#define DLOG_FINGERPRINT_LONG                                              0x80u
+#define DLOG_FINGERPRINT_PRGDATE_INITIAL                                   0x99u
+#define DLOG_FINGERPRINT_PRGDATE_YEAR_POS                                  0x00u
+#define DLOG_FINGERPRINT_PRGDATE_MONTH_POS                                 0x01u
+#define DLOG_FINGERPRINT_PRGDATE_DAY_POS                                   0x02u
+#define DLOG_FINGERPRINT_FORMAT_POS                                        0x03u
+#define DLOG_FINGERPRINT_TESTER_SERVICE_ID_INITIAL                         0x0Bu
+
+#define DLOG_FINGERPRINT_INITIAL \
+          /* programming date                                                     */ \
+          (uint8)DLOG_FINGERPRINT_PRGDATE_INITIAL, \
+          (uint8)DLOG_FINGERPRINT_PRGDATE_INITIAL, \
+          (uint8)DLOG_FINGERPRINT_PRGDATE_INITIAL, \
+           \
+          /* fingerprint format / tester sevice id                                */ \
+          ( \
+          ( (uint8)DLOG_FINGERPRINT_SHORT        & \
+          (uint8)DLOG_FINGERPRINT_LENGTH_MASK \
+          ) \
+          | \
+          ( (uint8)DLOG_FINGERPRINT_TESTER_SERVICE_ID_INITIAL & \
+          (uint8)DLOG_FINGERPRINT_TESTER_SERVICE_ID_MASK \
+          ) \
+          )
+
+
+/* ----------------------------------------------------------------------- */
+/*                     Flash timing parameters                             */
+/* ----------------------------------------------------------------------- */
+/* in seconds, according to FP5_5563 et seqq.                               */
+
+#define DLOG_ERASEMEMORYTIME                   %{="0x%04x" %(value(ref("EraseMemoryTime")))}%u     /* maximum 0x0078    */
+#define DLOG_CHECKMEMORYTIME                   %{="0x%04x" %(value(ref("CheckMemoryTime")))}%u     /* maximum 0x003C    */
+#define DLOG_BOOTLOADERINSTALLATIONTIME        %{="0x%04x" %(value(ref("BootloaderInstallTime")))}%u     /* maximum 0x0078    */
+#define DLOG_AUTHENTIFICATIONTIME              %{="0x%04x" %(value(ref("AuthentificationTime")))}%u     /* maximum 0x000A    */
+#define DLOG_RESETTIME                         %{="0x%04x" %(value(ref("ResetTime")))}%u     /* maximum 0x000A    */
+#define DLOG_TRANSFERDATATIME                  %{="0x%04x" %(value(ref("TransferDataTime")))}%u
+
+
+/* ----------------------------------------------------------------------- */
+/*                     Platform                                            */
+/* ----------------------------------------------------------------------- */
+%{#
+  reset();
+  into(container("DlogShared/DlogSharedPlatform"));
+}%
+
+   /******** ConvertExtAddress2IntPointer / ConvertIntPointer2ExtAddress *********/
+   /* uint32 ConvertExtAddress2IntPointer(uint32 extAddress);                    */
+   /* uint32 ConvertIntPointer2ExtAddress(uint32 intPointer);                    */
+   /* Converts a logical block number sent by the tester (e.g. a pointer to a    */
+   /* SWE table) to an internal (far) pointer and vice versa.                    */
+   /*                                                                            */
+   /* nothing to do on 32 bit platforms                                          */
+   /*                                                                            */
+   #define Dlog_ConvertExtAddress2IntPointer(extAddress)   %{=value( ref("ConvertExtAddress2IntPointer") )}% /* PRQA S 3453 */
+   #define Dlog_ConvertIntPointer2ExtAddress(intPointer)   %{=value( ref("ConvertIntPointer2ExtAddress") )}% /* PRQA S 3453 */
+
+
+/* -------------------------------------------------------------------------- */
+/*                     SWE status specific defines                            */
+/* -------------------------------------------------------------------------- */
+%{#
+   flashPageSize = value( ref("FlashPageSize") );
+   crcAreaLength = max(16, flashPageSize);
+   areaLength = max(16, flashPageSize);
+   progDepareaLength = max(32, flashPageSize);
+}%
+
+/**
+ * Length of the SWE CRC checksum area. It must have a correct size for HIS
+ * flash driver
+ */
+#define DLOG_SWE_CRC_CHECKSUM_AREA_LENGTH      (%{="0x%02x" %(crcAreaLength)}%u * sizeof(size_t) / 4)
+/** SWE CRC checksum data. It must have size of 'SWE_CRC_CHECKSUM_AREA_LENGTH'*/
+#define DLOG_SWE_CRC_CHECKSUM_DATA                               \
+   %{@ i in range (0, crcAreaLength) }%(uint8)0x00u%{: if i+1<crcAreaLength }%, %{: if (i%4==3) }% \
+%{:}%%{:}%
+   %{@}%
+
+/**
+ * Length of the SWE valid flag area. It must have a correct size for HIS flash
+ * driver
+ */
+#define DLOG_SWE_VALID_FLAG_AREA_LENGTH        %{="0x%02x" %(areaLength)}%u
+/** SWE valid flag data. It must have size of 'SWE_VALID_FLAG_AREA_LENGTH'    */
+#define DLOG_SWE_VALID_FLAG_DATA                                 \
+   (uint8)0x5Au, (uint8)0x5Au, (uint8)0x00u, (uint8)0x00u,  \
+   %{@ i in range (4, areaLength) }%(uint8)0x00u%{: if i+1<areaLength }%, %{: if (i%4==3) }% \
+%{:}%%{:}%
+   %{@}%
+
+/**
+ * Length of the programming dependencies flag area. It must have a correct
+ * size for his flash driver
+ *
+ * 4 Bytes Counter, 1 Byte ProgDepFlag, 3 Bytes Padding, 4 Bytes Fingerprint, 8 Bytes ProgId
+ */
+#define DLOG_PROG_DEP_AREA_LENGTH              %{="0x%02x" %(progDepareaLength)}%u
+/** Programming dependencies data. It must have size of 'PROG_DEP_AREA_LENGTH'*/
+#define DLOG_PROG_DEP_DATA                                       \
+  (uint8)0x00u, (uint8)0x00u, (uint8)0x00u, (uint8)0x01u,  \
+  (uint8)0x01u, (uint8)0x00u, (uint8)0x00u, (uint8)0x00u,  \
+  DLOG_FINGERPRINT_INITIAL,  \
+  (uint8)0x01u, (uint8)0x02u, (uint8)0x03u, (uint8)0x04u,  \
+  (uint8)0x05u, (uint8)0x06u, (uint8)0x07u, (uint8)0x08u,  \
+  %{@ i in range (28, progDepareaLength) }%(uint8)0x00u%{: if i+1<progDepareaLength }%, %{: if (i%4==3) }% \
+%{:}%%{:}%
+  %{@}%
+
+#define DLOG_PROG_DEP_OFS_COUNTER      0u
+#define DLOG_PROG_DEP_OFS_FLAG         4u
+#define DLOG_PROG_DEP_OFS_FINGERPRINT  8u
+#define DLOG_PROG_DEP_OFS_PROGID      12u
+
+/**
+ * Length of the whole SWE flash status area
+ */
+#define DLOG_SWE_FLASH_STATUS_AREA_LENGTH                                           \
+   ( DLOG_SWE_CRC_CHECKSUM_AREA_LENGTH +                                            \
+     DLOG_SWE_VALID_FLAG_AREA_LENGTH   +                                            \
+     DLOG_PROG_DEP_AREA_LENGTH                                                      \
+   )
+
+
+/**
+ * This defines the value which indicates erased flash memory. This is usually
+ * 0xFF, however on Tricore it is 0x00.
+ */
+#define FLASH_ERASED_BYTE                 %{="0x%02x" %(value( ref("FlashErasedByte") ))}%u
+
+%{# eccErrorState = value( ref("EccErrorState") );
+}%
+
+/* -------------------------------------------------------------------------- */
+/*            SWE / Programming Dependencies State on ECC error               */
+/* -------------------------------------------------------------------------- */
+
+#define DLOG_SWE_STATE_ECC_ERROR DLOG_SWE_STATE_%{=eccErrorState}%
+#define DLOG_PROG_DEP_ECC_ERROR  DLOG_PROG_DEP_%{=eccErrorState}%%{: if eccErrorState == "UNCHECKED" }%_APPL%{:}%
+
+
+/* ----------------------------------------------------------------------- */
+/*                     Logistic Data                                       */
+/* ----------------------------------------------------------------------- */
+%{#
+  reset();
+  into(container("DlogShared/DlogSharedGeneral/Logistic"));
+}%
+
+/**
+ * The number of Svk backups beside the system supplier and plan svk history.
+ * Svk backups are not mandatory. Choose '0u' to disable this feature. Dont't
+ * forget to update NvM configuration.
+ * 0u <= NUMBEROFSVKBACKUPS <= 61u
+ */
+%{# numberOfSvkBackups = value(ref("DlogNumberOfSvkBackups")); }%
+%{: if numberOfSvkBackups > 0 }%
+#define DLOG_SVKBACKUPENABLE            STD_ON
+#define DLOG_NVM_BLOCK_SVK_BACKUP_ARRAY \
+{ \
+%{@ i in range(0, numberOfSvkBackups) }%
+   DLOG_NVM_BLOCK_SVK_BACKUP_%{="%02i" %(i+1)}%%{: if i+1<numberOfSvkBackups }%,%{:}% \
+%{@}%
+}
+%{: else }%
+#define DLOG_SVKBACKUPENABLE            STD_OFF
+%{:}%
+#define DLOG_NUMBEROFSVKBACKUPS         %{=numberOfSvkBackups}%u
+%{# DlogEcuSerialNumberLength = value(ref("DlogEcuSerialNumberLength")); }%
+#define DLOG_ECUSERIALNUMBERDEFAULT     %{=GetUint8Array(value(ref("DlogEcuSerialNumberDefault")))}%
+
+#define DLOG_ECUMANUFACTURINGDATELENGTH      3u
+#define DLOG_ECUMANUFACTURINGDATEDEFAULT     %{=value(ref("DlogEcuManufactoringDateDefault"))}%
+
+#define DLOG_ECUUIDDEFAULT 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0xee
+
+/**
+ * Length of the HWE development info field:
+ * The HardwareDevelopmentInfo CAN NOT be overwritten by the SWE-Generator tool.
+ * The length that is configured here will be reserved in a protected ROM space
+ * (in the BootManager). It is not designated that the size can be increased
+ * during ECU livetime.
+ */
+%{# DlogHweDevelopmentInfoLength = value(ref("DlogHweDevelopmentInfoLength")); }%
+#define DLOG_HWEDEVELOPMENTINFOLENGTH        %{=DlogHweDevelopmentInfoLength}%u
+
+#define DLOG_SWE_DEV_INFO_LENGTH             %{=value(ref("DlogSweDevelopmentInfoLength"))}%u
+
+%{: if value( ref("DlogHweTableInitFromRom") ) }%
+#define DLOG_HWETABLE_INIT_FROM_ROM  STD_ON
+%{: else }%
+#define DLOG_HWETABLE_INIT_FROM_ROM  STD_OFF
+%{:}%
+
+%{#
+   reset();
+   into(container("DlogShared/DlogSharedGeneral/Logistic"));
+   numberOfHwe = 0;
+   numberOfHweConfigSets = 0;
+   maxNumberOfHwe = 0;
+   lastNumberOfHwe = 0;
+   hweTableIndices = "";
+   numberOfBootSwe = sweTable.NumberOfBootSwe;
+   numberOfApplSwe = 0;
+   xid = 0;
+}%
+%{@ container( "ConfigSet" ) }%
+%{#
+   numberOfHweConfigSets += 1;
+   hweTableIndices += str(numberOfHwe);
+   hweTableIndices += ", ";
+   lastNumberOfHwe = numberOfHwe;
+}%
+%{@ (container( "HweData" ))}%
+%{#
+      xid = value(ref("Id"));
+      xDevInfo = value(ref("DevelopmentInfo"));
+      xProcClass = value( ref("ProcessClass") );
+}%
+%{: if ( xProcClass == "DLOG_PROCESSCLASS_HWEL" or xProcClass == "DLOG_PROCESSCLASS_HWAP" or xProcClass == "DLOG_PROCESSCLASS_HWFR" ) }%
+%{#
+        numberOfHwe += 1;
+}%
+/* -------------------------------------------------------------------------- */
+/*                    initialisation data of HWE Sgbm Id(s)                   */
+/* -------------------------------------------------------------------------- */
+
+#define DLOG_HWE%{=numberOfHwe}%CLASSIFICATIONDATA      %{=value( ref("ProcessClass") )}%
+#define DLOG_HWE%{=numberOfHwe}%LOGISTICIDENTIFIERDATA  (uint8)%{="0x%02x" %(GetHiHiByte(xid))}%u, (uint8)%{="0x%02x" %(GetHiLoByte(xid))}%u, (uint8)%{="0x%02x" %(GetLoHiByte(xid))}%u, (uint8)%{="0x%02x" %(GetLoLoByte(xid))}%u
+#define DLOG_HWE%{=numberOfHwe}%VERSIONDATA             (uint8)%{="0x%02x" %(value(ref("VersionMajor")))}%u, (uint8)%{="0x%02x" %(value(ref("VersionMinor")))}%u, (uint8)%{="0x%02x" %(value(ref("VersionPatch")))}%u
+/* HWEDevelopmentInfo */
+#if (DLOG_HWEDEVELOPMENTINFOLENGTH > 0u)
+   #define DLOG_HWE%{=numberOfHwe}%DEVELOPMENTINFO      %{=GetUint8ArrayString(xDevInfo)}%
+/*                                         'H','W','E','L','H','W','E','D','E','V','I','N','F','O' */
+#endif
+
+#define DLOG_HWE%{=numberOfHwe}%_TABLE_ENTRY \
+      {                                      \
+         {                                   \
+            DLOG_HWE%{=numberOfHwe}%CLASSIFICATIONDATA,     \
+            DLOG_HWE%{=numberOfHwe}%LOGISTICIDENTIFIERDATA, \
+            DLOG_HWE%{=numberOfHwe}%VERSIONDATA             \
+         }%{: if DlogHweDevelopmentInfoLength>0 }%,                                  \
+         {DLOG_HWE%{=numberOfHwe}%DEVELOPMENTINFO}%{:}%          \
+      }
+
+%{:}%
+%{@}%
+%{#
+  if (maxNumberOfHwe < numberOfHwe - lastNumberOfHwe):
+      maxNumberOfHwe = numberOfHwe - lastNumberOfHwe;
+}%
+%{@}%
+%{@ sweEntry in sweEntries }%
+%{:   if (sweEntry.IsBootSwe) }%
+
+/* -------------------------------------------------------------------------- */
+/*                 initialisation data of Boot.-SWE1 Sgbm Id                  */
+/* -------------------------------------------------------------------------- */
+/* BTLD: Bootloader                                                           */
+#define BOOTSWECLASSIFICATIONDATA   DLOG_PROCESSCLASS_BTLD
+#if (DLOG_SWE_DEV_INFO_LENGTH > 0u)
+   #define BOOTSWEDEVINFO           %{=GetUint8ArrayString(sweEntry.logisticData["devInfo"])}%
+#endif
+%{:   else }%
+%{#
+        numberOfApplSwe += 1;
+}%
+
+/* -------------------------------------------------------------------------- */
+/*                 initialisation data of Appl.-SWE%{=numberOfApplSwe}% Sgbm Id                  */
+/* -------------------------------------------------------------------------- */
+/* SWFL: Software ECU memory image                                            */
+#define SWE%{=numberOfApplSwe}%SWECLASSIFICATIONDATA   DLOG_PROCESSCLASS_SWFL
+#if (DLOG_SWE_DEV_INFO_LENGTH > 0u)
+   #define SWE%{=numberOfApplSwe}%SWEDEVINFO           %{=GetUint8ArrayString(sweEntry.logisticData["devInfo"])}%
+#endif
+
+%{:}%
+%{@}%
+
+#define DLOG_HWE_TABLE                      \
+%{@ i in range(1, numberOfHwe+1) }%
+    DLOG_HWE%{=i}%_TABLE_ENTRY%{: if i < numberOfHwe }%, \
+%{:}%
+%{@}%
+%{#
+   hweTableIndices += str(numberOfHwe);
+}%
+
+#define DLOG_HWE_TABLE_INDICES %{=hweTableIndices}%
+
+/** total number of HWE Sgbm Id(s)                                            */
+#define DLOG_TOTALNUMBEROFHWESGBMIDS    %{=numberOfHwe}%u
+/** max number of HWE Sgbm Id(s) per config set                               */
+#define DLOG_MAXNUMBEROFHWESGBMIDS      %{=numberOfHwe}%u
+/** number of HWE config sets                                                 */
+#define DLOG_NUMBEROFHWECONFIGSETS      %{=numberOfHweConfigSets}%u
+/** number of bootloader SWEs                                                 */
+#define DLOG_NUMBEROFBOOTSWESGBMIDS     %{=numberOfBootSwe}%u
+/** number of application SWEs                                                */
+#define DLOG_NUMBEROFAPPLSWESGBMIDS     %{=numberOfApplSwe}%u
+/** number of bootloader and application SWEs                                 */
+#define DLOG_NUMBEROFALLSWESGBMIDS      (DLOG_NUMBEROFBOOTSWESGBMIDS +   \
+                                         DLOG_NUMBEROFAPPLSWESGBMIDS)
+
+/** \deprecated use DLOG_NUMBEROFALLSWESGBMIDS instead */
+#define DLOG_NUMBEROFALLPHYSSWESGBMIDS  DLOG_NUMBEROFALLSWESGBMIDS
+
+/* ----------------------------------------------------------------------- */
+/*                     Memory Segmentation Table                           */
+/* ----------------------------------------------------------------------- */
+
+%{#
+  reset()
+  into(container("DlogShared/DlogSharedGeneral/MemorySegmentation"))
+
+  mst = MemSegTable(container( "Entry" ))
+
+  numberOfEntries = mst.NumberOfEntries
+  numberOfSegments = mst.NumberOfSegments
+
+  memSegTable = mst.Entries;
+}%
+   #define DLOG_MEMSEGTABLE_NUM_SEGMENTS   %{= numberOfSegments }%
+   #define DLOG_MEMSEGTABLE_NUM_ENTRIES    %{= numberOfEntries }%
+
+   #define DLOG_MEMSEGTABLE_START_ADDRESSES                                    \
+      {                                                                        \
+%{@ i in range (0, numberOfEntries) }%
+          %{= "0x%08x" %(memSegTable[i]["start"])}%uL%{: if i+1<numberOfEntries }%,%{:}%       \
+%{@}%
+      }
+
+   #define DLOG_MEMSEGTABLE_SIZES                                              \
+      {                                                                        \
+%{@ i in range (0, numberOfEntries) }%
+          %{= "0x%08x" %(memSegTable[i]["size"])}%uL%{: if i+1<numberOfEntries }%,%{:}%       \
+%{:}%
+      }
+
+   #define DLOG_MEMSEGTABLE_NUMBERS_OF_SEGMENTS                                \
+      {                                                                        \
+%{@ i in range (0, numberOfEntries) }%
+          %{= memSegTable[i]["numSegs"]}%u%{: if i+1<numberOfEntries }%,%{:}%     \
+%{:}%
+      }
+
+
+/* ----------------------------------------------------------------------- */
+/*                     SWE configuration                                   */
+/* ----------------------------------------------------------------------- */
+%{#
+  reset();
+  into(container("DlogShared/DlogSharedGeneral/Swe"));
+
+  numberOfSweConfigs = 0;
+  sweNumSeg = 0;
+  sweNumSegBoot = 0;
+  sweNumSegAppl = 0;
+
+  for sweEntry in sweEntries:
+
+    if (numberOfSweConfigs>0):
+      sweNumSegAppl += sweNumSeg;
+    else:
+      sweNumSegBoot += sweNumSeg;
+
+    numberOfSweConfigs += 1;
+}%
+   #define SWE_SEGMENT_NUMBER_APPL                                             \
+%{@ i in range(1, numberOfApplSwe+1) }%
+      SWE%{=i}%_SEGMENT_NUMBER_APPL%{:
+         if (i<numberOfApplSwe)
+       }%,                                                \
+%{:}%
+%{@}%
+
+
+   #define SWE_SEGMENT_INDEX_APPL                                              \
+%{@ i in range(1, numberOfApplSwe+1) }%
+      SWE%{=i}%_SEGMENT_INDEX_APPL%{:
+         if (i<numberOfApplSwe)
+       }%,                                                 \
+%{:}%
+%{@}%
+
+   /* *************************  boot  ************************************** */
+
+   /** Defines the total number of memory areas dedicated for the bootloader  */
+   #define FLASH_SEGMENT_NUMBER_BOOT    %{=sweNumSegBoot}%u
+
+
+   /* ************************  appl  *************************************** */
+
+   /** calculates the number of memory segments of all application SWEs       */
+   #define FLASH_SEGMENT_NUMBER_APPL (            \
+%{@ i in range(1, numberOfApplSwe+1) }%
+           (SWE%{=i}%_SEGMENT_NUMBER_APPL)%{:
+      if (i<numberOfApplSwe)
+       }% + %{:}%                                          \
+%{@}%   )
+
+   /** calculates the number of memory segments of all SWEs                   */
+   #define FLASH_SEGMENT_NUMBER_ALL  (FLASH_SEGMENT_NUMBER_BOOT +              \
+                                      FLASH_SEGMENT_NUMBER_APPL)
+
+
+/**
+ * Maximum number of supported SWEs by the bootmanager (reserved)
+ */
+#define DLOG_MAX_NUMBER_OF_SWES                %{=value(ref("MaxNumberOfSwes"))}%u
+
+/**
+ * Number of Bytes to skip after processing one byte during CRC calculation.
+ * Set this value to 0 to include all bytes in CRC calculation. A value of 255
+ * processes every 256'th byte.
+ */
+#define DLOG_CRC_CALC_BLOCK_SKIP_SIZE          %{=value(ref("CrcSkipSize"))}%u
+
+/**
+ * Number of blocks (bytes) that are checked in one Crc_CalculateCRC32 call
+ */
+#define DLOG_CRC_CALC_BLOCK_LENGTH             0x01u
+
+#define DLOG_SWE_ID_OF_BLU_SWE                 %{=value(ref("BluSweId"))}%u
+#define DLOG_DIRECT_BLU_SWE_TABLE              Dlog_Swe%{=value(ref("BluSweId"))}%Table
+#define DLOG_DIRECT_BLU_SWE_FLASHSTATUS        Dlog_Swe%{=value(ref("BluSweId"))}%FlashStatus
+
+
+/**
+ * Defines whether the job RDBI SwfkDeleteSupported is available
+ */
+%{: if sweTable.HasSwfk }%
+
+#define DLOG_SWFK_DELSUP_AVAILABLE             STD_ON
+
+/**
+ * The return value of the job RDBI SwfkDeleteSupported.
+ *
+ * The job SwfkDelete is supported, if there are optional SWEs.
+ */
+%{: if sweGroupTable.HasOptional }%
+#define DLOG_SWFK_DELETE_SUPPORTED             0x01u
+#define DLOG_CHECK_FOR_OPTIONAL_SWFK           STD_ON
+%{: else }%
+#define DLOG_SWFK_DELETE_SUPPORTED             0x00u
+#define DLOG_CHECK_FOR_OPTIONAL_SWFK           STD_OFF
+%{:}%
+
+%{: else }%
+#define DLOG_SWFK_DELSUP_AVAILABLE             STD_OFF
+#define DLOG_CHECK_FOR_OPTIONAL_SWFK           STD_OFF
+%{:}%
+
+
+#endif /* DLOG_CFG_COMMON_H */
+
+
+/*** End of file **************************************************************/
+

@@ -1,0 +1,1384 @@
+/**********************************************************************************************************************
+*  COPYRIGHT
+*  -------------------------------------------------------------------------------------------------------------------
+*  Copyright (c) 2017 by Vctr Informatik GmbH.                                                  All rights reserved.
+*
+*                This software is copyright protected and proprietary to Vctr Informatik GmbH.
+*                Vctr Informatik GmbH grants to you only those rights as set out in the license conditions.
+*                All other rights remain with Vctr Informatik GmbH.
+*  -------------------------------------------------------------------------------------------------------------------
+*  FILE DESCRIPTION
+*  -------------------------------------------------------------------------------------------------------------------
+*  File       :  If_AsrIfFr.plugin
+*  Module     :  Elisa
+*
+*  Description:  Entry point of Elisa Core.
+*
+*  -------------------------------------------------------------------------------------------------------------------
+*  AUTHOR IDENTITY
+*  -------------------------------------------------------------------------------------------------------------------
+*  Name                          Initials      Company
+*  -------------------------------------------------------------------------------------------------------------------
+*  Patrick Markl                  visml        Vctr Informatik GmbH
+*  Markus Groﬂ                    visgms       Vctr Informatik GmbH
+*  Oliver Reineke                 visore       Vctr Informatik GmbH
+*  Anthony Thomas                 visath       Vctr Informatik GmbH
+*  -------------------------------------------------------------------------------------------------------------------
+*  REVISION HISTORY
+*  -------------------------------------------------------------------------------------------------------------------
+*  Version    Date          Author   Change Id        Description
+*  -------------------------------------------------------------------------------------------------------------------
+*  00.01.00   2012-05-21    visml    -                Initial version
+*  00.02.00   2012-07-13    visgms   -                Updated to current API version
+*  00.03.00   2012-08-07    visml    -                Added field for requirements tracking.
+*  01.00.00   2012-09-19    visore   ESCAN00060515    AR3-2442: Implement module specific checking rules in Elisa plugin
+*  01.00.01   2014-06-03    visore   ESCAN00076019    error: 	assertion 'FrIf_TxPduDirtyBytes.Size: XXX' == 'YYY' does not hold
+*  01.01.00   2014-08-25    visore   ESCAN00074837    AR3-2636: Adapt Plugin to current Elisa TestSuite 
+*  01.01.01   2014-11-06    visore   ESCAN00079396    error:	assertion 'FrIf_NumberOfChannels: 2' == '1' does not hold
+*  02.00.00   2015-11-08    visath   ESCAN00085152    FEAT-1527: SafeBSW Step 3
+*  02.00.02   2016-07-27    visath   ESCAN00091178    No error is reported, although FRIF_DEV_ERROR_DETECT is defined as STD_OFF
+*  02.01.00   2017-02-28    visore   FEATC-1077       Support 2 FlexRay controllers
+*  02.01.01   2017-04-28    visath   ESCAN00094963    Fixed access to the max Tx PDU id and the max Tx Frame id
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Mandatory Functions
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : RegisterPlugin
+* Return value : Reference to a structure which contains the registration information about the plugin
+* Description  : Elisa_core calls this function to query necessary information about the plugin.
+*                This function is mandatory.
+**********************************************************************************************************************/
+def RegisterPlugin()
+{
+  var reg = ModulePluginRegistration()
+  reg.SetVersion(0x020101)                              /* version number of the plugin */
+  reg.SetPackageName("If_AsrIfFr")                      /* package name of the module (as in ALM). */
+  reg.SetInputFiles(["FrIf_PBcfg.c", "FrIf_Lcfg.c"])    /* list of all required C-files to be checked */
+
+  return reg // Mandatory
+}
+
+
+/**********************************************************************************************************************
+ * Name         : CheckVersions
+ * Parameter    : None
+ * Return value : None
+ * Description  : Elisa_core calls this function to query necessary information about the plugin.
+ *                This function is mandatory.
+ *********************************************************************************************************************/
+def CheckVersions()
+{
+  /* ESCAN00074837 : Name of the BSW module header which contains the version defines of the module, aswell as the 
+                     major/minor and release version of the BSW module to be checked */
+
+  AssertDefineEquals("FRIF_SW_MAJOR_VERSION", "(5u)")
+  AssertDefineEquals("FRIF_SW_MINOR_VERSION", "(1u)")
+}
+
+/**********************************************************************************************************************
+* Name         : main
+* Parameter    : None
+* Return value : None
+* Description  : This is the entry point of the Elisa plugin. main calls all rule functions to check the configuration.
+*                This function is mandatory.
+* Requirements : None
+**********************************************************************************************************************/
+def main()
+{
+  var configVariant = Define("FRIF_CONFIGURATION_VARIANT")
+  var variantSupport = Define("FRIF_POSTBUILD_VARIANT_SUPPORT")
+  var useRootStructs = (configVariant.GetValueAsString() == "FRIF_CONFIGURATION_VARIANT_POSTBUILD_LOADABLE") || variantSupport.IsStdOn()
+  var FrIf_CommonMaxNumberOfClusters = Define("FrIf_CommonMaxNumberOfClusters")
+  var iterations = 1
+
+  add_global(configVariant, "gConfigVariant")
+  add_global(variantSupport, "gVariantSupport")
+  add_global(useRootStructs, "gUseRootStructs")
+  add_global(iterations, "gIterations")
+
+  if (gUseRootStructs)
+  {
+    var rootStructs := FindConstSymbol("FrIf_Config.*")
+    gIterations = rootStructs.size
+
+    add_global(rootStructs, "gRootStructs")
+  }
+
+  /* Rules always required */
+  InvokeRule("Check pre-compile switches", CheckQMDefines)  
+  InvokeRule("Check the size of FrIf_Status[]", Rule_StatusSize)
+  
+  if (FrIf_CommonMaxNumberOfClusters.GetValueAsNumber() == 1) /* prevent errors caused by unsupported config variants with more than one controller */
+  {
+    InvokeRule("Check the size of FrIf_TxPduDirtyBytes[]", Rule_DirtyBytesSize)
+    InvokeRule("Check the size of FrIf_TxPduWasSentFlags[]", Rule_WasSentFlagsSize)
+    InvokeRule("Check the size of FrIf_TxPduDescriptors[]", Rule_TxPduDescriptorsSize)
+    InvokeRule("Check the indexes of the PDUs configured as immediate", Rule_ImmediateTxIndexes)
+    InvokeRule("Check the size of FrIf_TxPduTxRequestCounters[]", Rule_TxReqCountersSize)
+    InvokeRule("Check the size of the arrays of Tx/Rx frame descriptors", Rule_FrameDescriptorsSize)
+    InvokeRule("Check the size of FrIf_FrameBuffer[]", Rule_FrameBufferSize)
+    InvokeRule("Check PDUs' fit within their related frames", Rule_PduFit)
+    InvokeRule("Check the size of the arrays of Tx/Rx frame layout elements", Rule_FrameLayoutElementsSize)
+    InvokeRule("Check the column range of the FrIf_Jobs", Rule_JobDataColumns)
+    InvokeRule("Check the job confirmation settings of the FrIf_Jobs", Rule_JobDataTxConfJobs)
+    InvokeRule("Check the size of FrIf_JobDescriptors[]", Rule_JobDataSize)
+    InvokeRule("Check the position of the update-bit bytes", Rule_UpdateBitBytePosition)
+    InvokeRule("Check the size of FrIf_TxPduDirtyBits[]", Rule_DirtyBitsSize)
+    InvokeRule("Check the size of FrIf_TransceiverDescriptors[]", Rule_TransceiverDescriptorsSize)
+    InvokeRule("Check the correctness of the cycle masks", Rule_CycleMasks)
+  
+    if (gUseRootStructs) /* Rules required only when root structures are present */
+    {
+      InvokeRule("Check the correctness of the Tx PDU translation tables", Rule_TxPduTranslationTable)
+      InvokeRule("Check the correctness of the Tx/Rx L-PDU translation tables", Rule_LPduTranslationTable)
+    }
+    else /* Rules required only when root structures are not present */
+    {
+      InvokeRule("Check the PduHandles in the Tx/Rx frame layout elements", Rule_PduHandlesInFLEs)
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Helper Functions
+**********************************************************************************************************************/
+
+def GetCtrl2Array(array,index,rootidx)
+{
+  var retval
+  var suffix
+  var infix = ""
+
+  if (IsStdOn("FRIF_CTRL_ENABLE_API_OPTIMIZATION") && !gUseRootStructs)
+  {
+    retval = Array("FrIf_" + array)
+  }
+  else
+  {
+    if ((array == "TxHandles") && IsStdOff("FRIF_CTRL_ENABLE_API_OPTIMIZATION"))
+    {
+      suffix = "TxComHandleTable"
+    }
+    else if ((array == "RxHandles") && IsStdOff("FRIF_CTRL_ENABLE_API_OPTIMIZATION"))
+    {
+      suffix = "RxComHandleTable"
+    }
+    else
+    {
+      suffix = array
+    }
+    
+    if (IsStdOff("FRIF_CTRL_ENABLE_API_OPTIMIZATION"))
+    {
+      if ((suffix == "RxCycleMasks") || (suffix == "TxCycleMasks") || (suffix == "RxComHandleTable") || (suffix == "TxComHandleTable") || (suffix == "JobDescriptors"))
+      {
+        infix = "Clst2"
+      }
+      else if (suffix != "TransceiverDescriptors")
+      {
+        infix = "Ctrl2"
+      }
+    }
+    
+    if (!gUseRootStructs)
+    {
+      var CtrlArray = Array("FrIf_" + infix + suffix)
+      retval = CtrlArray.GetElemAsArray(index)
+    }
+    else
+    { 
+      var root = Struct(gRootStructs[rootidx].GetSymbolName())
+      var CtrlArray = root.GetMemberAsArray("p"+infix+suffix)
+      if (IsStdOff("FRIF_CTRL_ENABLE_API_OPTIMIZATION"))
+      {
+        retval = CtrlArray.GetElemAsArray(index)
+      }
+      else
+      {
+        retval = CtrlArray
+      }
+    }
+  }
+  
+  return retval
+}
+
+def getCtrl2Value(name, idx, rootIdx)
+{
+  var ctrl2Array
+
+  if (!gUseRootStructs)
+  {
+    ctrl2Array = Array("FrIf_Ctrl2" + name)
+  }
+  else
+  { 
+    var root = Struct(gRootStructs[rootIdx].GetSymbolName())
+    ctrl2Array = root.GetMemberAsArray("pCtrl2" + name)
+  }
+
+  return ctrl2Array.GetElemAsNumber(idx)
+}
+
+def GetInvalidHandle(direction,index,rootidx)
+{
+  var retval
+  
+  if (direction == "Rx")
+  {
+    if (gUseRootStructs && IsStdOn("FRIF_CTRL_ENABLE_API_OPTIMIZATION"))
+    {
+      var root = Struct(gRootStructs[rootidx].GetSymbolName())
+      retval = root.GetMemberAsNumber("InvalidRxHandle")
+    }
+    else if (gUseRootStructs && IsStdOff("FRIF_CTRL_ENABLE_API_OPTIMIZATION"))
+    {
+      var root = Struct(gRootStructs[rootidx].GetSymbolName())
+      var InvalidRxHandleArray = root.GetMemberAsArray("pCtrl2InvalidRxHandle")
+      retval = InvalidRxHandleArray.GetElemAsNumber(index)
+    }
+    else if (IsStdOff("FRIF_CTRL_ENABLE_API_OPTIMIZATION"))
+    {
+      var InvalidRxHandleArray = Array("FrIf_Ctrl2InvalidRxHandle")
+      retval = InvalidRxHandleArray.GetElemAsNumber(index)        
+    }
+    else 
+    {
+      retval = getDefineOrConstant("FrIf_InvalidRxHandle").GetValueAsNumber()
+    }
+  }
+  else
+  {
+    if (gUseRootStructs && IsStdOn("FRIF_CTRL_ENABLE_API_OPTIMIZATION"))
+    {
+      var root = Struct(gRootStructs[rootidx].GetSymbolName())
+      retval = root.GetMemberAsNumber("InvalidTxHandle")
+    }
+    else if (gUseRootStructs && IsStdOff("FRIF_CTRL_ENABLE_API_OPTIMIZATION"))
+    {
+      var root = Struct(gRootStructs[rootidx].GetSymbolName())
+      var InvalidTxHandleArray = root.GetMemberAsArray("pCtrl2InvalidTxHandle")
+      retval = InvalidTxHandleArray.GetElemAsNumber(index)
+    }
+    else if (IsStdOff("FRIF_CTRL_ENABLE_API_OPTIMIZATION"))
+    {
+      var InvalidTxHandleArray = Array("FrIf_Ctrl2InvalidTxHandle")
+      retval = InvalidTxHandleArray.GetElemAsNumber(index)        
+    }
+    else 
+    {
+      retval = getDefineOrConstant("FrIf_InvalidTxHandle").GetValueAsNumber()
+    }
+  }
+  
+  return retval
+}
+
+/**********************************************************************************************************************
+* Name         : getDefineOrConstant
+* Parameter    : paramname: name of the parameter that shall be returned as either define or constant
+* Return value : define or constant value of the given parameter
+**********************************************************************************************************************/
+def getDefineOrConstant(paramname)
+{
+  var retval
+
+  if (!(gConfigVariant.GetValueAsString() == "FRIF_CONFIGURATION_VARIANT_PRECOMPILE") || gVariantSupport.IsStdOn())
+  {
+    retval = Constant(paramname)
+  }
+  else if (gConfigVariant.GetValueAsString() == "FRIF_CONFIGURATION_VARIANT_PRECOMPILE")
+  {
+    retval = Define(paramname)
+  }
+
+  return retval
+}
+
+/**********************************************************************************************************************
+* Name         : checkPduHandlesInFLEs
+* Parameter    : direction
+* Return value : None
+**********************************************************************************************************************/
+def checkPduHandlesInFLEs(direction)
+{
+  var pduDescriptors
+  var frameLayoutElements
+
+  if (direction == "Tx")
+  {
+    pduDescriptors = GetCtrl2Array("TxPduDescriptors",0,0)
+    frameLayoutElements = GetCtrl2Array("TxFrameLayoutElements",0,0)
+  }
+  else
+  {
+    pduDescriptors = GetCtrl2Array("RxPduDescriptors",0,0)
+    frameLayoutElements = GetCtrl2Array("RxFrameLayoutElements",0,0)
+  }
+
+  for (var i = 0; i < frameLayoutElements.GetSize(); ++i)
+  {
+    /* CM_FRIF_TXPDUDESC_SIZE.2 */
+    AssertInArrayBounds(frameLayoutElements.GetElemAsStruct(i), "PduHandle", pduDescriptors)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : checkLPduTranslationTable
+* Parameter    : direction
+* Return value : None
+**********************************************************************************************************************/
+def checkLPduTranslationTable(direction)
+{
+  for (var i = 0; i < gIterations; ++i)
+  {
+    var root = Struct(gRootStructs[i].GetSymbolName())
+    var frameHandles
+    var translationTable
+    var invalidHandle
+
+    if (direction == "Tx")
+    {
+      frameHandles = GetCtrl2Array("TxHandles",0,i)
+      translationTable = GetCtrl2Array("TxLPduTranslationTable",0,i)
+      invalidHandle = GetInvalidHandle("Tx",0,i)
+    }
+    else
+    {
+      frameHandles = GetCtrl2Array("RxHandles",0,i)
+      translationTable = GetCtrl2Array("RxLPduTranslationTable",0,i)
+      invalidHandle = GetInvalidHandle("Rx",0,i)
+    }
+
+    for (var j = 0; j < frameHandles.GetSize(); ++j)
+    {
+      var handles_j = frameHandles.GetElemAsArray(j)
+
+      for (var k = 0; k < handles_j.GetSize(); ++k)
+      {
+        if (handles_j.GetElemAsNumber(k) != invalidHandle)
+        {
+          /* CM_FRIF_FRAMETRANS.1 */
+          AssertInArrayBounds(handles_j, k, translationTable)
+
+          if (handles_j.GetElemAsNumber(k) < translationTable.GetSize())
+          {
+            /* CM_FRIF_FRAMETRANS.2 */
+            Assert(translationTable.GetElemAsNumber(handles_j.GetElemAsNumber(k)), NotEqual, invalidHandle)
+            /* AssertArrayElem(translationTable, handles_j.GetElemAsNumber(k), NotEqual, root, invalidHandle) */
+          }
+        }
+      }
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : checkFrameLayoutElementsSize
+* Parameter    : direction
+* Return value : None
+**********************************************************************************************************************/
+def checkFrameLayoutElementsSize(direction)
+{
+  var frameDescriptors
+  var frameLayoutElements
+
+  for (var i = 0; i < gIterations; ++i)
+  {
+    if (direction == "Tx")
+    {
+      frameDescriptors = GetCtrl2Array("TxFrameDescriptors",0,i)
+      frameLayoutElements = GetCtrl2Array("TxFrameLayoutElements",0,i)
+    }
+    else
+    {
+      frameDescriptors = GetCtrl2Array("RxFrameDescriptors",0,i)
+      frameLayoutElements = GetCtrl2Array("RxFrameLayoutElements",0,i)
+    }
+
+    for (var j = 0; j < frameDescriptors.GetSize(); ++j)
+    {
+       var frameDescriptor = frameDescriptors.GetElemAsStruct(j)
+       var firstFLE = frameDescriptor.GetMemberAsNumber("FirstFrameLayoutElementHandle")
+       var numberOfPdus = frameDescriptor.GetMemberAsNumber("NumberOfPdus")
+
+       /* CM_FRIF_FLE_SIZE */
+       if (firstFLE + numberOfPdus > frameLayoutElements.GetSize())
+       {
+         ReportError("The range of " + direction + " frame layout elements required by " + frameDescriptor.GetName() +
+           " is out of the bounds of " + frameLayoutElements.GetName() + "[]")
+       }
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : checkPduFit
+* Parameter    : direction
+* Return value : None
+**********************************************************************************************************************/
+def checkPduFit(direction)
+{
+  var pduDescriptors
+  var frameDescriptors
+  var frameLayoutElements
+
+  for (var i = 0; i < gIterations; ++i)
+  {
+    if (direction == "Tx")
+    {
+      pduDescriptors = GetCtrl2Array("TxPduDescriptors",0,i)
+      frameDescriptors = GetCtrl2Array("TxFrameDescriptors",0,i)
+      frameLayoutElements = GetCtrl2Array("TxFrameLayoutElements",0,i)
+    }
+    else
+    {
+      pduDescriptors = GetCtrl2Array("RxPduDescriptors",0,i)
+      frameDescriptors = GetCtrl2Array("RxFrameDescriptors",0,i)
+      frameLayoutElements = GetCtrl2Array("RxFrameLayoutElements",0,i)
+    }
+
+    for (var j = 0; j < frameDescriptors.GetSize(); ++j)
+    {
+      var frameDescriptor = frameDescriptors.GetElemAsStruct(j)
+      var numberOfPdus = frameDescriptor.GetMemberAsNumber("NumberOfPdus")
+      var firstFLE = frameDescriptor.GetMemberAsNumber("FirstFrameLayoutElementHandle")
+      
+      if (firstFLE + numberOfPdus <= frameLayoutElements.GetSize())
+      {
+        for (var k = firstFLE; k < firstFLE + numberOfPdus; ++k)
+        {
+          var fLE = frameLayoutElements.GetElemAsStruct(k)
+          var handleFromFLE = fLE.GetMemberAsNumber("PduHandle")
+          var internalPduIdx = handleFromFLE
+          
+          if (gUseRootStructs && direction == "Tx")
+          {
+            var root = Struct(gRootStructs[i].GetSymbolName())
+            var translationTable = root.GetMemberAsArray("pTxPduTranslationTable")
+            
+            if (handleFromFLE < translationTable.GetSize()) {
+              internalPduIdx = translationTable.GetElemAsStruct(handleFromFLE).GetMemberAsNumber("InternalTxPduId")
+            }
+            else
+            {
+              ReportNote(fLE.GetName() + ".PduHandle: " + fLE.GetMemberAsString("PduHandle") +
+              " is out of the bounds of " + translationTable.GetName() +
+              "[]. Rule_TxPduTranslationTable shall report this as an error.")
+              break
+            }
+          }
+
+          if (internalPduIdx < pduDescriptors.GetSize())
+          {
+            var frameLength = frameDescriptor.GetMemberAsNumber("FrameLength")
+            var pduDescriptor = pduDescriptors.GetElemAsStruct(internalPduIdx)
+
+            /* CM_FRIF_PDU_FIT */
+            if (fLE.GetMemberAsNumber("ByteOffsetInFrame") + pduDescriptor.GetMemberAsNumber("PduLength") > frameLength)
+            {
+              ReportError("The " + direction + " PDU related to " + fLE.GetName() + " (ByteOffsetInFrame = " +
+                fLE.GetMemberAsString("ByteOffsetInFrame") + ") and " + pduDescriptor.GetName() + " (PduLength = " +
+                pduDescriptor.GetMemberAsString("PduLength") + ") is not contained within the limits of the " +
+                direction + " frame related to " + frameDescriptor.GetName() + " (FrameLength = " +
+                frameDescriptor.GetMemberAsString("FrameLength") + ")")
+            }
+          }
+          else
+          {
+            ReportNote(fLE.GetName() + ".PduHandle: " + fLE.GetMemberAsString("PduHandle") +
+              " is out of the bounds of " + pduDescriptors.GetName() +
+              "[]. RuleCheckframeLayoutElementsPduHandle shall report this as an error.")
+          }
+        }
+      }
+      else
+      {
+        ReportNote("The range of " + direction + " frame layout elements required by " + frameDescriptor.GetName() +
+          " is out of the bounds of " + frameLayoutElements.GetName() +
+          "[]. RuleCheckframeLayoutElements() shall report this as an error.")
+      }
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : checkCycleMasks
+* Parameter    : direction
+* Return value : None
+**********************************************************************************************************************/
+def checkCycleMasks(direction)
+{
+  var frameHandles
+  var cycleMasks
+
+  for (var i = 0; i < gIterations; ++i)
+  {
+    if (direction == "Tx")
+    {
+      frameHandles = GetCtrl2Array("TxHandles",0,i)
+      cycleMasks = GetCtrl2Array("TxCycleMasks",0,i)
+    }
+    else
+    {
+      frameHandles = GetCtrl2Array("RxHandles",0,i)
+      cycleMasks = GetCtrl2Array("RxCycleMasks",0,i)
+    }
+
+    for (var j = 0; j < frameHandles.GetSize(); ++j)
+    {
+      /* CM_FRIF_CYCLE_MASKS */
+      AssertInArrayBounds(cycleMasks, j, frameHandles.GetElemAsArray(j))
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : checkFrameDescriptorsSize
+* Parameter    : direction
+* Return value : None
+**********************************************************************************************************************/
+def checkFrameDescriptorsSize(direction)
+{
+  var invalidFrameHandle
+  var frameDescriptors
+  var frameHandles
+
+  for (var i = 0; i < gIterations; ++i)
+  {
+    if (direction == "Tx")
+    {
+      frameDescriptors = GetCtrl2Array("TxFrameDescriptors",0,i)
+      frameHandles = GetCtrl2Array("TxHandles",0,i)
+      invalidFrameHandle = GetInvalidHandle("Tx",0,i)      
+    }
+    else
+    {
+      frameDescriptors = GetCtrl2Array("RxFrameDescriptors",0,i)
+      frameHandles = GetCtrl2Array("RxHandles",0,i)
+      invalidFrameHandle = GetInvalidHandle("Rx",0,i)      
+    }
+
+    if (gUseRootStructs)
+    {
+      var root = Struct(gRootStructs[i].GetSymbolName())
+      var translationTable
+      
+      if (direction == "Tx")
+      {
+        translationTable = GetCtrl2Array("TxLPduTranslationTable",0,i)
+      }
+      else
+      {
+        translationTable = GetCtrl2Array("RxLPduTranslationTable",0,i)
+      }
+
+      for (var j = 0; j < translationTable.GetSize(); ++j)
+      {
+        if (translationTable.GetElemAsNumber(j) != invalidFrameHandle)
+        {
+          /* CM_FRIF_FRAMEDESC_SIZE with rootStruct */
+          AssertInArrayBounds(translationTable, j, frameDescriptors)
+        }
+      }
+    }
+    else
+    {
+      for (var j = 0; j < frameHandles.GetSize(); ++j)
+      {
+        var handles_j = frameHandles.GetElemAsArray(j)
+        for (var k = 0; k < handles_j.GetSize(); ++k)
+        {
+          if (handles_j.GetElemAsNumber(k) != invalidFrameHandle)
+          {
+            /* CM_FRIF_FRAMEDESC_SIZE without rootStruct */
+            AssertInArrayBounds(handles_j, k, frameDescriptors)
+          }
+        }
+      }
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : checkFrameBufferSize
+* Parameter    : direction
+* Return value : None
+**********************************************************************************************************************/
+def checkFrameBufferSize(direction)
+{
+  var frameDescriptors
+
+  for (var i = 0; i < gIterations; ++i)
+  {
+    var FrIf_FrameBuffer = GetCtrl2Array("FrameBuffer",0,i)
+    
+    if (direction == "Tx")
+    {
+      frameDescriptors = GetCtrl2Array("TxFrameDescriptors",0,i)
+    }
+    else
+    {
+      frameDescriptors = GetCtrl2Array("RxFrameDescriptors",0,i)
+    }
+
+    for (var i = 0; i < frameDescriptors.GetSize(); ++i)
+    {
+      var frameDescriptor = frameDescriptors.GetElemAsStruct(i)
+      var sizeInDwords = (frameDescriptor.GetMemberAsNumber("FrameLength") + 3) / 4
+
+      /* CM_FRIF_FBUFF_SIZE */
+      if (sizeInDwords > FrIf_FrameBuffer.GetSize())
+      {
+        ReportError("The " + direction + " frame related to " + frameDescriptor.GetName() + " is " +
+          sizeInDwords.to_string() + " DWORDs long and exceeds the length of " + FrIf_FrameBuffer.GetName() + "[] (" +
+          FrIf_FrameBuffer.GetSize().to_string() + " DWORDs)")
+      }
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : checkUpdateBitBytePosition
+* Parameter    : direction
+* Return value : None
+**********************************************************************************************************************/
+def checkUpdateBitBytePosition(direction)
+{
+  var frameDescriptors
+  var FrIf_FrameHasPduWithUpdateBit = Define("FrIf_FrameHasPduWithUpdateBit")
+  
+  for (var i = 0; i < gIterations; ++i)
+  {
+    if (direction == "Tx")
+    {
+      frameDescriptors = GetCtrl2Array("TxFrameDescriptors",0,i)
+    }
+    else
+    {
+      frameDescriptors = GetCtrl2Array("RxFrameDescriptors",0,i)
+    }
+
+    if (IsStdOn("FRIF_UNIFORMUPDATEBYTEPOS") && IsStdOn("FRIF_ALL_FRAMES_HAVE_SAME_UPDATEBIT_BYTEPOS"))
+    {
+      for (var j = 0; j < frameDescriptors.GetSize(); ++j)
+      {
+        var frameDescriptor = frameDescriptors.GetElemAsStruct(j)
+        if ((frameDescriptor.GetMemberAsNumber("FrameConfig") & FrIf_FrameHasPduWithUpdateBit.GetValueAsNumber()) > 0)
+        {
+          if (gUseRootStructs)
+          {
+            var root = Struct(gRootStructs[i].GetSymbolName())
+            
+            /* CM_FRIF_UPDATEBITBYTE_POS.1 with rootStruct */
+            AssertStructMember(frameDescriptor, "FrameLength", GreaterThan, root, "UpdateBitBytePos")
+          }
+          else
+          {
+            var FrIf_UpdateBitBytePos = getDefineOrConstant("FrIf_UpdateBitBytePos")
+            
+            /* CM_FRIF_UPDATEBITBYTE_POS.1 without rootStruct */
+            AssertStructMember(frameDescriptor, "FrameLength", GreaterThan, FrIf_UpdateBitBytePos)
+          }
+        }
+      }
+    }
+    else if (IsStdOn("FRIF_UNIFORMUPDATEBYTEPOS") && IsStdOff("FRIF_ALL_FRAMES_HAVE_SAME_UPDATEBIT_BYTEPOS"))
+    {
+      for (var j = 0; j < frameDescriptors.GetSize(); ++j)
+      {
+        var frameDescriptor = frameDescriptors.GetElemAsStruct(j)
+        if ((frameDescriptor.GetMemberAsNumber("FrameConfig") & FrIf_FrameHasPduWithUpdateBit.GetValueAsNumber()) > 0)
+        {
+          /* CM_FRIF_UPDATEBITBYTE_POS.2 */
+          AssertStructMember(frameDescriptor, "FrameLength", GreaterThan, frameDescriptor, "UpdateBitBytePos")
+        }
+      }
+    }
+    else if (IsStdOff("FRIF_UNIFORMUPDATEBYTEPOS") && IsStdOff("FRIF_ALL_FRAMES_HAVE_SAME_UPDATEBIT_BYTEPOS"))
+    {
+      for (var j = 0; j < frameDescriptors.GetSize(); ++j)
+      {
+        var frameDescriptor = frameDescriptors.GetElemAsStruct(j)
+        if ((frameDescriptor.GetMemberAsNumber("FrameConfig") & FrIf_FrameHasPduWithUpdateBit.GetValueAsNumber()) > 0)
+        {
+          var numberOfPdus = frameDescriptor.GetMemberAsNumber("NumberOfPdus")
+          var firstFLE = frameDescriptor.GetMemberAsNumber("FirstFrameLayoutElementHandle")
+          var frameLayoutElements
+
+          if (direction == "Tx")
+          {
+            frameLayoutElements = GetCtrl2Array("TxFrameLayoutElements",0,i)
+          }
+          else
+          {
+            frameLayoutElements = GetCtrl2Array("RxFrameLayoutElements",0,i)
+          }
+
+          if (firstFLE + numberOfPdus <= frameLayoutElements.GetSize())
+          {
+            for (var j = firstFLE; j < firstFLE + numberOfPdus; ++j)
+            {
+              var fLE= frameLayoutElements.GetElemAsStruct(j)
+              
+              /* CM_FRIF_UPDATEBITBYTE_POS.3 */
+              AssertStructMember(frameDescriptor, "FrameLength", GreaterThan, fLE, "UpdateBitBytePos")
+            }
+          }
+          else
+          {
+            ReportNote("The range of " + direction + " frame layout elements required by " + frameDescriptor.GetName() +
+              " is out of the bounds of " + frameLayoutElements.GetName() +
+              "[]. RuleCheckframeLayoutElements() shall report this as an error.")
+          }
+        }
+      }
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Rules
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : CheckQMDefines
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks the setting of QM-related preprocessor defines. Typically it checks that QM features
+*                are inactive in safety context.
+* Requirements : CM_FRIF_QMDEFINES
+**********************************************************************************************************************/
+def CheckQMDefines()
+{
+  AssertDefineIsStdOff("FRIF_MEASURE_JLETASKTIMES")
+  AssertDefineIsStdOff("FRIF_3RD_PARTY_DRIVER_SUPPORT")
+  AssertDefineIsStdOff("FRIF_CUSTOM_JLE_SCHEDULING")
+
+  AssertDefineIsStdOn("FRIF_DEV_ERROR_DETECT")
+
+  AssertDefineIsNotSet("FRIF_ENABLE_JLE_TIMER")
+  AssertDefineIsNotSet("FRIF_DISABLE_JLE_TIMER")
+  AssertDefineIsNotSet("FRIF_SET_JLE_TIMER")
+
+  var apiAsMacro = Define("FRIF_API_AS_MACRO")
+  var devErrorDetect = Define("FRIF_DEV_ERROR_DETECT")
+
+  if (IsStdOn("FRIF_DEV_ERROR_DETECT"))
+  {
+    Assert(apiAsMacro, NotEqual, devErrorDetect)
+  }
+
+}
+
+/**********************************************************************************************************************
+* Name         : Rule_DirtyBytesSize
+* Parameter    : None
+* Return value : None
+* Requirements : SBSW_FRIF_DIRTY_BYTES_RST, SBSW_FRIF_DIRTY_BYTES_WRT1
+**********************************************************************************************************************/
+def Rule_DirtyBytesSize()
+{
+  if (IsStdOn("FRIF_PDUDIRTYBYTE_USAGE"))
+  {
+    for (var i = 0; i < gIterations; ++i)
+    {
+      var TxFrameLayoutElements = GetCtrl2Array("TxFrameLayoutElements", 0, i)
+      var FrIf_TxPduDirtyBytes = GetCtrl2Array("TxPduDirtyBytes", 0, i)
+      var expectedSize
+      
+      if (IsStdOn("FRIF_CTRL_ENABLE_API_OPTIMIZATION"))
+      {
+        var FrIf_CommonMaxTxPduId = getDefineOrConstant("FrIf_CommonMaxTxPduId")
+        expectedSize = FrIf_CommonMaxTxPduId.GetValueAsNumber() + 1
+      }
+      else
+      {
+        expectedSize = getCtrl2Value("MaxTxPduId", 0, i) + 1
+      }
+
+      /* CM_FRIF_DIRTYBYTES_SIZE.1 */
+      if (FrIf_TxPduDirtyBytes.GetSize() != expectedSize)
+      {
+        ReportError("assertion " + FrIf_TxPduDirtyBytes.GetName() + ".Size: " + FrIf_TxPduDirtyBytes.GetSize().to_string() +
+        " == " + expectedSize.to_string() + " does not hold")
+      }
+      
+      for (var j= 0; j < TxFrameLayoutElements.GetSize(); ++j)
+      {
+        /* CM_FRIF_DIRTYBYTES_SIZE.2 */
+        AssertInArrayBounds(TxFrameLayoutElements.GetElemAsStruct(j), "PduHandle", FrIf_TxPduDirtyBytes)
+      }
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Rule_WasSentFlagsSize
+* Parameter    : None
+* Return value : None
+* Requirements : SBSW_FRIF_SENT_FLAGS_RST1, SBSW_FRIF_SENT_FLAGS_RST2, SBSW_FRIF_SENT_FLAGS_WRT1
+**********************************************************************************************************************/
+
+def Rule_WasSentFlagsSize()
+{
+  for (var i = 0; i < gIterations; ++i)
+  {
+    var FrIf_TxHandles
+    var FrIf_InvalidTxHandle
+    var expectedSize
+
+    var FrIf_TxPduWasSentFlags = GetCtrl2Array("TxPduWasSentFlags",0,i)
+
+    if (IsStdOn("FRIF_CTRL_ENABLE_API_OPTIMIZATION"))
+    {
+      var FrIf_CommonMaxTxFrameId = getDefineOrConstant("FrIf_CommonMaxTxFrameId")
+      expectedSize = FrIf_CommonMaxTxFrameId.GetValueAsNumber() + 1
+    }
+    else
+    {
+      expectedSize = getCtrl2Value("MaxTxFrameId", 0, i) + 1
+    }
+
+    /* CM_FRIF_SENTFLAGS_SIZE.1 */
+    if (FrIf_TxPduWasSentFlags.GetSize() != expectedSize)
+    {
+      ReportError("assertion " + FrIf_TxPduWasSentFlags.GetName() + ".Size: " + FrIf_TxPduWasSentFlags.GetSize().to_string() +
+      " == " + expectedSize.to_string() + " does not hold")
+    }
+    
+    FrIf_TxHandles = GetCtrl2Array("TxHandles",0,i)
+    FrIf_InvalidTxHandle = GetInvalidHandle("Tx",0,i)      
+
+    for (var j = 0; j < FrIf_TxHandles.GetSize(); ++j)
+    {
+      var txHandles_j = FrIf_TxHandles.GetElemAsArray(j)
+      
+      for (var k = 0; k < txHandles_j.GetSize(); ++k)
+      {
+        if (txHandles_j.GetElemAsNumber(k) != FrIf_InvalidTxHandle)
+        {
+          /* CM_FRIF_SENTFLAGS_SIZE.2 */
+          AssertInArrayBounds(txHandles_j, k, FrIf_TxPduWasSentFlags)
+        }
+      }
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Rule_TxPduDescriptorsSize
+* Parameter    : None
+* Return value : None
+* Requirements : SBSW_FRIF_FCT_CALL_PTR2TXPDUDESC1, SBSW_FRIF_FCT_CALL_PTR2TXPDUDESC2, SBSW_FRIF_REQUEST_COUNTER_WRT2,
+                 SBSW_FRIF_REQUEST_COUNTER_WRT3
+**********************************************************************************************************************/
+def Rule_TxPduDescriptorsSize()
+{
+  for (var i = 0; i < gIterations; ++i)
+  {
+    var FrIf_TxPduDescriptors
+    var FrIf_InvalidTxPduHandle
+    
+    FrIf_TxPduDescriptors = GetCtrl2Array("TxPduDescriptors",0,i)
+
+    if (gUseRootStructs)
+    {
+      var root = Struct(gRootStructs[i].GetSymbolName())
+      var txTranslation = root.GetMemberAsArray("pTxPduTranslationTable")
+      FrIf_InvalidTxPduHandle = root.GetMemberAsNumber("InvalidTxPduHandle")
+
+      for (var j = 0; j < txTranslation.GetSize(); ++j)
+      {
+        var translationTuple_j = txTranslation.GetElemAsStruct(j)
+        
+        if (translationTuple_j.GetMemberAsNumber("InternalTxPduId") != FrIf_InvalidTxPduHandle)
+        {
+          /* CM_FRIF_TXPDUDESC_SIZE with rootStruct*/
+          AssertInArrayBounds(translationTuple_j, "InternalTxPduId", FrIf_TxPduDescriptors)
+        }
+      }
+    }
+    else
+    {
+      FrIf_InvalidTxPduHandle = getDefineOrConstant("FrIf_InvalidTxPduHandle")
+      
+      /* CM_FRIF_TXPDUDESC_SIZE.1 */
+      AssertArraySize(FrIf_TxPduDescriptors, Equal, FrIf_InvalidTxPduHandle)
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Rule_ImmediateTxIndexes
+* Parameter    : None
+* Return value : None
+* Requirements : SBSW_FRIF_SENT_FLAGS_WRT2
+**********************************************************************************************************************/
+def Rule_ImmediateTxIndexes()
+{
+  var FrIf_TxPduIsImmediateTx = Define("FrIf_TxPduIsImmediateTx")
+  var txPduDescriptors
+
+  for (var i = 0; i < gIterations; ++i)
+  {
+    var FrIf_TxPduWasSentFlags = GetCtrl2Array("TxPduWasSentFlags",0,i)
+    txPduDescriptors = GetCtrl2Array("TxPduDescriptors",0,i)
+    
+    if (gUseRootStructs)
+    {
+      var root = Struct(gRootStructs[i].GetSymbolName())
+      var txPduTranslation = root.GetMemberAsArray("pTxPduTranslationTable")
+      
+      for (var j = 0; j < txPduTranslation.GetSize(); ++j)
+      {
+        var translationTuple = txPduTranslation.GetElemAsStruct(j)
+        var txPduIdx = translationTuple.GetMemberAsNumber("InternalTxPduId")
+
+        if (txPduIdx != root.GetMemberAsNumber("InvalidTxPduHandle"))
+        {
+          if (txPduIdx < txPduDescriptors.GetSize())
+          {
+            var txPduDescriptor = txPduDescriptors.GetElemAsStruct(txPduIdx)
+            var isImmediate = (txPduDescriptor.GetMemberAsNumber("PduConfig") & FrIf_TxPduIsImmediateTx.GetValueAsNumber()) > 0
+            var isWithinBounds = translationTuple.GetMemberAsNumber("TxFrameHandle") < FrIf_TxPduWasSentFlags.GetSize()
+
+            /* CM_FRIF_IMMEDIATETX_IDX with rootStruct */
+            if (isImmediate && !isWithinBounds)
+            {
+              ReportError(translationTuple.GetName() + " belongs to an immediate PDU, but index " +
+                translationTuple.GetName() + ".TxFrameHandle:" + translationTuple.GetMemberAsString("TxFrameHandle") +
+                " is not within the bounds of " + FrIf_TxPduWasSentFlags.GetName() + "[]")
+            }
+          }
+          else
+          {
+            ReportNote(translationTuple.GetName() + ".InternalTxPduId: " +
+              translationTuple.GetMemberAsString("InternalTxPduId") + " is out of the bounds of " +
+              txPduDescriptors.GetName() + "[]. Rule_TxPduDescriptorsSize shall report this as an error.")
+          }
+        }
+      }
+    }
+    else
+    {
+      for (var j = 0; j < txPduDescriptors.GetSize(); ++j)
+      {
+        var txPduDescriptor = txPduDescriptors.GetElemAsStruct(j)
+        var isImmediate = (txPduDescriptor.GetMemberAsNumber("PduConfig") & FrIf_TxPduIsImmediateTx.GetValueAsNumber()) > 0
+        var isWithinBounds = j < FrIf_TxPduWasSentFlags.GetSize()
+
+        /* CM_FRIF_IMMEDIATETX_IDX without rootStruct */
+        if (isImmediate && !isWithinBounds)
+        {
+          ReportError(txPduDescriptor.GetName() + " belongs to an immediate PDU, but index " + j.to_string() +
+            " is not within the bounds of " + FrIf_TxPduWasSentFlags.GetName() + "[]")
+        }
+      }
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Rule_TxReqCountersSize
+* Parameter    : None
+* Return value : None
+* Requirements : SBSW_FRIF_REQUEST_COUNTERS_RST, SBSW_FRIF_REQUEST_COUNTER_WRT1, SBSW_FRIF_REQUEST_COUNTER_WRT2, 
+                 SBSW_FRIF_REQUEST_COUNTER_WRT3
+**********************************************************************************************************************/
+def Rule_TxReqCountersSize()
+{
+  if (IsStdOff("FRIF_REQUEST_COUNTER_HANDLING_DISABLE"))
+  {
+    var FrIf_TxPduHasTxRequestCounter = Define("FrIf_TxPduHasTxRequestCounter")
+    var FrIf_TxPduDescriptors
+    var FrIf_TxPduTxRequestCounters
+    var numberOfRequestCounters
+
+    var foundPdu = false
+    for (var i = 0; i < gIterations; ++i)
+    {
+      if (IsStdOn("FRIF_CTRL_ENABLE_API_OPTIMIZATION"))
+      {
+        numberOfRequestCounters = getDefineOrConstant("FrIf_CommonMaxNumberOfTxRequestCounters")
+      }
+      else
+      {
+        numberOfRequestCounters = getCtrl2Value("NumberOfTxRequestCounters", 0, i)
+      }
+
+      FrIf_TxPduTxRequestCounters = GetCtrl2Array("TxPduTxRequestCounters",0,i)
+      FrIf_TxPduDescriptors = GetCtrl2Array("TxPduDescriptors",0,i)
+      
+      if (gUseRootStructs)
+      {
+        var root = Struct(gRootStructs[i].GetSymbolName())        
+      }
+
+      for (var j = 0; j < FrIf_TxPduDescriptors.GetSize(); ++j)
+      {
+         var FrIf_TxPduDescriptor = FrIf_TxPduDescriptors.GetElemAsStruct(j)
+         if ((FrIf_TxPduDescriptor.GetMemberAsNumber("PduConfig") & FrIf_TxPduHasTxRequestCounter.GetValueAsNumber()) > 0)
+         {
+            foundPdu = true
+            /* CM_FRIF_TXREQCOUNTERS_SIZE.1 */
+            AssertInArrayBounds(FrIf_TxPduDescriptor, "TxRequestCounterIndex", FrIf_TxPduTxRequestCounters)
+         }
+      }
+    }
+
+    if (!foundPdu)
+    {
+      AssertArraySize(FrIf_TxPduTxRequestCounters, Equal, 1)
+    }
+    else
+    {
+      /* CM_FRIF_TXREQCOUNTERS_SIZE.2 */
+      AssertArraySize(FrIf_TxPduTxRequestCounters, Equal, numberOfRequestCounters)
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Rule_FrameDescriptorsSize
+* Parameter    : None
+* Return value : None
+* Requirements : SBSW_FRIF_FCT_CALL_PTR2TXFRAMEDESC, SBSW_FRIF_FCT_CALL_PTR2RXFRAMEDESC
+**********************************************************************************************************************/
+def Rule_FrameDescriptorsSize()
+{
+checkFrameDescriptorsSize("Tx")
+checkFrameDescriptorsSize("Rx")
+}
+
+/**********************************************************************************************************************
+* Name         : Rule_FrameBufferSize
+* Parameter    : None
+* Return value : None
+* Requirements : SBSW_FRIF_FCT_CALL_FILLFRAME3
+**********************************************************************************************************************/
+def Rule_FrameBufferSize()
+{
+checkFrameBufferSize("Tx")
+checkFrameBufferSize("Rx")
+}
+
+/**********************************************************************************************************************
+* Name         : Rule_PduFit
+* Parameter    : None
+* Return value : None
+* Requirements : SBSW_FRIF_FCT_CALL_TRIGGERTX, SBSW_FRIF_FCT_CALL_FILLFRAME1
+**********************************************************************************************************************/
+def Rule_PduFit()
+{
+checkPduFit("Tx")
+checkPduFit("Rx")
+}
+
+/**********************************************************************************************************************
+* Name         : Rule_FrameLayoutElementsSize
+* Parameter    : None
+* Return value : None
+* Requirements : SBSW_FRIF_FCT_CALL_PTR2TXPDUDESC2, SBSW_FRIF_REQUEST_COUNTER_WRT2
+**********************************************************************************************************************/
+def Rule_FrameLayoutElementsSize()
+{
+checkFrameLayoutElementsSize("Tx")
+checkFrameLayoutElementsSize("Rx")
+}
+
+/**********************************************************************************************************************
+* Name         : Rule_PduHandlesInFLEs
+* Parameter    : None
+* Return value : None
+* Requirements : SBSW_FRIF_FCT_CALL_PTR2TXPDUDESC1, SBSW_FRIF_FCT_CALL_PTR2TXPDUDESC2, SBSW_FRIF_REQUEST_COUNTER_WRT2,
+                 SBSW_FRIF_REQUEST_COUNTER_WRT3
+**********************************************************************************************************************/
+def Rule_PduHandlesInFLEs()
+{
+checkPduHandlesInFLEs("Tx")
+checkPduHandlesInFLEs("Rx")
+}
+
+/**********************************************************************************************************************
+* Name         : Rule_JobDataTxConfJobs
+* Parameter    : None
+* Return value : None
+* Requirements : SBSW_FRIF_SENT_FLAGS_WRT1
+**********************************************************************************************************************/
+def Rule_JobDataTxConfJobs()
+{
+  var FrIf_JobDescriptors
+  
+  for (var i = 0; i < gIterations; ++i)
+  {
+    FrIf_JobDescriptors = GetCtrl2Array("JobDescriptors",0,i)
+
+    for (var j = 0; j < FrIf_JobDescriptors.GetSize(); ++j)
+    {
+      var FrIf_JobDescriptorsElement = FrIf_JobDescriptors.GetElemAsStruct(j)
+      if ((FrIf_JobDescriptorsElement.GetMemberAsNumber("MinTxConfJobNo") != 255) && (FrIf_JobDescriptorsElement.GetMemberAsNumber("MaxTxConfJobNo") != 254))
+      {
+        /* CM_FRIF_JOBDATA_TXCONF */
+        AssertInArrayBounds(FrIf_JobDescriptorsElement, "MinTxConfJobNo", FrIf_JobDescriptors)
+        AssertInArrayBounds(FrIf_JobDescriptorsElement, "MaxTxConfJobNo", FrIf_JobDescriptors)
+      }
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Rule_JobDataColumns
+* Parameter    : None
+* Return value : None
+* Requirements : SBSW_FRIF_SENT_FLAGS_WRT1
+**********************************************************************************************************************/
+def Rule_JobDataColumns()
+{
+  var FrIf_TxHandles
+  var FrIf_TxCycleMasks
+  var FrIf_RxHandles
+  var FrIf_RxCycleMasks
+  var FrIf_JobDescriptors
+  var FrIf_JobDataIsRxTask = Define("FrIf_JobDataIsRxTask")
+
+  for (var i = 0; i < gIterations; ++i)
+  {
+    FrIf_TxHandles = GetCtrl2Array("TxHandles",0,i)
+    FrIf_TxCycleMasks = GetCtrl2Array("TxCycleMasks",0,i)
+    FrIf_RxHandles = GetCtrl2Array("RxHandles",0,i)
+    FrIf_RxCycleMasks = GetCtrl2Array("RxCycleMasks",0,i)
+    FrIf_JobDescriptors = GetCtrl2Array("JobDescriptors",0,i)
+    
+    for (var j = 0; j < FrIf_JobDescriptors.GetSize(); ++j)
+    {
+      var FrIf_JobDescriptorsElement = FrIf_JobDescriptors.GetElemAsStruct(j)
+      if ((FrIf_JobDescriptorsElement.GetMemberAsNumber("MinColumnNumber") != 255) && (FrIf_JobDescriptorsElement.GetMemberAsNumber("MaxColumnNumber") != 254))
+      {
+        if ((FrIf_JobDescriptorsElement.GetMemberAsNumber("JobConfig") & FrIf_JobDataIsRxTask.GetValueAsNumber()) > 0)
+        {
+          /* CM_FRIF_JOBDATA_COLUMNS Rx Jobs */
+          AssertInArrayBounds(FrIf_JobDescriptorsElement, "MinColumnNumber", FrIf_RxHandles)
+          AssertInArrayBounds(FrIf_JobDescriptorsElement, "MaxColumnNumber", FrIf_RxHandles)
+          AssertInArrayBounds(FrIf_JobDescriptorsElement, "MinColumnNumber", FrIf_RxCycleMasks)
+          AssertInArrayBounds(FrIf_JobDescriptorsElement, "MaxColumnNumber", FrIf_RxCycleMasks)
+        }
+        else
+        {
+          /* CM_FRIF_JOBDATA_COLUMNS Tx Jobs */
+          AssertInArrayBounds(FrIf_JobDescriptorsElement, "MinColumnNumber", FrIf_TxHandles)
+          AssertInArrayBounds(FrIf_JobDescriptorsElement, "MaxColumnNumber", FrIf_TxHandles)
+          AssertInArrayBounds(FrIf_JobDescriptorsElement, "MinColumnNumber", FrIf_TxCycleMasks)
+          AssertInArrayBounds(FrIf_JobDescriptorsElement, "MaxColumnNumber", FrIf_TxCycleMasks)
+        }
+      }
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Rule_JobDataSize
+* Parameter    : None
+* Return value : None
+* Requirements : SBSW_FRIF_SENT_FLAGS_WRT1
+**********************************************************************************************************************/
+def Rule_JobDataSize()
+{
+  var FrIf_NumberOfJobs
+  var FrIf_JobDescriptors
+
+  for (var i = 0; i < gIterations; ++i)
+  {
+    FrIf_JobDescriptors = GetCtrl2Array("JobDescriptors",0,i)
+    
+    if (gUseRootStructs && IsStdOn("FRIF_CTRL_ENABLE_API_OPTIMIZATION"))
+    {
+      var root = Struct(gRootStructs[i].GetSymbolName())
+      FrIf_NumberOfJobs = root.GetMemberAsNumber("NumberOfJobs")
+    }
+    else if (gUseRootStructs && IsStdOff("FRIF_CTRL_ENABLE_API_OPTIMIZATION"))
+    {
+      var root = Struct(gRootStructs[i].GetSymbolName())
+      var FrIf_NumberOfJobsArray = root.GetMemberAsArray("pClst2NumberOfJobs")
+      FrIf_NumberOfJobs = FrIf_NumberOfJobsArray.GetElemAsNumber(0)
+    }
+    else if (IsStdOff("FRIF_CTRL_ENABLE_API_OPTIMIZATION"))
+    {
+      var FrIf_NumberOfJobsArray = Array("FrIf_Clst2NumberOfJobs")
+      FrIf_NumberOfJobs = FrIf_NumberOfJobsArray.GetElemAsNumber(0)
+    }
+    else
+    {
+      FrIf_NumberOfJobs = Constant("FrIf_NumberOfJobs")
+    }        
+    
+    AssertArraySize(FrIf_JobDescriptors, Equal, FrIf_NumberOfJobs)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Rule_UpdateBitBytePosition
+* Parameter    : None
+* Return value : None
+* Requirements : SBSW_FRIF_UPDATE_BITS_WRT
+**********************************************************************************************************************/
+def Rule_UpdateBitBytePosition()
+{
+  checkUpdateBitBytePosition("Tx")
+  checkUpdateBitBytePosition("Rx")
+}
+
+/**********************************************************************************************************************
+* Name         : Rule_DirtyBitsSize
+* Parameter    : None
+* Return value : None
+* Requirements : SBSW_FRIF_DIRTY_BITS_RST, SBSW_FRIF_DIRTY_BITS_WRT1, SBSW_FRIF_DIRTY_BITS_WRT2
+**********************************************************************************************************************/
+def Rule_DirtyBitsSize()
+{
+  if (IsStdOff("FRIF_PDUDIRTYBYTE_USAGE"))
+  {
+    for (var i = 0; i < gIterations; ++i)
+    {
+      var TxFrameLayoutElements
+      var FrIf_TxPduDirtyBits = GetCtrl2Array("TxPduDirtyBits",0,i)
+      var expectedSize
+
+      if (IsStdOn("FRIF_CTRL_ENABLE_API_OPTIMIZATION"))
+      {
+        var FrIf_CommonMaxTxPduId = getDefineOrConstant("FrIf_CommonMaxTxPduId")
+        expectedSize = (FrIf_CommonMaxTxPduId.GetValueAsNumber / 8) + 1
+      }
+      else
+      {
+        expectedSize = (getCtrl2Value("MaxTxPduId", 0, i) / 8) + 1
+      }
+
+      /* CM_FRIF_DIRTYBITS_SIZE.1 */
+      if (FrIf_TxPduDirtyBits.GetSize() != expectedSize)
+      {
+        ReportError("assertion " + FrIf_TxPduDirtyBits.GetName() + ".Size: " + FrIf_TxPduDirtyBits.GetSize().to_string() +
+        " == " + expectedSize.to_string() + " does not hold")
+      }
+
+      TxFrameLayoutElements = GetCtrl2Array("TxFrameLayoutElements",0,i)
+      
+      for (var j = 0; j < TxFrameLayoutElements.GetSize(); ++j)
+      {
+        var byteIdx = TxFrameLayoutElements.GetElemAsStruct(j).GetMemberAsNumber("PduHandle") / 8
+
+        /* CM_FRIF_DIRTYBITS_SIZE.2 */
+        if (byteIdx >= FrIf_TxPduDirtyBits.GetSize())
+        {
+          ReportError("(" + TxFrameLayoutElements.GetElemAsStruct(j).GetName() + ".PduHandle / 8): " + byteIdx.to_string() +
+          " is not within the bounds of " + FrIf_TxPduDirtyBits.GetName() + "[]")
+        }
+      }
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Rule_TransceiverDescriptorsSize
+* Parameter    : None
+* Return value : None
+* Requirements : SBSW_FRIF_FCT_PTR_FRTRCVMAP
+**********************************************************************************************************************/
+def Rule_TransceiverDescriptorsSize()
+{
+  if (IsStdOn("FRIF_USE_FRTRCV_API"))
+  {
+    for (var i = 0; i < gIterations; ++i)
+    {
+      var FrIf_TransceiverDescriptors
+
+      if (gUseRootStructs)
+      {
+        var root = Struct(gRootStructs[i].GetSymbolName())
+        FrIf_TransceiverDescriptors = root.GetMemberAsArray("pTrcvDescriptors")
+      }
+      else
+      {
+        FrIf_TransceiverDescriptors = Array("FrIf_TransceiverDescriptors")
+      }
+
+      /* CM_FRIF_TRCVDESC_SIZE */
+      AssertArraySize(FrIf_TransceiverDescriptors, Equal, 2)
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Rule_StatusSize
+* Parameter    : None
+* Return value : None
+* Requirements : SBSW_FRIF_STATUS_WRT
+**********************************************************************************************************************/
+def Rule_StatusSize()
+{
+  /* CM_FRIF_MAX_NUM_CLST */
+  var FrIf_CommonMaxNumberOfClusters = Define("FrIf_CommonMaxNumberOfClusters")
+  Assert(FrIf_CommonMaxNumberOfClusters, Equal, 1)
+}
+
+/**********************************************************************************************************************
+* Name         : Rule_CycleMasks
+* Parameter    : None
+* Return value : None
+* Requirements : SBSW_FRIF_SENT_FLAGS_WRT1
+**********************************************************************************************************************/
+def Rule_CycleMasks()
+{
+  checkCycleMasks("Tx")
+  checkCycleMasks("Rx")
+}
+
+/**********************************************************************************************************************
+* Name         : Rule_TxPduTranslationTable
+* Parameter    : None
+* Return value : None
+* Requirements : SBSW_FRIF_FCT_CALL_PTR2TXPDUDESC1, SBSW_FRIF_FCT_CALL_PTR2TXPDUDESC2, SBSW_FRIF_REQUEST_COUNTER_WRT2,
+                 SBSW_FRIF_REQUEST_COUNTER_WRT3
+**********************************************************************************************************************/
+def Rule_TxPduTranslationTable
+{
+  for (var i = 0; i < gIterations; ++i)
+  {
+    var root = Struct(gRootStructs[i].GetSymbolName())
+    var txTranslation = root.GetMemberAsArray("pTxPduTranslationTable")
+            
+    var txFLEs = GetCtrl2Array("TxFrameLayoutElements",0,i)
+    var txPduDescriptors = GetCtrl2Array("TxPduDescriptors",0,i)
+
+    /* CM_FRIF_TXPDUTRANS.1 */
+    AssertArraySize(txTranslation, Equal, root, "InvalidTxPduHandle")
+
+    for (var j = 0; j < txFLEs.GetSize(); ++j)
+    {
+      /* CM_FRIF_TXPDUTRANS.2 */
+      AssertInArrayBounds(txFLEs.GetElemAsStruct(j), "PduHandle", txTranslation)
+      
+      var handleFromFLE = txFLEs.GetElemAsStruct(j).GetMemberAsNumber("PduHandle")
+      if (handleFromFLE < txTranslation.GetSize())
+      {
+        /* CM_FRIF_TXPDUTRANS.3 */
+        AssertStructMember(txTranslation.GetElemAsStruct(handleFromFLE), "InternalTxPduId", NotEqual, root, "InvalidTxPduHandle")
+      }
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Rule_LPduTranslationTable
+* Parameter    : None
+* Return value : None
+* Requirements : SBSW_FRIF_FCT_CALL_PTR2TXFRAMEDESC, SBSW_FRIF_FCT_CALL_PTR2RXFRAMEDESC
+**********************************************************************************************************************/
+def Rule_LPduTranslationTable
+{
+    checkLPduTranslationTable("Tx")
+    checkLPduTranslationTable("Rx")
+}

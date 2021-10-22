@@ -1,0 +1,45 @@
+#
+# CMakeLists.txt for Coding classic adapter
+#
+
+cmake_minimum_required(VERSION 3.1)
+SET(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
+LIST(INSERT CMAKE_MODULE_PATH 0 "$ENV{BPS_CMAKE_MODULE_PATH}")
+
+project(Coding.classic C CXX)
+include(BAC)
+
+bps_module_adapter(
+  Coding
+    classic
+
+  SRC
+    Coding_ConcAdapter.c
+    Coding_CryptoAdapter.c
+    Coding_DlogAdapter.c
+    Coding_ErrMemAdapter.c
+    Coding_MgmtAdapter.c
+    Coding_NvMAdapter.c
+    Coding_TimerAdapter.c
+    Coding_UDSAdapter.c
+    Coding_VinAdapter.c
+  INCLUDE
+    Coding_Assert.h
+  GENERATE/INCLUDE
+    CodingClassic_Cfg.h.pgen
+    CodingClassic_Version.h.pgen
+  GENERATE/SRC
+    Coding_ApplAdapter.c.pgen
+    Coding_FuncAdapter.c.pgen
+  GENERATE/META
+    Coding_ext_interfaces.arxml.pgen
+    Coding_interfaces.arxml.pgen
+    Coding_internal.arxml.pgen
+  GENERATE/INPUT
+    Coding
+    CodingClassic
+  CFGDESC
+    CodingClassic_paramdef.arxml
+  DOC
+    intmanual
+)

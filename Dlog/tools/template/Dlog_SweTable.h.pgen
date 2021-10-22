@@ -1,0 +1,324 @@
+%{+ ../pageinclude/Dlog_Help.pgen }%
+/**
+*  \file
+*
+*  \brief       SWE Table.
+*
+*  \project     BMW Platform Software
+*
+*  \copyright   BMW AG 2015 - 2017
+*
+*  \version     5.3.1
+*
+*/
+
+/*------------------------------------------------------------------------------
+*
+*  THIS FILE WAS GENERATED. DO NOT MODIFY!
+*
+*  GENERATOR       : %{= generation_tool() }% %{= generation_version_info() }%
+*
+*  GENERATION TIME : %{= generation_timestamp() }%
+*
+------------------------------------------------------------------------------*/
+
+#ifndef DLOG_SWE_TABLE_H
+#define DLOG_SWE_TABLE_H
+
+%{#
+  into(container("DlogShared/DlogSharedGeneral/Swe"));
+  sweGroupTable = SweGroupTable(container("SweGroupConfiguration"))
+  sweTable = SweTable(container( "SweConfiguration" ), sweGroupTable)
+  sweEntries = sweTable.Entries;
+
+  numApplSwes = sweTable.NumberOfApplSwe;
+  numSwes = sweTable.NumberOfEntries;
+  numBootSwes = numSwes - numApplSwes;
+
+  numPhysApplSwes = numApplSwes;
+  numPhysSwes = numSwes;
+
+}%
+/*------------------------------------------------------------------------------
+                      Include Section
+------------------------------------------------------------------------------*/
+
+#include <Std_Types.h>
+#include "DlogClassic_Cfg.h"
+#include "Dlog_Data.h"
+
+
+/*------------------------------------------------------------------------------
+                      MISRA-Deviations
+------------------------------------------------------------------------------*/
+
+/* Violation of MISRA rule 19.1, Reason: Including Dlog_MemMap.h is necessary throughout
+   the file according to memory abstraction, see PRQA: 5087 */
+
+
+/*------------------------------------------------------------------------------
+                      Macros
+-------------------------------------------------------------------------------*/
+
+/* check version of the module */
+#if (!DlogClassic_CHECK_VERSION(5,3,1))
+   #error "Version of Dlog_SweTable.h does not match the version of the module!"
+#endif
+
+/* --- configuration of signature data -------------------------------------- */
+#define DLOG_SIGNATURE_LENGTH           %{=value(ref("SignatureLength"))}%u                    /* ... in uint8  */
+
+#define DLOG_PTR_TO_SWE_FLASH_STATUS \
+        {                            \
+           &Dlog_BootFlashStatus,    /**< Pointer to flash status of Boot */ \
+%{@ i in range(1, numPhysApplSwes + 1) }%
+           &Dlog_Swe%{=i}%FlashStatus%{: if i<numPhysApplSwes }%,%{:}%     /**< Pointer to flash status of Swe%{=i}% */ \
+%{@}%
+        }
+
+#define DLOG_PTR_TO_SWE_TABLE \
+        {                            \
+           &Dlog_SweBootTable,        /**< Pointer to the BootTable */        \
+%{@ i in range(1, numPhysApplSwes + 1) }%
+           &Dlog_Swe%{=i}%Table%{: if i<numPhysApplSwes }%,%{:}%          /**< Pointer to the Swe%{=i}%Table */       \
+%{@}%
+        }
+
+#define DLOG_PTR_TO_SWE_SIGNATURE \
+        {                            \
+           &Dlog_BootSignature[0],       /**< Pointer to signature of Boot */ \
+%{@ i in range(1, numPhysApplSwes + 1) }%
+           &Dlog_Swe%{=i}%Signature[0]%{: if i<numPhysApplSwes }%,%{:}%          /**< Pointer to the Swe%{=i}%Signature */       \
+%{@}%
+        }
+
+#define DLOG_SWE_TO_GROUP_MAP \
+        { \
+%{@ i in range(0, numSwes) }%
+          %{=sweEntries[i].groupId }%%{: if i<numSwes }%,%{:}%          /**< Swe%{=i}% Info */       \
+%{@}%
+        }
+
+
+%{#
+  reset();
+  into(container("DlogShared/DlogSharedGeneral/Swe"));
+
+  numberOfSweGroups = count(container("SweGroupConfiguration"));
+
+}%
+/**
+ * SWE groups
+ */
+#define DLOG_NUMBEROFSWEGROUPS %{=sweGroupTable.NumberOfEntries }%u
+#define DLOG_SWE_GROUP_TABLE           \
+        {                              \
+%{@ i in range(0, sweGroupTable.NumberOfEntries) }%
+           DLOG_SWEGROUP_%{=sweGroupTable.entries[i]["groupType"] }%%{: if (i < sweGroupTable.NumberOfEntries-1) }%, %{:}%  \
+%{@}%
+        }
+
+
+%{#
+  reset();
+  into(container("DlogShared/DlogSharedGeneral/Swe"));
+
+  signatureIndices = [0 for x in range(numPhysSwes+1)];
+  signatureIndex = 0;
+  sweIndex = 0;
+  signatureBlocks = [];
+
+  for sweEntry in sweEntries:
+    signatureIndices[sweIndex] = signatureIndex;
+
+    for sb in sweEntry.signatureBlocks:
+      signatureBlocks.append(sb)
+      signatureIndex += 1
+
+    sweIndex += 1;
+
+  signatureIndices[sweIndex] = signatureIndex;
+}%
+
+#define DLOG_SIG_TABLE_SIZE           %{=len(signatureBlocks)}%u
+
+#define DLOG_SIG_ADR_TABLE         \
+        {                          \
+%{# signatureIndex = 1; }%
+%{@ sb in signatureBlocks }%
+           %{="0x%08x" %(sb["start"])}%uL%{: if signatureIndex<len(signatureBlocks) }%,%{:}%           \
+%{# signatureIndex += 1 }%
+%{@}%
+        }
+
+#define DLOG_SIG_LEN_TABLE         \
+        {                          \
+%{# signatureIndex = 1; }%
+%{@ sb in signatureBlocks }%
+           %{="0x%08x" %(sb["size"])}%uL%{: if signatureIndex<len(signatureBlocks) }%,%{:}%           \
+%{# signatureIndex += 1 }%
+%{@}%
+        }
+
+#define DLOG_SWE_SIGNATURE_TABLE \
+        {                        \
+%{@ i in range(0, numPhysSwes+1) }%
+           %{=signatureIndices[i]}%%{: if i<numPhysSwes }%,           /**< Signature of Swe%{=i}% */%{:}% \
+%{@}%
+        }
+
+/* --- configuration of swe data -------------------------------------- */
+%{#
+  reset();
+  into(container("DlogShared/DlogSharedGeneral/MemorySegmentation"));
+
+  mst = MemSegTable(container( "Entry" ));
+
+  numberOfEntries = mst.NumberOfEntries;
+  numberOfSegments = mst.NumberOfSegments;
+
+  memSegTable = mst.Entries;
+
+  blockIndices = [0 for x in range(numPhysSwes+1)];
+  blockIndex = 0;
+  sweIndex = 0;
+  sweBlocks = [];
+
+  for sweEntry in sweEntries:
+    if (sweEntry.IsBootSwe):
+      continue;
+
+    blockIndices[sweIndex] = blockIndex;
+
+    for sb in sweEntry.sweBlocks:
+      sweBlocks.append(sb);
+      blockIndex += 1;
+
+    sweIndex += 1;
+
+  blockIndices[sweIndex] = blockIndex;
+}%
+
+#define DLOG_SWE_BLOCK_TABLE_SIZE        %{=len(sweBlocks)}%u
+
+#define DLOG_SWE_BLOCK_INDEX_TABLE         \
+        {                          \
+%{# blockIndex = 1; }%
+%{@ sb in sweBlocks }%
+           %{=mst.getIndexForAddress(sb["start"])}%u%{: if blockIndex<len(sweBlocks) }%,%{:}%           \
+%{# blockIndex += 1 }%
+%{@}%
+        }
+
+#define DLOG_SWE_BLOCK_LEN_TABLE         \
+        {                          \
+%{# blockIndex = 1; }%
+%{@ sb in sweBlocks }%
+           %{=mst.getIndexForAddress(sb["start"] + sb["size"] - 1) - mst.getIndexForAddress(sb["start"]) + 1}%u%{: if blockIndex<len(sweBlocks) }%,%{:}%           \
+%{# blockIndex += 1 }%
+%{@}%
+        }
+
+#define DLOG_SWE_BLOCK_TABLE \
+        {                        \
+%{@ i in range(0, numApplSwes + 1) }%
+           %{=blockIndices[i]}%%{: if i<numApplSwes }%,       /**< Blocks of Swe%{=i+numBootSwes}% */ %{:}% \
+%{@}%
+        }
+
+
+/*------------------------------------------------------------------------------
+                      Data Types
+-------------------------------------------------------------------------------*/
+%{#
+  reset();
+  into(container("DlogShared/DlogSharedGeneral/Logistic"));
+}%
+
+typedef struct
+{
+   /** --- logistic data ---------------------------------------------------- */
+   uint8 SgbmId[DLOG_SGBM_ID_LENGTH];
+%{#
+  DlogSweDevelopmentInfoLength = value(ref("DlogSweDevelopmentInfoLength"));
+}%
+%{: if DlogSweDevelopmentInfoLength > 0 }%
+   /** --- SWE development Information -------------------------------------- */
+   uint8 SweDevInfo[DLOG_SWE_DEV_INFO_LENGTH+1];
+%{:}%
+} Dlog_SweHeaderType;
+
+typedef struct
+{
+   /** CRC of valid-flag flash segment                                        */
+   uint8 SweCrcCheckSum[DLOG_SWE_CRC_CHECKSUM_AREA_LENGTH];
+   /** SWE valid-flag                                                         */
+   uint8 SweValidFlag[DLOG_SWE_VALID_FLAG_AREA_LENGTH];
+   /** SWE programming dependencies flag                                      */
+   uint8 ProgDepFlag[DLOG_PROG_DEP_AREA_LENGTH];
+} Dlog_SweFlashStatusType;
+
+
+/*------------------------------------------------------------------------------
+                      Global Variables
+------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------
+                      Boot-SWE
+------------------------------------------------------------------------------*/
+/* extern declaration of Boot.-SWE table                                      */
+#define BL_START_SEC_CONST_BOOTSWE_DESCRIPTION_TABLE
+#include "Dlog_MemMap.h"  /* PRQA S 5087 */
+extern CONST(Dlog_SweHeaderType, Dlog_CONST) Dlog_SweBootTable;
+#define BL_STOP_SEC_CONST_BOOTSWE_DESCRIPTION_TABLE
+#include "Dlog_MemMap.h"  /* PRQA S 5087 */
+/* -------------------------------------------------------------------------- */
+
+/* extern declaration of Boot.-SWE flash status                               */
+#define BL_START_SEC_CONST_BOOTSWE_FLASH_STATUS
+#include "Dlog_MemMap.h"  /* PRQA S 5087 */
+extern CONST(Dlog_SweFlashStatusType, Dlog_CONST) Dlog_BootFlashStatus;
+#define BL_STOP_SEC_CONST_BOOTSWE_FLASH_STATUS
+#include "Dlog_MemMap.h"  /* PRQA S 5087 */
+/* -------------------------------------------------------------------------- */
+
+/* extern declaration of Boot.-SWE signature                                  */
+#define BL_START_SEC_CONST_BOOTSWE_SIGNATURE
+#include "Dlog_MemMap.h"  /* PRQA S 5087 */
+extern CONST(uint8, Dlog_CONST) Dlog_BootSignature[DLOG_SIGNATURE_LENGTH];
+#define BL_STOP_SEC_CONST_BOOTSWE_SIGNATURE
+#include "Dlog_MemMap.h"  /* PRQA S 5087 */
+/* -------------------------------------------------------------------------- */
+
+%{@ i in range(1, numPhysApplSwes + 1) }%
+/*------------------------------------------------------------------------------
+                      Appl.-SWE%{=i}%
+------------------------------------------------------------------------------*/
+/* extern declaration of Appl.-SWE%{=i}% table                                     */
+#define APPL_START_SEC_CONST_SWE%{=i}%_DESCRIPTION_TABLE
+#include "Dlog_MemMap.h"  /* PRQA S 5087 */
+extern CONST(Dlog_SweHeaderType, Dlog_CONST) Dlog_Swe%{=i}%Table;
+#define APPL_STOP_SEC_CONST_SWE%{=i}%_DESCRIPTION_TABLE
+#include "Dlog_MemMap.h"  /* PRQA S 5087 */
+/* -------------------------------------------------------------------------- */
+
+/* extern declaration of Appl.-SWE%{=i}% flash status                              */
+#define APPL_START_SEC_CONST_SWE%{=i}%_FLASH_STATUS
+#include "Dlog_MemMap.h"  /* PRQA S 5087 */
+extern CONST(Dlog_SweFlashStatusType, Dlog_CONST) Dlog_Swe%{=i}%FlashStatus;
+#define APPL_STOP_SEC_CONST_SWE%{=i}%_FLASH_STATUS
+#include "Dlog_MemMap.h"  /* PRQA S 5087 */
+/* -------------------------------------------------------------------------- */
+
+/* extern declaration of Appl.-SWE%{=i}% signature                                */
+#define APPL_START_SEC_CONST_SWE%{=i}%_SIGNATURE
+#include "Dlog_MemMap.h"  /* PRQA S 5087 */
+extern CONST(uint8, Dlog_CONST) Dlog_Swe%{=i}%Signature[DLOG_SIGNATURE_LENGTH];
+#define APPL_STOP_SEC_CONST_SWE%{=i}%_SIGNATURE
+#include "Dlog_MemMap.h"  /* PRQA S 5087 */
+/* -------------------------------------------------------------------------- */
+
+%{@}%
+
+#endif /* #ifndef DLOG_SWE_TABLE_H */
+

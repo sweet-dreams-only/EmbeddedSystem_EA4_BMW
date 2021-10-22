@@ -1,0 +1,44 @@
+#
+# CMakeLists.txt for Coding generic
+#
+
+cmake_minimum_required(VERSION 3.1)
+SET(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
+LIST(INSERT CMAKE_MODULE_PATH 0 "$ENV{BPS_CMAKE_MODULE_PATH}")
+
+project(Coding.generic C CXX)
+include(BAC)
+
+bps_module(
+  Coding
+
+  SRC
+    Coding.c
+    Coding_Data.c
+  INCLUDE
+    Coding.h
+    Coding_ApplAdapter.h
+    Coding_ConcAdapter.h
+    Coding_CryptoAdapter.h
+    Coding_Data.h
+    Coding_DlogAdapter.h
+    Coding_ErrMemAdapter.h
+    Coding_MgmtAdapter.h
+    Coding_NvMAdapter.h
+    Coding_TimerAdapter.h
+    Coding_UDSAdapter.h
+  GENERATE/VERIFY
+    Coding.autoverify.pgen
+    Coding.verify.pgen
+  GENERATE/INCLUDE
+    Coding_Cfg.h.pgen
+    Coding_Function.h.pgen
+    Coding_Version.h.pgen
+  GENERATE/SRC
+    Coding_Cfg.c.pgen
+    Coding_Function.c.pgen
+  GENERATE/INPUT
+    Coding
+  CFGDESC
+    Coding_paramdef.arxml
+)

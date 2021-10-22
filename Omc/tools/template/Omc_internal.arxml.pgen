@@ -1,0 +1,901 @@
+%{#
+   bDetActive          = value(ref("OmcDevErrorDetect"))
+   bOpmodeCallout      = value(ref("OmcOperatingModeCallout"))
+}%<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+*  \file        Omc_internal.arxml
+*
+*  \brief       BMW SWC OMC
+*
+*  This file is a template for the software component description file
+*  for usage in the BMW AUTOSAR Core.
+*
+*  \project     BMW Platform Software
+*
+*  \copyright   BMW AG 2014 - 2017
+*
+*  \version     5.2.0
+*
+*  \remarks     The content of this file only serves as an example. If this
+*               file is platform dependent, this shall be mentioned here.
+*
+*               THIS FILE WAS GENERATED. DO NOT MODIFY!
+*
+*               GENERATOR       : <#= GeneratorName #> <#= GeneratorVersion #>
+*
+*               GENERATION TIME : <#= DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss") #>
+*
+*/
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-2-2_STRICT_COMPACT.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>BMW</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>Platform</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE>
+              <SHORT-NAME>Omc</SHORT-NAME>
+              <AR-PACKAGES>
+                <AR-PACKAGE>
+                  <SHORT-NAME>SwcImplementations</SHORT-NAME>
+                  <ELEMENTS>
+                    <SWC-IMPLEMENTATION>
+                      <SHORT-NAME>Omc_Implementation</SHORT-NAME>
+                      <CODE-DESCRIPTORS>
+                        <CODE>
+                          <SHORT-NAME>Code1</SHORT-NAME>
+                          <ARTIFACT-DESCRIPTORS>
+                            <AUTOSAR-ENGINEERING-OBJECT>
+                              <SHORT-LABEL>dummy</SHORT-LABEL>
+                              <CATEGORY>dummy</CATEGORY>
+                            </AUTOSAR-ENGINEERING-OBJECT>
+                          </ARTIFACT-DESCRIPTORS>
+                        </CODE>
+                      </CODE-DESCRIPTORS>
+                      <COMPILERS />
+                      <HW-ELEMENT-REFS />
+                      <LINKERS />
+                      <PROGRAMMING-LANGUAGE>C</PROGRAMMING-LANGUAGE>
+                      <RESOURCE-CONSUMPTION>
+                        <SHORT-NAME>dummy</SHORT-NAME>
+                      </RESOURCE-CONSUMPTION>
+                      <SW-VERSION>5.2.0</SW-VERSION>
+                      <VENDOR-ID>5</VENDOR-ID>
+                      <BEHAVIOR-REF DEST="SWC-INTERNAL-BEHAVIOR">/BMW/Platform/Omc/SwComponentTypes/Omc/InternalBehavior</BEHAVIOR-REF>
+                      <PER-INSTANCE-MEMORY-SIZES />
+                    </SWC-IMPLEMENTATION>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+                <AR-PACKAGE>
+                  <SHORT-NAME>SwComponentTypes</SHORT-NAME>
+                  <ELEMENTS>
+                    <APPLICATION-SW-COMPONENT-TYPE>
+                      <SHORT-NAME>Omc</SHORT-NAME>
+                      <PORTS>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>StdDiag</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Omc/PortInterfaces/OmcModesCallouts</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>StdDiagCbk</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Omc/PortInterfaces/OmcModesCalloutsResult</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+%{: if bOpmodeCallout }%
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>User</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Omc/PortInterfaces/OmcModesCallouts</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>UserCbk</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Omc/PortInterfaces/OmcModesCalloutsResult</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+%{:}%
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>ControlExtendedEnergySavingState</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Omc/Dcm/PortInterfaces/RoutineServices_ExtendedOperatingModeControl</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>ControlEnergySavingState</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Omc/Dcm/PortInterfaces/RoutineServices_OperatingModeControl</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+%{: if bDetActive }%
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>DETServicePort</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Omc/Det/PortInterfaces/DETService</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+%{:}%
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>EnableCond_OMC</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Omc/Dem/PortInterfaces/EnableCondition</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>NvMServicePort</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Omc/NvM/PortInterfaces/NvMService_OMC</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>NvMNotifyJobFinished</SHORT-NAME>
+                          <PROVIDED-COM-SPECS>
+                            <SERVER-COM-SPEC>
+                              <OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/NvM/PortInterfaces/NvMNotifyJobFinished/JobFinished</OPERATION-REF>
+                              <QUEUE-LENGTH>1</QUEUE-LENGTH>
+                            </SERVER-COM-SPEC>
+                          </PROVIDED-COM-SPECS>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Omc/NvM/PortInterfaces/NvMNotifyJobFinished</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>ExtendedEnergySavingState</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Omc/Dcm/PortInterfaces/DataServices_ExtendedOperatingMode</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>EnergySavingState</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Omc/Dcm/PortInterfaces/DataServices_OperatingMode</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>extendedOperatingModeSwitchPort</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="MODE-SWITCH-INTERFACE">/BMW/Platform/Omc/PortInterfaces/ExtendedOperatingModeNotification</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>operatingModeSwitchPort</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="MODE-SWITCH-INTERFACE">/BMW/Platform/Omc/PortInterfaces/OperatingModeNotification</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>LifeCycleRequest</SHORT-NAME>
+                          <REQUIRED-COM-SPECS>
+                            <NONQUEUED-RECEIVER-COM-SPEC>
+                              <DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Omc/PortInterfaces/ILifeCycleRequest/requestMode</DATA-ELEMENT-REF>
+                              <HANDLE-OUT-OF-RANGE>NONE</HANDLE-OUT-OF-RANGE>
+                              <USES-END-TO-END-PROTECTION>false</USES-END-TO-END-PROTECTION>
+                              <ALIVE-TIMEOUT>0.0</ALIVE-TIMEOUT>
+                              <ENABLE-UPDATE>false</ENABLE-UPDATE>
+                              <HANDLE-NEVER-RECEIVED>false</HANDLE-NEVER-RECEIVED>
+                              <HANDLE-TIMEOUT-TYPE>NONE</HANDLE-TIMEOUT-TYPE>
+                              <INIT-VALUE>
+                                <NUMERICAL-VALUE-SPECIFICATION>
+                                  <SHORT-LABEL>Omc_RequestModeInitialValue</SHORT-LABEL>
+                                  <VALUE>2</VALUE>
+                                </NUMERICAL-VALUE-SPECIFICATION>
+                              </INIT-VALUE>
+                            </NONQUEUED-RECEIVER-COM-SPEC>
+                          </REQUIRED-COM-SPECS>
+                          <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/BMW/Platform/Omc/PortInterfaces/ILifeCycleRequest</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <PR-PORT-PROTOTYPE>
+                          <SHORT-NAME>LifeCycle</SHORT-NAME>
+                          <PROVIDED-COM-SPECS>
+                            <MODE-SWITCH-SENDER-COM-SPEC>
+                              <ENHANCED-MODE-API>true</ENHANCED-MODE-API>
+                              <MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Omc/PortInterfaces/ILifeCycle/Mode</MODE-GROUP-REF>
+                              <QUEUE-LENGTH>2</QUEUE-LENGTH>
+                            </MODE-SWITCH-SENDER-COM-SPEC>
+                          </PROVIDED-COM-SPECS>
+                          <PROVIDED-REQUIRED-INTERFACE-TREF DEST="MODE-SWITCH-INTERFACE">/BMW/Platform/Omc/PortInterfaces/ILifeCycle</PROVIDED-REQUIRED-INTERFACE-TREF>
+                        </PR-PORT-PROTOTYPE>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>VsmEventOpmode</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Omc/Dem/PortInterfaces/Omc_DiagnosticMonitor</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>ClearEventAllowedPort</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/BMW/Platform/Omc/Dem/PortInterfaces/CallbackClearEventAllowed</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                      </PORTS>
+                      <INTERNAL-BEHAVIORS>
+                        <SWC-INTERNAL-BEHAVIOR>
+                          <SHORT-NAME>InternalBehavior</SHORT-NAME>
+                          <CONSTANT-VALUE-MAPPING-REFS />
+                          <DATA-TYPE-MAPPING-REFS>
+                            <DATA-TYPE-MAPPING-REF DEST="DATA-TYPE-MAPPING-SET">/BMW/Platform/Omc/DataTypeMappingSets/Omc_DataTypeMappingSets</DATA-TYPE-MAPPING-REF>
+                          </DATA-TYPE-MAPPING-REFS>
+                          <EXCLUSIVE-AREAS>
+                            <EXCLUSIVE-AREA>
+                              <SHORT-NAME>Mode</SHORT-NAME>
+                            </EXCLUSIVE-AREA>
+                          </EXCLUSIVE-AREAS>
+                          <AR-TYPED-PER-INSTANCE-MEMORYS />
+                          <EVENTS>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>E_StdDiag_OpModeSwitchAllowedResult</SHORT-NAME>
+                              <DISABLED-MODE-IREFS />
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Omc/SwComponentTypes/Omc/InternalBehavior/StdDiag_OpModeSwitchAllowedResult</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/StdDiagCbk</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/PortInterfaces/OmcModesCalloutsResult/OpModeSwitchAllowedResult</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>E_StdDiag_OpModeSwitchCancelledAck</SHORT-NAME>
+                              <DISABLED-MODE-IREFS />
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Omc/SwComponentTypes/Omc/InternalBehavior/StdDiag_OpModeSwitchCancelledAck</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/StdDiagCbk</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/PortInterfaces/OmcModesCalloutsResult/OpModeSwitchCancelledAck</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+%{: if bOpmodeCallout }%
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>E_Application_OpModeSwitchAllowedResult</SHORT-NAME>
+                              <DISABLED-MODE-IREFS />
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Omc/SwComponentTypes/Omc/InternalBehavior/Application_OpModeSwitchAllowedResult</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/UserCbk</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/PortInterfaces/OmcModesCalloutsResult/OpModeSwitchAllowedResult</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>E_Application_OpModeSwitchCancelledAck</SHORT-NAME>
+                              <DISABLED-MODE-IREFS />
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Omc/SwComponentTypes/Omc/InternalBehavior/Application_OpModeSwitchCancelledAck</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/UserCbk</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/PortInterfaces/OmcModesCalloutsResult/OpModeSwitchCancelledAck</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+%{:}%
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>E_ChangeExtendedOperatingMode</SHORT-NAME>
+                              <DISABLED-MODE-IREFS />
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Omc/SwComponentTypes/Omc/InternalBehavior/ChangeExtendedOperatingMode</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/ControlExtendedEnergySavingState</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/Dcm/PortInterfaces/RoutineServices_ExtendedOperatingModeControl/Start</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>E_ChangeOperatingMode</SHORT-NAME>
+                              <DISABLED-MODE-IREFS />
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Omc/SwComponentTypes/Omc/InternalBehavior/ChangeOperatingMode</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/ControlEnergySavingState</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/Dcm/PortInterfaces/RoutineServices_OperatingModeControl/Start</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>E_ConditionCheckReadExtendedOperatingMode</SHORT-NAME>
+                              <DISABLED-MODE-IREFS />
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Omc/SwComponentTypes/Omc/InternalBehavior/ConditionCheckReadExtendedOperatingMode</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/ExtendedEnergySavingState</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/Dcm/PortInterfaces/DataServices_ExtendedOperatingMode/ConditionCheckRead</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>E_NvMNotifyJobFinished</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Omc/SwComponentTypes/Omc/InternalBehavior/NvMWriteJobFinished</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/NvMNotifyJobFinished</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/NvM/PortInterfaces/NvMNotifyJobFinished/JobFinished</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>E_ReadDIDExtendedOperatingMode</SHORT-NAME>
+                              <DISABLED-MODE-IREFS />
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Omc/SwComponentTypes/Omc/InternalBehavior/ReadDIDExtendedOperatingMode</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/ExtendedEnergySavingState</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/Dcm/PortInterfaces/DataServices_ExtendedOperatingMode/ReadData</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>E_ReadOperatingMode</SHORT-NAME>
+                              <DISABLED-MODE-IREFS />
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Omc/SwComponentTypes/Omc/InternalBehavior/ReadOperatingMode</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/EnergySavingState</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/Dcm/PortInterfaces/DataServices_OperatingMode/ReadData</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>E_ConditionCheckReadDIDOperatingMode</SHORT-NAME>
+                              <DISABLED-MODE-IREFS />
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Omc/SwComponentTypes/Omc/InternalBehavior/ConditionCheckReadOperatingMode</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/EnergySavingState</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/Dcm/PortInterfaces/DataServices_OperatingMode/ConditionCheckRead</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                            <DATA-RECEIVED-EVENT>
+                              <SHORT-NAME>LifeCycleRequest</SHORT-NAME>
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Omc/SwComponentTypes/Omc/InternalBehavior/LifeCycleHandler</START-ON-EVENT-REF>
+                              <DATA-IREF>
+                                <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/LifeCycleRequest</CONTEXT-R-PORT-REF>
+                                <TARGET-DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Omc/PortInterfaces/ILifeCycleRequest/requestMode</TARGET-DATA-ELEMENT-REF>
+                              </DATA-IREF>
+                            </DATA-RECEIVED-EVENT>
+                            <OPERATION-INVOKED-EVENT>
+                              <SHORT-NAME>E_ClearEventAllowed</SHORT-NAME>
+                              <DISABLED-MODE-IREFS />
+                              <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/BMW/Platform/Omc/SwComponentTypes/Omc/InternalBehavior/ClearEventAllowed</START-ON-EVENT-REF>
+                              <OPERATION-IREF>
+                                <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/ClearEventAllowedPort</CONTEXT-P-PORT-REF>
+                                <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/Dem/PortInterfaces/CallbackClearEventAllowed/ClearEventAllowed</TARGET-PROVIDED-OPERATION-REF>
+                              </OPERATION-IREF>
+                            </OPERATION-INVOKED-EVENT>
+                          </EVENTS>
+                          <EXPLICIT-INTER-RUNNABLE-VARIABLES />
+                          <HANDLE-TERMINATION-AND-RESTART>NO-SUPPORT</HANDLE-TERMINATION-AND-RESTART>
+                          <IMPLICIT-INTER-RUNNABLE-VARIABLES />
+                          <INCLUDED-DATA-TYPE-SETS>
+                            <INCLUDED-DATA-TYPE-SET>
+                              <DATA-TYPE-REFS>
+                                <DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Omc/ImplementationDataTypes/Omc_ExtendedOperatingModeType</DATA-TYPE-REF>
+                                <DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/BMW/Platform/Omc/ImplementationDataTypes/Omc_OperatingModeType</DATA-TYPE-REF>
+                              </DATA-TYPE-REFS>
+                            </INCLUDED-DATA-TYPE-SET>
+                          </INCLUDED-DATA-TYPE-SETS>
+                          <INSTANTIATION-DATA-DEF-PROPSS />
+                          <PER-INSTANCE-MEMORYS />
+                          <PER-INSTANCE-PARAMETERS />
+                          <PORT-API-OPTIONS />
+                          <RUNNABLES>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>ChangeExtendedOperatingMode</SHORT-NAME>
+                              <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                                <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/BMW/Platform/Omc/SwComponentTypes/Omc/InternalBehavior/Mode</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                              </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <RUNS-INSIDE-EXCLUSIVE-AREA-REFS />
+                              <ASYNCHRONOUS-SERVER-CALL-RESULT-POINTS />
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <MODE-ACCESS-POINTS />
+                              <MODE-SWITCH-POINTS />
+                              <PARAMETER-ACCESSS />
+                              <READ-LOCAL-VARIABLES />
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_WriteBlock</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/NvMServicePort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/NvM/PortInterfaces/NvMService_OMC/WriteBlock</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_GetErrorStatus</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/NvMServicePort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/NvM/PortInterfaces/NvMService_OMC/GetErrorStatus</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_OmcStdDiagOpModeCallout</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/StdDiag</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/PortInterfaces/OmcModesCallouts/AllowOpModeSwitch</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_OmcStdDiagOpModeCancelledCallout</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/StdDiag</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/PortInterfaces/OmcModesCallouts/OpModeSwitchCancelled</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{: if bOpmodeCallout }%
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_OmcOpModeCallout</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/User</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/PortInterfaces/OmcModesCallouts/AllowOpModeSwitch</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_OmcOpModeCancelledCallout</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/User</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/PortInterfaces/OmcModesCallouts/OpModeSwitchCancelled</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{:}%
+%{: if bDetActive }%
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_ReportError</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/DETServicePort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/Det/PortInterfaces/DETService/ReportError</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{:}%
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Omc_RoutineControlStartExtendedOperatingMode</SYMBOL>
+                              <WAIT-POINTS />
+                              <WRITTEN-LOCAL-VARIABLES />
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>ChangeOperatingMode</SHORT-NAME>
+                              <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                                <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/BMW/Platform/Omc/SwComponentTypes/Omc/InternalBehavior/Mode</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                              </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <RUNS-INSIDE-EXCLUSIVE-AREA-REFS />
+                              <ASYNCHRONOUS-SERVER-CALL-RESULT-POINTS />
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <MODE-ACCESS-POINTS />
+                              <MODE-SWITCH-POINTS />
+                              <PARAMETER-ACCESSS />
+                              <READ-LOCAL-VARIABLES />
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_WriteBlock</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/NvMServicePort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/NvM/PortInterfaces/NvMService_OMC/WriteBlock</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_GetErrorStatus</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/NvMServicePort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/NvM/PortInterfaces/NvMService_OMC/GetErrorStatus</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{: if bDetActive }%
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_ReportError</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/DETServicePort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/Det/PortInterfaces/DETService/ReportError</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{:}%
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_OmcStdDiagOpModeCallout</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/StdDiag</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/PortInterfaces/OmcModesCallouts/AllowOpModeSwitch</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_OmcStdDiagOpModeCancelledCallout</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/StdDiag</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/PortInterfaces/OmcModesCallouts/OpModeSwitchCancelled</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{: if bOpmodeCallout }%
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_OmcOpModeCallout</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/User</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/PortInterfaces/OmcModesCallouts/AllowOpModeSwitch</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_OmcOpModeCancelledCallout</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/User</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/PortInterfaces/OmcModesCallouts/OpModeSwitchCancelled</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{:}%
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Omc_RoutineControlStartOperatingMode</SYMBOL>
+                              <WAIT-POINTS />
+                              <WRITTEN-LOCAL-VARIABLES />
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>ConditionCheckReadExtendedOperatingMode</SHORT-NAME>
+                              <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                                <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/BMW/Platform/Omc/SwComponentTypes/Omc/InternalBehavior/Mode</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                              </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <RUNS-INSIDE-EXCLUSIVE-AREA-REFS />
+                              <ASYNCHRONOUS-SERVER-CALL-RESULT-POINTS />
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <MODE-ACCESS-POINTS />
+                              <MODE-SWITCH-POINTS />
+                              <PARAMETER-ACCESSS />
+                              <READ-LOCAL-VARIABLES />
+                              <SERVER-CALL-POINTS>
+%{: if bDetActive }%
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_ReportError</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/DETServicePort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/Det/PortInterfaces/DETService/ReportError</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{:}%
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Omc_ConditionCheckReadDIDExtendedOperatingMode</SYMBOL>
+                              <WAIT-POINTS />
+                              <WRITTEN-LOCAL-VARIABLES />
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>ConditionCheckReadOperatingMode</SHORT-NAME>
+                              <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                                <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/BMW/Platform/Omc/SwComponentTypes/Omc/InternalBehavior/Mode</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                              </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <RUNS-INSIDE-EXCLUSIVE-AREA-REFS />
+                              <ASYNCHRONOUS-SERVER-CALL-RESULT-POINTS />
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <MODE-ACCESS-POINTS />
+                              <MODE-SWITCH-POINTS />
+                              <PARAMETER-ACCESSS />
+                              <READ-LOCAL-VARIABLES />
+                              <SERVER-CALL-POINTS>
+%{: if bDetActive }%
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_ReportError</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/DETServicePort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/Det/PortInterfaces/DETService/ReportError</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{:}%
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Omc_ConditionCheckReadDIDOperatingMode</SYMBOL>
+                              <WAIT-POINTS />
+                              <WRITTEN-LOCAL-VARIABLES />
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>LifeCycleHandler</SHORT-NAME>
+                              <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                                <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/BMW/Platform/Omc/SwComponentTypes/Omc/InternalBehavior/Mode</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                              </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <RUNS-INSIDE-EXCLUSIVE-AREA-REFS />
+                              <ASYNCHRONOUS-SERVER-CALL-RESULT-POINTS />
+                              <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                              <DATA-READ-ACCESSS>
+                                <VARIABLE-ACCESS>
+                                  <SHORT-NAME>requestedMode</SHORT-NAME>
+                                  <ACCESSED-VARIABLE>
+                                    <AUTOSAR-VARIABLE-IREF>
+                                      <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/LifeCycleRequest</PORT-PROTOTYPE-REF>
+                                      <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/BMW/Platform/Omc/PortInterfaces/ILifeCycleRequest/requestMode</TARGET-DATA-PROTOTYPE-REF>
+                                    </AUTOSAR-VARIABLE-IREF>
+                                  </ACCESSED-VARIABLE>
+                                </VARIABLE-ACCESS>
+                              </DATA-READ-ACCESSS>
+                              <MODE-ACCESS-POINTS>
+                                <MODE-ACCESS-POINT>
+                                  <MODE-GROUP-IREF>
+                                    <P-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                      <CONTEXT-P-PORT-REF DEST="PR-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/LifeCycle</CONTEXT-P-PORT-REF>
+                                      <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Omc/PortInterfaces/ILifeCycle/Mode</TARGET-MODE-GROUP-REF>
+                                    </P-MODE-GROUP-IN-ATOMIC-SWC-INSTANCE-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-ACCESS-POINT>
+                              </MODE-ACCESS-POINTS>
+                              <MODE-SWITCH-POINTS>
+                                <MODE-SWITCH-POINT>
+                                  <SHORT-NAME>LifeCycle</SHORT-NAME>
+                                  <MODE-GROUP-IREF>
+                                    <CONTEXT-P-PORT-REF DEST="PR-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/LifeCycle</CONTEXT-P-PORT-REF>
+                                    <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Omc/PortInterfaces/ILifeCycle/Mode</TARGET-MODE-GROUP-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-SWITCH-POINT>
+                                <MODE-SWITCH-POINT>
+                                  <SHORT-NAME>MSP_currentOperatingMode</SHORT-NAME>
+                                  <MODE-GROUP-IREF>
+                                    <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/operatingModeSwitchPort</CONTEXT-P-PORT-REF>
+                                    <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Omc/PortInterfaces/OperatingModeNotification/currentOperatingMode</TARGET-MODE-GROUP-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-SWITCH-POINT>
+                                <MODE-SWITCH-POINT>
+                                  <SHORT-NAME>MSP_currentExtendedOperatingMode</SHORT-NAME>
+                                  <MODE-GROUP-IREF>
+                                    <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/extendedOperatingModeSwitchPort</CONTEXT-P-PORT-REF>
+                                    <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Omc/PortInterfaces/ExtendedOperatingModeNotification/currentExtendedOperatingMode</TARGET-MODE-GROUP-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-SWITCH-POINT>
+                              </MODE-SWITCH-POINTS>
+                              <PARAMETER-ACCESSS />
+                              <READ-LOCAL-VARIABLES />
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_SetEnableCondition</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/EnableCond_OMC</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/Dem/PortInterfaces/EnableCondition/SetEnableCondition</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_SetEventStatus</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/VsmEventOpmode</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/Dem/PortInterfaces/Omc_DiagnosticMonitor/SetEventStatus</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{: if bDetActive }%
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_ReportError</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/DETServicePort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/Det/PortInterfaces/DETService/ReportError</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{:}%
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Omc_LifeCycleHandler</SYMBOL>
+                              <WAIT-POINTS />
+                              <WRITTEN-LOCAL-VARIABLES />
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>ReadDIDExtendedOperatingMode</SHORT-NAME>
+                              <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                                <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/BMW/Platform/Omc/SwComponentTypes/Omc/InternalBehavior/Mode</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                              </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <RUNS-INSIDE-EXCLUSIVE-AREA-REFS />
+                              <ASYNCHRONOUS-SERVER-CALL-RESULT-POINTS />
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <MODE-ACCESS-POINTS />
+                              <MODE-SWITCH-POINTS />
+                              <PARAMETER-ACCESSS />
+                              <READ-LOCAL-VARIABLES />
+                              <SERVER-CALL-POINTS>
+%{: if bDetActive }%
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_ReportError</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/DETServicePort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/Det/PortInterfaces/DETService/ReportError</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{:}%
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Omc_ReadDIDExtendedOperatingMode</SYMBOL>
+                              <WAIT-POINTS />
+                              <WRITTEN-LOCAL-VARIABLES />
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>ReadOperatingMode</SHORT-NAME>
+                              <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                                <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/BMW/Platform/Omc/SwComponentTypes/Omc/InternalBehavior/Mode</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                              </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <RUNS-INSIDE-EXCLUSIVE-AREA-REFS />
+                              <ASYNCHRONOUS-SERVER-CALL-RESULT-POINTS />
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <MODE-ACCESS-POINTS />
+                              <MODE-SWITCH-POINTS />
+                              <PARAMETER-ACCESSS />
+                              <READ-LOCAL-VARIABLES />
+                              <SERVER-CALL-POINTS>
+%{: if bDetActive }%
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_ReportError</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/DETServicePort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/Det/PortInterfaces/DETService/ReportError</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{:}%
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Omc_ReadDIDOperatingMode</SYMBOL>
+                              <WAIT-POINTS />
+                              <WRITTEN-LOCAL-VARIABLES />
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>NvMWriteJobFinished</SHORT-NAME>
+                              <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                                <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/BMW/Platform/Omc/SwComponentTypes/Omc/InternalBehavior/Mode</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                              </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <RUNS-INSIDE-EXCLUSIVE-AREA-REFS />
+                              <ASYNCHRONOUS-SERVER-CALL-RESULT-POINTS />
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <MODE-ACCESS-POINTS />
+                              <MODE-SWITCH-POINTS>
+                                <MODE-SWITCH-POINT>
+                                  <SHORT-NAME>MSP_currentOperatingMode</SHORT-NAME>
+                                  <MODE-GROUP-IREF>
+                                    <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/operatingModeSwitchPort</CONTEXT-P-PORT-REF>
+                                    <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Omc/PortInterfaces/OperatingModeNotification/currentOperatingMode</TARGET-MODE-GROUP-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-SWITCH-POINT>
+                                <MODE-SWITCH-POINT>
+                                  <SHORT-NAME>MSP_currentExtendedOperatingMode</SHORT-NAME>
+                                  <MODE-GROUP-IREF>
+                                    <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/extendedOperatingModeSwitchPort</CONTEXT-P-PORT-REF>
+                                    <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/BMW/Platform/Omc/PortInterfaces/ExtendedOperatingModeNotification/currentExtendedOperatingMode</TARGET-MODE-GROUP-REF>
+                                  </MODE-GROUP-IREF>
+                                </MODE-SWITCH-POINT>
+                              </MODE-SWITCH-POINTS>
+                              <PARAMETER-ACCESSS />
+                              <READ-LOCAL-VARIABLES />
+                              <SERVER-CALL-POINTS>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_WriteBlock</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/NvMServicePort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/NvM/PortInterfaces/NvMService_OMC/WriteBlock</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_GetErrorStatus</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/NvMServicePort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/NvM/PortInterfaces/NvMService_OMC/GetErrorStatus</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_SetEnableCondition</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/EnableCond_OMC</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/Dem/PortInterfaces/EnableCondition/SetEnableCondition</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_SetEventStatus</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/VsmEventOpmode</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/Dem/PortInterfaces/Omc_DiagnosticMonitor/SetEventStatus</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{: if bDetActive }%
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_ReportError</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/DETServicePort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/Det/PortInterfaces/DETService/ReportError</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{:}%
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Omc_NvMNotifyJobFinishedOperatingModes</SYMBOL>
+                              <WAIT-POINTS />
+                              <WRITTEN-LOCAL-VARIABLES />
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>ClearEventAllowed</SHORT-NAME>
+                              <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                                <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/BMW/Platform/Omc/SwComponentTypes/Omc/InternalBehavior/Mode</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                              </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <RUNS-INSIDE-EXCLUSIVE-AREA-REFS />
+                              <ASYNCHRONOUS-SERVER-CALL-RESULT-POINTS />
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <MODE-ACCESS-POINTS />
+                              <MODE-SWITCH-POINTS />
+                              <PARAMETER-ACCESSS />
+                              <READ-LOCAL-VARIABLES />
+                              <SERVER-CALL-POINTS>
+%{: if bDetActive }%
+                                <SYNCHRONOUS-SERVER-CALL-POINT>
+                                  <SHORT-NAME>SSCP_ReportError</SHORT-NAME>
+                                  <OPERATION-IREF>
+                                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/DETServicePort</CONTEXT-R-PORT-REF>
+                                    <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/BMW/Platform/Omc/Det/PortInterfaces/DETService/ReportError</TARGET-REQUIRED-OPERATION-REF>
+                                  </OPERATION-IREF>
+                                  <TIMEOUT>0.0</TIMEOUT>
+                                </SYNCHRONOUS-SERVER-CALL-POINT>
+%{:}%
+                              </SERVER-CALL-POINTS>
+                              <SYMBOL>Omc_ClearEventAllowed</SYMBOL>
+                              <WAIT-POINTS />
+                              <WRITTEN-LOCAL-VARIABLES />
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>StdDiag_OpModeSwitchAllowedResult</SHORT-NAME>
+                              <CAN-ENTER-EXCLUSIVE-AREA-REFS />
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <RUNS-INSIDE-EXCLUSIVE-AREA-REFS />
+                              <ASYNCHRONOUS-SERVER-CALL-RESULT-POINTS />
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <MODE-ACCESS-POINTS />
+                              <MODE-SWITCH-POINTS />
+                              <PARAMETER-ACCESSS />
+                              <READ-LOCAL-VARIABLES />
+                              <SERVER-CALL-POINTS />
+                              <SYMBOL>Omc_StdDiag_OpModeSwitchAllowedResult</SYMBOL>
+                              <WAIT-POINTS />
+                              <WRITTEN-LOCAL-VARIABLES />
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>StdDiag_OpModeSwitchCancelledAck</SHORT-NAME>
+                              <CAN-ENTER-EXCLUSIVE-AREA-REFS />
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <RUNS-INSIDE-EXCLUSIVE-AREA-REFS />
+                              <ASYNCHRONOUS-SERVER-CALL-RESULT-POINTS />
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <MODE-ACCESS-POINTS />
+                              <MODE-SWITCH-POINTS />
+                              <PARAMETER-ACCESSS />
+                              <READ-LOCAL-VARIABLES />
+                              <SERVER-CALL-POINTS />
+                              <SYMBOL>Omc_StdDiag_OpModeSwitchCancelledAck</SYMBOL>
+                              <WAIT-POINTS />
+                              <WRITTEN-LOCAL-VARIABLES />
+                            </RUNNABLE-ENTITY>
+%{: if bOpmodeCallout }%
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>Application_OpModeSwitchAllowedResult</SHORT-NAME>
+                              <CAN-ENTER-EXCLUSIVE-AREA-REFS />
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <RUNS-INSIDE-EXCLUSIVE-AREA-REFS />
+                              <ASYNCHRONOUS-SERVER-CALL-RESULT-POINTS />
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <MODE-ACCESS-POINTS />
+                              <MODE-SWITCH-POINTS />
+                              <PARAMETER-ACCESSS />
+                              <READ-LOCAL-VARIABLES />
+                              <SERVER-CALL-POINTS />
+                              <SYMBOL>Omc_Appl_OpModeSwitchAllowedResult</SYMBOL>
+                              <WAIT-POINTS />
+                              <WRITTEN-LOCAL-VARIABLES />
+                            </RUNNABLE-ENTITY>
+                            <RUNNABLE-ENTITY>
+                              <SHORT-NAME>Application_OpModeSwitchCancelledAck</SHORT-NAME>
+                              <CAN-ENTER-EXCLUSIVE-AREA-REFS />
+                              <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                              <RUNS-INSIDE-EXCLUSIVE-AREA-REFS />
+                              <ASYNCHRONOUS-SERVER-CALL-RESULT-POINTS />
+                              <CAN-BE-INVOKED-CONCURRENTLY>true</CAN-BE-INVOKED-CONCURRENTLY>
+                              <MODE-ACCESS-POINTS />
+                              <MODE-SWITCH-POINTS />
+                              <PARAMETER-ACCESSS />
+                              <READ-LOCAL-VARIABLES />
+                              <SERVER-CALL-POINTS />
+                              <SYMBOL>Omc_Appl_OpModeSwitchCancelledAck</SYMBOL>
+                              <WAIT-POINTS />
+                              <WRITTEN-LOCAL-VARIABLES />
+                            </RUNNABLE-ENTITY>
+%{:}%
+                          </RUNNABLES>
+                          <SERVICE-DEPENDENCYS>
+                            <SWC-SERVICE-DEPENDENCY>
+                              <SHORT-NAME>OmcDependencyNVMData</SHORT-NAME>
+                              <ASSIGNED-PORTS>
+                                <ROLE-BASED-PORT-ASSIGNMENT>
+                                  <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/BMW/Platform/Omc/SwComponentTypes/Omc/NvMServicePort</PORT-PROTOTYPE-REF>
+                                  <ROLE>NvmService</ROLE>
+                                </ROLE-BASED-PORT-ASSIGNMENT>
+                              </ASSIGNED-PORTS>
+                              <SERVICE-NEEDS>
+                                <NV-BLOCK-NEEDS>
+                                  <SHORT-NAME>OmcNvBlockNeeds_Data</SHORT-NAME>
+                                  <CALC-RAM-BLOCK-CRC>false</CALC-RAM-BLOCK-CRC>
+                                  <N-DATA-SETS>1</N-DATA-SETS>
+                                  <N-ROM-BLOCKS>1</N-ROM-BLOCKS>
+                                  <RESTORE-AT-START>true</RESTORE-AT-START>
+                                  <STORE-AT-SHUTDOWN>false</STORE-AT-SHUTDOWN>
+                                </NV-BLOCK-NEEDS>
+                              </SERVICE-NEEDS>
+                            </SWC-SERVICE-DEPENDENCY>
+                          </SERVICE-DEPENDENCYS>
+                          <SHARED-PARAMETERS />
+                          <SUPPORTS-MULTIPLE-INSTANTIATION>false</SUPPORTS-MULTIPLE-INSTANTIATION>
+                        </SWC-INTERNAL-BEHAVIOR>
+                      </INTERNAL-BEHAVIORS>
+                    </APPLICATION-SW-COMPONENT-TYPE>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+              </AR-PACKAGES>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

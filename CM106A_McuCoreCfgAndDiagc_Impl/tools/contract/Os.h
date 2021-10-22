@@ -1,0 +1,1 @@
+extern uint32 osGlobalShared_StartAddr;

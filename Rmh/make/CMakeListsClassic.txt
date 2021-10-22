@@ -1,0 +1,38 @@
+#
+# CMakeLists.txt for Rmh Classic Module
+#
+
+cmake_minimum_required(VERSION 3.1)
+SET(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
+LIST(INSERT CMAKE_MODULE_PATH 0 "$ENV{BPS_CMAKE_MODULE_PATH}")
+
+project(Rmh.classic C CXX)
+include (BAC)
+
+bps_module_adapter(
+   Rmh
+   classic
+
+   SRC
+      RmhClassic.c
+      RmhClassic_Cdd.c
+      RmhClassic_Int.c
+   GENERATE/INCLUDE
+      RmhClassic_Cfg.h.pgen
+      RmhClassic_Version.h.pgen
+   GENERATE/META
+      Rmh_cdd_interfaces.arxml.pgen
+      Rmh_cdd_internal.arxml.pgen
+      Rmh_ext_interfaces.arxml.pgen
+      Rmh_interfaces.arxml.pgen
+      Rmh_internal.arxml.pgen
+   GENERATE/SRC
+      RmhClassic_Cfg.c.pgen
+   GENERATE/INPUT
+      RmhClassic
+   CFGDESC
+     RmhClassic_paramdef.arxml
+   DOC
+     intmanual
+)
+

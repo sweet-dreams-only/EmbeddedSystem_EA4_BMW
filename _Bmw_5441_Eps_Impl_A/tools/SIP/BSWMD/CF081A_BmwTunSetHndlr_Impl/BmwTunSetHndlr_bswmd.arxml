@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-0-3.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://autosar.org/schema/r4.0">
+    <AR-PACKAGES>
+        <AR-PACKAGE UUID="11bf59af-e2cd-463f-866d-fa7f8cef65c9">
+            <SHORT-NAME>Nxtr</SHORT-NAME>
+            <ELEMENTS>
+                <ECUC-MODULE-DEF UUID="3f7da760-7f48-40bd-85ae-b2ff388d9943">
+                    <SHORT-NAME>BmwTunSetHndlr</SHORT-NAME>
+                    <DESC>
+                        <L-2 L="EN">Configuration of the BmwTunSetHndlr.</L-2>
+                    </DESC>
+                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                    <SUPPORTED-CONFIG-VARIANTS>
+                        <SUPPORTED-CONFIG-VARIANT>VARIANT-PRE-COMPILE</SUPPORTED-CONFIG-VARIANT>
+                    </SUPPORTED-CONFIG-VARIANTS>
+                    <CONTAINERS>
+                        <!-- Parameter Container Definition: BmwTunSetHndlrGeneral -->
+                        <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:e98a1a45-2c60-4da3-aff5-4c5598ba7646">
+                            <SHORT-NAME>BmwTunSetHndlrGeneral</SHORT-NAME>
+                            <DESC>
+                                <L-2 L="EN">This container contains the configuration (parameters) of the BmwTunSetHndlr.</L-2>
+                            </DESC>
+                            <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                            <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                            <MULTIPLE-CONFIGURATION-CONTAINER>false</MULTIPLE-CONFIGURATION-CONTAINER>
+                            <PARAMETERS>
+                                <!-- PARAMETER DEFINITION: DESININIDXNOTPRSNT -->
+                                <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:4e4a64f0-644d-4165-8b8e-83d4c2506430">
+                                    <SHORT-NAME>DESININIDXNOTPRSNT</SHORT-NAME>
+                                    <DESC>
+                                        <L-2 L="EN">This constant is used as NTC number. NTC DesIninIdxNotPrsnt is set in CF081A and determines if NVM containing the Desired Initialization Index has been written during manufacturing process. The NTC may be set only during Initialization of the component. However it may be cleared in triggered service that is a part of the CF081A (server runnable).</L-2>
+                                    </DESC>
+                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                    <IMPLEMENTATION-CONFIG-CLASSES>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                    </IMPLEMENTATION-CONFIG-CLASSES>
+                                    <ORIGIN>Nxtr</ORIGIN>
+                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                    <DEFAULT-VALUE>NTCNR_0X1E5</DEFAULT-VALUE>
+                                    <LITERALS>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:d7de7a9a-3f48-4dc2-867f-b11a5d8b1ac1">
+                                            <SHORT-NAME>NTCNR_0X1E0</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:5765b473-3248-4759-bc73-43752ddc4caf">
+                                            <SHORT-NAME>NTCNR_0X1E1</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:a28db528-a312-4627-88f6-eb0deeec37a6">
+                                            <SHORT-NAME>NTCNR_0X1E2</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:90a54189-a926-43a6-88fb-3520961d74d0">
+                                            <SHORT-NAME>NTCNR_0X1E3</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:62ad3ec4-f5e5-4465-806c-e346f41c7fb5">
+                                            <SHORT-NAME>NTCNR_0X1E4</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:5d91ed3c-ec96-4b66-8eaf-1dc39996ccfb">
+                                            <SHORT-NAME>NTCNR_0X1E5</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:47368667-71c0-4dda-9b20-ad28efbb9a19">
+                                            <SHORT-NAME>NTCNR_0X1E6</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:0b8f0491-b3d6-479b-86d3-75cdbf18092f">
+                                            <SHORT-NAME>NTCNR_0X1E7</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:db40d44a-84e0-4495-9d73-6fd091577bc6">
+                                            <SHORT-NAME>NTCNR_0X1E8</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:14389baf-2973-4f76-a9d6-41c7272f5214">
+                                            <SHORT-NAME>NTCNR_0X1E9</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:e77bc482-0ad9-429a-bdc4-f2747d8a93ed">
+                                            <SHORT-NAME>NTCNR_0X1EA</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:40b86162-4d43-4b03-b2f4-fe80feac8042">
+                                            <SHORT-NAME>NTCNR_0X1EB</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:62123185-2f0f-48ed-90f6-753b3670912c">
+                                            <SHORT-NAME>NTCNR_0X1EC</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:db2ba5f2-3aa1-479d-984d-b05a715f10ea">
+                                            <SHORT-NAME>NTCNR_0X1ED</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:ea0e6685-4b2c-48e2-908b-baf15efa4d8d">
+                                            <SHORT-NAME>NTCNR_0X1EE</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:cffbb5b1-cb8d-4d68-91dd-6631c2113cff">
+                                            <SHORT-NAME>NTCNR_0X1EF</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:668844db-b90a-455f-b53d-879ff62eec5f">
+                                            <SHORT-NAME>NTCNR_0X1F0</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:b27f7257-ee4f-4941-83f7-7dbe49ce6446">
+                                            <SHORT-NAME>NTCNR_0X1F1</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:0e470104-60a3-49af-9368-9f278a021b44">
+                                            <SHORT-NAME>NTCNR_0X1F2</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:7114a027-d0f4-46d4-beb5-9a320f2b3625">
+                                            <SHORT-NAME>NTCNR_0X1F3</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:5bf35cee-c8a2-4322-9853-dcf608ab8494">
+                                            <SHORT-NAME>NTCNR_0X1F4</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:b54e9376-b6cd-4681-a3af-d033f6500fbd">
+                                            <SHORT-NAME>NTCNR_0X1F5</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:ec5ce2a8-172a-4c3d-989b-2973f4d70458">
+                                            <SHORT-NAME>NTCNR_0X1F6</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:0f2e8bb9-27a7-47f4-84c6-65b01930b7c3">
+                                            <SHORT-NAME>NTCNR_0X1F7</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:eaa08b1d-7c11-420d-a7a5-9a609f30c93b">
+                                            <SHORT-NAME>NTCNR_0X1F8</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:839dac35-b746-44d8-9773-1d317f8af48d">
+                                            <SHORT-NAME>NTCNR_0X1F9</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:2650d0c0-aebd-4e37-9a04-b41d857f78cd">
+                                            <SHORT-NAME>NTCNR_0X1FA</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:f6d34d79-afd0-4869-86ab-c1edad6b3f9e">
+                                            <SHORT-NAME>NTCNR_0X1FB</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:1dd4924b-5764-4278-9ac7-a9eacd749266">
+                                            <SHORT-NAME>NTCNR_0X1FC</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:67583227-0045-44a0-bfe6-69a67ee8a351">
+                                            <SHORT-NAME>NTCNR_0X1FD</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:b5ecb8f6-46b2-4a77-8453-db95ea252a1a">
+                                            <SHORT-NAME>NTCNR_0X1FE</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:d19bc4d0-ac46-47c5-830b-599fe1867ba3">
+                                            <SHORT-NAME>NTCNR_0X1FF</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                    </LITERALS>
+                                </ECUC-ENUMERATION-PARAM-DEF>
+                                <!-- PARAMETER DEFINITION: DESININOPTSETAISXNOTPRSNT -->
+                                <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:4e4a64f0-644d-4165-8b8e-8344c2506230">
+                                    <SHORT-NAME>DESININOPTSETAISXNOTPRSNT</SHORT-NAME>
+                                    <DESC>
+                                        <L-2 L="EN">This constant is used as NTC number. NTC DesIninOptSetAIdxNotPrsnt is set in CF081A and determines if NVM containing the Desired Initialization Index has been written during manufacturing process. The NTC may be set only during Initialization of the component. However it may be cleared in triggered service that is a part of the CF081A (server runnable).</L-2>
+                                    </DESC>
+                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                    <IMPLEMENTATION-CONFIG-CLASSES>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                        <IMPLEMENTATION-CONFIG-CLASS>
+                                            <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                            <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                        </IMPLEMENTATION-CONFIG-CLASS>
+                                    </IMPLEMENTATION-CONFIG-CLASSES>
+                                    <ORIGIN>Nxtr</ORIGIN>
+                                    <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                    <DEFAULT-VALUE>NTCNR_0X1E6</DEFAULT-VALUE>
+                                    <LITERALS>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:d7de7a9a-3f48-4dc2-867f-b17a5d821ac1">
+                                            <SHORT-NAME>NTCNR_0X1E0</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:5765b473-3248-4759-bc73-43762ddc42af">
+                                            <SHORT-NAME>NTCNR_0X1E1</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:a28db528-a312-4627-88f6-eb0de1ec32a6">
+                                            <SHORT-NAME>NTCNR_0X1E2</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:90a54189-a926-43a6-88fb-3522941d74d0">
+                                            <SHORT-NAME>NTCNR_0X1E3</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:62ad3ec4-f5e5-4465-806c-e341f41c71b5">
+                                            <SHORT-NAME>NTCNR_0X1E4</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:5d91ed3c-ec96-4b66-8eaf-1d339926ccfb">
+                                            <SHORT-NAME>NTCNR_0X1E5</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:47368667-71c0-4dda-9b20-ad21efbb9a29">
+                                            <SHORT-NAME>NTCNR_0X1E6</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:0b8f0491-b3d6-479b-86d3-75cdb518012f">
+                                            <SHORT-NAME>NTCNR_0X1E7</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:db40d44a-84e0-4495-9d73-6f1091587bc6">
+                                            <SHORT-NAME>NTCNR_0X1E8</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:14389baf-2973-4f76-a9d6-41c1272f5214">
+                                            <SHORT-NAME>NTCNR_0X1E9</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:e77bc482-0ad9-429a-bdc4-f2147d1a93ed">
+                                            <SHORT-NAME>NTCNR_0X1EA</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:40b86162-4d43-4b03-b2f4-f180fe3c8042">
+                                            <SHORT-NAME>NTCNR_0X1EB</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:62123185-2f0f-48ed-90f6-753b3270912c">
+                                            <SHORT-NAME>NTCNR_0X1EC</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:db2ba5f2-3aa1-479d-984d-b051715f12ea">
+                                            <SHORT-NAME>NTCNR_0X1ED</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:ea0e6685-4b2c-48e2-908b-b1f15efa3d8d">
+                                            <SHORT-NAME>NTCNR_0X1EE</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:cffbb5b1-cb8d-4d68-91dd-633122113cff">
+                                            <SHORT-NAME>NTCNR_0X1EF</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:668844db-b90a-455f-b53d-879f162ee35f">
+                                            <SHORT-NAME>NTCNR_0X1F0</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:b27f7257-ee4f-4941-83f7-7d1e494e6446">
+                                            <SHORT-NAME>NTCNR_0X1F1</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:0e470104-60a3-49af-9368-9f258a025b44">
+                                            <SHORT-NAME>NTCNR_0X1F2</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:7114a027-d0f4-46d4-beb5-9a323f253625">
+                                            <SHORT-NAME>NTCNR_0X1F3</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:5bf35cee-c8a2-4322-9853-dcf618ab5494">
+                                            <SHORT-NAME>NTCNR_0X1F4</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:b54e9376-b6cd-4681-a3af-d033f6100f5d">
+                                            <SHORT-NAME>NTCNR_0X1F5</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:ec5ce2a8-172a-4c3d-989b-2975f4d70258">
+                                            <SHORT-NAME>NTCNR_0X1F6</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:0f2e8bb9-27a7-47f4-84c6-65101930b783">
+                                            <SHORT-NAME>NTCNR_0X1F7</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:eaa08b1d-7c11-420d-a7a5-9a602f30893b">
+                                            <SHORT-NAME>NTCNR_0X1F8</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:839dac35-b746-44d8-9773-1d317f3af48d">
+                                            <SHORT-NAME>NTCNR_0X1F9</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:2650d0c0-aebd-4e37-9a04-b41d827f78cd">
+                                            <SHORT-NAME>NTCNR_0X1FA</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:f6d34d79-afd0-4869-86ab-c1ed8d6b1f9e">
+                                            <SHORT-NAME>NTCNR_0X1FB</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:1dd4924b-5764-4278-9ac7-a9e5cd789266">
+                                            <SHORT-NAME>NTCNR_0X1FC</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:67583227-0045-44a0-bfe6-69a65ee85351">
+                                            <SHORT-NAME>NTCNR_0X1FD</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:b5ecb8f6-46b2-4a77-8453-db93ea152a1a">
+                                            <SHORT-NAME>NTCNR_0X1FE</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                        <ECUC-ENUMERATION-LITERAL-DEF UUID="ECUC:d19bc4d0-ac46-47c5-830b-5996e18678a3">
+                                            <SHORT-NAME>NTCNR_0X1FF</SHORT-NAME>
+                                        </ECUC-ENUMERATION-LITERAL-DEF>
+                                    </LITERALS>
+                                </ECUC-ENUMERATION-PARAM-DEF>
+                            </PARAMETERS>
+                        </ECUC-PARAM-CONF-CONTAINER-DEF>
+                    </CONTAINERS>
+                </ECUC-MODULE-DEF>
+            </ELEMENTS>
+        </AR-PACKAGE>
+    </AR-PACKAGES>
+</AUTOSAR>
